@@ -1,0 +1,18 @@
+uuid: 9417bdec-e2ce-4325-ad02-35f6c744d2b3
+langcode: es
+status: true
+dependencies:
+  config:
+    - node.type.rules_technical_specifications
+id: node.rules_technical_specifications.changed
+field_name: changed
+entity_type: node
+bundle: rules_technical_specifications
+label: Modificado
+description: 'La fecha en que el nodo fue editado por última vez.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

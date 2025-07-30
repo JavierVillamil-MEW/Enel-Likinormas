@@ -1,0 +1,30 @@
+uuid: 40c81e1a-8965-4698-bf45-cb630cd5c28b
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.rules_comments_block
+    - field.field.block_content.rules_comments_block.comment
+  module:
+    - comment
+id: block_content.rules_comments_block.default
+targetEntityType: block_content
+bundle: rules_comments_block
+mode: default
+content:
+  comment:
+    type: comment_default
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  langcode: true

@@ -1,0 +1,11 @@
+uuid: 3d1988ea-b0fa-468e-989c-83fba8b09bb2
+langcode: es
+status: true
+dependencies:
+  config:
+    - node.type.rules_monthly_newsletter
+id: node.rules_monthly_newsletter
+target_entity_type_id: node
+target_bundle: rules_monthly_newsletter
+default_langcode: site_default
+language_alterable: false

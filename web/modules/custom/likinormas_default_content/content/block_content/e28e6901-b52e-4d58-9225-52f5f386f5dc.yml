@@ -1,0 +1,133 @@
+_meta:
+  version: '1.0'
+  entity_type: block_content
+  uuid: e28e6901-b52e-4d58-9225-52f5f386f5dc
+  bundle: rules_title_description_and_item
+  default_langcode: es
+  depends:
+    e3e84c9c-f2fb-4cc8-baa8-9a27b498f392: file
+    a39da516-6e6d-4849-a0b1-b433be6c58c5: file
+    7cc2634f-8d9b-41f3-954f-4c66ef8c8a75: file
+default:
+  status:
+    -
+      value: true
+  info:
+    -
+      value: 'Login Block'
+  reusable:
+    -
+      value: true
+  revision_translation_affected:
+    -
+      value: true
+  background_image:
+    -
+      entity: e3e84c9c-f2fb-4cc8-baa8-9a27b498f392
+      alt: city_backgound
+      title: city_backgound
+      width: 1920
+      height: 1080
+  background_image_mobile:
+    -
+      entity: a39da516-6e6d-4849-a0b1-b433be6c58c5
+      alt: city_backgound
+      title: ''
+      width: 1810
+      height: 3200
+  description_section:
+    -
+      value: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.'
+  items:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: a2070d93-c780-4214-9727-c74eb2714892
+          bundle: rules_items_forms
+          default_langcode: es
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1684267229
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          description_item:
+            -
+              value: "Podrás acceder a información exclusiva y actualizada sobre los\r\ncambios en las normativas, nuevos procedimientos y tecnologías"
+          image_item:
+            -
+              entity: 7cc2634f-8d9b-41f3-954f-4c66ef8c8a75
+              alt: wert
+              title: ewt
+              width: 320
+              height: 320
+          title_item:
+            -
+              value: 'Acceso a la información exclusiva'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 54bec8cc-af3c-497f-9446-604c6a0651e0
+          bundle: rules_items_forms
+          default_langcode: es
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1684267232
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          description_item:
+            -
+              value: "Podrás acceder a información exclusiva y actualizada sobre los\r\ncambios en las normativas, nuevos procedimientos y tecnologías"
+          title_item:
+            -
+              value: 'Acceso a la información exclusiva'
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 552d4980-00ff-4ab6-8225-c1ed6ebad331
+          bundle: rules_items_forms
+          default_langcode: es
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1684267235
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          description_item:
+            -
+              value: "Podrás acceder a información exclusiva y actualizada sobre los\r\ncambios en las normativas, nuevos procedimientos y tecnologías"
+          title_item:
+            -
+              value: 'Acceso a la información exclusiva'
+  title_section:
+    -
+      value: '<h1>Nuestra red</h1>'
+      format: full_html

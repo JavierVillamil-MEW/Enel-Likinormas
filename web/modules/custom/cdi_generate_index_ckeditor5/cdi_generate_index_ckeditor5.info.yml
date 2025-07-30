@@ -1,0 +1,5 @@
+name: 'CDI: Generate index ckeditor5'
+type: module
+description: Generate automatically index ckeditor5 full html fields
+package: Custom
+core_version_requirement: ^9 || ^10

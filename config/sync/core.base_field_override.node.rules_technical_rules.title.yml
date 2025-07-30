@@ -1,0 +1,18 @@
+uuid: 000b12c4-82e8-4664-bffb-c96867305e77
+langcode: es
+status: true
+dependencies:
+  config:
+    - node.type.rules_technical_rules
+id: node.rules_technical_rules.title
+field_name: title
+entity_type: node
+bundle: rules_technical_rules
+label: Título
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

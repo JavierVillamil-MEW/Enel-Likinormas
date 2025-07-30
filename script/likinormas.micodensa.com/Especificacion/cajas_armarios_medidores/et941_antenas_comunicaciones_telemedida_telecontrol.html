@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET941 Antenas de comunicaciones para telemedida y telecontrol | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/1963" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F1963.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/1963" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/1963" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '32');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET941 Antenas de comunicaciones para telemedida y telecontrol</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET941</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">14/09/2022</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/1963">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F1963&amp;nodoid=1963', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et941_antenas_comunicaciones_telemedida_telecontrol.html#heading_0">1. OBJETO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et941_antenas_comunicaciones_telemedida_telecontrol.html#heading_1">2. REQUERIMIENTOS GENERALES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et941_antenas_comunicaciones_telemedida_telecontrol.html#heading_2">2.1. CARACTER&#205;STICAS CONSTRUCTIVAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et941_antenas_comunicaciones_telemedida_telecontrol.html#heading_3">3. GARANTIA Y VIDA UTIL</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et941_antenas_comunicaciones_telemedida_telecontrol.html#heading_4">4. REPUESTOS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et941_antenas_comunicaciones_telemedida_telecontrol.html#heading_5">5. EMBALAJE PARA EL TRANSPORTE Y MARCACION</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et941_antenas_comunicaciones_telemedida_telecontrol.html#heading_6">5.1 MARCACI&#211;N DE EMBALAJE</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et941_antenas_comunicaciones_telemedida_telecontrol.html#heading_7">5.2	MARCACI&#211;N INDIVIDUAL</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et941_antenas_comunicaciones_telemedida_telecontrol.html#heading_8">6. PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et941_antenas_comunicaciones_telemedida_telecontrol.html#heading_9">6.1. PRUEBAS DE HOMOLOGACI&#211;N Y/O TIPO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et941_antenas_comunicaciones_telemedida_telecontrol.html#heading_10">6.2. PRUEBAS DE RUTINA</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et941_antenas_comunicaciones_telemedida_telecontrol.html#heading_11">6.3. PRUEBAS DE RECEPCI&#211;N  </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et941_antenas_comunicaciones_telemedida_telecontrol.html#heading_12">ANEXO A: PLANTILLA DE DATOS T&#201;CNICOS</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1. OBJETO</h2>El presente documento recoge las caracter&#237;sticas t&#233;cnicas y funcionales m&#237;nimas, generales y particulares para las antenas de comunicaciones a ser utilizadas para la telemedida de medidores de energ&#237;a y equipos de telecontrol; dispositivos a ser instalados en las redes de Enel Colombia.<br />
+<h2 id="heading_1" >2. REQUERIMIENTOS GENERALES</h2>
+<h3 id="heading_2" >2.1. CARACTER&#205;STICAS CONSTRUCTIVAS</h3>
+<b>2.1.1. Requisitos ambientales</b> <br /><br />El rango de temperaturas v&#225;lido de trabajo debe oscilar entre -5 &#186;C y 50 &#186;C<br /><br /><b>2.1.2. Caracter&#237;sticas El&#233;ctricas:</b> <br />•  Rango de frecuencia:	824-960/1700-2170 MHz<br />•  Ancho de banda: 136/460 MHz<br />•  Polarizaci&#243;n: Vertical<br />•  Impedancia de entrada: 50 (ohmio)<br />•  V.S.W.R: &lt; o = 2.0 <br />•  Ganancia: 
+<ul><li>7 dBi </li>
+<li>9 dBi</li></ul>
+•  Potencia m&#225;xima de entrada: 50 W<br /><br /><b>2.1.3. Caracter&#237;sticas Mec&#225;nicas:</b>  
+<ul><li>Longitud m&#225;xima total de la antena:	450 mm</li>
+<li>Montaje: Base magn&#233;tica de di&#225;metro m&#225;ximo de 70 mm</li>
+<li>Material base magn&#233;tica: Polipropileno (no se  aceptan bases met&#225;licas)</li>
+<li>Fuerza del magneto base: 300 onzas m&#237;nimo</li>
+<li>Tipo de conector: SMA macho soldado industrialmente</li>
+<li>Peso m&#225;ximo: 	800 g</li>
+<li>Color: Negro</li>
+<li>Longitud del cable: 3 m </li>
+<li>Cable: Coaxial LMR-200</li>
+<li>Uso: Intemperie.</li>
+<li>IP: 54</li></ul>
+Los c&#243;digos son:<br /><div style="width:365px;"><table><tr><td colspan="1" rowspan="1" style="width:93px;height:35px;text-align:center"><b>C&#211;DIGO</b></td><td colspan="1" rowspan="1" style="width:272px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:2px;text-align:center">470028</td><td colspan="1" rowspan="1" style="">ANTENA OMNIDIRECCIONAL 9dBi.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:2px;text-align:center">470030</td><td colspan="1" rowspan="1" style="">ANTENA OMNIDIRECCIONAL 7dBi</td></tr></table><br /></div><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/1963/Antena.jpg" src="../../media/cache/images/900x900/wikiimages/2d32313239313632343637-872866-Antena.jpg" title="Figura 1. Elementos incluidos en el suministro (referencial)"  /></div><div class="texto_imagen_articulos" style="max-width:900px">Figura 1. Elementos incluidos en el suministro (referencial)</div></div></div>
+<h2 id="heading_3" >3. GARANTIA Y VIDA UTIL</h2>
+La garant&#237;a m&#237;nima debe ser de 5 a&#241;os. La vida &#250;til debe ser como m&#237;nimo de 10 a&#241;os.<br /><br />Ante un proceso de garant&#237;a el proveedor debe asumir todos los costos asociados a esta. Al ser reintegrada alguna antena por garant&#237;a, el proveedor la debe reemplazar a m&#225;s tardar en 15 d&#237;as calendario.<br /><br />Las antenas rechazadas por garant&#237;a las debe retirar el proveedor y entregar su reemplazo en las bodegas de Enel Colombia en la ciudad de Bogot&#225;. Enel Colombia indicar&#225; al proveedor la ubicaci&#243;n de la bodega cuando se genere la primera devoluci&#243;n.<br /><br />El proveedor debe tener en stock m&#237;nimo el 5% de la cantidad de antenas de la orden de compra, con el fin de reponer por garant&#237;a los equipos que presente alguna falla.<br />
+<h2 id="heading_4" >4. REPUESTOS</h2>
+El proveedor debe garantizar el suministro de accesorios por garant&#237;a o para cuando est&#233;n fuera de garant&#237;a o su da&#241;o no sea atribuible a la calidad de estos. <br />
+<h2 id="heading_5" >5. EMBALAJE PARA EL TRANSPORTE Y MARCACION</h2> <br />Las antenas deben ser embalados para su transporte mar&#237;timo, a&#233;reo o terrestre seg&#250;n corresponda. El embalaje debe ser el adecuado para evitar da&#241;os (golpes, corrosi&#243;n, absorci&#243;n de humedad, etc.).<br /><br />Los embalajes deben soportar las operaciones normales de carga, descarga, y el eventual apilamiento. <br />
+<h3 id="heading_6" >5.1 MARCACI&#211;N DE EMBALAJE</h3>Todas las cajas deber&#225;n llevar los detalles necesarios de identificaci&#243;n y manipulaci&#243;n, en forma clara e indeleble, detallando el contenido de cada caja con m&#237;nimo la siguiente informaci&#243;n:
+<ul><li>Nombre del proveedor o marca</li>
+<li>N&#250;mero de contrato</li>
+<li>Fecha de fabricaci&#243;n</li></ul>
+
+<h3 id="heading_7" >5.2	MARCACI&#211;N INDIVIDUAL</h3>Todas las antenas deber&#225;n ser marcadas de forma visible e indeleble con la siguiente informaci&#243;n;
+<ul><li>Nombre del fabricante o logotipo</li>
+<li>Mes y a&#241;o de producci&#243;n</li>
+<li>Lote de producci&#243;n</li>
+<li>Inscripci&#243;n 3-4G</li></ul>
+
+<h2 id="heading_8" >6. PRUEBAS</h2>
+<h3 id="heading_9" >6.1. PRUEBAS DE HOMOLOGACI&#211;N Y/O TIPO</h3>
+Las pruebas deben ser realizadas por un laboratorio de pruebas acreditado en dos muestras de antenas, Enel Colombia analizar&#225; toda la documentaci&#243;n proporcionada para verificar el cumplimiento de los requisitos especificados. Adem&#225;s, Enel Colombia podr&#225; solicitar la repetici&#243;n de cualquiera de las pruebas en caso de ser necesario.<br /><br />El procedimiento y configuraci&#243;n de medici&#243;n de la prueba tienen que ser informados en la documentaci&#243;n de homologaci&#243;n.<br /><br /><b>6.1.1. Pruebas radioel&#233;ctricas</b><br /><u><b>• Patr&#243;n de radiaci&#243;n:</b></u><br />El patr&#243;n de radiaci&#243;n debe registrarse en cualquier frecuencia de la banda / canales descritos en las caracter&#237;sticas t&#233;cnicas requeridas y. tanto en el plano ecuatorial como en el vertical. <br /><br />En el plano horizontal, la medici&#243;n debe realizarse en 0&#176; grados de elevaci&#243;n. Todos los patrones de radiaci&#243;n deben ejecutarse con una frecuencia angular de muestreo &lt; o = 6 &#176;.<br /><br />La antena bajo prueba debe estar equipado con un cable de menos de 20 cm, con las mismas caracter&#237;sticas del cable a suministrar en cada lote.<br /><br /><u>Criterio de aceptaci&#243;n:</u> en el plano ecuatorial, la brecha entre el valor m&#225;ximo y el m&#237;nimo debe ser &lt; o = 1,5 dB. En el plano vertical, el ancho de haz de media potencia debe estar entre 60&#176; y 30&#176; de acuerdo con la frecuencia de prueba.<br /><br /><u><b>• Ganancia:</b></u><br />1. La ganancia de la antena a temperatura ambiente medida en el conector de la antena (cable (&lt;20 cm)que conecta la antena y el dispositivo de prueba). La prueba debe ser ejecutada a 0&#176; de elevaci&#243;n y verificado en la direcci&#243;n de ganancia m&#225;xima seg&#250;n lo detectado por el diagrama de radiaci&#243;n en el plano ecuatorial.<br /><br /><u>Criterios de aceptaci&#243;n:</u> valor de ganancia &gt; o = 7dBi o 9dBi (seg&#250;n caracter&#237;stica t&#233;cnica) para todas las frecuencias especificadas. Se permite un error de medici&#243;n &lt; o = 0,5 dB.<br /><br />2. La ganancia del sistema completo de antena (con todos los accesorios) a la temperatura ambiente, medida en el conector de la antena (cable (de 3 m) que conecta la antena y el dispositivo de prueba). La prueba debe ser ejecutada a 0&#176; de elevaci&#243;n y verificado en la direcci&#243;n de ganancia m&#225;xima seg&#250;n lo detectado por el diagrama de radiaci&#243;n en el plano ecuatorial.<br /><br /><u>Criterios de aceptaci&#243;n:</u> valor de ganancia &gt; o = -6 dBi / -8dBi (seg&#250;n caracter&#237;stica t&#233;cnica) para todas las frecuencias especificadas. Se permite un error de medici&#243;n &lt; o = 0,5 dB.<br /><br /><u><b>• VSWR:</b></u><br />1. Relaci&#243;n de onda estacionaria de voltaje (VSWR) de la antena a temperatura ambiente medida en el conector de la antena (cable que conecta la antena y el dispositivo de prueba &lt; 20 cm).<br /><br /><u>Criterios de aceptaci&#243;n:</u> valor VSWR &lt; o = 2.0 para todas las frecuencias especificadas.<br /><br />2. Relaci&#243;n de onda estacionaria de voltaje (VSWR) de la antena en los l&#237;mites de operaci&#243;n (requeridos en el numeral 2.1) medido en el conector de la antena (el cable que conecta la antena y el dispositivo de prueba &lt;20cm). Despu&#233;s de que la antena se someta a una temperatura l&#237;mite durante 4 horas, la medici&#243;n puede ser ejecutado dentro de 10 minutos siguientes, una vez que la antena est&#233; fuera de la c&#225;mara clim&#225;tica.<br /><br /><u>Criterios de aceptaci&#243;n:</u> valor VSWR &lt; o = 2.5 para todas las frecuencias de trabajo especificadas.<br /><br /><b>6.1.2. Mec&#225;nicas</b><br /><b>a. Prueba de flexi&#243;n</b><br /><b><u>Descripci&#243;n:</u></b><br />Colocar a 30 cm de la base de la antena, una carga de 120 g y fijar la antena. Entonces flexionar 60&#176; a la izquierda y luego 60&#176; a la derecha; esto se realizar&#225; 1000 veces.<br /><br /><b><u>Resultados esperados para la aceptaci&#243;n:</u></b><br />Despu&#233;s de realizar la prueba se evidenciar&#225; que no se afectan las caracter&#237;sticas mec&#225;nicas de la antena.<br /><br /><b>b. Prueba de resistencia</b><br /><b><u>Descripci&#243;n:</u></b><br />Se aplica una carga est&#225;tica de 15 lb en la punta de la antena, durante 1 minuto.<br /><br /><b><u>Resultados esperados para la aceptaci&#243;n:</u></b><br />Despu&#233;s de realizar la prueba se evidenciar&#225; que la antena no presente ning&#250;n da&#241;o.<br /><br /><b>c. Prueba fuerza de tracci&#243;n</b><br /><b><u>Descripci&#243;n:</u></b><br />La prueba se realiza fijando la antena y aplicando una carga est&#225;tica de 7 kg al extremo del cable.<br /><br /><b><u>Resultados esperados para la aceptaci&#243;n:</u></b><br />Despu&#233;s de realizar la prueba se evidenciar&#225; que la uni&#243;n entre la antena y el cable no presente ning&#250;n da&#241;o.<br /><br /><b>d. Prueba de IP</b><br /><b><u>Descripci&#243;n:</u></b><br />La prueba debe cumplir la norma IEC 60529 “Degrees of protection provided by enclosures (IP Code)”<br /><br /><b><u>Resultados esperados para la aceptaci&#243;n:</u></b><br />IP igual o superior al solicitado.<br /><br /><b>6.1.3. Durabilidad</b><br /><b>a. Prueba de niebla salina</b><br /><b><u>Descripci&#243;n:</u></b><br />Se realiza prueba de niebla salina seg&#250;n el est&#225;ndar GB1266-86<br />Se realiza prueba de agua destilada: Destilaci&#243;n una vez PH 6.5~7<br />Cantidad: 1.4 me 80 cm<sup>2</sup>/h<br />Presi&#243;n del aire comprimido: 1kgf/cm<sup>2</sup><br />Tiempo de prueba: 96 horas<br /><br /><b><u>Resultados esperados para la aceptaci&#243;n:</u></b><br />No se presenta corrosi&#243;n en la antena y en el conector SMA<br />
+<h3 id="heading_10" >6.2. PRUEBAS DE RUTINA</h3>
+El proveedor deber&#225; generar los protocolos de pruebas, para cada lote fabricado, el cual debe ser realizado sobre el lote con un muestreo igual o mayor al muestreo indicado para las pruebas de recepci&#243;n, las cuales deben garantizar la funcionalidad de la antena y su correcta terminaci&#243;n respecto al ensamble, acabados, accesorios, embalaje, etc.<br /><br />Las pruebas de rutina son:
+<ul><li>Inspecci&#243;n visual / dimensional</li>
+<li>Verificaci&#243;n de la curva VSWR</li></ul>
+
+<h3 id="heading_11" >6.3. PRUEBAS DE RECEPCI&#211;N  </h3>
+Las pruebas solicitas para la recepci&#243;n son:
+<ul><li>Inspecci&#243;n visual / dimensional</li>
+<li>Verificaci&#243;n de la curva VSWR</li>
+<li>Verificaci&#243;n de la calidad del ensamble (se realiza mediante el chequeo mec&#225;nico sobre las secciones de la antena y estas no deben desprenderse con facilidad)</li>
+<li>Verificaci&#243;n de la base magn&#233;tica (se probar&#225; mediante una fijaci&#243;n firme de la antena al momento de ser sobrepuesta en una superficie met&#225;lica y debe soportar posici&#243;n vertical sin presentar deslizamiento). </li></ul>
+<br />El proveedor deber&#225; generar los protocolos de pruebas, para cada lote fabricado, el cual debe ser realizado sobre una muestra acorde a las tablas definidas para cada tipo de prueba, a fin de garantizar las funcionalidades de la antena y su correcta terminaci&#243;n respecto al ensamble, acabados, accesorios, embalaje, etc.<br /><br />Cada antena debe tener una hoja de prueba (test report), en formato electr&#243;nico, que certifique que sus valores de VSWR est&#225;n dentro de los l&#237;mites especificados.<br /><br />El proveedor debe generar y poner a disposici&#243;n el archivo (test report) para cada lote de suministros que contenga las referencias de las antenas suministradas, el detalle de los resultados y la fecha de ejecuci&#243;n de las mismas. Este archivo debe garantizar la funcionalidad del equipo y su correcta terminaci&#243;n respecto a ensamble, accesorios, embalaje, etc.<br /><br />Cada antena revisada ser&#225; calificada como “conforme” o “no conforme”. Una antena ser&#225; “no conforme” si presenta cualquier defecto en la revisi&#243;n, sea “menor, mayor o cr&#237;tico”. <br /><br />El muestreo a utilizar ser&#225;:
+<ul><li>Inspecci&#243;n visual ser&#225;: Nivel II con AQL de 1.5%, (muestreo simple)</li>
+<li>Pruebas funcionales: Nivel especial de inspecci&#243;n S3 con AQL de 1.5% (muestreo simple)</li></ul>
+<br /><b>Tabla 1. Muestreo inspecci&#243;n visual</b><br /><div style="width:600px;"><table><tr><td colspan="1" rowspan="1" style="width:150px;height:50px;text-align:center"><b>Tama&#241;o del lote</b></td><td colspan="1" rowspan="1" style="width:150px;text-align:center"><b>Tama&#241;o de la muestra</b></td><td colspan="1" rowspan="1" style="width:150px;text-align:center"><b>N&#250;mero permitido de defectuosos</b></td><td colspan="1" rowspan="1" style="width:150px;text-align:center"><b>N&#250;mero defectuoso para rechazo</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:11px;text-align:center"><b>91-150</b></td><td colspan="1" rowspan="1" style="text-align:center">20</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:11px;text-align:center"><b>151-280</b></td><td colspan="1" rowspan="1" style="text-align:center">32</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:11px;text-align:center"><b>281-500</b></td><td colspan="1" rowspan="1" style="text-align:center">50</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:11px;text-align:center"><b>501-1200</b></td><td colspan="1" rowspan="1" style="text-align:center">80</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:11px;text-align:center"><b>1201-3200</b></td><td colspan="1" rowspan="1" style="text-align:center">125</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr></table><br /></div><b>Tabla 2. Muestreo pruebas funcionales</b><br /><div style="width:600px;"><table><tr><td colspan="1" rowspan="1" style="width:150px;height:50px;text-align:center"><b>Tama&#241;o del lote</b></td><td colspan="1" rowspan="1" style="width:160px;text-align:center"><b>Tama&#241;o de la muestra</b></td><td colspan="1" rowspan="1" style="width:160px;text-align:center"><b>N&#250;mero permitido de defectuosos</b></td><td colspan="1" rowspan="1" style="width:160px;text-align:center"><b>N&#250;mero defectuoso para rechazo</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:11px;text-align:center"><b>91-150</b></td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:11px;text-align:center"><b>151-280</b></td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:11px;text-align:center"><b>281-500</b></td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:11px;text-align:center"><b>501-1200</b></td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>1201-3200</b></td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr></table><br /></div>El rechazo del material, debido a fallas o incumplimientos de las exigencias de la especificaci&#243;n, durante la recepci&#243;n, no exime al proveedor de su responsabilidad de cumplir con las fechas de entrega.<br />
+<h2 id="heading_12" >ANEXO A: PLANTILLA DE DATOS T&#201;CNICOS</h2><div style="width:960px;"><table><tr><td colspan="1" rowspan="1" style="width:50px;height:45px;text-align:center"><b>N&#176;</b></td><td colspan="2" rowspan="1" style="width:520px;text-align:center"><b>Datos</b></td><td colspan="1" rowspan="1" style="width:70px;text-align:center"><b>Unidad</b></td><td colspan="1" rowspan="1" style="width:160px;text-align:center"><b>Solicitado</b></td><td colspan="1" rowspan="1" style="width:100px;text-align:center"><b>Ofertado</b></td><td colspan="1" rowspan="1" style="width:60px;text-align:center"><b>Cumple (SI/NO)</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">1</td><td colspan="2" rowspan="1" style="">Marca</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="text-align:center">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">1.2</td><td colspan="2" rowspan="1" style="">Modelo</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="text-align:center">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">1.3</td><td colspan="2" rowspan="1" style="">Pa&#237;s de fabricaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="text-align:center">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">1.4</td><td colspan="2" rowspan="1" style="">A&#241;o de fabricaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="text-align:center">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">2</td><td colspan="6" rowspan="1" style=""><b>Caracter&#237;sticas mec&#225;nicas</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">2.1</td><td colspan="2" rowspan="1" style="">Longitud m&#225;xima total de la antena</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="text-align:center">450</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">2.2</td><td colspan="2" rowspan="1" style="">Tipo de cable</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="text-align:center">Coaxial LMR-200</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">2.3</td><td colspan="2" rowspan="1" style="">Longitud del cable</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="text-align:center">3000</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">2.4</td><td colspan="2" rowspan="1" style="">Tipo de conector</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="text-align:center">SMA macho soldado industrialmente</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="3" style="height:10px;text-align:center">2.5</td><td colspan="1" rowspan="3" style="">Montaje mediante base magn&#233;tica</td><td colspan="1" rowspan="1" style="">Di&#225;metro m&#225;ximo</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="text-align:center">70</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="">Material</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="text-align:center">Polipropileno</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="">Fuerza del magneto base</td><td colspan="1" rowspan="1" style="text-align:center">onzas</td><td colspan="1" rowspan="1" style="text-align:center">300</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">2.6</td><td colspan="2" rowspan="1" style="">Peso m&#225;ximo</td><td colspan="1" rowspan="1" style="text-align:center">g</td><td colspan="1" rowspan="1" style="text-align:center">800</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">2.7</td><td colspan="2" rowspan="1" style="">Color</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="text-align:center">Negro</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">2.8</td><td colspan="2" rowspan="1" style="">Uso</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="text-align:center">Exterior</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">2.9</td><td colspan="2" rowspan="1" style="">IP</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="text-align:center">54</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"><b>3</b></td><td colspan="6" rowspan="1" style=""><b>Caracter&#237;sticas el&#233;ctricas</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">3.1</td><td colspan="2" rowspan="1" style="">Rango de frecuencia</td><td colspan="1" rowspan="1" style="text-align:center">MHz</td><td colspan="1" rowspan="1" style="text-align:center">824-960/1700-2170 </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">3.2</td><td colspan="2" rowspan="1" style="">Ancho de banda</td><td colspan="1" rowspan="1" style="text-align:center">MHz</td><td colspan="1" rowspan="1" style="text-align:center">136/460</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">3.3</td><td colspan="2" rowspan="1" style="">Polarizaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="text-align:center">Vertical</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">3.4</td><td colspan="2" rowspan="1" style="">Impedancia de entrada</td><td colspan="1" rowspan="1" style="text-align:center">ohmio</td><td colspan="1" rowspan="1" style="text-align:center">50</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">3.5</td><td colspan="2" rowspan="1" style="">V.S.W.R</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="text-align:center">&lt; o = 2.0</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">3.6</td><td colspan="2" rowspan="1" style="">Ganancia</td><td colspan="1" rowspan="1" style="text-align:center">dBi</td><td colspan="1" rowspan="1" style="text-align:center">7 o 9</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">3.7</td><td colspan="2" rowspan="1" style="">Potencia m&#225;xima de entrada</td><td colspan="1" rowspan="1" style="text-align:center">W</td><td colspan="1" rowspan="1" style="text-align:center">50</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"><b>4</b></td><td colspan="6" rowspan="1" style=""><b>Pruebas tipo</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"><b>4.1</b></td><td colspan="6" rowspan="1" style=""><b>Pruebas radioel&#233;ctricas</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">4.1.1</td><td colspan="2" rowspan="1" style="">Patr&#243;n de radiaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="text-align:center">Soportes</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">4.1.2</td><td colspan="2" rowspan="1" style="">Ganancia</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="text-align:center">Soportes</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">4.1.3</td><td colspan="2" rowspan="1" style="">VSWR</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="text-align:center">Soportes</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"><b>4.2</b></td><td colspan="6" rowspan="1" style=""><b>Mec&#225;nicas</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">4.2.1</td><td colspan="2" rowspan="1" style="">Prueba de flexi&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="text-align:center">Soportes </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">4.2.2</td><td colspan="2" rowspan="1" style="">Pruebas de resistencia</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="text-align:center">Soportes</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">4.2.3</td><td colspan="2" rowspan="1" style="">Pruebas fuerza de tracci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="text-align:center">Soportes </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">4.2.4</td><td colspan="2" rowspan="1" style="">IP</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="text-align:center">Soportes </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"><b>4.3</b></td><td colspan="6" rowspan="1" style=""><b>Durabilidad</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">4.3.1</td><td colspan="2" rowspan="1" style="">Prueba de niebla salina</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="text-align:center">Soportes</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"><b>5</b></td><td colspan="6" rowspan="1" style=""><b>Garant&#237;a y vida &#250;til</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">5.1</td><td colspan="2" rowspan="1" style="">Garant&#237;a m&#237;nima</td><td colspan="1" rowspan="1" style="text-align:center">a&#241;os</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">5.2</td><td colspan="2" rowspan="1" style="">Vida &#250;til</td><td colspan="1" rowspan="1" style="text-align:center">a&#241;os</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"><b>6</b></td><td colspan="6" rowspan="1" style=""><b>Embalaje y marcaci&#243;n</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">6.1</td><td colspan="3" rowspan="1" style="">Embalaje para transporte mar&#237;timo, a&#233;reo o terrestre seg&#250;n corresponda, y adecuado para evitar da&#241;os (golpes, corrosi&#243;n, absorci&#243;n de humedad, etc.)</td><td colspan="1" rowspan="1" style="text-align:center">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">6.2</td><td colspan="3" rowspan="1" style="">Las cajas deben llevar los detalles necesarios de identificaci&#243;n y manipulaci&#243;n, en forma clara e indeleble, detallando el contenido de cada caja, m&#237;nimo con la siguiente informaci&#243;n: Nombre proveedor o marca, n&#250;mero de contrato y fecha de fabricaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">6.3</td><td colspan="3" rowspan="1" style="">Marcaci&#243;n individual de forma visible e indeleble m&#237;nimo con la siguiente informaci&#243;n: Nombre del fabricante o logotipo, mes y a&#241;o de producci&#243;n, lote de producci&#243;n y la inscripci&#243;n 3-4G</td><td colspan="1" rowspan="1" style="text-align:center">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr></table><br /></div>
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 1963, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

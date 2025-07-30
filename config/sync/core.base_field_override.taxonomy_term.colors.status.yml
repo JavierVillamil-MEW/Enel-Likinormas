@@ -1,0 +1,22 @@
+uuid: 823be5b7-80f3-40f0-8b18-de2b0a2934be
+langcode: es
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.colors
+id: taxonomy_term.colors.status
+field_name: status
+entity_type: taxonomy_term
+bundle: colors
+label: Publicado
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Activado
+  off_label: Desactivado
+field_type: boolean

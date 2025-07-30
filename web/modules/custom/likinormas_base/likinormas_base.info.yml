@@ -1,0 +1,11 @@
+name: Likinormas Base
+type: module
+description: Provides additional functionality for the site.
+package: Custom
+core_version_requirement: ^9 || ^10
+dependencies:
+  - feeds:feeds
+  - drupal:block
+  - drupal:config
+  - drupal:views
+  - drupal:node

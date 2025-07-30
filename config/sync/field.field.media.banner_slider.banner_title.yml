@@ -1,0 +1,24 @@
+uuid: 5fd7dfeb-c7d9-43de-82f8-319cb31b6de2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.banner_title
+    - media.type.banner_slider
+  module:
+    - text
+id: media.banner_slider.banner_title
+field_name: banner_title
+entity_type: media
+bundle: banner_slider
+label: 'Título del banner'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: '<h1 class="title-primary"></h1>'
+    format: full_html
+default_value_callback: ''
+settings: {  }
+field_type: text

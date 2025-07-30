@@ -1,0 +1,19 @@
+uuid: f4acae68-3c65-4ff5-8d42-ec7ff53f909a
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.rules_comment_block
+    - field.storage.comment.comment_content
+id: comment.rules_comment_block.comment_content
+field_name: comment_content
+entity_type: comment
+bundle: rules_comment_block
+label: Comentario
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

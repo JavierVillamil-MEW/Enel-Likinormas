@@ -1,0 +1,33 @@
+uuid: c1470aa3-59f2-4012-b5cb-6933069b3d09
+langcode: es
+status: true
+dependencies:
+  config:
+    - block_content.type.rules_header_fixed_logo
+    - field.field.block_content.rules_header_fixed_logo.fixed_logo_image
+    - image.style.thumbnail
+  module:
+    - svg_image
+id: block_content.rules_header_fixed_logo.default
+targetEntityType: block_content
+bundle: rules_header_fixed_logo
+mode: default
+content:
+  fixed_logo_image:
+    type: image_image
+    weight: 26
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  langcode: true

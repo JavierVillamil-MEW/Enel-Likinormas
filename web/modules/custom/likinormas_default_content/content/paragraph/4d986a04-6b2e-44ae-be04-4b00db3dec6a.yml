@@ -1,0 +1,56 @@
+_meta:
+  version: '1.0'
+  entity_type: paragraph
+  uuid: 4d986a04-6b2e-44ae-be04-4b00db3dec6a
+  bundle: rules_section
+  default_langcode: en
+  depends:
+    fbc20365-b5ae-4527-a6a2-e923530299d3: taxonomy_term
+    1dc42eea-de05-4d05-9c43-933304ba3e38: taxonomy_term
+    3f7b0722-d37b-4c1f-86ef-0ba5392169c0: file
+    20f0bb3f-78db-43eb-b89b-6d13ea1acdc9: file
+default:
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1682436090
+  behavior_settings:
+    -
+      value: {  }
+  revision_translation_affected:
+    -
+      value: true
+  section_alignment:
+    -
+      entity: fbc20365-b5ae-4527-a6a2-e923530299d3
+  section_button:
+    -
+      uri: 'internal:/'
+      title: 'Especificaciones técnicas locales'
+      options: {  }
+  section_color:
+    -
+      entity: 1dc42eea-de05-4d05-9c43-933304ba3e38
+  section_description:
+    -
+      value: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, \r\nsed diam nonumy eirmod tempor invidunt ut labore et \r\ndolore magna aliquyam erat, sed diam voluptua. At vero eos \r\net accusam et justo duo"
+  section_image:
+    -
+      entity: 3f7b0722-d37b-4c1f-86ef-0ba5392169c0
+      alt: Image-2
+      title: Image-2
+      width: 960
+      height: 691
+  section_image_mobile:
+    -
+      entity: 20f0bb3f-78db-43eb-b89b-6d13ea1acdc9
+      alt: Image-2
+      title: ''
+      width: 414
+      height: 489
+  section_title:
+    -
+      value: '<h2>Especificaciones técnicas locales</h2>'
+      format: full_html

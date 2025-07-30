@@ -1,0 +1,44 @@
+uuid: 0d25bd29-8f3a-40cb-ba16-d0bfa8164807
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.rules_items_forms.description_item
+    - field.field.paragraph.rules_items_forms.image_item
+    - field.field.paragraph.rules_items_forms.title_item
+    - image.style.rules_web_image
+    - paragraphs.paragraphs_type.rules_items_forms
+  module:
+    - image
+id: paragraph.rules_items_forms.default
+targetEntityType: paragraph
+bundle: rules_items_forms
+mode: default
+content:
+  description_item:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  image_item:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: rules_web_image
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  title_item:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden: {  }

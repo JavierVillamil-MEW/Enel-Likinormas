@@ -1,0 +1,28 @@
+uuid: ba48da10-a88f-4d5e-bf30-09020c068116
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.related_content
+    - node.type.rules_technical_rules
+id: node.rules_technical_rules.related_content
+field_name: related_content
+entity_type: node
+bundle: rules_technical_rules
+label: 'Normas técnicas relacionadas'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      rules_technical_rules: rules_technical_rules
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

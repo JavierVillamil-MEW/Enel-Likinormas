@@ -1,0 +1,8 @@
+uuid: b74cb262-548c-4a19-9577-a1be8f494fc0
+langcode: en
+status: true
+dependencies: {  }
+id: rules_banner_with_background
+label: 'Banner con fondo'
+revision: 0
+description: 'Banner que se muestra en los filtros de cada tipo de norma'

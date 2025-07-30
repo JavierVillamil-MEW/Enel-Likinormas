@@ -1,0 +1,63 @@
+{% set base_url = url('<front>')|render|split('/', -1)|join('/') %}
+<!DOCTYPE html>
+<html lang="es">
+
+<body>
+
+<div class="pdf-technical-rule">
+  <div class="pdf-header">
+    <div class="pdf-header-child">
+      <div class="section-title">
+        <h1 class="title"><strong>{{ node.specification_title.value }}</strong></h1>
+        <h2 class="subtitle">ESPECIFICACIÓN TÉCNICA</h2>
+      </div>
+
+      <div class="data-author">
+
+        <table class="table-revision">
+          <thead>
+            <tr>
+              <th>Revisión #:</th>
+              <th>Entrada en vigencia:</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>{{ node.specification_number.value }}</td>
+              <td>{{ content.effective_date }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-liki">
+        <table class="table-info-liki">
+          <tbody>
+            <tr>
+              <td><img src="/sites/default/files/2023-07/logo_likinormas.jpg"></td>
+              <td><p style="font-size: 12px;">Esta información ha sido extractada de la plataforma Likinormas de Enel colombia en donde se encuentran las normas y especificaciones técnicas. Consulte siempre la versión actualizada en {{ base_url }}</p></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-super" align="right">
+        <img src="/sites/default/files/2023-07/superintendencia.png">
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="pdf-body">
+    <div class="content-pdf">
+      {{ content.specification_content }}
+    </div>
+  </div>
+
+</div>
+
+</body>
+
+</html>

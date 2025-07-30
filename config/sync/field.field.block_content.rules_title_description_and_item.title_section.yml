@@ -1,0 +1,24 @@
+uuid: 0194aa73-bbc9-4662-b5c8-481fa2d5a784
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.rules_title_description_and_item
+    - field.storage.block_content.title_section
+  module:
+    - text
+id: block_content.rules_title_description_and_item.title_section
+field_name: title_section
+entity_type: block_content
+bundle: rules_title_description_and_item
+label: 'Título de la sección'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: '<h1></h1>'
+    format: full_html
+default_value_callback: ''
+settings: {  }
+field_type: text

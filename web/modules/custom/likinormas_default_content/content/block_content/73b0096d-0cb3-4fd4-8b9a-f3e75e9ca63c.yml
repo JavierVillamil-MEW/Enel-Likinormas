@@ -1,0 +1,28 @@
+_meta:
+  version: '1.0'
+  entity_type: block_content
+  uuid: 73b0096d-0cb3-4fd4-8b9a-f3e75e9ca63c
+  bundle: rules_header_fixed_logo
+  default_langcode: es
+  depends:
+    42edd4bb-6951-408d-8d67-cac86c78b75c: file
+default:
+  status:
+    -
+      value: true
+  info:
+    -
+      value: 'Logo fijo menú principal'
+  reusable:
+    -
+      value: true
+  revision_translation_affected:
+    -
+      value: true
+  fixed_logo_image:
+    -
+      entity: 42edd4bb-6951-408d-8d67-cac86c78b75c
+      alt: fixed_logo
+      title: fixed_logo
+      width: 208
+      height: 76

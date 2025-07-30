@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET-AT503 Descargadores de sobretensión 500 kv | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/2033" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F2033.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/2033" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/2033" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '54');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET-AT503 Descargadores de sobretensi&#243;n 500 kv</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET-AT503</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">16/11/2004</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/2033">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F2033&amp;nodoid=2033', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat503_descargadores_sobretension_500_kv.html#heading_0">1. OBJETO </a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat503_descargadores_sobretension_500_kv.html#heading_1">2.	  CONDICIONES DE SERVICIO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat503_descargadores_sobretension_500_kv.html#heading_2">3.	NORMAS RELACIONADAS </a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat503_descargadores_sobretension_500_kv.html#heading_3">4. CARACTER&#205;STICAS CONSTRUCTIVAS </a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat503_descargadores_sobretension_500_kv.html#heading_4">4.1	 ENVOLVENTE </a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat503_descargadores_sobretension_500_kv.html#heading_5">4.2	 AISLAMIENTO EN PORCELANA</a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat503_descargadores_sobretension_500_kv.html#heading_6">4.3 AISLADORES EN GOMA SILICONADA</a></li>
+                    <li class="indexitem"><a class="head_h4" href="etat503_descargadores_sobretension_500_kv.html#heading_7">4.3.1 N&#250;cleo</a></li>
+                    <li class="indexitem"><a class="head_h4" href="etat503_descargadores_sobretension_500_kv.html#heading_8">4.3.2 Recubrimiento del n&#250;cleo</a></li>
+                    <li class="indexitem"><a class="head_h4" href="etat503_descargadores_sobretension_500_kv.html#heading_9">4.3.3 Campanas aislantes</a></li>
+                    <li class="indexitem"><a class="head_h4" href="etat503_descargadores_sobretension_500_kv.html#heading_10">4.3.4 Constituci&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat503_descargadores_sobretension_500_kv.html#heading_11">5.		TERMINALES Y CONECTORES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat503_descargadores_sobretension_500_kv.html#heading_12">6.	 	CONTADORES DE DESCARGA</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat503_descargadores_sobretension_500_kv.html#heading_13">7.	 	PLACA DE CARACTER&#205;STICAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat503_descargadores_sobretension_500_kv.html#heading_14">8.		PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat503_descargadores_sobretension_500_kv.html#heading_15">8.1	PRUEBAS TIPO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat503_descargadores_sobretension_500_kv.html#heading_16">8.2	  PRUEBAS DE RUTINA</a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat503_descargadores_sobretension_500_kv.html#heading_17">8.3	  PRUEBAS DE ACEPTACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat503_descargadores_sobretension_500_kv.html#heading_18">9.	  INSPECCI&#211;N T&#201;CNICA</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat503_descargadores_sobretension_500_kv.html#heading_19">10.	   EMBALAJE Y TRANSPORTE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat503_descargadores_sobretension_500_kv.html#heading_20">11.	 INFORMACI&#211;N T&#201;CNICA</a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat503_descargadores_sobretension_500_kv.html#heading_21">11.1	 INFORMACI&#211;N PARA LA PROPUESTA </a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat503_descargadores_sobretension_500_kv.html#heading_22">11.2	INFORMACI&#211;N PARA APROBACI&#211;N DEL CLIENTE</a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat503_descargadores_sobretension_500_kv.html#heading_23">11.3	DISE&#209;OS APROBADOS E INFORMACION FINAL CERTIFICADA</a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat503_descargadores_sobretension_500_kv.html#heading_24">11.4	 RESPONSABILIDAD DEL FABRICANTE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat503_descargadores_sobretension_500_kv.html#heading_25">12.	  GARANT&#205;AS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat503_descargadores_sobretension_500_kv.html#heading_26">13.	 PROVISI&#211;N B&#193;SICA</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1. OBJETO </h2>
+La presente <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a> tiene por objeto establecer los requisitos, condiciones de utilizaci&#243;n y prestaciones b&#225;sicas que deben satisfacer los descargadores de sobre <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a>, destinados a ser instalados  en subestaciones con <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-292" class="externalLink  glosarioLink">nivel de tensi&#243;n</a> de 500 kV.<br />
+<h2 id="heading_1" >2.	  CONDICIONES DE <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-359" class="externalLink  glosarioLink">SERVICIO</a></h2>
+<b>Condiciones ambientales</b><br /><div style="width:669px;"><table><tr><td colspan="1" rowspan="1" style="width:362px;height:22px;"><b>CARACTER&#205;STICA</b></td><td colspan="1" rowspan="1" style="width:307px;"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Altitud m&#225;xima (m.s.n.m)</td><td colspan="1" rowspan="1" style="">2650</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Temperatura m&#237;nima (&#176;C)</td><td colspan="1" rowspan="1" style="">-5&#176;C</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Temperatura m&#225;xima (&#176;C)</td><td colspan="1" rowspan="1" style="">+40&#176;C</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Temperatura media (&#176;C)</td><td colspan="1" rowspan="1" style="">+30&#176;C</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Nivel de humedad (%)</td><td colspan="1" rowspan="1" style="">&gt;90%</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Humedad relativa media (%)</td><td colspan="1" rowspan="1" style="">80</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Velocidad del viento (m / s)</td><td colspan="1" rowspan="1" style="">&lt;34</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Nivel de <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-145" class="externalLink  glosarioLink">contaminaci&#243;n</a> (IEC 60815)</td><td colspan="1" rowspan="1" style="">Medio (II)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:25px;">Radiaci&#243;n solar m&#225;x. (Wb/m2)</td><td colspan="1" rowspan="1" style="">&lt;1000</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:41px;">Condiciones s&#237;smicas</td><td colspan="1" rowspan="1" style="">Si  (0.3 g para direcci&#243;n horizontal y 0.2 g para direcci&#243;n vertical)</td></tr></table><br /></div><br /><b>Los equipos deben cumplir con los  requerimientos s&#237;smicos exigidos en el</b> Reglamento de Construcciones Sismo Resistentes NSR-98.<br /><br /><div style="width:724px;"><table><tr><td colspan="2" rowspan="1" style="width:724px;height:22px;"> <b>CARACTER&#205;STICAS EL&#201;CTRICAS DEL <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-363" class="externalLink  glosarioLink">SISTEMA</a></b> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:41px;">a. <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-384" class="externalLink  glosarioLink">tensi&#243;n nominal</a> del <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> (kV)</td><td colspan="1" rowspan="1" style="">500</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">b. <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-377" class="externalLink  glosarioLink">Tensi&#243;n</a> m&#225;xima del <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-363" class="externalLink  glosarioLink">sistema</a>  (kV)</td><td colspan="1" rowspan="1" style="">550</td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;">c. Niveles de aislamiento</td></tr>
+<tr><td colspan="2" rowspan="1" style="height:60px;">Para aislamientos externos (a trav&#233;s de aire) se admiten niveles reducidos siempre y cuando est&#233;n soportados en consideraciones, c&#225;lculos y experiencias debidamente justificadas, a criterio de CODENSA.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">c1.  <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-101" class="externalLink  glosarioLink">BIL</a>  (kV) a 2650 msnm</td><td colspan="1" rowspan="1" style="">1550</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">c2.  BSL  (kV) a 2650 msnm</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">  <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-205" class="externalLink  glosarioLink">fase</a> - <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-387" class="externalLink  glosarioLink">tierra</a></td><td colspan="1" rowspan="1" style="">1175</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">  <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-205" class="externalLink  glosarioLink">fase</a> – <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-205" class="externalLink  glosarioLink">fase</a></td><td colspan="1" rowspan="1" style="">1760</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">d. <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-210" class="externalLink  glosarioLink">Frecuencia</a> del <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-363" class="externalLink  glosarioLink">sistema</a></td><td colspan="1" rowspan="1" style="">60</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">e. Nivel de <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-152" class="externalLink  glosarioLink">cortocircuito</a> (kA)</td><td colspan="1" rowspan="1" style="">40</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">f. N&#250;mero de fases</td><td colspan="1" rowspan="1" style="">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">g.  Conexi&#243;n <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-290" class="externalLink  glosarioLink">neutro</a></td><td colspan="1" rowspan="1" style="">S&#243;lidamente aterrizado</td></tr></table><br /></div>
+<h2 id="heading_2" >3.	NORMAS RELACIONADAS </h2>
+<div style="width:654px;"><table><tr><td colspan="1" rowspan="1" style="width:132px;height:22px;"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:522px;"><b>TITULO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:61px;">IEC 60099-4</td><td colspan="1" rowspan="1" style="">Parte 4: Descargadores de oxido met&#225;lico sin explosores para sistemas corriente alterna (Metal-oxide surge arresters without gaps for A.C- systems. </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:41px;">IEC 61264</td><td colspan="1" rowspan="1" style="">Ceramic pressurized hollow insulators for high voltage switchgear and controlgear.</td></tr></table><br /></div>
+<h2 id="heading_3" >4. CARACTER&#205;STICAS CONSTRUCTIVAS </h2>
+Los descargadores de sobre <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> deben ser del tipo &#243;xido de zinc (Zn0), sin explosores (gaps), para conexi&#243;n entre <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-205" class="externalLink  glosarioLink">fase</a> y <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-387" class="externalLink  glosarioLink">tierra</a>.<br /><br />Los descargadores deben ser aptos para protecci&#243;n de los equipos, contra las sobre tensiones producidas por operaciones de maniobras y por la ocurrencia de descargas atmosf&#233;ricas.<br /><br />Los descargadores deben ser del tipo exterior, auto soportados, para instalaci&#243;n vertical; de construcci&#243;n robusta dise&#241;ados para facilitar su montaje y su limpieza. <br /><br />Si el dise&#241;o del fabricante considera el empleo de aros para efecto corona, este debe ser incluido en el suministro.<br />
+<h3 id="heading_4" >4.1	 ENVOLVENTE </h3>
+La envolvente (aislamiento) de los descargadores podr&#225; estar constituida por <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-274" class="externalLink  glosarioLink">material</a> de goma de silicona color gris ANSI 70 o en <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-274" class="externalLink  glosarioLink">material</a> cer&#225;mico color marr&#243;n.<br />
+<h3 id="heading_5" >4.2	 AISLAMIENTO EN PORCELANA</h3>
+Todas las uniones deben realizarse con un <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-274" class="externalLink  glosarioLink">material</a> estable que garantice el sellado herm&#233;tico del descargador durante su <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-406" class="externalLink  glosarioLink">vida &#250;til</a>.<br /> <br />Los sellos deben quedar suficientemente ajustados para resistir las presiones internas resultantes durante la operaci&#243;n normal y adem&#225;s deber&#225;n soportar cambios en la temperatura ambiente sin escape de gases o admisi&#243;n de humedad.<br /><br />El dise&#241;o de la columna de porcelana debe ser tal que no se presenten esfuerzos indebidos en ninguna de sus partes debido a cambios en la temperatura.  La porcelana debe ser homog&#233;nea,  sin porosidades o cavidades que desmejoren su resistencia a la humedad.<br /><br />Para prevenir la destrucci&#243;n de la secci&#243;n de porcelana, deben proveerse dispositivos confiables de alivio de presi&#243;n para expulsar los gases que se presentan durante la ocurrencia de descargas prolongadas. <br />
+<h3 id="heading_6" >4.3 AISLADORES EN GOMA SILICONADA</h3>
+<h4 id="heading_7" >4.3.1 N&#250;cleo</h4>
+Las resistencias de no lineales de oxido de zinc deber&#225;n estar recubiertas por el n&#250;cleo de fibra de vidrio reforzada con resina ep&#243;xica de alta dureza, resistente a los &#225;cidos y a la rotura; tendr&#225; forma cil&#237;ndrica y estar&#225; destinada a soportar la <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-113" class="externalLink  glosarioLink">carga</a> mec&#225;nica aplicada sobre el <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-78" class="externalLink  glosarioLink">aislador</a>. El n&#250;cleo deber&#225; estar libre de cavidades de aire, sustancias extra&#241;as o defectos de fabricaci&#243;n. <br /><br />
+<h4 id="heading_8" >4.3.2 Recubrimiento del n&#250;cleo</h4>
+El n&#250;cleo de fibra de vidrio tendr&#225; un revestimiento hidrof&#243;bico en goma siliconada de una sola pieza aplicado por extrusi&#243;n o moldeo por inyecci&#243;n. Este recubrimiento no tendr&#225; juntas ni costuras, ser&#225; uniforme, libre de imperfecciones y estar&#225; firmemente unido al n&#250;cleo en todos sus puntos. La resistencia de la interfase entre el recubrimiento de goma siliconada y el cilindro de fibra de vidrio ser&#225; mayor que la resistencia al desgarramiento (tearing strength) de la goma siliconada.<br />
+<h4 id="heading_9" >4.3.3 Campanas aislantes</h4>
+Las campanas aislantes deber&#225;n ser hidrofobicas y construidas en  goma de silicona.  Deben estar firmemente unidos a la cubierta del cilindro de fibra de vidrio por moldeo como parte de la cubierta; Las campanas preferiblemente deben tener un perfil dise&#241;ado de acuerdo con las recomendaciones de la Norma IEC 60815. <br />
+<h4 id="heading_10" >4.3.4 Constituci&#243;n</h4>
+El descargador deber&#225; estar constituido por uno o m&#225;s conjuntos de resistencias de caracter&#237;stica no lineal, de oxido de zinc, conectadas en serie sin explosores. <br /><br />Los descargadores deben poder soportar una <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-113" class="externalLink  glosarioLink">carga</a> est&#225;tica de 100 daN aplicada a los bornes primarios, en cualquier direcci&#243;n.<br />
+<h2 id="heading_11" >5.		TERMINALES Y CONECTORES</h2>
+Los terminales de l&#237;nea deben ser v&#225;stagos (espigo) de secci&#243;n circular de 40 mm de di&#225;metro; si son de cobre deben ser recubiertos con plata para conexi&#243;n con conectores de aluminio. <br /><br />Deben suministrarse conectores apropiados para los conductores previstos en el dise&#241;o detallado de la <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-373" class="externalLink  glosarioLink">subestaci&#243;n</a>.<br /><br />Cada descargador se proveer&#225; con un conector para conexi&#243;n a <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-387" class="externalLink  glosarioLink">tierra</a>, tipo grapa, apto para cables de cobre de 100 a 200 mm<sup>2</sup>..<br /><br />
+<h2 id="heading_12" >6.	 	CONTADORES DE DESCARGA</h2>
+Los contadores de descarga deben ser del tipo electromec&#225;nico, de construcci&#243;n robusta, capaces de soportar, sin <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-153" class="externalLink  glosarioLink">da&#241;o</a>, las corrientes de descarga.<br /> <br />Los contadores de descarga deben cumplir las siguientes condiciones:<br />
+<ul><li>Deben ser a prueba de agua (grado de protecci&#243;n IP 54), para operaci&#243;n a la intemperie.</li>
+<li>Se deben suministrar con cicl&#243;metro de cuadrante de al menos 4 d&#237;gitos y de por lo menos 5 conteos por segundo.</li>
+<li>El <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de instalaci&#243;n del contador debe permitir su desconexi&#243;n sin necesidad de sacar de <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-359" class="externalLink  glosarioLink">servicio</a> el descargador.</li>
+<li>Debe tener un terminal para conectar a un analizador de corriente de fuga.</li>
+<li>El suministro debe incluir las bases aislantes del descargador y el conductor aislado (<a href="etat503_descargadores_sobretension_500_kv.html#" id="version-107" class="externalLink  glosarioLink">cable</a> o barra) para la conexi&#243;n entre el descargador y el contador de descargas.</li>
+<li>La altura de instalaci&#243;n debe permitir la lectura por parte de un operador parado en el piso. </li></ul>
+
+<h2 id="heading_13" >7.	 	PLACA DE CARACTER&#205;STICAS</h2>
+La placa met&#225;lica ser&#225; de acero inoxidable grabada en idioma espa&#241;ol y fijada con pernos o remaches del mismo <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-274" class="externalLink  glosarioLink">material</a>; ser&#225; ubicada en lugar visible y contendr&#225; la  informaci&#243;n indicada en la norma IEC 60099-4 complementada el n&#250;mero de Orden de Compra y la <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-273" class="externalLink  glosarioLink">masa</a> del descargador. <br />
+<h2 id="heading_14" >8.		PRUEBAS</h2>
+<h3 id="heading_15" >8.1	PRUEBAS TIPO</h3>
+El oferente deber&#225; entregar los reportes de pruebas tipo realizadas en descargadores similares a los ofertados, de acuerdo con lo estipulado en la secci&#243;n 7 de la norma IEC 60099-4.<br />
+<h3 id="heading_16" >8.2	  PRUEBAS DE RUTINA</h3>
+Las pruebas de rutina deben hacerse de acuerdo  con los requerimientos estipulados en la cl&#225;usula 8.1 de la publicaci&#243;n IEC 60099-4.<br />
+<h3 id="heading_17" >8.3	  PRUEBAS DE ACEPTACI&#211;N</h3>
+Las pruebas de aceptaci&#243;n deben hacerse de acuerdo  con los requerimientos estipulados en la cl&#225;usula 8.2 de la publicaci&#243;n IEC 60099-4.<br />
+<h2 id="heading_18" >9.	  <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-235" class="externalLink  glosarioLink">INSPECCI&#211;N</a> <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-376" class="externalLink  glosarioLink">T&#201;CNICA</a></h2>
+El representante de la <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-185" class="externalLink  glosarioLink">Empresa</a> (Inspector), tendr&#225; acceso en cualquier momento a inspeccionar el <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-392" class="externalLink  glosarioLink">trabajo</a> en proceso de manufactura.<br /><br />El fabricante adjudicado deber&#225; proveer por su cuenta, facilidades razonables para tales fines, y para la obtenci&#243;n de aquella informaci&#243;n que el inspector requiera respecto del progreso y el modo en que se efect&#250;an los trabajos y del car&#225;cter de los materiales usados.<br /><br />Los proponentes deber&#225;n cotizar en forma separada dentro de la oferta los costos de los ensayos de aceptaci&#243;n en la fabrica sin incluir el traslado ni estad&#237;a del inspector.<br />
+<h2 id="heading_19" >10.	   EMBALAJE Y TRANSPORTE</h2>
+Cada descargador y sus accesorios deber&#225;n ser embalados para transporte mar&#237;timo y terrestre de exportaci&#243;n, dentro de un empaque que lo proteja adecuadamente de da&#241;os (golpes, <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a>, absorci&#243;n de humedad, etc.) y robos.<br /><br />Los embalajes deben ser adecuados para soportar las operaciones normales de <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-113" class="externalLink  glosarioLink">carga</a>, descarga, y el eventual apilamiento.<br /><br />El embalaje de los accesorios deber&#225; prepararse especialmente para transporte y manipulaci&#243;n poco cuidadosa, y deber&#225; tener indicaciones muy claras respecto a la fragilidad de su contenido.<br /><br />Cada uno de los bultos deber&#225; incluir facilidades para levantarlo mediante estrobos. <br /><br />Para el transporte mar&#237;timo de exportaci&#243;n, el fabricante deber&#225; obtener la aprobaci&#243;n del embalaje por parte de las Compa&#241;&#237;as de Transporte, antes de despachar el <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-189" class="externalLink  glosarioLink">equipo</a> desde la f&#225;brica.<br /><br />Todos los bultos deber&#225;n llevar los detalles necesarios de identificaci&#243;n y manipulaci&#243;n, en forma clara e indeleble, tanto de su contenido como de los detalles de la Orden de Compra de CODENSA.<br /><br />El tipo de embalaje y su identificaci&#243;n deber&#225; ser sometido a la aprobaci&#243;n de los representantes del Cliente antes del despacho desde la f&#225;brica, y podr&#225; ser rechazado en caso de no cumplir con las condiciones especificadas.<br />
+<h2 id="heading_20" >11.	 INFORMACI&#211;N <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-376" class="externalLink  glosarioLink">T&#201;CNICA</a></h2>
+<h3 id="heading_21" >11.1	 INFORMACI&#211;N PARA LA PROPUESTA </h3>
+Cada proponente deber&#225; entregar junto con su oferta, la informaci&#243;n solicitada en esta especificaci&#243;n y cualquier otra informaci&#243;n necesaria que permita al cliente poder seleccionar los equipos a adquirir.<br /><br />Deber&#225; incluirse la siguiente informaci&#243;n:<br />
+<ul><li>Cuadro de Caracter&#237;sticas T&#233;cnicas Garantizadas </li>
+<li>Certificado de <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> </li>
+<li>Plazo de entrega y programa preliminar de fabricaci&#243;n e <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a>. El proponente debe incluir en su programa el tiempo que el Cliente requiere para aprobaci&#243;n de los planos de dise&#241;o. </li>
+<li>Protocolos de las Pruebas Tipo efectuados a descargadores similares a los ofertados. </li>
+<li>Planos de disposici&#243;n general indicando sus dimensiones principales, pesos y ubicaci&#243;n de accesorios.</li>
+<li>Rese&#241;a explicativa de los aspectos constructivos externos e internos esenciales, incluyendo una descripci&#243;n de los materiales a emplear y los detalles de cualquier dispositivo incorporado.</li>
+<li>Curvas caracter&#237;sticas de los descargadores ofrecidos. </li>
+<li>Una lista de referencia de suministros anteriores para los mismos tipos de Descargadores solicitados. </li></ul>
+El Cliente podr&#225; rechazar una propuesta si la informaci&#243;n entregada no tiene el suficiente grado de detalle y claridad.<br /><br />El proponente debe indicar claramente en su propuesta todos los puntos que presenten diferencias con respecto a esta Especificaci&#243;n.<br /><br />El idioma a utilizar en todos esos documentos ser&#225; el espa&#241;ol, seg&#250;n lo que se indique en los documentos de Licitaci&#243;n. En forma excepcional se aceptar&#225;n cat&#225;logos o planos de referencia en ingl&#233;s.<br />
+<h3 id="heading_22" >11.2	INFORMACI&#211;N PARA APROBACI&#211;N DEL CLIENTE</h3>
+En un plazo no superior a 30 d&#237;as calendario a partir de la fecha de colocaci&#243;n de  la orden de compra, el fabricante debe entregar para la aprobaci&#243;n del Cliente en medio magn&#233;tico la siguiente informaci&#243;n:
+<ul><li>Programa definitivo de fabricaci&#243;n e <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a>.</li>
+<li>Disposici&#243;n general con sus accesorios, incluyendo dimensiones, ubicaci&#243;n de componentes, etc.</li>
+<li>Vistas en cortes con detalles internos.</li>
+<li>Detalle de la fijaci&#243;n a la estructura.</li>
+<li>Dimensiones de los terminales de l&#237;nea.</li>
+<li>Dimensiones y ubicaci&#243;n de las placas para la <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a>.</li>
+<li>Placa de caracter&#237;sticas.</li></ul>
+
+<h3 id="heading_23" >11.3	DISE&#209;OS APROBADOS E INFORMACION FINAL CERTIFICADA</h3>
+A m&#225;s tardar 15 d&#237;as despu&#233;s de la etapa de aprobaci&#243;n de planos, el fabricante deber&#225; enviar dos copias duras y una magn&#233;tica de:<br />
+<ul><li>An&#225;lisis de selecci&#243;n de las caracter&#237;sticas de protecci&#243;n de los descargadores de <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-372" class="externalLink  glosarioLink">sobretensi&#243;n</a>.</li>
+<li>Curva tiempo contra <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> a <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-210" class="externalLink  glosarioLink">frecuencia</a> industrial.</li>
+<li>Curva corriente contra <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> a <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-210" class="externalLink  glosarioLink">frecuencia</a> industrial.</li>
+<li>Curva corriente contra <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> residual.</li>
+<li>Planos de disposici&#243;n y dimensiones del <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-189" class="externalLink  glosarioLink">equipo</a></li>
+<li>Manual de montaje y almacenamiento</li>
+<li>Listado de componentes.</li></ul>
+
+<h3 id="heading_24" >11.4	 RESPONSABILIDAD DEL FABRICANTE</h3>
+La aprobaci&#243;n de cualquier dise&#241;o por parte del Cliente no exime al fabricante de su plena responsabilidad en cuanto al proyecto y funcionamiento correcto del <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-189" class="externalLink  glosarioLink">equipo</a> suministrado.<br />
+<h2 id="heading_25" >12.	  GARANT&#205;AS</h2>
+El <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-189" class="externalLink  glosarioLink">equipo</a>, as&#237; como sus componentes y accesorios, deben ser cubiertos por una garant&#237;a respecto a cualquier defecto de fabricaci&#243;n, por un plazo de 30 meses a contar de la fecha de entrega de toda la partida, o de 24 meses a contar de la fecha de puesta en <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-359" class="externalLink  glosarioLink">servicio</a>, prevaleciendo la condici&#243;n que primero se cumpla.<br /><br />Si durante el per&#237;odo de garant&#237;a determinadas piezas presentaran defectos frecuentes, el Cliente podr&#225; exigir el reemplazo de esas piezas en todas las unidades del suministro, sin costo para &#233;l. A las piezas de reemplazo se les aplicar&#225; nuevamente el plazo de garant&#237;a.<br />
+<h2 id="heading_26" >13.	 PROVISI&#211;N B&#193;SICA</h2>
+El suministro comprende:<br />
+<ul><li>La provisi&#243;n de descargadores de sobre <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> con todos su accesorios completos, en las cantidades que se indiquen.</li>
+<li>El costo de los ensayos de recepci&#243;n en f&#225;brica, incluyendo la provisi&#243;n del <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-274" class="externalLink  glosarioLink">material</a> complementario, equipos, instrumentos y mano de obra necesaria.</li></ul>
+<br /><b>ANEXO 1. TABLA DE CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS</b><br /><div style="width:838px;"><table><tr><td colspan="1" rowspan="1" style="width:80px;height:22px;text-align:center">&#205;TEM</td><td colspan="1" rowspan="1" style="width:541px;text-align:center">DESCRIPCI&#211;N</td><td colspan="1" rowspan="1" style="width:97px;text-align:center"> </td><td colspan="1" rowspan="1" style="width:120px;text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">Fabricante</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">Pa&#237;s</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">Referencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">4</td><td colspan="1" rowspan="1" style="text-align:center">Norma</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">IEC 60099-4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">Tipo de instalaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">Exterior</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center"><a href="etat503_descargadores_sobretension_500_kv.html#" id="version-210" class="externalLink  glosarioLink">Frecuencia</a> asignada</td><td colspan="1" rowspan="1" style="text-align:center">Hz.</td><td colspan="1" rowspan="1" style="text-align:center">60</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">7</td><td colspan="1" rowspan="1" style="text-align:center"><a href="etat503_descargadores_sobretension_500_kv.html#" id="version-384" class="externalLink  glosarioLink">tensi&#243;n nominal</a> del descargador (Ur)</td><td colspan="1" rowspan="1" style="text-align:center">kV</td><td colspan="1" rowspan="1" style="text-align:center">444</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">M&#225;xima <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> de operaci&#243;n permanente (Ur)  kV rms</td><td colspan="1" rowspan="1" style="text-align:center">kV</td><td colspan="1" rowspan="1" style="text-align:center">318</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">9</td><td colspan="1" rowspan="1" style="text-align:center">Corriente de descarga asignada (In)</td><td colspan="1" rowspan="1" style="text-align:center">kA</td><td colspan="1" rowspan="1" style="text-align:center">20</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:42px;text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">Nivel b&#225;sico de aislamiento al impulso (<a href="etat503_descargadores_sobretension_500_kv.html#" id="version-101" class="externalLink  glosarioLink">BIL</a>) A 2650 m.s.n.m. </td><td colspan="1" rowspan="1" style="text-align:center">kV</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">Clase de descarga de l&#237;nea </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">5</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">Corriente asignada del dispositivo de alivio de presi&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">kA</td><td colspan="1" rowspan="1" style="text-align:center">40</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:42px;text-align:center">11</td><td colspan="1" rowspan="1" style="text-align:center"><a href="etat503_descargadores_sobretension_500_kv.html#" id="version-377" class="externalLink  glosarioLink">Tensi&#243;n</a> residual al impulso de corriente escal&#243;n, 20 kA, (Ures)</td><td colspan="1" rowspan="1" style="text-align:center">kV</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="3" style="height:21px;text-align:center">12</td><td colspan="1" rowspan="1" style="text-align:center"><a href="etat503_descargadores_sobretension_500_kv.html#" id="version-377" class="externalLink  glosarioLink">Tensi&#243;n</a> residual al impulso tipo <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-270" class="externalLink  glosarioLink">maniobra</a> (Ures)</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="3" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">a)  Para 500 A</td><td colspan="1" rowspan="1" style="text-align:center">kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">b)  Para  2000 A</td><td colspan="1" rowspan="1" style="text-align:center">kV</td></tr>
+<tr><td colspan="1" rowspan="5" style="height:21px;text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center"><a href="etat503_descargadores_sobretension_500_kv.html#" id="version-377" class="externalLink  glosarioLink">Tensi&#243;n</a> residual al impulso tipo <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-346" class="externalLink  glosarioLink">rayo</a> 8/20&#181;s</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="5" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">a)  10 KA</td><td colspan="1" rowspan="1" style="text-align:center">kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">b)  20 KA</td><td colspan="1" rowspan="1" style="text-align:center">kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">c) &#160; 40 KA</td><td colspan="1" rowspan="1" style="text-align:center">kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">d)  Corriente de prueba a ser verificada en la recepci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">15</td><td colspan="1" rowspan="1" style="text-align:center">Capacidad  m&#237;nima de absorci&#243;n de energ&#237;a</td><td colspan="1" rowspan="1" style="text-align:center">kJ/kV</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:41px;text-align:center">17</td><td colspan="1" rowspan="1" style="text-align:center">M&#237;nima sobre <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> temporal soportada, luego de absorber la energ&#237;a asignada</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="5" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">a)  Durante 0,1s</td><td colspan="1" rowspan="1" style="text-align:center">kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">b)  Durante 1s</td><td colspan="1" rowspan="1" style="text-align:center">kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">c) &#160; Durante 10s</td><td colspan="1" rowspan="1" style="text-align:center">kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">d)  Durante 100s </td><td colspan="1" rowspan="1" style="text-align:center">kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">18</td><td colspan="1" rowspan="1" style="text-align:center">Peso neto </td><td colspan="1" rowspan="1" style="text-align:center">kg</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">19</td><td colspan="1" rowspan="1" style="text-align:center">Distancia de fuga m&#237;nima</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="text-align:center">11000</td></tr>
+<tr><td colspan="1" rowspan="3" style="height:21px;text-align:center">20</td><td colspan="1" rowspan="1" style="text-align:center">Caracter&#237;sticas s&#237;smicas</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="3" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">a)  <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-210" class="externalLink  glosarioLink">Frecuencia</a> natural</td><td colspan="1" rowspan="1" style="text-align:center">Hz.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">b)  Coeficiente de amortiguamiento cr&#237;tico</td><td colspan="1" rowspan="1" style="text-align:center">%</td></tr>
+<tr><td colspan="1" rowspan="3" style="height:21px;text-align:center">21</td><td colspan="1" rowspan="1" style="text-align:center"><a href="etat503_descargadores_sobretension_500_kv.html#" id="version-113" class="externalLink  glosarioLink">Carga</a> admisible en los bornes</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="3" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">a)  Est&#225;tico</td><td colspan="1" rowspan="1" style="text-align:center">N</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">b)  Din&#225;mico</td><td colspan="1" rowspan="1" style="text-align:center">N</td></tr>
+<tr><td colspan="1" rowspan="3" style="height:21px;text-align:center">22</td><td colspan="1" rowspan="1" style="text-align:center">Contador de descargas</td><td colspan="1" rowspan="3" style="text-align:center"> </td><td colspan="1" rowspan="3" style="text-align:center">S&#237;</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">a)  Fabricante</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">b)  Referencia</td></tr>
+<tr><td colspan="1" rowspan="4" style="height:21px;text-align:center">23</td><td colspan="1" rowspan="1" style="text-align:center">Corriente de fuga m&#225;xima y componente resistiva</td><td colspan="1" rowspan="4" style="text-align:center"> </td><td colspan="1" rowspan="4" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1. A la <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> de operaci&#243;n (289 kV)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">2. A la <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> m&#225;xima de operaci&#243;n continua (318 kV)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">3. A la <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-384" class="externalLink  glosarioLink">tensi&#243;n nominal</a> del descargador (444 kV) </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">24</td><td colspan="1" rowspan="1" style="text-align:center"><a href="etat503_descargadores_sobretension_500_kv.html#" id="version-274" class="externalLink  glosarioLink">Material</a> de la envolvente</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">25</td><td colspan="1" rowspan="1" style="text-align:center">Cumplimiento con el <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-363" class="externalLink  glosarioLink">Sistema</a> de <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-112" class="externalLink  glosarioLink">Calidad</a></td><td colspan="1" rowspan="1" style="text-align:center">ISO 9000</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div><br /><b>Es responsabilidad del <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-146" class="externalLink  glosarioLink">contratista</a> seleccionar las caracter&#237;sticas de protecci&#243;n de los descargadores de modo que sean adecuadas a los aislamientos externos e internos de los equipos de la <a href="etat503_descargadores_sobretension_500_kv.html#" id="version-373" class="externalLink  glosarioLink">subestaci&#243;n</a>.</b><br /><br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 2033, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

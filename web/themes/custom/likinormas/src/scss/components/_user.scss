@@ -1,0 +1,584 @@
+.path-user {
+
+  .region-breadcrumb,
+  .alert {
+    display: none;
+  }
+}
+
+body.path-user {
+
+  .block-user {
+    position: relative;
+
+    &+form {
+      display: none;
+    }
+
+    .field--name-background-image {
+      &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba($color: $color-black, $alpha: 0.66);
+      }
+
+      picture {
+        display: block;
+
+        img {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: -1;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+      }
+    }
+
+    .ajax-progress.ajax-progress-throbber {
+      display: none !important;
+    }
+
+    .section-info {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10rem var(--margin-width-container-secondary) 6rem;
+      gap: 10rem;
+
+      @include media-query(desktopM) {
+        padding: 12rem var(--margin-width-container-secondary) 6rem;
+      }
+
+      @include media-query(desktopLS) {
+        padding: 14rem var(--margin-width-container-secondary) 6rem;
+        gap: 13vw;
+      }
+
+      @include media-query(desktopXLS) {
+        min-height: 80vh;
+        align-items: center;
+      }
+
+      .block-user-data {
+        display: none;
+        align-self: center;
+
+        @include media-query(desktopM) {
+          display: block;
+        }
+
+        @include media-query(desktopLS) {
+          width: 45%;
+        }
+
+        &-title {
+          margin: 0 0 1rem;
+        }
+
+        &-description {
+          @extend %section-paragraph;
+          margin-bottom: 3rem;
+          line-height: 2.5rem;
+
+          @include media-query(maxdesktopLS) {
+            font-size: 1.7rem;
+          }
+        }
+
+        &-itmes {
+          color: $color-white;
+
+          .field--name-items {
+            display: flex;
+            flex-direction: column;
+            row-gap: 3.5rem;
+          }
+
+          .field__item {
+            .info-item {
+              align-items: flex-start;
+              gap: 3rem;
+            }
+
+            &-img {
+              flex: none;
+
+              img {
+                max-width: 8.4rem;
+                max-height: 8.4rem;
+              }
+            }
+
+            &-info {
+              &-title {
+                font-family: "RoobertENEL-Bold";
+                font-size: 2rem;
+                margin-bottom: 0.3rem;
+
+                @include media-query(desktopLS) {
+                  font-size: 2.2rem;
+                }
+              }
+
+              &-description {
+                @extend %section-paragraph;
+                line-height: 2.5rem;
+                margin-bottom: 0;
+
+                @include media-query(maxdesktopLS) {
+                  font-size: 1.7rem;
+                }
+              }
+            }
+
+
+          }
+        }
+      }
+
+      .block-user-form {
+        width: 100%;
+        flex: none;
+
+        @include media-query(mobilexl) {
+          max-width: 40rem;
+          width: 90%;
+        }
+
+        @include media-query(tablet) {
+          max-width: initial;
+          width: 40rem;
+        }
+
+        @include media-query(desktopLS) {
+          width: 43rem;
+        }
+
+        form {
+          background-color: $color-white;
+          border-radius: 2.5rem;
+          box-shadow: 0 0 0.6rem $color-black;
+          padding: 4.2rem 4.1rem;
+
+          .form-title {
+            color: #2E2E2E;
+            font-size: 3.7rem;
+            font-family: 'RoobertENEL-Bold';
+            margin-bottom: 2rem;
+          }
+
+          p {
+            font-size: 1.5rem;
+            color: $color-gray-primary;
+          }
+
+          .btn-facebook {
+            position: relative;
+            color: #1977F3;
+            width: 100%;
+            height: 4rem;
+            border: 1px solid #1977F3;
+            border-radius: 0;
+            padding: .5rem 3rem 0.5rem 4rem;
+            margin: 0 0 1.4rem;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 1rem;
+
+
+            @include media-query(mobilex) {
+              padding: 0.5rem 1.7rem;
+              justify-content: center;
+            }
+
+            @include media-query(mobilexl) {
+              gap: 4rem;
+            }
+
+            &:hover {
+              background-color: #1977F3;
+              color: $color-white;
+
+              a {
+                color: inherit;
+              }
+            }
+
+            span {
+              font-size: 1.8rem;
+              position: absolute;
+              top: 50%;
+              left: 1rem;
+              transform: translateY(-50%);
+
+              @include media-query(mobilex) {
+                left: 1.7rem;
+              }
+            }
+
+            a {
+              color: inherit;
+              font-size: 1.4rem;
+              text-decoration: none;
+
+              @include media-query(mobilex) {
+                font-size: 1.5rem;
+              }
+            }
+          }
+
+          .other {
+            display: block;
+            text-align: center;
+            position: relative;
+            color: #707070;
+            font-size: 1.5rem;
+
+            &::before,
+            &::after {
+              content: "";
+              display: block;
+              width: 42%;
+              height: 0.01rem;
+              background-color: #C7C7C7;
+              position: absolute;
+              top: 40%;
+              transform: translateY(-50%);
+
+            }
+
+            &::before {
+              left: 0;
+            }
+
+            &::after {
+              right: 0;
+            }
+          }
+
+          .form-item {
+            margin: 1.6rem 0 2rem;
+
+            &.error-input {
+              input {
+                border-color: $color-red;
+              }
+
+              label.error {
+                display: none !important;
+              }
+            }
+
+            label {
+              margin-bottom: 0.5rem;
+              font-size: 1.4rem;
+              font-family: 'RoobertENEL-Bold';
+              color: $color-black-light;
+
+              @include media-query(mobilex) {
+                font-size: 1.3rem;
+              }
+
+              &.form-required {
+                &::after {
+                  content: "*";
+                  background-image: none;
+                  vertical-align: initial;
+                }
+              }
+
+              &.error {
+                color: $color-red;
+                font-size: 1.3rem;
+                font-family: 'RoobertENEL-Regular';
+                display: none !important;
+              }
+
+            }
+
+            .password-strength,
+            .password-suggestions {
+              font-size: 1.4rem;
+              font-family: 'RoobertENEL-Regular';
+              color: $color-black-light;
+              width: 100%;
+            }
+
+            input {
+              color: $color-gray-primary;
+              border-color: #B2B2B2;
+              border-radius: 0;
+              height: 4rem;
+              font-size: 1.5rem;
+              font-family: 'RoobertENEL-Light';
+
+              &:focus {
+                border-color: $color-pink;
+                box-shadow: 0 0 0 0.1rem rgba($color: $color-pink, $alpha: 25%);
+              }
+            }
+
+            &.form-type-password {
+              position: relative;
+
+              input {
+                padding: 0.375rem 3.8rem 0.375rem 0.75rem;
+              }
+
+              .icon-show-password {
+                display: block;
+                position: absolute;
+                right: 1rem;
+                width: 2.2rem;
+                background-repeat: no-repeat;
+                background-size: cover;
+                cursor: pointer;
+
+                &.hidden-password {
+                  height: 2.1rem;
+                  background-image: url('../assets/images/icon-eye-hide.svg');
+                  top: 3.7rem;
+                }
+
+                &.show-password {
+                  height: 1.4rem;
+                  background-image: url('../assets/images/icon-eye-show.svg');
+                  top: 4rem;
+                }
+              }
+            }
+
+            .form-item--error-message {
+              margin: 0.5rem 0 1rem;
+            }
+          }
+
+          .form-type-password-confirm {
+            .form-item--error-message {
+              margin: 0 0 1rem;
+            }
+          }
+
+          .form-item--error-message {
+            margin-bottom: 2rem;
+            color: $color-red;
+            font-size: 1.3rem;
+            font-family: 'RoobertENEL-Light';
+
+            &::before {
+              display: none;
+            }
+
+            a {
+              display: none;
+            }
+          }
+
+          .form-forgot-pass {
+            display: block;
+            text-align: right;
+            color: $color-green-light-two;
+            font-size: 1.4rem;
+            margin-top: -1rem;
+          }
+
+          .captcha {
+            margin-top: 0.8rem;
+            margin-bottom: 0;
+          }
+
+          .form-actions {
+            margin: 1.6rem 0 1rem;
+
+            input {
+              @extend %button-form-primary;
+              border: 0;
+              border-radius: 0;
+            }
+          }
+
+          .section-register-now {
+            span {
+              display: block;
+              color: #717171;
+              font-size: 1.4rem;
+
+              a {
+                color: $color-green-light-two;
+              }
+            }
+          }
+
+          &.user-register-form {
+            .form-item {
+              margin: 0.8rem 0;
+
+              &.form-item-name {
+                margin: 0rem 0;
+              }
+
+              .password-confirm-message {
+                display: none;
+              }
+
+            }
+
+            .field--name-profession-or-occupation,
+            .field--name-company {
+
+              @include media-query(mobile) {
+                width: 48%;
+                display: inline-block;
+              }
+            }
+
+            .field--name-profession-or-occupation {
+              @include media-query(mobile) {
+                margin-right: 2%;
+              }
+            }
+
+            .field--name-notifications,
+            .field--name-terms-and-conditions {
+              .form-item {
+                display: flex;
+                gap: 0.6rem;
+
+                input[type="checkbox"] {
+                  accent-color: #FC0F64;
+                  appearance: auto;
+                  flex: none;
+                  height: 1.6rem;
+                  width: 1.6rem;
+                  border-radius: 0.3rem;
+                  margin: 0;
+
+                  &:focus {
+                    box-shadow: none;
+                  }
+                }
+
+                label {
+                  font-size: 1.2rem;
+                  color: $color-gray-primary;
+                  font-family: 'RoobertENEL-Regular';
+
+                  a {
+                    color: $color-green-light-two;
+                    font-family: 'RoobertENEL-Bold';
+                  }
+                }
+              }
+            }
+
+            .field--name-notifications {
+              .form-item {
+                margin: 1.3rem 0 0.5rem;
+              }
+            }
+
+            .field--name-terms-and-conditions {
+              .form-item {
+                margin: 0rem;
+              }
+
+              label {
+                &.error {
+                  color: $color-red;
+                  font-size: 1.3rem;
+                  font-family: 'RoobertENEL-Regular';
+                }
+              }
+            }
+
+            &.register-with-facebook {
+              .field--name-user-picture {
+                .form-item {
+                  text-align: center;
+                  margin-bottom: 2rem;
+
+                  .form-managed-file {
+                    .image-preview {
+                      width: 10rem;
+                      height: 10rem;
+                      margin: 0 auto;
+
+                      img {
+                        border-radius: 50%;
+                        border: 2px solid #FC0F64;
+                      }
+                    }
+                  }
+                }
+              }
+
+              div[data-drupal-selector="edit-account"] {
+                display: flex;
+                flex-direction: column;
+
+                .description {
+                  display: none;
+                }
+              }
+
+              .form-item-name {
+                order: 1;
+              }
+
+              .form-item-mail {
+                order: 2;
+              }
+
+              .content-profession-company {
+                order: 3;
+              }
+
+              .form-item-current-pass {
+                order: 4;
+              }
+
+              .form-item-pass {
+                order: 5;
+                margin-bottom: 0;
+              }
+
+            }
+          }
+
+          &.user-pass-reset {
+            p {
+              color: $color-black-light;
+            }
+          }
+
+          &.user-form {
+            .form-item-current-pass {
+              .description {
+                display: none;
+              }
+            }
+
+            .password-confirm-message {
+              display: none;
+            }
+          }
+
+        }
+      }
+    }
+  }
+}

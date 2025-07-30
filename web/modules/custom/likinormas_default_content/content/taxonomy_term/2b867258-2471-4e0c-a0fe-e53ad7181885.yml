@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 2b867258-2471-4e0c-a0fe-e53ad7181885
+  bundle: rules_category
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'LÍNEAS AÉREAS RURALES DE DISTRIBUCION'
+  weight:
+    -
+      value: 5
+  parent:
+    -
+      target_id: 0
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /normas/lineas-aereas-rurales-de-distribucion
+      langcode: en
+      pathauto: 1

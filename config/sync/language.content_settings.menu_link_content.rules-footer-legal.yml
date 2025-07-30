@@ -1,0 +1,11 @@
+uuid: 1b24d0be-18c1-4672-9352-22ff9fde28b5
+langcode: es
+status: true
+dependencies:
+  config:
+    - system.menu.rules-footer-legal
+id: menu_link_content.rules-footer-legal
+target_entity_type_id: menu_link_content
+target_bundle: rules-footer-legal
+default_langcode: site_default
+language_alterable: false

@@ -1,0 +1,19 @@
+uuid: ce80afb6-cbcd-4ce9-97a5-f357cfad85f0
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.alignment_class
+    - taxonomy.vocabulary.rules_alignment
+id: taxonomy_term.rules_alignment.alignment_class
+field_name: alignment_class
+entity_type: taxonomy_term
+bundle: rules_alignment
+label: 'Clase de alineación'
+description: 'Clase que aplica a la sección para darle la orientación'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

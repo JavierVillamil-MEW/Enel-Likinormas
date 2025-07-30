@@ -1,0 +1,124 @@
+uuid: 87866f38-cfd5-4960-a263-ef767c4f45f3
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.rules_home_content.background_banner_button
+    - field.field.node.rules_home_content.background_banner_description
+    - field.field.node.rules_home_content.background_banner_image
+    - field.field.node.rules_home_content.background_banner_image_mobile
+    - field.field.node.rules_home_content.background_banner_title
+    - field.field.node.rules_home_content.contact_button
+    - field.field.node.rules_home_content.contact_description
+    - field.field.node.rules_home_content.contact_title
+    - field.field.node.rules_home_content.contact_webform
+    - field.field.node.rules_home_content.initial_sections
+    - field.field.node.rules_home_content.seo
+    - field.field.node.rules_home_content.user_network
+    - node.type.rules_home_content
+    - responsive_image.styles.rules_responsive_image
+  module:
+    - entity_reference_revisions
+    - link
+    - responsive_image
+    - text
+    - user
+    - webform
+id: node.rules_home_content.default
+targetEntityType: node
+bundle: rules_home_content
+mode: default
+content:
+  background_banner_button:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  background_banner_description:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  background_banner_image:
+    type: responsive_image
+    label: hidden
+    settings:
+      responsive_image_style: rules_responsive_image
+      image_link: ''
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  background_banner_title:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  contact_button:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  contact_description:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  contact_title:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  contact_webform:
+    type: webform_entity_reference_entity_view
+    label: hidden
+    settings:
+      source_entity: true
+      lazy: false
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  initial_sections:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  user_network:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 5
+    region: content
+hidden:
+  background_banner_image_mobile: true
+  langcode: true
+  links: true
+  seo: true

@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Índice. Acometidas y medidores | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../../index.html"><img src="../../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1865" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../../Usuario/Registro%3FReturnUrl=%252FNorma%252FDetalles%252F1865.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/1865" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1865" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			showSubmenu('4', '112');
+		});
+	</script>
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Norma t&#233;cnica
+	</div>
+	<h1>&#205;ndice. Acometidas y medidores</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de la norma</div>
+					<div class="caracteristicas">&#205;ndice. Acometidas y medidores</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">29/11/2018</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../../Home/DownloadPDF/1865">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FNorma%2FDetalles%2F1865&amp;nodoid=1865', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+        <div style="clear:left;"></div>
+		<div style="width:850px;"><table><tr><td colspan="2" rowspan="1" style="width:850px;height:41px;text-align:center"><b>ACOMETIDAS ELECTRICAS</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="width:150px;height:40px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:700px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../generalidades_ae/generalidades_7_1_actualizacion_generalidades.html" class="externalLink">GENERALIDADES 7.1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ACOMETIDAS EL&#201;CTRICAS Y MEDIDORES</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;"><a href="../generalidades_ae/flujograma_limites_actualizacion_flujograma_limites_carga_acometidas.html" class="externalLink">FLUJOGRAMA<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">FLUJOGRAMA DE L&#205;MITES DE CARGA ACOMETIDAS Y SUBESTACIONES</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../generalidades_ae/ap100_bloqueo_mecanico_interruptor_automatico.html" class="externalLink">AE100<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">BLOQUEO MEC&#193;NICO DE INTERRUPTOR AUTOM&#193;TICO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../generalidades_ae/ae110_marcacion_cajas_armario_medidores_energia.html" class="externalLink">AE110<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">MARCACI&#211;N DE CAJAS Y ARMARIO DE MEDIDORES DE ENERGIA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/generalidades_7_2_acometidas_electricas.html" class="externalLink">GENERALIDADES 7.2<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ACOMETIDAS EL&#201;CTRICAS</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae200_diagrama_unifilar_acometidas_tableros.html" class="externalLink">AE200<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">DIAGRAMA UNIFILAR PARA ACOMETIDAS Y TABLEROS</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae201_diagramas_unifilares_acometidas_alimentadas_red_b.html" class="externalLink">AE201<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">DIAGRAMAS UNIFILARES PARA ACOMETIDAS ALIMENTADAS DE LA RED B.T.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae2011_presenta_diferentes_esquemas_conexion.html" class="externalLink">AE201-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">DIAGRAMAS UNIFILARES PARA ACOMETIDAS DE B.T. DESDE TRANSFORMADORES DEDICADOS DE DISTRIBUCI&#211;N</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae2012_diagramas_unifilares_acometidas_m_t_1427.html" class="externalLink">AE201-2<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">DIAGRAMAS UNIFILARES PARA ACOMETIDAS DE M.T. A TRANSFORMADORES DEDICADOS DE DISTRIBUCI&#211;N</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae202_acometida_aerea_baja_tension.html" class="externalLink">AE202<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ACOMETIDA A&#201;REA DE BAJA TENSI&#211;N</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae203_diagramas_unifilares_acometidas_m_t.html" class="externalLink">AE203<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">IDENTIFICADOR DE MEDIDOR Y ACOMETIDAS</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae2031_acometida_esquema_conexion_caja_medidor.html" class="externalLink">AE203-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ACOMETIDA - ESQUEMAS DE CONEXI&#211;N PARA CAJA DE MEDIDOR MONOF&#193;SICO Y BIF&#193;SICO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae2032_acometida_esquema_conexion_caja.html" class="externalLink">AE203-2<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ACOMETIDA - ESQUEMAS DE CONEXI&#211;N PARA CAJA DE DOS MEDIDORES MONOF&#193;SICOS</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae2033_acometida_esquema_conexion_caja.html" class="externalLink">AE203-3<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ACOMETIDA - ESQUEMAS DE CONEXI&#211;N PARA CAJA DE DOS MEDIDORES TRIF&#193;SICOS </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae2034_acometida_esquema_conexion_caja_tres.html" class="externalLink">AE203-4<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ACOMETIDA - ESQUEMA DE CONEXI&#211;N PARA CAJA DE TRES Y CUATRO MEDIDORES TRIF&#193;SICOS </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae2042_caracteristicas_cables_subterraneos_bt_thwn2thhn.html" class="externalLink">AE204-2<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CAR&#193;CTER&#205;STICAS DE LOS CABLES SUBTERR&#193;NEOS DE B.T. - THWN-2/THHN</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae205_caracteristicas_cables_acometidas_awg.html" class="externalLink">AE205<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CARACTER&#205;STICAS DE LOS CABLES PARA ACOMETIDAS EN AWG Y mm2 600 V</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae216_acometida_aerea_b_t_caja.html" class="externalLink">AE216<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ACOMETIDA A&#201;REA DE B.T. DESDE CAJA DE ACOMETIDAS</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae217_acometida_aerea_baja_tension_cable_antifraude.html" class="externalLink">AE217<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ACOMETIDA A&#201;REA DE BAJA TENSI&#211;N CON CABLE ANTIFRAUDE DESDE RED ABIERTA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae218_acometida_aerea_baja_tension_red_trenzada.html" class="externalLink">AE218<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ACOMETIDA A&#201;REA DE BAJA TENSI&#211;N DESDE RED TRENZADA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae219_acometida_aerea_alternativa_1.html" class="externalLink">AE219<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ACOMETIDA A&#201;REA (ALTERNATIVA 1)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae2191_acometida_aerea_alternativa_2.html" class="externalLink">AE219-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ACOMETIDA A&#201;REA (ALTERNATIVA 2)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae2192_acometida_aerea_alternativa_3.html" class="externalLink">AE219-2<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ACOMETIDA A&#201;REA (ALTERNATIVA 3)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae2193_acometida_aerea_alternativa_4.html" class="externalLink">AE219-3<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ACOMETIDA A&#201;REA (ALTERNATIVA 4)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae2194_acometida_aerea_alternativa_5.html" class="externalLink">AE219-4<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ACOMETIDA A&#201;REA (ALTERNATIVA 5)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae220_acometida_aerea_monofasica_1_8_kw.html" class="externalLink">AE220<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ACOMETIDA A&#201;REA MONOF&#193;SICA DE 1 A 8 kW</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae2201_acometida_aerea_trifasica.html" class="externalLink">AE220-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ACOMETIDA A&#201;REA TRIF&#193;SICA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae2202_acometida_aerea_trifasica_31_35_kw.html" class="externalLink">AE220-2<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ACOMETIDAS A&#201;REAS TRIF&#193;SICA DE 31 A 35 kW</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae2203_acometida_aerea_bifasica_5_20_kw.html" class="externalLink">AE220-3<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ACOMETIDA A&#201;REA BIF&#193;SICA DE 1 A 20 kW</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae221_instalacion_medidor_monofasico_poste.html" class="externalLink">AE221<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">INSTALACI&#211;N MEDIDOR MONOF&#193;SICO EN POSTE</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae222_instalacion_medidor_trifasico_poste.html" class="externalLink">AE222<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">INSTALACI&#211;N MEDIDOR TRIF&#193;SICO EN POSTE</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae223_instalacion_caja_medidor_poste_concreto.html" class="externalLink">AE223<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">INSTALACI&#211;N DE CAJA DE MEDIDOR EN POSTE DE CONCRETO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae224_alimentacion_amplificador_o_equipo_comunicaciones_bt.html" class="externalLink">AE224<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ALIMENTACI&#211;N DE AMPLIFICADOR O EQUIPO DE COMUNICACIONES EN BT - ALIMENTACI&#211;N MONOF&#193;SICA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae225_alimentacion_amplificador_o_equipo_comunicaciones_bt.html" class="externalLink">AE225<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ALIMENTACI&#211;N DE AMPLIFICADOR O EQUIPO DE COMUNICACIONES EN BT - ALIMENTACI&#211;N TRIF&#193;SICA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae226_macromedicion_bt_telemedida.html" class="externalLink">AE226<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">MACROMEDICI&#211;N BT CON TELEMEDIDA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae229_acometidas_subterraneas_baja_tension.html" class="externalLink">AE229<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ACOMETIDA SUBTERR&#193;NEA DE BAJA TENSI&#211;N</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae235_numero_maximo_conductores_monopolares_baja_tension.html" class="externalLink">AE235<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">N&#218;MERO M&#193;XIMO DE CONDUCTORES MONOPOLARES DE B.T. POR TUBO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae237_canalizaciones_ductos_cajas_acometidas_subterraneas.html" class="externalLink">AE237<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CANALIZACIONES, DUCTOS Y CAJAS. ACOMETIDAS SUBTERR&#193;NEAS DE BAJA TENSI&#211;N</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae2371_utilizacion_andenes_redes_subterraneas_acometidas.html" class="externalLink">AE237-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">UTILIZACI&#211;N DE ANDENES PARA REDES SUBTERR&#193;NEAS Y ACOMETIDAS </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae238_subterranizacion_acometidas_b_t.html" class="externalLink">AE238<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">SUBTERRANIZACI&#211;N DE ACOMETIDAS EN B.T.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae239_acometidas_subterraneas_b_t.html" class="externalLink">AE239<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ACOMETIDAS SUBTERR&#193;NEAS EN B.T. DESDE UN TRANSFORMADOR EN POSTE</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae2391_acometida_subterranea_b_t_derivacion.html" class="externalLink">AE239-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ACOMETIDA SUBTERR&#193;NEA DE B.T. CON DERIVACI&#211;N DESDE CAJA DE INSPECCI&#211;N FRENTE AL INMUEBLE</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae2392_acometida_subterranea_circuito_b_t.html" class="externalLink">AE239-2<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ACOMETIDA SUBTERR&#193;NEA CON CIRCUITO DE B.T. DESDE BORNES DEL TRANSFORMADOR</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae240_acometida_aerea_b_t_alimentada.html" class="externalLink">AE240<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ACOMETIDA A&#201;REA DE B.T. ALIMENTADA DE UNA RED SUBTERR&#193;NEA. INSTALACI&#211;N SOBREPUESTA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;"><a href="../acometidas_electricas/ae241_detalles_ductos_zanjas_rellenos_1_ducto.html" class="externalLink">AE241<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">DETALLES DUCTOS, ZANJAS Y RELLENOS 1 DUCTO DI&#193;METRO &#216; 3&quot;</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae242_detalles_ductos_zanjas_rellenos_2.html" class="externalLink">AE242<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">DETALLES DUCTOS, ZANJAS Y RELLENOS 2 DUCTOS DI&#193;METRO &#216; 4&quot;</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae243_caja_inspeccion_alumbrado_publico_acometidas.html" class="externalLink">AE243<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CAJA DE INSPECCI&#211;N PARA ALUMBRADO P&#218;BLICO Y ACOMETIDAS DE BAJA TENSI&#211;N</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae2431_tapa_caja_inspeccion_alumbrado_publico.html" class="externalLink">AE243-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">TAPA DE CAJA DE INSPECCI&#211;N PARA ALUMBRADO P&#218;BLICO Y ACOMETIDAS EN BAJA TENSI&#211;N</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae2432_caja_inspeccion_alumbrado_publico_acometidas.html" class="externalLink">AE243-2<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CAJA DE INSPECCI&#211;N PARA ALUMBRADO PUBLICO Y ACOMETIDAS EN BAJA TENSI&#211;N (VISTA ISOM&#201;TRICA)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae244_alimentadores_barraje_transformadores_distribucion.html" class="externalLink">AE244<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ALIMENTADORES DE BARRAJE EN TRANSFORMADORES DE DISTRIBUCI&#211;N</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae279_conductor_neutro_acometidas_subterraneas_baja_tension.html" class="externalLink">AE279<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CONDUCTOR DE NEUTRO DE ACOMETIDAS SUBTERR&#193;NEAS DE BAJA TENSI&#211;N</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae280_conductor_neutro_acometidas_subterraneas_baja_tension.html" class="externalLink">AE280<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">SISTEMA DE PUESTA A TIERRA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae281_elementos_puesta_tierra_baja_tension.html" class="externalLink">AE281<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ELEMENTOS DE PUESTA A TIERRA EN BAJA TENSI&#211;N</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae285_acometidas_aereas_subterraneas_11_4_13.html" class="externalLink">AE285<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ACOMETIDAS A&#201;REAS Y SUBTERR&#193;NEAS EN 11,4, 13,2 Y 34,5 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae287_caja_inspeccion_metalica.html" class="externalLink">AE287<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CAJA DE INSPECCI&#211;N MET&#193;LICA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae2871_caja_inspeccion_metalica_cambio_caja_inspeccion.html" class="externalLink">AE287-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CAJA DE INSPECCI&#211;N MET&#193;LICA PARA CAMBIO DE NIVEL</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae288_detalles_soporte_ducteria_sotanos.html" class="externalLink">AE288<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">DETALLES PARA SOPORTE DE DUCTERIA EN S&#211;TANOS</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae290_acometidas_provisionales_obra.html" class="externalLink">AE290<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ACOMETIDAS PARA PROVISIONAL OBRAS</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae291_provisional_obra_instalacion_caja_medidor.html" class="externalLink">AE291<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">PROVISIONAL DE OBRA - INSTALACI&#211;N DE CAJA DE MEDIDOR SOBRE MURO ESTRUCTURAL</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;"><a href="../acometidas_electricas/ae292_provisional_obra_isntalacion_armario_equipo.html" class="externalLink">AE292<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">PROVISIONAL DE OBRA - INSTALACI&#211;N DE ARMARIO PARA EQUIPO DE MEDIDA Y TRANSFORMADORES DE CORRIENTE SOBRE MURO ESTRUCTURAL - ACOMETIDA Y PARCIAL SUBTERRANEA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;"><a href="../ae2921_provisional_obra_instalacion_armario_equipo.html" class="externalLink">AE292-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">PROVISIONAL DE OBRA - INSTALACI&#211;N DE ARMARIO PARA EQUIPO DE MEDIDA Y TRANSFORMADORES DE CORRIENTE SOBRE MURO ESTRUCTURAL - ACOMETIDA Y PARCIAL AEREA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;"><a href="../acometidas_electricas/ae293_instalacion_medidor_bicuerpo_poste_circuito_secundario_sencillo.html" class="externalLink">AE293<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">INSTALACION DE MEDIDOR BICUERPO EN POSTE (CIRCUITO SECUNDARIO SENCILLO - CONDUCTOR TRENZADO - CONSTRUCCI&#211;N ANGULAR)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae294_instalacion_equipo_medida_mt_compacto_combinado.html" class="externalLink">AE294<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">INSTALACION EQUIPO DE MEDIDA EN MT COMPACTO / COMBINADO PARA PROVISIONAL OBRA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae2951_montaje_caja_concentradores_medicion_inteligente_caso.html" class="externalLink">AE295-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Montaje de caja para concentradores de medici&#243;n inteligente caso un poste</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae2952_montaje_caja_concentradores_medicion_inteligente.html" class="externalLink">AE295-2<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Montaje de caja para concentradores de medici&#243;n inteligente - caso postes en h</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae2953_montaje_caja_concentradores_medicion_inteligente.html" class="externalLink">AE295-3<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Montaje de caja para concentradores de medici&#243;n inteligente - caso local</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae2954_montaje_caja_concentradores_medicion_inteligente.html" class="externalLink">AE295-4<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Montaje de caja para concentradores de medici&#243;n inteligente - caso pedestal</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/generalidades_7_3_generalidades_cajas_armarios_celdas.html" class="externalLink">GENERALIDADES 7.3<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CAJAS, ARMARIOS Y CELDAS</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../acometidas_electricas/ae300_cajas_armarios_celdas_instalacion_medidores.html" class="externalLink">AE300<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CAJAS, ARMARIOS Y CELDAS PARA INSTALACI&#211;N DE MEDIDORES</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae3001_diagrama_unifilar_localizan_cajas_armarios.html" class="externalLink">AE300-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">DIAGRAMA UNIFILAR DONDE SE LOCALIZAN CAJAS, ARMARIOS Y CELDAS PARA MEDIDORES</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae301_caja_medidor_monofasico_troquelada_especificaciones_generales.html" class="externalLink">AE301<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CAJA PARA MEDIDOR MONOF&#193;SICO (TROQUELADA) ESPECIFICACIONES GENERALES</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae302_caja_medidor_monofasico_puerta_plana_especificaciones_generales.html" class="externalLink">AE302<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CAJA PARA MEDIDOR MONOF&#193;SICO CON PUERTA PLANA.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae303_caja_medidor_trifasico_especificaciones_generales.html" class="externalLink">AE303<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CAJA PARA MEDIDOR BIF&#193;SICO O TRIF&#193;SICO. ESPECIFICACIONES GENERALES</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae304_caja_medidores_trifasicos_especificaciones_generales.html" class="externalLink">AE304<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CAJA PARA DOS MEDIDORES BIF&#193;SICOS O  TRIF&#193;SICOS. ESPECIFICACIONES GENERALES</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae3041_caja_medidores_monofasicos_especificaciones_generales.html" class="externalLink">AE304-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CAJA PARA DOS MEDIDORES MONOF&#193;SICOS. ESPECIFICACIONES GENERALES</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae3042_caja_vertical_medidores_monofasicos_especificaciones_generales.html" class="externalLink">AE304-2<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CAJA VERTICAL PARA DOS MEDIDORES MONOF&#193;SICOS. ESPECIFICACIONES GENERALES</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae3043_caja_vertical_medidores_trifasicos_especificaciones_generales.html" class="externalLink">AE304-3<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CAJA VERTICAL PARA DOS MEDIDORES BIF&#193;SICOS O TRIF&#193;SICOS. ESPECIFICACIONES GENERALES</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae305_caja_medidor_trifasico_50_150_especificaciones_generales.html" class="externalLink">AE305<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CAJA PARA MEDIDOR TRIF&#193;SICO 50 (150 A) ESPECIFICACIONES GENERALES</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae3051_caja_medidores_trifasicos.html" class="externalLink">AE305-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CAJA PARA DOS MEDIDORES TRIF&#193;SICOS  50 (150 A) ESPECIFICACIONES GENERALES</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae306_cajas_tres_cuatro_medidores_vista_isometrica.html" class="externalLink">AE306<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CAJAS PARA TRES Y CUATRO MEDIDORES MONOF&#193;SICOS, BIF&#193;SICOS O TRIF&#193;SICOS. ESPECIFICACIONES GENERALES</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae3061_caja_vertical_tres_medidores_trifasicos_especificaciones_generales.html" class="externalLink">AE306-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CAJA PARA TRES MEDIDORES BIF&#193;SICOS O TRIF&#193;SICOS. ESPECIFICACIONES GENERALES</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae307_ubicacion_armario_medidores_hall_acceso.html" class="externalLink">AE307<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">UBICACI&#211;N DE ARMARIO DE MEDIDORES EN HALL DE ACCESO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae308_armario_medidores_especificaciones_generales.html" class="externalLink">AE308<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ARMARIO DE MEDIDORES. ESPECIFICACIONES GENERALES</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae309_capacidad_amperimetrica_barrajes_rectangulares_cobre_armarios.html" class="externalLink">AE309<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CAPACIDAD AMPERIM&#201;TRICA DE BARRAJES RECTANGULARES EN COBRE PARA ARMARIOS Y CAJAS PARA MEDIDORES</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae310_caja_proteccion_acometida.html" class="externalLink">AE310<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CAJA PARA PROTECCI&#211;N DE ACOMETIDA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae311_tablero_general_acometidas.html" class="externalLink">AE311<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">TABLERO GENERAL DE ACOMETIDAS</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae3111_alternativa_tablero_general_acometidas_llegada_totalizador.html" class="externalLink">AE311-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ALTERNATIVA TABLERO GENERAL DE ACOMETIDAS (LLEGADA AL TOTALIZADOR EN BARRAS)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae3121_reja_seguridad_caja_medidores_monofasicos.html" class="externalLink">AE312-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">REJA DE SEGURIDAD PARA CAJA DE MEDIDORES MONOF&#193;SICOS Y TRIF&#193;SICOS</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae314_medicion_indirecta_b_t.html" class="externalLink">AE314<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">MEDICI&#211;N SEMIDIRECTA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae3141_medicion_indirecta_b_t_diagramas_unifilares.html" class="externalLink">AE314-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">MEDICI&#211;N SEMIDIRECTA. DIAGRAMAS UNIFILARES</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;"><a href="../cajas_armarios_celdas/ae3142_alternativas_localizacion_equipos_medicion_indirecta.html" class="externalLink">AE314-2<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ALTERNATIVAS PARA LOCALIZACI&#211;N DE EQUIPOS DE MEDICI&#211;N SEMIDIRECTA EN EDIFICACIONES. DIAGRAMA UNIFILAR</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae315_cajas_instalacion_transformadores_corriente_equipo.html" class="externalLink">AE315<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CAJAS PARA INSTALACI&#211;N DE TRANSFORMADORES DE CORRIENTE Y EQUIPO DE MEDIDA EN B.T. VISTA ISOM&#201;TRICA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;"><a href="../cajas_armarios_celdas/ae3151_cajas_instalacion_transformadores_corriente_equipo.html" class="externalLink">AE315-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CAJAS PARA INSTALACI&#211;N DE TRANSFORMADORES DE CORRIENTE Y EQUIPO DE MEDIDA EN B.T. BANDEJA PARA SOPORTE DE MEDIDOR ELECTR&#211;NICO 350 x 500 x 40 mm</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae316_instalacion_equipo_medida_transformador_corriente.html" class="externalLink">AE316<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">INSTALACI&#211;N DE EQUIPO DE MEDIDA Y TRANSFORMADOR DE CORRIENTE EN CAJAS SEPARADAS</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae317_armario_instalacion_equipo_medida_transformador.html" class="externalLink">AE317<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ARMARIO PARA INSTALACI&#211;N DE EQUIPO DE MEDIDA Y TRANSFORMADOR DE CORRIENTE EN B.T. (ALTERNATIVAS 1 Y 2)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae319_armario_instalacion_equipo_medida_transformadores.html" class="externalLink">AE319<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ARMARIO PARA INSTALACI&#211;N DE EQUIPO DE MEDIDA Y TRANSFORMADOR DE CORRIENTE EN B.T. (ALTERNATIVAS 3 Y 4)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;"><a href="../cajas_armarios_celdas/ae320_armario_instalacion_equipo_medida_transformadores.html" class="externalLink">AE320<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ARMARIO PARA INSTALACI&#211;N DE EQUIPO DE MEDIDA Y TRANSFORMADORES DE CORRIENTE EN B.T. CARGAS POR USUARIO HASTA 75 kW</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae321_instalacion_equipo_medida_b_t.html" class="externalLink">AE321<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">INSTALACI&#211;N DE EQUIPO DE MEDIDA EN B.T. ALTERNATIVA 1: EN MURO CON SALIDA A&#201;REA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae3211_instalacion_equipo_medida_b_t.html" class="externalLink">AE321-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">INSTALACI&#211;N DE EQUIPO DE MEDIDA EN B.T. ALTERNATIVA 2: EN MURO CON SALIDA SUBTERR&#193;NEA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae3212_instalacion_equipo_medida_b_t.html" class="externalLink">AE321-2<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">INSTALACI&#211;N DE EQUIPO DE MEDIDA EN B.T. ALTERNATIVA 3: EN MURO DOBLE</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae3213_instalacion_equipo_medida_b_t.html" class="externalLink">AE321-3<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">INSTALACI&#211;N DE EQUIPO DE MEDIDA EN B.T. ALTERNATIVA 4: EN MURO ADYACENTE AL POSTE</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae324_celdas_medida_11_4_13_2.html" class="externalLink">AE324<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CELDAS DE MEDIDA EN 11,4 kV, 13,2 kV Y 34,5 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae3241_diagramas_unifilares_localiza_celda.html" class="externalLink">AE324-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">DIAGRAMAS UNIFILARES DONDE SE LOCALIZA LA CELDA DE MEDIDA EN 11,4, 13,2 &#211; 34,5 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae325_celda_medida_11_4_13.html" class="externalLink">AE325<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CELDA DE MEDIDA EN 11,4  Y 13,2 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae327_celda_medida_34_5_kv_medicion.html" class="externalLink">AE327<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CELDA DE MEDIDA EN 34,5 kV CON MEDICI&#211;N EN TRES ELEMENTOS</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae328_celda_medida_11_4_13_2.html" class="externalLink">AE328<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CELDA DE MEDIDA EN 11,4 Y 13,2 kV TIPO INTEMPERIE</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae3281_celda_medida_11_4_13_2.html" class="externalLink">AE328-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CELDA DE MEDIDA EN 11,4 Y 13,2 kV OBRA CIVIL</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae329_celda_medida_34_5_kv_tipo_intemperie.html" class="externalLink">AE329<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CELDA DE MEDIDA EN 34,5 kV TIPO INTEMPERIE</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae330_senal_preventiva_ubicar_puertas.html" class="externalLink">AE330<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">SE&#209;AL PREVENTIVA A UBICAR SOBRE PUERTAS</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae340_medida_circuitos_aereos_rurales.html" class="externalLink">AE340<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">MEDIDA DE CIRCUITOS A&#201;REOS RURALES</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae3401_diagramas_unifilares_acometidas_medida_m_t.html" class="externalLink">AE340-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">DIAGRAMAS UNIFILARES PARA ACOMETIDAS Y MEDIDA EN M.T. Y 34,5 KV (ZONA RURAL)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae343_medida_11_4_13_2_34.html" class="externalLink">AE343<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">MEDIDA EN 11,4/ 13,2/ 34,5 KV DE ACOMETIDA A&#201;REA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae344_base_foso_celda_medida_tipo_intemperie.html" class="externalLink">AE344<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">BASE Y FOSO PARA CELDA DE MEDIDA TIPO INTEMPERIE DE 11,4-13,2-34,5 KV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../medidores_energia_electrica/generalidades_7_4_medidores_energia_electrica.html" class="externalLink">GENERALIDADES 7.4<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">MEDIDORES DE ENERG&#205;A EL&#201;CTRICA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;"><a href="../medidores_energia_electrica/generalidades_7_4_2_formas_medir_energia.html" class="externalLink">GENERALIDADES 7.4.2<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">FORMAS DE MEDIR LA ENERG&#205;A SEG&#218;N LA CARGA CONTRATADA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;"><a href="../medidores_energia_electrica/generalidades_7_4_3_medidores_utilizados_codensa.html" class="externalLink">GENERALIDADES 7.4.3<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">MEDIDORES UTILIZADOS POR CODENSA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae411_medidor_monofasico_conexion_asimetrica_2_hilos_120.html" class="externalLink">AE411<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">MEDIDOR MONOF&#193;SICO - CONEXI&#211;N ASIM&#201;TRICA-2 HILOS - 120 V</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae412_medidor_monofasico_conexion_simetrica_2_hilos_120.html" class="externalLink">AE412<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">MEDIDOR MONOF&#193;SICO - CONEXI&#211;N SIM&#201;TRICA-2 HILOS - 120 V</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../cajas_armarios_celdas/ae4131_medidor_bifasicotrifilar_conexion_asimetrica_2x120_v_208_v.html" class="externalLink">AE413-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">MEDIDOR BIF&#193;SICO TRIFILAR - CONEXI&#211;N ASIM&#201;TRICA - 2 x 120 / 208 V</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../medidores_energia_electrica/ae414_medidor_trifasico_conexion_directa_asimetrica_4_hilos.html" class="externalLink">AE414<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">MEDIDOR TRIF&#193;SICO - CONEXI&#211;N DIRECTA ASIM&#201;TRICA 4 HILOS - 120 / 208 V</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../medidores_energia_electrica/ae415_medidor_trifasico_conexion_directa_asimetrica_4_hilos.html" class="externalLink">AE415<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">MEDIDOR TRIF&#193;SICO - CONEXI&#211;N DIRECTA ASIM&#201;TRICA 4 HILOS - 277 / 480 V</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../medidores_energia_electrica/ae417_medidor_electronico_baja_tension_transformador_corriente.html" class="externalLink">AE417<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">MEDIDOR ELECTR&#211;NICO EN BAJA TENSI&#211;N CON TRANSFORMADOR DE CORRIENTE</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../medidores_energia_electrica/ae418_medicion_indirecta_bt_bornera_pruebas.html" class="externalLink">AE418<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">MEDICI&#211;N SEMIDIRECTA SIN BORNERA DE PRUEBAS</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../medidores_energia_electrica/ae419_medicion_semidirecta_bt_bornera_pruebas.html" class="externalLink">AE419<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">MEDICI&#211;N SEMIDIRECTA EN BT SIN BORNERA DE PRUEBAS</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../medidores_energia_electrica/ae421_medidor_electronico_media_tension_tc_tp.html" class="externalLink">AE421<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">MEDIDOR ELECTR&#211;NICO EN MEDIA TENSI&#211;N CON TC Y TP DE 3 ELEMENTOS</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../medidores_energia_electrica/ae424_medidor_energia_activa_tarifa_sencilla.html" class="externalLink">AE424<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">MEDIDOR DE ENERG&#205;A ACTIVA. TARIFA SENCILLA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../medidores_energia_electrica/ae425_medidor_trifasico_energia_tarifa_sencilla_multitarifa.html" class="externalLink">AE425<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">MEDIDOR TRIF&#193;SICO DE ENERG&#205;A. TARIFA SENCILLA Y MULTITARIFA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;"><a href="../medidores_energia_electrica/generalidades_7_4_4_medicion_usuarios_115_kv.html" class="externalLink">GENERALIDADES 7.4.4<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">MEDICION DE USUARIOS A 115 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../medidores_energia_electrica/ae4302_instalacion_equipo_medida_subestacion_115_kv.html" class="externalLink">AE430-2<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">INSTALACI&#211;N DE EQUIPO DE MEDIDA EN SUBESTACI&#211;N 115 kV - DIAGRAMA UNIFILAR</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;"><a href="../medidores_energia_electrica/generalidades_7_4_5_medicion_fronteras_115_kv.html" class="externalLink">GENERALIDADES 7.4.5<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">MEDICI&#211;N DE FRONTERAS A 115 kV O 230 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;"><a href="../medidores_energia_electrica/generalidades_7_4_6_teorema_basico_medicion.html" class="externalLink">GENERALIDADES 7.4.6<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">TEOREMA B&#193;SICO DE LA MEDICI&#211;N DE ENERG&#205;A</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;"><a href="../medidores_energia_electrica/generalidades_7_4_7_servicio_suplencia.html" class="externalLink">GENERALIDADES 7.4.7<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">SERVICIO DE SUPLENCIA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../medidores_energia_electrica/ae4402_suplencia_diferente_nivel_tension.html" class="externalLink">AE440-2<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">SUPLENCIA A DIFERENTE NIVEL DE TENSI&#211;N</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;"><a href="../medidores_energia_electrica/ae4403_suplencia_nivel_tension.html" class="externalLink">AE440-3<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">SUPLENCIA AL MISMO NIVEL DE TENSI&#211;N</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../equipo_auxiliar_medicion/generalidades_7_5_equipo_auxiliar_medicion.html" class="externalLink">GENERALIDADES 7.5<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">EQUIPO AUXILIAR DE MEDIDA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../equipo_auxiliar_medicion/ae516_instalacion_equipo_medida_b_t.html" class="externalLink">AE516<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">BORNERA CONEXI&#211;N Y PRUEBA 13 PUNTOS</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../equipo_auxiliar_medicion/ae517_transformadores_corriente_b_t.html" class="externalLink">AE517<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">TRANSFORMADORES DE CORRIENTE PARA B.T.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../equipo_auxiliar_medicion/ae518_transformadores_corriente_tipo_interior_15_kv.html" class="externalLink">AE518<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">TRANSFORMADORES DE CORRIENTE TIPO INTERIOR 15 kV - 36 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../equipo_auxiliar_medicion/ae519_transformadores_potencial_tipo_interior_15_kv_36.html" class="externalLink">AE519<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">TRANSFORMADORES DE POTENCIAL TIPO INTERIOR 15 kV - 36 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../sistemas_emergencia_instalados_cliente/generalidades_7_6_sistemas_emergencia_instalados_cliente.html" class="externalLink">GENERALIDADES 7.6<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">SISTEMAS DE EMERGENCIA INSTALADOS POR EL CLIENTE</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../sistemas_emergencia_instalados_cliente/ae601_esquema_tipico_seleccion_tipo_sistema_alterno.html" class="externalLink">AE601<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ESQUEMA T&#205;PICO PARA SELECCI&#211;N DEL TIPO DE SISTEMA ALTERNO DE ENERG&#205;A EL&#201;CTRICA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../sistemas_emergencia_instalados_cliente/ae602_transferencia_planta_emergencia_despues_equipo.html" class="externalLink">AE602<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">TRANSFERENCIA DE PLANTA DE EMERGENCIA DESPU&#201;S DEL EQUIPO DE MEDIDA EN B.T.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../sistemas_emergencia_instalados_cliente/ae604_transferencia_planta_emergencia_despues_armario.html" class="externalLink">AE604<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">TRANSFERENCIA DE PLANTA DE EMERGENCIA DESPU&#201;S DEL ARMARIO DE MEDIDORES</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../sistemas_emergencia_instalados_cliente/ae605_transferencia_planta_emergencia_media_tension.html" class="externalLink">AE605<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">TRANSFERENCIA DE PLANTA DE EMERGENCIA EN MEDIA TENSI&#211;N</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../../alumbrado_publico/centros_transformacion/ae_607_bomba_incendios.html" class="externalLink">AE607<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">BOMBA CONTRA INCENDIOS</td></tr></table><br /></div>
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 1865, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

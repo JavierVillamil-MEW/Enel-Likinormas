@@ -1,0 +1,19 @@
+uuid: e6e61a7e-c7ed-495e-bd27-aaacf93e2f6b
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.node.pre_title_404
+    - node.type.rules_page_404
+id: node.rules_page_404.pre_title_404
+field_name: pre_title_404
+entity_type: node
+bundle: rules_page_404
+label: 'Pre-título 404'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

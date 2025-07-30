@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: bede297c-e5bf-4ec4-b096-f9985345b3a0
+  bundle: rules_subcategory
+  default_langcode: en
+  depends:
+    941330ad-6a5b-4994-9e65-65cdb75b3215: taxonomy_term
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'Índice - Líneas aéreas urbanas'
+  weight:
+    -
+      value: 0
+  parent:
+    -
+      target_id: 0
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /normas/lineas-aereas-urbanas-de-distribucion/indice-lineas-aereas-urbanas
+      langcode: en
+      pathauto: 1
+  related_category:
+    -
+      entity: 941330ad-6a5b-4994-9e65-65cdb75b3215

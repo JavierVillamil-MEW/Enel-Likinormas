@@ -1,0 +1,22 @@
+uuid: f832d88a-4e7f-49d7-a159-4e70c250b88d
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: rules_technical_specifications
+label: 'Rules: Technical specifications'
+type: 'canonical_entities:node'
+pattern: 'especificaciones/[node:specification_category]/[node:title]'
+selection_criteria:
+  2dafb35f-ad88-4a2d-aae3-11183d3c81a5:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 2dafb35f-ad88-4a2d-aae3-11183d3c81a5
+    context_mapping:
+      node: node
+    bundles:
+      rules_technical_specifications: rules_technical_specifications
+selection_logic: and
+weight: -5
+relationships: {  }

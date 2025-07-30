@@ -1,0 +1,11 @@
+uuid: 3b88e46b-d18e-49a1-be08-67dd137f60fd
+langcode: es
+status: true
+dependencies:
+  config:
+    - block_content.type.rules_header_fixed_logo
+id: block_content.rules_header_fixed_logo
+target_entity_type_id: block_content
+target_bundle: rules_header_fixed_logo
+default_langcode: site_default
+language_alterable: false

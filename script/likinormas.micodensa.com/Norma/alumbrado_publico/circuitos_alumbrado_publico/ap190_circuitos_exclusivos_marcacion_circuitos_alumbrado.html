@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AP190 Circuitos  exclusivos y marcación para circuitos de alumbrado público  | Likinormas</title>
+	<meta name="description" content="Ctos exclusivos y marcación para circuitos de alumbrado público. redes de alumbrado publico y subterraneas; circuitos y marcación de alumbrado público" />
+	<script src="../../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../../index.html"><img src="../../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1256" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../../Usuario/Registro%3FReturnUrl=%252FNorma%252FDetalles%252F1256.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/1256" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1256" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			showSubmenu('4', '95');
+		});
+	</script>
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Norma t&#233;cnica
+	</div>
+	<h1>AP190 Circuitos  exclusivos y marcaci&#243;n para circuitos de alumbrado p&#250;blico </h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de la norma</div>
+					<div class="caracteristicas">AP190</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">22/07/2011</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../../Home/DownloadPDF/1256">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FNorma%2FDetalles%2F1256&amp;nodoid=1256', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+    <div class="modulo">
+        <div class="titu_modulo">
+            Relacionados
+        </div>
+            <div class="modulo_contenido" style="">
+                <div class="subtitulos_internos">
+                    <a href="../materiales_equipos/ap820_barraje_preformado_bt_fusibles_limitadores.html">AP820 Barraje preformado BT para fusibles limitadores  de corriente de cable de 6 salidas</a>
+                </div>
+                    <div class="relacionadotipo">Norma t&#233;cnica</div>
+            </div>
+            <div class="modulo_contenido" style="">
+                <div class="subtitulos_internos">
+                    <a href="../materiales_equipos/ap859_fusibles_limitadores_corriente_cables_6.html">AP859 Fusibles limitadores de corriente para cables No 6, 4 y 2 AWG </a>
+                </div>
+                    <div class="relacionadotipo">Norma t&#233;cnica</div>
+            </div>
+            <div class="modulo_contenido" style="">
+                <div class="subtitulos_internos">
+                    <a href="../circuitos_subterraneos/ap402_circuito_subterraneo_alumbrado_publico_proteccion_bt.html">AP402 Circuito subterr&#225;neo de alumbrado p&#250;blico con protecci&#243;n en B.T.</a>
+                </div>
+                    <div class="relacionadotipo">Norma t&#233;cnica</div>
+            </div>
+    </div>
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#heading_0">Transformadores exclusivos de alumbrado p&#250;blico</a></li>
+                    <li class="indexitem"><a class="head_h2" href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#heading_1">Transformadores compartidos de alumbrado p&#250;blico</a></li>
+                    <li class="indexitem"><a class="head_h2" href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#heading_2">Protecci&#243;n contra cortocircuito de los circuitos subterr&#225;neos exclusivos de alumbrado</a></li>
+                    <li class="indexitem"><a class="head_h2" href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#heading_3">Marcaci&#243;n de los circuitos de baja tensi&#243;n de alumbrado p&#250;blico</a></li>
+                    <li class="indexitem"><a class="head_h3" href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#heading_4">C&#243;digos de punto significativo</a></li>
+                    <li class="indexitem"><a class="head_h3" href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#heading_5">Marcaci&#243;n de fases</a></li>
+                    <li class="indexitem"><a class="head_h2" href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#heading_6">Identificaci&#243;n de circuitos de baja tensi&#243;n</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >Transformadores exclusivos de alumbrado p&#250;blico</h2>
+Para uso exclusivo de Alumbrado P&#250;blico las capacidades de los transformadores trif&#225;sicos son: 30, 45 y 75 kVA.  Para transformadores monof&#225;sicos las capacidades son: 10, 15, 25, 37.5, 50 kVA <br /><br />Los transformadores trif&#225;sicos tendr&#225;n salida en BT trif&#225;sicas, tetrafilares a 380/220 V.<br /><br />En los transformadores monof&#225;sicos la salida en BT ser&#225; monof&#225;sica trifilar a 480/240 V.<br /><br />Antes de la entrada en vigencia del RETILAP CODENSA utilizaba transformadores exclusivos de alumbrado p&#250;blico en v&#237;as arterias (V0, V1, V2 y V3) con relaci&#243;n 11,4 kV - 480/277 V.<br /><br />Los transformadores pueden ser instalados en centros de transformaci&#243;n capsulados, tipo pedestal o montados en poste, de acuerdo con las especificaciones de cada proyecto.<br /><br /><u>En v&#237;as arterias V2 y V3, tambi&#233;n se utilizan transformadores de distribuci&#243;n a 208 voltios, de las mismas capacidades de los transformadores exclusivos de alumbrado o se conectan las luminarias a circuitos alimentados por transformadores de las redes de distribuci&#243;n de la zona o sector, en proyectos previamente aprobados por la empresa.</u><br /><br />Para los transformadores de uso exclusivo de AP mayores a 5 kVA se tendr&#225;n medidores de energ&#237;a que realicen la medida de los equipos asociados.<br /><br /><br />
+<h2 id="heading_1" >Transformadores compartidos de alumbrado p&#250;blico</h2>
+Para redes de uso general en BT de CODENSA y que alimenten el alumbrado p&#250;blico, la <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> ser&#225; a 208 V, derivadas del <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de 208/120 V.  En circuitos monof&#225;sicos 120/240 V, la <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> para el AP ser&#225; de 240 V.<br /><br /><br />
+<h2 id="heading_2" >Protecci&#243;n contra cortocircuito de los circuitos subterr&#225;neos exclusivos de alumbrado</h2>
+Para proteger los circuitos subterr&#225;neos exclusivos de alumbrado p&#250;blico de avenidas, se utilizan barrajes preformados de <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a> con fusibles limitadores de corriente de <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-107" class="externalLink  glosarioLink">cable</a>, ver norma <a href="../materiales_equipos/ap820_barraje_preformado_bt_fusibles_limitadores.html" class="externalLink">AP820<span class="externalLinkIcon"></span></a>. Estos barrajes se alojan dentro de la caja de inspecci&#243;n, a la salida del transformador de alumbrado, se instala uno por <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-205" class="externalLink  glosarioLink">fase</a> y a dicho barraje se conectan los cables de cada uno de los circuitos de alumbrado.<br /><br />Los fusibles limitadores de corriente de <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-107" class="externalLink  glosarioLink">cable</a>, ver norma <a href="../materiales_equipos/ap859_fusibles_limitadores_corriente_cables_6.html" class="externalLink">AP859<span class="externalLinkIcon"></span></a>, protegen los cables de los circuitos de alumbrado p&#250;blico contra corrientes de <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-152" class="externalLink  glosarioLink">cortocircuito</a>. La acci&#243;n r&#225;pida del fusible limitador de corriente de <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-107" class="externalLink  glosarioLink">cable</a>, previene el <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-153" class="externalLink  glosarioLink">da&#241;o</a> del aislamiento del <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-107" class="externalLink  glosarioLink">cable</a>, evitando que se quemen tramos de gran magnitud.<br /><br />A diferencia de otros fusibles, la selecci&#243;n de la <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-117" class="externalLink  glosarioLink">capacidad de corriente</a> del fusible limitador de corriente de <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-107" class="externalLink  glosarioLink">cable</a>, se designa por el calibre del <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-107" class="externalLink  glosarioLink">cable</a> y no de la corriente de carga. Estos fusibles no responden a corrientes de sobrecarga.<br /><br />Como en cualquier otro fusible, el tiempo requerido para que el fusible limitador de <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-107" class="externalLink  glosarioLink">cable</a> despeje una <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-204" class="externalLink  glosarioLink">falla</a> de <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-152" class="externalLink  glosarioLink">cortocircuito</a>, es funci&#243;n de la corriente de <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-204" class="externalLink  glosarioLink">falla</a>. Los limitadores de corriente de <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-107" class="externalLink  glosarioLink">cable</a> a&#237;slan una <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-204" class="externalLink  glosarioLink">falla</a> en acometidas m&#250;ltiples alimentadas por un solo transformador.<br /><br />En instalaciones no residenciales de <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a>, como es el caso de los circuitos de alumbrado p&#250;blico, se deben usar fusibles limitadores de corriente de <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-107" class="externalLink  glosarioLink">cable</a> de 600 voltios.<br /><br />Los fusibles limitadores de <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-107" class="externalLink  glosarioLink">cable</a>, vienen con diferentes formas en sus terminales: terminal tipo pala o terminal tipo v&#225;stago. Para poder instalar los fusibles limitadores de <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-107" class="externalLink  glosarioLink">cable</a> en los barrajes preformados de <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a>, se necesita que al menos uno de sus terminales sea tipo pala (Ver norma <a href="../materiales_equipos/ap820_barraje_preformado_bt_fusibles_limitadores.html" class="externalLink">AP820<span class="externalLinkIcon"></span></a>). <br /><br />Como alternativa para proteger los circuitos subterr&#225;neos exclusivos de alumbrado p&#250;blico alimentados desde transformadores en poste, se instalar&#225;n seccionadores portafusibles con fusibles NH (Ver <a href="../circuitos_subterraneos/ap402_circuito_subterraneo_alumbrado_publico_proteccion_bt.html" class="externalLink">AP402<span class="externalLinkIcon"></span></a>).<br /><br /><br />
+<h2 id="heading_3" >Marcaci&#243;n de los circuitos de baja tensi&#243;n de alumbrado p&#250;blico</h2>
+El <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de distribuci&#243;n de la empresa est&#225; consignado dentro de una base de datos llamado <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de Informaci&#243;n de Distribuci&#243;n de CODENSA (SID) SDA. Para identificar los puntos f&#237;sicos de la red y relacionarlos con la base de datos se creo el concepto de &quot;Punto Significativo&quot;.<br /><br /><br />
+<h3 id="heading_4" >C&#243;digos de punto significativo</h3>
+En la red de <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a> de alumbrado p&#250;blico se definen como puntos significativos los siguientes:<br /><br /><br />a)	En los circuitos a&#233;reos los postes en los cuales se apoyan las luminarias.<br /><br />b)	En los circuitos subterr&#225;neos son puntos significativos donde existen: derivaciones de ramales, acometidas a luminarias, cambio apreciable de rumbo y a la salida de un transformador de distribuci&#243;n.<br /><br /><br />Al punto significativo le corresponde un c&#243;digo formado por un n&#250;mero de 7 d&#237;gitos y adicionalmente puede tener un octavo car&#225;cter de un n&#250;mero o una letra que distingue puntos el&#233;ctricamente distintos pero localizados en el mismo lugar y pertenecientes al mismo circuito.<br /><br />El n&#250;mero colocado en la octava posici&#243;n representa la cantidad de veces que el circuito pasa por un punto f&#237;sico, esto suele ocurrir con los circuitos subterr&#225;neos, los cuales pueden pasar varias veces por la misma caja de inspecci&#243;n. La letra colocada en la octava posici&#243;n se usa para fraccionar e identificar los diferentes puntos el&#233;ctricos de los equipos instalados en un punto significativo, por ejemplo el punto significativo de un <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-122" class="externalLink  glosarioLink">centro de transformaci&#243;n</a> de distribuci&#243;n.<br /><br />El octavo d&#237;gito del punto significativo es indispensable para la correcta determinaci&#243;n de la topolog&#237;a del circuito.<br /><br />El c&#243;digo de los puntos significativos es marcado con pintura de color rojo, en n&#250;meros de un tama&#241;o de 5 cm, de la siguiente manera:<br /><br /><br />a)	En los postes y <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-122" class="externalLink  glosarioLink">centro de transformaci&#243;n</a> los puntos significativos son marcados en sentido vertical.<br /><br />b)	En los <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-122" class="externalLink  glosarioLink">centro de transformaci&#243;n</a> se podr&#225; marcar en forma vertical u horizontal de acuerdo con el sitio donde se efect&#250;e la marcaci&#243;n; pero siempre buscando que el c&#243;digo quede en un lugar visible.<br /><br />c)	En las cajas de inspecci&#243;n se marcar&#225; en sentido horizontal, sobre una l&#225;mina de aluminio de 45 cm x 10 cm , la cual se fijar&#225; a una de las paredes de la caja con puntillas.<br /><br /><br />
+<h3 id="heading_5" >Marcaci&#243;n de fases</h3>
+En la marcaci&#243;n de las fases de los circuitos de <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a> se utilizan placas de acero de 4 x 4 cm , fij&#225;ndose con <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-84" class="externalLink  glosarioLink">alambre</a> de cobre a la <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-205" class="externalLink  glosarioLink">fase</a> respectiva (A, B &#243; C), en los siguientes sitios:<br /><br />a)	En la red a&#233;rea en el arranque del circuito (transformador), cada tres tramos (siempre y cuando haya luminarias) y en los finales de circuito o derivaci&#243;n.<br /><br />b)	En la red subterr&#225;nea en el arranque de los circuitos (transformador), cambio de rumbo y en los barrajes preformados de <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a>. Cuando el circuito no tenga cambios de rumbo ni barrajes preformados de <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a>, se identifican las fases cada tres cajas.<br /><br /><br />
+<h2 id="heading_6" >Identificaci&#243;n de circuitos de baja tensi&#243;n</h2>
+Los diferentes circuitos de <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a> de un mismo transformador se diferencian unos de otros, mediante la utilizaci&#243;n de letras consecutivas comenzando por la letra &quot;D&quot;, continuando con la letra &quot;E&quot; y as&#237; sucesivamente<br /><br />Esta identificaci&#243;n se coloca en la siguiente forma:<br /><br /><br />a)	En las redes a&#233;reas abiertas los puntos de marcaci&#243;n de los circuitos de <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a>, se hacen sobre el conductor, m&#225;s o menos a un metro de distancia del poste y en la primera <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-205" class="externalLink  glosarioLink">fase</a>, contando de abajo hacia arriba. Se utilizan l&#225;minas de aluminio &#243; de acero inoxidable de 4 x 4 cm y se fijan con <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-84" class="externalLink  glosarioLink">alambre</a> de cobre en los siguientes sitios: arranque del circuito, cambio de rumbo y fin del circuito o derivaci&#243;n. <br /><br />En la Norma AP-190 se muestra un transformador ubicado en el punto significativo 0034783 del cual salen dos (2) circuitos a&#233;reos de <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a>, los que se han diferenciado con las letras D y E.<br /><br />b)	En la red trenzada los puntos de marcaci&#243;n se identifican como circuito trif&#225;sico D,E, F, etc., de acuerdo con el n&#250;mero de salidas de <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a> que tenga desde el transformador. Se utilizan l&#225;minas de aluminio &#243; de acero inoxidable de 4 x 4 cm y se fijan con <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-84" class="externalLink  glosarioLink">alambre</a> de cobre en los siguientes sitios: arranque del circuito, cambio de rumbo y fin del circuito o derivaci&#243;n, a m&#225;s o menos a un metro de distancia del poste.<br /><br />c)	En la red subterr&#225;nea los puntos de marcaci&#243;n se hacen a la salida del transformador, derivaciones de ramales y cambio apreciable de rumbo.<br /><br /><br />Se utilizan placas de aluminio &#243; acero inoxidable de 4 x 4 cm fijadas con <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-84" class="externalLink  glosarioLink">alambre</a> de cobre, abarcando todas las fases del circuito. En la Norma AP-190, se muestra un transformador tipo pedestal ubicado en el punto significativo 0032349 del  cual salen cuatro (4) circuitos subterr&#225;neos de <a href="ap190_circuitos_exclusivos_marcacion_circuitos_alumbrado.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a>, los que se han diferenciado con las letras D,E,F y G respectivamente.<br /><br /><br /><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/norma/1256/AP 190.jpg" src="http://likinormas.micodensa.com/media/cache/images/900x1100/wikiimages/343330323035323737-163163-AP 190.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:900px"></div></div></div>
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 1256, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 2c6713a5-fe12-4fe2-a6ee-b7bda7b15610
+  default_langcode: es
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: lupa.png
+  uri:
+    -
+      value: 'public://2023-06/lupa.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 10134
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1686688494

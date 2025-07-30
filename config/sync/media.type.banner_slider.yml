@@ -1,0 +1,13 @@
+uuid: 79d8710c-c87d-474f-9a3a-081ade65f94b
+langcode: en
+status: true
+dependencies: {  }
+id: banner_slider
+label: 'Banner Slider'
+description: 'Le permite administrar el contenido del banner principal'
+source: image
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_media_image_1
+field_map: {  }

@@ -1,0 +1,24 @@
+uuid: 2db6fdac-b689-4f81-988a-02829e0c6656
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.node.effective_date
+    - node.type.rules_technical_rules
+  module:
+    - datetime
+id: node.rules_technical_rules.effective_date
+field_name: effective_date
+entity_type: node
+bundle: rules_technical_rules
+label: 'Fecha de entrada en vigencia'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime

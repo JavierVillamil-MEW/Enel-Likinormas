@@ -1,0 +1,20 @@
+uuid: 976a0a93-ab69-44c6-8f52-30a3c7050d79
+langcode: es
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.rules_glossary
+  module:
+    - text
+id: taxonomy_term.rules_glossary.description
+field_name: description
+entity_type: taxonomy_term
+bundle: rules_glossary
+label: Descripción
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

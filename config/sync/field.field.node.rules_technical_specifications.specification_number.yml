@@ -1,0 +1,19 @@
+uuid: c6653791-1f22-477e-b290-89408e45f304
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.specification_number
+    - node.type.rules_technical_specifications
+id: node.rules_technical_specifications.specification_number
+field_name: specification_number
+entity_type: node
+bundle: rules_technical_specifications
+label: 'Revisión #'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

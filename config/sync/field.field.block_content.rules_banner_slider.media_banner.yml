@@ -1,0 +1,29 @@
+uuid: 7e7cc8ca-5639-49c4-9ef2-cef62dc13756
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.rules_banner_slider
+    - field.storage.block_content.media_banner
+    - media.type.banner_slider
+id: block_content.rules_banner_slider.media_banner
+field_name: media_banner
+entity_type: block_content
+bundle: rules_banner_slider
+label: 'Añadir nuevo banner'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      banner_slider: banner_slider
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

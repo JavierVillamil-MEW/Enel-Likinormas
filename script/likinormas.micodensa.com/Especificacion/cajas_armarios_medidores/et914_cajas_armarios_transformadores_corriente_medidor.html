@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET914 Cajas y armarios para transformadores de Corriente y medidor de BT | Likinormas</title>
+	<meta name="description" content="grupo de medida; armario; medidor; instalacione electricas; instalaciones; medida" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/690" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F690.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/690" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/690" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '32');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET914 Cajas y armarios para transformadores de Corriente y medidor de BT</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET Cajas y armarios para transformadores de Corriente y medidor de BT914</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">02/09/2016</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/690">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F690&amp;nodoid=690', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et914_cajas_armarios_transformadores_corriente_medidor.html#heading_0">1.	OBJETO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et914_cajas_armarios_transformadores_corriente_medidor.html#heading_1">2.	ALCANCE </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et914_cajas_armarios_transformadores_corriente_medidor.html#heading_2">3.	CONDICIONES DE SERVICIO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et914_cajas_armarios_transformadores_corriente_medidor.html#heading_3">3.1  CONDICIONES EL&#201;CTRICAS DEL SISTEMA</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et914_cajas_armarios_transformadores_corriente_medidor.html#heading_4">3.2  CONDICIONES DE SERVICIO Y LUGAR DE INSTALACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et914_cajas_armarios_transformadores_corriente_medidor.html#heading_5">4.	SISTEMA DE UNIDADES </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et914_cajas_armarios_transformadores_corriente_medidor.html#heading_6">5.	NORMAS DE FABRICACI&#211;N Y PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et914_cajas_armarios_transformadores_corriente_medidor.html#heading_7">6. REQUERIMIENTOS T&#201;CNICOS PARTICULARES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et914_cajas_armarios_transformadores_corriente_medidor.html#heading_8">6.1 MATERIALES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et914_cajas_armarios_transformadores_corriente_medidor.html#heading_9">6.2 GRADO DE PROTECCI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et914_cajas_armarios_transformadores_corriente_medidor.html#heading_10">7.	ESTRUCTURA</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et914_cajas_armarios_transformadores_corriente_medidor.html#heading_11">7.1 L&#193;MINAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et914_cajas_armarios_transformadores_corriente_medidor.html#heading_12">7.2 SISTEMA DE ANCLAJE</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et914_cajas_armarios_transformadores_corriente_medidor.html#heading_13">7.3 ESPACIOS LIBRES, ALAMBRADO Y CONEXIONES EL&#201;CTRICAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et914_cajas_armarios_transformadores_corriente_medidor.html#heading_14">8.	DETALLES DE FABRICACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et914_cajas_armarios_transformadores_corriente_medidor.html#heading_15">8.1 CAJAS INDEPENDIENTES </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et914_cajas_armarios_transformadores_corriente_medidor.html#heading_16">8.2 ARMARIO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et914_cajas_armarios_transformadores_corriente_medidor.html#heading_17">9.	MARCACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et914_cajas_armarios_transformadores_corriente_medidor.html#heading_18">10.	PRUEBAS </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et914_cajas_armarios_transformadores_corriente_medidor.html#heading_19">11.	CERTIFICADOS DE CONFORMIDAD</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et914_cajas_armarios_transformadores_corriente_medidor.html#heading_20">12.	REQUISITOS PARA LAS OFERTAS </a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1.	OBJETO</h2>
+Esta <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a> establece las caracter&#237;sticas y requisitos t&#233;cnicos que deben cumplir y los ensayos a los cuales deben ser sometidas las cajas y armarios donde se alojan los transformadores de corriente y el medidor electr&#243;nico de <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a> de medida semidirecta.<br />
+<h2 id="heading_1" >2.	ALCANCE </h2>
+Esta especificaci&#243;n aplica para todas las cajas o armarios de este tipo que sean instaladas en el <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de distribuci&#243;n de CODENSA S.A. ESP.<br />
+<h2 id="heading_2" >3.	CONDICIONES DE SERVICIO</h2>
+<h3 id="heading_3" >3.1  CONDICIONES EL&#201;CTRICAS DEL <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-363" class="externalLink  glosarioLink">SISTEMA</a></h3><div style="width:402px;"><table><tr><td colspan="2" rowspan="1" style="width:402px;height:30px;text-align:center"><b>CONDICIONES EL&#201;CTRICAS DEL <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-363" class="externalLink  glosarioLink">SISTEMA</a></b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;"><a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-384" class="externalLink  glosarioLink">Tensi&#243;n Nominal</a> del <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-363" class="externalLink  glosarioLink">sistema</a></td><td colspan="1" rowspan="1" style="">208/120V, 440/254 V, 480/277V</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;"><a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-377" class="externalLink  glosarioLink">Tensi&#243;n</a> M&#225;xima</td><td colspan="1" rowspan="1" style="">600V</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Tipo de Conexi&#243;n</td><td colspan="1" rowspan="1" style="">Trif&#225;sica (tetrafilar)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Frecuencia del <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-363" class="externalLink  glosarioLink">sistema</a></td><td colspan="1" rowspan="1" style="">60 Hz</td></tr></table><br /></div><h3 id="heading_4" >3.2  CONDICIONES DE SERVICIO Y LUGAR DE INSTALACI&#211;N</h3>
+Los transformadores de corriente y el medidor de BT, se alojar&#225;n en cajas o   armarios con alimentaci&#243;n trif&#225;sica desde las redes de distribuci&#243;n secundaria (distribuci&#243;n trif&#225;sica tetrafilar 120/208 V, 440/254 V, 480/277V) con los siguientes objetivos:<br />
+<ul><li>Alojar y facilitar la instalaci&#243;n de medidores trif&#225;sicos y el <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-240" class="externalLink  glosarioLink">interruptor</a> autom&#225;tico termomagn&#233;tico general (en algunos casos), de forma que el acceso a las conexiones sea exclusivo para el personal autorizado por CODENSA y que el cliente solo tenga acceso al <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-240" class="externalLink  glosarioLink">interruptor</a> ubicado en el compartimiento de acceso al cliente.</li>
+<li>Minimizar en las acometidas el acceso no autorizado o fraudulento de los usuarios o extra&#241;os.</li>
+<li>Facilitar la lectura del medidor, las revisiones de la instalaci&#243;n y dem&#225;s trabajos que sobre la instalaci&#243;n generen las solicitudes del cliente y dem&#225;s operaciones comerciales entre el cliente y CODENSA.</li>
+<li>Facilitar los procesos de corte y reconexi&#243;n del servicio a los usuarios ocasionalmente morosos.</li>
+<li>Separar los compartimientos de uso exclusivo de CODENSA  y los del cliente.</li></ul>
+
+<h2 id="heading_5" >4.	SISTEMA DE UNIDADES </h2>
+En todos los documentos t&#233;cnicos se deben expresar las cantidades num&#233;ricas en unidades del sistema Internacional (S.I.). Si se usan cat&#225;logos, folletos o planos, en sistemas diferentes de unidades, deben hacerse las conversiones respectivas.<br />
+<h2 id="heading_6" >5.	NORMAS DE FABRICACI&#211;N Y PRUEBAS</h2>
+En caso de discrepancia entre las normas y este documento, prevalecer&#225; lo aqu&#237; establecido. Las normas aplicables son las siguientes:<br /><br /><div style="width:700px;"><table><tr><td colspan="2" rowspan="1" style="width:120px;height:30px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:580px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">3444</td><td colspan="1" rowspan="1" style="">Armarios para instalaci&#243;n de medidores de energ&#237;a el&#233;ctrica.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">1156</td><td colspan="1" rowspan="1" style="">Productos met&#225;licos y recubrimientos. <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de c&#225;mara salina.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">3279</td><td colspan="1" rowspan="1" style="">Grado de protecci&#243;n dado a los encerramientos. (C&#243;digo IP).</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">ASTM</td><td colspan="1" rowspan="1" style="text-align:center">D 2563</td><td colspan="1" rowspan="1" style="">Standard Practice for Classifying Visual Defects in Glass-Reinforced Plastic Laminate Parts</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">ASTM </td><td colspan="1" rowspan="1" style="text-align:center">D 4541</td><td colspan="1" rowspan="1" style=""> Standard Test Method for Pull-Off Strength of Coatings Using Portable Adhesion Testers</td></tr></table><br /></div>
+<h2 id="heading_7" >6. REQUERIMIENTOS T&#201;CNICOS PARTICULARES</h2>
+<h3 id="heading_8" >6.1 MATERIALES</h3>
+Las cajas y armarios deber&#225;n ser construidas en l&#225;mina de acero Cold Rolled calibre 18 BWG (1,214 mm ) y calibre 16 BWG (1,588 mm ) respectivamente.<br /><br />Todos los tornillos, tuercas, arandelas, guasas, bisagras, etc, utilizados, deber&#225;n ser galvanizados irizados o cromados.<br /><br />Cuando se utilicen materiales sint&#233;ticos o fibra de vidrio para la construcci&#243;n de los armarios, deber&#225;n garantizarse entre otros, los siguientes aspectos:<br />
+<ul><li>Alta resistencia al impacto.</li>
+<li>Auto extinguible.</li>
+<li>No higrosc&#243;pico.</li>
+<li>Baja degradaci&#243;n.</li>
+<li>Resistencia a la deformaci&#243;n por altas temperatura.</li>
+<li>Excelentes propiedades diel&#233;ctricas.</li></ul>
+	<br />Los armarios fabricados con pl&#225;stico reforzado utilizando procesos de manufactura de moldeo por contacto, por compresi&#243;n, por inyecci&#243;n, o cualquier otro <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> que asegure los requerimientos deber&#225;n ser autosoportantes, r&#237;gidos y cumplir con todos los requisitos, dimensiones, propiedades y caracter&#237;sticas de aqu&#233;llos que se fabrican en l&#225;mina de acero.<br />El <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-274" class="externalLink  glosarioLink">material</a> de construcci&#243;n estar&#225; compuesto de las siguientes partes:<br /><br />a)Resina.<br />Podr&#225;n ser utilizadas resinas insaturadas de poli&#233;ster, resinas ep&#243;xicas u otro tipo de resina comercial que sea capaz de formar un laminado reforzado.  Se utilizar&#225; una resina de grado comercial que asegure una alta resistencia de los rayos ultravioleta y a la indentaci&#243;n, o en su defecto una pintura que garantice una buena adherencia, con un espesor m&#237;nimo de 1 mm.<br /><br />b) <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-274" class="externalLink  glosarioLink">Material</a> reforzante.<br />Se utilizar&#225; la fibra de vidrio, en la forma de manta no tejida, hilado continuo, hilado cortado, tela tejida, o combinadas y que tengan un ajuste acoplante que suministre una adhesi&#243;n adecuada entre el <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-274" class="externalLink  glosarioLink">material</a> reforzante y la resina.<br />	<br />c) Llenantes y aditivos.<br />Los llenantes cuando sean usados, ser&#225;n inertes al ambiente de utilizaci&#243;n.  Aditivos tales como agentes tixotr&#243;picos, catal&#237;ticos, etc, podr&#237;an ser usados cuando sean requeridos por el proceso de manufactura.<br />Todos los elementos llevar&#225;n una capa de <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-274" class="externalLink  glosarioLink">material</a> de acabado (pintura o resina determinado) con un espesor m&#237;nimo de 1 mm en cualquier punto de la superficie.<br />	<br />No deber&#225;n sobresalir rebabas  de resina, ni gr&#225;nulos que imposibiliten una uni&#243;n perfecta entre las distintas partes de los elementos. En general se aceptar&#225;n defectos visuales hasta el nivel II especificado por la Norma ASTM D 2563.<br />Los armarios  deber&#225;n ser fabricados de acuerdo con las dimensiones especificadas.<br /><br /><b>6.1.1 PROCESO DE PINTURA</b><br /><br />La l&#225;mina de acero utilizada en la construcci&#243;n de las cajas (al igual que las cajas en proceso) debe someterse a un proceso de limpieza, desengrase y fosfatizado, el cual debe  garantizar que las superficies est&#233;n libres de grasas, &#243;xidos o cualquier elemento extra&#241;o que disminuyan la adherencia (son v&#225;lidos procesos qu&#237;micos y/o mec&#225;nicos); en un tiempo no mayor a dos horas, despu&#233;s de la limpieza debe aplicarse una capa de impr&#237;mante no mayor a 20 micras y en un lapso no menor a 8 ni mayor a 16 horas (o seg&#250;n recomendaci&#243;n de fabricante de pintura) se debe aplicar una pintura ep&#243;xica, con espesor no menor a 40 micras  (para un total de 60 micras), que deber&#225; ser horneada. La pintura ep&#243;xica debe ser color gris RAL serie 70, similar al RAL 7032, resistente a los rayos ultravioleta y la intemperie. El proceso debe garantizar  las caracter&#237;sticas de “tropicalizaci&#243;n”.<br />	<br />En pinturas horneables que garanticen la adherencia y espesores m&#237;nimos no requerir&#225;n impr&#237;mante; cada capa de pintura y todas deben garantizar una adherencia m&#237;nima de 400 PSI (libras/pulgada<sup>2</sup>) probada seg&#250;n norma ASTM D4541 de 1995.<br /><br /><b>6.1.2 PUERTAS</b><br /><br />Las puertas para todas las cajas y armarios de medidores se deber&#225;n construir en l&#225;mina Cold Rolled. Todas las puertas deber&#225;n abrir &#250;nicamente en sentido lateral m&#237;nimo 120<span class="codeInline">&#176;</span> respecto a la secci&#243;n horizontal superior del armario, poseer una agarradera que facilite su accionamiento y las bisagras deber&#225;n ser galvanizadas, iridizadas, cromadas, niqueladas o ser fabricadas en acero inoxidable, bronce o aluminio suficientemente fuertes para asegurar r&#237;gidamente la puerta de la estructura e instaladas sin que pierdan el recubrimiento protector.<br />	<br />Los pasadores de las bisagras deber&#225;n ser de acero inoxidable, bronce, lat&#243;n o aluminio. Las bisagras deben estar instaladas internamente.<br />	
+<h3 id="heading_9" >6.2 GRADO DE PROTECCI&#211;N</h3>
+El grado de protecci&#243;n que deber&#225; tener la envoltura exterior de las cajas y armarios deber&#225; ser como m&#237;nimo IP33 seg&#250;n Norma NTC 3279 (IEC 60529), es decir protegido contra cuerpos s&#243;lidos de di&#225;metro o espesor superior a 2.5 mm y contra el agua que cae en forma de lluvia (&#225;ngulo inferior o igual a 60&#176; respecto a la vertical). Cuando las cajas o armarios est&#233;n localizados junto a tableros de registros de gas, o muy cercano, se deber&#225; dar un grado de protecci&#243;n IP 559 (protegido contra polvo, agua y lluvia en todas direcciones y una energ&#237;a de choque de 20,00 Julios).<br />
+<h2 id="heading_10" >7.	ESTRUCTURA</h2>
+La construcci&#243;n estructural de las cajas y armarios ser&#225; de responsabilidad del fabricante el cual podr&#225; elegir el <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> m&#225;s conveniente, podr&#225; ser en l&#225;mina doblada o perfiles angulares, siempre y cuando d&#233; la <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a> espec&#237;fica.<br />
+<h3 id="heading_11" >7.1 L&#193;MINAS</h3>
+Si los armarios son fabricados en estructura de &#225;ngulo de acero &#233;ste ser&#225; de1 &#189;” x 1 &#189;” x 1/8&quot; como m&#237;nimo, recubiertas con l&#225;mina calibre BWG 16 (1,588 mm) como m&#237;nimo.  Para los fabricados en su totalidad en l&#225;mina, &#233;sta deber&#225; ser de calibre BWG 16 (1,588 mm) como m&#237;nimo, con sus respectivos dobleces para garantizar una estructura s&#243;lida.<br /><br />Las cajas deben construirse en forma  soldada, en l&#225;mina de acero SAE 1010, A36, o similar aprobada por CODENSA, y debe cumplir las normas ASTM. El calibre de la l&#225;mina sin pintura debe ser como m&#237;nimo 1,214 mm, elaborada por el proceso de estirado en fr&#237;o (Cold - Rolled). Debe ser una estructura completamente r&#237;gida e indeformable, sin bordes cortantes.<br /><br />Para el armario las l&#225;minas laterales, del fondo y superior, deber&#225;n ser en l&#225;mina de acero tipo Cold Rolled de calibre BWG 16 (1,588 mm) como m&#237;nimo.<br /> <br />Las l&#225;minas laterales, espaldar y superior si son removibles, deber&#225;n ser fijadas de tal forma que no se puedan soltar exteriormente, sino &#250;nicamente interiormente.<br /><br />La bandeja de soporte para el medidor y la bornera alojado en el armario ser&#225; de l&#225;mina calibre BWG 18 (1,214 mm)  como m&#237;nimo y deber&#225;n poseer pesta&#241;as para aumentar su rigidez.<br /><br />La torniller&#237;a, tuercas, arandelas de presi&#243;n y arandelas planas que fijan la estructura deber&#225;n ser galvanizadas iridizadas o cromadas y los tornillos deber&#225;n tener una longitud tal que sobresalgan de la tuerca por lo menos 3 hilos sin exceder de 10 mm.<br />
+<h3 id="heading_12" >7.2 <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-363" class="externalLink  glosarioLink">SISTEMA</a> DE ANCLAJE</h3>
+El armario deber&#225; quedar anclado al piso. El <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de anclaje no deber&#225; estar en un lugar fijo de la base del <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-375" class="externalLink  glosarioLink">tablero</a>, sino que pueda ser desplazado sobre su base para adaptarlo a la parte civil de la obra sin necesidad de hacerle modificaci&#243;n alguna. <br />
+<h3 id="heading_13" >7.3 ESPACIOS LIBRES, ALAMBRADO Y CONEXIONES EL&#201;CTRICAS</h3>	<br />El espacio libre dentro de las cajas y armarios deber&#225; ser el suficiente para dar amplio espacio a la distribuci&#243;n de los conductores. <br />	<br />Los terminales, empalmes y en general todas las conexiones que se realicen en las cajas y armarios, deber&#225;n cumplir con lo estipulado en la Norma NTC 2050, <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-301" class="externalLink  glosarioLink">Norma T&#233;cnica</a> Colombiana, art. 110-14, con relaci&#243;n a los terminales y empalmes de los conductores, bornas, etc.<br />
+<h2 id="heading_14" >8.	DETALLES DE FABRICACI&#211;N</h2>
+<h3 id="heading_15" >8.1 CAJAS INDEPENDIENTES </h3>
+<b>8.1.1 CAJA PARA EL MEDIDOR</b><br /><br />Es exclusivo para uso del personal de CODENSA o el debidamente autorizado. Es una caja de 600 x 600 x 300 mm con puerta y transparencia para la f&#225;cil revisi&#243;n, lectura y verificaci&#243;n de fraudes. Ver figuras 1 y 2.<br /><br />La caja tendr&#225; tres perforaciones de 1” por las caras laterales e inferior.<br /><br />Se instala el medidor electr&#243;nico sobre una bandeja la cual ser&#225; removible y sujeta con tornillos. La bandeja deber&#225; entregarse con todas las perforaciones necesarias que permitan el montaje de las borneras de prueba y el medidor.<br />La puerta tendr&#225; dos bisagras, agarradera, bujes de <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a>, con perforaciones para colocaci&#243;n de sellos de <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a> de CODENSA y perno triangular. Esta puerta deber&#225; tener una ventana con policarbonato transparente de 3 mm de espesor, instalados y fijados mediante doblez de la l&#225;mina, soporte met&#225;lico o polipropileno de tal forma que no sea posible retirarlos por el frente. Adem&#225;s tendr&#225; un empaque de caucho (en Z) y sello con silicona para evitar el ingreso de polvo y agua. Los extremos de la ventana pueden ser redondeadas o cortes a 90&#176;.<br />Sobre esta puerta se remachar&#225; una placa de acero inoxidable, aluminio, pl&#225;stico o acr&#237;lico, con la siguiente inscripci&#243;n de letras indelebles:<br /><div style="width:226px;"><table><tr><td colspan="1" rowspan="1" style="width:226px;height:35px;text-align:center">MEDIDOR USO EXCLUSIVO DE CODENSA</td></tr></table><br /></div>El tama&#241;o de las letras ser&#225; m&#237;nimo de 10 mm de altura.<br /><br />La caja tendr&#225; su terminal de <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a>.<br /><br /><b>8.1.2 CAJA PARA LOS TRANSFORMADORES DE CORRIENTE</b><br /><br />Es exclusivo para uso del personal de CODENSA o  el debidamente autorizado. Es una caja de 800 x 800 x 300 mm con puerta y transparencia para la f&#225;cil revisi&#243;n, lectura y verificaci&#243;n de fraudes. Ver figuras 1 y 2.<br /><br />La puerta tendr&#225; dos bisagras, agarradera, bujes de <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a>, con perforaciones para colocaci&#243;n de sellos de <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a> de CODENSA y perno triangular. Esta puerta deber&#225; tener una ventana con policarbonato transparente de 3 mm de espesor, instalados y fijados mediante doblez de la l&#225;mina, soporte met&#225;lico o polipropileno de tal forma que no sea posible retirarlos por el frente. Adem&#225;s tendr&#225;  un empaque de caucho (en Z) y sellado con silicona para evitar el ingreso de polvo y agua. Los extremos de la ventana pueden ser redondeados o en cortes a 90&#176;.<br /><br />Se instalar&#225;n los transformadores de corriente sobre una l&#225;mina de madera o met&#225;lica calibre 18 BWG (1,214 mm).<br /><br />La caja tendr&#225; las siguientes perforaciones:<br /><br />-	De 4” para tubo conduit, para la entrada y salida de los conductores de <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-72" class="externalLink  glosarioLink">acometida</a>. Por  todos los costados de la caja.<br /><br />-	De 1” para el <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-107" class="externalLink  glosarioLink">cable</a> multiconductor  de se&#241;ales de <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> y corrientes. Por tres caras laterales de la caja.<br /><br />-	De &#190;” para la <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a>. Por la cara inferior.<br /><br />Se instalar&#225; un conector o barra de <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> de cuatro posiciones, de tal forma que permita la entrada y salida del neutro, la <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a> de la caja del medidor  y la del  electrodo de <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a>.<br /><br />La puerta tendr&#225; dos bisagras, agarradera y bujes e <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a> con perforaciones para colocaci&#243;n de sellos de <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a> de CODENSA y pernos con cabeza triangular.<br /><br />Sobre esta puerta se remachar&#225; una placa de acero inoxidable, aluminio, pl&#225;stico o acr&#237;lico, con la siguiente inscripci&#243;n de letras indelebles:<br /><br /><div style="width:226px;"><table><tr><td colspan="1" rowspan="1" style="width:226px;height:35px;text-align:center">TRANSFORMADORES DE CORRIENTE USO EXCLUSIVO DE CODENSA</td></tr></table><br /></div>El tama&#241;o de las letras ser&#225; m&#237;nimo de 10 mm de altura.<br />
+<h3 id="heading_16" >8.2 ARMARIO</h3>
+El interior del armario est&#225; dividido en tres compartimientos separados: El del medidor, el de los transformadores de corriente y el de la protecci&#243;n general. Ver figuras 4 y 5<br /><br /><b>8.2.1 COMPARTIMIENTO DEL MEDIDOR</b><br /><br />Es exclusivo para uso del personal de CODENSA o  el debidamente autorizado. Es una caja con puerta y transparencia. Esta localizado en la parte superior del armario.<br /><br />La caja tendr&#225; una  perforaci&#243;n de 1” para comunicaci&#243;n con el compartimiento de los transformadores de corriente.<br /><br />El medidor electr&#243;nico debe ir instalado sobre una bandeja, la cual ser&#225; removible y sujeta con tornillos.<br /><br />La bandeja para el soporte del medidor deber&#225; entregarse con todas las perforaciones necesarias que permitan el montaje de las borneras de prueba y el medidor.<br /><br />La puerta tendr&#225; dos bisagras, agarradera, bujes de <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a>, con perforaciones para colocaci&#243;n de sellos de <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a> de CODENSA y perno triangular. Esta puerta deber&#225; tener una ventana con policarbonato transparente de 3 mm de espesor, instalados y fijados mediante doblez de la l&#225;mina, soporte met&#225;lico o polipropileno de tal forma que no sea posible retirarlos por el frente. Adem&#225;s tendr&#225;  un empaque de caucho (en Z) y sello con silicona para evitar el ingreso de polvo y agua. Los extremos de la ventana pueden ser redondeados o en cortes a 90 &#176;.<br /><br />En la puerta se colocar&#225; remachada una placa pl&#225;stica, de acero inoxidable o aluminio, con la siguiente inscripci&#243;n:<br /><br /><div style="width:226px;"><table><tr><td colspan="1" rowspan="1" style="width:226px;height:35px;text-align:center">MEDIDOR USO EXCLUSIVO CODENSA</td></tr></table><br /></div>El tama&#241;o de las letras ser&#225; m&#237;nimo de 10 mm de altura.<br /><br /><b>8.2.2 COMPARTIMIENTO DE LOS TRANSFORMADORES DE CORRIENTE</b><br /><br />Es exclusivo para uso del personal de CODENSA  o  el debidamente autorizado. Es una caja con puerta y transparencia. Est&#225; localizado en la parte intermedia del armario. Tendr&#225; las perforaciones adecuadas para la entrada y salida de los conductores de <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-72" class="externalLink  glosarioLink">acometida</a> y la comunicaci&#243;n con el compartimiento del medidor.<br /><br />Se instalar&#225;n los transformadores de corriente sobre una l&#225;mina de madera o met&#225;lica calibre 18 BWG (1,214 mm).<br /><br />La puerta central tendr&#225; dos bisagras, agarradera, bujes de <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a>, con perforaciones para colocaci&#243;n de sellos de <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a> de CODENSA y perno triangular. <br /><br />Esta puerta deber&#225; tener una ventana con policarbonato transparente de 3 mm de espesor, instalados y fijados mediante doblez de la l&#225;mina, soporte met&#225;lico o polipropileno de tal forma que no sea posible retirarlos por el frente. Adem&#225;s tendr&#225;  un empaque de caucho (en Z) y sello con silicona para evitar el ingreso de polvo y agua. Los extremos de la ventana pueden ser redondeados o en cortes a 90&#176;<br /><br />Sobre la puerta ir&#225; remachada, una placa de similares caracter&#237;sticas a la descrita anteriormente, con la siguiente inscripci&#243;n:<br /><br /><div style="width:226px;"><table><tr><td colspan="1" rowspan="1" style="width:226px;height:35px;text-align:center">TRANSFORMADORES DE CORRIENTE USO EXCLUSIVO CODENSA</td></tr></table><br /></div>El tama&#241;o de las letras ser&#225; m&#237;nimo de 10 mm de altura.<br /><br /><b>8.2.3 COMPARTIMIENTO DE PROTECCI&#211;N GENERAL (TOTALIZADOR)</b><br /><br />A &#233;ste compartimiento podr&#225;n tener acceso los usuarios. Tendr&#225; el espacio adecuado para instalar un <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-240" class="externalLink  glosarioLink">interruptor</a> general (totalizador) y eventualmente barraje e interruptores de protecci&#243;n de alimentadores. Esta localizado en la parte inferior del armario.<br /><br />Tendr&#225; las perforaciones adecuadas para la comunicaci&#243;n con el compartimiento  central.<br /><br />La puerta  tendr&#225; dos bisagras, agarradera y buje de <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a>. Sobre la puerta ir&#225; remachada una placa de acero inoxidable, aluminio, pl&#225;stico o acr&#237;lico, con la siguiente inscripci&#243;n de letras indelebles: <br /><br /><div style="width:226px;"><table><tr><td colspan="1" rowspan="1" style="width:226px;height:35px;text-align:center">TOTALIZADOR USO DEL CLIENTE</td></tr></table><br /></div>El tama&#241;o de las letras ser&#225; m&#237;nimo de 10 mm de altura.<br /><br />El ingreso de la <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-72" class="externalLink  glosarioLink">acometida</a> tendr&#225; su espacio independiente, de tal forma que pase hacia los equipos de medici&#243;n y cuando se utilice puerta para facilitar el cableado debe tener bujes de <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a> con portasellos.<br /><br /><b>8.2.4 <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-342" class="externalLink  glosarioLink">PUESTA A TIERRA</a></b><br /><br />El calibre del conductor del electrodo de <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a> y el del conductor entre el neutro y la barra de <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> del armario deber&#225; cumplir lo estipulado en la NTC 2050 en la Tabla 250-94 Conductor del electrodo de <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a> para sistemas de c.a. <br /><br />Tanto la barra del neutro como la estructura del armario deber&#225;n estar conectadas a <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-387" class="externalLink  glosarioLink">tierra</a>. El conector debe ser capaz de soportar 200 A.<br />
+<h2 id="heading_17" >9.	MARCACI&#211;N</h2>
+En las cajas sobre cada puerta y en el armario en la puerta del compartimiento de los transformadores de corriente, se remachar&#225; una placa del fabricante, con caracter&#237;sticas similares a las de las placas de identificaci&#243;n, con la siguiente informaci&#243;n (el tama&#241;o de las letras ser&#225; de 3 mm como m&#237;nimo):<br />
+<ul><li>Relaci&#243;n de corriente (Ip/Is)</li>
+<li><a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-384" class="externalLink  glosarioLink">Tensi&#243;n nominal</a></li>
+<li>N&#250;mero de fases: 3</li>
+<li>Numero de hilos: 4</li>
+<li>N&#250;mero de cuentas (para cajas: 1. Para armarios, seg&#250;n sea el caso)</li>
+<li>Nombre del fabricante</li>
+<li>N&#250;mero de serie de fabricaci&#243;n</li>
+<li>Direcci&#243;n de la f&#225;brica </li>
+<li>Fecha de fabricaci&#243;n</li>
+<li>Informaci&#243;n de la <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-124" class="externalLink  glosarioLink">certificaci&#243;n</a>  de <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-338" class="externalLink  glosarioLink">producto</a> con <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-301" class="externalLink  glosarioLink">norma t&#233;cnica</a> y con <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-354" class="externalLink  glosarioLink">RETIE</a> que incluya el ente que lo emiti&#243;, numero de certificado y vigencia.</li>
+<li>Para compras realizadas por CODENSA S.A ESP se debe incluir la palabra BOG-CUN y la orden de compra</li></ul>
+Adicionalmente debe incluirse el <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-362" class="externalLink  glosarioLink">s&#237;mbolo</a> de riesgo <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-177" class="externalLink  glosarioLink">el&#233;ctrico</a> para las cajas con las m&#237;nimas dimensiones indicadas en el art. 11.2.2 y art. 11.3 del <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-354" class="externalLink  glosarioLink">RETIE</a> y para el armario de acuerdo a las dimensiones mostradas en la figura 9. <br />
+<h2 id="heading_18" >10.	PRUEBAS </h2>
+Cada una de las cajas y armarios ser&#225;n sometidos a las siguientes pruebas:<br /><br />•	 	<a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-235" class="externalLink  glosarioLink">Inspecci&#243;n</a> visual.<br />•	Dimensiones.<br />•	Se efectuar&#225;n pruebas de adherencia de acuerdo con la norma ASTM D 4541. La prueba de envejecimiento se har&#225; de acuerdo con la norma NTC 1156 cuando sea requerida por CODENSA.<br />•	Se realizar&#225;n pruebas del espesor de las capas de fosfatizado y acabado final de acuerdo con lo especificado en esta norma.<br />•	Grado de protecci&#243;n IP.<br />•	Ensamblaje de los equipos y elementos complementarios.<br />
+<h2 id="heading_19" >11.	CERTIFICADOS DE <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-139" class="externalLink  glosarioLink">CONFORMIDAD</a></h2>
+Deben contar con certificado del <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> y de <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-139" class="externalLink  glosarioLink">conformidad</a> del <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-338" class="externalLink  glosarioLink">producto</a> con <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-301" class="externalLink  glosarioLink">norma t&#233;cnica</a> y <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-354" class="externalLink  glosarioLink">RETIE</a>, expedido por una entidad autorizada por la ONAC-Organizaci&#243;n Nacional de <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-75" class="externalLink  glosarioLink">Acreditaci&#243;n</a> de Colombia.<br />
+<h2 id="heading_20" >12.	REQUISITOS PARA LAS OFERTAS </h2>
+El Oferente deber&#225; incluir con su propuesta, la siguiente informaci&#243;n:<br />
+<ul><li>Planilla de caracter&#237;sticas t&#233;cnicas garantizadas, la cual deber&#225; ser diligenciada completamente, firmada y sellada por el oferente.</li></ul>
+ 
+<ul><li>Cat&#225;logos originales completos y actualizados del fabricante, que correspondan a los bienes cotizados, en la planilla de caracter&#237;sticas t&#233;cnicas garantizadas. </li></ul>
+
+<ul><li>Protocolos de pruebas de acuerdo con las normas indicadas en el numeral 8 de la presente especificaci&#243;n. En tales protocolos se deber&#225;n anotar las fechas de fabricaci&#243;n y pruebas del <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-189" class="externalLink  glosarioLink">equipo</a>, para permitir la verificaci&#243;n de las caracter&#237;sticas t&#233;cnicas garantizadas.</li></ul>
+
+<ul><li>Certificaciones del <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> y de <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-338" class="externalLink  glosarioLink">producto</a> con <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-301" class="externalLink  glosarioLink">norma t&#233;cnica</a> y <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-354" class="externalLink  glosarioLink">RETIE</a>.</li></ul>
+
+<ul><li>Informaci&#243;n adicional que considere aporta explicaci&#243;n a su dise&#241;o (dibujos,  detalles,  caracter&#237;sticas de operaci&#243;n,  dimensiones y pesos de los materiales ofertados). </li></ul>
+<br />CODENSA S.A. podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones, sin expresi&#243;n de causa ni obligaci&#243;n de compensaci&#243;n.<br /><br /><b>FIGURA 1. CAJAS DE INSTALACI&#211;N DE TRANSFORMADORES DE CORRIENTE Y <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-189" class="externalLink  glosarioLink">EQUIPO</a> DE MEDIDA EN B.T.</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../archivo/691.html"><img src="../../media/content/mediafile/691/ET-914-1.jpg" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br /><b>FIGURA 2. VISTA ISOMETRICA</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../archivo/692_692.html"><img src="../../media/content/mediafile/692/0-AE&#32;315(2).jpg" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br /><b>FIGURA 3. BANDEJA PARA SOPORTE DE MEDIDOR ELECTR&#211;NICO 350X500X40 mm</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../archivo/693.html"><img src="../../media/content/mediafile/693/ET&#32;916-3.jpg" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br /><b>FIGURA 4. ARMARIO PARA INSTALACI&#211;N DE <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-189" class="externalLink  glosarioLink">EQUIPO</a> DE MEDIDA Y TRANSFORMADORES DE CORRIENTE EN B.T. (ALTERNATIVA 1)</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../archivo/694_694.html"><img src="../../media/content/mediafile/694/ET-914-4.jpg" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br /><b>FIGURA 5. ARMARIO PARA INSTALACI&#211;N DE <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-189" class="externalLink  glosarioLink">EQUIPO</a> DE MEDIDA Y TRANSFORMADORES DE CORRIENTE EN B.T. (ALTERNATIVA 2)</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../archivo/695.html"><img src="../../media/content/mediafile/695/ET914-5.JPG" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br /><b>FIGURA 6A. BUJE DE <a href="et914_cajas_armarios_transformadores_corriente_medidor.html#" id="version-357" class="externalLink  glosarioLink">SEGURIDAD</a></b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../archivo/696_696.html"><img src="../../media/content/mediafile/696/ET&#32;916-9A-.jpg" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br /><b>FIGURA 6B. BUJE DE SEGURIDAD</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/690/Dibujo ET 914 Fig 6B.JPG" src="http://likinormas.micodensa.com/media/cache/images/900x900/wikiimages/313736373131383037-45726-Dibujo ET 914 Fig 6B.JPG" title="FIGURA 6B."  /></div><div class="texto_imagen_articulos" style="max-width:900px">FIGURA 6B.</div></div></div><br /><b>FIGURA 7. TORNILLO DE CABEZA TRIANGULAR</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../archivo/697_697.html"><img src="../../media/content/mediafile/697/0-ET&#32;916-10.jpg" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br /><b>FIGURA 8. LLAVE PARA PERNO DE CABEZA TRIANGULAR</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/690/Dibujo ET 914 Fig 8.JPG" src="http://likinormas.micodensa.com/media/cache/images/900x900/wikiimages/32303332333935353538-20250-Dibujo ET 914 Fig 8.JPG" title="FIGURA 8."  /></div><div class="texto_imagen_articulos" style="max-width:900px">FIGURA 8.</div></div></div><br /><b>FIGURA 9. SE&#209;AL PREVENTIVA</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../archivo/673_673.html"><img src="../../media/content/mediafile/673/AE&#32;330__&#32;ET&#32;908.jpg" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div>
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 690, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

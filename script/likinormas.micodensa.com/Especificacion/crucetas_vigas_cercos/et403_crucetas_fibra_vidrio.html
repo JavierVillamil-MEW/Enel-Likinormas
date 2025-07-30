@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET403 Crucetas en fibra de vidrio | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/1935" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F1935.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/1935" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/1935" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '29');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET403 Crucetas en fibra de vidrio</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET 403</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">06/04/2018</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/1935">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F1935&amp;nodoid=1935', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et403_crucetas_fibra_vidrio.html#heading_0">1. OBJETO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et403_crucetas_fibra_vidrio.html#heading_1">2. ALCANCE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et403_crucetas_fibra_vidrio.html#heading_2">3. CONDICIONES AMBIENTALES </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et403_crucetas_fibra_vidrio.html#heading_3">4. CONDICIONES SE SERVICIO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et403_crucetas_fibra_vidrio.html#heading_4">5. SISTEMAS DE UNIDADES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et403_crucetas_fibra_vidrio.html#heading_5">6. NORMAS RELACIONADAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et403_crucetas_fibra_vidrio.html#heading_6">7. DEFINICIONES </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et403_crucetas_fibra_vidrio.html#heading_7">8. REQUERIMIENTOS T&#201;CNICOS Y PARTICULARES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et403_crucetas_fibra_vidrio.html#heading_8">8.1. Caracter&#237;sticas Generales</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et403_crucetas_fibra_vidrio.html#heading_9">8.2. Caracter&#237;sticas constructivas </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et403_crucetas_fibra_vidrio.html#heading_10">8.3. Par&#225;metros geom&#233;tricos</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et403_crucetas_fibra_vidrio.html#heading_11">8.3.1. Cruceta de fibra de 2,5 X 0,10 X 0,10 m </a></li>
+                    <li class="indexitem"><a class="head_h4" href="et403_crucetas_fibra_vidrio.html#heading_12">8.3.2. Cruceta de fibra de 2,5 X 0,10 X 0,05 m (alternativa herraje auto soportado) </a></li>
+                    <li class="indexitem"><a class="head_h4" href="et403_crucetas_fibra_vidrio.html#heading_13">8.3.3. Herraje auto soportado</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et403_crucetas_fibra_vidrio.html#heading_14">9. PRUEBAS DE LABORATORIO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et403_crucetas_fibra_vidrio.html#heading_15">9.1. Resistencia a la carga de dise&#241;o </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et403_crucetas_fibra_vidrio.html#heading_16">9.2. Prueba de carga de rotura</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et403_crucetas_fibra_vidrio.html#heading_17">9.3. Prueba de flexi&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et403_crucetas_fibra_vidrio.html#heading_18">9.4. Prueba de perno pasante</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et403_crucetas_fibra_vidrio.html#heading_19">9.5. Prueba de torsi&#243;n de apriete</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et403_crucetas_fibra_vidrio.html#heading_20">9.6. Prueba de resistencia a la torsi&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et403_crucetas_fibra_vidrio.html#heading_21">9.7. Prueba mec&#225;nica de larga duraci&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et403_crucetas_fibra_vidrio.html#heading_22">9.8. Resistencia de las tapas laterales</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et403_crucetas_fibra_vidrio.html#heading_23">9.9. Resistencia a rayos UV</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et403_crucetas_fibra_vidrio.html#heading_24">9.10. Termo deformaci&#243;n </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et403_crucetas_fibra_vidrio.html#heading_25">9.11. Flamabilidad</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et403_crucetas_fibra_vidrio.html#heading_26">9.12. Resistencia a la absorci&#243;n de humedad</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et403_crucetas_fibra_vidrio.html#heading_27">9.13. Rigidez diel&#233;ctrica </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et403_crucetas_fibra_vidrio.html#heading_28">9.14. Tracking y erosi&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et403_crucetas_fibra_vidrio.html#heading_29">9.15. Prueba de tensi&#243;n no disruptiva a frecuencia industrial en h&#250;medo</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et403_crucetas_fibra_vidrio.html#heading_30">9.16. Resistencia qu&#237;mica</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et403_crucetas_fibra_vidrio.html#heading_31">9.17. Contenidos de vac&#237;o y relaci&#243;n Fibra-Resina </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et403_crucetas_fibra_vidrio.html#heading_32">9.18.	Prueba de torque de apriete &#243; par de pernos</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et403_crucetas_fibra_vidrio.html#heading_33">10. PRUEBA DIMENSIONAL</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et403_crucetas_fibra_vidrio.html#heading_34">11. VERIFICACIONES DE PROCESOS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et403_crucetas_fibra_vidrio.html#heading_35">12. ENSAYOS DE LABORATORIO </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et403_crucetas_fibra_vidrio.html#heading_36">13. MARCAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et403_crucetas_fibra_vidrio.html#heading_37">14. REQUISITOS DE LAS OFERTAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et403_crucetas_fibra_vidrio.html#heading_38">15. SUMINISTRO Y RECEPCI&#211;N DE CRUCETAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et403_crucetas_fibra_vidrio.html#heading_39">15.1. Tolerancias Aceptadas </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et403_crucetas_fibra_vidrio.html#heading_40">15.2. Recepci&#243;n de crucetas</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et403_crucetas_fibra_vidrio.html#heading_41">15.3. Motivos de rechazo</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et403_crucetas_fibra_vidrio.html#heading_42">16. GARANTIA DE FABRICA</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et403_crucetas_fibra_vidrio.html#heading_43">17. INSPECCI&#211;N EN FABRICA</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et403_crucetas_fibra_vidrio.html#heading_44">18. CERTIFICADOS DE CONFORMIDAD</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et403_crucetas_fibra_vidrio.html#heading_45">ANEXO1. CARACTER&#205;STICAS T&#201;CNICAS </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et403_crucetas_fibra_vidrio.html#heading_46">ANEXO 2</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1. OBJETO</h2>
+La presente especificaci&#243;n t&#233;cnica tiene por objeto establecer las caracter&#237;sticas y dimensiones que deben cumplir las crucetas  en fibra de vidrio con resina de poli&#233;ster que se emplear&#225;n como soportes estructurales para l&#237;neas a&#233;reas de distribuci&#243;n de media y baja tensi&#243;n.<br />
+<h2 id="heading_1" >2. ALCANCE</h2>
+Las crucetas ser&#225;n instaladas, en cualquier zona del &#225;rea de cobertura de CODENSA S.A., estas crucetas se emplean para la fijaci&#243;n y sost&#233;n de los diferentes elementos utilizados en los sistemas a&#233;reos de distribuci&#243;n urbana y rural.<br />
+<h2 id="heading_2" >3. CONDICIONES AMBIENTALES </h2>
+El ambiente donde ser&#225;n instaladas las crucetas de fibra podr&#225; tener las siguientes caracter&#237;sticas dentro del &#225;rea de concesi&#243;n de CODENSA S.A. E.S.P,  bajo las siguientes condiciones:<br /><br /><b>TABLA 1.  PAR&#193;METROS AMBIENTALES</b><br /><div style="width:562px;"><table><tr><td colspan="2" rowspan="1" style="width:562px;height:30px;text-align:center"><b>CARACTER&#205;STICAS AMBIENTALES</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">a. Altura sobre el nivel del mar</td><td colspan="1" rowspan="1" style="text-align:center">2 640 m</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">b. Ambiente</td><td colspan="1" rowspan="1" style="text-align:center">Tropical</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:23px;">c. Humedad</td><td colspan="1" rowspan="1" style="text-align:center">90%</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">d. Temperatura m&#225;xima y m&#237;nima</td><td colspan="1" rowspan="1" style="text-align:center">27 &#186;C y - 5 &#186;C respectivamente.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">e. Temperatura promedio</td><td colspan="1" rowspan="1" style="text-align:center">14 &#186;C.</td></tr></table><br /></div>
+<h2 id="heading_3" >4. CONDICIONES SE SERVICIO</h2>
+Las crucetas podr&#225;n ser instaladas, en cualquier zona del &#225;rea de cobertura de CODENSA S.A.<br />
+<h2 id="heading_4" >5. SISTEMAS DE UNIDADES</h2>
+En todos los documentos t&#233;cnicos se deben expresar las cantidades num&#233;ricas en unidades del sistema Internacional.  Si se usan cat&#225;logos, folletos o planos, en sistemas diferentes de unidades, deben hacerse  las conversiones respectivas.<br />
+<h2 id="heading_5" >6. NORMAS RELACIONADAS</h2>
+Las crucetas deber&#225;n cumplir con las siguientes normas de fabricaci&#243;n y ensayos:<br /><br /><b>TABLA 1.  NORMAS RELACIONADAS</b><br /><div style="width:691px;"><table><tr><td colspan="2" rowspan="1" style="width:162px;height:21px;text-align:center"><b>FABRICACION</b></td><td colspan="1" rowspan="1" style="width:529px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">ANSI</td><td colspan="1" rowspan="1" style="text-align:center">C 136</td><td colspan="1" rowspan="1" style="">American National Standard for Roadway and Area Lighting Equipment— Fiber-Reinforced Composite (FRC) Lighting Poles</td></tr>
+<tr><td colspan="2" rowspan="1" style="height:23px;text-align:center"><b>PRUEBAS</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:42px;text-align:center">ASTM</td><td colspan="1" rowspan="1" style="text-align:center">G 154</td><td colspan="1" rowspan="1" style="">Standard Practice for Operating Fluorescent Light Apparatus for UV Exposure of Nonmetallic Materials</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:42px;text-align:center">ASTM</td><td colspan="1" rowspan="1" style="text-align:center">D 6109</td><td colspan="1" rowspan="1" style="">Standard Test Methods for Flexural Properties of Unreinforced and Reinforced Plastic Lumber and Related Products </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;text-align:center">ASTM</td><td colspan="1" rowspan="1" style="text-align:center">D 149</td><td colspan="1" rowspan="1" style="">Test Method for Dielectric Breakdow Voltage and Dielectric -Strength -Solid Electrical Insulating Materials at Cornmercial Power Frecuencies</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;text-align:center">ASTM</td><td colspan="1" rowspan="1" style="text-align:center">D 543</td><td colspan="1" rowspan="1" style="">Standard Practices for Evaluating the Resistance of Plastics to Chemical Reagents</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;text-align:center">ASTM</td><td colspan="1" rowspan="1" style="text-align:center">D 570</td><td colspan="1" rowspan="1" style="">Standard Test Method for Water Absorption of Plastics</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:42px;text-align:center">IEC/   NTC</td><td colspan="1" rowspan="1" style="text-align:center">60695-2-11/ 5283</td><td colspan="1" rowspan="1" style="">Fire hazard testing - Part 2-11: Glowing/hot-wire based test methods - Glow-wire flammability test method for end-products</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:42px;text-align:center">ASTM</td><td colspan="1" rowspan="1" style="text-align:center">D 648</td><td colspan="1" rowspan="1" style="">Standard Test Method for Deflection Temperature of Plastics Under Flexural Load in the Edgewise Position</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">ASTM</td><td colspan="1" rowspan="1" style="text-align:center">D 2584</td><td colspan="1" rowspan="1" style="">Standard Test Method for Ignition Loss of Cured Reinforced Resins</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">ASTM</td><td colspan="1" rowspan="1" style="text-align:center">D 2734</td><td colspan="1" rowspan="1" style="">Standard Test Methods for Void Content of Reinforced Plastics</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;text-align:center">IEC</td><td colspan="1" rowspan="1" style="text-align:center">60587</td><td colspan="1" rowspan="1" style="">Electrical insulating materials  used under sever ambient conditions – Test methods for evaluating resistance  to tracking and erosion</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;text-align:center">IEC</td><td colspan="1" rowspan="1" style="text-align:center">60243-1</td><td colspan="1" rowspan="1" style="">Electric strength of insulating materials - Test methods - Part 1: Tests at power frequencies</td></tr>
+<tr><td colspan="2" rowspan="1" style="height:39px;text-align:center"><b>PRACTICAS</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:23px;text-align:center">RETIE</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="">Reglamento T&#233;cnico de Instalaciones El&#233;ctricas </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;text-align:center">ASCE</td><td colspan="1" rowspan="1" style="text-align:center">104</td><td colspan="1" rowspan="1" style="">Recommended practice for Fiber reforcerd Polymer products for overhead Utility Line Structures </td></tr></table><br /></div><br />Pueden emplearse otras normas internacionalmente reconocidas equivalentes o superiores a las aqu&#237; se&#241;aladas, siempre y cuando se ajusten a lo solicitado en la presente especificaci&#243;n t&#233;cnica.<br /><br />Las normas citadas en la presente especificaci&#243;n (o cualquier otra que llegare a ser aceptada por CODENSA S.A.) se refieren a su &#250;ltima revisi&#243;n.<br />
+<h2 id="heading_6" >7. DEFINICIONES </h2>
+Se establecen las siguientes definiciones para efectos de esta especificaci&#243;n t&#233;cnica:<br />
+<ul><li><b>AGRIETAMIENTO</b> </li></ul>
+Hendidura (quiebre o fractura) que se forma en la superficie del material,
+<ul><li><b>FLEXION MAXIMA ADMISIBLE</b></li></ul>
+Valor m&#225;ximo porcentual definido en funcion de la longitud de la cruceta. 
+<ul><li><b>CARGA DE TRABAJO</b></li></ul>
+Carga m&#225;xima a la que puede estar sometida la cruceta en condiciones de operaci&#243;n, sin que se exceda la flexi&#243;n m&#225;xima admisible.
+<ul><li><b>CARGA DE ROTURA</b></li></ul>
+Aquella carga que aplicada produce colapso estructural de la cruceta hasta la rotura de la misma.
+<ul><li><b>CARGA DE DISE&#209;O</b></li></ul>
+M&#237;nima carga que debe soportar la cruceta sin presentar degradaci&#243;n estructural.
+<ul><li><b>CRUCETA</b></li></ul>
+Pieza ubicada en la parte superior de las estructuras en posici&#243;n transversal, tiene como prop&#243;sito soportar conductores y equipos de redes a&#233;reas de distribuci&#243;n de energ&#237;a el&#233;ctrica y telecomunicaciones.
+<ul><li><b>EROSI&#211;N</b> </li></ul>
+Perdida de material de la superficie aislante que produce una superficie no conductora. Puede ser uniforme, localizada o en forma de &#225;rbol. Despu&#233;s de la formaci&#243;n de arcos pueden quedar rastros superficiales poco profundos.
+<ul><li><b>FIBRA DE VIDRIO</b> </li></ul>
+Cualquier hilo de fibra de vidrio basado en s&#237;lice de alto modulo de resistencia para ser utilizado como refuerzo de matrices pl&#225;sticas.
+<ul><li><b>FACTOR DE SEGURIDAD</b></li></ul>
+Relaci&#243;n entre la carga m&#237;nima de rotura y la tensi&#243;n m&#225;xima aplicada (carga m&#225;xima de trabajo).
+<ul><li><b>RESINAS</b></li></ul>
+Pol&#237;meros termo fijos obtenidos por la uni&#243;n de un pre pol&#237;mero y un catalizador, este ultimo promueve una reacci&#243;n de curado o polimerizaci&#243;n que permite el endurecimiento y fijaci&#243;n del termo fijo en sus propiedades.<br /><br />Los materiales termopl&#225;sticos no est&#225;n contemplados en la presente especificaci&#243;n.<br />
+<h2 id="heading_7" >8. REQUERIMIENTOS T&#201;CNICOS Y PARTICULARES</h2>
+<h3 id="heading_8" >8.1. Caracter&#237;sticas Generales</h3>
+Entre otras caracter&#237;sticas, las crucetas debe tener las que se indican a continuaci&#243;n:
+<ul><li>Resistir los rayos solares</li>
+<li>Evitar propagar la llama </li>
+<li>Rigidez diel&#233;ctrica elevada </li>
+<li>Alta dureza</li>
+<li>Alta resistencia a la tracci&#243;n y a la flexi&#243;n.</li>
+<li>Resistente a los qu&#237;micos y &#225;cidos.</li>
+<li>Debe ser libre de mantenimiento.</li>
+<li>No debe contener elementos que sirvan de alimento o permitan ser atacadas por microorganismos.</li>
+<li>Vida &#250;til de 25 a&#241;os o mayor</li>
+<li>El acabado exterior de la cruceta debe ser de color gris RAL serie 70, similar al RAL 7004.</li></ul>
+
+<h3 id="heading_9" >8.2. Caracter&#237;sticas constructivas </h3>
+La cruceta deber&#225; tener como m&#237;nimo las siguientes capas constructivas iniciando en el exterior  de la cruceta de la siguiente manera:<br /><br />a.	Top Coat: Capa exterior con protecci&#243;n contra intemperie y U.V, de acuerdo con la ASTM-G154.<br /><br />b.	Veil o velo: Capa rica en resina  que permite uniformidad en la textura y elimina la exposici&#243;n de fibras expuestas acorde con la ASCE-104 (Resin rich nonstructural suface veil). Cubrimiento uniforme de resina en toda la superficie de la cruceta . ?Acabado liso que evita acumulaci&#243;n de polvo, sales y elementos contaminantes que pueden a largo plazo crear caminos conductivos y fen&#243;menos de tracking.<br /><br />c.	Composici&#243;n o fibra que determina las caracter&#237;sticas mec&#225;nicas de la cruceta de acuerdo a la carga, acorde con la ANSI C136 y RETIE. La fibra de vidrio deber&#225; ser clase E  o de caracter&#237;sticas superiores.<br /><br />d.	Composici&#243;n rica en resina  que elimina la exposici&#243;n de fibras y defectos de la cruceta que puedan afectar el servicio del mismo y  protege la parte interior de la cruceta contra la intemperie. <br /><br />Nota: Las crucetas pueden llevar o no material de relleno en su interior, en caso de contener material de relleno este debe ser no higrosc&#243;pico.<br /><br />En caso de ofertarse  la cruceta en fibra de vidrio con herraje auto soportado, la cruceta debe de traer este elemento incluido como parte del suministro. <br /><br />Para cualquier tipo de uso de la con herrajes tales como abrazaderas y/o pernos entre otros, la cruceta debe soportar los esfuerzos mec&#225;nicos de compresi&#243;n de los herrajes hacia la cruceta; para tal fin la cruceta debe venir reforzada en las zonas donde se instalen los herrajes; de manera que se cumpla con la prueba de torque de apriete. Para esta prueba como requisito m&#237;nimo de CODENSA se debe exigir el cumplimiento de 130 Nm sin deformarse o averiarse en su estructura de la cruceta.<br />
+<h3 id="heading_10" >8.3. Par&#225;metros geom&#233;tricos</h3>
+Las crucetas en fibra de vidrio para el sistema de distribuci&#243;n urbana y rural ser&#225; de la forma y dimensiones que se muestran en las figuras  las siguientes figuras:<br />
+<h4 id="heading_11" >8.3.1. Cruceta de fibra de 2,5 X 0,10 X 0,10 m </h4>
+<div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/1935/Cruceta fibra de vidrio - Herrajes de Codensa-Model.jpg" src="http://likinormas.micodensa.com/media/cache/images/800x800/wikiimages/31373635353538343536-220559-Cruceta fibra de vidrio - Herrajes de Codensa-Model.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:800px"></div></div></div><br /><b>Notas:</b>
+<ol><li>Cruceta para uso con herrajes de CODENSA, abrazadera tipo U.</li>
+<li>Unidades en mm.</li></ol>
+
+<h4 id="heading_12" >8.3.2. Cruceta de fibra de 2,5 X 0,10 X 0,05 m (alternativa herraje auto soportado) </h4>
+<div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/1935/Cruceta fibra de vidrio - Autosoportada-Model.jpg" src="http://likinormas.micodensa.com/media/cache/images/800x800/wikiimages/2d343638393639303433-206189-Cruceta fibra de vidrio - Autosoportada-Model.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:800px"></div></div></div><br /><b>Notas:</b>
+<ol><li>El herraje auto soportado reemplaza  el uso de abrazadera  tipo U. Debe venir dentro del suministro de la cruceta como parte del kid. Ver numeral 8.3.3.</li>
+<li>Unidades en mm.</li></ol>
+
+<h4 id="heading_13" >8.3.3. Herraje auto soportado</h4>
+<div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/1935/Auto soporte - Cruceta de fibra de vidrio-Model.jpg" src="http://likinormas.micodensa.com/media/cache/images/800x800/wikiimages/2d31383732333936373832-161964-Auto soporte - Cruceta de fibra de vidrio-Model.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:800px"></div></div></div><br /><b>Notas:</b>
+<ol><li>Unidades en mm y pulgadas.</li></ol>
+
+<h2 id="heading_14" >9. PRUEBAS DE LABORATORIO</h2>
+<h3 id="heading_15" >9.1. Resistencia a la carga de dise&#241;o </h3>
+Se aplicara la carga de dise&#241;o de 1000 kgf seg&#250;n establecido en la ASTM D6109 con las perforaciones realizadas. Las crucetas no deber&#225;n de romperse ni fracturarse.<br />Las fuerzas se aplicaran como lo indica la figura 1 del anexo 2.<br />
+<h3 id="heading_16" >9.2. Prueba de carga de rotura</h3>
+La prueba se realizara seg&#250;n establecido en la ASTM D6109 aplicando la carga de rotura de 1200kgf con las perforaciones realizadas. Las crucetas no deber&#225;n de romperse ni fracturarse.<br />Las fuerzas se aplicaran como lo indica la figura 1 del anexo 2.<br />
+<h3 id="heading_17" >9.3. Prueba de flexi&#243;n</h3>
+La prueba se realizara seg&#250;n establecido en la ASTM D6109  con las perforaciones realizadas aplicando la carga de trabajo de 700 kgf. Las crucetas no deber&#225;n de romperse un fracturarse y no deber&#225; presentar deflexi&#243;n superior  al 2% de su longitud.<br />Las fuerzas se aplicaran como lo indica la figura 1 del anexo 2.<br />
+<h3 id="heading_18" >9.4. Prueba de perno pasante</h3>
+Se deber&#225; aplicar la carga de trabajo forma progresiva hasta llegar al valor de la carga de trabajo de 700 kgf de  sin que se presente falla en la pared de la cruceta que est&#225; dise&#241;ada para recibir carga mediante un perno de acero con arandela cuadrada en tres puntos equidistantes de la cruceta de acuerdo con lo establecido en el manual de la ASCE104 numeral 6.2.3. La cruceta deber&#225; de soportar como m&#237;nimo la carga de trabajo.<br />Las fuerzas se aplicaran conforme lo indica la figura 2 del anexo 2.<br />
+<h3 id="heading_19" >9.5. Prueba de torsi&#243;n de apriete</h3>
+De acuerdo con lo establecido en el Manual de la ASCE104 numeral 6.2.2., la cruceta debe de suportar 75 Nm (55 lb/pie) de carga en un perno. No se debe presentar fractura durante el apriete, ni despu&#233;s de realizar el ensayo de perno pasante.<br />La prueba se realizara seg&#250;n lo indicado en la figura 3 del anexo 2.<br />
+<h3 id="heading_20" >9.6. Prueba de resistencia a la torsi&#243;n</h3>
+Con la cruceta montada conforme a lo indicado  en la figura 4 del anexo 2, instalar a 10 cm de cada extremo un aislador tipo poste de acuerdo con la NTC 2620 (ANSI C29.7) para realizar la fijaci&#243;n del sistema de tracci&#243;n en los cuellos de los aisladores, se debe aplicar gradualmente una carga de tracci&#243;n al conjunto hasta alcanzar 102 kgf (perpendicular al eje vertical).<br />Despu&#233;s de al menos 5 minutos de aplicaci&#243;n de la carga, la cruceta no debe de presentar grietas de ning&#250;n tipo.<br />
+<h3 id="heading_21" >9.7. Prueba mec&#225;nica de larga duraci&#243;n</h3>
+Con la cruceta instalada en forma sim&#233;trica (ver figura 5 del anexo2), se debe aplicar la carga de trabajo de 700 kgf sobre el punto de fijaci&#243;n de los aisladores laterales. La carga debe mantenerse por un periodo de 216 horas.<br />Una vez retirada la carga se debe realizar la lectura del valor de la flecha (deflexi&#243;n) en un intervalo de tiempo de 5 – 10 minutos como m&#225;ximo. La cruceta se considera aprobada si no presenta grietas y la flecha residual m&#225;xima medida en cada extremo en el plano de aplicaci&#243;n de las cargar no supera los 20 mm. <br />
+<h3 id="heading_22" >9.8. Resistencia de las tapas laterales</h3>
+Se debe dejar caerla cruceta en posici&#243;n horizontal a una altura de un (1) metro sobre la superficie de concreto. Las tapas no se deben desprender.<br />Se debe suspender la misma muestra desde una de sus extremidades formando un &#225;ngulo de 30&#176; en relaci&#243;n con el suelo, se debe arrastrar en una superficie &#225;spera a una distancias de dos (2) metros, se debe de repetir el proceso para la tapa contraria. No se debe presentar desprendimiento ni fracturas de las tapas.<br />
+<h3 id="heading_23" >9.9. Resistencia a rayos UV</h3>
+De acuerdo con la normas ASTM G-154, la cruceta deber&#225; presentar resistencia a la degradaci&#243;n producida por la exposici&#243;n de rayos ultravioleta. Se deber&#225;n conservar m&#237;nimo el 75 % de los valores de  carga de dise&#241;o y deflexi&#243;n y no presentar  variaci&#243;n del 2 % en el peso. <br />
+<h3 id="heading_24" >9.10. Termo deformaci&#243;n </h3>
+Se toma tres crucetas por referencia para someterla a una temperatura, las crucetas deben de iniciar efectos de degradaci&#243;n t&#233;rmica a una temperatura superior a 100 &#176;C, de acuerdo con la norma ASTM D648, m&#233;todo B.<br />
+<h3 id="heading_25" >9.11. Flamabilidad</h3>
+Esta prueba est&#225; destinada a la verificaci&#243;n del material en cuanto a las propiedades de ignici&#243;n y extinci&#243;n de la llama. Se debe efectuar el ensayo de hilo incandescente a 900 &#176;C, conforme a lo establecido en la NTC 5283 (IEC 60695-2-11).<br />
+<h3 id="heading_26" >9.12. Resistencia a la absorci&#243;n de humedad</h3>
+Se deber&#225;n conservar m&#237;nimo el 75% de los valores de  carga de dise&#241;o y deflexi&#243;n y no presentar  variaci&#243;n del 3% en el peso, conforme a la normas ASTM D570.<br />
+<h3 id="heading_27" >9.13. Rigidez diel&#233;ctrica </h3>
+El ensayo se debe realizar sobre un esp&#233;cimen de 5 mm &#177; 1 mm. La rigidez diel&#233;ctrica debe cumplir con un valor mayor a 8 kV/mm en aire, en caso de que exista flameo se debe realizar en aceita.<br />La prueba se debe realizar de acuerdo con el m&#233;todo establecido en la norma ASTM D149, M&#233;todo A con electrodo Tipo 1 y las condiciones de temperatura y humedad relativa de la muestra debe cumplir con el numeral 5 de la IEC 60243-1. <br />
+<h3 id="heading_28" >9.14. Tracking y erosi&#243;n</h3>
+Se debe garantizar un alto desempe&#241;o que se demuestra al no presentar erosi&#243;n ni flameo bajo tensiones a frecuencias industriales seg&#250;n la norma IEC 60587.<br />La prueba se realiza mediante el m&#233;todo de escalonamiento de tensi&#243;n y debe de cumplir como m&#237;nimo con la tensi&#243;n de 1500 V, conforme al m&#233;todo 2, criterio A. <br />
+<h3 id="heading_29" >9.15. Prueba de tensi&#243;n no disruptiva a frecuencia industrial en h&#250;medo</h3>
+Se aplica tensi&#243;n directamente a la cruceta en el punto de fijaci&#243;n de la fase central. La cruceta tiene que estar montada con una sola diagonal met&#225;lica de fijaci&#243;n , en el extremo opuesto se aplica la tensi&#243;n , entre el punto de fijaci&#243;n del aislador y el punto de fijaci&#243;n de la cruceta al poste (tierra). La tensi&#243;n de aplicaci&#243;n debe de ser 1,05 veces mayor de la tensi&#243;n fase-tierra con una duraci&#243;n de 1 minuto.<br />La cruceta se considera aprobada si no se produce ninguna descarga disruptiva, ni ning&#250;n da&#241;o al material durante el ensayo.<br />
+<h3 id="heading_30" >9.16. Resistencia qu&#237;mica</h3>
+Ante la presencia de agentes como cloruro de sodio, acido sulf&#250;rico,  carbonato de sodio, sulfato de sodio, acido hidrocl&#243;rico , hidr&#243;xido de sodio,  acido ac&#233;tico, kerosene y aceite  de transformador. La cruceta deber&#225; presentar resistencia a la degradaci&#243;n producida por la exposici&#243;n de rayos ultravioleta . Se deber&#225;n conservar m&#237;nimo el 75% de los valores de  carga de dise&#241;o y deflexi&#243;n y no presentar  variaci&#243;n del 2% en el peso. La prueba se realizara como lo indiqu&#233; la norma ASTM D543.<br />
+<h3 id="heading_31" >9.17. Contenidos de vac&#237;o y relaci&#243;n Fibra-Resina </h3>
+El contenido de vacios y relaci&#243;n fibra-resina de las crucetas se eval&#250;an seg&#250;n las normas ASTM D2734 y ASTM D2584.<br />
+<h3 id="heading_32" >9.18.	Prueba de torque de apriete &#243; par de pernos</h3>
+El prop&#243;sito de la prueba de torque del perno es determinar el torque &#243;ptimo para un perno pasante.. Se debe instalar un perno pasante usando una arandela plana indicada en la ET460  en ambos lados del perno.<br />Prueba de torque de apriete 130 Nm en un laboratorio acreditado con ISO 17025. <br /><br />Tambi&#233;n deber&#225; presentar esta pruebas con los siguientes materiales:<br />
+<ul><li>Abrazaderas en U ET-436 de CODENSA</li></ul>
+
+<h2 id="heading_33" >10. PRUEBA DIMENSIONAL</h2>
+La verificaci&#243;n de las dimensiones se har&#225; con los instrumentos de medida que den la aproximaci&#243;n requerida y calibrador para los di&#225;metros y espesores. El tama&#241;o de la muestra deber&#225; estar de acuerdo con la  NTC ISO 2859-1. Se debe verificar las dimensiones de las crucetas de acuerdo en el numeral 8.3. <br />
+<h2 id="heading_34" >11. VERIFICACIONES DE PROCESOS</h2>
+Se refiere a las verificaciones que deben realizarse a las crucetas durante el proceso de fabricaci&#243;n. Constituyen una validaci&#243;n en el cumplimiento de par&#225;metros dimensionales y f&#237;sicos propios del dise&#241;o. Esta evaluaci&#243;n debe hacerse a todo el lote de producci&#243;n que se est&#225; fabricando.<br />
+<h2 id="heading_35" >12. ENSAYOS DE LABORATORIO </h2>
+El registro completo de los ensayos  debe estar disponible para  CODENSA S.A. ESP., durante el tiempo que dure la fabricaci&#243;n y por los dos a&#241;os siguientes a su terminaci&#243;n.<br /><br />Todos los ensayos descritos en esta especificaci&#243;n se deben realizar  por parte del fabricante y se deben entregar a CODENSA S.A. ESP.<br /><br />Los laboratorios de pruebas  deber&#225;n ser certificados bajo ISO IEC 17025.<br />
+<h2 id="heading_36" >13. MARCAS</h2>
+Todos las crucetas deber&#225;n llevar, en forma clara una leyenda en bajo relieve o placa, que indique:<br />
+<ul><li>Palabra BOG-CUN (en bajo relieve)</li>
+<li>Nombre o raz&#243;n social del fabricante.</li>
+<li>Peso m&#225;ximo (kg) </li>
+<li>Longitud y especificaci&#243;n t&#233;cnica ET–403.</li>
+<li>Fecha de fabricaci&#243;n, d&#237;a   mes   a&#241;o.</li>
+<li>N&#250;mero de orden de pedido.</li>
+<li>Orden de compa de CODENSA o pedido abierto</li></ul>
+
+<h2 id="heading_37" >14. REQUISITOS DE LAS OFERTAS</h2>
+La oferta t&#233;cnica deber&#225; entregarse en medio magn&#233;tico. El oferente deber&#225; incluir con su propuesta la siguiente informaci&#243;n:<br />
+<ul><li>Relaci&#243;n de los bienes cotizados.</li></ul>
+
+<ul><li>Informaci&#243;n del oferente, relaci&#243;n de clientes, evidencia de su capacidad t&#233;cnica y experiencias relacionadas con los materiales y/o equipos cotizados.</li></ul>
+
+<ul><li>Listado de normas t&#233;cnicas aplicables a los bienes cotizados.</li></ul>
+
+<ul><li>Planilla de caracter&#237;sticas t&#233;cnicas garantizadas indicada en el anexo1, la cual deber&#225; ser diligenciada completamente por el oferente. Esta planilla debe entregarse en formato Excel.</li></ul>
+
+<ul><li>Cat&#225;logos originales, completos y actualizados, que contengan caracter&#237;sticas t&#233;cnicas principales correspondientes a los bienes cotizados en la planilla de caracter&#237;sticas t&#233;cnicas garantizadas. </li></ul>
+
+<ul><li>Protocolos de pruebas de acuerdo con las normas indicadas en esta especificaci&#243;n en laboratorios certificados y/o reconocidos a nivel nacional. En tales protocolos se deber&#225;n anotar las fechas de fabricaci&#243;n y de realizaci&#243;n de las pruebas, para permitir la verificaci&#243;n de las caracter&#237;sticas t&#233;cnicas garantizadas. As&#237; mismo las fotocopias de los certificados de laboratorios internacionales cuando las pruebas deban ser hechas fuera del pa&#237;s.</li></ul>
+
+<ul><li>El oferente adjuntar&#225; con su propuesta el certificado de conformidad de producto con noma t&#233;cnica y con RETIE, expedido por una entidad autorizada por la ONAC.  Adem&#225;s deber&#225; presentar el certificado del sistema de calidad (ISO 9001).</li></ul>
+
+<ul><li>Los oferentes deber&#225;n ofrecer una garant&#237;a absoluta de sus productos de por lo menos dos (2) a&#241;os.</li></ul>
+
+<ul><li>Foto microsc&#243;pica ampliada que evidencie  cada una de las capas de fabricaci&#243;n de la cruceta.</li></ul>
+
+<ul><li>Informaci&#243;n adicional que considere aporta explicaci&#243;n a su dise&#241;o (dibujos, detalles,  caracter&#237;sticas de operaci&#243;n,  dimensiones y pesos de los materiales ofertados). </li></ul>
+
+<ul><li>Una muestra f&#237;sica de m&#237;nimo 5cm x 5cm de la cruceta</li></ul>
+
+<ul><li>Relaci&#243;n de las excepciones de car&#225;cter exclusivamente t&#233;cnico de la oferta, respecto a los bienes solicitados. Si la oferta no presenta excepci&#243;n, esto se indicar&#237;a expresamente. </li></ul>
+
+<ul><li>Prueba de torque de apriete 130 Nm en un laboratorio acreditado con ISO 17025.</li></ul>
+
+<ul><li>Carta firmada por el oferente aceptando que si el resultado de la evaluaci&#243;n t&#233;cnica es satisfactorio y es adjudicado, debe realizar las pruebas de perno de apriete e instalaci&#243;n de una estructura t&#237;pica previamente a la fabricaci&#243;n masiva y a las pruebas de recepci&#243;n, si el resultado es satisfactorio se procede a la fabricaci&#243;n. Si el resultado no es satisfactorio Codensa tendr&#225; la potestad de rechazar el producto adjudicado. </li></ul>
+<br />CODENSA S.A. ESP. podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones, sin expresi&#243;n de causa ni obligaci&#243;n de compensaci&#243;n.<br />
+<h2 id="heading_38" >15. SUMINISTRO Y RECEPCI&#211;N DE CRUCETAS</h2>
+<h3 id="heading_39" >15.1. Tolerancias Aceptadas </h3>
+<div style="width:536px;"><table><tr><td colspan="1" rowspan="1" style="width:285px;height:22px;text-align:center"><b>Tipo de tolerancia observada</b></td><td colspan="1" rowspan="1" style="width:251px;text-align:center"><b>Valores de tolerancia</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Longitud</td><td colspan="1" rowspan="1" style="text-align:center">&#177; 5 mm</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Lados de secci&#243;n externa</td><td colspan="1" rowspan="1" style="text-align:center">&#177; 4 mm</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Entre centros de perforaci&#243;n </td><td colspan="1" rowspan="1" style="text-align:center">&#177; 4 mm</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Perforaciones </td><td colspan="1" rowspan="1" style="text-align:center">&#177; 2 mm</td></tr></table><br /></div>
+<h3 id="heading_40" >15.2. Recepci&#243;n de crucetas</h3>
+La recepci&#243;n de crucetas, deber&#225; hacerla el gestor t&#233;cnico o un representante de CODENSA S.A. E.S.P, quienes inspeccionar&#225;n los lotes en forma detallada, para determinar si cumplen las especi&#172;ficaciones establecidas.<br /><br />Para llevar a cabo las labores de inspec&#172;ci&#243;n y recepci&#243;n de crucetas, se establece el siguiente plan de muestreo, en el que se determina, de acuerdo con el tama&#241;o del lote, el n&#250;mero de crucetas a las cuales se les debe practicar la inspecci&#243;n visual para la aceptaci&#243;n o rechazo del mismo:<br /><br />*TABLA 6. INSPECCION VISUAL Y DIMENSIONAL<br />(Nivel de Inspecci&#243;n general II, NCA = 4%)*<br /><div style="width:370px;"><table><tr><td colspan="1" rowspan="1" style="width:184px;height:21px;text-align:center"><b>Tama&#241;o del lote</b></td><td colspan="1" rowspan="1" style="width:186px;text-align:center"><b>Tama&#241;o de muestra</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">0 – 300</td><td colspan="1" rowspan="1" style="text-align:center">Sujeto a acuerdo</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">301 - 2000</td><td colspan="1" rowspan="1" style="text-align:center">7</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2001 - 5000</td><td colspan="1" rowspan="1" style="text-align:center">12</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">5001 – 10000</td><td colspan="1" rowspan="1" style="text-align:center">18</td></tr></table><br /></div><i>Nota.  Si el tama&#241;o de la muestra es mayor o igual al lote, se har&#225; inspecci&#243;n 100%</i><br />
+<h3 id="heading_41" >15.3. Motivos de rechazo</h3>
+Se rechazar&#225;n las crucetas por las siguientes causas (Defectos cr&#237;ticos):<br />
+<ul><li>La resistencia mec&#225;nica no cumple con los requisitos m&#237;nimos especificados.</li>
+<li>Presencia de grietas, abultamientos  o malos acabados </li>
+<li>El incumplimiento de las tolerancias especificadas, se consideran como defectos cr&#237;ticos.</li>
+<li>No colocaci&#243;n de la leyenda mencionada en el numeral 13.</li>
+<li>No cumplimiento de alguna de las pruebas requeridas en esta especificaci&#243;n</li></ul>
+
+<h2 id="heading_42" >16. GARANTIA DE FABRICA</h2>
+CODENSA S.A. E.S.P requiere como m&#237;nimo, un per&#237;odo de garant&#237;a de f&#225;brica de veinticuatro (24) meses, a partir de la entrega de los bienes.<br />
+<h2 id="heading_43" >17. INSPECCI&#211;N EN FABRICA</h2>
+El suministrador enviar&#225; con no menos de quince (15) d&#237;as calendario de anticipaci&#243;n, a la fecha programada para la realizaci&#243;n de las pruebas en f&#225;brica, el formato de protocolos de pruebas.<br /><br />El proveedor debe brindar plena colaboraci&#243;n al funcionario de CODENSA S.A. ESP. en el cumplimiento de sus funciones.<br /><br />El valor de las pruebas y ensayos debe incluirse en los precios cotizados en la propuesta.  CODENSA S.A. ESP. se reserva el derecho de descartar las propuestas que no ofrezcan pruebas, o si las ofrecidas son consideradas insuficientes para garantizar la calidad de los dispositivos.<br />
+<h2 id="heading_44" >18. CERTIFICADOS DE CONFORMIDAD</h2>
+El oferente adjuntar&#225; con su propuesta el certificado de conformidad de producto con norma t&#233;cnica, expedido por una entidad acreditada bajo ISO IEC 17065.<br />
+<h2 id="heading_45" >ANEXO1. CARACTER&#205;STICAS T&#201;CNICAS </h2>
+<div style="width:525px;"><table><tr><td colspan="1" rowspan="1" style="width:76px;height:20px;text-align:center"><b>ITEM</b></td><td colspan="3" rowspan="1" style="width:345px;"><b>DESCRIPCION</b></td><td colspan="1" rowspan="1" style="width:104px;text-align:center"><b>OFERTADO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1</td><td colspan="3" rowspan="1" style="">Proveedor</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">2</td><td colspan="3" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">3</td><td colspan="3" rowspan="1" style="">Pa&#237;s del fabricante</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">4</td><td colspan="3" rowspan="1" style="">Normas t&#233;cnicas de dise&#241;o y pruebas</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">5</td><td colspan="3" rowspan="1" style="">Dimensiones ancho, alto y profundidad (cm)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">6</td><td colspan="3" rowspan="1" style="">Peso total (kg)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">7</td><td colspan="3" rowspan="1" style="">Carga m&#237;nima de rotura (kgf)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">8</td><td colspan="3" rowspan="1" style="">Carga de trabajo (kgf)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">9</td><td colspan="3" rowspan="1" style="">Deflexi&#243;n bajo carga m&#225;xima (mm)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">10</td><td colspan="3" rowspan="1" style="">Color (referencia RAL)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:42px;text-align:center">11</td><td colspan="3" rowspan="1" style="">Cumple con la dimensi&#243;n y la distribuci&#243;n de las perforaciones indicadas en el numeral 8.3. (Si/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="4" style="height:22px;text-align:center">12</td><td colspan="2" rowspan="4" style="">Espesor de las capas (numeral 8.2. )</td><td colspan="1" rowspan="1" style="">Capa a.  Top coat exterior</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Capa b.  Veil &#243; Velo</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Capa c.  Fibra </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Capa d.  Composici&#243;n Resina</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">13</td><td colspan="3" rowspan="1" style="">Incluye  tapas? (Si/No y describir)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:42px;text-align:center">14</td><td colspan="3" rowspan="1" style="">Incluye marcaci&#243;n seg&#250;n numeral 13.? (Si/No y describir)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="19" style="height:42px;text-align:center">15</td><td colspan="4" rowspan="1" style="">Presentan protocolo de pruebas de los siguientes ensayos: (Indicar  Si/No y el laboratorio)</td></tr>
+<tr><td colspan="3" rowspan="1" style="height:42px;">Prueba de resistencia a carga de dise&#241;o - ASTM D6109</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:21px;">Prueba de carga de rotura - ASTM D6109</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:21px;">Prueba de flexi&#243;n - ASTM D6109 </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:21px;">Prueba de perno pasante - ASCE104 </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:21px;">Prueba de torsi&#243;n de apriete - ASCE104 </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:21px;">Prueba de resistencia a la torsi&#243;n </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:21px;">Prueba mec&#225;nica de larga duraci&#243;n </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:21px;">Resistencia de las tapas laterales</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:21px;">Resistencia a rayos UV - ASTM G154</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:21px;">Termo deformaci&#243;n - ASTM D648</td><td colspan="1" rowspan="2" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:21px;">Retardaci&#243;n a las llamas - IEC 60695-2-11</td></tr>
+<tr><td colspan="3" rowspan="1" style="height:21px;">Absorci&#243;n de humedad - ASTMD 570</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:21px;">Rigidez Diel&#233;ctrica - ASTM D149</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:21px;">Prueba de tracking y erosi&#243;n - IEC 60587</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:21px;">Prueba de tensi&#243;n no disruptiva a frecuencia industrial en h&#250;medo </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:21px;">Resistencia qu&#237;mica - ASTM D543</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:21px;">Contenidos de vac&#237;o y relaci&#243;n Fibra-Resina  (ASTM D2734 y ASTM D2584)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:21px;">Prueba de torque de apriete o par de pernos</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">16</td><td colspan="3" rowspan="1" style="">Vida &#250;til (a&#241;os)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">17</td><td colspan="3" rowspan="1" style="">Garant&#237;a (a&#241;os)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:42px;"><b>RESULTADO DE EVALUACI&#211;N T&#201;CNICA</b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:21px;text-align:center">18</td><td colspan="1" rowspan="5" style="">Certificaci&#243;n de sistema de calidad</td><td colspan="2" rowspan="1" style="">Entidad acreditadora</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Fecha de aprobaci&#243;n (d&#237;a/mes/a&#241;o)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Vigencia</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="6" style="height:21px;text-align:center">19</td><td colspan="1" rowspan="6" style="">Certificaci&#243;n con normas t&#233;cnicas</td><td colspan="2" rowspan="1" style="">Entidad acreditadora</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Vigencia</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Norma t&#233;cnica con la cual se certifica</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:21px;text-align:center">20</td><td colspan="1" rowspan="5" style="">Certificaci&#243;n con RETIE</td><td colspan="2" rowspan="1" style="">Entidad acreditadora</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Fecha de aprobaci&#243;n (d&#237;a/mes/a&#241;o)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Vigencia</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:42px;"><b>RESULTADO DE EVALUACI&#211;N REGULATORIA</b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">21</td><td colspan="3" rowspan="1" style="">Observaciones</td><td colspan="1" rowspan="1" style=""> </td></tr></table><br /></div>
+<h2 id="heading_46" >ANEXO 2</h2>
+<div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/1935/Figura 1. Esquema para la prueba de resistencia de diseño y de flexión.jpg" src="../../media/cache/images/500x355/wikiimages/31303433313732383333-18523-Figura&#32;1.&#32;Esquema&#32;para&#32;la&#32;prueba&#32;de&#32;resistencia&#32;de&#32;diseño&#32;y&#32;de&#32;flexión.jpg" title="Figura 1. Esquema para la prueba de resistencia de diseño y de flexión"  /></div><div class="texto_imagen_articulos" style="max-width:500px">Figura 1. Esquema para la prueba de resistencia de diseño y de flexión</div></div></div><br /><i>Nota: P = carga que var&#237;a seg&#250;n la prueba </i><br /><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/1935/Figura 2. Esquema para la prueba de perno pasante.jpg" src="http://likinormas.micodensa.com/media/cache/images/500x355/wikiimages/2d383135303738393539-18205-Figura 2. Esquema para la prueba de perno pasante.jpg" title="Figura 2. Esquema para la prueba de perno pasante"  /></div><div class="texto_imagen_articulos" style="max-width:500px">Figura 2. Esquema para la prueba de perno pasante</div></div></div><br /><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/1935/Figura 3. Esquema para la prueba de torsión de apriete.jpg" src="../../media/cache/images/500x355/wikiimages/2d333035343135383735-35126-Figura&#32;3.&#32;Esquema&#32;para&#32;la&#32;prueba&#32;de&#32;torsión&#32;de&#32;apriete.jpg" title="Figura 3. Esquema para la prueba de torsión de apriete"  /></div><div class="texto_imagen_articulos" style="max-width:500px">Figura 3. Esquema para la prueba de torsión de apriete</div></div></div><br /><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/1935/Figura 4. Esquema para la prueba de resistencia a la torsión.jpg" src="../../media/cache/images/500x355/wikiimages/31363435333734323730-28808-Figura&#32;4.&#32;Esquema&#32;para&#32;la&#32;prueba&#32;de&#32;resistencia&#32;a&#32;la&#32;torsión.jpg" title="Figura 4. Esquema para la prueba de resistencia a la torsión "  /></div><div class="texto_imagen_articulos" style="max-width:500px">Figura 4. Esquema para la prueba de resistencia a la torsión </div></div></div><br /><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/1935/Figura 5. Esquema para la prueba mecánica de larga duración.jpg" src="../../media/cache/images/500x355/wikiimages/2d32303936353935333433-22429-Figura&#32;5.&#32;Esquema&#32;para&#32;la&#32;prueba&#32;mecánica&#32;de&#32;larga&#32;duración.jpg" title="Figura 5. Esquema para la prueba mecánica de larga duración "  /></div><div class="texto_imagen_articulos" style="max-width:500px">Figura 5. Esquema para la prueba mecánica de larga duración </div></div></div><br /><br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 1935, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

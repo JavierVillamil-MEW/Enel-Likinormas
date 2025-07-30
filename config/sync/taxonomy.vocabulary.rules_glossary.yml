@@ -1,0 +1,8 @@
+uuid: 2da80b3e-0079-4295-8256-b6ec6dc9dc4a
+langcode: es
+status: true
+dependencies: {  }
+name: Glosario
+vid: rules_glossary
+description: 'Catálogo alfabético de palabras y expresiones de uno o más textos que son difíciles de entender'
+weight: -4

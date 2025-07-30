@@ -1,0 +1,23 @@
+<div class="register-form childre-form">
+  <h2 class="form-title">Regístrese ahora</h2>
+  {% if form.boolean_setting == "1" %}
+    <button type="button" class="btn btn-facebook"><span class="icon-facebook"></span><a href="/user/login/facebook">Regístrese
+        con Facebook</a></button>
+    <span class="other"> O </span>
+  {% endif %}
+  {{ form.account.name }}
+  {{ form.account.mail }}
+  {{ form.profession_or_occupation }}
+  {{ form.company }}
+  {{ form.account.pass }}
+  {{ form.notifications }}
+  {{ form.terms_and_conditions }}
+  {{ form.captcha }}
+  {{ form.actions }}
+  <div class="section-register-now">
+    <span>¿Ya está registrado? <a href="/user/login">Inicie sesión ahora</a></span>
+  </div>
+</div>
+{{ form.form_build_id }}
+{{ form.form_token }}
+{{ form.form_id }}

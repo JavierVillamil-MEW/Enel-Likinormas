@@ -1,0 +1,19 @@
+uuid: 70472207-4253-44c5-9857-04070c4016ab
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.section_description
+    - paragraphs.paragraphs_type.rules_section
+id: paragraph.rules_section.section_description
+field_name: section_description
+entity_type: paragraph
+bundle: rules_section
+label: 'Descripción de la sección'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

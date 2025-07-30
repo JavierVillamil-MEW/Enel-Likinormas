@@ -1,0 +1,32 @@
+uuid: e9f99871-ecae-4d27-be04-4c46e9d27ca7
+langcode: es
+status: true
+dependencies:
+  module:
+    - comment
+    - node
+    - save_edit
+    - system
+    - toolbar
+    - users_export
+id: approval
+label: Aprobador
+weight: 4
+is_admin: null
+permissions:
+  - 'access administration pages'
+  - 'access comments'
+  - 'access content overview'
+  - 'access site reports'
+  - 'access toolbar'
+  - 'access user profiles'
+  - 'administer account settings'
+  - 'administer comments'
+  - 'administer users'
+  - 'edit own comments'
+  - 'post comments'
+  - 'skip comment approval'
+  - 'use save and edit'
+  - 'users export access export page'
+  - 'view the administration theme'
+  - 'view user email addresses'

@@ -1,0 +1,30 @@
+uuid: bf15cdd8-e79f-413b-abcf-49f083c160ac
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:rules_banner_with_background:9e076622-2761-4682-9a22-8f5292d3a04c'
+  module:
+    - block_content
+    - system
+  theme:
+    - likinormas
+id: backgroundnormastenicas
+theme: likinormas
+region: content
+weight: -5
+provider: null
+plugin: 'block_content:9e076622-2761-4682-9a22-8f5292d3a04c'
+settings:
+  id: 'block_content:9e076622-2761-4682-9a22-8f5292d3a04c'
+  label: 'Background Normas tenicas'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /normas

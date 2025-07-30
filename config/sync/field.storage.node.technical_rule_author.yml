@@ -1,0 +1,21 @@
+uuid: 9925d8ef-a7a6-49ee-b50e-1a02773d82c6
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.technical_rule_author
+field_name: technical_rule_author
+entity_type: node
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

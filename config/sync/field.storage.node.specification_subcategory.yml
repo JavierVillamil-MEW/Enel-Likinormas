@@ -1,0 +1,20 @@
+uuid: 2cf961c2-cca7-4bfa-ac5f-dbb190843754
+langcode: es
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.specification_subcategory
+field_name: specification_subcategory
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

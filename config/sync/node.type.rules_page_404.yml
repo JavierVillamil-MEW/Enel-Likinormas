@@ -1,0 +1,17 @@
+uuid: 288a684a-5bba-462f-9bf5-1d82f98ccdec
+langcode: es
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'Página 404'
+type: rules_page_404
+description: 'Administra los elementos de la página de 404'
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: false

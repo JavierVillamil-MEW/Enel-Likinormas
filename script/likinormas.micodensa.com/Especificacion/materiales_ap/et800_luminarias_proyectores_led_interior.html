@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET800 Luminarias y Proyectores LED para uso Interior | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/2057" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F2057.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/2057" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/2057" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '30');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET800 Luminarias y Proyectores LED para uso Interior</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET800</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">06/10/2021</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/2057">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F2057&amp;nodoid=2057', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et800_luminarias_proyectores_led_interior.html#heading_0">1. OBJETO   </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et800_luminarias_proyectores_led_interior.html#heading_1">2. ALCANCE  </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et800_luminarias_proyectores_led_interior.html#heading_2">3. CONDICIONES DE SERVICIO  </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et800_luminarias_proyectores_led_interior.html#heading_3">4.  SISTEMA DE UNIDADES Y DEFINICIONES  </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et800_luminarias_proyectores_led_interior.html#heading_4">5.   NORMAS DE FABRICACI&#211;N Y PRUEBAS PARA LUMINARIAS Y PROYECTORES LED </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et800_luminarias_proyectores_led_interior.html#heading_5">6. REQUERIMIENTOS T&#201;CNICOS PARTICULARES  </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et800_luminarias_proyectores_led_interior.html#heading_6">6.1 Caracter&#237;sticas generales</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et800_luminarias_proyectores_led_interior.html#heading_7">6.2 Cuerpo de la luminaria LED para interior</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et800_luminarias_proyectores_led_interior.html#heading_8">6.2.1 Fuentes Tubulares</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et800_luminarias_proyectores_led_interior.html#heading_9">6.2.2 Downlight</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et800_luminarias_proyectores_led_interior.html#heading_10">6.2.3 Tracklight</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et800_luminarias_proyectores_led_interior.html#heading_11">6.2.4 Paneles LED</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et800_luminarias_proyectores_led_interior.html#heading_12">6.2.5 Herm&#233;ticas</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et800_luminarias_proyectores_led_interior.html#heading_13">6.2.6 Highbay</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et800_luminarias_proyectores_led_interior.html#heading_14">6.2.7 Luminarias Lineales</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et800_luminarias_proyectores_led_interior.html#heading_15">6.2.8 Apliques</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et800_luminarias_proyectores_led_interior.html#heading_16">6.3 Hermeticidad y grados de impacto </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et800_luminarias_proyectores_led_interior.html#heading_17">6.4 Conjunto El&#233;ctrico</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et800_luminarias_proyectores_led_interior.html#heading_18">6.5 Conjunto &#211;ptico</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et800_luminarias_proyectores_led_interior.html#heading_19">7.  CRITERIOS DE ACEPTACI&#211;N O RECHAZO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et800_luminarias_proyectores_led_interior.html#heading_20">7.1 Muestreo</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et800_luminarias_proyectores_led_interior.html#heading_21">7.2 Aceptaci&#243;n o Rechazo</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et800_luminarias_proyectores_led_interior.html#heading_22">8. PROTOCOLOS DE PRUEBA A SUMINISTRAR POR EL FABRICANTE</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et800_luminarias_proyectores_led_interior.html#heading_23">8.1. Ensayos generales</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et800_luminarias_proyectores_led_interior.html#heading_24">8.2. Ensayos Especiales</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et800_luminarias_proyectores_led_interior.html#heading_25">8.2.1 Fuentes tubulares</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et800_luminarias_proyectores_led_interior.html#heading_26">8.2.2 Down Light</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et800_luminarias_proyectores_led_interior.html#heading_27">8.2.3 Track Light</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et800_luminarias_proyectores_led_interior.html#heading_28">8.2.4 Panel LED</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et800_luminarias_proyectores_led_interior.html#heading_29">8.2.5 Luminarias Herm&#233;ticas, High bay y lineales</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et800_luminarias_proyectores_led_interior.html#heading_30">8.2.6 Apliques para interior de sobreponer o empotrar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et800_luminarias_proyectores_led_interior.html#heading_31">9.  MARCACI&#211;N Y EMPAQUE  </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et800_luminarias_proyectores_led_interior.html#heading_32">9.1 Marcaci&#243;n  </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et800_luminarias_proyectores_led_interior.html#heading_33">9.2 Empaque  </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et800_luminarias_proyectores_led_interior.html#heading_34">10. REQUISITOS DE LAS OFERTAS  </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et800_luminarias_proyectores_led_interior.html#heading_35">11.  GARANT&#205;A DE F&#193;BRICA  </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et800_luminarias_proyectores_led_interior.html#heading_36">12.  INSPECCI&#211;N DE LAS MUESTRAS    </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et800_luminarias_proyectores_led_interior.html#heading_37">13.  SISTEMA DE CALIDAD</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et800_luminarias_proyectores_led_interior.html#heading_38">14. PLANILLAS DE CARACTER&#205;STICAS T&#201;CNICAS  </a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1. OBJETO   </h2>
+Establecer las condiciones que deben satisfacer las <a href="et800_luminarias_proyectores_led_interior.html#" id="version-0" class="externalLink  glosarioLink">luminarias</a> y proyectores LED para alumbrado de uso interior, las cuales deben poseer excelentes caracter&#237;sticas t&#233;cnicas de desempe&#241;o fotom&#233;trico, durabilidad y <a href="et800_luminarias_proyectores_led_interior.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> para cumplir las condiciones actuales de desempe&#241;o en los sistemas de distribuci&#243;n de energ&#237;a de B.T.  <br />
+<h2 id="heading_1" >2. ALCANCE  </h2>
+La presente especificaci&#243;n se aplicar&#225; para todas las luminarias y proyectores LED para alumbrado de uso interior para aplicaciones Industriales, oficinas, salud y cuidados, educaci&#243;n, &#225;reas o zonas comunes, locales comerciales e iluminaci&#243;n residencial, cumpliendo con el REGLAMENTO TECNICO de ILUMINACION Y ALUMBRADO PUBLICO- RETILAP y Normatividad vigente.<br /><br />Las luminarias requeridas pueden ser:
+<ul><li>Tipo proyector</li>
+<li>Empotrables</li>
+<li>Superpuestas o superficie</li>
+<li>Apliques</li>
+<li>Luminarias suspendidas</li>
+<li>Luminarias downlight</li>
+<li>Luminarias tracklight</li>
+<li>Luminaria Highbay</li>
+<li>Paneles</li>
+<li>Luminarias Herm&#233;ticas</li>
+<li>Bombillas de Led E27</li>
+<li>Fuentes Tubulares </li>
+<li>Luminarias en l&#237;nea continua y regletas</li>
+<li>Sistemas de canales de luz</li></ul>
+<br /> 
+<h2 id="heading_2" >3. CONDICIONES DE SERVICIO  </h2>
+Las luminarias y proyectores LED ser&#225;n utilizados para su instalaci&#243;n en el <a href="et800_luminarias_proyectores_led_interior.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de alumbrado interior de las &#225;reas de operaci&#243;n de CODENSA S.A. E.S.P, bajo las siguientes condiciones:  <br /><br /><div style="width:440px;"><table><tr><td colspan="2" rowspan="1" style="width:440px;height:34px;text-align:center"><b>CARACTER&#205;STICAS AMBIENTALES</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">a. Altura sobre el nivel del mar</td><td colspan="1" rowspan="1" style=""> De 0 a 2 900 m</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">b. Ambiente</td><td colspan="1" rowspan="1" style="">Tropical</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">c. Humedad</td><td colspan="1" rowspan="1" style="">Mayor  al  90 %</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;">d. Temperatura m&#225;xima y m&#237;nima</td><td colspan="1" rowspan="1" style="">35 &#186;C y - 5 &#186;C respectivamente.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">e.  Instalaci&#243;n</td><td colspan="1" rowspan="1" style="">Interior</td></tr></table><br /></div><br /><div style="width:422px;"><table><tr><td colspan="2" rowspan="1" style="width:422px;height:34px;text-align:center"><b>CARACTER&#205;STICAS EL&#201;CTRICAS</b></td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">a. <a href="et800_luminarias_proyectores_led_interior.html#" id="version-384" class="externalLink  glosarioLink">tensi&#243;n nominal</a> de alimentaci&#243;n del cliente</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">- L&#237;nea - L&#237;nea</td><td colspan="1" rowspan="1" style="">208 a  480 V</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">- L&#237;nea - <a href="et800_luminarias_proyectores_led_interior.html#" id="version-290" class="externalLink  glosarioLink">Neutro</a></td><td colspan="1" rowspan="1" style="">120 a  277 V</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;">b. <a href="et800_luminarias_proyectores_led_interior.html#" id="version-210" class="externalLink  glosarioLink">Frecuencia</a> del <a href="et800_luminarias_proyectores_led_interior.html#" id="version-363" class="externalLink  glosarioLink">sistema</a></td><td colspan="1" rowspan="1" style="">60 Hz</td></tr></table><br /></div>
+<h2 id="heading_3" >4.  SISTEMA DE UNIDADES Y DEFINICIONES  </h2>
+Todos los documentos t&#233;cnicos, deben expresar las cantidades num&#233;ricas en unidades del <a href="et800_luminarias_proyectores_led_interior.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> Internacional (S.I.).  Si se usan cat&#225;logos, folletos o planos, en sistemas diferentes de unidades, deben hacerse las conversiones respectivas.  <br /><br /><b>DEFINICIONES</b>  <br /><br /><i>LED</i>: Diodo emisor de luz (por su sigla en ingl&#233;s Light Emitting Diode). Tecnolog&#237;a que produce luz artificial por efecto de electroluminiscencia en la uni&#243;n de dos semiconductores. Produciendo una luz uniforme, confortable con excelente reproducci&#243;n del color que mejora la visibilidad. <br /> <br /><i><a href="et800_luminarias_proyectores_led_interior.html#" id="version-269" class="externalLink  glosarioLink">LUMINARIA</a></i>: Aparato el cual distribuye, filtra y transforma la luz emitida por los LEDs o m&#243;dulos LED, que incluye las partes para la fijaci&#243;n y protecci&#243;n de las piezas que emiten la luz artificial (LED o m&#243;dulo LED), como tambi&#233;n los equipos el&#233;ctricos necesarios para la producci&#243;n de luz.   <br /><br /><i>PROYECTOR LED</i>:  Aparato de iluminaci&#243;n que concentra la luz en un &#225;ngulo s&#243;lido limitado, con el fin reobtener un valor de <a href="et800_luminarias_proyectores_led_interior.html#" id="version-238" class="externalLink  glosarioLink">intensidad</a> luminosa elevado.<br /><br /><i>FUENTE DE ALIMENTACI&#211;N (DRIVER)</i>:  <a href="et800_luminarias_proyectores_led_interior.html#" id="version-189" class="externalLink  glosarioLink">Equipo</a> electr&#243;nico que toma la energ&#237;a el&#233;ctrica de la red de distribuci&#243;n de BT y la transforma para que proporcione los par&#225;metros el&#233;ctricos ideales para el normal funcionamiento de los LED &#243; m&#243;dulos LEDs.  <br /><br /><i>CONJUNTO &#211;PTICO</i>: Es la parte de la <a href="et800_luminarias_proyectores_led_interior.html#" id="version-269" class="externalLink  glosarioLink">luminaria</a> o proyector que emite la luz artificial y est&#225; compuesta por los LED o m&#243;dulos LED, los lentes y sistemas que los protegen para obtener la hermeticidad y grado de protecci&#243;n.  <br /><br /><i>CONJUNTO <a href="et800_luminarias_proyectores_led_interior.html#" id="version-177" class="externalLink  glosarioLink">EL&#201;CTRICO</a></i>: Es la parte de la <a href="et800_luminarias_proyectores_led_interior.html#" id="version-269" class="externalLink  glosarioLink">luminaria</a> o proyector que contiene los equipos el&#233;ctricos/electr&#243;nicos capaces de conectar, transformar y adaptar la <a href="et800_luminarias_proyectores_led_interior.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> el&#233;ctrica de la red de alimentaci&#243;n de B.T. a los LED o m&#243;dulos LEDs que conforman el conjunto &#243;ptico.   <br /><br /><i>RETILAP</i>: <a href="et800_luminarias_proyectores_led_interior.html#" id="version-350" class="externalLink  glosarioLink">reglamento t&#233;cnico</a> de Iluminaci&#243;n y Alumbrado P&#250;blico.<br /><br /><i>ONAC</i>: Organismo Nacional de <a href="et800_luminarias_proyectores_led_interior.html#" id="version-75" class="externalLink  glosarioLink">Acreditaci&#243;n</a> de Colombia.
+<h2 id="heading_4" >5.   NORMAS DE FABRICACI&#211;N Y PRUEBAS PARA LUMINARIAS Y PROYECTORES LED </h2>
+<div style="width:800px;"><table><tr><td colspan="2" rowspan="1" style="width:92px;height:21px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:601px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">1000</td><td colspan="1" rowspan="1" style="">Sistema Internacional de Unidades.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">1156</td><td colspan="1" rowspan="1" style="">Productos met&#225;licos y recubrimientos. Ensayos c&#225;mara salina.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">3279</td><td colspan="1" rowspan="1" style="">Grados de protecci&#243;n dado por encerramiento de equipo el&#233;ctrico [Grados IP]</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">ISO 2859-1</td><td colspan="1" rowspan="1" style="">Procedimientos de muestreo para inspecci&#243;n por atributos.  Parte 1: Planes de muestreo determinados por el nivel aceptable de calidad para inspecci&#243;n lote a lote.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">2050</td><td colspan="1" rowspan="1" style="">C&#243;digo El&#233;ctrico Nacional (conexiones internas).</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">2230</td><td colspan="1" rowspan="1" style="">Luminarias. Requisitos generales y ensayos</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">IEC</td><td colspan="1" rowspan="1" style="text-align:center">60360</td><td colspan="1" rowspan="1" style="">Standard method of measurement of lamp cap temperature rise</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">IEC</td><td colspan="1" rowspan="1" style="text-align:center">62031</td><td colspan="1" rowspan="1" style="">LED modules for general lighting – Safety specifications</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">IEC</td><td colspan="1" rowspan="1" style="text-align:center">60529</td><td colspan="1" rowspan="1" style="">Degree of protection by enclosures [IP Code]</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">IEC</td><td colspan="1" rowspan="1" style="text-align:center">EN 60570</td><td colspan="1" rowspan="1" style="">Electrical supply track systems for luminaires</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center">IEC</td><td colspan="1" rowspan="1" style="text-align:center">205: 2013</td><td colspan="1" rowspan="1" style="">Revisi&#243;n de las medidas de calidad de iluminaci&#243;n para interiores con sistemas de iluminaci&#243;n LED</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">IEC</td><td colspan="1" rowspan="1" style="text-align:center">60695-2-10-13</td><td colspan="1" rowspan="1" style="">Fire Hazard testings </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">UNE</td><td colspan="1" rowspan="1" style="text-align:center">EN 12464-1</td><td colspan="1" rowspan="1" style="">Lugares de trabajo en interiores.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">CIE</td><td colspan="1" rowspan="1" style="text-align:center">CIE 117</td><td colspan="1" rowspan="1" style="">Discomfort glare in interior lighting- 1995</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center">EN</td><td colspan="1" rowspan="1" style="text-align:center">50102</td><td colspan="1" rowspan="1" style="">Grados de protecci&#243;n proporcionados por las envolventes de materiales el&#233;ctricos contra los impactos mec&#225;nicos externos (c&#243;digo IK)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">EN </td><td colspan="1" rowspan="1" style="text-align:center">61347-1     </td><td colspan="1" rowspan="1" style="">General and Safety Requirements.  (Driver)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">EN     </td><td colspan="1" rowspan="1" style="text-align:center">61347-2-13</td><td colspan="1" rowspan="1" style="">Particular Requirements for DC or AC Supplied Electronic Control    Gear for LED Modules.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center">EN    </td><td colspan="1" rowspan="1" style="text-align:center">62384</td><td colspan="1" rowspan="1" style="">Dispositivos de control electr&#243;nicos alimentados en corriente continua o corriente alterna para m&#243;dulos LED. Requisitos de funcionamiento.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">IEC</td><td colspan="1" rowspan="1" style="text-align:center">60598-1</td><td colspan="1" rowspan="1" style="">Luminaires - Part 1: General requirements and tests</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">EN</td><td colspan="1" rowspan="1" style="text-align:center">60598-2-25</td><td colspan="1" rowspan="1" style="">Luminarias para uso en hospitales y sanatorios.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">IEC</td><td colspan="1" rowspan="1" style="text-align:center">61547</td><td colspan="1" rowspan="1" style="">Equipment for general lighting purpose EMC immunity requirements</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">IEC</td><td colspan="1" rowspan="1" style="text-align:center">61000-3-2</td><td colspan="1" rowspan="1" style="">Limitation of harmonic current emission.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">IEC</td><td colspan="1" rowspan="1" style="text-align:center">61000-3-3</td><td colspan="1" rowspan="1" style="">Limitation of voltage fluctuation and flicker.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">IEC</td><td colspan="1" rowspan="1" style="text-align:center">62776</td><td colspan="1" rowspan="1" style="">Double-capped LED lamps designed to retrofit linear fluorescent lamps - Safety specifications</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">IES </td><td colspan="1" rowspan="1" style="text-align:center">LM 80-08</td><td colspan="1" rowspan="1" style="">Approved Method Measuring Lumen Maintenance of LED light</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">IES </td><td colspan="1" rowspan="1" style="text-align:center">TM 21   </td><td colspan="1" rowspan="1" style="">Projecting Long term Lumen Maintenance of LED Ligth Source</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">IES</td><td colspan="1" rowspan="1" style="text-align:center">TM 30</td><td colspan="1" rowspan="1" style="">Method for Evaluating Light Source Color Rendition</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">IES </td><td colspan="1" rowspan="1" style="text-align:center">LM 79-08</td><td colspan="1" rowspan="1" style="">Electrical and Photometric Measurements of Solid-State Lighting Products</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">DIN</td><td colspan="1" rowspan="1" style="text-align:center">5035</td><td colspan="1" rowspan="1" style="">Caracter&#237;sticas de reproducci&#243;n crom&#225;tica y tonos de luz</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">ISO</td><td colspan="1" rowspan="1" style="text-align:center">17025</td><td colspan="1" rowspan="1" style="">Requisitos generales para la competencia de los laboratorios de ensayo y calibraci&#243;n.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">IES</td><td colspan="1" rowspan="1" style="text-align:center">IESNA</td><td colspan="1" rowspan="1" style="">Illuminating Engineering Society of North America</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">UL</td><td colspan="1" rowspan="1" style="text-align:center">94</td><td colspan="1" rowspan="1" style="">Flame Classifications </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">UL</td><td colspan="1" rowspan="1" style="text-align:center">1598</td><td colspan="1" rowspan="1" style="">Luminaires</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">UL</td><td colspan="1" rowspan="1" style="text-align:center">1993</td><td colspan="1" rowspan="1" style="">Self-Ballasted Lamps and Lamp Adapters</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">RETIE</td><td colspan="1" rowspan="1" style="">Reglamento T&#233;cnico de Instalaciones El&#233;ctricas</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">RETILAP</td><td colspan="1" rowspan="1" style="">Reglamento T&#233;cnico de Iluminaci&#243;n y Alumbrado P&#250;blico.</td></tr></table><br /></div><br /><br />Pueden emplearse otras normas internacionalmente reconocidas equivalentes o superiores a las aqu&#237; se&#241;aladas, siempre y cuando se ajusten a lo solicitado en la presente <a href="et800_luminarias_proyectores_led_interior.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a>.  <br /><br />Las normas citadas en la presente especificaci&#243;n (o cualquier otra que llegare a ser aceptada por CODENSA S.A.) se refieren a su &#250;ltima revisi&#243;n. <br />
+<h2 id="heading_5" >6. REQUERIMIENTOS T&#201;CNICOS PARTICULARES  </h2>
+<h3 id="heading_6" >6.1 Caracter&#237;sticas generales</h3>
+<ul><li>Poder ser utilizados en la iluminaci&#243;n para uso interior en predios Industriales, comerciales o residenciales.</li></ul>
+
+<ul><li>Para la alimentaci&#243;n o <a href="et800_luminarias_proyectores_led_interior.html#" id="version-72" class="externalLink  glosarioLink">acometida</a> de la <a href="et800_luminarias_proyectores_led_interior.html#" id="version-269" class="externalLink  glosarioLink">luminaria</a> deber&#225; contar con un <a href="et800_luminarias_proyectores_led_interior.html#" id="version-363" class="externalLink  glosarioLink">sistema</a>, adecuado para recibir <a href="et800_luminarias_proyectores_led_interior.html#" id="version-107" class="externalLink  glosarioLink">cable</a> dos conductores calibre 20 AWG o superior (RETILAP numeral 320.2, literal m)</li></ul>
+
+<ul><li>Las luminarias deben poseer las certificaciones de <a href="et800_luminarias_proyectores_led_interior.html#" id="version-338" class="externalLink  glosarioLink">producto</a> RETILAP, expedida por un organismo acreditado. Dicho certificado deber&#225; entregarse, por parte del fabricante o comercializador con todos sus anexos.</li></ul>
+
+<ul><li>La matriz de intensidades por cada referencia utilizada debe ser expedidas por un laboratorio acreditado. </li></ul>
+<br /><br />El cuerpo de la <a href="et800_luminarias_proyectores_led_interior.html#" id="version-269" class="externalLink  glosarioLink">luminaria</a> de uso interior debe cumplir con los siguientes aspectos: <br /> <br />a)	Poseer un grado de protecci&#243;n contra el impacto y de hermeticidad de acuerdo al numeral 6.3.<br /><br />b)	Con acabado exterior en color gris o blanco o el que en su momento se autorice.<br />
+<h3 id="heading_7" >6.2 Cuerpo de la luminaria LED para interior</h3>
+<h4 id="heading_8" >6.2.1 Fuentes Tubulares</h4><ul><li>Los componentes el&#233;ctricos y su encerramiento deben ser adecuados para disipar el calor y soportar las temperaturas m&#225;ximas de operaci&#243;n, las cuales nunca deben superar los 90 &#186;C. </li>
+<li>Las luminarias deben estar dise&#241;adas de tal manera que, si cuentan con varias luminarias, el cambio de cualquiera de estas no afecte la seguridad de las dem&#225;s.</li></ul>
+
+<h4 id="heading_9" >6.2.2 Downlight</h4>
+<ul><li>Se debe incluir fotometr&#237;a para los diferentes &#225;ngulos de apertura.</li>
+<li>En la matriz de intensidades para programas de simulaci&#243;n, se deben ofrecer los diferentes &#225;ngulos de apertura.</li>
+<li>Los cables flexibles o cordones externos utilizados como medio de conexi&#243;n el&#233;ctrica de la luminaria, deber&#225;n ser capaces de resistir la temperatura m&#225;s alta a la que pueden estar expuestos en condiciones normales de uso sin sufrir deterioro, de acuerdo con la norma IEC 60598-2-2 o UL 1598.</li>
+<li>Las partes de la luminaria y los componentes dentro del espacio del techo o la cavidad deben proporcionar el mismo grado de protecci&#243;n contra riesgo de choque el&#233;ctrico que las partes de la luminaria bajo techo o fuera de la cavidad.</li>
+<li>Las luminarias que est&#233;n destinadas a instalarse en un techo suspendido y pesen m&#225;s de 22.7 kg, deben contar con un soporte independiente del techo.</li>
+<li>Las luminarias con clips de suspensi&#243;n deben soportar el peso de la luminaria adecuadamente y mantener fija la luminaria sin sufrir deformaciones y deben contar con las instrucciones de instalaci&#243;n.</li>
+<li>Las luminarias no deben superar los l&#237;mites de temperatura de la superficie en la que se instalan. (Se debe indicar sobre cu&#225;les superficies no es permitido que dichos equipos se instalen).</li></ul>
+<br />
+<h4 id="heading_10" >6.2.3 Tracklight</h4>
+<ul><li>Las luminarias montadas sobre rieles deben contar con la especificaci&#243;n de adaptador o conector.</li>
+<li>Las luminarias montadas sobre riel no deben provocar un calentamiento excesivo del riel sobre el que est&#225;n montadas.</li>
+<li>Para luminarias tracklight, el fabricante de la luminaria debe suministrar junto con la luminaria, una muestra del riel, conector y adaptadores mediante los cuales la luminaria debe ser conectada.</li>
+<li>Para las luminarias montadas sobre riel, el peso de la luminaria no debe sobrepasar el valor de carga m&#225;xima recomendado por el fabricante del riel para la suspensi&#243;n de la luminaria.</li>
+<li>Para las luminarias montadas sobre riel, ninguna parte del riel debe presentar deterioro que comprometa la seguridad, por ejemplo, fisuras, quemaduras o deformaciones.</li>
+<li>Para luminarias que cuentan con fuente luminosa reemplazable, se debe especificar en la ficha t&#233;cnica, el tipo y caracter&#237;sticas de la fuente permitida para el reemplazo.</li>
+<li>El riel no debe superar los l&#237;mites de temperatura de la superficie en la que se instalan.</li></ul>
+<br />
+<h4 id="heading_11" >6.2.4 Paneles LED</h4>
+<ul><li>Los paneles LED no deben sufrir deformaciones, curvaturas o pandearse durante su vida &#250;til.</li>
+<li>Deben contar con IP 20 para uso exclusivo en interior, y con IP 65 para uso en ambientes h&#250;medos o expuestos a la intemperie.</li>
+<li>En caso de que estas luminarias sean colgantes deben contar con un sistema de suspensi&#243;n que soporte el peso de la luminaria durante la vida &#250;til de la misma, y deben contener las instrucciones para su adecuada instalaci&#243;n, as&#237; como los accesorios necesarios.</li></ul>
+<br /><br />
+<h4 id="heading_12" >6.2.5 Herm&#233;ticas</h4>
+<ul><li>En caso de que estas luminarias sean colgantes deben contar con un sistema de suspensi&#243;n que soporte el peso de la luminaria durante la vida &#250;til de la misma, y deben contener las instrucciones para su adecuada instalaci&#243;n, as&#237; como los accesorios necesarios. </li>
+<li>Para luminarias que cuentan con fuente luminosa reemplazable, se debe especificar en la ficha t&#233;cnica el tipo y caracter&#237;sticas de la fuente permitida para el reemplazo.</li>
+<li>Los acoples, herrajes y dem&#225;s accesorios de suspensi&#243;n deben ser resistentes a la corrosi&#243;n.</li></ul>
+
+<h4 id="heading_13" >6.2.6 Highbay</h4>
+<ul><li>Las luminarias High Bay con fuente luminosa integrada deben contar con factor de potencia de 0.95 o superior.</li>
+<li>En caso de que estas luminarias sean colgantes deben contar con un sistema de suspensi&#243;n que soporte el peso de la luminaria durante la vida &#250;til de la misma, y deben contener las instrucciones para su adecuada instalaci&#243;n, as&#237; como los accesorios necesarios.</li>
+<li>Para luminarias que cuentan con fuente luminosa reemplazable, se debe especificar en la ficha t&#233;cnica el tipo y caracter&#237;sticas de la fuente permitida para el reemplazo).</li>
+<li>Los acoples, herrajes y dem&#225;s accesorios de suspensi&#243;n deben ser resistentes a la corrosi&#243;n.</li></ul>
+<br />
+<h4 id="heading_14" >6.2.7 Luminarias Lineales</h4>
+<ul><li>En caso de que estas luminarias sean colgantes deben contar con un sistema de suspensi&#243;n que soporte el peso de la luminaria durante la vida &#250;til de la misma, y deben contener las instrucciones para su adecuada instalaci&#243;n, as&#237; como los accesorios necesarios.</li>
+<li>Los acoples, herrajes y dem&#225;s accesorios de suspensi&#243;n deben ser resistentes a la corrosi&#243;n.</li></ul>
+<br />
+<h4 id="heading_15" >6.2.8 Apliques</h4>
+<ul><li>En su ficha t&#233;cnica debe especificar el tipo de socket de las fuentes luminosas (En caso de que dicha fuente se pueda reemplazar).</li>
+<li>Las luminarias deben indicar si el montaje se permite hacer en superficies combustibles.</li>
+<li>Las luminarias no deben superar los l&#237;mites de temperatura de la superficie en la que se instalan (Se debe indicar sobre cu&#225;les superficies no es permitido que dichos equipos se instalen).</li></ul>
+<br /><br />
+<h3 id="heading_16" >6.3 Hermeticidad y grados de impacto </h3>
+El grado de hermeticidad e impacto se define en la siguiente tabla: <br /><br /><div style="width:959px;"><table><tr><td colspan="1" rowspan="1" style="width:259px;height:21px;text-align:center"><b>ZONA</b></td><td colspan="1" rowspan="1" style="width:460px;text-align:center"><b>DETALLE</b></td><td colspan="1" rowspan="1" style="width:131px;text-align:center"><b>IP</b></td><td colspan="1" rowspan="1" style="width:109px;text-align:center"><b>IK</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:37px;">Con alto grado de <a href="et800_luminarias_proyectores_led_interior.html#" id="version-145" class="externalLink  glosarioLink">contaminaci&#243;n</a></td><td colspan="1" rowspan="1" style="">Industrias, Bodegas </td><td colspan="1" rowspan="1" style="text-align:center"> &gt; &#243; = 65 o superior</td><td colspan="1" rowspan="1" style="text-align:center">06 a 08 (1)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:37px;">Con bajo grado de <a href="et800_luminarias_proyectores_led_interior.html#" id="version-145" class="externalLink  glosarioLink">contaminaci&#243;n</a> o muy limpios</td><td colspan="1" rowspan="1" style="">oficinas, salud y cuidados, educaci&#243;n, &#225;reas o zonas comunes, locales comerciales e iluminaci&#243;n residencial</td><td colspan="1" rowspan="1" style="text-align:center"> &gt; &#243; = 20</td><td colspan="1" rowspan="1" style="text-align:center">02 o superior</td></tr></table><br /></div>(1) Lo define la posibilidad de un impacto directo a la luminaria por montacargas.<br />
+<h3 id="heading_17" >6.4 Conjunto El&#233;ctrico</h3>
+<ul><li><a href="et800_luminarias_proyectores_led_interior.html#" id="version-377" class="externalLink  glosarioLink">Tensi&#243;n</a> de alimentaci&#243;n: 120V A 277V con un rango de variaci&#243;n de <span class="codeInline">+</span>5% -10% para el uso industrial y 120V A 240V con un rango de variaci&#243;n de <span class="codeInline">+</span>5% -10%, para uso Comercial o residencial.</li>
+<li>Clase de aislamiento: Las luminarias utilizadas en alumbrado interior deben ser Clase el&#233;ctrica I (excepto para luminarias high bay, las cuales tambi&#233;n se permite el uso de Clase el&#233;ctrica II), y deben estar provistas en su interior de un terminal adecuado en contacto con el cuerpo de la luminaria para permitir su conexi&#243;n a tierra, de tal forma que las partes conductoras accesibles no se vuelvan peligrosas en caso de falla del aislamiento b&#225;sico. </li>
+<li>THD m&#225;ximo de corriente: 20%</li>
+<li>Todos los conductores pueden ser tipo <a href="et800_luminarias_proyectores_led_interior.html#" id="version-107" class="externalLink  glosarioLink">cable</a>. </li>
+<li>Si el driver utiliza colas, debe estar provisto de terminales tipo conductor (<a href="et800_luminarias_proyectores_led_interior.html#" id="version-107" class="externalLink  glosarioLink">cable</a>) de cobre, aislado para 300 V, 105 &#186;C, calibre 18 AWG, con longitud no menor a 20 cent&#237;metros para luminarias de potencia superior a 40W. En caso de que la potencia sea inferior a 40W. las colas del driver deben tener m&#237;nimo 10 cent&#237;metros. Lo anterior no aplica si la <a href="et800_luminarias_proyectores_led_interior.html#" id="version-269" class="externalLink  glosarioLink">luminaria</a> bornera.</li>
+<li>La fuente de alimentaci&#243;n del m&#243;dulo LED debe tener incorporado un <a href="et800_luminarias_proyectores_led_interior.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de protecci&#243;n contra temperatura; que cuando la temperatura de los Leds alcance niveles definidos como cr&#237;ticos, la protecci&#243;n de la fuente de alimentaci&#243;n apague la <a href="et800_luminarias_proyectores_led_interior.html#" id="version-269" class="externalLink  glosarioLink">luminaria</a>. </li>
+<li>Las conexiones el&#233;ctricas en las borneras, si se presentan, y/o torniller&#237;a que se encuentre directamente en contacto con un punto vivo, deben ser del tipo no ferroso. </li>
+<li>Los extremos de los cables deben ser esta&#241;ados o incluir terminales y de suficiente capacidad para soportar las corrientes.</li>
+<li>Las conexiones directas a los m&#243;dulos Leds, deben ser en conductor de cobre aislado m&#237;nimo para 300 V y apto para una temperatura de 105 &#176;C para aplicaci&#243;n industrial.</li>
+<li>Los drivers deben venir con protecci&#243;n contra sobre corriente incorporado. Se deber&#225;n describir las caracter&#237;sticas de esta protecci&#243;n.</li></ul>
+
+<h3 id="heading_18" >6.5 Conjunto &#211;ptico</h3> 
+<ul><li>Los lentes para cada LED o m&#243;dulo LED deben ser fabricados en materiales de alta transmitancia luminosa y que no cambien sus caracter&#237;sticas f&#237;sicas y qu&#237;micas en el tiempo, como el polimetacrilato de metilo acr&#237;lico (PMMA), policarbonato, LPG poliestireno o vidrio. Para aplicaciones comerciales y residenciales el conjunto &#243;ptico puede venir con acr&#237;lico transparente luz gu&#237;a –Light plate guide (LPG interno) y una capa externa difusora opalizada.</li>
+<li>La <a href="et800_luminarias_proyectores_led_interior.html#" id="version-269" class="externalLink  glosarioLink">luminaria</a> LED de uso interior debe tener un &#205;ndice de Reproducci&#243;n de Color (IRC) &gt; o = 80 con Temperatura de Color entre 3000 y 6500 Kelvin con m&#225;xima eficacia. </li></ul>
+<br />Se resume los requerimientos requeridos en la tabla:<br /><br /><div style="width:728px;"><table><tr><td colspan="1" rowspan="2" style="width:201px;height:20px;">Luminaria o proyector-Uso</td><td colspan="1" rowspan="1" style="width:119px;text-align:center">Eficacia</td><td colspan="1" rowspan="2" style="width:151px;text-align:center">Vida &#250;til (h/a&#241;os) L70</td><td colspan="1" rowspan="2" style="width:70px;text-align:center">IP</td><td colspan="1" rowspan="2" style="width:31px;text-align:center">IK</td><td colspan="1" rowspan="2" style="width:117px;text-align:center">Factor Potencia </td><td colspan="1" rowspan="2" style="width:39px;text-align:center">IRC</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">(lm/w)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Tubulares</td><td colspan="1" rowspan="1" style="text-align:center">80</td><td colspan="1" rowspan="1" style="text-align:center">30000</td><td colspan="1" rowspan="1" style="text-align:center">-</td><td colspan="1" rowspan="1" style="text-align:center">-</td><td colspan="1" rowspan="1" style="text-align:center">0,9</td><td colspan="1" rowspan="1" style="text-align:center">80</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Downlight</td><td colspan="1" rowspan="1" style="text-align:center">80</td><td colspan="1" rowspan="1" style="text-align:center">30000</td><td colspan="1" rowspan="1" style="text-align:center">-</td><td colspan="1" rowspan="1" style="text-align:center">-</td><td colspan="1" rowspan="1" style="text-align:center">0,5</td><td colspan="1" rowspan="1" style="text-align:center">80</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Tracklight</td><td colspan="1" rowspan="1" style="text-align:center">80</td><td colspan="1" rowspan="1" style="text-align:center">30000</td><td colspan="1" rowspan="1" style="text-align:center">65/20(*)</td><td colspan="1" rowspan="1" style="text-align:center">-</td><td colspan="1" rowspan="1" style="text-align:center">0,5</td><td colspan="1" rowspan="1" style="text-align:center">80</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Panel(&gt;30W/&lt;=30W)</td><td colspan="1" rowspan="1" style="text-align:center">80/60</td><td colspan="1" rowspan="1" style="text-align:center">30000</td><td colspan="1" rowspan="1" style="text-align:center">65/20(*)</td><td colspan="1" rowspan="1" style="text-align:center">-</td><td colspan="1" rowspan="1" style="text-align:center">0,9</td><td colspan="1" rowspan="1" style="text-align:center">80</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Hermetica</td><td colspan="1" rowspan="1" style="text-align:center">100</td><td colspan="1" rowspan="1" style="text-align:center">30000</td><td colspan="1" rowspan="1" style="text-align:center">65</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">0,9</td><td colspan="1" rowspan="1" style="text-align:center">80</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Highbay</td><td colspan="1" rowspan="1" style="text-align:center">130</td><td colspan="1" rowspan="1" style="text-align:center">50000</td><td colspan="1" rowspan="1" style="text-align:center">65</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">0,9</td><td colspan="1" rowspan="1" style="text-align:center">80</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Lineal </td><td colspan="1" rowspan="1" style="text-align:center">90</td><td colspan="1" rowspan="1" style="text-align:center">30000</td><td colspan="1" rowspan="1" style="text-align:center">65/20(*)</td><td colspan="1" rowspan="1" style="text-align:center">-</td><td colspan="1" rowspan="1" style="text-align:center">0,9</td><td colspan="1" rowspan="1" style="text-align:center">80</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Aplique</td><td colspan="1" rowspan="1" style="text-align:center">30</td><td colspan="1" rowspan="1" style="text-align:center">20000</td><td colspan="1" rowspan="1" style="text-align:center">65/20(*)</td><td colspan="1" rowspan="1" style="text-align:center">-</td><td colspan="1" rowspan="1" style="text-align:center">0,9</td><td colspan="1" rowspan="1" style="text-align:center">80</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Bombillas E27</td><td colspan="1" rowspan="1" style="text-align:center">85</td><td colspan="1" rowspan="1" style="text-align:center">15000</td><td colspan="1" rowspan="1" style="text-align:center">-</td><td colspan="1" rowspan="1" style="text-align:center">-</td><td colspan="1" rowspan="1" style="text-align:center">0,5</td><td colspan="1" rowspan="1" style="text-align:center">80</td></tr></table><br /></div>(*) Zonas con humedad/ zonas interiores<br />
+<h2 id="heading_19" >7.  CRITERIOS DE ACEPTACI&#211;N O RECHAZO</h2>
+Para este caso se considerar&#225; que existe un <a href="et800_luminarias_proyectores_led_interior.html#" id="version-264" class="externalLink  glosarioLink">lote</a> cuando:<br />
+<ul><li>Los materiales de producci&#243;n pertenecen a un mismo <a href="et800_luminarias_proyectores_led_interior.html#" id="version-264" class="externalLink  glosarioLink">lote</a> de materia prima.</li>
+<li>Las cajas de producci&#243;n se construyen en diferentes lotes.</li></ul>
+
+<h3 id="heading_20" >7.1 Muestreo</h3>
+El muestreo se realizar&#225; con base en los procedimientos y tablas estipuladas en la norma NTC-ISO 2859-1 “Procedimientos de muestreo para <a href="et800_luminarias_proyectores_led_interior.html#" id="version-235" class="externalLink  glosarioLink">Inspecci&#243;n</a> por Atributos. Parte 1: Planes de muestreo determinados por el nivel aceptable de <a href="et800_luminarias_proyectores_led_interior.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> para <a href="et800_luminarias_proyectores_led_interior.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> <a href="et800_luminarias_proyectores_led_interior.html#" id="version-264" class="externalLink  glosarioLink">lote</a> a <a href="et800_luminarias_proyectores_led_interior.html#" id="version-264" class="externalLink  glosarioLink">lote</a>” (Militar Standard 105 D &quot;Sampling procedures and tables for inspection by atributes&quot;) y se acordar&#225; por las partes, previamente a la fecha de la realizaci&#243;n de las pruebas y recepci&#243;n de los bienes. Para el desarrollo de las pruebas es indispensable que los instrumentos involucrados est&#233;n calibrados.<br />
+<h3 id="heading_21" >7.2 Aceptaci&#243;n o Rechazo</h3>
+Si el n&#250;mero de elementos defectuosos es menor o igual al correspondiente n&#250;mero de defectuosos (dado en la norma NTC-ISO 2859-1 en la tercera columna de las Tablas 1 y 2), se deber&#225; considerar que el <a href="et800_luminarias_proyectores_led_interior.html#" id="version-264" class="externalLink  glosarioLink">lote</a> cumple con los requisitos t&#233;cnicos exigidos por CODENSA S.A., pero en caso contrario, el <a href="et800_luminarias_proyectores_led_interior.html#" id="version-264" class="externalLink  glosarioLink">lote</a> se rechazar&#225;.<br /><br /><br /><div style="width:532px;"><table><tr><td colspan="1" rowspan="1" style="width:111px;height:86px;text-align:center"><b>TAMA&#209;O DEL LOTE</b></td><td colspan="1" rowspan="1" style="width:154px;text-align:center"><b>TAMA&#209;O DE LA MUESTRA</b></td><td colspan="1" rowspan="1" style="width:133px;text-align:center"><b>NUMERO PERMITIDO DE DEFECTUOSOS</b></td><td colspan="1" rowspan="1" style="width:134px;text-align:center"><b>NUMERO DEFECTUOSOS PARA RECHAZO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2  a           8</td><td colspan="1" rowspan="1" style="text-align:center">A  =   2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">9  a         15</td><td colspan="1" rowspan="1" style="text-align:center">B  =   3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16  a         25</td><td colspan="1" rowspan="1" style="text-align:center">C  =   5</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">26  a         50</td><td colspan="1" rowspan="1" style="text-align:center">D  =   8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">51  a         90</td><td colspan="1" rowspan="1" style="text-align:center">E  = 13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">91  a       150</td><td colspan="1" rowspan="1" style="text-align:center">F  = 20</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">151  a       280</td><td colspan="1" rowspan="1" style="text-align:center">G  = 32</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">281  a       500</td><td colspan="1" rowspan="1" style="text-align:center">H  = 50</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">501  a     1200</td><td colspan="1" rowspan="1" style="text-align:center">J  = 80</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center">1201  a     3200</td><td colspan="1" rowspan="1" style="text-align:center">K  = 125</td><td colspan="1" rowspan="1" style="text-align:center">7</td><td colspan="1" rowspan="1" style="text-align:center">8</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">3201  a   10000</td><td colspan="1" rowspan="1" style="text-align:center">L  = 200</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">11</td></tr></table><br /></div><b>TABLA  1 PLAN DE MUESTREO PARA INSPECCION VISUAL Y DIMENSIONAL</b><br /><b>(NIVEL DE INSPECCION II, NAC = 2,5%) (NORMA NTC-ISO 2859-1 TABLA1 - TABLA 2A)</b><br /><br /><div style="width:532px;"><table><tr><td colspan="1" rowspan="1" style="width:111px;height:52px;text-align:center"><b>TAMA&#209;O DEL LOTE</b></td><td colspan="1" rowspan="1" style="width:154px;text-align:center"><b>TAMA&#209;O DE LA MUESTRA</b></td><td colspan="1" rowspan="1" style="width:133px;text-align:center"><b>NUMERO PERMITIDO DE DEFECTUOSOS</b></td><td colspan="1" rowspan="1" style="width:134px;text-align:center"><b>NUMERO DEFECTUOSOS PARA RECHAZO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2  a           8</td><td colspan="1" rowspan="1" style="text-align:center">A  =   2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">9  a         15</td><td colspan="1" rowspan="1" style="text-align:center">A  =   2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16  a         25</td><td colspan="1" rowspan="1" style="text-align:center">B  =   3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">26  a         50</td><td colspan="1" rowspan="1" style="text-align:center">B  =   3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">51  a         90</td><td colspan="1" rowspan="1" style="text-align:center">C  =   5</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">91  a       150</td><td colspan="1" rowspan="1" style="text-align:center">C  =   5</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">151  a       280</td><td colspan="1" rowspan="1" style="text-align:center">D  =   8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">281  a       500</td><td colspan="1" rowspan="1" style="text-align:center">D  =   8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">501  a     1200</td><td colspan="1" rowspan="1" style="text-align:center">E  = 13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">1201  a     3200</td><td colspan="1" rowspan="1" style="text-align:center">E  = 13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">3201  a   10000</td><td colspan="1" rowspan="1" style="text-align:center">F  = 20</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr></table><br /></div><b>TABLA 2 PLAN DE MUESTREO PARA LOS ENSAYOS MECANICOS</b><br /><b>(NIVEL DE INSPECCION ESPECIAL S-3, NAC = 2,5%) (NORMA NTC-ISO 2859-1 TABLA1 - TABLA 2A)</b><br /><br />En el momento de recepci&#243;n del <a href="et800_luminarias_proyectores_led_interior.html#" id="version-264" class="externalLink  glosarioLink">lote</a> de luminarias o proyectores, el promedio de las p&#233;rdidas en el driver, no debe superar el valor garantizado por el Oferente en su propuesta.<br /><br />CODENSA S.A. se reserva el derecho de descartar las propuestas que no ofrezcan pruebas o si las ofrecidas son consideradas insuficientes para garantizar la <a href="et800_luminarias_proyectores_led_interior.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> de las luminarias.<br /><br />Para efectuar cualquier despacho, es <a href="et800_luminarias_proyectores_led_interior.html#" id="version-351" class="externalLink  glosarioLink">requisito</a> indispensable una autorizaci&#243;n escrita de CODENSA S.A., la cual ser&#225; expedida con base en los resultados de las pruebas realizadas en f&#225;brica y/o la aprobaci&#243;n del protocolo de pruebas solicitadas realizadas por el fabricante a las luminarias y proyectores.<br />
+<h2 id="heading_22" >8. PROTOCOLOS DE PRUEBA A SUMINISTRAR POR EL FABRICANTE</h2>
+<h3 id="heading_23" >8.1. Ensayos generales</h3>
+El fabricante deber&#225; remitir los protocolos de los ensayos realizados por un laboratorio acreditado ante la ONAC - Organismo de <a href="et800_luminarias_proyectores_led_interior.html#" id="version-124" class="externalLink  glosarioLink">Certificaci&#243;n</a> de Colombia, o un organismo internacional reconocido para la elaboraci&#243;n de pruebas el&#233;ctricas y fotom&#233;tricas:<br /><br /><div style="width:592px;"><table><tr><td colspan="1" rowspan="1" style="width:201px;height:52px;"><b>Ensayos a LUMINARIA</b></td><td colspan="1" rowspan="1" style="width:213px;"><b>Ensayos al conjunto  electr&#243;nico</b></td><td colspan="1" rowspan="1" style="width:178px;"><b>Ensayos al MODULO LED</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:69px;">Fotometr&#237;a</td><td colspan="1" rowspan="1" style="">Perdidas del Driver (m&#225;ximas en condiciones normales)</td><td colspan="1" rowspan="16" style="">Ensayos de vida &#250;til –LM80-TM30 - TM21, para aplicaci&#243;n Industrial</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:13px;">Temperatura de color y/o coordenada crom&#225;tica</td><td colspan="1" rowspan="1" style="">Par&#225;metros el&#233;ctricos (Tensi&#243;n nominal, corriente en l&#237;nea, potencia nominal, factor de potencia)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;">Hermeticidad</td><td colspan="1" rowspan="1" style="">Prueba de aislamiento</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:69px;">Resistencia mec&#225;nica</td><td colspan="1" rowspan="1" style="">Ensayos de vida &#250;til para productos industriales. </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:52px;">Ensayo de endurancia</td><td colspan="1" rowspan="1" style="">Se admite ensayo de fabrica</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;">Resistencia Aislamiento y Rigidez Diel&#233;ctrica</td><td colspan="1" rowspan="1" style="">Pruebas THD</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;">Distancia aislamiento y de fuga</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;">Resistencia al calor y penetraci&#243;n con bolilla </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Resistencia a la llama</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;">Protecci&#243;n contra choque el&#233;ctrico</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Ensayo de hilo incandescente</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Ensayo de aguja</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Resistencia a la corrosi&#243;n</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Angulo de apertura</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Eficacia, y prueba LM79</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;">Ensayo de riesgo fotobiol&#243;gico</td><td colspan="1" rowspan="1" style=""> </td></tr></table><br /></div><b>TABLA  3 ENSAYOS LUMINARIAS DE USO INTERIOR</b><br /><br />	<br />CODENSA se reserva el derecho de solicitar protocolos adicionales y la validaci&#243;n de los protocolos presentados.<br />
+<h3 id="heading_24" >8.2. Ensayos Especiales</h3>
+<h4 id="heading_25" >8.2.1 Fuentes tubulares</h4>De acuerdo con los siguientes referentes normativos: NTC 2230, IEC 60598-2-1, IEC 60598-2-14:<br /><br />-Ensayos mec&#225;nicos para terminales.<br />-Ensayo de resistencia de contacto para terminales.<br />
+<h4 id="heading_26" >8.2.2 Down Light</h4>De acuerdo con los siguientes referentes normativos: NTC 2230, IEC 60598-1, IEC 60598-2-2, UL 1598:<br /><br />-Endurancia de los cables y terminales de conexi&#243;n el&#233;ctrica.<br />-Ensayo de temperatura m&#225;xima sobre techos.<br />-Ensayo de suspensi&#243;n, fijaci&#243;n y dispositivos de ajuste.<br />
+<h4 id="heading_27" >8.2.3 Track Light</h4>De acuerdo con los siguientes referentes normativos: NTC 2230, IEC 60598, UL 1574, IEC/EN 60570:<br /><br />-Ensayo de calentamiento<br />-Funcionamiento anormal.<br />-En caso de fallo del devanado del dispositivo de control de la fuente.<br />-Ensayo de suspensi&#243;n, fijaci&#243;n y dispositivos de ajuste.<br />
+<h4 id="heading_28" >8.2.4 Panel LED</h4>
+De acuerdo con los siguientes referentes normativos: IEC 60598-1, IEC 60598-2-1, UL 1598:<br /><br />-Flexibilidad.<br />-Ensayo de suspensi&#243;n, fijaci&#243;n y dispositivos de ajuste.<br />
+<h4 id="heading_29" >8.2.5 Luminarias Herm&#233;ticas, High bay y lineales</h4>
+De acuerdo con los siguientes referentes normativos: IEC 60598, NTC2230:<br /><br />-Ensayo de suspensi&#243;n, fijaci&#243;n y dispositivos de ajuste.<br />
+<h4 id="heading_30" >8.2.6 Apliques para interior de sobreponer o empotrar</h4>
+De acuerdo con los siguientes referentes normativos: NTC 2230, IEC 60598, UL 1598:<br /><br />-Ensayo de temperatura de la superficie de la pared.<br /><br />
+<h2 id="heading_31" >9.  MARCACI&#211;N Y EMPAQUE  </h2>
+<h3 id="heading_32" >9.1 Marcaci&#243;n  </h3>
+La marcaci&#243;n de la <a href="et800_luminarias_proyectores_led_interior.html#" id="version-269" class="externalLink  glosarioLink">luminaria</a> debe ir en el cuerpo en forma indeleble y legible, y deber&#225; incluir la siguiente informaci&#243;n: 
+<ul><li>Marca de f&#225;brica</li>
+<li>Potencia</li>
+<li><a href="et800_luminarias_proyectores_led_interior.html#" id="version-281" class="externalLink  glosarioLink">Modelo</a> y referencia</li>
+<li>	Tipo de fuente</li>
+<li>Tensiones de conexi&#243;n</li>
+<li>Temperatura de color</li>
+<li>Tipo de base o socket de la fuente luminosa(cuando aplique)</li>
+<li>&#205;ndice de reproducci&#243;n crom&#225;tica</li>
+<li>Flujo luminoso</li>
+<li>&#205;ndices de protecci&#243;n (IP &amp; IK)</li>
+<li>Mes y a&#241;o de fabricaci&#243;n</li>
+<li>Tipo de uso</li>
+<li>Diagrama de conexiones indicando marcaci&#243;n de conductores de fase, neutro y tierra, o borneras</li>
+<li>Enel</li>
+<li># de contrato</li>
+<li>Garant&#237;a</li></ul>
+En el Empaque:<br />
+<ul><li>Marca de f&#225;brica</li>
+<li>Potencia</li>
+<li><a href="et800_luminarias_proyectores_led_interior.html#" id="version-281" class="externalLink  glosarioLink">Modelo</a> y referencia</li>
+<li>Tensiones de conexi&#243;n</li>
+<li>Temperatura de color</li>
+<li>Tipo de base o socket de la fuente luminosa(cuando aplique)</li>
+<li>&#205;ndice de reproducci&#243;n crom&#225;tica</li>
+<li>Flujo luminoso</li>
+<li>Vida &#250;til o promedio (cuado aplique)</li>
+<li>Mes y a&#241;o de fabricaci&#243;n</li>
+<li>Tipo de uso</li></ul>
+ 
+<h3 id="heading_33" >9.2 Empaque  </h3>
+Los bienes, objeto de la presente <a href="et800_luminarias_proyectores_led_interior.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a>, deben ser empacados en forma individual, adecuadamente para resistir las condiciones de humedad e impacto que pueden presentarse durante el transporte desde f&#225;brica hasta las bodegas de CODENSA S.A. y durante su almacenamiento. En dicho empaque, deber&#225; aparecer relacionado el c&#243;digo SAP.<br />
+<h2 id="heading_34" >10. REQUISITOS DE LAS OFERTAS  </h2>
+El Oferente obligatoriamente deber&#225; incluir con su propuesta, la siguiente informaci&#243;n:  <br />
+<ul><li>Planilla de caracter&#237;sticas t&#233;cnicas garantizadas, la cual deber&#225; ser diligenciada completamente, firmada y sellada por el oferente. Se debe incluir copia en formato Excel que permita la lectura y extracci&#243;n de la informaci&#243;n tanto para la planilla de caracter&#237;sticas como para cualquier otra que se indique en los requisitos de la oferta.</li>
+<li>El fabricante debe proveer la siguiente informaci&#243;n de acuerdo con el Art&#237;culo 2.3.1:</li></ul>
+-	Fotometr&#237;a.<br />-	Matriz de intensidades.<br />-	Diagrama Polar<br />-     	Diagrama de Isoiluminancia, cuando aplique.<br />-     	Curvas de factor de utilizaci&#243;n<br />
+<ul><li>Cat&#225;logos originales completos y actualizados del fabricante, que correspondan a los bienes cotizados, en la planilla de caracter&#237;sticas t&#233;cnicas garantizadas.   </li>
+<li>Protocolos de pruebas de acuerdo con las normas indicadas en la presente especificaci&#243;n. En tales protocolos se deber&#225;n anotar las fechas de fabricaci&#243;n y pruebas del <a href="et800_luminarias_proyectores_led_interior.html#" id="version-189" class="externalLink  glosarioLink">equipo</a>, para permitir la verificaci&#243;n de las caracter&#237;sticas t&#233;cnicas garantizadas.  </li>
+<li>Para los componentes de las luminarias, el oferente debe presentar tambi&#233;n, los protocolos de pruebas correspondientes, que permitan verificar las caracter&#237;sticas t&#233;cnicas garantizadas.  </li>
+<li>Muestras de cada una de las referencias ofertadas sin cargo a devoluci&#243;n, con cada una de las caracter&#237;sticas t&#233;cnicas, solicitadas y mencionadas en la presente especificaci&#243;n. Para los oferentes que cumplan t&#233;cnicamente.  </li>
+<li>Registro fotogr&#225;fico de alta <a href="et800_luminarias_proyectores_led_interior.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> de las luminarias y/o proyectores en sus cuatro vistas exteriores e interiores superior, inferior y laterales. </li>
+<li>Informaci&#243;n adicional que considere aporta explicaci&#243;n al <a href="et800_luminarias_proyectores_led_interior.html#" id="version-338" class="externalLink  glosarioLink">producto</a> ofertado.</li>
+<li>CODENSA S.A. podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones, sin expresi&#243;n de causa ni obligaci&#243;n de compensaci&#243;n.</li>
+<li>Todos los planos y/o dibujos indicativos de la <a href="et800_luminarias_proyectores_led_interior.html#" id="version-269" class="externalLink  glosarioLink">luminaria</a> o proyector entregados en la oferta deben incluir una copia en formato PDF.</li>
+<li>El fabricante debe comprometerse a que, en caso de adjudicaci&#243;n, realizar&#225; acompa&#241;amiento al instalador en la elaboraci&#243;n de las Memorias de c&#225;lculo del dise&#241;o solicitado las cuales deber&#225;n incluir: </li></ul>
+-	Metodolog&#237;a dispuesta por RETILAP vigente<br />-	Resultados del dise&#241;o: Incluyendo par&#225;metros de c&#225;lculo, y resultados (valores garantizados) del dise&#241;o dispuestos por RETILAP Capitulo 4, vigente.  
+<ul><li>La luminaria debe contar con un manual de instrucciones con la informaci&#243;n de uso, instalaci&#243;n, mantenimiento y reemplazo de sus componentes.</li></ul>
+
+<h2 id="heading_35" >11.  GARANT&#205;A DE F&#193;BRICA  </h2>
+CODENSA S.A E.S.P requiere como m&#237;nimo, un per&#237;odo de garant&#237;a de f&#225;brica de acuerdo con la siguiente tabla dependiendo del tipo de luminaria:  <br /><br /><br /><div style="width:414px;"><table><tr><td colspan="1" rowspan="1" style="width:201px;height:44px;text-align:center">LUMINARIA</td><td colspan="1" rowspan="1" style="width:213px;text-align:center">GARANTIA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Tubulares</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Downlight</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Tracklight</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Panel</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Herm&#233;tica</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Highbay</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Lineal</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Aplique</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:61px;">Bombillas E27 LED, Bombilla LED, globo, miniglobo, vela, GU10</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr></table><br /></div><br />
+<h2 id="heading_36" >12.  INSPECCI&#211;N DE LAS MUESTRAS    </h2>
+El proveedor enviar&#225; con las muestras que se soliciten para evaluaci&#243;n el formato de protocolos de pruebas y copia de las normas en ingl&#233;s y/o espa&#241;ol utilizadas para tal fin. CODENSA informar&#225; por escrito su <a href="et800_luminarias_proyectores_led_interior.html#" id="version-139" class="externalLink  glosarioLink">conformidad</a> con las pruebas requeridas.  <br /><br />Igualmente, el proveedor acompa&#241;ar&#225; cada una de las entregas de las luminarias y proyectores con los protocolos de pruebas y copia de las normas en ingl&#233;s y/o espa&#241;ol utilizadas para tal fin. CODENSA informar&#225; por escrito su <a href="et800_luminarias_proyectores_led_interior.html#" id="version-139" class="externalLink  glosarioLink">conformidad</a> con las pruebas requeridas.    <br /><br />El ingeniero responsable de CODENSA podr&#225; inspeccionar en las instalaciones del proveedor o fabricante y solicitar la informaci&#243;n y ensayos que a su juicio resulten necesarias para verificar el cumplimiento de los requisitos estipulados en este documento. El proveedor debe brindar plena colaboraci&#243;n al responsable en el cumplimiento de sus funciones. El costo de las pruebas que soliciten estar&#225; a cargo del proveedor.   <br /><br />
+<h2 id="heading_37" >13.  SISTEMA DE CALIDAD</h2>  <br />El oferente adjuntar&#225; con su propuesta su certificado del <a href="et800_luminarias_proyectores_led_interior.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de <a href="et800_luminarias_proyectores_led_interior.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> ISO 9001. Adicionalmente el <a href="et800_luminarias_proyectores_led_interior.html#" id="version-126" class="externalLink  glosarioLink">certificado de conformidad</a> de <a href="et800_luminarias_proyectores_led_interior.html#" id="version-338" class="externalLink  glosarioLink">producto</a> con <a href="et800_luminarias_proyectores_led_interior.html#" id="version-301" class="externalLink  glosarioLink">norma t&#233;cnica</a> y RETILAP expedido por una entidad autorizada por la ONAC- Organismo Nacional de <a href="et800_luminarias_proyectores_led_interior.html#" id="version-75" class="externalLink  glosarioLink">Acreditaci&#243;n</a> de Colombia.   <br />
+<h2 id="heading_38" >14. PLANILLAS DE CARACTER&#205;STICAS T&#201;CNICAS  </h2>
+El oferente deber&#225; presentarlas en su oferta <a href="et800_luminarias_proyectores_led_interior.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a> diligenciadas en formato Excel por cada referencia.<br /><br /><b>ANEXO 1. LUMINARIAS Y PROYECTORES LED PLANILLA DE CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS</b><br /><div style="width:1000px;"><table><tr><td colspan="8" rowspan="1" style="width:1384px;height:21px;text-align:center"><b>CARACTER&#205;STICAS GENERALES DE LUMINARIA DE EMERGENCIA USO INTERIOR</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>ITEM</b></td><td colspan="3" rowspan="1" style="text-align:center"><b>DESCRIPCI&#211;N</b></td><td colspan="2" rowspan="1" style="text-align:center"><b>EXIGIDO </b></td><td colspan="2" rowspan="1" style="text-align:center"><b>OFERTADO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">1</td><td colspan="3" rowspan="1" style="">Fabricante</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:80px;text-align:center">2</td><td colspan="3" rowspan="1" style="">Pa&#237;s de origen</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">3</td><td colspan="3" rowspan="1" style="">Referencia</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:80px;text-align:center">4</td><td colspan="3" rowspan="1" style="">Voltaje nominal de alimentaci&#243;n de la luminaria  (V)</td><td colspan="2" rowspan="1" style="text-align:center">120V A 277V <u>5% -10% Industria/120-240V </u>5% -10%  Residencial-Comercial</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:32px;text-align:center">5</td><td colspan="3" rowspan="1" style="">Potencia total de la luminaria   (W) (incluyendo las p&#233;rdidas)</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">6</td><td colspan="3" rowspan="1" style="">Factor de Potencia</td><td colspan="2" rowspan="1" style="text-align:center">&gt;&#243;=0.5/&gt;&#243;=0.9</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">7</td><td colspan="3" rowspan="1" style="">Frecuencia (Hz)</td><td colspan="2" rowspan="1" style="text-align:center">60 Hz</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:32px;text-align:center">8</td><td colspan="3" rowspan="1" style="">THD m&#225;ximo de Corriente a voltaje nominal (%)</td><td colspan="2" rowspan="1" style="text-align:center">= 20%</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">9</td><td colspan="3" rowspan="1" style="">Clase Aislamiento de la luminaria </td><td colspan="2" rowspan="1" style="text-align:center">Clase I</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:32px;text-align:center">10</td><td colspan="3" rowspan="1" style="">Flujo luminoso total emitido por el luminaria [l&#250;menes].</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:32px;text-align:center">11</td><td colspan="3" rowspan="1" style="">Conjunto &#243;ptico  y el&#233;ctrico incorporado</td><td colspan="2" rowspan="1" style="text-align:center">SI</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="8" style="height:33px;text-align:center">12</td><td colspan="1" rowspan="8" style="">Clasificaci&#243;n de la luminaria </td><td colspan="1" rowspan="4" style="">Rango de Flujo Luminoso</td><td colspan="1" rowspan="1" style="">Rango de flujo Lm.</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:33px;">Numero de Leds</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:49px;">Flujo Luminoso  total</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:65px;">Corriente de los chips de Led</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="4" style="height:49px;">Distribuci&#243;n Fotom&#233;trica en caso de la luminaria</td><td colspan="1" rowspan="1" style="">Sim&#233;trica con eje de revoluci&#243;n </td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:81px;">Sim&#233;trica con respecto a dos planos</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:81px;">Sim&#233;trica con respecto a un solo plano</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:48px;">Distribuci&#243;n asim&#233;trica</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="4" style="height:21px;text-align:center">13</td><td colspan="1" rowspan="4" style="">Cuerpo de la luminaria </td><td colspan="2" rowspan="1" style="">Material</td><td colspan="2" rowspan="1" style="text-align:center">Aluminio-Otro especificar</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:80px;">Las diferentes partes que conforman el cuerpo de la luminaria  son inyectadas y/o extruidas</td><td colspan="2" rowspan="1" style="text-align:center">SI</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Color</td><td colspan="2" rowspan="1" style="text-align:center">GRIS &#160;o Blanco, especificar RAL </td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:32px;">Espesor m&#237;nimo de la carcasa [mm]</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="4" style="height:21px;text-align:center">14</td><td colspan="1" rowspan="4" style="">Grado de protecci&#243;n</td><td colspan="2" rowspan="1" style="">Compartimento el&#233;ctrico (IP) ambiente limpio/ambiente alto grado contaminaci&#243;n</td><td colspan="2" rowspan="1" style="text-align:center">&gt;&#243;=20/&gt;&#243;=65 o especificar</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Compartimento &#243;ptico (IP) ambiente limpio/ambiente alto grado contaminaci&#243;n</td><td colspan="2" rowspan="1" style="text-align:center">&gt;&#243;=20/&gt;&#243;=65</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Carcasa (IK) para industria, especificar para comercial y residencial</td><td colspan="2" rowspan="1" style="text-align:center">08 o especificar</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Vidrio Protector o lente  (IK)</td><td colspan="2" rowspan="1" style="text-align:center">08 o especificar</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:97px;text-align:center">15</td><td colspan="1" rowspan="1" style="">Accesorios Incorporados (marca y tipo)</td><td colspan="2" rowspan="1" style="">Fuente de alimentaci&#243;n</td><td colspan="2" rowspan="1" style="text-align:center">SI</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16</td><td colspan="3" rowspan="1" style="">Vidrio Protector o Lentes en vidrio templado liso Si / No, especificar</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">17</td><td colspan="3" rowspan="1" style="">Referencia del LED o Modulo LED</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">18</td><td colspan="3" rowspan="1" style="">Referencia de la fuente de alimentaci&#243;n</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">19</td><td colspan="3" rowspan="1" style="">Peso de la luminaria   [kg] </td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">20</td><td colspan="3" rowspan="1" style="">Dimensiones de la luminaria </td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="6" style="height:21px;text-align:center">21</td><td colspan="1" rowspan="6" style="">Caracter&#237;sticas &#211;pticas de la luminaria herm&#233;ticas</td><td colspan="2" rowspan="1" style="">Temperatura de color [K]</td><td colspan="2" rowspan="1" style="text-align:center">3000…6500 (*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="2" style="height:21px;">Coordenada crom&#225;tica (CIE 1931)</td><td colspan="1" rowspan="1" style="text-align:center">X</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:112px;text-align:center">Y</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Eficacia m&#237;nima [lm/W]</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:223px;">Binning (factor de agrupamiento) los m&#243;dulos LED deben tener una consistencia de color, de acuerdo a las elipses McAdam y SDCM. Las variaciones en la temperatura de color de los LED estar&#225;n restringida por la norma ANSI C78.377A.</td><td colspan="2" rowspan="1" style="text-align:center">=5</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">IRC [%] (IESNA TM-30-15)</td><td colspan="2" rowspan="1" style="text-align:center">=70% </td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">22</td><td colspan="1" rowspan="1" style="">Fotometr&#237;a</td><td colspan="2" rowspan="1" style="">Nombre Archivo (,ies )</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="2" style="height:75px;text-align:center">23</td><td colspan="1" rowspan="2" style="">Temperatura  m&#225;xima externa de funcionamiento [&#176;C]</td><td colspan="2" rowspan="1" style="">Fuente de alimentaci&#243;n</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:32px;">Carcasa de la luminaria </td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">24</td><td colspan="1" rowspan="1" style="">Atenuable o dimerizable</td><td colspan="2" rowspan="1" style="">&#160;Indicar si es ajustable o programable</td><td colspan="2" rowspan="1" style="text-align:center">Indicar, 1-10V; 0-10V, DALI, Otro</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">25</td><td colspan="3" rowspan="1" style="">Dimensiones de la caja para transporte mm x mm x mm</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:49px;text-align:center">26</td><td colspan="1" rowspan="1" style="">Tipo de Instalaci&#243;n</td><td colspan="2" rowspan="1" style="">Sobrepuesta/Empotrada/colgante</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:21px;text-align:center">27</td><td colspan="1" rowspan="5" style="">Certificaci&#243;n de producto (RETILAP)</td><td colspan="2" rowspan="1" style="">Entidad acreditadora</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:32px;">N&#250;mero de acreditaci&#243;n</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:32px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Vigencia</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:32px;">Adjunta el certificado (Si/No)</td><td colspan="2" rowspan="1" style="text-align:center">SI</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:21px;text-align:center">28</td><td colspan="1" rowspan="5" style="">Sistema de calidad ISO 9001 o ISO 9002 del Fabricante</td><td colspan="2" rowspan="1" style="">Entidad acreditadora</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:32px;">N&#250;mero de acreditaci&#243;n</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:32px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Vigencia</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:32px;">Adjunta el certificado (Si/No)</td><td colspan="2" rowspan="1" style="text-align:center">SI</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:21px;text-align:center">29</td><td colspan="1" rowspan="5" style="">Sistema de calidad ISO 9001 del Proveedor</td><td colspan="2" rowspan="1" style="">Entidad acreditadora</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:32px;">N&#250;mero de acreditaci&#243;n</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:32px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:32px;">Vigencia</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:32px;">Adjunta el certificado (Si/No)</td><td colspan="2" rowspan="1" style="text-align:center">(*)</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="17" style="height:48px;text-align:center">30</td><td colspan="1" rowspan="17" style="">Marcaci&#243;n de la luminaria (Contestar Si/No seg&#250;n corresponda)</td><td colspan="2" rowspan="1" style="">Nombre de Fabricante o Logotipo registrada en Colombia</td><td colspan="2" rowspan="1" style="text-align:center">SI</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Tensi&#243;n o rango de alimentaci&#243;n</td><td colspan="2" rowspan="1" style="text-align:center">SI</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Potencia</td><td colspan="2" rowspan="1" style="text-align:center">SI</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Modelo y referencia</td><td colspan="2" rowspan="1" style="text-align:center">SI</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:32px;">Tipo de fuente luminosa</td><td colspan="2" rowspan="1" style="text-align:center">SI</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:48px;">&#205;ndice de reproducci&#243;n crom&#225;tica. IRC</td><td colspan="2" rowspan="1" style="text-align:center">SI</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Flujo Luminoso</td><td colspan="2" rowspan="1" style="text-align:center">SI</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Temperatura de color</td><td colspan="2" rowspan="1" style="text-align:center">SI</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Indices de Protecci&#243;n</td><td colspan="2" rowspan="1" style="text-align:center">SI</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Marcaci&#243;n RETILAP Numeral 322.1 item a.</td><td colspan="2" rowspan="1" style="text-align:center">SI</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Tipo de Uso</td><td colspan="2" rowspan="1" style="text-align:center">SI</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Fecha de fabricaci&#243;n</td><td colspan="2" rowspan="1" style="text-align:center">SI</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">ENEL</td><td colspan="2" rowspan="1" style="text-align:center">SI</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Numero de contrato</td><td colspan="2" rowspan="1" style="text-align:center">SI</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Garant&#237;a</td><td colspan="2" rowspan="1" style="text-align:center">SI</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Tipo de base</td><td colspan="2" rowspan="1" style="text-align:center">SI, cuando aplique</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Diagrama de conexiones</td><td colspan="2" rowspan="1" style="text-align:center">SI</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:32px;text-align:center">31</td><td colspan="1" rowspan="1" style="">Vida &#250;til del chip Led  horas</td><td colspan="2" rowspan="1" style="">L70 = (*) horas, IES LM 80:2008; TM-21. </td><td colspan="2" rowspan="1" style="text-align:center">Especificar</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">32</td><td colspan="1" rowspan="1" style="">Garant&#237;a </td><td colspan="2" rowspan="1" style="">(*)</td><td colspan="2" rowspan="1" style="text-align:center">Especificar</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:32px;text-align:center">33</td><td colspan="3" rowspan="1" style="">Entrega registro fotogr&#225;fico en las 4 vistas interior y exterior</td><td colspan="2" rowspan="1" style="text-align:center">SI</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:32px;text-align:center">34</td><td colspan="3" rowspan="1" style="">Entrega copia de todos los planos y dibujos en formato PDF </td><td colspan="2" rowspan="1" style="text-align:center">SI</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">35</td><td colspan="3" rowspan="1" style="">Posee Disipadores de calor pasivos</td><td colspan="2" rowspan="1" style="text-align:center">SI</td><td colspan="2" rowspan="1" style="text-align:center"> </td></tr></table><br /></div><br /><br /><b>(<span class="codeInline">*</span>) Informaci&#243;n que se requiere sea diligenciada por el fabricante </b>
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 2057, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

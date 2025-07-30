@@ -1,0 +1,5 @@
+services:
+  likinormas_base.feeds_subscriber:
+    class: Drupal\likinormas_base\EventSubscriber\FeedsSubscriber
+    tags:
+      - { name: event_subscriber }

@@ -1,0 +1,34 @@
+uuid: 9796c4c4-0a88-453e-81d1-614f82da3165
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.user_network
+    - node.type.rules_home_content
+    - paragraphs.paragraphs_type.rules_section
+  module:
+    - entity_reference_revisions
+id: node.rules_home_content.user_network
+field_name: user_network
+entity_type: node
+bundle: rules_home_content
+label: 'Red de usuarios'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      rules_section: rules_section
+    negate: 0
+    target_bundles_drag_drop:
+      rules_items_forms:
+        weight: 3
+        enabled: false
+      rules_section:
+        weight: 2
+        enabled: true
+field_type: entity_reference_revisions

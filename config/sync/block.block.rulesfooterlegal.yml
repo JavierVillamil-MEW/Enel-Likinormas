@@ -1,0 +1,25 @@
+uuid: a070632f-178c-49bd-867d-2686edab4ca9
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.rules-footer-legal
+  module:
+    - system
+  theme:
+    - likinormas
+id: rulesfooterlegal
+theme: likinormas
+region: legal
+weight: 0
+provider: null
+plugin: 'system_menu_block:rules-footer-legal'
+settings:
+  id: 'system_menu_block:rules-footer-legal'
+  label: 'Rules: Footer legal'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

@@ -1,0 +1,19 @@
+.captcha {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+
+  .g-recaptcha {
+    &>div {
+      &>div {
+        width: 100% !important;
+        height: 78px;
+        transform: scale(0.77);
+        text-align: center;
+        position: relative;
+      }
+    }
+  }
+
+}

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Índice de especificaciones técnicas AT | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/1919" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F1919.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/1919" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/1919" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '111');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>&#205;ndice de especificaciones t&#233;cnicas AT</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">&#205;ndice AT</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">25/01/2017</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/1919">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F1919&amp;nodoid=1919', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+        <div style="clear:left;"></div>
+		<div style="width:834px;"><table><tr><td colspan="1" rowspan="1" style="width:110px;height:21px;text-align:center"><b>Familia</b></td><td colspan="1" rowspan="1" style="width:110px;text-align:center"><b>Subfamilia</b></td><td colspan="1" rowspan="1" style="width:112px;text-align:center"><b>Especificaci&#243;n</b></td><td colspan="1" rowspan="1" style="width:502px;text-align:center"><b>Descripci&#243;n </b></td></tr>
+<tr><td colspan="1" rowspan="52" style="height:21px;text-align:center"><b>Potencia</b></td><td colspan="1" rowspan="26" style="text-align:center"><b>Equipos</b></td><td colspan="1" rowspan="1" style="text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">GSH001<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">HV circuit-breakers</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">GSH002<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Hybrid modules</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">GSH003<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">HV disconnectors and earthing switches with rated voltage from 72,5 kv to 245 kv</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">GSH005<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Metal-Oxide Polymer-Housed surge arresters without GAPS for A.C. systems for substations from 12KV to 245 KV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">GST002<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Power Transformers</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-distribucion/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas#" class="externalLink">GSCT013<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">High Voltage current Transformers</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">E-SE-003<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Interruptor de media tensi&#243;n</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">E-SE-005<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Transformador de instrumentaci&#243;n de alta tensi&#243;n</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">E-SE-006<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Seccionadores de media tensi&#243;n</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">E-SE-007<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Transformadores de instrumentaci&#243;n mt</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">E-SE-008<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Celdas de media tensi&#243;n</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">E-SE-009<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Bancos de condensadores de M.T. para uso en subestaciones</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">E-SE-010<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Acci&#243;n s&#237;smica en equipos el&#233;ctricos y mec&#225;nicos</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">E-SE-012<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Pararrayos de &#243;xido met&#225;lico para subestaciones de potencia</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">E-SE-014<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Resistencia para la puesta a tierra del neutro del transformador de potencia</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">E-SE-015<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">&#160;Equipo blindado aislado con SF6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat001_transformadores_potencia_500_115_kv.html" class="externalLink">ET-AT001<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Transformadores de potencia 500 / 115 KV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat002_transformadores_instrumentacion_500_kv.html" class="externalLink">ET-AT002<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Transformadores de instrumentaci&#243;n de 500 KV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat501_interruptores_500_kv.html" class="externalLink">ET-AT501<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Interruptores de 500 kv</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat502_seccionadores_500_kv.html" class="externalLink">ET-AT502<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Seccionadores de 500 kv</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat503_descargadores_sobretension_500_kv.html" class="externalLink">ET-AT503<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Descargadores de sobretensi&#243;n 500 KV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat504_transformadores_medida_combinados_exterior.html" class="externalLink">ET-AT504<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Transformadores  de medida combinados (uso exterior) </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat505_unidades_capacitivas_bancos_condensadores_115_kv.html" class="externalLink">ET-AT505<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Unidades capacitivas bancos de condensadores  115 KV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat506_reactores_aire_bancos_condensadores_115_kv.html" class="externalLink">ET-AT506<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Reactores de aire para bancos de condensadores 115 KV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat507_transformadores_corriente_toroidal_resistencia_neutro_transformadores.html" class="externalLink">ET-AT507<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Transformadores de corriente toroidal para resistencia neutro de transformadores de potencia AT/MT tipo ventana</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../equipos_maniobra_proteccion_sobrecorriente_sobretensiones/etat508_transformador_corriente_toroide_ventana_abierta_cable_xlpe.html" class="externalLink">ET-AT508<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">TRANSFORMADOR DE CORRIENTE TOROIDE VENTANA ABIERTA PARA CABLE XLPE 145kV</td></tr>
+<tr><td colspan="1" rowspan="2" style="height:21px;text-align:center"><b>Estructuras</b></td><td colspan="1" rowspan="1" style="text-align:center"><a href="../otros/etat020_postes_acero_lineas_alta_tension.html" class="externalLink">ET-AT020<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Postes de acero para l&#237;neas de alta tensi&#243;n</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat027_torres_metalicas_celosia.html" class="externalLink">ET-AT027<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Torres met&#225;licas en celos&#237;a</td></tr>
+<tr><td colspan="1" rowspan="7" style="height:21px;text-align:center"><b>Aisladores</b></td><td colspan="1" rowspan="1" style="text-align:center"><a href="../otros/etat250_aisladores_subestaciones_alta_tension.html" class="externalLink">ET-AT250<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Aisladores  para subestaciones de  alta tensi&#243;n</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">E-LT-002<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Aisladores para redes de AT</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">E-LT-003<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Cable unipolar de aislaci&#243;n sint&#233;tica s&#243;lida para l&#237;neas subterr&#225;neas de AT</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">E-SE-011<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Aisladores para subestaciones de poder</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat252_aisladores_suspension_tipo_fog_lineas_transmision.html" class="externalLink">ET-AT252<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Aisladores de suspensi&#243;n tipo fog para l&#237;neas de transmisi&#243;n</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat253_aisladores_polimericos_tipo_line_post_lineas_alta.html" class="externalLink">ET-AT253<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Aisladores polim&#233;ricos tipo line post para l&#237;neas de alta tensi&#243;n</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat927_cubiertas_salidas_media_tension_transformadores.html" class="externalLink">ET-AT927<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Cubiertas para salidas de media tensi&#243;n de transformadores de potencia</td></tr>
+<tr><td colspan="1" rowspan="17" style="height:21px;text-align:center"><b>Cables, conductores y herrajes</b></td><td colspan="1" rowspan="1" style="text-align:center"><a href="../otros/etat101_cable_acsr_desnudo.html" class="externalLink">ET-AT101<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Cable acsr desnudo</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">E-LT-001<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Conductores desnudos para lineas aereas de AT</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">E-LT-004<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Accesorios para cable unipolar de aislaci&#243;n sint&#233;tica s&#243;lida para AT</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">E-LT-005<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Herrajes para l&#237;neas a&#233;reas de alta tensi&#243;n</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat102_conductores_subestaciones_15_34_5_kv.html" class="externalLink">ET-AT102<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Conductores para subestaciones de 15 y 34,5 KV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat105_cables_fibra_optica_opgw_lineas_at.html" class="externalLink">ET-AT105<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Cables de fibra &#243;ptica opgw para l&#237;neas el&#233;ctricas de AT</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat106_cables_fibra_optica_adss_lineas_at.html" class="externalLink">ET-AT106<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Cables de fibra &#243;ptica adss para l&#237;neas el&#233;ctricas de AT</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat107_cables_fibra_optica_adss_lineas_aereas.html" class="externalLink">ET-AT107<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Cables de fibra &#243;ptica ADSS para l&#237;neas a&#233;reas de media tensi&#243;n</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat108_cables_fibra_optica_armada_instalacion_ducteria.html" class="externalLink">ET-AT108<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Cables de fibra &#243;ptica armada para instalaci&#243;n en ducteria</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat109_cables_fibra_optica_opgw_48_fibras_lineas.html" class="externalLink">ET-AT109<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Cables de fibra &#243;ptica OPGW 48 fibras para l&#237;neas de AT</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat300_conductores_conectores_subestaciones_alta_tension.html" class="externalLink">ET-AT300<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Conductores y conectores  para subestaciones de  alta tensi&#243;n</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat305_herrajes_lineas_aereas_alta_tension.html" class="externalLink">ET-AT305<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Herrajes para l&#237;neas a&#233;reas de alta tensi&#243;n</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat310_conectores_potencia_subestaciones_lineas_transmision.html" class="externalLink">ET-AT310<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Conectores de potencia para subestaciones y l&#237;neas de transmisi&#243;n</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat400_terminal_tubular_acero_compresion_lineas.html" class="externalLink">ET-AT400<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Terminal tubular de acero de compresi&#243;n para l&#237;neas de transmisi&#243;n</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat433_abrazadera_salida_3_x_38_lineas.html" class="externalLink">ET-AT433<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Abrazadera  sin  salida de  3”  x  3/8” para  l&#237;neas  de  transmisi&#243;n </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat928_abrazaderas_salida_postes_alta_tension.html" class="externalLink">ET-AT928<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Abrazaderas sin salida para postes de alta tensi&#243;n</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat929_puente_conexion_cable_aislado_115kv.html" class="externalLink">ET-AT929<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Puente de conexi&#243;n en cable aislado para 115 kv </td></tr>
+<tr><td colspan="2" rowspan="17" style="height:21px;text-align:center"><b>Control y protecci&#243;n </b></td><td colspan="1" rowspan="1" style="text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">E-PCM-001<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Protecci&#243;n sobrecorriente multifuncional</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">E-PCM-002<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Protecci&#243;n para bancos condensadores de MT</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">E-PCM-003<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Protecci&#243;n diferencial transformador</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">E-PCM-004<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Protecci&#243;n diferencial de barras</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">E-PCM-005<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Protecci&#243;n de distancia</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">E-PCM-006<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Protecci&#243;n diferencial de l&#237;nea</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">E-PCM-007<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Protecci&#243;n de sobrecorriente homopolar</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">GSTZ112<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Power switchgear and controlgear assembly (PSC) for HV/MV Substation</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat103_cables_aislados_baja_tension_subestaciones.html" class="externalLink">ET-AT103<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Cables aislados de baja tensi&#243;n para subestaciones.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat601_reles_regulacion_automatica_tension.html" class="externalLink">ET-AT601<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Regulador de tensi&#243;n</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat602_controladores_bahia_subestaciones_atat_atmt.html" class="externalLink">ET-AT602<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Controladores de bahia subestaciones AT/MT y AT/AT</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat603_equipos_mando_sincronizado.html" class="externalLink">ET-AT603<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Equipos de mando sincronizado</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat604_equipos_registradores_falla.html" class="externalLink">ET-AT604<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Registradores de falla</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat_913_unidad_digital_medida.html" class="externalLink">ET-AT913<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Unidad digital de medida</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat914_modulo_anunciador_ses.html" class="externalLink">ET-AT914<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">M&#243;dulo anunciador para s/es </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat_925_equipo_transferencia_automatica_corriente_alterna.html" class="externalLink">ET-AT925<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Equipo de transferencia autom&#225;tica</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat931_borneras_subestaciones_at_mt.html" class="externalLink">ET-AT931<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Borneras  para uso en subestaciones AT y MT de codensa</td></tr>
+<tr><td colspan="2" rowspan="4" style="height:21px;text-align:center"><b>Medida</b></td><td colspan="1" rowspan="1" style="text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">GSTQ001<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Fixed installed indoor power quality instrument</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">GSTQ002<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Extended power quality data interchange formats</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat010.html" class="externalLink">ET-AT010<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Medidores de energ&#237;a para frontera</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat011_equipos_fijos_calidad_potencia.html" class="externalLink">ET-AT011<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Equipos fijos de calidad de la potencia</td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;text-align:center"><b>Sistema digital</b></td><td colspan="1" rowspan="1" style="text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">E-PCM-008<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Sistema digital para el sistema de automatizaci&#243;n de subestaciones.</td></tr>
+<tr><td colspan="2" rowspan="5" style="height:21px;text-align:center"><b>Servicios auxiliares</b></td><td colspan="1" rowspan="1" style="text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">E-SE-013<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Banco de bater&#237;as y cargador.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html" class="externalLink">GSTZ111<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Power Supply Station (PSS) for HV/MV Substation</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat902_cargador_banco_baterias_125_vcc_subestaciones.html" class="externalLink">ET-AT902<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Cargador y banco de bater&#237;as 125 vcc para subestaciones mt/mt </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat_912_cargador_banco_baterias_48_vcc.html" class="externalLink">ET-AT912<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Cargador y banco de bater&#237;as 48vcc para equipos de comunicaciones.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat915_cargador_rectificador_modular_servicios_auxiliares_48_vdc_telecontrol.html" class="externalLink">ET-AT915<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Cargador Rectificador Modular Servicios Auxiliares 48 VDC Telecontrol S/E</td></tr>
+<tr><td colspan="2" rowspan="9" style="height:21px;text-align:center"><b>Tableros y Gabinetes</b></td><td colspan="1" rowspan="1" style="text-align:center"><a href="../otros/etat_906_tablero_distribucion_ac_servicios_auxiliares_ses.html" class="externalLink">ET-AT906<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Tablero de distribuci&#243;n ac para servicios auxiliares S/E AT/AT y AT/MT</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat907_tablero_distribucion_dc_servicio_auxiliares_ses.html" class="externalLink">ET-AT907<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Tablero de distribuci&#243;n dc para servicio auxiliares S/Es AT/AT y AT/MT</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat_908_tablero_distribucion_ac_ses_mtmt.html" class="externalLink">ET-AT908<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Tablero de distribuci&#243;n ac para s/e mt/mt</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat_909_tablero_distribucion_dc_ses_mtmt.html" class="externalLink">ET-AT909<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Tablero de distribuci&#243;n dc para servicios auxiliares S/E MT/MT</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat_910_tablero_medida_comunicaciones_ses_mtmt.html" class="externalLink">ET-AT910<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Tablero de medida y comunicaciones para S/E MT/MT</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat_916_tablero_tipo_tunel.html" class="externalLink">ET-AT916<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Tablero tipo t&#250;nel</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat_917_tablero_control_proteccion.html" class="externalLink">ET-AT917<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Tablero de control y protecci&#243;n</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat919_tablero_concentrador_patio_mk_exterior.html" class="externalLink">ET-AT919<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Tablero concentrador de patio (mk) - uso exterior</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="../otros/etat_920_gabinete_agrupamiento_cts_pts.html" class="externalLink">ET-AT920<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Gabinete de Agrupamiento Para CT y PT</td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;text-align:center"><b>Envolventes met&#225;licas</b></td><td colspan="1" rowspan="1" style="text-align:center"><a href="../otros/etat933_envolventes_metalicas_subestaciones_atmt_mtmt.html" class="externalLink">ET-AT933<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Envolventes met&#225;licas para subestaciones AT/MT y MT/MT</td></tr>
+<tr><td colspan="2" rowspan="1" style="height:35px;text-align:center"><b>Cajas</b></td><td colspan="1" rowspan="1" style="text-align:center"><a href="../otros/etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html" class="externalLink">ET-AT932<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Cajas prefabricadas con tapa, elaboradas con materiales polim&#233;ricos para uso a la intemperie en subestaciones primarias</td></tr></table><br /></div>
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 1919, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

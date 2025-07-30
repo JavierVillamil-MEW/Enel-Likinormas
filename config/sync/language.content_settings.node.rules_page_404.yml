@@ -1,0 +1,11 @@
+uuid: 19d5b7b8-7e44-4b13-af44-4347fb8e8e35
+langcode: es
+status: true
+dependencies:
+  config:
+    - node.type.rules_page_404
+id: node.rules_page_404
+target_entity_type_id: node
+target_bundle: rules_page_404
+default_langcode: site_default
+language_alterable: false

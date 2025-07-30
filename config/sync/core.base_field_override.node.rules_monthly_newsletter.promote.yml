@@ -1,0 +1,22 @@
+uuid: fd8b2ccf-dccd-430d-b124-4f258afd2fc6
+langcode: es
+status: true
+dependencies:
+  config:
+    - node.type.rules_monthly_newsletter
+id: node.rules_monthly_newsletter.promote
+field_name: promote
+entity_type: node
+bundle: rules_monthly_newsletter
+label: 'Promocionado a la página principal'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Activado
+  off_label: Desactivado
+field_type: boolean

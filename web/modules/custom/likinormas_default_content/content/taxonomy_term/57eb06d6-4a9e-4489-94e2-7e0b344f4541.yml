@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 57eb06d6-4a9e-4489-94e2-7e0b344f4541
+  bundle: rules_category
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'CABLES SUBTERRÁNEOS'
+  weight:
+    -
+      value: 2
+  parent:
+    -
+      target_id: 0
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /normas/cables-subterraneos
+      langcode: en
+      pathauto: 1

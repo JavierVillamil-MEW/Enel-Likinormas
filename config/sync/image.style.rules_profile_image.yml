@@ -1,0 +1,21 @@
+uuid: ab1b1561-0fe5-42cb-ae84-d53b034c9855
+langcode: es
+status: true
+dependencies: {  }
+name: rules_profile_image
+label: 'Rules: Profile Image'
+effects:
+  c540ea1e-0f8d-48c5-9761-179a81796ca7:
+    uuid: c540ea1e-0f8d-48c5-9761-179a81796ca7
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 240
+      height: 240
+      anchor: center-center
+  ff593863-eb34-4d15-b9f4-b974d36d2e4d:
+    uuid: ff593863-eb34-4d15-b9f4-b974d36d2e4d
+    id: image_convert
+    weight: 2
+    data:
+      extension: webp

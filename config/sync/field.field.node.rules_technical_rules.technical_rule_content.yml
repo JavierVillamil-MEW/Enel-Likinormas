@@ -1,0 +1,21 @@
+uuid: 559441e1-4b54-40df-8669-80c9a3e46e70
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.technical_rule_content
+    - node.type.rules_technical_rules
+  module:
+    - text
+id: node.rules_technical_rules.technical_rule_content
+field_name: technical_rule_content
+entity_type: node
+bundle: rules_technical_rules
+label: 'Cuerpo de la norma técnica'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

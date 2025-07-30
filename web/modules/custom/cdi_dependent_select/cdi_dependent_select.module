@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for Cdi Dependent Select module.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_page_attachments().
+ */
+//function cdi_dependent_select_page_attachments(array &$attachments) {
+//  $attachments['#attached']['library'][] = 'cdi_dependent_select/cdi_dependent_select';
+//}
+
+/**
+ * Implements hook_form_views_exposed_form_alter().
+ */
+function cdi_dependent_select_form_views_exposed_form_alter(&$form, FormStateInterface $form_state) {
+  if(str_contains($form['#id'], 'views-exposed-form-rules-list-of-technical-rules')){
+    $form["rule_category_target_id"]['#attached']['library'][] = 'cdi_dependent_select/cdi_dependent_select';
+  }
+
+  if(str_contains($form['#id'], 'views-exposed-form-rules-list-of-technical-specifications')) {
+    $form["specification_category_target_id"]['#attached']['library'][] = 'cdi_dependent_select/cdi_dependent_select';
+  }
+}

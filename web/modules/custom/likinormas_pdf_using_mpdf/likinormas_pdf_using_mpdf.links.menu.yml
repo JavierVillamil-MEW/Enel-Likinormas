@@ -1,0 +1,6 @@
+likinormas_pdf_using_mpdf.mpdf_link:
+  title: 'Likinormas PDF using mPDF'
+  description: 'Configuration and settings'
+  parent: system.admin_config_ui
+  route_name: likinormas_pdf_using_mpdf.admin_form
+  weight: 10

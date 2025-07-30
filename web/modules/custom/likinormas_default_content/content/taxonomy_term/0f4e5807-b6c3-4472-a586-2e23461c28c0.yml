@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 0f4e5807-b6c3-4472-a586-2e23461c28c0
+  bundle: rules_subcategory
+  default_langcode: en
+  depends:
+    2b867258-2471-4e0c-a0fe-e53ad7181885: taxonomy_term
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'Índice - Líneas aéreas rurales'
+  weight:
+    -
+      value: 0
+  parent:
+    -
+      target_id: 0
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /normas/lineas-aereas-rurales-de-distribucion/indice-lineas-aereas-rurales
+      langcode: en
+      pathauto: 1
+  related_category:
+    -
+      entity: 2b867258-2471-4e0c-a0fe-e53ad7181885

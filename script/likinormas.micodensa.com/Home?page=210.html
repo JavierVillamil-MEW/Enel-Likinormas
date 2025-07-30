@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html xmlns:fb="http://ogp.me/ns/fb#">
+<head>
+	<title>210 - </title>
+	<meta name="description" content="ET480 Indicadores de falla subterráneos 1. GENERALIDADES
+1.1.	Objeto de la Especificaci&#243;n
+Establecer las caracter&#237;sticas t&#233;cnicas y condiciones que deben cumplir los indicadores de falla con telecontrol o sin telecontrol,  capaces de detectar  el paso de una corriente de cortocircuito en l&#237;neas subterr&#225;neas de media tensi&#243;n, con reposici&#243;n autom&#225;tica por retorno de la corriente o tensi&#243;n de carga, con un retardo de 3s, 30s o 60s y con se&#241;alizaci&#243;n de actuaci&#243;n luminosa intermitente como indicaci&#243;n de falla. Ser&#225;n programables y ajustables en sitio por el usuario mismo con el fin de satisfacer los requerimientos locales de corriente, presentes en el sistema a utilizar, mediante un banco de micro-interruptores  dentro del indicador. 
+1.2.	Normas de referencia
+IEC 60068-2   	Ensayos ambientales en dispositivos el&#233;ctricosIEC 60529      	Grados de protecci&#243;n provistos para cubiertas de dispositivos                 	El&#233;ctricos (C&#243;digos IP).IEC 61554 	Instrumentos de medici&#243;n El&#233;ctricos.IEC 61131  	Controladores programables.                                   IEC 61000-4   	T&#233;cnicas de ensayo y medida de compatibilidad electromagn&#233;tica ante transitorios el&#233;ctricos r&#225;pidos en r&#225;fagas.IEC 1000-4-2         Compatibilidad electromagn&#233;tica (CEM). Parte 4: T&#233;cnicas de ensayo y de medida. Secci&#243;n 2: Ensayos de inmunidad a las descargas electrost&#225;ticas. Norma b&#225;sica de CEM.IEC 1000-6-2 	Compatibilidad electromagn&#233;tica  - Part 6-2: est&#225;ndares gen&#233;ricos - Inmunidad a los ambientes industriales  
+1.3	Condiciones de utilizaci&#243;n
+Las indicaciones t&#233;cnicas de los numerales 1.1, 1.2, 1.3, 2.1, 2.2, 2.3, 2.5, 2.6, 2.7, 3, 4 y 5 se comparten para los indicadores de falla telecontrolados y no telecontrolados. 1.3.1	El&#233;ctricasEstos dispositivos ser&#225;n instalados con torones-transformadores de corriente montados sobre los conductores de fase, para permitir la detecci&#243;n de fallas de fase a tierra; los di&#225;metros exteriores de los conductores triplex de fase van hasta 1000MCM.La tensi&#243;n nominal de las l&#237;neas es hasta 34.5 kV, 60 Hz.El valor de la corriente de cortocircuito trif&#225;sica sim&#233;trica m&#225;xima es de 25 kA durante 0.7 s.1.3.2		AmbientalesLa zona de instalaci&#243;n presenta clima c&#225;lido y h&#250;medo. La temperatura ambiente podr&#225; variar entre los -2&#176;C y 35&#176;C ; con una humedad hasta el 93 %. Los dispositivos, en consecuencia, estar&#225;n dise&#241;ados y construidos para prestar servicio en las mencionadas condiciones.1.3.3	Tipo de servicioLos indicadores ser&#225;n instalados en sitios cubiertos de locales de centros de transformaci&#243;n, motivo por el cual los materiales constitutivos del mismo deber&#225;n resistir la acci&#243;n de las inclemencias clim&#225;ticas, por humedad, polvo, contaminaci&#243;n ambiental y agua.
+2.	REQUISITOS2.1	Dise&#241;o y construcci&#243;n
+B&#225;sicamente estar&#225;n constituidos por:  
+Tres elementos (toroides) capaz de detectar el paso de la sobrecorriente por una o varias de las fases y producir una indicaci&#243;n luminosa centelleante. (ver figura 1)
+Indicadores de fallos mediante LED con luz intermitente, Circuitos electr&#243;nicos impresos que permitan calibraciones para reposici&#243;n autom&#225;tica por presencia de la media tensi&#243;n, al detectar una corriente de carga o temporizadamente.  Sin embargo el n&#250;mero de LED&#180;s y colores podr&#225;n ser sugeridos por el fabricante, bajo previa autorizaci&#243;n de CODENSA.
+Encapsulado de policarbonato UV.
+Fuente de poder propia por bater&#237;as.
+Pulsador para reposici&#243;n manual local.  
+
+2.2	 Actuaci&#243;n e indicaci&#243;n
+Los indicadores deben detectar el paso de la corriente de falla antes  que los dispositivos de protecci&#243;n  del sistema, por lo cual el indicador debe poseer una selecci&#243;n de corrientes de detecci&#243;n (fase-tierra), 3Io, comprendida entre 10 y 160 A, una selecci&#243;n de corrientes de detecci&#243;n (Imax),  comprendida entre 200 y 1000 A y un ajuste de tiempo de actuaci&#243;n entre 50 y 400 ms .La indicaci&#243;n se producir&#225; por un elemento de alta luminosidad de color rojo (4 candelas como valor m&#237;nimo) y destellante (per&#237;odo del destello : 2 s) que permitir&#225; ser visto de manera tal que se pueda detectar a simple vista a los efectos de localizar f&#225;cilmente la secci&#243;n de l&#237;nea averiada.Se contar&#225; con LEDs Internos y externos: Internos: 	1 LED que indica falla a tierra              	3 LEDs que indican las fases involucradas en la falla fase-fase               	Opcional para Indicaci&#243;n de Presencia de Tensi&#243;n               	Opcional para estado de bater&#237;aExternos:	LED-2 &amp;-3 e indicaci&#243;n de XenonSin embargo el n&#250;mero de LED&#180;s y colores podr&#225;n ser sugeridos por el fabricante, bajo previa autorizaci&#243;n de CODENSA
+2.3. 	Reposici&#243;n de activaci&#243;n , Tiempos
+El indicador podr&#225; reponerse autom&#225;tica o manualmente.Se Puede programar el IPF para que se reinicie de manera autom&#225;tica &#243; por temporizador; es decir que los dos criterios son excluyentes.
+La reposici&#243;n autom&#225;tica se llevar&#225; a cabo por: 
+
+Retorno de corriente de carga superior a 5 A, despu&#233;s de 3 s de censada la presencia de  MT.
+ 
+Para la reposici&#243;n temporizada, el tiempo ser&#225; ajustable entre 1 y 24 horas.
+Se podr&#225; elegir, por programaci&#243;n, el modo de reposici&#243;n deseado. Si se selecciona la reposici&#243;n por restablecimiento de la corriente de carga, &#233;ste modo ser&#225; prioritario con respecto a la temporizaci&#243;n.
+Cuando se seleccione &#250;nicamente reposici&#243;n temporizada, la falta de selecci&#243;n de reposici&#243;n por restablecimiento de la corriente de carga deber&#225; preparar la l&#243;gica para que el indicador se desactive despu&#233;s del tiempo calibrado.
+
+La reposici&#243;n manual ser&#225; por medio de un pulsador localizado en la cubierta frontal del indicador.
+
+2.4. Alternativa indicadores de falla telecontrolados
+En caso de ser indicadores de falla telecontrolados se deber&#225; ser mediante puerto de comunicaci&#243;n RS232 o USB con protocolo de comunicaci&#243;n DNP 3.0, para comunicaci&#243;n con MODEM.Tambi&#233;n deber&#225; tener tambi&#233;n incorporado el equipo de comunicaciones por radio con las caracter&#237;sticas especificadas y  la fuente con la capacidad respectiva, con un  alcance  m&#237;nimo de 300 m que permita la implementaci&#243;n de un MODEM remoto para la toma de las se&#241;ales. Deber&#225; suministrase el equipo receptor m&#243;vil con puerto de comunicaci&#243;n externo RS232 o RJ45 con protocolo de comunicaci&#243;n DNP 3.0. Los indicadores de falla tele controlados deber&#225;n permitir almacenar internamente los registros de falla hist&#243;ricos de por lo menos 100 datos. Las fallas que deber&#225; almacenar corresponder&#225;n a los correspondientes a fallas permanentes como las transitorias, de tal forma que se tenga, fecha y hora del evento. Igualmente deber&#225;n tener los registros de tensi&#243;n (ausencia o presencia) preferiblemente medida con el fin de poder llevar el registro al centro de control. Los indicadores de falla que posean equipo de radio propio deber&#225;n tener la capacidad de entregar los mismos registros al centro de control mediante un equipo de radio port&#225;til que permita visualizar por la cuadrilla  m&#243;vil los datos requeridos con el alcance antes mencionado.
+2.5  Bater&#237;aSe dar&#225;  preferencia  indicadores autoalimentados que no requieran bater&#237;as (panel solar o por inducci&#243;n) en caso de bater&#237;as deber&#225;n ser de tipo comercial de f&#225;cil consecuci&#243;n en el mercado, f&#225;ciles de instalar y libres de mantenimiento.As&#237; mismo las bater&#237;as para funcionamiento del control y de la indicaci&#243;n ser&#225;n preferiblemente de Litio y deber&#225;n tener una capacidad tal que garantice la activaci&#243;n del indicador como m&#237;nimo 5 a&#241;os, considerando una operaci&#243;n de falla en el circuito de 50 veces por a&#241;o. Dicha bater&#237;a debe resistir m&#237;nimo 1500h de destello continuo, o hasta 9 a&#241;os. El valor de la corriente de cortocircuito trif&#225;sica sim&#233;trica m&#225;xima es de 12.5 kA durante 1 s. 
+2.6	Requerimientos generales
+Los equipos concentrar&#225;n las se&#241;ales provenientes de los toroides - transformador de corriente  y deber&#225;n incluir dentro del suministro los accesorios necesarios para su instalaci&#243;n.
+Los indicadores deber&#225;n ser dise&#241;ados para cumplir con los requerimientos solicitados en los numerales 1.2, 1.3 y 3.0.
+La caja (cubierta) donde se alojar&#225;n los componentes del equipo deber&#225; tener un grado de protecci&#243;n IP 55 e IK07
+El aislamiento interno de la electr&#243;nica ser&#225; de 6 kV, 1 minuto.
+En una placa o en relieve, localizada en el exterior de la cubierta, se deber&#225;n grabar el modelo, el a&#241;o de fabricaci&#243;n de cada indicador, la orden de compra y el nombre de CODENSA.  
+
+2.7.	Accesorios
+El lote de indicadores de falla deber&#225; incluir los toroides – transformadores de corriente y los accesorios necesarios para su instalaci&#243;n, reposici&#243;n y prueba local de los indicadores. Adicionalmente con el lote de indicadores deber&#225;n suministrarse 5 bater&#237;as de fuente de poder. Los indicadores de falla deber&#225;n suministrar por cada 60 juegos un equipo receptor m&#243;vil antes descrito. Los Telecontrolados deber&#225;n suministra por cada juego de 3 fases su respectivo equipo receptor para comunicaci&#243;n con el centro de control. Dicho equipo deber&#225; inmerso en un gabinete con grado de protecci&#243;n IP54, fuente de alimentaci&#243;n para el equipo receptor y MODEM (celular), y poder ser alimentado mediante tensi&#243;n de 120 V AC.  El equipo receptor deber&#225; tener bater&#237;as que permitan mantener por al menos 8 horas la autonom&#237;a del equipamiento interno y para  la alimentaci&#243;n externa deber&#225; tener protecci&#243;n de sobretensi&#243;n.  Igualmente con el lote de indicadores deber&#225;n suministrarse 5 bater&#237;as de fuente de poder.  
+3.	ENSAYOS
+3.1 Ensayos de tipo requeridos
+a) 	ensayo de corriente de cortocircuito 12,5 kA (1 s).b) 	ensayo de compatibilidad electromagn&#233;tica.c) 	Verificaci&#243;n del grado de protecci&#243;n.d) 	Ensayos funcionales de disparo y reposici&#243;n.
+3.2	Ensayos de rutina
+Se realizar&#225;n sobre el 100 % del suministro y consistir&#225;n b&#225;sicamente en los ensayos funcionales de disparo y reposici&#243;n.a) 	Medici&#243;n de los par&#225;metros generales del equipo.b) 	Chequeos funcionales.
+4.	Acondicionamiento para la entrega
+Cada indicador ser&#225; entregado en cajas de cart&#243;n, resistente a la manipulaci&#243;n y al impacto. Sobre cada una de las cajas estar&#225;n grabadas las caracter&#237;sticas que permitan identificar al mismo.Sobre cada caja vendr&#225; impreso marca, modelo y a&#241;o de fabricaci&#243;n, orden de compra y CODENSA.
+5.	Documentaci&#243;n e informaci&#243;n t&#233;cnica
+El oferente deber&#225; presentar la siguiente documentaci&#243;n:a) 	Protocolo de ensayos de tipo (seg&#250;n &#237;tem 3.1.)b) 	Planilla de datos garantizados (Anexo 1) debidamente completadac) 	Folletos de descripci&#243;n del equipod) 	Manual de puesta en servicio y de mantenimientoe) 	Listado de suministros anterioresf) 	Para los indicadores de falla se deber&#225;n entregar los manuales, software respectivo con sus licencias de uso.g) 	Deber&#225; entregarse adicionalmente capacitaci&#243;n de programaci&#243;n (configuraci&#243;n) de los equipos y sistema.FIGURA 1*En caso de ser indicadores de falla subterr&#225;neos telecontrolados.ANEXO 1.Planilla de datos garantizadosNo.Descripci&#243;nUnidadPedidoOfrecido
+1Tipo de indicador (tele controlado &#243; no tele controlado)  (*)
+2NormasIEC60068-2  60529  61000-4 
+3Tensi&#243;n nominal de la l&#237;neakVHasta 34.5 
+4Corriente permanente de servicioA300 
+5FrecuenciaHz60 
+6Tiempo de se&#241;alizaci&#243;nhoras1 hasta 10 
+7Tipo de se&#241;alizaci&#243;n Luminosa  
+8Describa los tipos y cantidad de se&#241;alizaci&#243;n y colores sugeridos Requerido  
+9Tipo de fuente ofertada para el indicador   
+10Suministra equipo receptor con las caracter&#237;sticas indicadas en la E.T462 (SI/NO) Requerido  
+11Suministra 1 equipo receptor por cada 60 juegos (SI/NO)Requerido  
+12Tipo de bater&#237;a en el equipo receptorRequerido  
+13ACTUACI&#211;N E INDICACI&#211;N   
+aValores de corriente de detecci&#243;n de falla a tierra 3Io - ajustableA10 - 160 
+bCorriente m&#225;xima (Imax) - ajustableA200 - 1000 
+cTiempo de actuaci&#243;nms50 - 400 
+14REPOSICI&#211;N   
+aAutom&#225;tica(SI/NO)   
+ Restablecimiento de la corriente de carga, despu&#233;s de 3 segA&gt;5A 
+ Temporizadohoras1 a 24 
+bManual (SI/NO)   
+15Tiempo de se&#241;alizaci&#243;nhoras1 hasta 10 
+16Tipo de se&#241;alizaci&#243;n Luminosa  
+17Corriente de cortocircuito (0.7 seg)kA25 
+18Precisi&#243;n%&#177; 10 
+19Frecuencia del destello/minuto30 
+20Intensidad luminosa del flashCandelas4 
+21Tipo de bater&#237;a Preferiblemente Litio 
+22Expectativa de vida de la bater&#237;a a 20 &#176;C en standbya&#241;os10 
+23Aislamiento 1 minutokV6 
+24Di&#225;metro de los conductores a abrazarmmHasta 1000 MCM 
+25Dimensiones  Longitud  Di&#225;metromm-------(*)
+26Pesogramos-------(*)(*) A indicar por el fabricante________________Firma del  Proponente" />
+	<script src="webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            var stringSearhItem = $('#searchBox').val();
+
+	            if (stringSearhItem.indexOf("#") != "-1") {
+	                var concatStrings = stringSearhItem.split("#");
+	                stringSearhItem = concatStrings[1];
+	            }
+
+	            if (stringSearhItem.indexOf("-") != "-1") {
+	                var concatStrings2 = stringSearhItem.split("-");
+	                stringSearhItem = concatStrings2[0];
+	            }
+	            if (trim(stringSearhItem) == '' || stringSearhItem == texto_default) {
+	                return false;
+	            }
+	            $('#searchBox').val(stringSearhItem);
+
+	        });
+	    });
+
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+		});
+	</script>
+</head>
+<body>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="index.html"><img src="themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="contenedorinterno">
+				<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Home?page=210" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="Usuario/Registro%3FReturnUrl=%252FHome%3Fpage=210.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Home?page=210" /></form>    </div>
+					<div id="menu-principal">
+						<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+						</ul>
+					</div>
+				</div>
+				<div class="contenido">
+					<div class="search_box">
+						<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							    <input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							    <a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                    <img class="ico_search" src="themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                                </a>
+</form>							<a class="search_link" href="Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+						</div>
+					</div>
+					
+
+<script type="text/javascript">
+    var page = 0;
+    var processingContents=false;
+	$(document).ready(function () {
+		var pageLink = $('#contenidos-pagina').find('.ver_mas').html();
+		if (pageLink) {
+			$('#contenidos-pagina').find('.ver_mas').remove();
+			$('.ver_mas').html(pageLink);
+		}
+	});
+	$(function () {
+	    $('.nextpage').live('click', function () {
+	        page++;
+	        cargarContenidosHome();
+	        return false;
+	    });
+	    function cargarContenidosHome() {
+	        if (!processingContents) {
+	            processingContents = true;
+	            $('.ver_mas').html('<img style="margin:0 20px 0 0" src="themes/websitelikinormas/includes/style/images/ajax_loading_med.gif"/>');
+	            $.ajax({
+	                url: '/home/contenidoshome',
+	                data: {
+	                    nodetype: $('#contenidoshome-selecttipo').val(),
+	                    page: page,
+	                    sort: $('#contenidoshome-actualizacion').hasClass('vinculo-inactivo') ? 'visitas' : 'actualizacion'
+	                },
+
+	                success: function (result) {
+	                    //alert('result:' + result);
+	                    $('#contenidos-pagina').append(result);
+	                    if (result.indexOf('ver_mas') != -1) {
+	                        var pageLink = $('#contenidos-pagina').find('.ver_mas').html();
+	                        $('#contenidos-pagina').find('.ver_mas').remove();
+	                        $('.ver_mas').html(pageLink);
+	                        $('.ver_mas').show();
+	                    } else {
+	                        $('.ver_mas').html('');
+	                        $('.ver_mas').hide();
+	                    }
+                        setTimeout(function(){processingContents=false;},1000);
+	                }
+	            }
+			    );
+	        }
+	    }
+	    $('#contenidoshome-actualizacion').live('click', function () {
+	        if ($('#contenidoshome-actualizacion').hasClass('vinculo-inactivo')) {
+	            $('#contenidoshome-actualizacion').removeClass('vinculo-inactivo');
+	            $('#contenidoshome-visitas').addClass('vinculo-inactivo');
+	            //$('#contenidoshome-filtroano').show();
+	            $('#contenidos-pagina').html('');
+	            page = 0;
+	            cargarContenidosHome();
+	        }
+	        return false;
+	    });
+	    $('#contenidoshome-visitas').live('click', function () {
+	        if ($('#contenidoshome-visitas').hasClass('vinculo-inactivo')) {
+	            $('#contenidoshome-visitas').removeClass('vinculo-inactivo');
+	            $('#contenidoshome-actualizacion').addClass('vinculo-inactivo');
+	            //$('#contenidoshome-filtroano').hide();
+	            $('#contenidos-pagina').html('');
+	            page = 0;
+	            cargarContenidosHome();
+	        }
+	        return false;
+	    });
+	    $('#contenidoshome-selecttipo').live('change', function () {
+	        page = 0;
+	        $('#contenidos-pagina').html('');
+	        cargarContenidosHome();
+
+	    });
+	    $('#contenidoshome-selectanio').live('change', function () {
+	        page = 0;
+	        $('#contenidos-pagina').html('');
+	        cargarContenidosHome();
+	    });
+	});
+
+    var processingStream=false;
+    function renderActionAppendControl(setimageid, targetid, actionUrl, data, useblock, f) {
+        //console.log('renderacionappendcontrol:' + processingStream);
+        if (!processingStream) {
+            processingStream = true;
+            $('#' + setimageid).html('<img style="margin:0 20px 0 0" src="themes/websitelikinormas/includes/style/images/ajax_loading_med.gif"/>');
+            if (useblock != false) {
+                $('#' + targetid).parent().block({
+                    css: {
+                        border: 'none',
+                        opacity: 0.7
+                    },
+                    message: '<div style="width:auto;height:auto"></div>',
+                    overlayCSS: { backgroundColor: '#000' }
+                });
+            }
+            $.ajax({
+                url: actionUrl,
+                data: data,
+                cache: false,
+                success: function (result) {
+                    if (f != undefined && typeof f == 'function') {
+                        f();
+                    }
+                    if (useblock != false) {
+                        $('#' + targetid).parent().unblock();
+                    }
+                    if (result != '' && result != 'error') {
+                        var domElement = $(result); // create element from html
+                        $('#' + targetid).append(domElement); // establece contenido
+                    }
+                    setTimeout(function(){processingStream=false;},1000);
+                }
+            });
+        }
+	}
+
+</script>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+<div class="box_intro">
+	<div class="ico_intro">
+	</div>
+	<div class="intro_text">
+		<div class="welcome_text">
+			<h1>Bienvenido al mundo Likinormas</h1>
+		</div>
+		<br/>
+		<div class="intro">
+            Busque fácil, conozca y aprenda sobre normas constructivas,  especificaciones para fabricantes y otras reglamentaciones útiles en el diseño y construcción de proyectos eléctricos. Entérese de las novedades. Participe con su opinión, contacte a otros profesionales del sector y entre en el mundo de la energía y la construcción.
+			<span class="resalto"></span>
+		</div>
+	</div>
+</div>
+<div class="titulos">
+	<div class="ico_titu">
+	</div>
+	Últimas actualizaciones
+</div>
+<div class="img_final">
+</div>
+<div class="line">
+</div>
+<div class="actualizaciones">
+	<div class="filtros">
+		<div class="pestana">
+			<a href="Home%3Fpage=210.html#" id="contenidoshome-actualizacion">Últimas actualizaciones</a>
+		</div>
+		<div class="esquina_pes">
+		</div>
+		<div class="pestana">
+			<a href="Home%3Fpage=210.html#" id="contenidoshome-visitas" class="vinculo-inactivo">Más visitadas</a>
+		</div>
+		<div class="esquina_pes">
+		</div>
+		<div class="contenedor-desplegables">
+			<span>Tipo:</span> <span>
+				<select id="contenidoshome-selecttipo" name="select">
+					<option value="todos">Todos</option>
+					<option value="norma">Norma</option>
+					<option value="especificacion">Especificacion</option>
+					<option value="leccion">Caso práctico</option>
+				</select></span>
+		</div>
+	</div>
+	<table border="0" >
+        <tbody id="contenidos-pagina">
+    			<tr>
+		<td>
+			<div class="modificado">
+				Modificado: el 7 de mayo a las 14:43</div>
+			<a class="titu_contenido" href="Especificacion/equipos_maniobra_proteccion_sobrecorriente_sobretensiones/et480_indicadores_falla_subterraneos.html">ET480 Indicadores de falla subterr&#225;neos</a>
+			<div class="categoria">
+				<div class="ico_cat">
+				</div>
+				Especificaci&#243;n t&#233;cnica</div>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div class="modificado">
+				Modificado: el 7 de mayo a las 14:23</div>
+			<a class="titu_contenido" href="Especificacion/cables/et114_cables_cobre_aislado_pepvc_600_v.html">ET114 Cables de cobre aislado PE-PVC 600 V, uso subterr&#225;neo  </a>
+			<div class="categoria">
+				<div class="ico_cat">
+				</div>
+				Especificaci&#243;n t&#233;cnica</div>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div class="modificado">
+				Modificado: el 6 de mayo a las 19:14</div>
+			<a class="titu_contenido" href="Norma/alumbrado_publico/canalizaciones/ap220_detalles_ductos_zanjas_rellenos_1_ducto_diametro.html">AP220 Detalles ductos, zanjas y rellenos. 1 ducto di&#225;metro &#216;3”</a>
+			<div class="categoria">
+				<div class="ico_cat">
+				</div>
+				Norma t&#233;cnica</div>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div class="modificado">
+				Modificado: el 6 de mayo a las 19:13</div>
+			<a class="titu_contenido" href="Norma/alumbrado_publico/canalizaciones/ap221_detalle_zanja_relleno_enterrado.html">AP221 Detalle de la zanja y relleno para el enterrado directo del cable</a>
+			<div class="categoria">
+				<div class="ico_cat">
+				</div>
+				Norma t&#233;cnica</div>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div class="modificado">
+				Modificado: el 6 de mayo a las 13:33</div>
+			<a class="titu_contenido" href="Norma/alumbrado_publico/canalizaciones/ap207_detalles_ductos_zanjas_rellenos.html">AP207 Detalles ductos, zanjas y rellenos. 2 ductos di&#225;metro &#216; 3”</a>
+			<div class="categoria">
+				<div class="ico_cat">
+				</div>
+				Norma t&#233;cnica</div>
+		</td>
+	</tr>
+	<tr style="display: none">
+		<td>
+			<div class="ver_mas">
+				<!--@(Html.Raw((new AdminPager(paging, Request).QueryParam("p") as AdminPager).CreateCustomPageLink(paging.PageIndex + 1, "Ver más", "nextpage")))-->
+                <a class="nextpage" href="Home%3Fpage=211.html">Ver más</a>
+			</div>
+		</td>
+	</tr>
+
+        </tbody>
+	</table>
+	<div class="ver_mas">
+	</div>
+</div>
+<div class="titulos">
+	<div class="ico_titu"></div>
+	Actividad de Usuarios
+</div>
+<div class="img_final"></div>
+<div class="line"></div>
+
+<div id="streamgrouped" class="streamgrouped">
+    <script type="text/javascript">
+        renderAction('streamgrouped', '/Home/GroupedStream', { ct: 'Site', group: '', nodeid: 0, userid: 0, page: 0, title: '' }, false, function () { })
+    </script>
+</div>  
+
+					<div class="footer">
+						<div class="line-deco-footer">
+						</div>
+						<div class="box-text-footer">
+							<div class="line-footer">
+							</div>
+							<div class="textofooter">
+								<strong>CODENSA S.A. ESP</strong><br />
+								Cra 13 A No. 93 - 66<br />
+								Teléfono: 6016060</div>
+							<div class="terminos">
+								<strong>Términos y condiciones</strong><br />
+								2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<script type="text/javascript">
+
+     var _gaq = _gaq || [];
+     _gaq.push(['_setAccount', 'UA-18088061-16']);
+     _gaq.push(['_trackPageview']);
+
+     (function () {
+         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+     })();
+ 
+</script>
+</body>
+</html>

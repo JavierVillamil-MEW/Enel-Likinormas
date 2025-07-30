@@ -1,0 +1,20 @@
+uuid: 63a67caa-eed9-4f5d-9435-0252cef04a0b
+langcode: es
+status: true
+dependencies:
+  config:
+    - media.type.banner_slider
+  module:
+    - path
+id: media.banner_slider.path
+field_name: path
+entity_type: media
+bundle: banner_slider
+label: 'Alias de URL'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

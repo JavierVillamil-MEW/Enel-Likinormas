@@ -1,0 +1,6 @@
+cdi_generate_index_ckeditor5:
+  js:
+    assets/js/cdi-generate-index-ckeditor5.js: {}
+  dependencies:
+    - core/jquery
+    - core/once

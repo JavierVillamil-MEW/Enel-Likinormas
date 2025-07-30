@@ -1,0 +1,19 @@
+uuid: cae90233-aced-43ee-821a-a68365867add
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.rules_title_description_and_item
+    - field.storage.block_content.description_section
+id: block_content.rules_title_description_and_item.description_section
+field_name: description_section
+entity_type: block_content
+bundle: rules_title_description_and_item
+label: 'Sección de descripción'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

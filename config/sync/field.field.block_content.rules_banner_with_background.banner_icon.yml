@@ -1,0 +1,44 @@
+uuid: 386be513-953d-4d06-afaa-c0e5ec0dcf17
+langcode: es
+status: true
+dependencies:
+  config:
+    - block_content.type.rules_banner_with_background
+    - field.storage.block_content.banner_icon
+  module:
+    - image
+    - image_replace
+third_party_settings:
+  image_replace:
+    image_style_map:
+      rules_replace_and_webp:
+        source_field: '0'
+id: block_content.rules_banner_with_background.banner_icon
+field_name: banner_icon
+entity_type: block_content
+bundle: rules_banner_with_background
+label: 'Icono del banner'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'png gif jpg jpeg'
+  max_filesize: ''
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: true
+  title_field: true
+  title_field_required: true
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+field_type: image

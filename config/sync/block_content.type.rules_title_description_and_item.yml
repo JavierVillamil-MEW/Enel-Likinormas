@@ -1,0 +1,8 @@
+uuid: 57df375b-2dd8-44e3-a08c-9d7f4a195530
+langcode: en
+status: true
+dependencies: {  }
+id: rules_title_description_and_item
+label: 'Título, descripción y elementos'
+revision: 0
+description: 'Secciones que se muestran en el registro, inicio de sesión y recuperación de contraseña'

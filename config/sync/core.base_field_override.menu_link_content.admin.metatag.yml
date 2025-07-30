@@ -1,0 +1,18 @@
+uuid: b4b1ea3e-1106-45e2-af9e-6cdb219d2b9b
+langcode: es
+status: true
+dependencies:
+  config:
+    - system.menu.admin
+id: menu_link_content.admin.metatag
+field_name: metatag
+entity_type: menu_link_content
+bundle: admin
+label: 'Metatags (Hidden field for JSON support)'
+description: 'Las metaetiquetas de la entidad.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

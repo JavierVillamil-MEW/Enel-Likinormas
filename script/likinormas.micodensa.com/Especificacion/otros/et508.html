@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET-508 Fusibles tipo very slow (VS) para MT | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/2113" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F2113.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/2113" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/2113" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '54');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET-508 Fusibles tipo very slow (VS) para MT</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET508</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">13/05/2024</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/2113">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F2113&amp;nodoid=2113', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et508.html#heading_0">1	OBJETO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et508.html#heading_1">2	CONDICIONES DE UTILIZACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et508.html#heading_2">2.1	 SERVICIO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et508.html#heading_3">2.2	 El&#233;ctricas</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et508.html#heading_4">2.3	 Ambientales</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et508.html#heading_5">2.4	 Lugar de instalaci&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et508.html#heading_6">3	DETALLES CONSTRUCTIVOS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et508.html#heading_7">4	 CRITERIOS DE ACEPTACION O RECHAZO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et508.html#heading_8">4.1	MUESTREO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et508.html#heading_9">4.2	ACEPTACI&#211;N O RECHAZO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et508.html#heading_10">5	ACONDICIONAMIENTO PARA LA ENTREGA</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et508.html#heading_11">6	ENSAYOS Y RECEPCI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et508.html#heading_12">6.1	ENSAYOS TIPO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et508.html#heading_13">6.2	 ENSAYOS DE RUTINA / ACEPTACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et508.html#heading_14">6.2.1	 Inspecci&#243;n Visual/Dimensional</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et508.html#heading_15">6.2.2	 Verificaci&#243;n de la Curva Tiempo-Corriente de Fusi&#243;n:</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et508.html#heading_16">6.2.3	Prueba de resistencia mec&#225;nica a la tracci&#243;n:</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et508.html#heading_17">7	 INFORMACI&#211;N T&#201;CNICA A SUMINISTRAR POR EL OFERENTE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et508.html#heading_18">8	MARCACI&#211;N </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et508.html#heading_19">9	DOCUMENTACI&#211;N ANEXA</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et508.html#heading_20">10	ANEXO I - PLANILLA DE DATOS GARANTIZADOS</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1	OBJETO</h2>
+La presente Especificaci&#243;n tiene por objeto establecer las condiciones que deber&#225;n satisfacer los fusibles del tipo VS para ser instalados en  cortacircuitos (cut-out) para l&#237;neas a&#233;reas de  11.4 kV y 13.2 kV. Aplica su uso &#250;nica y puntualmente para ramales y sub-ramales en zonas del alto nivel cer&#225;unico y/o zonas con alta densidad de descargas a tierra.<br />
+<h2 id="heading_1" >2	CONDICIONES DE UTILIZACI&#211;N</h2>
+<h3 id="heading_2" >2.1	 SERVICIO</h3>
+Continuo.<br /><br />
+<h3 id="heading_3" >2.2	 El&#233;ctricas</h3>
+<ul><li>      <a href="et508.html#" id="version-384" class="externalLink  glosarioLink">Tensi&#243;n nominal</a>					 11.4, 13,2   kV</li>
+<li><a href="et508.html#" id="version-0" class="externalLink  glosarioLink">Tensi&#243;n M&#225;xima de Servicio</a>				 12.5, 14,5   kV</li>
+<li>	Sistema	monof&#225;sico y Trif&#225;sico </li>
+<li>	Neutro R&#237;gido a Tierra e n la subestaci&#243;n 		 	 AT-MT</li>
+<li>	Pot. de Cortocircuito Trifilar Sim&#233;trico			 hasta 300 MVA</li></ul>
+<br />
+<h3 id="heading_4" >2.3	 Ambientales</h3>
+<ul><li>	Temperatura M&#225;xima		 	45 &#186;C</li>
+<li>	Temperatura M&#237;nima	 		-5  &#186;C</li>
+<li>	Humedad relativa ambiente hasta 	100 %</li></ul>
+<br />
+<h3 id="heading_5" >2.4	 Lugar de instalaci&#243;n</h3>
+El material de la presente est&#225; destinado a ser utilizado en las l&#237;neas a&#233;reas de 11,4 y 13,2 kV, propiedad de ENEL. Aplica su uso  &#250;nica y puntualmente para ramales y sub-ramales en zonas del alto nivel cer&#225;unico y/o zonas con  alta densidad de descargas a tierra.<br /><br />
+<h2 id="heading_6" >3	DETALLES CONSTRUCTIVOS</h2>
+<br />Los elementos fusibles por emplearse en los cartuchos porta fusibles del tipo expulsi&#243;n simple, ser&#225;n construidos y ensayados de acuerdo con las normas IEEE C 37-41 y C 37-42 &#250;ltima versi&#243;n. Los mismos responder&#225;n a los valores, de corriente nominal y velocidad de interrupci&#243;n, que se indican en la planilla de Datos Garantizados.<br /><br /><br />Las unidades ofrecidas estar&#225;n compuestas por los siguientes componentes: <br />
+<ul><li>	Cabeza</li>
+<li>	Terminales de Arco</li>
+<li>	Elemento Sensible a la Corriente</li>
+<li>	Cola de Cable Extra flexible.</li>
+<li>	Tubo auto extinguible en fibra vulcanizada seg&#250;n ASMT D710</li></ul>
+<br /><br />En la Cabeza se estampar&#225;n las caracter&#237;sticas necesarias para identificar al fusible (corriente nominal, marca, clase). Ver figura 1.<br /><br /><img src="https://i.ibb.co/VWc59s5/1.png" /><br /><b>Figura 1. Corriente nominal, marca, clase</b><br /><br />El ensamble, entre el elemento sensible a la corriente y los terminales de arco deber&#225; realizarse por medio de estampado cuidando de no producir da&#241;os en dichos elementos. <br />La arandela incluida en el fusible debe ser de cobre libre de rebabas y de espesor 1 mm.<br /><br />La cabeza del fusible deber&#225; ser de cobre plateada<br /><img src="https://i.ibb.co/2dZt59h/2.png" /><br /><b>Figura 2. Dimensiones</b><br /><br /><img src="https://i.ibb.co/txFWxtk/3.png" /><br />Tabla No. 1 Dimensiones en mm<br />
+<h2 id="heading_7" >4	 CRITERIOS DE ACEPTACION O RECHAZO</h2>
+<h3 id="heading_8" >4.1	MUESTREO</h3>
+El muestreo se llevar&#225; a cabo tomando para cada prueba de acuerdo a lo indicado en la tabla 1<br /><br /><div style="width:478px;"><table><tr><td colspan="1" rowspan="1" style="width:144px;height:62px;text-align:center"><b>TAMA&#209;O DEL LOTE</b></td><td colspan="1" rowspan="1" style="width:173px;text-align:center"><b>TAMA&#209;O DE LA MUESTRA</b></td><td colspan="1" rowspan="1" style="width:161px;text-align:center"><b>N&#218;MERO PERMITIDO DE DEFECTUOSOS</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2             a          15</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16           a          50</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">51           a        150</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">0</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">151         a        500</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">501         a      3200</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">3201       a    35000</td><td colspan="1" rowspan="1" style="text-align:center">20</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">35000     y       m&#225;s</td><td colspan="1" rowspan="1" style="text-align:center">32</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr></table><br /></div><b>TABLA 2. PLAN DE MUESTREO PARA LOS ENSAYOS</b> <br /><b>(NIVEL DE INSPECCI&#211;N ESPECIAL S-3 AQL = 4%)</b><br /><br />
+<h3 id="heading_9" >4.2	ACEPTACI&#211;N O RECHAZO</h3>
+Si el n&#250;mero de elementos defectuosos es menor o igual al correspondiente n&#250;mero de defectuosos dados en la tercera columna de la Tabla 1 se deber&#225; considerar que el lote cumple con los requisitos solicitados en esta Norma, en caso contrario el lote se rechazar&#225; por completo.<br /><br />
+<h2 id="heading_10" >5	ACONDICIONAMIENTO PARA LA ENTREGA</h2>
+Los elementos fusibles deber&#225;n ser entregados en cajas de cart&#243;n o similar que permitan su f&#225;cil almacenamiento y manipuleo. Cada caja llevar&#225; indicado la cantidad de elementos que contiene y la corriente nominal.<br />
+<h2 id="heading_11" >6	ENSAYOS Y RECEPCI&#211;N</h2>
+La recepci&#243;n del material ser&#225; efectuada por representantes de ENEL con el fin que ENEL o sus representantes ser&#225;n avisados, por lo menos con quince (15) d&#237;as de anticipaci&#243;n, por el fabricante a fin de asistir a las pruebas. La ausencia de los representantes de ENEL en el momento de efectuar los ensayos y pruebas seg&#250;n lo programado, aun cuando hayan sido debidamente avisados, no eximir&#225; al proveedor de realizarlos previa conformidad de ENEL debiendo comunicar a &#233;sta inmediatamente el resultado de estos.<br /><br />Los ensayos se efectuar&#225;n en f&#225;brica del proveedor, qui&#233;n deber&#225; proporcionar el material y personal necesario. Estos igualmente podr&#225;n realizarse en laboratorios particulares u oficial reconocido por ENEL. Todas las piezas destruidas en los ensayos ser&#225;n por cuenta y cargo del proveedor.<br />El costo de los ensayos, salvo los gastos de los representantes de ENEL estar&#225; incluido en el precio, a excepci&#243;n de los correspondientes a los Ensayos Tipo, para lo cual vale lo establecido en el &#237;tem respectivo de la presente. ENEL se reserva el derecho de realizar una inspecci&#243;n permanente durante todo el proceso de fabricaci&#243;n, para lo cual el proveedor suministrar&#225; los medios necesarios para facilitarla.<br /> La recepci&#243;n de un lote estar&#225; subordinada a: 
+<ul><li>	Resultado satisfactorio de los ensayos tipo, en el caso que ENEL juzgara conveniente su ejecuci&#243;n. Tal como lo establecido en el punto 6.1 de la presente.</li></ul>
+
+<ul><li>Resultado satisfactorio de los ensayos establecidos en el punto 6.2 de la presente.</li></ul>
+<br />
+<h3 id="heading_12" >6.1	ENSAYOS TIPO</h3>
+<br />El fabricante deber&#225; presentar los protocolos de ensayo tipo exigidos por la Norma IEEE C 37-4, efectuados sobre los fusibles adquiridos por ENEL seg&#250;n la presente.<br /><br />Los ensayos deber&#225;n ser efectuados en un laboratorio oficial o independiente, ENEL CODENSA se reserva el derecho de solicitar al fabricante la repetici&#243;n, por un laboratorio especializado a satisfacci&#243;n de ENEL CODENSA de estos ensayos tipo. <br /><br />Los ensayos tipo a realizar son:<br /><br />1) Ensayo de Calentamiento: Seg&#250;n IEEE C 37.42             		    	  <br />2) Ensayos de Caracter&#237;stica Tiempo-Corriente: Seg&#250;n IEEE C37.42 <br />3) Ensayo de tracci&#243;n mec&#225;nica: seg&#250;n NTC 2132 	 	<br /><br />Los ensayos y curvas correspondientes pedidos en este &#237;tem son los siguientes:<br /><br />a)	Ensayo Tiempo-Corriente de m&#237;nimo tiempo de fusi&#243;n:	Seg&#250;n IEEE C 37.41 <br />b)	Ensayo Tiempo-Corriente de m&#225;ximo tiempo de Interrupci&#243;n: Seg&#250;n IEEE C 37.41<br /> <br />
+<h3 id="heading_13" >6.2	 ENSAYOS DE RUTINA / ACEPTACI&#211;N</h3>
+
+<h4 id="heading_14" >6.2.1	 Inspecci&#243;n Visual/Dimensional</h4>
+Se verificar&#225; el buen estado de los materiales utilizados y construcci&#243;n correcta del fusible acorde al dise&#241;o aprobado en homologaci&#243;n.<br /> 
+<h4 id="heading_15" >6.2.2	 Verificaci&#243;n de la Curva Tiempo-Corriente de Fusi&#243;n:</h4>
+Seg&#250;n IEEE C 37.42.<br /><br />De cada lote se sacar&#225; una muestra al azar. Se verificar&#225; la curva Tiempo-Corriente de m&#237;nimo y m&#225;ximo tiempo de fusi&#243;n.<br /><br />Para la ejecuci&#243;n y valoraci&#243;n de este ensayo se seguir&#225;n las estipulaciones establecidas en la Norma IEEE C 37.41 &#250;ltima edici&#243;n. <br />Ver ANEXO 2. <br />
+<h4 id="heading_16" >6.2.3	Prueba de resistencia mec&#225;nica a la tracci&#243;n:</h4>
+Seg&#250;n NTC 2132, el fusible debe soportar un esfuerzo de tracci&#243;n de 4,5kg, sin presentar da&#241;o mec&#225;nico de los hilos del fusible. <br />
+<h2 id="heading_17" >7	 INFORMACI&#211;N T&#201;CNICA A SUMINISTRAR POR EL OFERENTE</h2>
+<br />Para su debido an&#225;lisis ser&#225; imprescindible que la oferta incluya las muestras y documentaci&#243;n t&#233;cnica siguiente, sin cuyo requisito no podr&#225; ser tenida en cuenta.
+<ul><li>Planilla de Datos T&#233;cnicos Garantizados debidamente completadas con los valores ofrecidos y firmadas por el profesional representante t&#233;cnico de la firma con radicaci&#243;n en el pa&#237;s.</li>
+<li>Protocolos de los ensayos tipo solicitados en esta especificaci&#243;n efectuada de acuerdo a las normas estipuladas. Los mismos habr&#225;n sido realizados en un laboratorio oficial o independiente, (a satisfacci&#243;n de ENEL). </li>
+<li>Deber&#225; constar en los mismos la metodolog&#237;a, valores y resultados de los ensayos, estando perfectamente identificados los elementos sometidos a ensayo los cuales ser&#225;n de id&#233;ntico dise&#241;o a los ofrecidos.</li>
+<li>Antecedentes de suministros efectuados en los &#250;ltimos tres a&#241;os indicando fecha, modelo, cantidades y destinatario.</li>
+<li>Muestras de los fusibles (5 como m&#237;nimo) id&#233;nticos a los ofrecidos para cada &#237;tem, a los efectos de poder comprobar sus caracter&#237;sticas el&#233;ctricas y la calidad de fabricaci&#243;n.</li>
+<li>Descripci&#243;n T&#233;cnica completa, cat&#225;logos y publicaciones.</li>
+<li>Curvas Tiempo-Corriente de m&#237;nimo tiempo de fusi&#243;n y m&#225;ximo tiempo de interrupci&#243;n.</li>
+<li>Marca, modelo y caracter&#237;sticas de los cartuchos portafusibles de los seccionadores utilizados en los ensayos.</li>
+<li>El oferente deber presentar los ensayos efectuados a la fibra vulcanizada seg&#250;n ASTM D710</li></ul>
+
+<h2 id="heading_18" >8	MARCACI&#211;N </h2>
+Para la identificaci&#243;n del tipo de fusible VS, la corriente y el voltaje nominales se debe realizar como se describe a continuaci&#243;n:<br /><br />Cabeza: tipo y corriente Nominal.<br />Tubo:  informaci&#243;n correspondiente a lote / fecha de fabricaci&#243;n # Contrato y Enel.<br /><br />As&#237; mismo se debe fijar o ponchar una  shakira en el extremo del cable del fusible para identificar el  nivel de corriente. En la siguiente figura se ilustra un ejemplo de la instalaci&#243;n de este aditamento para un fusible de 0.5 A tipo VS.<br /><br /><img src="https://i.ibb.co/GkxNFcL/4.png" /><br /><b>Figura 3. Identificaci&#243;n del Fusible 0.5 VS</b><br /><br /><b>Propiedades de la shakira</b><br /><br />El material utilizado debe ser polim&#233;rico, resina, fibra u otro material siempre y cuando tenga una protecci&#243;n antes rayos UV que proteja la degradaci&#243;n del color de la shakira. El fabricante deber&#225; adjuntas el protocolo de pruebas de las shakiras antes rayos UV en un laboratorio reconocido por las entidades correspondientes tales como la ONAC a nivel nacional.<br />
+<h2 id="heading_19" >9	DOCUMENTACI&#211;N ANEXA</h2>
+<h2 id="heading_20" >10	ANEXO I - PLANILLA DE DATOS GARANTIZADOS</h2>
+Planilla de Datos Solicitados y Garantizados N&#186; 1  Los valores solicitados en la planilla son de cumplimiento obligatorio. El oferente deber&#225; firmar la misma al pie de p&#225;gina, lo cual implicar&#225; la aceptaci&#243;n por su parte de dichos valores. Aquellos que no sean expresamente solicitados, deber&#225;n ser indicados por el oferente, en cuyo caso adquieren el car&#225;cter de valores garantizados.<br /> En caso de ofrecer una o m&#225;s alternativas, el oferente deber&#225; incluir en su oferta una planilla similar, con los datos correspondientes al material ofrecido, para cada una de las alternativas.<br /><br />En la columna GARANTIZADO el oferente indicar&#225; los valores correspondientes al material que propone, los cuales asumen el car&#225;cter de datos garantizados. ENEL a su solo juicio determinar&#225; si cumple con lo solicitado. <br /><br /><br /><b>ANEXO 1 DATOS T&#201;CNICOS GARANTIZADOS</b><br /><br /><div style="width:811px;"><table><tr><td colspan="1" rowspan="2" style="width:56px;height:22px;text-align:center"><b>No</b></td><td colspan="1" rowspan="2" style="width:144px;text-align:center"><b>DESCRIPCI&#211;N</b></td><td colspan="1" rowspan="2" style="width:173px;text-align:center"><b>UNID</b></td><td colspan="2" rowspan="1" style="width:438px;text-align:center"><b>CARACTER&#205;STICAS</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center"><b>SOLICITADO</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>GARANTIZADO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:40px;text-align:center">1</td><td colspan="1" rowspan="1" style="">Norma a que Responde</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="">IEEE C 37.42, IEEE C 37-41</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="10" style="height:22px;text-align:center">2</td><td colspan="1" rowspan="1" style="">Voltaje</td><td colspan="1" rowspan="1" style="text-align:center">V</td><td colspan="1" rowspan="1" style="text-align:center">11.4 y 13.2 kV</td><td colspan="1" rowspan="10" style=""> </td></tr>
+<tr><td colspan="1" rowspan="9" style="height:21px;">Corriente</td><td colspan="1" rowspan="9" style="text-align:center">A</td><td colspan="1" rowspan="1" style="text-align:center">TIPO VS</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">0.5</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1.5 </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">10</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">15</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:78px;text-align:center">3</td><td colspan="1" rowspan="1" style="">Identificaci&#243;n del Tipo de Elemento Fusible en Funci&#243;n de la Velocidad.</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style=""> ()</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:40px;text-align:center">4</td><td colspan="1" rowspan="1" style=""><a href="et508.html#" id="version-381" class="externalLink  glosarioLink">tensi&#243;n de servicio</a></td><td colspan="1" rowspan="1" style="text-align:center">KV</td><td colspan="1" rowspan="1" style="">11.4  y  13.2 </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:78px;text-align:center">5</td><td colspan="1" rowspan="1" style=""><a href="et508.html#" id="version-381" class="externalLink  glosarioLink">tensi&#243;n de servicio</a> M&#225;xima Respectivamente</td><td colspan="1" rowspan="1" style="text-align:center">kV</td><td colspan="1" rowspan="1" style="">12.5, 14.5 </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:40px;text-align:center">6</td><td colspan="1" rowspan="1" style=""><a href="et508.html#" id="version-384" class="externalLink  glosarioLink">tensi&#243;n nominal</a></td><td colspan="1" rowspan="1" style="text-align:center">KV</td><td colspan="1" rowspan="1" style="">()</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">7</td><td colspan="1" rowspan="1" style="">Consumo Nominal</td><td colspan="1" rowspan="1" style="text-align:center">W</td><td colspan="1" rowspan="1" style="">()</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:78px;text-align:center">8</td><td colspan="1" rowspan="1" style="">Di&#225;metro de la Cabeza Terminal Seg&#250;n norma NTC 2133</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">9</td><td colspan="1" rowspan="1" style="">Cabeza</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">Cobre plateado</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">10</td><td colspan="1" rowspan="1" style="">Material arandela </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">Cobre</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:40px;text-align:center">11</td><td colspan="1" rowspan="1" style="">Espesor de la arandela </td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:40px;text-align:center">12</td><td colspan="1" rowspan="1" style="">Tubo fibra vulcanizada</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">ASTM D710</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:59px;text-align:center">13</td><td colspan="1" rowspan="1" style="">Di&#225;metro Exterior M&#225;ximo del Tubo de Fusi&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="text-align:center">()</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:58px;text-align:center">14</td><td colspan="1" rowspan="1" style="">Largo Total M&#237;nimo del Elemento de 15kV</td><td colspan="1" rowspan="1" style="text-align:center">mm </td><td colspan="1" rowspan="1" style="text-align:center">584</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;text-align:center">15</td><td colspan="1" rowspan="1" style="">Tensi&#243;n mec&#225;nica a la tracci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">Kg-f</td><td colspan="1" rowspan="1" style="text-align:center">4.5</td><td colspan="1" rowspan="1" style=""> </td></tr></table><br /></div><b>Tabla 3. Caracter&#237;sticas t&#233;cnicas garantizadas</b><br /><br /><br /><br />Firma del Oferente: <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i> <i></i>_<br /><br /><br /><br /><b>ANEXO 2: CORRIENTES DE FUSI&#211;N</b><br /><br /><img src="https://i.ibb.co/VBFsLSD/5.png" />
+<ul><li>  Todos los valores est&#225;n indicados en amperios</li></ul>
+<b>Tabla No. 4 Corrientes de fusi&#243;n</b><br /><br /><br /><b>ANEXO 3: SHAKIRAS COLORES DE IDENTIFICACION</b> <br /><br /><div style="width:392px;"><table><tr><td colspan="1" rowspan="1" style="width:173px;height:21px;text-align:center">Color</td><td colspan="1" rowspan="1" style="width:219px;text-align:center">Fusible VS</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">Naranja</td><td colspan="1" rowspan="1" style="text-align:center">0,5</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">Verde claro</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">Negro</td><td colspan="1" rowspan="1" style="text-align:center">1,5</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">Verde oscuro</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">Rojo</td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">Azul celeste</td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">Amarillo</td><td colspan="1" rowspan="1" style="text-align:center">10</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">marr&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">15</td></tr></table><br /></div><b>Tabla No. 5 identificaci&#243;n de colores</b><br /><br /><br /><br /><b>ANEXO 4: CODIGOS</b><br /><br /><div style="width:392px;"><table><tr><td colspan="1" rowspan="1" style="width:173px;height:21px;">170144</td><td colspan="1" rowspan="1" style="width:219px;">Fusible 0,5A tipo VS para MT </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">170145</td><td colspan="1" rowspan="1" style="">Fusible 1A tipo VS para MT </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">170146</td><td colspan="1" rowspan="1" style="">Fusible 1,5A tipo VS para MT </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">170147</td><td colspan="1" rowspan="1" style="">Fusible 3A tipo VS para MT </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">170148</td><td colspan="1" rowspan="1" style="">Fusible 4A tipo VS para MT </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">170149</td><td colspan="1" rowspan="1" style="">Fusible 6A tipo VS para MT </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">170150</td><td colspan="1" rowspan="1" style="">Fusible 10A tipo VS para MT </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">170151</td><td colspan="1" rowspan="1" style="">Fusible 15A tipo VS para MT </td></tr></table><br /></div><b>Tabla No. 6 c&#243;digos</b><br /><br /><br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 2113, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+uuid: c322bbdf-9c09-4bbb-afd9-b0f6c20aa812
+langcode: es
+status: true
+dependencies: {  }
+id: rules_header_fixed_logo
+label: 'Logo menu principal fixed'
+revision: 0
+description: 'Logo que se muestra cuando el menú se torna de color blanco'

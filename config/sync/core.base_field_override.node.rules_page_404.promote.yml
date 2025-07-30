@@ -1,0 +1,22 @@
+uuid: bd6ca2ab-a7fd-4351-a286-b3b5631a2fd1
+langcode: es
+status: true
+dependencies:
+  config:
+    - node.type.rules_page_404
+id: node.rules_page_404.promote
+field_name: promote
+entity_type: node
+bundle: rules_page_404
+label: 'Promocionado a la página principal'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Activado
+  off_label: Desactivado
+field_type: boolean

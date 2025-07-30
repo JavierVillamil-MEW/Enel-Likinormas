@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET708 Empalmes en resina para baja tensión 600V | Likinormas</title>
+	<meta name="description" content="empalmes preformados de BT; cables subterraneos; redes subterraneas; redes" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/587" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F587.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/587" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/587" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '33');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET708 Empalmes en resina para baja tensi&#243;n 600V</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET 708</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">04/09/2014</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/587">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F587&amp;nodoid=587', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et708_empalmes_resina_baja_tension_600_v.html#heading_0">1.	 REQUISITOS GENERALES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et708_empalmes_resina_baja_tension_600_v.html#heading_1">1.1	 Condiciones de servicio</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et708_empalmes_resina_baja_tension_600_v.html#heading_2">1.2	 Normas de fabricaci&#243;n y pruebas</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et708_empalmes_resina_baja_tension_600_v.html#heading_3">2.	REQUISITOS T&#201;CNICOS PARTICULARES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et708_empalmes_resina_baja_tension_600_v.html#heading_4">3.	 EMPAQUE E IDENTIFICACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et708_empalmes_resina_baja_tension_600_v.html#heading_5">4. CRITERIOS  DE  ACEPTACI&#211;N  O  RECHAZO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et708_empalmes_resina_baja_tension_600_v.html#heading_6">4.1 Inspecci&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et708_empalmes_resina_baja_tension_600_v.html#heading_7">4.2 Muestreo</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et708_empalmes_resina_baja_tension_600_v.html#heading_8">4.3 Aceptaci&#243;n o rechazo</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et708_empalmes_resina_baja_tension_600_v.html#heading_9">4.4 Pruebas</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1.	 REQUISITOS GENERALES</h2>
+<h3 id="heading_1" >1.1	 Condiciones de servicio</h3>
+Los empalmes aislados en resina, en derivaci&#243;n o tipo recto, que trata esta especificaci&#243;n ser&#225;n instalados en circuitos subterr&#225;neos de sistemas de distribuci&#243;n secundaria de CODENSA S.A. ESP, de acuerdo con las siguientes condiciones generales del <a href="et708_empalmes_resina_baja_tension_600_v.html#" id="version-363" class="externalLink  glosarioLink">sistema</a>:<br /><br /><b>1.1.1	 Condiciones ambientales</b><br />- Altura sobre el nivel del mar: 2640 m<br />- Humedad relativa: 90%<br />- Temperatura ambiente m&#225;xima: 27 &#176;C<br />- Temperatura ambiente m&#237;nima: -5 &#176;C<br />- Temperatura ambiente promedio: 14 &#176;C<br /><br /><b>1.1.2	 Caracter&#237;sticas el&#233;ctricas del <a href="et708_empalmes_resina_baja_tension_600_v.html#" id="version-363" class="externalLink  glosarioLink">sistema</a></b><br />- <a href="et708_empalmes_resina_baja_tension_600_v.html#" id="version-384" class="externalLink  glosarioLink">Tensi&#243;n nominal</a>: 600 V<br />- Conexi&#243;n: Trif&#225;sica tetrafilar<br />- Frecuencia <a href="et708_empalmes_resina_baja_tension_600_v.html#" id="version-298" class="externalLink  glosarioLink">nominal</a>: 60 Hz<br /><br /><b>1.1.3	 Calibres normalizados</b><br /><br /><div style="width:788px;"><table><tr><td colspan="1" rowspan="2" style="width:158px;height:20px;text-align:center"><b>C&#243;digo</b></td><td colspan="6" rowspan="1" style="width:630px;text-align:center"><b>Empalme en derivaci&#243;n</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:60px;text-align:center"><b>Calibre pincipal AWG</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Calibre derivaci&#243;n AWG</b></td><td colspan="4" rowspan="1" style="text-align:center"><b>Descripci&#243;n</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">6762545</td><td colspan="1" rowspan="1" style="text-align:center">2-6</td><td colspan="1" rowspan="1" style="text-align:center">8-14</td><td colspan="4" rowspan="1" style="">Empalme resina BT 2-6 AWG Sec 8-14 AWG</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">2/0</td><td colspan="1" rowspan="1" style="text-align:center">4</td><td colspan="4" rowspan="1" style="">Empalme derivaci&#243;n en resina 2/0 a 4 AWG</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"> </td><td colspan="1" rowspan="1" style="text-align:center">4</td><td colspan="1" rowspan="1" style="text-align:center">4</td><td colspan="4" rowspan="1" style="">Empalme derivaci&#243;n en resina 4 a 4 WG</td></tr>
+<tr><td colspan="1" rowspan="2" style="height:21px;text-align:center"><b>C&#243;digo</b></td><td colspan="6" rowspan="1" style="text-align:center"><b>Empalme tipo recto</b></td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;text-align:center"><b>Calibre rango en AWG</b></td><td colspan="4" rowspan="1" style="text-align:center"><b>Descripci&#243;n</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">6762547</td><td colspan="2" rowspan="1" style="text-align:center">4</td><td colspan="4" rowspan="1" style="">Empalme resina recto 4 AWG Conect tub</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"> </td><td colspan="2" rowspan="1" style="text-align:center">2/0 - 4</td><td colspan="4" rowspan="1" style="">Emplame recto en resina 2/0 a 4 AWG</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;"> </td><td colspan="2" rowspan="1" style="text-align:center">2/0 - 2/0</td><td colspan="4" rowspan="1" style="">Empalme recto en resina 2/0 a 2/0 AWG</td></tr></table><br /></div><b>1.1.4	 Condiciones de utilizaci&#243;n</b><br /><br />-	En c&#225;maras,  directamente enterrados  &#243; ocasionalmente sumergidos en agua.<br />-	Se debe esperar a que se realice el curado de la resina antes de energizar el <a href="et708_empalmes_resina_baja_tension_600_v.html#" id="version-107" class="externalLink  glosarioLink">cable</a>, el tiempo de curado en promedio a 20&#176;C es de 25 min.<br />-	Cuando la conexi&#243;n es de Al – Cu debe utilizarse conector bimet&#225;lico de comprei&#243;n.<br />- No se debe permitir la utilizaci&#243;n de emplmes tipo gel.
+<h3 id="heading_2" >1.2	 Normas de fabricaci&#243;n y pruebas</h3>
+El <a href="et708_empalmes_resina_baja_tension_600_v.html#" id="version-184" class="externalLink  glosarioLink">empalme</a>, as&#237; como sus componentes, deber&#225;n cumplir con los requerimientos de la &#250;ltima revisi&#243;n de las siguientes normas (donde sean aplicables):<br /><br /><div style="width:753px;"><table><tr><td colspan="1" rowspan="1" style="width:158px;height:40px;text-align:center"><b>Norma</b></td><td colspan="1" rowspan="1" style="width:595px;text-align:center"><b>T&#237;tulo</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">ANSI C119.1</td><td colspan="1" rowspan="1" style="">Electric Connectors – Sealed Insulated Underground Connector System Rated 600 Volts.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">ASTM D149</td><td colspan="1" rowspan="1" style="">Standard Test Method for Dielectric Breakdown Voltage and Dielectric Strength of Solid Electrical Insulating Materials at Commercial Power Frequencies.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">ASTM D412</td><td colspan="1" rowspan="1" style="">Standard Test Methods for Vulcanized Rubber and Thermoplastic Rubbers and Thermoplastic Elastomers Tension.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">ASTM D624</td><td colspan="1" rowspan="1" style="">Standard Test Method for Tear Strength of Conventional Vulcanized Rubber and Thermoplastic Elastomers</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">ASTM D1212-91</td><td colspan="1" rowspan="1" style="">Standard Test Methods for Measurement of Wet Film Thickness of Organic Coatings</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">UL 486 A – 486 B</td><td colspan="1" rowspan="1" style="">Standard Test Methods for Measurement of Wet Film Thickness of Organic Coatings</td></tr></table><br /></div><br />
+<h2 id="heading_3" >2.	REQUISITOS T&#201;CNICOS PARTICULARES</h2>
+El <a href="et708_empalmes_resina_baja_tension_600_v.html#" id="version-184" class="externalLink  glosarioLink">empalme</a> est&#225; basado en una resina de poliuretano,  dicha resina  ofrece aislamiento, sello contra humedad y protecci&#243;n mec&#225;nica excelente y garantiza el uso de los empalmes en cualquier aplicaci&#243;n.<br />Es compatible con los materiales comunmente utilizados en la elaboraci&#243;n de aislamientos y chaquetas de cables. Cada juego debe tener todo el <a href="et708_empalmes_resina_baja_tension_600_v.html#" id="version-274" class="externalLink  glosarioLink">material</a> necesario para realzar los empalmes, incluyendo los conectores de compresi&#243;n.<br /><br />Los empalmes  deben aptos para trabajar en temperatura normal de operaci&#243;n de 90&#176;C y en los cuales una <a href="et708_empalmes_resina_baja_tension_600_v.html#" id="version-371" class="externalLink  glosarioLink">sobrecarga</a> de <a href="et708_empalmes_resina_baja_tension_600_v.html#" id="version-183" class="externalLink  glosarioLink">emergencia</a> genere hasta 130 &#176;C.  y deben cumplir con los requerimientos de la norma ANSI C119.1.<br />
+<h2 id="heading_4" >3.	 EMPAQUE E IDENTIFICACI&#211;N</h2>
+Los empalmes deber&#225;n embalarse en cajas de cart&#243;n.<br />La siguiente informaci&#243;n deber&#225; aparecer en la caja del barraje:<br />- Nombre del fabricante, tipo y n&#250;mero de designaci&#243;n<br />- Clase de aislamiento<br />- M&#225;xima <a href="et708_empalmes_resina_baja_tension_600_v.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> de dise&#241;o a <a href="et708_empalmes_resina_baja_tension_600_v.html#" id="version-387" class="externalLink  glosarioLink">tierra</a><br />- Calibres m&#225;ximo y m&#237;nimo del conductor del <a href="et708_empalmes_resina_baja_tension_600_v.html#" id="version-107" class="externalLink  glosarioLink">cable</a><br /><br />En el embalaje deber&#225; indicarse:<br />- Nombre del fabricante<br />- El nombre “CODENSA S.A. ESP”<br />- El n&#250;mero y la fecha de la orden de compra<br />- <a href="et708_empalmes_resina_baja_tension_600_v.html#" id="version-377" class="externalLink  glosarioLink">Tensi&#243;n</a> de servicio y dem&#225;s caracter&#237;sticas t&#233;cnicas <br />- C&#243;digo de almac&#233;n <br />
+<h2 id="heading_5" >4. CRITERIOS  DE  ACEPTACI&#211;N  O  RECHAZO</h2>
+<h3 id="heading_6" >4.1 Inspecci&#243;n</h3>
+La Empresa se reserva el derecho de realizar una inspecci&#243;n durante el proceso de fabricaci&#243;n; para tal efecto el proveedor suministrar&#225; los medios necesarios para facilitar la misma.<br /><br />Se deber&#225;n cumplir las propiedades f&#237;sicas y el&#233;ctricas del empalme, de acuerdo con el numeral 2 (REQUISITOS T&#201;CNICOS PARTICULARES) de la presente especificaci&#243;n.<br />
+<h3 id="heading_7" >4.2 Muestreo</h3>
+El muestreo se realizar&#225; con base en los procedimientos y tablas estipuladas en la NTC-ISO 2859-1 “Procedimientos de muestreo para Inspecci&#243;n por Atributos. Parte 1: Planes de muestreo determinados por el nivel aceptable de calidad para inspecci&#243;n lote a lote”, y se acordar&#225; por las partes, previamente a la fecha de la realizaci&#243;n de los ensayos y recepci&#243;n de los bienes.<br /><br />Para el desarrollo de las pruebas es indispensable que los instrumentos involucrados est&#233;n calibrados.<br /><br />El tama&#241;o del lote ser&#225; el total de empalmes que se entreguen en cada recepci&#243;n (parcial o completa) que se haga a los inspectores. <br />
+<h3 id="heading_8" >4.3 Aceptaci&#243;n o rechazo</h3>
+Si el n&#250;mero de elementos defectuosos es menor o igual al correspondiente n&#250;mero de defectuosos (dado en la norma NTC-ISO 2859-1 en la tercera columna de las Tablas 1 y 2), se deber&#225; considerar que el lote cumple con los requisitos t&#233;cnicos exigidos por CODENSA S.A., en caso contrario, el lote se rechazar&#225;.<br /><br /><b>TABLA 1. PLAN DE MUESTREO PARA INSPECCI&#211;N (NIVEL DE INSPECCI&#211;N II,  NAC = 2,5%) (NORMA NTC-ISO 2859-1 TABLA1 - TABLA 2A)</b><br /><div style="width:526px;"><table><tr><td colspan="1" rowspan="1" style="width:122px;height:61px;text-align:center"><b>TAMA&#209;O DEL LOTE</b></td><td colspan="1" rowspan="1" style="width:112px;text-align:center"><b>TAMA&#209;O DE LA MUESTRA</b></td><td colspan="1" rowspan="1" style="width:145px;text-align:center"><b>NUMERO PERMITIDO DE DEFECTUOSOS</b></td><td colspan="1" rowspan="1" style="width:147px;text-align:center"><b>NUMERO DEFECTUOSOS PARA RECHAZO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2  a  8</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">9  a  15</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">16  a  25</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">26  a  50</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">51  a  90</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">91  a  150</td><td colspan="1" rowspan="1" style="text-align:center">20</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">151  a  280</td><td colspan="1" rowspan="1" style="text-align:center">32</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">281  a  500</td><td colspan="1" rowspan="1" style="text-align:center">50</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">501  a  1200</td><td colspan="1" rowspan="1" style="text-align:center">80</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1201  a  3200</td><td colspan="1" rowspan="1" style="text-align:center">125</td><td colspan="1" rowspan="1" style="text-align:center">7</td><td colspan="1" rowspan="1" style="text-align:center">8</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">3201  a  10000</td><td colspan="1" rowspan="1" style="text-align:center">200</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">11</td></tr></table><br /><br /></div>
+<h3 id="heading_9" >4.4 Pruebas</h3> <br />Las pruebas incluyen como m&#237;nimo:<br /><br />- Resistencia a los rayos UV.<br />- Estabilidad el&#233;ctrica bajo ciclos t&#233;rmicos, en aire.<br />- Estabilidad t&#233;rmica bajo carga.<br />- Resistencia diel&#233;ctrica.<br />- Resistividad volum&#233;trica.<br /><br />CODENSA S.A. ESP se reserva el derecho de solicitar al fabricante, la repetici&#243;n por un laboratorio especializado a satisfacci&#243;n de CODENSA S.A. ESP de &#233;stas pruebas. A tal fin el oferente deber&#225; cotizar por separado el costo de cada una de &#233;stas pruebas. De ser necesario, las pruebas ser&#225;n ejecutadas por el fabricante en cables que suministrar&#225; CODENSA S.A. ESP.<br /><br />	 <br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../archivo/598_598.html"><img src="../../media/content/mediafile/598/ET&#32;708&#32;1.jpg" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br /><br /><br /><b>ANEXO 1. TABLA DE CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS</b><br />Los datos del presente anexo deber&#225;n ser indicados por el oferente. Los mismos una vez indicados tendr&#225;n el car&#225;cter de valores garantizados.<br /><br />En caso de ofrecer una o m&#225;s alternativas, el oferente deber&#225; incluir en su oferta una planilla similar, con los datos correspondientes al material ofrecido para cada una de las alternativas.<br /><br /><div style="width:801px;"><table><tr><td colspan="1" rowspan="1" style="width:60px;height:40px;text-align:center"><b>N&#176;</b></td><td colspan="2" rowspan="1" style="width:534px;text-align:center"><b>Descripci&#243;n</b></td><td colspan="1" rowspan="1" style="width:207px;text-align:center"><b>Ofertado</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1</td><td colspan="2" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">2</td><td colspan="2" rowspan="1" style="">Pa&#237;s de fabricaci&#243;n</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">3</td><td colspan="2" rowspan="1" style="">Referencia o modelo</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">4</td><td colspan="2" rowspan="1" style="">Normas de fabricaci&#243;n y pruebas</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">5</td><td colspan="2" rowspan="1" style="">Tensi&#243;n de dise&#241;o(V)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">6</td><td colspan="2" rowspan="1" style="">Material cubierta</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">7</td><td colspan="2" rowspan="1" style="">Caracter&#237;sticas de la resina</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">8</td><td colspan="2" rowspan="1" style="">Material del conector</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">9</td><td colspan="2" rowspan="1" style="">Tipo de conector y caracter&#237;sticas t&#233;cnicas (Describir y presentar plano o imagen)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">10</td><td colspan="2" rowspan="1" style="">Color del empalme</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">11</td><td colspan="2" rowspan="1" style="">Temperatura de operaci&#243;n (&#176;C)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">12</td><td colspan="2" rowspan="1" style="">Temperatura de emergencia (&#176;C)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">13</td><td colspan="2" rowspan="1" style="">Rango de aplicaci&#243;n (Calibres)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">14</td><td colspan="2" rowspan="1" style="">Material de conductores a conectar</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">15</td><td colspan="2" rowspan="1" style="">Empaque e identificaci&#243;n</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">16</td><td colspan="2" rowspan="1" style="">Elementos que incluyen con el empalme</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">17</td><td colspan="2" rowspan="1" style="">Garant&#237;a (meses)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">18</td><td colspan="2" rowspan="1" style="">Presentan protocolos de pruebas (Si/No, cuales)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">19</td><td colspan="2" rowspan="1" style="">Presentan instrucciones de montaje en espa&#241;ol</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">20</td><td colspan="2" rowspan="1" style="">Entregan muestra (Si/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:20px;"><b>RESULTADO DE EVALUACI&#211;N T&#201;CNICA</b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:20px;text-align:center">21</td><td colspan="1" rowspan="5" style="width:267px;">Certificado del sistema de calidad del fabricante (Normas ISO)</td><td colspan="1" rowspan="1" style="width:267px;">Entidad certificadora</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">N&#250;mero de certificado</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Fecha de aprobaci&#243;n </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Vigencia</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Adjunta el certificado </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="6" style="height:20px;text-align:center">22</td><td colspan="1" rowspan="6" style="">Certificado de conformidad con norma t&#233;cnica</td><td colspan="1" rowspan="1" style="">Entidad certificadora</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">N&#250;mero de certificado</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Fecha de aprobaci&#243;n </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Vigencia</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Norma t&#233;cnica con la cual se certifica</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Adjunta el certificado </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:20px;text-align:center">23</td><td colspan="1" rowspan="5" style="">Certificado de conformidad con RETIE</td><td colspan="1" rowspan="1" style="">Entidad certificadora</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">N&#250;mero de certificado</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Fecha de aprobaci&#243;n </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Vigencia</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Adjunta el certificado </td><td colspan="1" rowspan="1" style=""> </td></tr></table><br /></div>
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 587, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

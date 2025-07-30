@@ -1,0 +1,15 @@
+_core:
+  default_config_hash: yTxtFqBHnEWxQswuWvkjE8mKw2t8oKuCL1q8KnfHuGE
+langcode: es
+uuid: 3a5b246d-0ccd-4518-833a-52820bc220c5
+name: 'Likinormas (enelcol.com.co)​'
+mail: admin@example.com
+slogan: ''
+page:
+  403: ''
+  404: /node/68
+  front: /node/1
+admin_compact_mode: false
+weight_select_max: 100
+default_langcode: es
+mail_notification: ''

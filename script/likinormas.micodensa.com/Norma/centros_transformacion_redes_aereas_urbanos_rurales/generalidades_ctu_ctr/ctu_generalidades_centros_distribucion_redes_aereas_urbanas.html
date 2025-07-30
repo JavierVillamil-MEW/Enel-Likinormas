@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Generalidades. Centros de distribución para redes aéreas urbanas | Likinormas</title>
+	<meta name="description" content="redes  aéreas urbanas; centros de distribución industrial; redes aereas; redes de media tensión" />
+	<script src="../../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../../index.html"><img src="../../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1247" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../../Usuario/Registro%3FReturnUrl=%252FNorma%252FDetalles%252F1247.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/1247" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1247" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			showSubmenu('4', '75');
+		});
+	</script>
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Norma t&#233;cnica
+	</div>
+	<h1>Generalidades. Centros de distribuci&#243;n para redes a&#233;reas urbanas</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de la norma</div>
+					<div class="caracteristicas">CTU generalidades </div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">27/11/2009</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../../Home/DownloadPDF/1247">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FNorma%2FDetalles%2F1247&amp;nodoid=1247', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+    <div class="modulo">
+        <div class="titu_modulo">
+            Relacionados
+        </div>
+            <div class="modulo_contenido" style="">
+                <div class="subtitulos_internos">
+                    <a href="../centros_transformacion_aereos_urbanos_trifasicos/ctu516_diagrama_unifilar_instalacion_transformador_trifasico.html">CTU516 Diagrama unifilar instalaci&#243;n transformador trif&#225;sico.</a>
+                </div>
+                    <div class="relacionadotipo">Norma t&#233;cnica</div>
+            </div>
+            <div class="modulo_contenido" style="">
+                <div class="subtitulos_internos">
+                    <a href="../centros_transformacion_aereos_urbanos_trifasicos/ctu5161_diagrama_unifilar_instalacion_transformador_distribucion_bifilar.html">CTU516-1 Diagrama unifilar instalaci&#243;n de transformador de  distribuci&#243;n bifilar 11 400  – 120 / 240 V</a>
+                </div>
+                    <div class="relacionadotipo">Norma t&#233;cnica</div>
+            </div>
+    </div>
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h3" href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#heading_0">Centros de transformaci&#243;n en poste.</a></li>
+                    <li class="indexitem"><a class="head_h3" href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#heading_1">Centros de transformaci&#243;n a la intemperie  tipo patio.</a></li>
+                    <li class="indexitem"><a class="head_h3" href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#heading_2">Capacidad de transformadores urbanos</a></li>
+                    <li class="indexitem"><a class="head_h3" href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#heading_3">Capacidad de transformadores &#225;rea rural</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		Se llama <a href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#" id="version-122" class="externalLink  glosarioLink">centro de transformaci&#243;n</a> a los centros de distribuci&#243;n donde se instalan transformadores <a href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#" id="version-277" class="externalLink  glosarioLink">media tensi&#243;n</a> – <a href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#" id="version-277" class="externalLink  glosarioLink">media tensi&#243;n</a>, <a href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#" id="version-277" class="externalLink  glosarioLink">media tensi&#243;n</a> - <a href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a> tales como: 34 500 -11 400 V, 34 500 – 13200 V, 13 200 - 208/120 V, 11 400-208/120 V, que existen en el <a href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de distribuci&#243;n de energ&#237;a, y cuya alimentaci&#243;n se hace mediante red a&#233;rea o subterr&#225;nea.<br /><br />En el <a href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de distribuci&#243;n de energ&#237;a el&#233;ctrica se utilizan centros de transformaci&#243;n a&#233;reos y centros de transformaci&#243;n subterr&#225;neos, los primeros, de los que trata este cap&#237;tulo son tipo intemperie y pueden ser instalados  en poste o en patio de frente vivo.<br />Los centros de transformaci&#243;n subterr&#225;neos son tratados en la categoria Centros de transformaci&#243;n para redes subterr&#225;neos.<br />
+<h3 id="heading_0" >Centros de transformaci&#243;n en poste.</h3>
+Se usan en redes a&#233;reas en zonas rurales, urbanas, industriales o en urbanizaciones. Generalmente los postes se instalan en los andenes de las v&#237;as p&#250;blicas; no se permitir&#225; el montaje de transformadores en las esquinas, en raz&#243;n del alto riesgo de accidentes de tr&#225;nsito que pueden afectar la <a href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#" id="version-138" class="externalLink  glosarioLink">confiabilidad</a> del <a href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#" id="version-363" class="externalLink  glosarioLink">sistema</a>.<br /><br />En las v&#237;as clasificadas por el Departamento Administrativo de Planeaci&#243;n Distrital (DAPD) como v&#237;as V0, V1, V2, y V3, la malla vial arterial y complementaria, as&#237; como en las urbanizaciones de estratos  4, 5 y 6 definidos por el Decreto 1192 del 22 de Diciembre de 1997, en zonas hist&#243;ricas y en general en aquellos sitios donde la conformaci&#243;n de redes a&#233;reas no est&#233; de acuerdo con las normas establecidas, no se permite el montaje en postes de transformadores de ninguna capacidad, ni la construcci&#243;n de redes a&#233;reas; en &#233;stos casos deben construirse redes subterr&#225;neas. <br /><br />El Distrito Capital expidi&#243; el Decreto 619 de 2000 con el cual se reglament&#243; el Plan de Ordenamiento Territorial.  Como complemento se expidi&#243; la Resoluci&#243;n 0033 de Enero 26 de 2001 por el Departamento Administrativo de Planeaci&#243;n Distrital.  En los dos se indica el uso de redes a&#233;reas y subterr&#225;neas.<br /><br />El Decreto reglamenta que para estrato 3, los nuevos desarrollos Urbanos, que se generen mediante planes parciales (extensiones de terreno&gt; 10 Ha), las redes de distribuci&#243;n y acometidas deber&#225;n ser subterr&#225;neas. <br /><br />Los transformadores con tensiones en <a href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a> diferentes a 208/120 V y 120/240 V, solo  ser&#225;n propiedad del <a href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#" id="version-403" class="externalLink  glosarioLink">usuario</a> (uso dedicado), quien responder&#225; por su <a href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#" id="version-271" class="externalLink  glosarioLink">mantenimiento</a>. <br /><br />Como condici&#243;n m&#237;nima de acuerdo con el <a href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#" id="version-354" class="externalLink  glosarioLink">RETIE</a> por “2013, numeral 24.3 literal a se emplean los postes de la siguiente forma:<br /><div style="width:461px;"><table><tr><td colspan="1" rowspan="1" style="width:91px;height:10px;text-align:center">kVA</td><td colspan="1" rowspan="1" style="width:103px;text-align:center">Peso (kgf)</td><td colspan="1" rowspan="1" style="width:267px;">Tipo de poste</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"><span class="codeInline">&lt;=</span> 112.5</td><td colspan="1" rowspan="1" style="text-align:center">&lt; 600</td><td colspan="1" rowspan="1" style="">12 m x 510 kgf - concreto</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">150</td><td colspan="1" rowspan="1" style="text-align:center">&lt; 700</td><td colspan="1" rowspan="1" style="">12 m x 750 kgf - concreto</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">225</td><td colspan="1" rowspan="1" style="text-align:center">&lt; 800</td><td colspan="1" rowspan="1" style="">2 (12 m x 750 kgf) - concreto</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"><span class="codeInline">&lt;=</span> 25</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="">12 m x 510 kgf - madera</td></tr></table><br /></div>Es necesario considerar, adem&#225;s del peso, el tipo de estructura de MT en la cima del poste, tales como: de paso, de bandera, cambios de direcci&#243;n y retenciones, que obliga a reconsiderar el <a href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#" id="version-95" class="externalLink  glosarioLink">apoyo</a>.<br /><br />En estructuras de MT de retenci&#243;n y cambios de direcci&#243;n, con transformadores, se utilizar&#225;n postes de concreto 12 m 1050 kgf.<br />En estructuras de MT de paso y bandera, con transformadores, se utilizar&#225;n postes de concreto 12 m 510 kgf<br />Tambi&#233;n se podr&#225;n usar estructuras en H cuando el transformador no sea para instalar en poste o sobrepase los pesos establecidos.<br /><br />Para transformadores de capacidades superiores a 150 kVA y 225 kVA , deber&#225; proveerse de <a href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#" id="version-122" class="externalLink  glosarioLink">centro de transformaci&#243;n</a>  capsulada, pedestal, subterr&#225;nea, etc, para su instalaci&#243;n. Igual que para transformadores con capacidades menores, que por condiciones del <a href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#" id="version-363" class="externalLink  glosarioLink">sistema</a>, por disposiciones urban&#237;sticas de los entes de Planeaci&#243;n Distrital o Municipal, o cuando la conformaci&#243;n urban&#237;stica lo exige.<br />
+<h3 id="heading_1" >Centros de transformaci&#243;n a la intemperie  tipo patio.</h3>
+Se instalan dentro del predio de ciertas industrias, generalmente alimentadas al nivel de <a href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> de 34,5 kV.<br />
+<h3 id="heading_2" >Capacidad de transformadores urbanos</h3>
+En los sistemas de 34,5 kV, 13,2 kV y 11,4 kV las potencias normalizadas por CODENSA S.A ESP para los transformadores es la siguiente:<br /><div style="width:480px;"><table><tr><td colspan="3" rowspan="1" style="width:480px;height:10px;text-align:center"><b>TRIF&#193;SICOS</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"><b>34,5 kV – 440/254 V (<span class="codeInline">*</span>)</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>34,5 kV – 11,4 kV</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>11,4 kV – 208/120 V</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">225 kVA</td><td colspan="1" rowspan="1" style="text-align:center">500 kVA</td><td colspan="1" rowspan="1" style="text-align:center">15 kVA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">300 kVA</td><td colspan="1" rowspan="1" style="text-align:center">630 kVA</td><td colspan="1" rowspan="1" style="text-align:center">30 kVA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">400 kVA</td><td colspan="1" rowspan="1" style="text-align:center">750 kVA</td><td colspan="1" rowspan="1" style="text-align:center">45 kVA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">500 kVA</td><td colspan="1" rowspan="1" style="text-align:center">800 kVA</td><td colspan="1" rowspan="1" style="text-align:center">75 kVA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">630 kVA</td><td colspan="1" rowspan="1" style="text-align:center">1 000 kVA</td><td colspan="1" rowspan="1" style="text-align:center">112,5 kVA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">750 kVA</td><td colspan="1" rowspan="1" style="text-align:center">1 250 kVA</td><td colspan="1" rowspan="1" style="text-align:center">150 kVA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">800 kVA</td><td colspan="1" rowspan="1" style="text-align:center">1 600 kVA</td><td colspan="1" rowspan="1" style="text-align:center">225 kVA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">1 000 kVA</td><td colspan="1" rowspan="1" style="text-align:center">2 000 kVA</td><td colspan="1" rowspan="1" style="text-align:center">300 kVA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">1 250 kVA</td><td colspan="1" rowspan="1" style="text-align:center">2 500 kVA</td><td colspan="1" rowspan="1" style="text-align:center">400 kVA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">500 kVA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">630 kVA (<span class="codeInline">**</span>)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">750 kVA (<span class="codeInline">**</span>)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">800 kVA (<span class="codeInline">**</span>)</td></tr></table><br /></div>Notas: Para Alumbrado P&#250;blico se utilizan transformadores de 11400–380/220 V y de  11400-480/277 V de las siguientes capacidades: 30, 45 y 75 kVA.<br />(<span class="codeInline">*</span>) &#201;sta <a href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> corresponde a la que utilice el cliente industrial (Tambi&#233;n puede ser 480/277 V)<br />(<span class="codeInline">**</span>) Para uso industrial de propiedad particular<br />
+<h3 id="heading_3" >Capacidad de transformadores &#225;rea rural</h3>
+Las potencias normalizadas por la <a href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#" id="version-185" class="externalLink  glosarioLink">Empresa</a> para los transformadores de Distribuci&#243;n en &#225;reas rurales y veredal se encuentran en la siguiente tabla:<br /><div style="width:479px;"><table><tr><td colspan="1" rowspan="1" style="width:238px;height:10px;text-align:center"><b>TRIF&#193;SICOS                                                                                                                                                                                                                                                                                                                           13,2 &#243; 11,4 – 208/120 V</b></td><td colspan="1" rowspan="1" style="width:241px;text-align:center"><b>MONOF&#193;SICOS                                                                                                                                                                                                                                                                                                                              13,2 &#243; 11,4  kV – 120/240 V</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">15       kVA</td><td colspan="1" rowspan="1" style="text-align:center">5 kVA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">30       kVA</td><td colspan="1" rowspan="1" style="text-align:center">10 kVA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">45       kVA</td><td colspan="1" rowspan="1" style="text-align:center">15 kVA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">75       kVA</td><td colspan="1" rowspan="1" style="text-align:center">25 kVA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">112,5  kVA</td><td colspan="1" rowspan="1" style="text-align:center">37,5 KVA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">150     kVA</td><td colspan="1" rowspan="1" style="text-align:center">50 KVA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">225     kVA</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">300     kVA</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">400     kVA</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">500     kVA</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">630     kVA</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">750     kVA</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">800     kVA</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">1 000  kVA</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div>El <a href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#" id="version-271" class="externalLink  glosarioLink">mantenimiento</a> de los transformadores se har&#225; de acuerdo con lo indicado en el c&#243;digo de <a href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#" id="version-170" class="externalLink  glosarioLink">distribuci&#243;n de energ&#237;a el&#233;ctrica</a> (Resoluci&#243;n 070 del 8 de junio de 1998) expedida por la Comisi&#243;n de Regulaci&#243;n de Energ&#237;a y Gas CREG.  Lo anterior se har&#225; extensivo a las l&#237;neas de <a href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#" id="version-277" class="externalLink  glosarioLink">Media Tensi&#243;n</a> de uso dedicado que alimentan dichos transformadores.<br /><br />La derivaci&#243;n a&#233;rea que va de la red de <a href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#" id="version-277" class="externalLink  glosarioLink">Media tensi&#243;n</a> al transformador es en No 4 AWG cobre desnudo.<br /><br />De acuerdo  con <a href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#" id="version-354" class="externalLink  glosarioLink">RETIE</a> 2013 numeral 31.4 no se permite el uso de la <a href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> como conductor de retorno, por lo tanto no se pueden utilizar transformadores de un solo buje a 6,6 &#243; 7,6 kV. <br /><br />Un resumen de las conexiones de los transformadores en poste, se encuentran en los diagramas unifilares de las Normas <a href="http://likinormas.micodensa.com/Norma/centros_transformacion_redes_aereas_urbanos_rurales/centros_transformacion_aereos_urbanos_trifasicos/ctu516_diagrama_unifilar_instalacion_transformador_distribucion_trifasico" class="externalLink">CTU 516<span class="externalLinkIcon"></span></a> y <a href="../centros_transformacion_aereos_urbanos_trifasicos/ctu5161_diagrama_unifilar_instalacion_transformador_distribucion_bifilar.html" class="externalLink">CTU 516-1<span class="externalLinkIcon"></span></a>.<br /><br /><b>NOTAS:</b>
+<ul><li>En caso de existir red abierta en <a href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a> “<u>existente</u>” se debe instalar protecci&#243;n en <a href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a>, bien sea con fusibles con su correspondiente <a href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> porta <a href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#" id="version-218" class="externalLink  glosarioLink">fusible</a> o con <a href="ctu_generalidades_centros_distribucion_redes_aereas_urbanas.html#" id="version-240" class="externalLink  glosarioLink">interruptor</a> termo magn&#233;tico. Ver normas de referencia <a href="http://likinormas.micodensa.com/Norma/centros_transformacion_redes_aereas_urbanos_rurales/centros_transformacion_aereos_urbanos_trifasicos/ctu516_diagrama_unifilar_instalacion_transformador_distribucion_trifasico" class="externalLink">CTU 516<span class="externalLinkIcon"></span></a>, <a href="../centros_transformacion_aereos_urbanos_trifasicos/ctu5161_diagrama_unifilar_instalacion_transformador_distribucion_bifilar.html" class="externalLink">CTU 516-1<span class="externalLinkIcon"></span></a>, <a href="../centros_transformacion_aereos_rurales/ctr510_diagrama_unifilar_instalacion_transformador_distribucion.html" class="externalLink">CTR 510<span class="externalLinkIcon"></span></a>, <a href="../../../Especificacion/cajas_armarios_medidores/et_531_tablero_proteccion_baja_tension_montaje_1969.html" class="externalLink">ET-531<span class="externalLinkIcon"></span></a> y <a href="../../../Especificacion/equipos_maniobra_proteccion_sobrecorriente_sobretensiones/et511_seccionador_portafusible.html" class="externalLink">ET-511<span class="externalLinkIcon"></span></a>.</li></ul>
+<br /><br /><br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 1247, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

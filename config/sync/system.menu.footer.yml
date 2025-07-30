@@ -1,0 +1,10 @@
+uuid: 81b41794-f6f6-44e0-b0b3-ea4e01a78d13
+langcode: es
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 7yrlW5z9zdg2eBucB2GPqXKSMQfH9lSRSO4DbWF7AFc
+id: footer
+label: CONTACTO
+description: 'Enlaces de información del sitio'
+locked: true

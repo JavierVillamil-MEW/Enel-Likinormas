@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET351 Grapa de suspensión metálica para MT | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/497" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F497.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/497" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/497" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '23');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET351 Grapa de suspensi&#243;n met&#225;lica para MT</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET351</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">02/12/2019</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/497">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F497&amp;nodoid=497', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et351_grapa_suspension_metalica_mt.html#heading_0">1. OBJETO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et351_grapa_suspension_metalica_mt.html#heading_1">2. ALCANCE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et351_grapa_suspension_metalica_mt.html#heading_2">3. CONDICIONES  DE  SERVICIO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et351_grapa_suspension_metalica_mt.html#heading_3">4. SISTEMA  DE  UNIDADES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et351_grapa_suspension_metalica_mt.html#heading_4">5. NORMAS  DE  FABRICACI&#211;N  Y  PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et351_grapa_suspension_metalica_mt.html#heading_5">6. REQUISITOS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et351_grapa_suspension_metalica_mt.html#heading_6">6.1.  MATERIAS PRIMAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et351_grapa_suspension_metalica_mt.html#heading_7">6.2. DETALLES CONSTRUCTIVOS </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et351_grapa_suspension_metalica_mt.html#heading_8">6.3	 REQUISITOS QU&#205;MICOS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et351_grapa_suspension_metalica_mt.html#heading_9">6.4. TRATAMIENTO T&#201;RMICO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et351_grapa_suspension_metalica_mt.html#heading_10">6.5.  REQUISITOS MEC&#193;NICOS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et351_grapa_suspension_metalica_mt.html#heading_11">6.6. REQUISITOS DE RECUBRIMIENTO </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et351_grapa_suspension_metalica_mt.html#heading_12">6.7. REQUISITOS DE ACABADO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et351_grapa_suspension_metalica_mt.html#heading_13">6.8. ACCESORIOS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et351_grapa_suspension_metalica_mt.html#heading_14"> 7. CRITERIOS DE ACEPTACI&#211;N O RECHAZO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et351_grapa_suspension_metalica_mt.html#heading_15">8. PRUEBAS </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et351_grapa_suspension_metalica_mt.html#heading_16">8.1 PRUEBAS TIPO</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et351_grapa_suspension_metalica_mt.html#heading_17"> 8.1.1 Verificaci&#243;n visual y dimensional</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et351_grapa_suspension_metalica_mt.html#heading_18"> 8.1.2. Pruebas de deslizamiento</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et351_grapa_suspension_metalica_mt.html#heading_19"> 8.1.3. Prueba de rotura</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et351_grapa_suspension_metalica_mt.html#heading_20"> 8.1.4. Pruebas de envejecimiento clim&#225;tico y corrosi&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et351_grapa_suspension_metalica_mt.html#heading_21"> 8.1.5 Pruebas de Galvanizado</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et351_grapa_suspension_metalica_mt.html#heading_22"> 8.1.6 Otros</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et351_grapa_suspension_metalica_mt.html#heading_23">8.2	PRUEBAS DE RECEPCI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et351_grapa_suspension_metalica_mt.html#heading_24">9.	EMPAQUE Y ROTULADO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et351_grapa_suspension_metalica_mt.html#heading_25">9.1.	EMPAQUE</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et351_grapa_suspension_metalica_mt.html#heading_26">9.2.	ROTULADO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et351_grapa_suspension_metalica_mt.html#heading_27">9.3. MARCACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et351_grapa_suspension_metalica_mt.html#heading_28">10. PRESENTACI&#211;N DE LAS OFERTAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et351_grapa_suspension_metalica_mt.html#heading_29">ANEXO 1. CARACTER&#205;STICAS T&#201;CNICAS</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1. OBJETO</h2>
+Esta especificaci&#243;n <a href="et351_grapa_suspension_metalica_mt.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a> tiene por objeto establecer las caracter&#237;sticas y requisitos t&#233;cnicos que deben satisfacer las grapas de suspensi&#243;n para l&#237;neas a&#233;reas de media tensi&#243;n en sistemas de  distribuci&#243;n.<br />
+<h2 id="heading_1" >2. ALCANCE</h2>
+Esta especificaci&#243;n t&#233;cnica se aplicar&#225; en todas las grapas de suspensi&#243;n met&#225;licas para l&#237;neas a&#233;reas de media tensi&#243;n que adquiera ENEL CODENSA.<br />
+<h2 id="heading_2" >3. CONDICIONES  DE  SERVICIO</h2>
+Las grapas se utilizar&#225;n en las siguientes condiciones:<br /><div style="width:470px;"><table><tr><td colspan="2" rowspan="1" style="width:470px;height:30px;text-align:center"><b>CARACTER&#205;STICAS  AMBIENTALES</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Altura sobre el nivel del mar</td><td colspan="1" rowspan="1" style="">2 700 m.s.n.m.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Ambiente</td><td colspan="1" rowspan="1" style="">Tropical</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Humedad relativa</td><td colspan="1" rowspan="1" style="">Desde 20 % al 100 %</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Temperatura</td><td colspan="1" rowspan="1" style="">-5 &#176;C a 45 &#176;C</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Poluci&#243;n</td><td colspan="1" rowspan="1" style="">Media</td></tr></table><br /></div>Las grapas son elementos mec&#225;nicos que trabajan a tracci&#243;n y cuya &#250;nica funci&#243;n es suspender el <a href="et351_grapa_suspension_metalica_mt.html#" id="version-107" class="externalLink  glosarioLink">cable</a> en las l&#237;neas a&#233;reas de <a href="et351_grapa_suspension_metalica_mt.html#" id="version-277" class="externalLink  glosarioLink">media tensi&#243;n</a>, estos elementos ser&#225;n empleados a la intemperie. <br /><br />Las grapas deben permitir sujetar los siguientes cables:<br /><br /><div style="width:752px;"><table><tr><td colspan="1" rowspan="1" style="width:92px;height:38px;text-align:center"><b>#</b></td><td colspan="1" rowspan="1" style="width:142px;text-align:center"><b>Global</b></td><td colspan="1" rowspan="1" style="width:102px;text-align:center"><b>SAP</b></td><td colspan="1" rowspan="1" style="width:92px;text-align:center"><b>Tipo</b></td><td colspan="1" rowspan="1" style="width:162px;text-align:center"><b>Norma</b></td><td colspan="1" rowspan="1" style="width:162px;text-align:center"><b>Descripci&#243;n</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:right">1</td><td colspan="1" rowspan="1" style="text-align:right">GSC003.3</td><td colspan="1" rowspan="1" style="text-align:right">6762276</td><td colspan="1" rowspan="1" style="text-align:right">ACSR</td><td colspan="1" rowspan="1" style="text-align:right">ASTM B 232/B 232M</td><td colspan="1" rowspan="1" style="text-align:right">Raven 1/0 AWG </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:33px;text-align:right">2</td><td colspan="1" rowspan="1" style="text-align:right">GSC003.4</td><td colspan="1" rowspan="1" style="text-align:right">6762335</td><td colspan="1" rowspan="1" style="text-align:right">ACSR</td><td colspan="1" rowspan="1" style="text-align:right">ASTM B 232/B 232M</td><td colspan="1" rowspan="1" style="text-align:right">Quail. 2/0 AWG </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:33px;text-align:right">3</td><td colspan="1" rowspan="1" style="text-align:right">GSC003.5</td><td colspan="1" rowspan="1" style="text-align:right">6762309</td><td colspan="1" rowspan="1" style="text-align:right">ACSR</td><td colspan="1" rowspan="1" style="text-align:right">ASTM B 232/B 232M</td><td colspan="1" rowspan="1" style="text-align:right">Penguin. 4/0 AWG</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:33px;text-align:right">4</td><td colspan="1" rowspan="1" style="text-align:right">GSC003.6</td><td colspan="1" rowspan="1" style="text-align:right">6762293</td><td colspan="1" rowspan="1" style="text-align:right">ACSR</td><td colspan="1" rowspan="1" style="text-align:right">ASTM B 232/B 232M</td><td colspan="1" rowspan="1" style="text-align:right">Partridge. 266,8 kcmil</td></tr></table><br /></div><br />Preferiblemente como una sola unidad.<br />
+<h2 id="heading_3" >4. SISTEMA  DE  UNIDADES</h2>
+Todos los documentos tanto de la propuesta como del contrato de suministro, deben expresar las cantidades num&#233;ricas en unidades del sistema internacional (SI). Si el oferente utiliza en sus libros de instrucci&#243;n, folletos o dibujos, unidades en sistemas diferentes, debe hacer las conversiones respectivas.<br /> 
+<h2 id="heading_4" >5. NORMAS  DE  FABRICACI&#211;N  Y  PRUEBAS</h2>
+<div style="width:800px;"><table><tr><td colspan="1" rowspan="1" style="width:100px;height:37px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:700px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC 2076</td><td colspan="1" rowspan="1" style="">Recubrimiento de zinc por inmersi&#243;n en caliente para elementos en hierro y acero.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC 2772</td><td colspan="1" rowspan="1" style="">Electrotecnia. Herrajes y accesorios para redes y l&#237;neas a&#233;reas de distribuci&#243;n de energ&#237;a el&#233;ctrica. Grapas de suspensi&#243;n</td></tr></table><br /></div><br />Pueden emplearse otras normas internacionalmente reconocidas equivalentes o superiores a las aqu&#237; se&#241;aladas, siempre y cuando se ajusten a lo solicitado en la presente especificaci&#243;n t&#233;cnica.<br />Las normas citadas en la presente especificaci&#243;n (o cualquier otra que llegare a ser aceptada por ENEL CODENSA) se refieren a su &#250;ltima revisi&#243;n.<br />
+<h2 id="heading_5" >6. REQUISITOS</h2>   
+<h3 id="heading_6" >6.1.  MATERIAS PRIMAS</h3>
+Las grapas de suspensi&#243;n estar&#225;n construidas con materiales de la mejor <a href="et351_grapa_suspension_metalica_mt.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> para ese fin, debi&#233;ndose descartar el empleo de materiales alterables por la humedad, radiaci&#243;n solar y otras condiciones ambientales desfavorables.<br /><br />Las grapas se pueden fabricar en cualquiera de los materiales de la tabla, teniendo en cuenta el <a href="et351_grapa_suspension_metalica_mt.html#" id="version-274" class="externalLink  glosarioLink">material</a> del <a href="et351_grapa_suspension_metalica_mt.html#" id="version-107" class="externalLink  glosarioLink">cable</a> que est&#225; en contacto con la grapa, para minimizar el par galv&#225;nico y la p&#233;rdida de potencia debida al calentamiento por efecto magn&#233;tico.<br /><br />Deben fabricarse en cualquiera de los siguientes procesos: fundici&#243;n en arena, fundici&#243;n a presi&#243;n, fundici&#243;n en moldes permanentes o semipermanentes y por forja.<br /><br /><br /><div style="width:750px;"><table><tr><td colspan="1" rowspan="1" style="width:320px;height:30px;text-align:center"><b><a href="et351_grapa_suspension_metalica_mt.html#" id="version-274" class="externalLink  glosarioLink">MATERIAL</a> DEL <a href="et351_grapa_suspension_metalica_mt.html#" id="version-107" class="externalLink  glosarioLink">CABLE</a></b></td><td colspan="1" rowspan="1" style="width:430px;text-align:center"><b><a href="et351_grapa_suspension_metalica_mt.html#" id="version-274" class="externalLink  glosarioLink">MATERIAL</a> DE LA GRAPA</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:24px;text-align:center">De aleaci&#243;n de aluminio</td><td colspan="1" rowspan="1" style="text-align:center">De aleaci&#243;n de aluminio 356-T6 o equivalente</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:24px;text-align:center">De aluminio y alma de acero (<a href="et351_grapa_suspension_metalica_mt.html#" id="version-107" class="externalLink  glosarioLink">cable</a> ACSR)</td><td colspan="1" rowspan="1" style="text-align:center">De aluminio o aleaci&#243;n de aluminio 356-T6 o equivalente</td></tr></table><br /></div><b>TABLA No. 1</b><br />
+<h3 id="heading_7" >6.2. DETALLES CONSTRUCTIVOS </h3>
+La grapa de suspensi&#243;n se compone del cuerpo y la mordaza.<br /> <br />Ser&#225; dise&#241;ada de tal forma que permita el desplazamiento lateral del conductor en un &#225;ngulo de 30&#176; como m&#225;ximo, a uno y otro lado del plano vertical, y adem&#225;s que, aplicando un esfuerzo longitudinal sobre el conductor, el conjunto describa una traslaci&#243;n paralela.<br /><br />El <a href="et351_grapa_suspension_metalica_mt.html#" id="version-274" class="externalLink  glosarioLink">material</a> estar&#225; libre de grietas, cavidades, sopladuras, defectos superficiales o internos y de cualquier <a href="et351_grapa_suspension_metalica_mt.html#" id="version-204" class="externalLink  glosarioLink">falla</a> que pudiera afectar su correcto funcionamiento.<br /><br />La grapa de suspensi&#243;n tendr&#225; los elementos necesarios para lograr los grados de movimiento indicados. Los componentes del conjunto de suspensi&#243;n ser&#225;n imperdibles entre s&#237;.<br /><br />Tendr&#225;n un dise&#241;o racional tal que no origine sobre el conductor esfuerzos concentrados que produzcan su deterioro. La garganta de la grapa donde se aloje el conductor deber&#225; tener un perfil adecuado, sin aristas vivas ni radios de curvatura peque&#241;os, en todos los puntos que puedan tomar contacto con el <a href="et351_grapa_suspension_metalica_mt.html#" id="version-107" class="externalLink  glosarioLink">cable</a>.<br />
+<h3 id="heading_8" >6.3	 REQUISITOS QU&#205;MICOS</h3>
+El cuerpo de la grapa pueden ser de cualquier <a href="et351_grapa_suspension_metalica_mt.html#" id="version-274" class="externalLink  glosarioLink">material</a> de los indicados en la tabla No.2, que cumpla con las exigencias mec&#225;nicas establecidas en la tabla No. 3.<br /><br /><div style="width:400px;"><table><tr><td colspan="1" rowspan="1" style="width:200px;height:30px;text-align:center"><b>TIPO DE <a href="et351_grapa_suspension_metalica_mt.html#" id="version-274" class="externalLink  glosarioLink">MATERIAL</a>:</b></td><td colspan="1" rowspan="1" style="width:200px;text-align:center"><b>ALEACI&#211;N DE ALUMINIO A 356</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">% Manganeso</td><td colspan="1" rowspan="1" style="text-align:center">0,1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">% Silicio</td><td colspan="1" rowspan="1" style="text-align:center">6,50 a 7,50</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">% Magnesio</td><td colspan="1" rowspan="1" style="text-align:center">0,25 a 0,40</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">% Cobre</td><td colspan="1" rowspan="1" style="text-align:center">0,1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">% Hierro</td><td colspan="1" rowspan="1" style="text-align:center">0,4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">% Zinc</td><td colspan="1" rowspan="1" style="text-align:center">0,1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">% Titanio</td><td colspan="1" rowspan="1" style="text-align:center">0,2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">% Aluminio</td><td colspan="1" rowspan="1" style="text-align:center">91,2</td></tr></table><br /></div><b>TABLA No. 2</b><br />
+<h3 id="heading_9" >6.4. TRATAMIENTO T&#201;RMICO</h3>
+La letra “T” del tratamiento t&#233;rmico, significa que es tratado t&#233;rmicamente con anterioridad al &#250;ltimo tratamiento t&#233;rmico.<br /><br />El tratamiento T6 significa que es solubilizado, enfriado r&#225;pidamente en sales y envejecido artificialmente.<br />
+<h3 id="heading_10" >6.5.  REQUISITOS MEC&#193;NICOS</h3>
+Las grapas deben cumplir  satisfactoriamente con los requisitos de resistencia que se dan en la siguiente tabla:<br /><br /><div style="width:500px;"><table><tr><td colspan="1" rowspan="1" style="width:200px;height:35px;text-align:center"><b>TIPO DE GRAPA</b></td><td colspan="1" rowspan="1" style="width:150px;text-align:center"><b>DESLIZAMIENTO</b></td><td colspan="1" rowspan="1" style="width:150px;text-align:center"><b>ROTURA</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">Grapa de suspensi&#243;n  </td><td colspan="1" rowspan="1" style="text-align:center">25</td><td colspan="1" rowspan="1" style="text-align:center">60</td></tr></table><br /></div><b>Tabla 3.</b><br />
+<h3 id="heading_11" >6.6. REQUISITOS DE RECUBRIMIENTO </h3>
+Los elementos ferrosos ser&#225;n totalmente galvanizados por inmersi&#243;n en caliente y deber&#225;n cumplir con lo especificado en la NTC 2076 y deben estar libres de burbujas, &#225;reas sin revestimiento, dep&#243;sitos de escoria, escoriaciones o cualquier otra imperfecci&#243;n.<br /><br />Para zonas contaminadas se especificar&#225;n galvanizados superiores, como se indica en la tabla siguiente:<br /><br /><div style="width:370px;"><table><tr><td colspan="1" rowspan="1" style="width:200px;height:41px;text-align:center"><b>APLICACI&#211;N</b></td><td colspan="1" rowspan="1" style="width:90px;text-align:center"><b>PROMEDIO gr/m<sup>2</sup></b></td><td colspan="1" rowspan="1" style="width:80px;text-align:center"><b>M&#205;NIMO gr/m<sup>2</sup></b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">Elementos ferrosos</td><td colspan="1" rowspan="1" style="text-align:center">825</td><td colspan="1" rowspan="1" style="text-align:center">750</td></tr></table><br /></div><b>Tabla 4.</b><br />
+<h3 id="heading_12" >6.7. REQUISITOS DE ACABADO</h3>
+Las grapas deber&#225;n estar libres de deformaciones, aristas cortantes y rellenos. La superficie de contacto entre el conductor y la grapa debe ser completamente lisa y exenta de bordes cortantes que puedan tallar el conductor.<br />
+<h3 id="heading_13" >6.8. ACCESORIOS</h3>
+Los pernos en U deber&#225;n fabricarse en acero de grado tal que la grapa cumpla con las caracter&#237;sticas mec&#225;nicas (deslizamiento y resistencia a la tensi&#243;n),siguiendo la <a href="et465_grapa_tipo_grillete.html" class="externalLink">ET465<span class="externalLinkIcon"></span></a> en lo que se refiere al perno en U. El roscado puede efectuarse por laminado o por corte y rectificado. <br /><br />La rosca no deber&#225; reparase despu&#233;s del galvanizado. Las dimensiones de la rosca ser&#225;n standard.<br /><br />Los pisa cables y cualquier otro elemento que este en contacto con el conductor se construir&#225;n con la misma aleaci&#243;n de la grapa y recibir&#225; el mismo tratamiento t&#233;rmico.<br /><br />Las arandelas de presi&#243;n deber&#225;n cumplir con la <a href="et462_arandelas_acero_galvanizado.html" class="externalLink">ET462<span class="externalLinkIcon"></span></a>. Las tuercas deber&#225;n cumplir con los requisitos establecidos en la <a href="et463_tuerca_acero_galvanizado.html" class="externalLink">ET463<span class="externalLinkIcon"></span></a>.   <br />
+<h2 id="heading_14" > 7. CRITERIOS DE ACEPTACI&#211;N O RECHAZO</h2>
+Si el n&#250;mero de elementos defectuosos es menor o igual al correspondiente n&#250;mero de defectuosos definidos a continuaci&#243;n, se deber&#225; considerar que el lote cumple con los requisitos t&#233;cnicos exigidos por ENEL CODENSA, en caso contrario, el lote se rechazar&#225;.<br /><br /><b>Inspecci&#243;n Visual y Dimensional</b> <br /><br />De acuerdo a la tabla a continuaci&#243;n.<br /><br /><div style="width:644px;"><table><tr><td colspan="4" rowspan="1" style="width:644px;height:20px;text-align:center">Tabla inspecci&#243;n visual y dimensional</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">Tama&#241;o del lote</td><td colspan="1" rowspan="1" style="text-align:center">Muestra</td><td colspan="1" rowspan="1" style="text-align:center">Aceptado</td><td colspan="1" rowspan="1" style="text-align:center">Rechazado</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">2 a 8</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">9 a 15</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">16 a 25</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">26 a 50</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">51 a 90</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">91 a 150</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">151 a 280</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">281 a 500</td><td colspan="1" rowspan="1" style="text-align:center">20</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">501 a 1200</td><td colspan="1" rowspan="1" style="text-align:center">32</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1201 a 3200</td><td colspan="1" rowspan="1" style="text-align:center">50</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">3201 a 10000</td><td colspan="1" rowspan="1" style="text-align:center">80</td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">7</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">10001 a 35000</td><td colspan="1" rowspan="1" style="text-align:center">125</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">9</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">35001 a 150000</td><td colspan="1" rowspan="1" style="text-align:center">200</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">11</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">150001 a 500000</td><td colspan="1" rowspan="1" style="text-align:center">315</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">11</td></tr></table><br /></div><b>TABLA  5. Plan de muestreo para inspecci&#243;n visual y dimensional.</b><br /><br /><b>Ensayos Mec&#225;nicos</b> <br /><br />De acuerdo a la tabla a continuaci&#243;n.<br /><br /><div style="width:644px;"><table><tr><td colspan="4" rowspan="1" style="width:644px;height:20px;text-align:center">Tabla inspecci&#243;n visual y dimensional</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">Tama&#241;o del lote</td><td colspan="1" rowspan="1" style="text-align:center">Muestra</td><td colspan="1" rowspan="1" style="text-align:center">Aceptado</td><td colspan="1" rowspan="1" style="text-align:center">Rechazado</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">2 a 8</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">9 a 15</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">16 a 25</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">26 a 50</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">51 a 90</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">91 a 150</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">151 a 280</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">281 a 500</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">501 a 1200</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1201 a 3200</td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">3201 a 10000</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">10001 a 35000</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">35001 a 150000</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">150001 a 500000</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr></table><br /></div><b>TABLA 6. Plan de muestreo para pruebas mec&#225;nicas.</b><br />
+<h2 id="heading_15" >8. PRUEBAS </h2>
+Las pruebas tipo ser&#225;n efectuados sobre cada nuevo modelo de fabricaci&#243;n o ante cualquier modificaci&#243;n de un modelo ya aprobado.<br />
+<h3 id="heading_16" >8.1 PRUEBAS TIPO</h3>
+Las pruebas tipo son:<br /><br />•	Verificaci&#243;n visual y dimensional<br />•	Pruebas de deslizamiento<br />•	Prueba de rotura<br />•	Pruebas de envejecimiento clim&#225;tico y corrosi&#243;n<br />•	Pruebas de Galvanizado<br /><br />•	Ensayo de dureza 
+<ol><li>Grapa sin tratamiento t&#233;rmico</li>
+<li>Grapa con tratamiento t&#233;rmico de solubilizaci&#243;n</li>
+<li>Grapa con todos los tratamientos t&#233;rmicos</li></ol>
+<br />•	Ensayo metalogr&#225;fico
+<ol><li>Grapa sin tratamiento t&#233;rmico</li>
+<li>Grapa con tratamiento t&#233;rmico de solubilizaci&#243;n</li>
+<li>Grapa con todos los tratamientos t&#233;rmicos</li></ol>
+<br />•	An&#225;lisis qu&#237;mico
+<ol><li>Grapa sin tratamiento t&#233;rmico</li>
+<li>Grapa con tratamiento t&#233;rmico de solubilizaci&#243;n</li>
+<li>Grapa con todos los tratamientos t&#233;rmicos</li></ol>
+
+<h4 id="heading_17" > 8.1.1 Verificaci&#243;n visual y dimensional</h4>
+Se verificar&#225; la correcta terminaci&#243;n, caracter&#237;sticas constructivas e identificaci&#243;n del material, de acuerdo a lo indicado en el numeral 6.<br /><br />La verificaci&#243;n de las dimensiones se har&#225; con los instrumentos de medida que den la aproximaci&#243;n requerida (cinta met&#225;lica con divisiones de 1 mm para longitudes y calibrador para los di&#225;metros y espesores). El tama&#241;o de la muestra deber&#225; estar de acuerdo con la tabla 5.<br />
+<h4 id="heading_18" > 8.1.2. Pruebas de deslizamiento</h4>
+Las pruebas se realizar&#225;n a una temperatura ambiente de 20 * 5&#176; C.<br /><br />Las grapas de suspensi&#243;n se instalar&#225;n en condiciones similares a las de servicio. <br /><br />El ensayos se realiza con el cable para el cual ha sido dise&#241;ado de acuerdo con el montaje mostrado en la figura 2. La carga es aplicada gradualmente hasta llegar al valor de la carga de prueba seg&#250;n lo indicado en la tabla 3, manteni&#233;ndose durante un minuto, para luego verificar si ocurri&#243; el deslizamiento. Debe emplearse un dispositivo que impida el deslizamiento del cable en la grapa mordaza.   <br /><br />El torque para las tuercas de las grapas en U ser&#225; el adecuado para el di&#225;metro.<br />
+<h4 id="heading_19" > 8.1.3. Prueba de rotura</h4>
+El ensayo se efect&#250;a de acuerdo al montaje mostrado en la figura 1 sometiendo la grapa a la carga hasta llegar a la rotura y el valor obtenido deber&#225; cumplir con lo dispuesto en la tabla 3 teniendo en cuenta para la prueba el conductor de mayor calibre a sujetar por la grapa. La velocidad de aplicaci&#243;n de la carga ser&#225; como m&#225;ximo 10 mm/min. El torque de las tuercas y de las grapas en U ser&#225; el adecuado para el di&#225;metro de la respectiva grapa.<br />
+<h4 id="heading_20" > 8.1.4. Pruebas de envejecimiento clim&#225;tico y corrosi&#243;n</h4>
+Estas pruebas se deben realizar, en grapas de suspensi&#243;n que est&#233;n construidos con materiales  combinados, seg&#250;n el siguiente detalle:<br />
+<ul><li>Ensayo de corrosi&#243;n, para grapas construidas parcialmente con componentes met&#225;licos.</li>
+<li>Ensayo de envejecimiento clim&#225;tico seguido del ensayo de corrosi&#243;n para los elementos combinados.</li></ul>
+<br />Las grapas que por su construcci&#243;n sean sometidas al ensayo de corrosi&#243;n, finalizada esta prueba no deber&#225;n presentar corrosi&#243;n localizada.<br /><br />Adem&#225;s de los ensayos de envejecimiento clim&#225;tico y/o de corrosi&#243;n, deber&#225;n cumplir satisfactoriamente con los ensayos de deslizamiento, de tracci&#243;n y rigidez diel&#233;ctrica.<br />
+<h4 id="heading_21" > 8.1.5 Pruebas de Galvanizado</h4>
+Esta prueba se har&#225; solo a los accesorios ferrosos de acuerdo a la norma NTC 2076.<br />
+<h4 id="heading_22" > 8.1.6 Otros</h4>
+Adicionalmente a la prueba mec&#225;nica y como parte de esta, el proveedor entregar&#225; una grapa que se extraer&#225; del lote despu&#233;s de la fundici&#243;n y antes de los tratamientos t&#233;rmicos; se extraer&#225; otra grapa despu&#233;s del tratamiento t&#233;rmico de solubilizaci&#243;n y antes del tratamiento final de envejecimiento; y finalmente se extraer&#225; una grapa del lote con todos sus tratamientos t&#233;rmicos; estas muestras ser&#225;n sometidas en un laboratorio autorizado por ENEL CODENSA a las siguientes pruebas:
+<ul><li>Prueba de dureza</li>
+<li>Examen metalogr&#225;fico.</li>
+<li>An&#225;lisis qu&#237;mico.</li></ul>
+<br />El laboratorio deber&#225; certificar que los diferentes tratamientos t&#233;rmicos fueron adecuados.<br />
+<h3 id="heading_23" >8.2	PRUEBAS DE RECEPCI&#211;N</h3>
+Las pruebas de recepci&#243;n son:<br /><br />•	Inspecci&#243;n Visual<br />•	Verificaci&#243;n Dimensional<br />•	Ensayo de Tracci&#243;n (deslizamiento)<br />•	Verificaci&#243;n Certificados de Calidad<br />•	Verificaci&#243;n Espesor de Galvanizado<br />•	Ensayo de Dureza<br />•	Ensayo de Rotura<br />
+<h2 id="heading_24" >9.	EMPAQUE Y ROTULADO</h2>
+<h3 id="heading_25" >9.1.	EMPAQUE</h3>
+Los conjuntos de suspensi&#243;n, debidamente armados, se proveer&#225;n acondicionados dentro de cajas de cart&#243;n corrugado o en un empaque similar de tal manera que no sufran durante el transporte, manipulaci&#243;n y almacenamiento. Cada uno de estos empaques puede contener hasta 25 unidades.<br />
+<h3 id="heading_26" >9.2.	ROTULADO</h3>
+En cada caja se colocar&#225; un r&#243;tulo con la siguiente informaci&#243;n:
+<ul><li>Especificaci&#243;n del contenido con su referencia.</li>
+<li>Nombre y raz&#243;n social del proveedor.</li>
+<li>Pa&#237;s de origen.</li>
+<li>Cantidad de elementos.</li>
+<li>Peso unitario, peso total bruto y neto.</li>
+<li>N&#250;mero de contrato o pedido.</li>
+<li>Fecha de entrega.</li>
+<li>C&#243;digo de Almac&#233;n.</li></ul>
+
+<h3 id="heading_27" >9.3. MARCACI&#211;N</h3>
+El material debe cumplir la siguiente marcaci&#243;n en bajo o en alto relieve. No se acepta pintura ni calcoman&#237;a.<br /><br />•	Logo del fabricante<br />•	Lote<br />•	ENEL CODENSA<br />•	Mes y a&#241;o de fabricaci&#243;n<br />•	Rango de Uso<br />
+<h2 id="heading_28" >10. PRESENTACI&#211;N DE LAS OFERTAS</h2>
+Para su an&#225;lisis, ser&#225; imprescindible que la oferta incluya la siguiente documentaci&#243;n:<br />
+<ul><li>Relaci&#243;n de los bienes cotizados.</li>
+<li>Protocolos de los ensayos requeridos en esta especificaci&#243;n t&#233;cnica. Deber&#225; constar la metodolog&#237;a aplicada, los valores y resultados del ensayo.</li>
+<li>Cat&#225;logos originales, completos y actualizados del fabricante, que correspondan a los elementos cotizados en la planilla de caracter&#237;sticas t&#233;cnicas garantizadas.</li>
+<li>El proponente debe llenar la tabla de caracter&#237;sticas t&#233;cnicas solicitadas en el anexo 1 completamente diligenciado en formato Excel.</li>
+<li>El oferente adjuntar&#225; con su propuesta el certificado de conformidad de producto con noma t&#233;cnica y con RETIE, expedido por una entidad acreditada por ONAC. Adem&#225;s, deber&#225; presentar el certificado del sistema de gesti&#243;n de calidad del fabricante.</li>
+<li>Relaci&#243;n de clientes, como evidencia de su capacidad t&#233;cnica y experiencias relacionadas con los materiales cotizados.</li>
+<li>En caso que se requiera se podr&#225;n exigir muestras de cada uno de los elementos ofertados sin cargo a devoluci&#243;n, con las caracter&#237;sticas t&#233;cnicas, solicitadas y mencionadas en la presente especificaci&#243;n.</li>
+<li>Se deben relacionar las excepciones de car&#225;cter exclusivamente t&#233;cnico de la oferta, respecto a los bienes solicitados. Si la oferta no presenta excepci&#243;n, se indicar&#237;a expresamente.</li>
+<li>Informaci&#243;n adicional que considere aporta explicaci&#243;n a su dise&#241;o (dibujos, detalles, caracter&#237;sticas de operaci&#243;n, dimensiones y pesos de los materiales ofertados).</li></ul>
+<br />ENEL CODENSA podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones, sin expresi&#243;n de causa ni obligaci&#243;n de compensaci&#243;n.<br /><br />Figura 1. Ensayo de rotura<br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/497/Dibujo ET 351 FIG 1.JPG" src="http://likinormas.micodensa.com/media/cache/images/800x800/wikiimages/2d333034373634393934-26150-Dibujo ET 351 FIG 1.JPG" title="Figura 1. ENSAYO DE ROTURA"  /></div><div class="texto_imagen_articulos" style="max-width:800px">Figura 1. ENSAYO DE ROTURA</div></div></div><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/497/ET351(2).jpg" src="../../media/cache/images/800x800/wikiimages/31333938313730333637-424222-ET351(2).jpg" title="FIGURA 2. PRUEBA DE DESLIZAMIENTO"  /></div><div class="texto_imagen_articulos" style="max-width:800px">FIGURA 2. PRUEBA DE DESLIZAMIENTO</div></div></div><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/497/ET351(3).jpg" src="../../media/cache/images/800x800/wikiimages/31333936313338373531-442093-ET351(3).jpg" title="FIGURA 3. FORMA Y DIMENSIONES"  /></div><div class="texto_imagen_articulos" style="max-width:800px">FIGURA 3. FORMA Y DIMENSIONES</div></div></div><br /><b>TABLA No. 7</b><br /><div style="width:850px;"><table><tr><td colspan="2" rowspan="1" style="width:150px;height:21px;text-align:center"><b><span class="codeInline">&#216;</span> DEL <a href="et351_grapa_suspension_metalica_mt.html#" id="version-107" class="externalLink  glosarioLink">CABLE</a></b></td><td colspan="2" rowspan="1" style="width:150px;text-align:center"><b>CAL. AWG</b></td><td colspan="1" rowspan="1" style="width:70px;text-align:center"><b>A</b></td><td colspan="1" rowspan="1" style="width:70px;text-align:center"><b>B</b></td><td colspan="1" rowspan="1" style="width:70px;text-align:center"><b>C</b></td><td colspan="1" rowspan="1" style="width:70px;text-align:center"><b>D</b></td><td colspan="1" rowspan="1" style="width:70px;text-align:center"><b>E</b></td><td colspan="1" rowspan="2" style="width:200px;text-align:center"><b>Carga de rotura del conductor mayor (kN)</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center"><b>Min</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Max</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Min</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Max</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>mm</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>mm</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>mm</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>mm</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>mm</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:24px;text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">12</td><td colspan="1" rowspan="1" style="text-align:center">4</td><td colspan="1" rowspan="1" style="text-align:center">2/0</td><td colspan="1" rowspan="1" style="text-align:center">140</td><td colspan="1" rowspan="1" style="text-align:center">55</td><td colspan="1" rowspan="1" style="text-align:center">20</td><td colspan="1" rowspan="1" style="text-align:center">16</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">23,57</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">12</td><td colspan="1" rowspan="1" style="text-align:center">14</td><td colspan="1" rowspan="1" style="text-align:center">2/0</td><td colspan="1" rowspan="1" style="text-align:center">4/0</td><td colspan="1" rowspan="1" style="text-align:center">180</td><td colspan="1" rowspan="1" style="text-align:center">60</td><td colspan="1" rowspan="1" style="text-align:center">20</td><td colspan="1" rowspan="1" style="text-align:center">16</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">14</td><td colspan="1" rowspan="1" style="text-align:center">23</td><td colspan="1" rowspan="1" style="text-align:center">2/0</td><td colspan="1" rowspan="1" style="text-align:center">266.8</td><td colspan="1" rowspan="1" style="text-align:center">180</td><td colspan="1" rowspan="1" style="text-align:center">60</td><td colspan="1" rowspan="1" style="text-align:center">25</td><td colspan="1" rowspan="1" style="text-align:center">16</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">50,11</td></tr></table><br /></div><i><b>Nota:</b> La dimensi&#243;n C corresponde a un valor m&#237;nimo. Las otras dimensiones son de referencia</i><br />
+<h2 id="heading_29" >ANEXO 1. CARACTER&#205;STICAS T&#201;CNICAS</h2><div style="width:800px;"><table><tr><td colspan="1" rowspan="1" style="width:30px;height:35px;text-align:center"><b>N&#176;</b></td><td colspan="2" rowspan="1" style="width:650px;text-align:center"><b>DESCRIPCI&#211;N</b></td><td colspan="1" rowspan="1" style="width:120px;text-align:center"><b>OFERTADO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1</td><td colspan="2" rowspan="1" style="">Oferente</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">2</td><td colspan="2" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">3</td><td colspan="2" rowspan="1" style="">Pa&#237;s de origen</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">4</td><td colspan="2" rowspan="1" style="">Referencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">5</td><td colspan="2" rowspan="1" style="">Normas de fabricaci&#243;n y ensayos</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="2" style="height:20px;text-align:center">6</td><td colspan="1" rowspan="2" style="width:200px;">Rangos de sujeci&#243;n (calibre o di&#225;metro de conductor)</td><td colspan="1" rowspan="1" style="width:400px;">M&#237;nimo</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">M&#225;ximo</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:20px;text-align:center">7</td><td colspan="1" rowspan="5" style="">Dimensiones de referencia</td><td colspan="1" rowspan="1" style="">A</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">B</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">C</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">D</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">E</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="2" style="height:20px;text-align:center">8</td><td colspan="1" rowspan="2" style="">Material de fabricaci&#243;n</td><td colspan="1" rowspan="1" style="">Grapa (Indicar tratamiento t&#233;rmico)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Pernos en U</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">9</td><td colspan="2" rowspan="1" style="">Accesorios incluidos (Indicar cuales y que cantidad)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">10</td><td colspan="2" rowspan="1" style="">Proceso de fabricaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">11</td><td colspan="2" rowspan="1" style="">Resistencia minima de deslizamiento</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">12</td><td colspan="2" rowspan="1" style="">Resistencia minima de rotura</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">13</td><td colspan="2" rowspan="1" style="">Presentan protocolos de pruebas (Si/No) y de que pruebas</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">14</td><td colspan="2" rowspan="1" style="">Cumple con las condiciones de empaque, rotulado y marcaci&#243;n seg&#250;n la ET-350</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:20px;"><b>RESULTADO DE LA EVALUACI&#211;N T&#201;CNICA</b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:21px;text-align:center">16</td><td colspan="1" rowspan="5" style="">Certificado del sistema de gesti&#243;n de la calidad del fabrticante</td><td colspan="1" rowspan="1" style="">Entidad Certificadora</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">N&#250;mero del certificado</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Fecha de aprobaci&#243;n (d&#237;a/mes/a&#241;o) </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Fecha de vencimiento (d&#237;a/mes/a&#241;o)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Adjunta el certificado (si/no)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="6" style="height:21px;text-align:center">17</td><td colspan="1" rowspan="6" style="">Certificado de conformidad de producto bajo norma</td><td colspan="1" rowspan="1" style="">Entidad Certificadora</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">N&#250;mero del certificado</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Fecha de aprobaci&#243;n (d&#237;a/mes/a&#241;o)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Fecha de vencimiento (d&#237;a/mes/a&#241;o)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Norma bajo la cual se certifica</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Adjunta el certificado (si/no)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:21px;text-align:center">18</td><td colspan="1" rowspan="5" style="">Certificado de conformidad producto bajo RETIE</td><td colspan="1" rowspan="1" style="">Entidad certificadora</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">N&#250;mero de certificado</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Fecha de aprobaci&#243;n (d&#237;a/mes/a&#241;o)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Fecha de vencimiento (d&#237;a/mes/a&#241;o)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Adjunta el certificado (si/no)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:30px;"><b>RESULTADO DE EVALUACI&#211;N REGULATORIA</b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:40px;text-align:center">19</td><td colspan="2" rowspan="1" style="">OBSERVACIONES</td><td colspan="1" rowspan="1" style=""> </td></tr></table><br /></div>
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 497, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

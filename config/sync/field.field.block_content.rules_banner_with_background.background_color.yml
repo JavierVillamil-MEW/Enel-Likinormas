@@ -1,0 +1,29 @@
+uuid: 81911164-f377-4638-b8b5-848b03f08823
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.rules_banner_with_background
+    - field.storage.block_content.background_color
+    - taxonomy.vocabulary.colors
+id: block_content.rules_banner_with_background.background_color
+field_name: background_color
+entity_type: block_content
+bundle: rules_banner_with_background
+label: 'Color de fondo'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      colors: colors
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

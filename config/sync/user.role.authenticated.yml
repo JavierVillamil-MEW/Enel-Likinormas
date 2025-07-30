@@ -1,0 +1,24 @@
+uuid: 9ecb3c51-2d81-4bc4-bef5-bb9fac349c0e
+langcode: es
+status: true
+dependencies:
+  module:
+    - comment
+    - likinormas_pdf_using_mpdf
+    - media
+    - system
+_core:
+  default_config_hash: btW6TFHajhy7Eo6YUvdFiPh4TcPggo8GBXYctjV6zag
+id: authenticated
+label: 'Usuario autenticado'
+weight: 1
+is_admin: false
+permissions:
+  - 'access comments'
+  - 'access content'
+  - 'access user profiles'
+  - 'change own username'
+  - 'generate rules_technical_rules pdf'
+  - 'generate rules_technical_specifications pdf'
+  - 'post comments'
+  - 'view media'

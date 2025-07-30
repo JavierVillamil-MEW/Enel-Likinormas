@@ -1,0 +1,18 @@
+uuid: 173ac220-a65f-4e06-b8b8-27d8742b656b
+langcode: es
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.rules_subcategory
+id: taxonomy_term.rules_subcategory.name
+field_name: name
+entity_type: taxonomy_term
+bundle: rules_subcategory
+label: Nombre
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

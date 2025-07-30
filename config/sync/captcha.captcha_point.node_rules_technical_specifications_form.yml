@@ -1,0 +1,7 @@
+uuid: b17a24df-3d6e-4b23-bfc7-cd68af85fde8
+langcode: es
+status: false
+dependencies: {  }
+formId: node_rules_technical_specifications_form
+captchaType: default
+label: node_rules_technical_specifications_form

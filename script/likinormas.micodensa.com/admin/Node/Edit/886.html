@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Ingreso al sistema</title>
+    <link href="../../../includes/style/web-admin-css.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+    <script src="../../../web-bambooadmin-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+        <!--[if IE 6]>
+        <link rel="stylesheet" type="text/css" href="/includes/style/ie6.css" />
+    <![endif]-->
+
+
+</head>
+<body>
+<div id="layout-conatainer-logon">
+    <div id="header">
+    </div>
+    <!--header-->
+    <div id="contenedor">
+        
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.submitform').keyup(function (event) {
+            if (event.which == 13) {
+                $('#loginform').submit();
+            }
+        });
+    });
+</script>
+
+<form action="https://likinormas.micodensa.com/user/logon" id="loginform" method="post">    <div class="login-container">
+        <div class="box-login">
+            <div class="validation-summary-valid alert-login" data-valmsg-summary="true"><span>No fue posible iniciar sesi&#243;n. Int&#233;ntelo de nuevo.</span>
+<ul><li style="display:none"></li>
+</ul></div>
+            <div class="logo-login-bamboo">
+            </div>
+            <div class="box-text-login">
+                <div class="text-login">
+                    Nombre</div>
+                <div class="text-login">
+                    <label>
+                        <input class="input large" id="usrname" name="usrname" type="text" value="" />
+                        <span class="field-validation-valid error-field-user" data-valmsg-for="usrname" data-valmsg-replace="false">Debe ingresar el email</span>
+                    </label>
+                </div>
+                <div class="text-login">
+                    Contraseña</div>
+                <div class="text-login">
+                    <label>
+                        <input class="input large submitform" id="paswrd" name="paswrd" type="password" />
+                        <span class="field-validation-valid error-field-user" data-valmsg-for="paswrd" data-valmsg-replace="false">Debe ingresar el password</span>
+                    </label>
+                </div>
+                <div class="text-login">
+                    <input class="styled" id="rmberMe" name="rmberMe" type="checkbox" value="true" /><input name="rmberMe" type="hidden" value="false" />
+                    Recordar contraseña</div>
+                <div class="text-login">
+                    <!--<input type="submit" value="Ingresar"  class="bbb medium green"  />-->
+					<div class= "hack"><a href="886.html#" onclick="javascript:$('#loginform').submit()">Ingresar</a></div>
+                </div>
+                <div class="clear">
+                </div>
+            </div>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="shadow-login">
+        </div>
+        <div class="logo-client">
+        </div>
+    </div>
+</form>
+    </div>
+    <div class="clear">
+    </div>
+    <div id="footer">
+    </div>
+    </div>
+</body>
+</html>

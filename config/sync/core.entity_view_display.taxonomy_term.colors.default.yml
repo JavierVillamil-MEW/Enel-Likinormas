@@ -1,0 +1,31 @@
+uuid: a03619a6-9fcb-4bbb-b231-7ce1d55f2ca7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.colors.hex_color
+    - taxonomy.vocabulary.colors
+  module:
+    - text
+id: taxonomy_term.colors.default
+targetEntityType: taxonomy_term
+bundle: colors
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  hex_color:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  langcode: true

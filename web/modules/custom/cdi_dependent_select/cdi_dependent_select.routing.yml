@@ -1,0 +1,15 @@
+cdi_dependent_select.rules_subcategories:
+  path: '/cdi-dependent-select/rules_subcategories/{id}/{ids}'
+  defaults:
+    _title: 'CdiAjax'
+    _controller: '\Drupal\cdi_dependent_select\Controller\CdiDependentSelectController::buildSubcategoriesRules'
+  requirements:
+    _permission: 'access content'
+
+cdi_dependent_select.specifications_subcategories:
+  path: '/cdi-dependent-select/specifications_subcategories/{id}/{ids}'
+  defaults:
+    _title: 'CdiAjax'
+    _controller: '\Drupal\cdi_dependent_select\Controller\CdiDependentSelectController::buildSubcategoriesSpecifications'
+  requirements:
+    _permission: 'access content'

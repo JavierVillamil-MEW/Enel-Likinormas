@@ -1,0 +1,30 @@
+uuid: 7b659aaa-2e76-4e5e-9403-212f9f733956
+langcode: es
+status: true
+dependencies:
+  content:
+    - 'block_content:rules_banner_with_background:a5c01a0a-1a4d-4209-93c4-b15d46f83012'
+  module:
+    - block_content
+    - system
+  theme:
+    - likinormas
+id: bannerbuscadorglobal
+theme: likinormas
+region: content
+weight: -8
+provider: null
+plugin: 'block_content:a5c01a0a-1a4d-4209-93c4-b15d46f83012'
+settings:
+  id: 'block_content:a5c01a0a-1a4d-4209-93c4-b15d46f83012'
+  label: 'Banner Buscador Global'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /buscador

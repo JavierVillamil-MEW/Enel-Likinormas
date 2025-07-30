@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 7cc2634f-8d9b-41f3-954f-4c66ef8c8a75
+  default_langcode: es
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: circle-outline-png-3.png
+  uri:
+    -
+      value: 'public://2023-05/circle-outline-png-3.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 11249
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1684336974

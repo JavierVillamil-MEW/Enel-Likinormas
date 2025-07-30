@@ -1,0 +1,49 @@
+<?php
+
+use \Mpdf\Mpdf;
+
+/**
+ * Implements hook_uninstall().
+ */
+function likinormas_pdf_using_mpdf_uninstall() {
+  \Drupal::configFactory()->getEditable('likinormas_pdf_using_mpdf.settings')->delete();
+  \Drupal::configFactory()->getEditable('core.entity_view_mode.node.likinormas_pdf_using_mpdf')->delete();
+}
+
+/**
+ * Implements hook_requirements().
+ */
+function likinormas_pdf_using_mpdf_requirements($phase) {
+  $requirements = [];
+
+  if ($phase == 'install') {
+    if (!class_exists(Mpdf::class)) {
+      $requirements = [
+        'likinormas_pdf_using_mpdf' => [
+          'title' => t('mPDF library'),
+          'value' => '',
+          'description' => t('mPDF library does not exist. Please check README'),
+          'severity' => REQUIREMENT_ERROR,
+        ]
+      ];
+    }
+  }
+
+  if ($phase == 'runtime') {
+    if (class_exists(Mpdf::class)) {
+      $requirements = [
+        'likinormas_pdf_using_mpdf' => [
+          'title' => t('mPDF library'),
+          'value' => 'Installed version: ' . Mpdf::VERSION,
+          'description' => t('mPDF library is installed'),
+          'severity' => REQUIREMENT_INFO,
+        ]
+      ];
+    }
+    else {
+      \Drupal::logger('likinormas_pdf_using_mpdf')->critical(t('mPDF library is not installed.'));
+    }
+  }
+
+  return $requirements;
+}

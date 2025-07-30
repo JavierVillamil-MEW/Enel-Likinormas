@@ -1,0 +1,19 @@
+uuid: c0632cc0-4fa6-45b5-9501-03f8263d8497
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.technical_rule_number
+    - node.type.rules_technical_rules
+id: node.rules_technical_rules.technical_rule_number
+field_name: technical_rule_number
+entity_type: node
+bundle: rules_technical_rules
+label: 'Revisión #'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

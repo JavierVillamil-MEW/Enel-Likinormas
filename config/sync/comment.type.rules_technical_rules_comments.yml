@@ -1,0 +1,8 @@
+uuid: dbb04ec3-191d-4778-8002-897e8c66a3f4
+langcode: en
+status: true
+dependencies: {  }
+id: rules_technical_rules_comments
+label: 'Seccion de comentarios'
+target_entity_type_id: node
+description: 'Módulo de comentarios que se aplica a las normas técnicas y especificaciones'

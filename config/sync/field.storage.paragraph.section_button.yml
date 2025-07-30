@@ -1,0 +1,19 @@
+uuid: be72cbd4-3bea-456f-8560-20e85ee85eb8
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - paragraphs
+id: paragraph.section_button
+field_name: section_button
+entity_type: paragraph
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

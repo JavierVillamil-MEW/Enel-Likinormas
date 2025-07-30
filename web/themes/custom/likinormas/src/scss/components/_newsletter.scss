@@ -1,0 +1,50 @@
+body.page-node-type-rules-monthly-newsletter {
+  header {
+    position: relative;
+    margin-bottom: 2rem;
+
+    &.scroll {
+      position: fixed;
+
+      .navbar {
+        background-color: $color-white !important;
+
+        .container-fluid {
+          .navbar-collapse {
+            .region-nav-additional {
+              .block-menu {
+                .nav>.nav-item ul {
+                  background-color: $color-white;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .navbar {
+      background-color: $color-blue !important;
+
+      .container-fluid {
+        .navbar-collapse {
+          .region-nav-additional {
+            .block-menu {
+              .nav>.nav-item ul {
+                background-color: $color-blue;
+              }
+            }
+          }
+        }
+      }
+    }
+
+
+  }
+
+  .node--type-rules-monthly-newsletter {
+    .field--name-html-newsletter {
+      padding: 0 var(--margin-width-container-primary);
+    }
+  }
+}

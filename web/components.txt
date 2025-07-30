@@ -1,0 +1,125 @@
+ --------------------------- ------------------------------------------------------------------------------------ --------- --------------- 
+  Package                     Name                                                                                 Status    Version        
+ --------------------------- ------------------------------------------------------------------------------------ --------- --------------- 
+  Core                        Automated Cron (automated_cron)                                                      Enabled   10.0.11        
+  Core                        BigPipe (big_pipe)                                                                   Enabled   10.0.11        
+  Core                        Block (block)                                                                        Enabled   10.0.11        
+  Core                        Custom Block (block_content)                                                         Enabled   10.0.11        
+  Core                        Breakpoint (breakpoint)                                                              Enabled   10.0.11        
+  Core                        CKEditor 5 (ckeditor5)                                                               Enabled   10.0.11        
+  Core                        Comment (comment)                                                                    Enabled   10.0.11        
+  Core                        Configuration Manager (config)                                                       Enabled   10.0.11        
+  Core                        Content Moderation (content_moderation)                                              Enabled   10.0.11        
+  Core                        Contextual Links (contextual)                                                        Enabled   10.0.11        
+  Field types                 Datetime (datetime)                                                                  Enabled   10.0.11        
+  Core                        Database Logging (dblog)                                                             Enabled   10.0.11        
+  Core                        Internal Dynamic Page Cache (dynamic_page_cache)                                     Enabled   10.0.11        
+  Core                        Text Editor (editor)                                                                 Enabled   10.0.11        
+  Core                        Field (field)                                                                        Enabled   10.0.11        
+  Core                        Field UI (field_ui)                                                                  Enabled   10.0.11        
+  Field types                 File (file)                                                                          Enabled   10.0.11        
+  Core                        Filter (filter)                                                                      Enabled   10.0.11        
+  Field types                 Image (image)                                                                        Enabled   10.0.11        
+  Core                        Inline Form Errors (inline_form_errors)                                              Enabled   10.0.11        
+  Multilingual                Language (language)                                                                  Enabled   10.0.11        
+  Core                        Layout Builder (layout_builder)                                                      Enabled   10.0.11        
+  Core                        Layout Discovery (layout_discovery)                                                  Enabled   10.0.11        
+  Field types                 Link (link)                                                                          Enabled   10.0.11        
+  Multilingual                Interface Translation (locale)                                                       Enabled   10.0.11        
+  Core                        Media (media)                                                                        Enabled   10.0.11        
+  Core                        Media Library (media_library)                                                        Enabled   10.0.11        
+  Core                        Custom Menu Links (menu_link_content)                                                Enabled   10.0.11        
+  Core                        Menu UI (menu_ui)                                                                    Enabled   10.0.11        
+  Core                        MySQL (mysql)                                                                        Enabled   10.0.11        
+  Core                        Node (node)                                                                          Enabled   10.0.11        
+  Field types                 Options (options)                                                                    Enabled   10.0.11        
+  Core                        Internal Page Cache (page_cache)                                                     Enabled   10.0.11        
+  Core                        Path (path)                                                                          Enabled   10.0.11        
+  Core                        Path alias (path_alias)                                                              Enabled   10.0.11        
+  Core                        Responsive Image (responsive_image)                                                  Enabled   10.0.11        
+  Web services                RESTful Web Services (rest)                                                          Enabled   10.0.11        
+  Web services                Serialization (serialization)                                                        Enabled   10.0.11        
+  Core                        System (system)                                                                      Enabled   10.0.11        
+  Core                        Taxonomy (taxonomy)                                                                  Enabled   10.0.11        
+  Field types                 Telephone (telephone)                                                                Enabled   10.0.11        
+  Field types                 Text (text)                                                                          Enabled   10.0.11        
+  Core                        Toolbar (toolbar)                                                                    Enabled   10.0.11        
+  Core                        Update Manager (update)                                                              Enabled   10.0.11        
+  Core                        User (user)                                                                          Enabled   10.0.11        
+  Core                        Views (views)                                                                        Enabled   10.0.11        
+  Core                        Views UI (views_ui)                                                                  Enabled   10.0.11        
+  Core                        Workflows (workflows)                                                                Enabled   10.0.11        
+  Administration              Admin Toolbar (admin_toolbar)                                                        Enabled   3.4.2          
+  Administration              Admin Toolbar Extra Tools (admin_toolbar_tools)                                      Enabled   3.4.2          
+  Other                       AJAX Comments (ajax_comments)                                                        Enabled   8.x-1.0-beta5  
+  Other                       Backup and Migrate (backup_migrate)                                                  Enabled   5.0.3          
+  Views                       Better Exposed Filters (better_exposed_filters)                                      Enabled   6.0.3          
+  Other                       Better Social Sharing Buttons (better_social_sharing_buttons)                        Enabled   4.0.7          
+  Spam control                CAPTCHA (captcha)                                                                    Enabled   2.0.5          
+  Other                       CKEditor 4 (contrib) (ckeditor)                                                      Enabled   1.0.2          
+  CKEditor 5                  CKEditor 5 Paste Filter (ckeditor5_paste_filter)                                     Enabled   1.0.0-rc1      
+  Other                       Comments Order (comments_order)                                                      Enabled   3.0.1          
+  Web services                Serialization (CSV) (csv_serialization)                                              Enabled   4.0.0          
+  Chaos tool suite            Chaos Tools (ctools)                                                                 Enabled   8.x-3.14       
+  Web services                Default content (default_content)                                                    Enabled   2.0.0-alpha2   
+  Development                 Devel Generate (devel_generate)                                                      Enabled   5.1.2          
+  Display Suite               Display Suite (ds)                                                                   Enabled   8.x-3.15       
+  Navigation                  Easy Breadcrumb (easy_breadcrumb)                                                    Enabled   2.0.5          
+  Field types                 Entity Reference Revisions (entity_reference_revisions)                              Enabled   8.x-1.10       
+  Feeds                       Feeds (feeds)                                                                        Enabled   8.x-3.0-beta4  
+  Other                       Gin Toolbar (gin_toolbar)                                                            Enabled   8.x-1.0-rc3    
+  Statistics                  Google Tag Manager (google_tag)                                                      Enabled   8.x-1.6        
+  Other                       Image Replace Effect (image_replace)                                                 Enabled   2.0.0          
+  Fields                      Inline Entity Form (inline_entity_form)                                              Enabled   8.x-1.0-rc15   
+  jQuery UI                   jQuery UI (jquery_ui)                                                                Enabled   8.x-1.6        
+  jQuery UI                   jQuery UI Datepicker (jquery_ui_datepicker)                                          Enabled   2.0.0          
+  jQuery UI                   jQuery UI Slider (jquery_ui_slider)                                                  Enabled   2.0.0          
+  jQuery UI                   jQuery UI Touch Punch (jquery_ui_touch_punch)                                        Enabled   1.1.0          
+  Layout Builder              Layout Builder Styles (layout_builder_styles)                                        Enabled   2.0.0          
+  Other                       Layout library (layout_library)                                                      Enabled   8.x-1.0-beta4  
+  Other                       Link attributes (link_attributes)                                                    Enabled   2.1.0          
+  Other                       Link attributes: Menu Link Content integration (link_attributes_menu_link_content)   Enabled   2.1.0          
+  User interface              Linkit (linkit)                                                                      Enabled   6.0.2          
+  Administration              Mail Login (mail_login)                                                              Enabled   8.x-2.9        
+  Mail                        Mail System (mailsystem)                                                             Enabled   8.x-4.4        
+  Menu                        Menu Item Extras (menu_item_extras)                                                  Enabled   8.x-2.19       
+  Other                       Menu Link Attributes (menu_link_attributes)                                          Enabled   8.x-1.3        
+  SEO                         Metatag (metatag)                                                                    Enabled   8.x-1.26       
+  SEO                         Metatag: Open Graph (metatag_open_graph)                                             Enabled   8.x-1.26       
+  SEO                         Metatag: Twitter Cards (metatag_twitter_cards)                                       Enabled   8.x-1.26       
+  Paragraphs                  Paragraphs (paragraphs)                                                              Enabled   8.x-1.16       
+  Security                    Password Policy (password_policy)                                                    Enabled   4.0.0          
+  Security                    Password Characters of Type Policy (password_policy_characters)                      Enabled   4.0.0          
+  Security                    Password Consecutive Characters Policy (password_policy_consecutive)                 Enabled   4.0.0          
+  Security                    Password Character Length Policy (password_policy_length)                            Enabled   4.0.0          
+  Other                       Pathauto (pathauto)                                                                  Enabled   8.x-1.11       
+  Spam control                reCAPTCHA (recaptcha)                                                                Enabled   8.x-3.2        
+  Other                       Redirect (redirect)                                                                  Enabled   8.x-1.9        
+  Other                       Save & Edit (save_edit)                                                              Enabled   8.x-1.7        
+  SEO                         Simple XML Sitemap (Views) (simple_sitemap_views)                                    Enabled   4.1.6          
+  SEO                         Simple XML Sitemap (simple_sitemap)                                                  Enabled   4.1.6          
+  Social                      Social API (social_api)                                                              Enabled   4.0.1          
+  Social                      Social Auth (social_auth)                                                            Enabled   4.1.0          
+  Social                      Social Auth Facebook (social_auth_facebook)                                          Enabled   4.0.3          
+  Media                       SVG image (svg_image)                                                                Enabled   3.0.1          
+  Mail                        Drupal Symfony Mailer Lite (symfony_mailer_lite)                                     Enabled   1.0.6          
+  Other                       Telephone Validation (telephone_validation)                                          Enabled   8.x-2.4        
+  Other                       Token (token)                                                                        Enabled   8.x-1.12       
+  Other                       Twig Tweak (twig_tweak)                                                              Enabled   3.2.1          
+  User                        Users Export (users_export)                                                          Enabled   3.0.0          
+  Views                       Views Data Export (views_data_export)                                                Enabled   8.x-1.4        
+  Webform                     Webform UI (webform_ui)                                                              Enabled   6.2.0-beta7    
+  Webform                     Webform (webform)                                                                    Enabled   6.2.0-beta7    
+  Custom                      Cdi Dependent Select (cdi_dependent_select)                                          Enabled                  
+  Custom                      CDI: Generate index ckeditor5 (cdi_generate_index_ckeditor5)                         Enabled                  
+  Custom                      Likinormas Base (likinormas_base)                                                    Enabled                  
+  Custom                      Likinormas default content (likinormas_default_content)                              Enabled                  
+  Likinormas PDF Conversion   Likinormas PDF using mPDF (likinormas_pdf_using_mpdf)                                Enabled                  
+  Custom                      update content (update_content)                                                      Enabled                  
+  Core                        Claro (claro)                                                                        Enabled   10.0.11        
+  Core                        Olivero (olivero)                                                                    Enabled   10.0.11        
+  Core                        Stable 9 (stable9)                                                                   Enabled   10.0.11        
+                              Bootstrap5 (bootstrap5)                                                              Enabled   3.0.10         
+                              Gin (gin)                                                                            Enabled   8.x-3.0-rc6    
+                              Likinormas (likinormas)                                                              Enabled                  
+ --------------------------- ------------------------------------------------------------------------------------ --------- --------------- 

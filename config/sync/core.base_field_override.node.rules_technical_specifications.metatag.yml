@@ -1,0 +1,18 @@
+uuid: f9d87c1e-99a6-4d12-be8f-4bc66a46539d
+langcode: es
+status: true
+dependencies:
+  config:
+    - node.type.rules_technical_specifications
+id: node.rules_technical_specifications.metatag
+field_name: metatag
+entity_type: node
+bundle: rules_technical_specifications
+label: 'Metatags (Hidden field for JSON support)'
+description: 'Las metaetiquetas de la entidad.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

@@ -1,0 +1,19 @@
+uuid: 71b975f4-3dd7-46c1-88fb-2c7a4dac369c
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: node.technical_rule_description
+field_name: technical_rule_description
+entity_type: node
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

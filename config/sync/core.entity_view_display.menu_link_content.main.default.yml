@@ -1,0 +1,37 @@
+uuid: 340c7ce0-a601-4c66-b2e5-27a7d19d9b1e
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.field.menu_link_content.main.icono
+    - image.style.rules_web_image
+    - system.menu.main
+  module:
+    - svg_image
+id: menu_link_content.main.default
+targetEntityType: menu_link_content
+bundle: main
+mode: default
+content:
+  children:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  icono:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: rules_web_image
+      image_loading:
+        attribute: lazy
+      svg_attributes:
+        width: null
+        height: null
+      svg_render_as_image: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  langcode: true

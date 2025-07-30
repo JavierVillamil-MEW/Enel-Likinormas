@@ -1,0 +1,15 @@
+uuid: 428b3a3e-c302-431c-a0bd-efc822980df0
+langcode: es
+status: true
+dependencies: {  }
+id: rules_site_map
+label: 'Normas: Mapa del sitio web'
+description: 'Listado de enlaces que contiene el sitio web que hacen referencia al contenido existente.'
+sitemap_generator: default
+url_generators:
+  entity: entity
+  entity_menu_link_content: entity_menu_link_content
+  custom: custom
+  arbitrary: arbitrary
+  index: index
+  views: views

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET1003 Tablero de TLC y Servicios Auxiliares  Centros MT/BT | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/2095" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F2095.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/2095" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/2095" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '54');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET1003 Tablero de TLC y Servicios Auxiliares  Centros MT/BT</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET 1003</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">14/02/2023</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/2095">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F2095&amp;nodoid=2095', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et1003_tablero_tcl_servicios_auxiliares_centros.html#heading_0">1. OBJETO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et1003_tablero_tcl_servicios_auxiliares_centros.html#heading_1">2. ALCANCE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et1003_tablero_tcl_servicios_auxiliares_centros.html#heading_2">3. CONDICIONES DE SERVICIO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et1003_tablero_tcl_servicios_auxiliares_centros.html#heading_3"> 3.1. Condiciones Ambientales</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et1003_tablero_tcl_servicios_auxiliares_centros.html#heading_4">3.2. Instalaci&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et1003_tablero_tcl_servicios_auxiliares_centros.html#heading_5">3.3. Caracter&#237;sticas el&#233;ctricas del sistema</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et1003_tablero_tcl_servicios_auxiliares_centros.html#heading_6">4. SISTEMA DE UNIDADES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et1003_tablero_tcl_servicios_auxiliares_centros.html#heading_7">5. NORMAS DE REFERENCIA</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et1003_tablero_tcl_servicios_auxiliares_centros.html#heading_8">5.1. Normas de fabricaci&#243;n y pruebas.</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et1003_tablero_tcl_servicios_auxiliares_centros.html#heading_9">6. REQUERIMIENTOS T&#201;ECNICOS PARTICULARES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et1003_tablero_tcl_servicios_auxiliares_centros.html#heading_10">6.1. Materiales y caracter&#237;sticas constructivas.</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et1003_tablero_tcl_servicios_auxiliares_centros.html#heading_11">6.2. Componentes</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et1003_tablero_tcl_servicios_auxiliares_centros.html#heading_12">6.2.1. Concentrador, medidor y modem  </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et1003_tablero_tcl_servicios_auxiliares_centros.html#heading_13">6.2.2. Tablero de servicios auxiliares</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et1003_tablero_tcl_servicios_auxiliares_centros.html#heading_14">6.2.3.	Bater&#237;as UP </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et1003_tablero_tcl_servicios_auxiliares_centros.html#heading_15">6.2.4. Fuente UP  y UP.</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et1003_tablero_tcl_servicios_auxiliares_centros.html#heading_16">6.2.5. Cub&#237;culo modem UP.</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et1003_tablero_tcl_servicios_auxiliares_centros.html#heading_17">6.3 PROCESO DE PINTURA.</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et1003_tablero_tcl_servicios_auxiliares_centros.html#heading_18">6.4.	GRADO DE PROTECCI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et1003_tablero_tcl_servicios_auxiliares_centros.html#heading_19">6.5.	ESTRUCTURA y LAMINAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et1003_tablero_tcl_servicios_auxiliares_centros.html#heading_20">6.5.1.	Sistema de anclaje </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et1003_tablero_tcl_servicios_auxiliares_centros.html#heading_21">6.6.	ESPACIOS LIBRES, ALAMBRADO, CONEXIONES EL&#201;CTRICAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et1003_tablero_tcl_servicios_auxiliares_centros.html#heading_22">6.6.1.	Espacios libres</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et1003_tablero_tcl_servicios_auxiliares_centros.html#heading_23">6.6.2.	puesta a tierra</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et1003_tablero_tcl_servicios_auxiliares_centros.html#heading_24">6.7.	PUERTAS </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et1003_tablero_tcl_servicios_auxiliares_centros.html#heading_25">7. MARCACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et1003_tablero_tcl_servicios_auxiliares_centros.html#heading_26">8. PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et1003_tablero_tcl_servicios_auxiliares_centros.html#heading_27">8.1 Prueba Tipo.</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et1003_tablero_tcl_servicios_auxiliares_centros.html#heading_28">8.2 Pruebas de Recepci&#243;n.</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et1003_tablero_tcl_servicios_auxiliares_centros.html#heading_29">9. REQUISITOS PARA LAS OFERTAS</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1. OBJETO</h2>
+Este documento tiene por objeto establecer las condiciones t&#233;cnicas para el dise&#241;o, fabricaci&#243;n y pruebas de los tableros de Telecontrol (TLC) y de servicios auxiliares que ser&#225;n instalados en rack 19” del <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-375" class="externalLink  glosarioLink">tablero</a> TLC en centros compactos MT/BT.<br />
+<h2 id="heading_1" >2. ALCANCE</h2>
+Esta especificaci&#243;n aplica para todos los tableros de TLC y los tableros de auxiliares tipo GSCL001/3 que sean instalados en el <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de distribuci&#243;n de ENEL COLOMBIA.<br />
+<h2 id="heading_2" >3. CONDICIONES DE SERVICIO</h2>
+Los tableros ser&#225;n instalados en el <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de distribuci&#243;n de ENEL COLOMBIA, bajo las siguientes condiciones:<br />
+<h3 id="heading_3" > 3.1. Condiciones Ambientales</h3>
+<div style="width:466px;"><table><tr><td colspan="2" rowspan="1" style="width:466px;height:20px;text-align:center"><b>CARACTER&#205;STICAS AMBIENTALES</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;">a.&#160;&#160;&#160;&#160; Altura sobre el nivel del mar</td><td colspan="1" rowspan="1" style="text-align:center">2700 m</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:33px;">b.&#160;&#160;&#160;&#160; Humedad relativa: </td><td colspan="1" rowspan="1" style="text-align:center">90%</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;">c.&#160;&#160;&#160;&#160; Temperatura ambiente m&#225;xima:</td><td colspan="1" rowspan="1" style="text-align:center">30 &#176;C</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;">d.&#160;&#160;&#160;&#160; Temperatura ambiente m&#237;nima:</td><td colspan="1" rowspan="1" style="text-align:center">-2 &#176;C</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;">e.&#160;&#160;&#160;&#160; Temperatura ambiente promedio</td><td colspan="1" rowspan="1" style="text-align:center">14 &#176;C</td></tr></table><br /></div>
+<h3 id="heading_4" >3.2. Instalaci&#243;n</h3>
+Los tableros de TLC ser&#225;n instalados apernados en los pisos t&#233;cnicos y/o en las paredes de la envolvente del  centro MT/BT, con el objetivo de alojar los siguientes elementos: <br /><br /><div style="width:466px;"><table><tr><td colspan="1" rowspan="1" style="width:81px;height:37px;text-align:center"><b>ITEM</b></td><td colspan="1" rowspan="1" style="width:385px;"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">1</td><td colspan="1" rowspan="1" style="">concentrador, medidor y modem macro medida</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">2</td><td colspan="1" rowspan="1" style=""><a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-363" class="externalLink  glosarioLink">Sistema</a> de servicios auxiliares</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">3</td><td colspan="1" rowspan="1" style="">bater&#237;as de la UP</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">4</td><td colspan="1" rowspan="1" style="">fuente de la UP</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">5</td><td colspan="1" rowspan="1" style="">Remote Terminal Unit for telecontrol and supervision of MV UP</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;text-align:center">6</td><td colspan="1" rowspan="1" style=""> modem UP/ otros </td></tr></table><br /></div><br />
+<h3 id="heading_5" >3.3. Caracter&#237;sticas el&#233;ctricas del sistema</h3>
+<div style="width:466px;"><table><tr><td colspan="2" rowspan="1" style="width:466px;height:35px;text-align:center"><b>CARACTER&#205;STICAS EL&#201;CTRICAS</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:33px;"><a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-384" class="externalLink  glosarioLink">Tensi&#243;n Nominal</a> secundaria</td><td colspan="1" rowspan="1" style="">208 / 120 V  </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;"><a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-210" class="externalLink  glosarioLink">Frecuencia</a> </td><td colspan="1" rowspan="1" style="">60 Hz</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;">Tipo de conexi&#243;n</td><td colspan="1" rowspan="1" style="">Trif&#225;sica </td></tr></table><br /></div>
+<h2 id="heading_6" >4. SISTEMA DE UNIDADES</h2>
+En todos los documentos t&#233;cnicos se deben expresar las cantidades num&#233;ricas en unidades del sistema Internacional (S.I.).  Si se usan cat&#225;logos, folletos o planos, en sistemas diferentes de unidades, deben hacerse las conversiones respectivas.<br /><br />En caso de discrepancia entre las Normas y este documento, prevalecer&#225; lo aqu&#237; establecido.  Las normas aplicables son las  indicadas en el numeral 5.<br />
+<h2 id="heading_7" >5. NORMAS DE REFERENCIA</h2>
+<br /><div style="width:681px;"><table><tr><td colspan="1" rowspan="1" style="width:117px;height:20px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:564px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">GSCB001</td><td colspan="1" rowspan="1" style="">Stationary Lead-Acid Battery VRLA Type for MV - LV Substation and pole transformer point</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">GSCL001/3</td><td colspan="1" rowspan="1" style="">Electrical Control Panel Auxiliary Services Of Secondary Substations</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">GSTR001/2</td><td colspan="1" rowspan="1" style="">UP - Box for indoor installations</td></tr></table><br /></div>
+<h3 id="heading_8" >5.1. Normas de fabricaci&#243;n y pruebas.</h3><div style="width:707px;"><table><tr><td colspan="1" rowspan="1" style="width:318px;height:20px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:389px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;">ASTM B 117-97</td><td colspan="1" rowspan="1" style="">Standard practice for operating salt spray (fog) apparatus</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:33px;">NTC 3279- IEC 529.</td><td colspan="1" rowspan="1" style="">Grado de protecci&#243;n dado a los encerramientos. (C&#243;digo IP)    IEC 529.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;">ASTM D14000 </td><td colspan="1" rowspan="1" style="">Espesor m&#237;nimo de pintura</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;">ASTM D 4541 </td><td colspan="1" rowspan="1" style="">Standard Test Method for Pull-Off Strength of Coatings Using Portable Adhesion Testers</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:53px;">NTC 3916-(ASTMD 4541 de 1995)</td><td colspan="1" rowspan="1" style=""><a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-278" class="externalLink  glosarioLink">M&#233;todo</a> de <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> para la resistencia a la tracci&#243;n de recubrimientos, utilizando probadores port&#225;tiles de adherencia.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;"><a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-354" class="externalLink  glosarioLink">RETIE</a></td><td colspan="1" rowspan="1" style=""><a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-350" class="externalLink  glosarioLink">reglamento t&#233;cnico</a> de instalaciones el&#233;ctricas </td></tr></table><br /></div><br />Pueden emplearse otras normas internacionalmente reconocidas equivalentes o superiores a las aqu&#237; se&#241;aladas, siempre y cuando se ajusten a lo solicitado en la presente <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a>.<br /><br />En cuanto al dise&#241;o del  <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-375" class="externalLink  glosarioLink">tablero</a> de servicios auxiliares  remitirse a especificaci&#243;n global GSCL001/3. <br /><br />Pueden emplearse otras normas internacionalmente reconocidas equivalentes o superiores a las aqu&#237; se&#241;aladas, siempre y cuando se ajusten a lo solicitado en la presente <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a>. Las normas citadas en la presente especificaci&#243;n (o cualquier otra que llegare a ser aceptada por ENEL COLOMBIA) se refieren a su &#250;ltima revisi&#243;n.<br />
+<h2 id="heading_9" >6. REQUERIMIENTOS T&#201;ECNICOS PARTICULARES</h2>
+<h3 id="heading_10" >6.1. Materiales y caracter&#237;sticas constructivas.</h3>
+La estructura, envolventes y techo debe estar construida con perfiles estructurales de l&#225;mina Cold Rolled calibre 14 (2 mm). El piso se debe construir en calibre 14 (2 mm) con l&#225;mina de aluminio para ser perforada para la correspondiente entrada/salida de cables.<br /><br />El gabinete debe estar montado en una base sobre perfil en U fabricado en lamina Cold Rolled calibre 14 (2 mm) y deber&#225; contar con los puntos para el anclaje al piso t&#233;cnico o piso de la envolvente.<br /> <br />La torniller&#237;a, tuercas, arandelas de presi&#243;n y arandelas planas que fijan la estructura deber&#225;n ser en acero inoxidable y los tornillos deber&#225;n tener una longitud tal que sobresalgan de la tuerca por lo menos 3 hilos sin exceder de 10 mm.  <br /><br />Se presenta  la soluci&#243;n modular  en cub&#237;culos concentr&#225;ndolos en un solo <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-375" class="externalLink  glosarioLink">tablero</a> de almacenamiento de equipamientos.<br /><br />Los  tableros presentados en esta especificaci&#243;n son del tipo rack aptos para contener cub&#237;culos 19&#39;&#39; (solo se puede insertar desde el frente) <br /><br />El <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-375" class="externalLink  glosarioLink">tablero</a> tendr&#225; las siguientes medidas externas 2100 x 600 x 600 mm<br /><br />Las indicaciones dadas en las figuras de esta especificaci&#243;n son referenciales, mientras que los detalles constructivos ser&#225;n establecidos por cada fabricante siempre que se garantice lo siguiente:<br /><br />La estructura del armario debe ser adecuada para contener cub&#237;culos tipo caja con las siguientes caracter&#237;sticas:<br /><br />- Ancho normalizado a 19 &quot;, igual a 482,6 mm;<br /><br />- M&#250;ltiples alturas de 1U, con profundidades variables de 250 a 350 mm.<br /><br />- Soportado  &#250;nicamente por los tornillos de fijaci&#243;n en el panel frontal ver fig. 1 y las 2 gu&#237;as de apoyo ver fig. 8B.<br /><br />- El marco debe estar equipado con pares de gu&#237;as perforadas fijas (frontal y trasera) con soporte de chapa de acero apto para alojar cub&#237;culos de 19”.<br /><br />- Las gu&#237;as deben estar libres de otros componentes, como barras de <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-387" class="externalLink  glosarioLink">tierra</a>, soporte para canales, etc.<br /><br />- La <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-113" class="externalLink  glosarioLink">carga</a> admisible distribuida  interna debe ser de al menos 450 Kg.<br /><br />- El gabinete (cub&#237;culos rack), no necesita c&#225;ncamos para izaje y tendr&#225; una estructura adecuada para el transporte y posicionamiento en la cabina. El <br /> revestimiento lateral y trasero deben estar empotradas y fijadas con tornillos que no sobresalgan.<br /><br />El armario debe asegurar (por convecci&#243;n natural) la disipaci&#243;n del calor producido de las diversas utilidades contenidas en los cub&#237;culos alojados en los mismos, por:<br /><br />- la rejilla de ventilaci&#243;n superior debajo del techo del panel ver Figura 2<br /><br />- la cuadr&#237;cula en el marco que se muestra en la parte  1 de  Figura. 1.<br /><br />- Las dos rejillas del revestimiento lateral como se muestra en la Figura. 8A y 8B<br /><br />El armario debe fijarse al suelo mediante tornillos de expansi&#243;n como se muestra en la Figura. No. 2<br /><br />En general, el armario debe permitir el paso de cables tanto por la parte frontal (unos 150 mm) y en la<br />parte trasera (alrededor de 100 mm) como se muestra en la Fig. 9&#170;<br /><br />El <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-375" class="externalLink  glosarioLink">tablero</a> deber&#225; incluir resistencia para controlar el efecto de  condensaci&#243;n; las resistencias de calefacci&#243;n deber&#225;n estar localizadas en la parte m&#225;s baja del <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-375" class="externalLink  glosarioLink">tablero</a> en forma tal que no sea un <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-317" class="externalLink  glosarioLink">peligro</a> para el <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-189" class="externalLink  glosarioLink">equipo</a> o cableado y tambi&#233;n para que no afecte el rango de temperatura del <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-189" class="externalLink  glosarioLink">equipo</a> o la <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-111" class="externalLink  glosarioLink">calibraci&#243;n</a> de los rel&#233;s. Los circuitos de calefacci&#243;n deber&#225;n proveerse de un controlador autom&#225;tico de control con un rango de 10&#176; C a 40&#176; C. El <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-375" class="externalLink  glosarioLink">tablero</a> deber&#225; suministrarse con borneras, rieles, canaletas y dem&#225;s componentes para el cableado y conexionado.<br />
+<h3 id="heading_11" >6.2. Componentes</h3>
+El interior del <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-375" class="externalLink  glosarioLink">tablero</a> deber&#225; tener los siguientes compartimientos y distancias en altura para alojar los equipos indicados en la siguiente tabla: <br /><br /><div style="width:612px;"><table><tr><td colspan="1" rowspan="1" style="width:324px;height:20px;text-align:center"><b>Descripci&#243;n</b></td><td colspan="1" rowspan="1" style="width:125px;text-align:center"><b>U</b></td><td colspan="1" rowspan="1" style="width:84px;text-align:center"><b>Unidad</b></td><td colspan="1" rowspan="1" style="width:79px;text-align:center"><b>mm</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">concentrador, medidor y modem macro medida</td><td colspan="1" rowspan="1" style="text-align:center">44,45</td><td colspan="1" rowspan="1" style="text-align:center">13,5</td><td colspan="1" rowspan="1" style="text-align:center">600</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">servicios auxiliares</td><td colspan="1" rowspan="1" style="text-align:center">44,45</td><td colspan="1" rowspan="1" style="text-align:center">4</td><td colspan="1" rowspan="1" style="text-align:center">180</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">bater&#237;as UP</td><td colspan="1" rowspan="1" style="text-align:center">44,45</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">230</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">fuente UP</td><td colspan="1" rowspan="1" style="text-align:center">44,45</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">135</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">UP</td><td colspan="1" rowspan="1" style="text-align:center">44,45</td><td colspan="1" rowspan="1" style="text-align:center">4</td><td colspan="1" rowspan="1" style="text-align:center">180</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">cub&#237;culo modem UP, otros </td><td colspan="1" rowspan="1" style="text-align:center">44,45</td><td colspan="1" rowspan="1" style="text-align:center">14</td><td colspan="1" rowspan="1" style="text-align:center">625</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">Total</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">1950</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">bordes externos superior </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">100</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">bordes externos  inferior</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style="text-align:center">50</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">Altura total con bordes</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style="text-align:center"><b>2100</b></td></tr></table><br /></div><br /><img src="https://i.ibb.co/RjzqcHt/f1.png" /><br /><b>Figura 1.</b> Vista posterior, lateral sin puerta y frontal.<br /><br /><img src="https://i.ibb.co/fGFqKFB/f2.png" /><br /><b>Figura 2.</b> Vista secci&#243;n superior.<br /><br />
+<h3 id="heading_12" >6.2.1. Concentrador, medidor y modem  </h3>
+El <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-375" class="externalLink  glosarioLink">tablero</a> debe ser suministrado con un soporte para  concentrador, medidor y modem, compuesto por  una bandeja  m&#237;nimo calibre 14 como se muestra en la figura  No. 3.<br /><br /><br /><img src="https://i.ibb.co/MkDhCbk/f3.png" /><br /><b>Figura 3.</b> Bandeja de soporte para  macro medida.<br /><br /><br />La sujeci&#243;n de la bandeja al rack podr&#225; ser dise&#241;o propio  sugerido del fabricante.<br /> <br /> <br /> 
+<h3 id="heading_13" >6.2.2. Tablero de servicios auxiliares</h3>
+El <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-375" class="externalLink  glosarioLink">tablero</a> de servicios auxiliares debe estar incluido como parte del suministro del <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-375" class="externalLink  glosarioLink">tablero</a> de TLC. Se deber&#225; contemplar el equipamiento de servicios auxiliares para montaje en bastidor de 19” acorde de con GSCL001/3.<br /><br /><img src="https://i.ibb.co/G5r60H3/f4.png" /><br /><b>Figura 4.</b> Servicios auxiliares.<br /><br />(1) Los micro interruptores de las cargas y la toma auxiliar se pueden dise&#241;ar con norma NTC o ANSI y con las corrientes nominales indicadas en esta especificaci&#243;n<br /><br />La estructura del <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-375" class="externalLink  glosarioLink">tablero</a> debe ser apta para montaje  en rack de ancho normalizado a 19&quot;, igual a 482,6 mm<br /><br />Se deber&#225; contemplar el equipamiento de servicios auxiliares para montaje en bastidor de 19” acorde de con especificaci&#243;n  GSCL001 <br /><br />El <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-375" class="externalLink  glosarioLink">tablero</a> de auxiliares deber&#225; tener  b&#225;sicamente las siguientes cargas y como se ilustra en la figura No 4A <br /><br />1.	Alimentaci&#243;n de iluminaci&#243;n y de <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-183" class="externalLink  glosarioLink">emergencia</a><br />2.	Alimentaci&#243;n de <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-389" class="externalLink  glosarioLink">tomacorriente</a> auxiliar 120 V<br />3.	Alimentaci&#243;n de la UP<br />4.	Alimentaci&#243;n de la macro medida <br /><br />En la figura No 4A se visualizan algunos componentes de  micro interruptores, borneras  de las cargas y la toma auxiliar.<br /><br /><img src="https://i.ibb.co/RpJvYpB/f5.png" /><br /><b>Figura 4A.</b> Servicios auxiliares.<br /><br />El diagrama el&#233;ctrico del <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-375" class="externalLink  glosarioLink">tablero</a>  se indica en la figura No. 4B.<br /><br /><img src="https://i.ibb.co/1fYBKKk/f6.png" /><br /><b>Figura 4B.</b> 4B Diagrama el&#233;ctrico tablero de auxiliares (2).<br />	(2) Fuente (GSCL001 figura 7C).<br />La   protecci&#243;n termomagn&#233;tica de las  cargas son las consideradas:<br /><br />- Luminarias  					  	6A<br />- <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-269" class="externalLink  glosarioLink">Luminaria</a> de <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-183" class="externalLink  glosarioLink">emergencia</a>     6A<br />- UP 							6A<br />- Toma corriente 1F est&#225;ndar  auxiliar 		16A – 20A<br />- Macro medida 					 6A (3F)<br /><br /><br />El acceso a de los cables se realiza retirando un panel frontal y utilizando los 5 pasacables fijados en la carcasa del panel. Acorde con figura No. 4.<br /><br />
+<h3 id="heading_14" >6.2.3.	Bater&#237;as UP </h3>
+Cada gabinete debe ser suministrado con cub&#237;culo de 19” de ancho y 350 de profundidad mm y altura 5Uapto para contener dos acumuladores (con dimensiones totales aproximadas de cada acumulador individual LxSxH = 250x170x175mm y peso de 15 kg).<br /><br />Este cub&#237;culo est&#225; abierto en el frente con un borde de 1 cm. (bandeja) adecuada para sostener el cualquier fuga de &#225;cido. Si el cub&#237;culo es de metal, el fondo debe tratarse con pintura anti&#225;cido. En la pared trasera del cub&#237;culo, a media altura, debe estar hay un orificio de  &#216; 40 mm para el paso de los cables. La bandeja deber&#225; tener conexionado a <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-387" class="externalLink  glosarioLink">tierra</a>.<br /><br />Un bloque de terminales (con 4 terminales) que corresponden a los  puntos de conexi&#243;n de alimentaci&#243;n de la UP tambi&#233;n se encuentra en el cub&#237;culo del contenedor de la bater&#237;a; ver Figs. 5 y 9B, para la validaci&#243;n de la fuente de alimentaci&#243;n de 12Vdc (aislado de <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-387" class="externalLink  glosarioLink">tierra</a>) y a 24Vdc (positivo a <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-387" class="externalLink  glosarioLink">tierra</a>) hacia el DCE (Data Communications Equipment). Dicho bloque de terminales debe reportar las se&#241;ales  indicadas en la figura No. 5. El DCE (no suministrado) se alojar&#225; en el compartimento ubicado en el lado derecho de los acumuladores. Se adaptara  la perforaci&#243;n para instalar el bloque de terminales en riel DIN Omega.<br /><br /><img src="https://i.ibb.co/Kz3xy71/f7.png" /><br /><b>Figura 5</b> Borneras de se&#241;ales de bater&#237;a. <br />
+<h3 id="heading_15" >6.2.4. Fuente UP  y UP.</h3>
+La unidad perif&#233;rica de control remoto  que consiste en el cub&#237;culo de fuente de alimentaci&#243;n de 3U y del cub&#237;culo de se&#241;ales (UE8)  con una altura de 4U.<br />
+<h3 id="heading_16" >6.2.5. Cub&#237;culo modem UP.</h3>Se contempla de un espacio extra igual a 14U, para instalar adicional al modem de la UP cualquier <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-189" class="externalLink  glosarioLink">equipo</a> que sea necesario. El modem de UP por su tama&#241;o no vendr&#225; adosado al riel del <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-375" class="externalLink  glosarioLink">tablero</a> por lo tanto se ubicar&#225; superpuesto al igual que la ubicaci&#243;n de la bater&#237;a .<br /><br />Las dimensiones del modem corresponden a; alto=150mm, ancho 40 mm, profundidad 177 mm. Se podr&#225; dejar como alternativa la perforaci&#243;n para el bloque de terminales en riel DIN Omega.<br /><img src="https://i.ibb.co/Y2tZTrG/f8.png" /><br /><b>Figura 6</b> Modem UP.<br /> <br /> 
+<h3 id="heading_17" >6.3 PROCESO DE PINTURA.</h3> <br />La l&#225;mina de acero utilizada en la construcci&#243;n de los tableros de TLC deber&#225;n someterse a un proceso de limpieza, desengrase y fosfatizado, el cual debe garantizar que las superficies est&#233;n libres de grasas, &#243;xidos o cualquier elemento extra&#241;o disminuyan la adherencia (son v&#225;lidos procesos qu&#237;micos y/o mec&#225;nicos); en un tiempo no mayor a dos horas, despu&#233;s de la limpieza debe aplicarse una capa de imprimante no mayor a 20 micras y en un lapso no menor a 8 ni mayor a 16 horas (o seg&#250;n recomendaci&#243;n de fabricante de pintura) se debe aplicar una pintura ep&#243;xica, color RAL 7030, resistente a los rayos ultravioleta y la intemperie, con espesor no menor a 50 micras (para un total de 70 micras), que deber&#225; ser horneada. El proceso debe garantizar las caracter&#237;sticas de “tropicalizaci&#243;n”.<br /><br />El espesor de pintura debe medirse con un medidor de espesores debidamente calibrado seg&#250;n la norma ASTM D 14000. Para la medici&#243;n de los espesores de recubrimiento se deben tener en cuenta las siguientes definiciones:<br /><br />a. Lectura del espesor: Medida que <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-288" class="externalLink  glosarioLink">muestra</a> el medidor de espesores, al colocar una vez el censor sobre la pieza a medir.<br />b. Medida del espesor: Promedios de 3 lecturas de espesor tomadas a una distancia aproximada de 2,5 cm.<br /><br />En pinturas horneables que garanticen la adherencia y espesores m&#237;nimos no requerir&#225;n imprimante. <br />Cada capa de pintura debe garantizar una adherencia m&#237;nima de 400 PSI (libras/pulgada2) probada seg&#250;n norma NTC 3916 (ASTM D 4541 de 1995)<br />
+<h3 id="heading_18" >6.4.	GRADO DE PROTECCI&#211;N</h3>
+El grado de protecci&#243;n que deber&#225; tener la envoltura exterior de los <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-375" class="externalLink  glosarioLink">Tablero</a> de Control y Protecci&#243;n deber&#225; ser como m&#237;nimo un grado de protecci&#243;n IP 4X seg&#250;n la norma IEC 60529.<br /><br />
+<h3 id="heading_19" >6.5.	ESTRUCTURA y LAMINAS</h3>
+La construcci&#243;n estructural podr&#225; ser en l&#225;mina doblada o perfiles angulares, siempre y cuando de la <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a> especifica.<br />
+<h3 id="heading_20" >6.5.1.	Sistema de anclaje </h3>El <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-375" class="externalLink  glosarioLink">tablero</a>  deber&#225; quedar anclado en su base y  debe poder ser desplazado sobre su base y/o pared para adaptarlo al piso t&#233;cnico de la <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-373" class="externalLink  glosarioLink">subestaci&#243;n</a>.
+<h3 id="heading_21" >6.6.	ESPACIOS LIBRES, ALAMBRADO, CONEXIONES EL&#201;CTRICAS</h3>	
+<h3 id="heading_22" >6.6.1.	Espacios libres</h3>El espacio libre dentro del <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-375" class="externalLink  glosarioLink">tablero</a> deber&#225; ser el suficiente para distribuci&#243;n de los cables dentro de ellos. La separaci&#243;n entre las partes met&#225;licas de los dispositivos y los aparatos montados en su interior deber&#225; cumplir con lo estipulado en el art&#237;culo 373-11 de la Norma NTC 2050 en lo referente a separaciones entre partes activas, base, dispositivos, puertas, etc. y las paredes, fondo y puntos de soporte, as&#237; como las disposiciones con relaci&#243;n al espacio necesario para el alambrado.<br />
+<h3 id="heading_23" >6.6.2.	<a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a></h3>
+El calibre del conductor del <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-0" class="externalLink  glosarioLink">electrodo de [glosario:puesta a tierra</a>] deber&#225; cumplir lo estipulado en la Tabla 250-94 de la NTC 2050, donde se especifica que el calibre m&#237;nimo del conductor de <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a> es 8,36 mm2 (8 AWG) en Cobre.<br /><br />
+<h3 id="heading_24" >6.7.	PUERTAS </h3>
+Las puertas del <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-375" class="externalLink  glosarioLink">tablero</a> se deber&#225;n construir en l&#225;mina Cold Rolled. Todas las puertas deber&#225;n abrir &#250;nicamente en sentido lateral m&#237;nimo 120&#176; respecto a la secci&#243;n horizontal superior del <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-375" class="externalLink  glosarioLink">tablero</a>, poseer una manija que facilite su accionamiento y las bisagras deber&#225;n ser fabricadas en acero inoxidable, suficientemente fuertes para asegurar r&#237;gidamente la puerta de la estructura.<br /><br />Los pasadores de las bisagras deber&#225;n ser de acero inoxidable. Las bisagras deben estar instaladas internamente.<br /><br />La puerta debe venir equipada con dos rejillas de ventilaci&#243;n superior e inferior como se muestra en la Fig. 8A y 8B. El detalle de la rejilla es indicado  la Fig. 7 La  puerta del <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-375" class="externalLink  glosarioLink">tablero</a> se deber&#225; construir en l&#225;mina Cold Rolled, calibre BWG 16 garantizando su rigidez estructural. <br /><br /><img src="https://i.ibb.co/HBkj44Z/f9.png" /><br /><b>Figura 7. </b> Detalle rejillas de  ventilaci&#243;n.<br /> <br />El <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-375" class="externalLink  glosarioLink">tablero</a> debe contener cerradura multipunto mec&#225;nica o electromec&#225;nica de alta <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a>.<br /> <br /><img src="https://i.ibb.co/yBQrng9/f10.png" /><br /><b>Figura 8A. </b> Detalle rejillas de  ventilaci&#243;n.<br /><br /><img src="https://i.ibb.co/Z8QBx27/f11.png" /><br /><b>Figura 8B.</b> Tablero de compartimientos - Vista de la puerta y detalles.<br /> <br /><img src="https://i.ibb.co/XVzSZ7N/f12.png" /><br /><b>Figura 8C</b> Tablero de compartimientos - Vista de la puerta y detalles.<br /><br /><img src="https://i.ibb.co/GM1mCHv/f13.png" /><br /><b>Figura 9A</b> Tablero contenedor de compartimientos  vista lateral.<br /><br /><img src="https://i.ibb.co/J2NsKKW/f14.png" /><br /><b>Figura 9B.</b> Tablero contenedor de compartimientos vista frontal.<br /><br /><img src="https://i.ibb.co/3dnJvQ2/f15.png" /><br />*Figura 9C. Dimensi&#243;n externa 19” equipo  UP.<br />
+<h2 id="heading_25" >7. MARCACI&#211;N</h2>
+Sobre la puerta se remachar&#225; una placa del fabricante con caracter&#237;sticas similares a las de las placas de identificaci&#243;n. Deber&#225; contener la siguiente informaci&#243;n: (el tama&#241;o de las letras ser&#225; de 3 mm como m&#237;nimo)<br /><br />-  Nombre del fabricante.<br />-  N&#250;mero de orden de compra.<br />-  Direcci&#243;n de la f&#225;brica.<br />-  Fecha de fabricaci&#243;n.<br />
+<h2 id="heading_26" >8. PRUEBAS</h2>
+<h3 id="heading_27" >8.1 Prueba Tipo.</h3>
+El fabricante del <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-375" class="externalLink  glosarioLink">tablero</a> TLC y de auxiliares  deber&#225; realizar y/o entregar protocolos de prueba de las siguientes pruebas tipo:<br />• Se efectuar&#225;n pruebas de adherencia de acuerdo con la norma NTC 3916 (ASTM D4541 de 1995).<br />• Se efectuar&#225;n pruebas de resistencia a la <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a> de acuerdo con la norma ASTM B117de 1997).<br />• Se realizar&#225;n pruebas del espesor de las capas de fosfatizado y acabado final de acuerdo con lo especificado en esta norma.<br />• Grado de protecci&#243;n IP seg&#250;n Norma NTC 3279.<br /><br />
+<h3 id="heading_28" >8.2 Pruebas de Recepci&#243;n.</h3>
+El <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-375" class="externalLink  glosarioLink">tablero</a> TLC y de auxiliares   ser&#225; sometido a las siguientes pruebas:<br /><br />• <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-235" class="externalLink  glosarioLink">Inspecci&#243;n</a> visual<br />• <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-235" class="externalLink  glosarioLink">Inspecci&#243;n</a> dimensional<br />• Ensamblaje de los equipos y elementos complementarios.<br />• Medici&#243;n del espesor de pintura<br /><br />Para el dise&#241;o bajo  pruebas tipo y de recepci&#243;n de [glosario tablero] de auxiliares se debe remitir  a GSCL001, se podr&#225;n tomar pruebas bajo IEC o ensayos similares en ANSI.<br />
+<h2 id="heading_29" >9. REQUISITOS PARA LAS OFERTAS</h2>
+El Oferente deber&#225; incluir con su propuesta, la siguiente informaci&#243;n:<br />• Planilla de caracter&#237;sticas t&#233;cnicas garantizadas, la cual deber&#225; ser diligenciada completamente, firmada y sellada por el oferente.<br />• Protocolos de pruebas de acuerdo con las normas indicadas en el numeral 5.1 de la presente especificaci&#243;n. En tales protocolos se deber&#225;n anotar las fechas de fabricaci&#243;n y pruebas del <a href="et1003_tablero_tcl_servicios_auxiliares_centros.html#" id="version-189" class="externalLink  glosarioLink">equipo</a>, para permitir la verificaci&#243;n de las caracter&#237;sticas t&#233;cnicas garantizadas.<br />• Informaci&#243;n adicional que considere aporta explicaci&#243;n a su dise&#241;o (dibujos, detalles, dimensiones y pesos de los materiales ofertados).<br /><br />ENEL podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones. <br /><br /><br />	 <br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 2095, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

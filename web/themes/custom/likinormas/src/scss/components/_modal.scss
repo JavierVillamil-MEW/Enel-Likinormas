@@ -1,0 +1,225 @@
+body {
+  &.show-modal {
+    position: relative;
+
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba($color: $color-black, $alpha: 50%);
+      z-index: 9999999999;
+    }
+
+    &.no-show-second-modal {
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  .ui-dialog {
+    background-color: $color-white;
+    z-index: 9999999999999 !important;
+    border: 0 !important;
+    border-radius: 0.4rem 0.4rem 0.3rem 0.3rem;
+    max-width: 50rem !important;
+
+    .ui-dialog-titlebar {
+      background: $color-pink;
+      border-radius: 0.3rem 0.3rem 0 0;
+
+      .ui-dialog-title {
+        color: $color-white;
+        text-align: center;
+        font-size: 2.2rem;
+        font-family: 'RoobertENEL-Regular';
+        font-weight: 400;
+        padding: 1rem 3rem;
+        white-space: normal;
+        text-overflow: initial;
+        width: 100%;
+      }
+
+      .ui-dialog-titlebar-close {
+        position: absolute;
+        background-color: $color-pink;
+        border-radius: 50%;
+        cursor: pointer;
+        top: -15px;
+        right: -13px;
+        background-image: none;
+        background-color: $color-white;
+        opacity: 1;
+        width: 40px;
+        height: 40px;
+        text-indent: initial;
+        font-size: 0;
+        margin: 0;
+        transform: none;
+
+        @include media-query(mobile) {
+          right: -19px;
+        }
+
+        &::after {
+          content: "X";
+          display: block;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          color: $color-pink;
+          font-size: 2rem;
+          font-family: Arial, Helvetica, sans-serif;
+          transform: translate(-50%, -50%);
+        }
+
+        &:focus {
+          box-shadow: none;
+        }
+      }
+    }
+
+    .ui-dialog-content {
+      background-color: $color-white !important;
+      color: #212529;
+      font-size: 1.6rem;
+      text-align: center;
+      padding: 3rem !important;
+
+      form {
+        text-align: left;
+      }
+    }
+
+    .ui-dialog-buttonpane {
+      background-color: $color-white !important;
+
+      .form-actions {
+        display: flex;
+
+        button {
+          &.form-submit {
+            @extend %button-form-primary;
+            height: 3.7rem;
+            border: 0;
+            border-radius: 0;
+          }
+
+          &.dialog-cancel {
+            @extend %button-form-secondary;
+            min-width: 11rem;
+          }
+        }
+      }
+    }
+  }
+
+  .ui-widget-overlay.ui-front {
+    background-color: rgba($color: $color-black, $alpha: 40%);
+    opacity: 1;
+  }
+
+}
+
+.dialog {
+  background-color: $color-white;
+  z-index: 9999999999999;
+  border: 0;
+  border-radius: .4rem .4rem .3rem .3rem;
+  max-width: 50rem;
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  @include media-query(maxmobile) {
+    width: 80%;
+  }
+
+  &-header {
+    background: $color-pink;
+    border-radius: .3rem .3rem 0 0;
+
+    &-title {
+      color: $color-white;
+      text-align: center;
+      font-size: 2.2rem;
+      font-family: "RoobertENEL-Regular";
+      padding: 1rem 3rem;
+      width: 100%;
+    }
+
+    .dialog-close {
+      position: absolute;
+      border-radius: 50%;
+      cursor: pointer;
+      top: -15px;
+      right: -13px;
+      background-image: none;
+      background-color: $color-white;
+      opacity: 1;
+      width: 40px;
+      height: 40px;
+      border: 0;
+      color: $color-pink;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      outline: none;
+    }
+  }
+
+  &-body {
+    color: #212529;
+    font-size: 1.6rem;
+    text-align: center;
+    padding: 3rem;
+
+    &-description {
+      color: inherit;
+      font-size: inherit;
+    }
+  }
+}
+
+body.page-node-type-rules-technical-specifications,
+body.page-node-type-rules-technical-rules {
+  .ui-dialog {
+    .ui-dialog-titlebar {
+      height: 0;
+      padding: 0;
+      border-radius: 0;
+      margin: 0;
+      border: 0;
+
+      .ui-dialog-title {
+        display: none;
+      }
+
+      &-close {
+        background-color: #fc0f64;
+        color: white;
+        z-index: 999999;
+
+        .ui-icon {
+          display: none;
+        }
+
+        &::after {
+          color: white;
+        }
+
+      }
+    }
+
+    .ui-dialog-content {
+      border-radius: 10px;
+    }
+  }
+}

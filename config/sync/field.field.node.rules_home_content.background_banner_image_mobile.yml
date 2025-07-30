@@ -1,0 +1,44 @@
+uuid: 7ddde64b-b894-48a6-ba91-a834a24c0994
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.background_banner_image_mobile
+    - node.type.rules_home_content
+  module:
+    - image
+    - image_replace
+third_party_settings:
+  image_replace:
+    image_style_map:
+      rules_replace_and_webp:
+        source_field: '0'
+id: node.rules_home_content.background_banner_image_mobile
+field_name: background_banner_image_mobile
+entity_type: node
+bundle: rules_home_content
+label: 'Imagen mobile del banner de fondo'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'png gif jpg jpeg'
+  max_filesize: ''
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: true
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+field_type: image

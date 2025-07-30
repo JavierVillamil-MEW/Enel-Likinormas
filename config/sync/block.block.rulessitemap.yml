@@ -1,0 +1,25 @@
+uuid: d9aef8c5-8aff-4a87-b531-d4cb7a529be5
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.rules-site-map
+  module:
+    - system
+  theme:
+    - likinormas
+id: rulessitemap
+theme: likinormas
+region: footer
+weight: -4
+provider: null
+plugin: 'system_menu_block:rules-site-map'
+settings:
+  id: 'system_menu_block:rules-site-map'
+  label: 'MAPA DEL SITIO'
+  label_display: visible
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

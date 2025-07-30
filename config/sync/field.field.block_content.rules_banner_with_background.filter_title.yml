@@ -1,0 +1,24 @@
+uuid: 43185624-d0e3-4871-bed4-e3bf139a63da
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.rules_banner_with_background
+    - field.storage.block_content.filter_title
+  module:
+    - text
+id: block_content.rules_banner_with_background.filter_title
+field_name: filter_title
+entity_type: block_content
+bundle: rules_banner_with_background
+label: 'Título del filtro'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: '<h1></h1>'
+    format: full_html
+default_value_callback: ''
+settings: {  }
+field_type: text

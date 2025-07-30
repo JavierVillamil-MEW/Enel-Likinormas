@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 42edd4bb-6951-408d-8d67-cac86c78b75c
+  default_langcode: es
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: logo-to-color.svg
+  uri:
+    -
+      value: 'public://2023-05/logo-to-color.svg'
+  filemime:
+    -
+      value: image/svg+xml
+  filesize:
+    -
+      value: 48294
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1684944430

@@ -1,0 +1,28 @@
+uuid: 6fdcaf55-3cc3-4441-bd53-3ffcf40fd4c8
+langcode: es
+status: true
+dependencies:
+  config:
+    - views.view.rules_global_search
+  module:
+    - system
+    - views
+  theme:
+    - likinormas
+id: formularioexpuestorules_global_searchpage_1
+theme: likinormas
+region: content
+weight: -7
+provider: null
+plugin: 'views_exposed_filter_block:rules_global_search-page_1'
+settings:
+  id: 'views_exposed_filter_block:rules_global_search-page_1'
+  label: ''
+  label_display: '0'
+  provider: views
+  views_label: ''
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: "/buscador\r\n<front>"

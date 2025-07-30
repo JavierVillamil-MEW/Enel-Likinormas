@@ -1,0 +1,14 @@
+_core:
+  default_config_hash: 5UHMfSmFu9rzzODqDc4xPCxSBK0u_u9xq0ftLz8uy4Q
+langcode: es
+iconset: social-icons--no-color
+services:
+  facebook: facebook
+  x: x
+  whatsapp: whatsapp
+  email: email
+width: 32px
+radius: 3px
+print_css: ''
+facebook_app_id: ''
+node_field: false

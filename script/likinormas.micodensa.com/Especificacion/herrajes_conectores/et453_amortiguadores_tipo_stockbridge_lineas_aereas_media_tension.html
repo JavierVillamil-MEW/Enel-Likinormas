@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET453 Amortiguadores tipo stockbridge en líneas aéreas de media tensión | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/543" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F543.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/543" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/543" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '23');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET453 Amortiguadores tipo stockbridge en l&#237;neas a&#233;reas de media tensi&#243;n</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET453</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">29/04/2021</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/543">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F543&amp;nodoid=543', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#heading_0">1.	OBJETO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#heading_1">2.	ALCANCE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#heading_2">3.	CONDICIONES DE SERVICIO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#heading_3">4.	SISTEMAS DE UNIDADES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#heading_4">5.	NORMAS DE FABRICACI&#211;N Y PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#heading_5">6.	DEFINICIONES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#heading_6">7.	REQUERIMIENTO T&#201;CNICOS PARTICULARES.  DEFINICIONES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#heading_7">7.1	GENERALES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#heading_8">7.2	PARTICULARES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#heading_9">7.3	INSTALACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#heading_10">7.4	DESLIZAMIENTO DE LA GRAPA </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#heading_11">8.	CRITERIOS  DE  ACEPTACI&#211;N  O  RECHAZO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#heading_12">9.	 PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#heading_13">10. MARCACI&#211;N Y EMPAQUE </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#heading_14">10.1   MARCACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#heading_15">10.2   EMPAQUE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#heading_16">11.	 REQUISITOS DE LAS OFERTAS </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#heading_17">12.	 GARANT&#205;A DE F&#193;BRICA </a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1.	OBJETO</h2>
+Esta especificaci&#243;n establece las condiciones t&#233;cnicas y funcionales que deben reunir los amortiguadores tipo stock-bridge para conductores y cables de guarda de las l&#237;neas a&#233;reas de distribuci&#243;n de energ&#237;a el&#233;ctrica de ENEL CODENSA, en su fabricaci&#243;n, pruebas y entrega.<br />
+<h2 id="heading_1" >2.	ALCANCE</h2>
+La presente especificaci&#243;n se aplicar&#225; en todas las redes a&#233;reas de <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-277" class="externalLink  glosarioLink">media tensi&#243;n</a> del &#225;rea de cobertura de  ENEL CODENSA.<br />
+<h2 id="heading_2" >3.	CONDICIONES DE SERVICIO</h2>
+Los amortiguadores  ser&#225;n utilizados   bajo las siguientes condiciones:<div style="width:472px;"><table><tr><td colspan="2" rowspan="1" style="width:472px;height:30px;text-align:center"><b>CARACTER&#205;STICAS AMBIENTALES</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Altura sobre el nivel del mar</td><td colspan="1" rowspan="1" style="">2 700 m.s.n.m.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Ambiente</td><td colspan="1" rowspan="1" style="">Tropical</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Humedad</td><td colspan="1" rowspan="1" style="">Mayor al  90 %</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Temperatura m&#225;xima y m&#237;nima</td><td colspan="1" rowspan="1" style="">45 &#186;C y - 5 &#186;C respectivamente.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Instalaci&#243;n</td><td colspan="1" rowspan="1" style="">A la intemperie</td></tr></table><br /></div><div style="width:472px;"><table><tr><td colspan="2" rowspan="1" style="width:472px;height:30px;text-align:center"><b>CARACTER&#205;STICAS EL&#201;CTRICAS</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;"><a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-384" class="externalLink  glosarioLink">Tensi&#243;n Nominal</a> del <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-363" class="externalLink  glosarioLink">sistema</a></td><td colspan="1" rowspan="1" style="">11400 V –  13200 V  y 34500 V</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Frecuencia del <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-363" class="externalLink  glosarioLink">sistema</a></td><td colspan="1" rowspan="1" style="">60 Hz</td></tr></table><br /></div>
+<h2 id="heading_3" >4.	SISTEMAS DE UNIDADES</h2>   <br />Todos los documentos t&#233;cnicos, deben expresar las cantidades num&#233;ricas en unidades del <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> Internacional (S.I.).  Si se usan cat&#225;logos, folletos o planos, en sistemas diferentes de unidades, deben hacerse  las conversiones respectivas.<br />
+<h2 id="heading_4" >5.	NORMAS DE FABRICACI&#211;N Y PRUEBAS</h2>
+El amortiguador debe considerar en su dise&#241;o, fabricaci&#243;n y pruebas las siguientes normas seg&#250;n corresponda, en su &#250;ltima revisi&#243;n, prevaleciendo lo establecido en la presente especificaci&#243;n de existir alg&#250;n tipo de discrepancia:<br /><div style="width:750px;"><table><tr><td colspan="1" rowspan="1" style="width:100px;height:30px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:650px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">NTC 3524</td><td colspan="1" rowspan="1" style="">Herrajes y accesorios para redes y l&#237;neas a&#233;reas de distribuci&#243;n energ&#237;a el&#233;ctrica. Gu&#237;a para la selecci&#243;n y localizaci&#243;n de amortiguadores de vibraci&#243;n tipo stock-bridge.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">NTC 2076</td><td colspan="1" rowspan="1" style="">Galvanizado por inmersi&#243;n en caliente.</td></tr></table><br /></div><br />Para el dise&#241;o, fabricaci&#243;n y pruebas pueden emplearse otras normas internacionalmente reconocidas, equivalentes o superiores a las aqu&#237; citadas, siempre y cuando se ajusten a lo solicitado en este pliego y se haya adjuntado a la oferta una copia en espa&#241;ol o ingl&#233;s. <br /><br />Pueden emplearse otras normas internacionalmente reconocidas equivalentes o superiores a las aqu&#237; se&#241;aladas, siempre y cuando se ajusten a lo solicitado en la presente <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a>.<br /><br />Las normas citadas en la presente especificaci&#243;n (o cualquier otra que llegare a ser aceptada por ENEL CODENSA) se refieren a su &#250;ltima revisi&#243;n.<br />
+<h2 id="heading_5" >6.	DEFINICIONES</h2>
+<b>Amortiguador de Vibraci&#243;n Tipo Stockbrigde:</b> Dispositivo mec&#225;nico integrado por una grapa de sujeci&#243;n, <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-107" class="externalLink  glosarioLink">cable</a> mensajero y dos contrapesos, cuyo objetivo es el de atenuar la amplitud de las vibraciones e&#243;licas, para efectos de protecci&#243;n de los cables en l&#237;neas a&#233;reas contra fallas por fatiga de los puntos de restricci&#243;n en movimiento <br /><br /><b>Amplitud:</b> Es el desplazamiento m&#225;ximo vertical que experimenta un <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-107" class="externalLink  glosarioLink">cable</a> cuando vibra sinusoidalmente, respecto a su eje cuando est&#225; en reposo. La amplitud de pico a pico es el doble de este valor. <br /><br /><b><a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-107" class="externalLink  glosarioLink">Cable</a> Mensajero:</b> Elemento el&#225;stico que integra el amortiguador de vibraciones, que absorbe y disipa, mediante la fricci&#243;n entre hilos, parte de la energ&#237;a e&#243;lica que transmite el <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-107" class="externalLink  glosarioLink">cable</a> al amortiguador. <br /><br /><b>Eficiencia:</b> Es la medida de la capacidad del amortiguador para atenuar la vibraci&#243;n en cables de l&#237;neas a&#233;reas. <br /><br /><b>Fatiga:</b> Es el l&#237;mite para el cual puede ocurrir un n&#250;mero grande de de esfuerzos, antes de que el <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-274" class="externalLink  glosarioLink">material</a> falle. <br /><br /><b>Vibraciones E&#243;licas en Cables:</b> Son las vibraciones que se producen como resultado de la acci&#243;n del viento, que ocasiona presiones alternas y desbalanceadas que mueven el <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-107" class="externalLink  glosarioLink">cable</a> hacia arriba y hacia abajo. <br />
+<h2 id="heading_6" >7.	REQUERIMIENTO T&#201;CNICOS PARTICULARES.  DEFINICIONES</h2>
+<h3 id="heading_7" >7.1	GENERALES</h3>
+El amortiguador de vibraci&#243;n es un elemento met&#225;lico destinado a disipar la energ&#237;a de las vibraciones que se producen en los conductores por las fuerzas perpendiculares a la direcci&#243;n del viento, originadas por el desprendimiento de remolinos ocasionados por el flujo de aire alrededor del conductor. Su utilizaci&#243;n ayuda a disminuir, dentro de l&#237;mites tolerables, la amplitud de las vibraciones, los requerimientos din&#225;micos del conductor y a prevenir fallas por fatiga en el conductor.<br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/543/Dibujo ET 453 FIG 1.JPG" src="http://likinormas.micodensa.com/media/cache/images/500x355/wikiimages/2d31373331303932383333-14151-Dibujo ET 453 FIG 1.JPG" title=""  /></div><div class="texto_imagen_articulos" style="max-width:500px"></div></div></div><br />
+<h3 id="heading_8" >7.2	PARTICULARES</h3>
+El amortiguador de vibraci&#243;n en general y sus diferentes partes constitutivas (grapa de sujeci&#243;n, <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-107" class="externalLink  glosarioLink">cable</a> mensajero y contrapesos) deben cumplir con las caracter&#237;sticas enunciadas a continuaci&#243;n. <br /><br /><b>Grapa de sujeci&#243;n.</b> La grapa ser&#225; de aleaci&#243;n de aluminio de alta resistencia (AL 356 T6), libre de porosidades, grietas, rebabas o aristas cortantes. Deber&#225; permitir la instalaci&#243;n del amortiguador, sobre el tipo de conductor y calibre, para el cual se especific&#243; su uso, sin ocasionar <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-153" class="externalLink  glosarioLink">da&#241;o</a> al <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-107" class="externalLink  glosarioLink">cable</a> durante su instalaci&#243;n y operaci&#243;n. Los puntos de sujeci&#243;n del conductor, deben presentar bordes internos redondeados. El dise&#241;o debe brindar facilidad de montaje en altura mediante el uso de herramientas est&#225;ndar. Estando abierta, debe permitir sostener por su propio peso el amortiguador. <br /><br /><b><a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-107" class="externalLink  glosarioLink">Cable</a> mensajero.</b> El <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-107" class="externalLink  glosarioLink">cable</a> debe ser de acero galvanizado, con alta resistencia a la fatiga y a la deformaci&#243;n permanente (buena deformaci&#243;n el&#225;stica). El galvanizado del <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-107" class="externalLink  glosarioLink">cable</a> deber&#225; estar de acuerdo con la norma ASTM A475. <br /><br /><b>Contrapesos.</b> Los contrapesos deben ser de hierro nodular galvanizado en caliente, de forma que resistan a la <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a>. Sus superficies deber&#225;n ser lisas y de bordes redondeados para reducir el efecto corona. Deber&#225;n contar con agujeros de drenaje que impidan la acumulaci&#243;n de agua. El dise&#241;o de los contrapesos deber&#225; estar de acuerdo con la frecuencia de resonancia deseada. <br /><br /><b>Torniller&#237;a.</b> El tornillo y la arandela de presi&#243;n, deben ser de acero galvanizado en caliente o acero inoxidable. El galvanizado de la torniller&#237;a deber&#225; estar de acuerdo con la norma NTC 2076. La longitud del tornillo debe ser tal, que ninguna parte de la grapa se desensamble cuando se abra para montar el amortiguador al conductor. Torque &#243;ptimo de apriete del tornillo deber&#225; ser estipulado por el fabricante. <br /><br /><b>Acabado.</b> El amortiguador debe estar libre de defectos o imperfecciones tales como bordes cortantes, grietas y excesivas rugosidades, que afecten la apariencia o perjudiquen su operaci&#243;n. <br /><br /><b>Dimensiones.</b> Todas las dimensiones obedecer&#225;n al dise&#241;o particular del fabricante, bajo las cuales se aceptar&#225;n tolerancias de &#177;2%. <br />
+<h3 id="heading_9" >7.3	INSTALACI&#211;N</h3>
+El amortiguador se instalara teniendo en cuenta  los par&#225;metros de  calibre del conductor y  longitud de <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-404" class="externalLink  glosarioLink">vano</a> de acuerdo a lo indicado en las tablas  No.1 y  No. 2.  <br /><br />La distancia entre amortiguadores “d” ver figura No. 1, depender&#225; del calibre de conductor y el numero de amortiguadores depender&#225;  de la longitud del <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-404" class="externalLink  glosarioLink">vano</a>, de acuerdo a, lo establecido por el fabricante. Ver tablas 1 y 2.<br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/543/Dibujo ET 453 FIG 2.JPG" src="http://likinormas.micodensa.com/media/cache/images/500x355/wikiimages/2d31373139363234303333-20824-Dibujo ET 453 FIG 2.JPG" title="Figura No. 1. Instalación de amortiguador tipo Stock bridge"  /></div><div class="texto_imagen_articulos" style="max-width:500px">Figura No. 1. Instalación de amortiguador tipo Stock bridge</div></div></div><br /><b>Tabla No. 1</b><br /><div style="width:460px;"><table><tr><td colspan="1" rowspan="1" style="width:150px;height:30px;text-align:center"><b><a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-362" class="externalLink  glosarioLink">S&#237;mbolo</a></b></td><td colspan="1" rowspan="1" style="width:160px;text-align:center"><b>Conductor  ASCR</b></td><td colspan="1" rowspan="1" style="width:150px;text-align:center"><b>Distancia d (mm)</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">a<sub>44</sub></td><td colspan="1" rowspan="1" style="text-align:center">266,8</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">a<sub>43</sub></td><td colspan="1" rowspan="1" style="text-align:center">4/0</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">a<sub>42</sub></td><td colspan="1" rowspan="1" style="text-align:center">2/0</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">a<sub>41</sub></td><td colspan="1" rowspan="1" style="text-align:center">1/0</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">a<sub>40</sub></td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center"><b><a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-362" class="externalLink  glosarioLink">S&#237;mbolo</a></b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Cable acero galvanizado</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Distancia d (mm)</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">cm<sub>1</sub></td><td colspan="1" rowspan="1" style="text-align:center">3/8”</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td></tr></table><br /></div><b>Tabla No. 2</b><br /><div style="width:370px;"><table><tr><td colspan="1" rowspan="1" style="width:170px;height:45px;text-align:center"><b><a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-404" class="externalLink  glosarioLink">Vano</a> (m)</b></td><td colspan="1" rowspan="1" style="width:200px;text-align:center"><b>Cantidad de amortiguadores (Por fase en cada extremo)</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">300-365</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">365-670</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">&gt; 670</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td></tr></table><br /></div>(*) El valor depender&#225; de acuerdo a lo establecido por  cada fabricante<br /><br />Los amortiguadores se instalaran en  finales de circuito, retenciones dobles y en reemplazo de amortiguadores tipo puente ver <a href="../../Norma/lineas_aereas_rurales_distribucion/lineas_aereas_rurales_34_5kv/lar196_instalaciones_amortiguadores_tipo_puente.html" class="externalLink">LAR196<span class="externalLinkIcon"></span></a>.<br /><br />La distancia “d” se mide desde el punto de amarre del conductor tanto en estructuras de suspensi&#243;n como en estructuras de retenci&#243;n.<br />
+<h3 id="heading_10" >7.4	DESLIZAMIENTO DE LA GRAPA </h3>
+El fabricante debe indicar el par de apriete de montaje de los amortiguadores, capaz de asegurar que el deslizamiento de la grapa, ver figura No. 2, se produzca para valores comprendidos entre los m&#237;nimos y m&#225;ximos de la  tabla 3:<br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/543/Dibujo ET 453 FIG 3.JPG" src="http://likinormas.micodensa.com/media/cache/images/500x355/wikiimages/2d31373235393831303235-8140-Dibujo ET 453 FIG 3.JPG" title="Figura No. 2. Instalación de amortiguador tipo Stock bridge"  /></div><div class="texto_imagen_articulos" style="max-width:500px">Figura No. 2. Instalación de amortiguador tipo Stock bridge</div></div></div><br /><br /><b>Tabla No. 3</b><br /><div style="width:372px;"><table><tr><td colspan="2" rowspan="1" style="width:372px;height:30px;text-align:center"><b>Carga de deslizamiento (daN)</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center"><b>M&#237;nima</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>M&#225;xima</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">250</td><td colspan="1" rowspan="1" style="text-align:center">400</td></tr></table><br /></div>
+<h2 id="heading_11" >8.	CRITERIOS  DE  ACEPTACI&#211;N  O  RECHAZO</h2>
+Si el n&#250;mero de elementos defectuosos es menor o igual al correspondiente n&#250;mero de defectuosos definidos a continuaci&#243;n, se deber&#225; considerar que el lote cumple con los requisitos t&#233;cnicos exigidos por ENEL CODENSA, en caso contrario, el lote se rechazar&#225;.<br /><br /><b>Inspecci&#243;n Visual y Dimensional</b> <br /><br />De acuerdo a la tabla a continuaci&#243;n.<br /><br /><div style="width:644px;"><table><tr><td colspan="4" rowspan="1" style="width:644px;height:20px;text-align:center">Tabla inspecci&#243;n visual y dimensional</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">Tama&#241;o del lote</td><td colspan="1" rowspan="1" style="text-align:center">Muestra</td><td colspan="1" rowspan="1" style="text-align:center">Aceptado</td><td colspan="1" rowspan="1" style="text-align:center">Rechazado</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">2 a 8</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">9 a 15</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">16 a 25</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">26 a 50</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">51 a 90</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">91 a 150</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">151 a 280</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">281 a 500</td><td colspan="1" rowspan="1" style="text-align:center">20</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">501 a 1200</td><td colspan="1" rowspan="1" style="text-align:center">32</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1201 a 3200</td><td colspan="1" rowspan="1" style="text-align:center">50</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">3201 a 10000</td><td colspan="1" rowspan="1" style="text-align:center">80</td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">7</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">10001 a 35000</td><td colspan="1" rowspan="1" style="text-align:center">125</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">9</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">35001 a 150000</td><td colspan="1" rowspan="1" style="text-align:center">200</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">11</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">150001 a 500000</td><td colspan="1" rowspan="1" style="text-align:center">315</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">11</td></tr></table><br /></div><b>TABLA 4	 . Plan de muestreo para inspecci&#243;n visual y dimensional.</b><br /><br /><b>Ensayos mec&#225;nicos</b><br /><br />De acuerdo a la tabla a continuaci&#243;n.<br /><br /><div style="width:644px;"><table><tr><td colspan="4" rowspan="1" style="width:644px;height:20px;text-align:center">Tabla inspecci&#243;n visual y dimensional</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">Tama&#241;o del lote</td><td colspan="1" rowspan="1" style="text-align:center">Muestra</td><td colspan="1" rowspan="1" style="text-align:center">Aceptado</td><td colspan="1" rowspan="1" style="text-align:center">Rechazado</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">2 a 8</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">9 a 15</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">16 a 25</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">26 a 50</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">51 a 90</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">91 a 150</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">151 a 280</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">281 a 500</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">501 a 1200</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1201 a 3200</td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">3201 a 10000</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">10001 a 35000</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">35001 a 150000</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">150001 a 500000</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr></table><br /></div><b>TABLA 5. Plan de muestreo para pruebas mec&#225;nicas.</b><br />
+<h2 id="heading_12" >9.	 PRUEBAS</h2>
+El <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-274" class="externalLink  glosarioLink">material</a> debe cumplir las siguientes pruebas, a costo del proveedor.<br /><div style="width:670px;"><table><tr><td colspan="1" rowspan="1" style="width:377px;height:21px;">Pruebas</td><td colspan="1" rowspan="1" style="width:89px;text-align:center">Tipo</td><td colspan="1" rowspan="1" style="width:89px;text-align:center">Rutina</td><td colspan="1" rowspan="1" style="width:115px;text-align:center">Aceptaci&#243;n</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Verificaci&#243;n visual</td><td colspan="1" rowspan="1" style="text-align:center">X</td><td colspan="1" rowspan="1" style="text-align:center">X</td><td colspan="1" rowspan="1" style="text-align:center">X</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Verificaci&#243;n dimensional</td><td colspan="1" rowspan="1" style="text-align:center">X</td><td colspan="1" rowspan="1" style="text-align:center">X</td><td colspan="1" rowspan="1" style="text-align:center">X</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Verificaci&#243;n espesores de galvanizado</td><td colspan="1" rowspan="1" style="text-align:center">X</td><td colspan="1" rowspan="1" style="text-align:center">X</td><td colspan="1" rowspan="1" style="text-align:center">X</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Verificaci&#243;n certificados de <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> de la materia prima</td><td colspan="1" rowspan="1" style="text-align:center">X</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">X</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Verificaci&#243;n del torque de apriete</td><td colspan="1" rowspan="1" style="text-align:center">X</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">X</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;"><a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> deslizamiento de la grapa</td><td colspan="1" rowspan="1" style="text-align:center">X</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">X</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;"><a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> comportamiento a la fatiga por vibraci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">X</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;"><a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de energ&#237;a Disipada</td><td colspan="1" rowspan="1" style="text-align:center">X</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div><h2 id="heading_13" >10. MARCACI&#211;N Y EMPAQUE </h2>
+<h3 id="heading_14" >10.1   MARCACI&#211;N</h3>
+El material debe cumplir la siguiente marcaci&#243;n en bajo o en alto relieve. No se acepta pintura ni calcoman&#237;a.<br />
+<ul><li>Logo del fabricante</li>
+<li>Calibre del conductor (AWG y mm2)</li>
+<li>ENEL CODENSA</li>
+<li>Mes y a&#241;o de fabricaci&#243;n</li>
+<li>Lote</li></ul>
+
+<h3 id="heading_15" >10.2   EMPAQUE</h3>
+Los bienes, objeto de la presente <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a>, deben ser empacados, adecuadamente para resistir las condiciones de humedad e impacto que pueden presentarse durante el transporte desde f&#225;brica hasta las bodegas de ENEL CODENSA y durante su almacenamiento. <br /><br />El empaque del <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-338" class="externalLink  glosarioLink">producto</a> podr&#225; ser de cualquier <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-274" class="externalLink  glosarioLink">material</a> no contaminante siempre que permita contenerlo, protegerlo de cualquier tipo de riesgo que les puede afectar en su presentaci&#243;n o funcionalidad, conservarlo y facilitar su almacenamiento y distribuci&#243;n. <br />
+<h2 id="heading_16" >11.	 REQUISITOS DE LAS OFERTAS </h2>
+El Oferente obligatoriamente deber&#225; incluir con su propuesta, la siguiente informaci&#243;n:<br />
+<ul><li>Relaci&#243;n de bienes cotizados</li></ul>
+
+<ul><li>Planilla de caracter&#237;sticas t&#233;cnicas garantizadas, la cual deber&#225; ser diligenciada completamente y presentada en Excel.</li></ul>
+ 
+<ul><li>Cat&#225;logos originales completos y actualizados del fabricante, que correspondan a los bienes cotizados, en la planilla de caracter&#237;sticas t&#233;cnicas garantizadas. </li></ul>
+
+<ul><li><a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-124" class="externalLink  glosarioLink">Certificaci&#243;n</a> del <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> y <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-124" class="externalLink  glosarioLink">certificaci&#243;n</a> del <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-338" class="externalLink  glosarioLink">producto</a> con norma <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a>, emitidos por ente competente en Colombia.</li></ul>
+
+<ul><li>Protocolos   de   pruebas </li></ul>
+
+<ul><li>Muestras de cada una de las referencias ofertadas sin cargo a devoluci&#243;n, en el caso de solicitarse</li></ul>
+
+<ul><li>Relaci&#243;n de clientes, evidencia de su capacidad t&#233;cnica y experiencias relacionadas con los materiales y/o equipos cotizados.</li></ul>
+
+<ul><li>Carta de garant&#237;a de los bienes cotizados</li></ul>
+
+<ul><li>Informaci&#243;n adicional que considere aporta explicaci&#243;n a su dise&#241;o (dibujos,  detalles,  caracter&#237;sticas de operaci&#243;n,  dimensiones y pesos de los materiales ofertados). </li></ul>
+
+<ul><li>Procedimiento y recomendaciones de instalaci&#243;n</li></ul>
+
+<ul><li>El oferente debe adjuntar con su propuesta el <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-126" class="externalLink  glosarioLink">certificado de conformidad</a> de <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-338" class="externalLink  glosarioLink">producto</a> bajo <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-354" class="externalLink  glosarioLink">RETIE</a>.</li></ul>
+<br />ENEL CODENSA podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones, sin expresi&#243;n de causa ni obligaci&#243;n de compensaci&#243;n.<br />
+<h2 id="heading_17" >12.	 GARANT&#205;A DE F&#193;BRICA </h2>
+ENEL CODENSA requiere como m&#237;nimo, un per&#237;odo de garant&#237;a de f&#225;brica de veinticuatro (24) meses, a partir de la entrega de los amortiguadores.<br /><br /><b>ANEXO 1.</b><br /><b>PLANILLA DE CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS AMORTIGUADOR DE VIBRACI&#211;N TIPO STOCKBRIGE</b><br /><div style="width:750px;"><table><tr><td colspan="1" rowspan="1" style="height:30px;text-align:center"><b>ITEM</b></td><td colspan="2" rowspan="1" style="text-align:center"><b>CARACTER&#205;STICAS</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>OFERTADO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">1</td><td colspan="2" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">2</td><td colspan="2" rowspan="1" style="">Normas de dise&#241;o, fabricaci&#243;n y pruebas</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">3</td><td colspan="3" rowspan="1" style=""><b>Caracter&#237;sticas generales </b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">3.1</td><td colspan="2" rowspan="1" style="">Apto para trabajar con conductores AAAC y ACSR y cables de acero galvanizado  (S&#237;/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">4</td><td colspan="3" rowspan="1" style=""><b>Caracter&#237;sticas t&#233;cnicas </b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">4.1</td><td colspan="2" rowspan="1" style="">Grapa de sujeci&#243;n en aleaci&#243;n de aluminio 356 T6, libre de porosidades, grietas, rebabas o aristas cortantes (S&#237;/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">4.2</td><td colspan="2" rowspan="1" style="">La grapa abierta, debe permitir sostener por su propio peso el amortiguador (S&#237;/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">4.3</td><td colspan="2" rowspan="1" style=""><a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-107" class="externalLink  glosarioLink">Cable</a> mensajero en acero galvanizado (S&#237;/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">4.4</td><td colspan="2" rowspan="1" style="">Contrapesos en hierro nodular, galvanizado en caliente (S&#237;/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">4.5</td><td colspan="2" rowspan="1" style="">Contrapesos con superficies lisas y bordes redondeados (S&#237;/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">4.6</td><td colspan="2" rowspan="1" style="">Cantidad de frecuencias de resonancia. </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">4.7</td><td colspan="2" rowspan="1" style="">Tornillo y arandela de presi&#243;n en acero galvanizado o acero inoxidable (S&#237;/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">4.8</td><td colspan="2" rowspan="1" style="">Torque de apriete &#243;ptimo del tornillo.  (A Indicar por el fabricante, kgf-cm)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">4.9</td><td colspan="2" rowspan="1" style="">Amortiguador libre de defectos o imperfecciones (S&#237;/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">4.10</td><td colspan="2" rowspan="1" style="">Tama&#241;o <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-298" class="externalLink  glosarioLink">nominal</a> del amortiguador (kg)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">4.11</td><td colspan="2" rowspan="1" style="">Rango de calibres de conductores para los cuales se especific&#243; el uso del amortiguador (AWG / mm<sup>2</sup>)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">4.12</td><td colspan="2" rowspan="1" style="">Distancia “d”  para cada tipo de conductor (mm)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="3" style="height:9px;text-align:center">4.13</td><td colspan="1" rowspan="3" style="">Cantidad de Amortiguadores (Por fase en cada extremo)</td><td colspan="1" rowspan="1" style="">300-365</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="">365-670</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="">&gt;670</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">5</td><td colspan="2" rowspan="1" style="">Pruebas (seg&#250;n NTC 3524, S&#237;/No, describir)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">6</td><td colspan="2" rowspan="1" style="">Marcaci&#243;n (seg&#250;n ET453, S&#237;/No, describir)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">7</td><td colspan="3" rowspan="1" style=""><b>Documentaci&#243;n </b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">7.1</td><td colspan="2" rowspan="1" style="">Cat&#225;logos, planos y recomendaciones de selecci&#243;n e instalaci&#243;n (S&#237;/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">7.2</td><td colspan="2" rowspan="1" style=""><a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-126" class="externalLink  glosarioLink">Certificado de conformidad</a> de <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-338" class="externalLink  glosarioLink">producto</a> con norma <a href="et453_amortiguadores_tipo_stockbridge_lineas_aereas_media_tension.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a> y sus anexos (S&#237;/No)</td><td colspan="1" rowspan="1" style=""> </td></tr></table><br /></div>
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 543, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

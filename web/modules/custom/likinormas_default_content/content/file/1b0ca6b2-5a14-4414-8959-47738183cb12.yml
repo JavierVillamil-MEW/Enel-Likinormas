@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 1b0ca6b2-5a14-4414-8959-47738183cb12
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: 'Grupo 36524.png'
+  uri:
+    -
+      value: 'public://2023-04/Grupo 36524_3.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 85911
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1682436251

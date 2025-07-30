@@ -1,0 +1,2098 @@
+numero,nombre,fecha,contenido,categoria
+ET-AT105,ET-AT105 Cables de fibra óptica OPGW para líneas de AT,01/09/2009,"<div class=""contenido"">
+
+
+<div class=""internas"">
+
+
+<div class=""caja_texto wikiformat"">
+
+<div style=""clear:left;"">
+</div>
+<h2 id=""heading_0"">
+        1. OBJETO
+       </h2>
+       El objeto de la presente especificación es fijar las características ópticas, mecánicas y eléctricas que deben cumplir los cables de fibra óptica OPGW, a ser empleados en líneas de
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/55/definition"" id=""version-88"">
+        alta tensión
+       </a>
+       existentes en Enel Colombia S.A. ESP.
+       <br/>
+<h2 id=""heading_1"">
+        2. NORMAS APLICABLES
+       </h2>
+       Para el diseño, fabricación y pruebas, los cables de fibra óptica así como sus componentes, deberán cumplir con las prescripciones de la última versión de alguna de las siguientes normas:
+       <br/>
+<br/>
+       - IEC 60794-4-10: Cables de fibra óptica: Cables aéreos ópticos para líneas de transmisión eléctrica. Especificación para OPGW (Cables ópticos de guarda.)
+       <br/>
+<br/>
+       - IEEE-1138: Norma de Construcción de cables compuestos de fibra óptica y alambres de guarda para uso en líneas de transmisión eléctrica.
+       <br/>
+<h2 id=""heading_2"">
+        3. REQUERIMIENTOS DE CALIDAD
+       </h2>
+       El oferente deberá tener implementado un
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+        sistema
+       </a>
+       de
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/79/definition"" id=""version-112"">
+        calidad
+       </a>
+       basado en las normas de la serie ISO -9001 del año 2000, el cual cubra los procedimientos para diseño, manufactura, instalación, servicios, inspecciones y pruebas. Este
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+        sistema
+       </a>
+       de
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/79/definition"" id=""version-112"">
+        calidad
+       </a>
+       deberá tener la correspondiente
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/91/definition"" id=""version-124"">
+        certificación
+       </a>
+       vigente.
+       <br/>
+<h2 id=""heading_3"">
+        4. CAMPO DE APLICACIÓN
+       </h2>
+       Esta especificación esta desarrollada para cables de fibra óptica que se utilizarán en líneas aéreas con voltajes iguales o superiores a 57.5 kV, en ambientes normales y severos  de
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/112/definition"" id=""version-145"">
+        contaminación
+       </a>
+       , alto grado de humedad y neblina. Sus características deberán adecuarse a dichas condiciones de
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/320/definition"" id=""version-359"">
+        servicio
+       </a>
+       .
+       <br/>
+<h2 id=""heading_4"">
+        5. CARACTERÍSTICAS CONSTRUCTIVAS
+       </h2>
+<h3 id=""heading_5"">
+        5.1 CARACTERÍSTICAS GENERALES:
+       </h3>
+       Consiste en un
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/74/definition"" id=""version-107"">
+        cable
+       </a>
+       de
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/348/definition"" id=""version-387"">
+        tierra
+       </a>
+       con capas exteriores de acero recubierto de aluminio o de aleación de aluminio, arrollados sobre un tubo de aluminio extruido en cuyo interior se aloja el núcleo óptico.
+       <br/>
+<br/>
+       En el interior del
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/74/definition"" id=""version-107"">
+        cable
+       </a>
+       (tubo extruido de aluminio), se aloja el núcleo óptico formado por un elemento central mecánicamente resistente y por tubos holgados (alojan las fibras ópticas holgadas), en cuyo interior se dispondrá  de un gel anti humedad. También el núcleo óptico se rellenará de un gel anti humedad. Todo el conjunto estará envuelto por unas cintas de sujeción y protección térmica.
+       <br/>
+<br/>
+<div class=""contenedor_imagen_articulos"">
+<div class=""box_imagen_articulos"">
+<div class=""imagen_articulos"">
+<img class=""lightbox"" rel=""http://likinormas.micodensa.com/media/content/especificacion/2003/2222.jpg"" src=""/sites/default/files/media/cache/images/500x355/wikiimages/2d31313536393138373537-34782-2222.jpg"" title=""""/>
+</div>
+<div class=""texto_imagen_articulos"" style=""max-width:500px"">
+</div>
+</div>
+</div>
+<br/>
+<b>
+        Figura 1. Composición Cable OPGW (cable de guarda con hilos de fibra óptica)
+       </b>
+<br/>
+<h3 id=""heading_6"">
+        5.2 CARACTERÍSTICAS MECÁNICAS Y ELÉCTRICAS DEL CABLE
+       </h3>
+<div style=""width:500px;"">
+<table>
+<tr>
+<td colspan=""2"" rowspan=""1"" style=""width:500px;height:30px;text-align:center"">
+<b>
+            CABLES OPGW  Icc 19 kA/0,3 s
+           </b>
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           Número de fibras
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           24
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           Diámetro
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/74/definition"" id=""version-107"">
+            cable
+           </a>
+           (mm)
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           14
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/80/definition"" id=""version-113"">
+            Carga
+           </a>
+           de rotura (Kg)
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           7944
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           Peso (Kg/Km)
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           547
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           Módulo de elasticidad (Kg/mm2)
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           10826
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           Coeficiente de dilatación (x10-6 °C-1)
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           15.77
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           Radio de curvatura (mm) (durante la dilatación)
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           400
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           Radio de curvatura (mm) (en el dispositivo de freno)
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           560
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           Radio de curvatura (mm) (depués de la instalación)
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           280
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           Resistencia óhmica a 20 ºC (ohm/Km)
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           0.406
+          </td>
+</tr>
+</table>
+<br/>
+</div>
+<h3 id=""heading_7"">
+        5.3 COMPOSICIÓN
+       </h3>
+<b>
+        5.3.1 Núcleo óptico
+       </b>
+<br/>
+<ul>
+<li>
+         Soporte central:
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/127/definition"" id=""version-160"">
+          dieléctrico
+         </a>
+         resistente a la tracción.
+        </li>
+<li>
+         Fibras ópticas: 12 y 24
+        </li>
+<li>
+         Segunda protección: holgada en el interior de tubos, con cintas de protección, sujeción tanto térmica como mecánica y gel protector. No se instalarán fibras de diferente tipo por el mismo tubo.
+        </li>
+</ul>
+<br/>
+<b>
+        5.3.2 Tubo  de protección del núcleo óptico
+       </b>
+<br/>
+       Tubo de aluminio estanco y extrusionado de un espesor igual o superior a 1,1 mm. El relleno entre el tubo de aluminio estanco y el núcleo óptico se efectuará con gelatina hidrófuga.
+       <br/>
+<br/>
+<b>
+        5.3.3 Capa  exterior
+       </b>
+<br/>
+       Coronas de alambres que proporcionarán las características tanto mecánicas como eléctricas. En ambientes agresivos se utilizarán alambres con diámetro &gt; 3 mm.
+       <br/>
+<h3 id=""heading_8"">
+        5.4 TIPO DE FIBRA ÓPTICA: MONOMODO CONVENCIONAL
+       </h3>
+       La fibra debera ser del tipo monomodo cuya longitud de onda de dispersión nula estará situada en torno a 1300 nm, optimizada para uso en la región de longitud de onda de 1310 nm, y que puede utilizarse también a longitudes de onda en la región de 1550 nm, (en las que la fibra no está optimizada).
+       <br/>
+<br/>
+<b>
+        5.4.1 Características de la fibra
+       </b>
+<br/>
+<div style=""width:630px;"">
+<table>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""width:400px;height:30px;"">
+           Diámetro campo modal  (a 1310 nm)
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""width:230px;"">
+           9,5± 0,5 um.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           Diámetro del revestimiento
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           125 mm ± 2,4 % del valor
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/259/definition"" id=""version-298"">
+            nominal
+           </a>
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           No circularidad del revestimiento
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           &lt; 2%
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           No circularidad del campo de propagación monomodal
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           &lt; 6%
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/162/definition"" id=""version-195"">
+            Error
+           </a>
+           de concentricidad núcleo/revestimiento
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           ± 1um
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           Atenuación  para fibra SM  lambda = 1310 nm
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           &lt;= 0,36  dB/Km  Se verificará la no existencia de discontinuidad
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           Atenuación para fibra SM  lambda = 1550 nm
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           &lt;= 0,23  dB/Km   Se verificará la no existencia de discontinuidad
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           Longitud de onda de corte
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           entre 1100 y 1280 nm.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           Coeficiente de dispersión cromática Entre 1285 y 1330 nm
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           &lt;= 3,5 ps/(nm.Km)
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           Entre 1525 y 1575 nm
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           &lt;=  20  ps/(nm.Km)
+          </td>
+</tr>
+</table>
+<br/>
+</div>
+<h3 id=""heading_9"">
+        5.5 COLORES
+       </h3>
+       Cada una de las fibras es coloreada para su fácil identificación de acuerdo con lo especificado en la norma IEC  60304
+       <br/>
+<h2 id=""heading_10"">
+        6. INSPECCIÓN TÉCNICA Y PRUEBAS
+       </h2>
+       El
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/74/definition"" id=""version-107"">
+        cable
+       </a>
+       de fibra óptica OPGW, deberá cumplir con todas las exigencias de las pruebas de tipo, aceptación y de rutina, descritas en la norma IEC 60794-4-10.
+       <br/>
+       Las pruebas tipo deberán ser realizadas y certificadas por laboratorios independientes de reconocido prestigio internacional.
+       <br/>
+<h3 id=""heading_11"">
+        6.1 PRUEBAS TIPO
+       </h3>
+       La finalidad de estos ensayos será verificar las principales características de un
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/74/definition"" id=""version-107"">
+        cable
+       </a>
+       de fibra óptica OPGW.
+       <br/>
+       Las siguientes pruebas Tipo deben ser efectuadas:
+       <br/>
+<ul>
+<li>
+         Prueba de tracción.
+        </li>
+<li>
+         Prueba de Esfuezo-
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/338/definition"" id=""version-377"">
+          tensión
+         </a>
+</li>
+<li>
+         Prueba de resistencia de rotura
+        </li>
+<li>
+         Prueba de torsión (sheave)
+        </li>
+<li>
+         Prueba de vibración
+        </li>
+<li>
+         Prueba de Creep
+        </li>
+<li>
+         Prueba de ciclos térmicos
+        </li>
+<li>
+         Prueba de penetración de Agua
+        </li>
+<li>
+         Prueba de corto circuito
+        </li>
+<li>
+         Prueba de resistencia al
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/307/definition"" id=""version-346"">
+          rayo
+         </a>
+         .
+        </li>
+</ul>
+<h3 id=""heading_12"">
+        6.2 PRUEBAS MUSTREO Y DE ACEPTACIÓN EN FÁBRICA
+       </h3>
+       Se deberan realizar estos ensayos para demostrar el adecuado diseño, de los materiales y del proceso de fabricación (tecnología) del
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/74/definition"" id=""version-107"">
+        cable
+       </a>
+       de fibra óptica OPGW.
+       <br/>
+<br/>
+       Las pruebas típicas son:
+       <br/>
+<ul>
+<li>
+         Diseño
+        </li>
+<li>
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/200/definition"" id=""version-235"">
+          Inspección
+         </a>
+         visual.
+        </li>
+<li>
+         Longitud de paso
+        </li>
+<li>
+         Diámetro del
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/74/definition"" id=""version-107"">
+          cable
+         </a>
+</li>
+<li>
+         Peso del
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/74/definition"" id=""version-107"">
+          cable
+         </a>
+</li>
+<li>
+         Resistencia DC del
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/74/definition"" id=""version-107"">
+          cable
+         </a>
+</li>
+<li>
+         Prueba de resistencia de rotura (hilos).
+        </li>
+<li>
+         Pruebas de atenuación en la fibra.
+        </li>
+</ul>
+<br/>
+<b>
+        Estas pruebas deberán ser realizadas por el fabricante y los resultados de los ensayos entregados a Enel Colombia S.A. ESP.
+       </b>
+<br/>
+<br/>
+       Opcionalmente, en el caso que se indique, Codensa asistirá a dichas pruebas por lo que se deberán incluir en la oferta los costos asociados a alojamiento, alimentación, transporte, seguro, tasas de embarque, impuestos, visas, gastos menores y otros propios de la actividad por realizar.
+       <br/>
+<h3 id=""heading_13"">
+        6.3 PRUEBAS DE RUTINA
+       </h3>
+       La finalidad de estas pruebas es eliminar el
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/74/definition"" id=""version-107"">
+        cable
+       </a>
+       de fibra óptica OPGW que tengan defectos de fabricación Se aplicará según IEC 60794-4-10 punto 11 “Routine test”. Es responsablilidad del fabricante su realización.
+       <br/>
+<ul>
+<li>
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/200/definition"" id=""version-235"">
+          Inspección
+         </a>
+         de entrada de materia prima de acuerdo con el plan de manufactura de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/79/definition"" id=""version-112"">
+          calidad
+         </a>
+         .
+        </li>
+<li>
+         Coeficiente de atenuación de la fibra
+        </li>
+<li>
+         Diseño del
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/74/definition"" id=""version-107"">
+          cable
+         </a>
+</li>
+<li>
+         Longitud de paso
+        </li>
+<li>
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/79/definition"" id=""version-112"">
+          Calidad
+         </a>
+         de la superficie del
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/74/definition"" id=""version-107"">
+          cable
+         </a>
+</li>
+<li>
+         Diámetro del
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/74/definition"" id=""version-107"">
+          cable
+         </a>
+</li>
+<li>
+         Diámetro de los componentes del
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/74/definition"" id=""version-107"">
+          cable
+         </a>
+</li>
+<li>
+         Características eléctricas y mecánicas de los componentes del
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/74/definition"" id=""version-107"">
+          cable
+         </a>
+         .
+        </li>
+</ul>
+<h3 id=""heading_14"">
+        6.4 RECEPCIÓN E INFORMACIÓN TÉCNICA (EMBALAJE Y TRANSPORTE)
+       </h3>
+       Los cables de fibra óptica deberán ser cuidadosamente embalados y debidamente protegidos para resistir la manipulación durante las operaciones de embarque, desembarque y transporte internacional y nacional.
+       <br/>
+<br/>
+       Deberán ser empacados preferiblemente en cajones de madera u otro
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/239/definition"" id=""version-274"">
+        material
+       </a>
+       que aseguren un transporte aceptable y seguro por parte de un transportista regular hasta el punto de entrega requerido por el comprador. Cada cajón deberá ser marcado con un código seleccionado por el fabricante con el propósito de identificar el
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/229/definition"" id=""version-264"">
+        lote
+       </a>
+       . Estas marcas deberán ser resistentes a la intemperie y a condiciones anormales durante el transporte y almacenaje.
+       <br/>
+<br/>
+       Los cables deberán estar fijados de una forma adecuada tal que se asegure la inmovilización de los mismos durante el transporte y almacenaje.  Los cajones de madera deberán tener un diseño que permita su manipulación con vehículo montacargas.
+       <br/>
+<br/>
+       En todos los cajones, deberá incluirse en una tarjeta dentro de un bolsillo plástico externo, que resista el clima, el transporte y manejo, en una parte claramente visible, la longitud del
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/74/definition"" id=""version-107"">
+        cable
+       </a>
+       , el nombre del comprador y el número de la orden de compra.
+       <br/>
+<br/>
+<h2 id=""heading_15"">
+        7. INFORMACIÓN A PRESENTAR EN LA OFERTA TÉCNICA
+       </h2>
+       El oferente deberá entregar dentro de su propuesta
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/337/definition"" id=""version-376"">
+        técnica
+       </a>
+       la siguiente información:
+       <br/>
+<ul>
+<li>
+         Certificado de gestion de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/79/definition"" id=""version-112"">
+          calidad
+         </a>
+         ISO 9001.
+        </li>
+<li>
+         Tablas de características técnicas garantizadas diligenciadas em su totalidad, según Anexo 1.
+        </li>
+<li>
+         Listado de suministros similares, con certificado de por lo menos 2 clientes, en los cuales se afirme que conductores similares a los ofertados, han presentado un comportamiento favorable.
+        </li>
+<li>
+         Folletos y Documentacion
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/337/definition"" id=""version-376"">
+          técnica
+         </a>
+         del conductor y los herrajes.
+        </li>
+<li>
+         Desviaciones técnicas de la oferta.
+        </li>
+<li>
+         Copia de las normas técnicas empleadas en la fabricación y pruebas del
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/74/definition"" id=""version-107"">
+          cable
+         </a>
+         y los herrajes.
+        </li>
+</ul>
+<br/>
+<b>
+        Es
+        <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/312/definition"" id=""version-351"">
+         requisito
+        </a>
+        obligatorio para cumplir técnicamente, la presentacion de la totalidad de la información anteriormente solicitada.
+       </b>
+<br/>
+<h2 id=""heading_16"">
+        8. GARANTÍA
+       </h2>
+       El fabricante se comprometerá a una garantía sobre los cables y herrajes por un período mínimo de 3 años, a establecer inmediatamente desde la recepción, obligándose a reponer el
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/355/definition"" id=""version-394"">
+        tramo
+       </a>
+       del mismo así como los materiales y trabajos asociados, que en dicho período pudieran resultar defectuosos.
+       <br/>
+<br/>
+<b>
+        ANEXO 1. TABLAS DE CARACTERÍSTICAS TÉCNICAS GARANTIZADAS
+       </b>
+<br/>
+<br/>
+       Las Tablas de Características Técnicas son reproducibles y deberán ser diligenciadas en su totalidad y firmadas por el proponente.
+       <br/>
+<br/>
+       Aspectos generales de los proponentes
+       <br/>
+<br/>
+       1. Nombre del fabricante ......................................................................
+       <br/>
+       2. Nombre de la fábrica	.......................................................................
+       <br/>
+       3. País de la fábrica .........................................................................
+       <br/>
+       4. Dirección ..................................................................................
+       <br/>
+       5. E- Mail ....................................................................................
+       <br/>
+       6. Nombre
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/280/definition"" id=""version-319"">
+        persona
+       </a>
+       a contactar ......................................................
+       <br/>
+       7. Teléfono / Fax .............................................................................
+       <br/>
+       8. Nombre del representante ...................................................................
+       <br/>
+       9. Dirección ..................................................................................
+       <br/>
+       10. E- Mail ...................................................................................
+       <br/>
+       11. Nombre
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/280/definition"" id=""version-319"">
+        persona
+       </a>
+       a contactar .....................................................
+       <br/>
+       12. Teléfono / Fax ............................................................................
+       <br/>
+<br/>
+<b>
+        ANEXO 1. TABLA Nº 1. CARACTERÍSTICAS TÉCNICAS GARANTIZADAS - OPGW
+       </b>
+<br/>
+<br/>
+<div style=""width:750px;"">
+<table>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""width:40px;height:30px;text-align:center"">
+<b>
+            ÍTEM
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""width:300px;text-align:center"">
+<b>
+            DESCRIPCIÓN
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""width:70px;text-align:center"">
+<b>
+            Unidad
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""width:175px;text-align:center"">
+<b>
+            SOLICITADO
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""width:75px;text-align:center"">
+<b>
+            OFRECIDO
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""width:90px;text-align:center"">
+<b>
+            Observación
+           </b>
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+<b>
+            1
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<b>
+            Norma de Fabricación:
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+<b>
+            -
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           IEC 60794-4-10 o IEEE-1138
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+<b>
+            2
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<b>
+            Fabricante y País de origen:
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+<b>
+            -
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+<b>
+            3
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<b>
+            Referencia Cable:
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+<b>
+            -
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+<b>
+            4
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<b>
+            Fibras ópticas
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           4,1
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Número de hilos
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           Un
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           24
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           4,2
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Material de los hilos
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           Norma ITU-T G.652-D
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+<b>
+            5
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<b>
+            Tubo de protección
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           -
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           5,1
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Espesor
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           mm
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           0,35
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           5,2
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Diámetro externo
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           mm
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           3
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           5,3
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Material
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           -
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           PBT 1Ttubo/12 fibras
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+<b>
+            6
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<b>
+            Pasta tamponante
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""3"" style=""height:20px;text-align:center"">
+           6,1
+          </td>
+<td colspan=""1"" rowspan=""3"" style="""">
+           Material
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           -
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           Gel pulibutéica
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           Tixotrópica/ Gel
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           Silicona Absorvedora de hidrógeno
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+<b>
+            7
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<b>
+            Cinta de recubrimiento
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           7,1
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Material (1 alambre)
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           -
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           Poliaramida 3160 HM
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           7,2
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Material (6 alambre)
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           -
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           Poliaramida 1420 HM
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+<b>
+            8
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<b>
+            Cubierta Metálica
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           8,1
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Espesor
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           mm
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           1,5
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           8,2
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Material
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           -
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           Aluminio 1350
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           8,3
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Diámetro externo
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           mm
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           7
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+<b>
+            9
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<b>
+            Corona exterior
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           9,1
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Número de hilos
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           Un
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           9
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           9,2
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Diámetro externo
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           mm
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           3,5
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           9,3
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Material
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           -
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           Acero cubierto de aluminio
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           9,4
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Norma material
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           -
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           20.3% IACS ASTM B415
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+<b>
+            10
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<b>
+            Sección metálica
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           mm2
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           113
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+<b>
+            11
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<b>
+            Diámetro exterior nominal
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           mm
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           14
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+<b>
+            12
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<b>
+            Paso
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           mm
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           190
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+<b>
+            13
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<b>
+            Carga de rotura nominal (UTS)
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           kgf
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           7944
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+<b>
+            14
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<b>
+            Máxima tracción en las peores condiciones climáticas
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           kgf
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           3178
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+<b>
+            15
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<b>
+            Peso nominal
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           kg/km
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           547
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+<b>
+            16
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<b>
+            Módulo de elasticidad
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           kgf/mm^2
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           10826
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+<b>
+            17
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<b>
+            Coeficiente de dilatación lineal
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           1/ºC
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           15.77x10-6
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+<b>
+            18
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<b>
+            Radio mínimo de curvatura
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           -
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           18,1
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Durante instalación
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           mm
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           400
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           18,2
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           En el dispositivo de freno
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           mm
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           560
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           18,3
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Después de la instalación
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           mm
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           280
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+<b>
+            19
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<b>
+            Clase de descarga atmosférica (CREM=60%)
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           C
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           50
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""2"" style=""height:20px;text-align:center"">
+<b>
+            20
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<b>
+            Máxima corriente de corto circuito
+           </b>
+</td>
+<td colspan=""1"" rowspan=""2"" style=""text-align:center"">
+           (kA)^2s
+          </td>
+<td colspan=""1"" rowspan=""2"" style=""text-align:center"">
+           107
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+<b>
+            Ti= 40 ºC; Tf= 180 ºC; t= 0.3 s; Icc=  19 kA
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+<b>
+            21
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<b>
+            Resistencia eléctrica del cable en (CC @ 20 ºC)
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           O/km
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           0,406
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+<b>
+            22
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<b>
+            Coeficiente de corrección de la resistencia eléctrica a temperatura del cable
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           1/ºC
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           3.7X10-3
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+<b>
+            23
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<b>
+            Temperatura de operación
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           ºC
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           -30/+70
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+<b>
+            24
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<b>
+            Pruebas de muestreo
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           24,1
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Diseño
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           -
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           si
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           24,2
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Inspección visual de los elementos del cable
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           -
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           si
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           24,3
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Diámetro del cable
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           -
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           si
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           24,4
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Peso del cable
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           -
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           si
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           24,5
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Resistencia DC del cable
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           -
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           si
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           24,6
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Prueba de resistencia de rotura
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           -
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           si
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           24,7
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Coeficiente de atenuación de la fibra
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           -
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           si
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+<b>
+            25
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<b>
+            Pruebas de rutina
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           -
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           25,1
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Inspección visual
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           -
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           si
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           25,2
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Coeficiente de atenuación
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           -
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           si
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           25,3
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Diseño del cable
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           -
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           si
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           25,4
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Longitud de la capa de armadura
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           -
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           si
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           25,5
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Calidad de la superficie del cable
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           -
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           si
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           25,6
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Diámetro del cable
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           -
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           si
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           25,7
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Diámetro de los componentes del cable
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           -
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           si
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           25,8
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Características eléctricas y mecánicas de los componentes del cable
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           -
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           si
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+<b>
+            26
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<b>
+            Período de Garantía
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           años
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           3
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+<b>
+            27
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<b>
+            Certificado de Calidad ISO 9001
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           -
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           si
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+</table>
+<br/>
+</div>
+<br/>
+<b>
+        ANEXO 2. TABLA Nº 1. CARACTERÍSTICAS TÉCNICAS GARANTIZADAS PATCH CORDS
+       </b>
+<br/>
+<div style=""width:675px;"">
+<table>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""width:40px;height:30px;text-align:center"">
+<b>
+            ÍTEM
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""width:230px;text-align:center"">
+<b>
+            DESCRIPCIÓN
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""width:70px;text-align:center"">
+<b>
+            Unidad
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""width:175px;text-align:center"">
+<b>
+            SOLICITADO
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""width:75px;text-align:center"">
+<b>
+            OFRECIDO
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""width:85px;text-align:center"">
+<b>
+            Observación
+           </b>
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           1
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Tipo de conector
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+<b>
+            -
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           FC-PC, simplex
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           2
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Cubierta del cable
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+<b>
+            -
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           ONFR y kevlar
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           3
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Color
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+<b>
+            -
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           Amarillo
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           4
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Tipo de fibra
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           Monomodo
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           5
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Longitud
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           m
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           6 m
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           6
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Pérdidas directas
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           dB
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           &lt; 0.3
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+           7
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Pérdidas de retorno
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           dB
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           &gt; 45
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+</table>
+<br/>
+</div>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+</div>
+<div class=""streamgrouped"" id=""streamgrouped"">
+
+</div>
+</div>
+
+</div>",OTROS

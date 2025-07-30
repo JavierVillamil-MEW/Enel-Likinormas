@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET601 Ductos metálicos galvanizados para redes de media y baja tensión | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/561" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F561.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/561" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/561" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '27');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET601 Ductos met&#225;licos galvanizados para redes de media y baja tensi&#243;n</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET 601</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">08/03/2021</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/561">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F561&amp;nodoid=561', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#heading_0">1. OBJETO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#heading_1">2. ALCANCE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#heading_2">3. NORMAS RELACIONADAS </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#heading_3">4. CONDICIONES DE SERVICIO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#heading_4">4.1 Condiciones ambientales</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#heading_5">4.2 Caracter&#237;sticas el&#233;ctricas del sistema</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#heading_6">4.3 Condiciones de instalaci&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#heading_7">5. DUCTOS NORMALIZADOS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#heading_8">6. REQUISITOS GENERALES </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#heading_9">6.1 Caracter&#237;sticas Constructivas</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#heading_10">6.2 Caracter&#237;sticas de fabricaci&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#heading_11">7. PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#heading_12">8. MARCACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#heading_13">9. CRITERIOS  DE  ACEPTACI&#211;N  O  RECHAZO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#heading_14">10. REQUISITOS DE LAS OFERTAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#heading_15">11.  GARANT&#205;A DE FABRICA</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#heading_16">12. CERTIFICADO DE CONFORMIDAD DE PRODUCTO</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1. OBJETO</h2>
+Especificar las caracter&#237;sticas t&#233;cnicas que deben cumplir y pruebas a que deben ser sometidas los ductos met&#225;licos galvanizados utilizados en redes de media y baja <a href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> y acometidas.<br />
+<h2 id="heading_1" >2. ALCANCE</h2>
+Esta especificaci&#243;n aplica para todos los ductos met&#225;licos galvanizados que sean instalados en el <a href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de distribuci&#243;n de CODENSA S.A. ESP<br />
+<h2 id="heading_2" >3. NORMAS RELACIONADAS </h2><div style="width:650px;"><table><tr><td colspan="2" rowspan="1" style="width:100px;height:40px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:550px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="width:40px;height:30px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="width:60px;text-align:center">169</td><td colspan="1" rowspan="1" style="width:550px;">(ANSI C80.6) – Tuber&#237;a met&#225;lica. Tubos de acero tipo “IMC” recubiertos de cinc para la conducci&#243;n y protecci&#243;n de conductores el&#233;ctricos (tuber&#237;a conduit)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">171</td><td colspan="1" rowspan="1" style="">(ANSI C80.1) – Tuber&#237;a met&#225;lica. Tubos de acero tipo “RIGID”, recubiertos de cinc.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">332</td><td colspan="1" rowspan="1" style="">(ANSI/ASME B1.20.1) – Tuber&#237;a met&#225;lica. Roscas para tuber&#237;a destinada a prop&#243;sitos generales (unidades en pulgadas)</td></tr></table><br /></div><h2 id="heading_3" >4. CONDICIONES DE SERVICIO</h2>
+Los ductos de que trata esta especificaci&#243;n ser&#225;n instalados en sistemas de distribuci&#243;n primaria y secundaria de CODENSA S.A. E.S.P., de acuerdo con las siguientes condiciones generales del <a href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#" id="version-363" class="externalLink  glosarioLink">sistema</a>:<br />
+<h3 id="heading_4" >4.1 Condiciones ambientales</h3>- Altura sobre el nivel del mar: 2640 m<br />- Humedad relativa: 90%<br />- Temperatura ambiente m&#225;xima: 27 &#176;C<br />- Temperatura ambiente m&#237;nima: -5 &#176;C<br />- Temperatura ambiente promedio: 14 &#176;C<br />
+<h3 id="heading_5" >4.2 Caracter&#237;sticas el&#233;ctricas del <a href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#" id="version-363" class="externalLink  glosarioLink">sistema</a></h3>- <a href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#" id="version-384" class="externalLink  glosarioLink">Tensi&#243;n nominal</a> m&#225;xima: 34,5 kV – 11,4 kV – 13,2 kV – 208 V /120 V<br />
+<h3 id="heading_6" >4.3 Condiciones de instalaci&#243;n</h3>- Al aire libre, y directamente enterrados.<br />
+<h2 id="heading_7" >5. DUCTOS NORMALIZADOS</h2>
+Los ductos deber&#225;n ser met&#225;licos, del tipo IMC (Intermediate Metal Conduit) para los siguientes di&#225;metros nominales:<br /><br />- &#189; &quot;<br />- &#190; &quot;<br />- 1&quot;<br />- 1- &#188;&quot;<br />- 1- &#189;&quot;<br />- 2&quot;<br />- 2- &#189;&quot;<br />- 3&quot;<br />- 3- &#189;&quot;<br />- 4&quot;<br /><br />Los ductos deber&#225;n ser met&#225;licos, del tipo RMC (Rigid Metal Conduit) para los siguientes di&#225;metros nominales:<br />-	6&quot;<br />
+<h2 id="heading_8" >6. REQUISITOS GENERALES </h2>
+<h3 id="heading_9" >6.1 Caracter&#237;sticas Constructivas</h3>
+El ducto y sus componentes deber&#225;n cumplir con las caracter&#237;sticas y ensayos dadas en la norma ICONTEC NTC 169 para los ductos tipo IMC y en la norma ICONTEC NTC 171 para los ductos tipo RMC as&#237; como las caracter&#237;sticas generales dadas en las tablas No. 1 a No.5.<br /><br /><b>Tabla No. 1</b><br /><b>Dimensiones para las roscas</b><br /><div style="width:534px;"><table><tr><td colspan="1" rowspan="2" style="width:100px;height:9px;text-align:center"><b>Tama&#241;o <a href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#" id="version-298" class="externalLink  glosarioLink">nominal</a> o comercial del ducto, in</b></td><td colspan="1" rowspan="2" style="width:65px;text-align:center"><b>Tipo de ducto</b></td><td colspan="1" rowspan="2" style="width:89px;text-align:center"><b>hilos / in</b></td><td colspan="1" rowspan="2" style="width:128px;text-align:center"><b>Di&#225;metro de paso en el extremo de la rosca Eo, con una conicidad de 3/4 in /ft</b></td><td colspan="2" rowspan="1" style="width:152px;text-align:center"><b>Longitud de la rosca, in</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center"><b>Efectiva, L2</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Total, L4</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">1/2</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">14</td><td colspan="1" rowspan="1" style="text-align:center">0,7584</td><td colspan="1" rowspan="1" style="text-align:center">0,53</td><td colspan="1" rowspan="1" style="text-align:center">0,78</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">3/4</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">14</td><td colspan="1" rowspan="1" style="text-align:center">0,9677</td><td colspan="1" rowspan="1" style="text-align:center">0,55</td><td colspan="1" rowspan="1" style="text-align:center">0,79</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">11-1/2</td><td colspan="1" rowspan="1" style="text-align:center">1,2136</td><td colspan="1" rowspan="1" style="text-align:center">0,68</td><td colspan="1" rowspan="1" style="text-align:center">0,98</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">1-1/4</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">11-1/2</td><td colspan="1" rowspan="1" style="text-align:center">1,5571</td><td colspan="1" rowspan="1" style="text-align:center">0,71</td><td colspan="1" rowspan="1" style="text-align:center">1,01</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">1-1/2</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">11-1/2</td><td colspan="1" rowspan="1" style="text-align:center">1,7961</td><td colspan="1" rowspan="1" style="text-align:center">0,72</td><td colspan="1" rowspan="1" style="text-align:center">1,03</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">11-1/2</td><td colspan="1" rowspan="1" style="text-align:center">2,2690</td><td colspan="1" rowspan="1" style="text-align:center">0,76</td><td colspan="1" rowspan="1" style="text-align:center">1,06</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">2-1/2</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">2,7195</td><td colspan="1" rowspan="1" style="text-align:center">1,14</td><td colspan="1" rowspan="1" style="text-align:center">1,57</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">3,3406</td><td colspan="1" rowspan="1" style="text-align:center">1,20</td><td colspan="1" rowspan="1" style="text-align:center">1,63</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">3-1/2</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">3,8375</td><td colspan="1" rowspan="1" style="text-align:center">1,25</td><td colspan="1" rowspan="1" style="text-align:center">1,68</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">4</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">4,3344</td><td colspan="1" rowspan="1" style="text-align:center">1,30</td><td colspan="1" rowspan="1" style="text-align:center">1,73</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">RMC</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">6,4461</td><td colspan="1" rowspan="1" style="text-align:center">1,51</td><td colspan="1" rowspan="1" style="text-align:center">1,95</td></tr></table><br /></div><b>Tabla No. 2</b><br /><b>Dimensiones de los tubos</b><br /><div style="width:547px;"><table><tr><td colspan="1" rowspan="2" style="width:76px;height:9px;text-align:center"><b>Tama&#241;o <a href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#" id="version-298" class="externalLink  glosarioLink">nominal</a> o comercial del ducto, in</b></td><td colspan="1" rowspan="2" style="width:65px;text-align:center"><b>Tipo de ducto</b></td><td colspan="2" rowspan="1" style="width:178px;text-align:center"><b>Diametro externo, in</b></td><td colspan="2" rowspan="1" style="width:152px;text-align:center"><b>Espesor de pared, in</b></td><td colspan="1" rowspan="2" style="width:76px;text-align:center"><b>Longitud sin uni&#243;n, ft e in</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center"><b>m&#225;x.</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>m&#237;n.</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>m&#225;x.</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>m&#237;n.</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">1/2</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">0,820</td><td colspan="1" rowspan="1" style="text-align:center">0,810</td><td colspan="1" rowspan="1" style="text-align:center">0,085</td><td colspan="1" rowspan="1" style="text-align:center">0,070</td><td colspan="1" rowspan="1" style="text-align:center">9&#39; 11-1/4&quot;</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">3/4</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">1.034</td><td colspan="1" rowspan="1" style="text-align:center">1.024</td><td colspan="1" rowspan="1" style="text-align:center">0,090</td><td colspan="1" rowspan="1" style="text-align:center">0,075</td><td colspan="1" rowspan="1" style="text-align:center">9&#39; 11-1/4&quot;</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">1.295</td><td colspan="1" rowspan="1" style="text-align:center">1.285</td><td colspan="1" rowspan="1" style="text-align:center">0,100</td><td colspan="1" rowspan="1" style="text-align:center">0,085</td><td colspan="1" rowspan="1" style="text-align:center">9&#39; 11&quot;</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">1-1/4</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">1.645</td><td colspan="1" rowspan="1" style="text-align:center">1.630</td><td colspan="1" rowspan="1" style="text-align:center">0,105</td><td colspan="1" rowspan="1" style="text-align:center">0,085</td><td colspan="1" rowspan="1" style="text-align:center">9&#39; 11&quot;</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">1-1/2</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">1.890</td><td colspan="1" rowspan="1" style="text-align:center">1.875</td><td colspan="1" rowspan="1" style="text-align:center">0,110</td><td colspan="1" rowspan="1" style="text-align:center">0,090</td><td colspan="1" rowspan="1" style="text-align:center">9&#39; 11&quot;</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">2.367</td><td colspan="1" rowspan="1" style="text-align:center">2.352</td><td colspan="1" rowspan="1" style="text-align:center">0,115</td><td colspan="1" rowspan="1" style="text-align:center">0,095</td><td colspan="1" rowspan="1" style="text-align:center">9&#39; 11&quot;</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">2-1/2</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">2.867</td><td colspan="1" rowspan="1" style="text-align:center">2.847</td><td colspan="1" rowspan="1" style="text-align:center">0,160</td><td colspan="1" rowspan="1" style="text-align:center">0,140</td><td colspan="1" rowspan="1" style="text-align:center">9&#39; 10-1/2&quot;</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">3.486</td><td colspan="1" rowspan="1" style="text-align:center">3.466</td><td colspan="1" rowspan="1" style="text-align:center">0,160</td><td colspan="1" rowspan="1" style="text-align:center">0,140</td><td colspan="1" rowspan="1" style="text-align:center">9&#39; 10-1/2&quot;</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">3-1/2</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">3.981</td><td colspan="1" rowspan="1" style="text-align:center">3.961</td><td colspan="1" rowspan="1" style="text-align:center">0,160</td><td colspan="1" rowspan="1" style="text-align:center">0,140</td><td colspan="1" rowspan="1" style="text-align:center">9&#39; 10-1/4&quot;</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">4</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">4.476</td><td colspan="1" rowspan="1" style="text-align:center">4.456</td><td colspan="1" rowspan="1" style="text-align:center">0,160</td><td colspan="1" rowspan="1" style="text-align:center">0,140</td><td colspan="1" rowspan="1" style="text-align:center">9&#39; 10-1/4&quot;</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style="text-align:center">Di&#225;metro interno <a href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#" id="version-298" class="externalLink  glosarioLink">nominal</a>, in</td><td colspan="1" rowspan="1" style="text-align:center">Di&#225;metro externo, in</td><td colspan="1" rowspan="1" style="text-align:center">Espesor de pared, in</td><td colspan="1" rowspan="1" style="text-align:center">Peso m&#237;nimo de 10 longitudes con uni&#243;n anexa, lb</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">RMC</td><td colspan="1" rowspan="1" style="text-align:center">6.093</td><td colspan="1" rowspan="1" style="text-align:center">6.625</td><td colspan="1" rowspan="1" style="text-align:center">0,266</td><td colspan="1" rowspan="1" style="text-align:center">1745,3</td><td colspan="1" rowspan="1" style="text-align:center">9&#39; 10&quot;</td></tr></table><br /></div><b>Tabla No. 3</b><br /><b>Dimensiones de las uniones</b><br /><div style="width:550px;"><table><tr><td colspan="1" rowspan="2" style="width:70px;height:9px;text-align:center"><b>Tama&#241;o <a href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#" id="version-298" class="externalLink  glosarioLink">nominal</a> o comercial del ducto, in</b></td><td colspan="1" rowspan="2" style="width:57px;text-align:center"><b>Tipo de ducto</b></td><td colspan="1" rowspan="2" style="width:57px;text-align:center"><b>Diametro externo, in</b></td><td colspan="1" rowspan="2" style="width:62px;text-align:center"><b>Longitud m&#237;nima, in</b></td><td colspan="2" rowspan="1" style="width:152px;text-align:center"><b>Di&#225;metro de paso, in</b></td><td colspan="2" rowspan="1" style="width:152px;text-align:center"><b>Di&#225;metro del bisel, in</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center"><b>m&#237;n.</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>m&#225;x.</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>m&#237;n.</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>m&#225;x.</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">1/2</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">1.010</td><td colspan="1" rowspan="1" style="text-align:center">1-5/8</td><td colspan="1" rowspan="1" style="text-align:center">0,801</td><td colspan="1" rowspan="1" style="text-align:center">0,814</td><td colspan="1" rowspan="1" style="text-align:center">0,798</td><td colspan="1" rowspan="1" style="text-align:center">0,838</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">3/4</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">1.250</td><td colspan="1" rowspan="1" style="text-align:center">1-41/64</td><td colspan="1" rowspan="1" style="text-align:center">1.011</td><td colspan="1" rowspan="1" style="text-align:center">1.024</td><td colspan="1" rowspan="1" style="text-align:center">1.088</td><td colspan="1" rowspan="1" style="text-align:center">1.048</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">1,525</td><td colspan="1" rowspan="1" style="text-align:center">1-31/32</td><td colspan="1" rowspan="1" style="text-align:center">1.267</td><td colspan="1" rowspan="1" style="text-align:center">1.283</td><td colspan="1" rowspan="1" style="text-align:center">1.260</td><td colspan="1" rowspan="1" style="text-align:center">1.300</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">1-1/4</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">1.869</td><td colspan="1" rowspan="1" style="text-align:center">2-1/32</td><td colspan="1" rowspan="1" style="text-align:center">1.612</td><td colspan="1" rowspan="1" style="text-align:center">1.628</td><td colspan="1" rowspan="1" style="text-align:center">1.605</td><td colspan="1" rowspan="1" style="text-align:center">1.645</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">1-1/2</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">2.155</td><td colspan="1" rowspan="1" style="text-align:center">2-1/16</td><td colspan="1" rowspan="1" style="text-align:center">1.852</td><td colspan="1" rowspan="1" style="text-align:center">1.868</td><td colspan="1" rowspan="1" style="text-align:center">1.845</td><td colspan="1" rowspan="1" style="text-align:center">1.885</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">2.650</td><td colspan="1" rowspan="1" style="text-align:center">2-1/8</td><td colspan="1" rowspan="1" style="text-align:center">2.327</td><td colspan="1" rowspan="1" style="text-align:center">2.343</td><td colspan="1" rowspan="1" style="text-align:center">2.320</td><td colspan="1" rowspan="1" style="text-align:center">2.360</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">2-1/2</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">3.250</td><td colspan="1" rowspan="1" style="text-align:center">3-3/16</td><td colspan="1" rowspan="1" style="text-align:center">2.806</td><td colspan="1" rowspan="1" style="text-align:center">2.828</td><td colspan="1" rowspan="1" style="text-align:center">2.800</td><td colspan="1" rowspan="1" style="text-align:center">2.860</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">3.870</td><td colspan="1" rowspan="1" style="text-align:center">3-5/16</td><td colspan="1" rowspan="1" style="text-align:center">3.431</td><td colspan="1" rowspan="1" style="text-align:center">3.453</td><td colspan="1" rowspan="1" style="text-align:center">3.425</td><td colspan="1" rowspan="1" style="text-align:center">3.485</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">3-1/2</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">4.500</td><td colspan="1" rowspan="1" style="text-align:center">3-13/32</td><td colspan="1" rowspan="1" style="text-align:center">3.931</td><td colspan="1" rowspan="1" style="text-align:center">3.953</td><td colspan="1" rowspan="1" style="text-align:center">3.925</td><td colspan="1" rowspan="1" style="text-align:center">3.985</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">4</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">4.875</td><td colspan="1" rowspan="1" style="text-align:center">3-33/64</td><td colspan="1" rowspan="1" style="text-align:center">4.431</td><td colspan="1" rowspan="1" style="text-align:center">4.453</td><td colspan="1" rowspan="1" style="text-align:center">4.425</td><td colspan="1" rowspan="1" style="text-align:center">4.485</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">RMC</td><td colspan="1" rowspan="1" style="text-align:center">7.200</td><td colspan="1" rowspan="1" style="text-align:center">4-1/4</td><td colspan="1" rowspan="1" style="text-align:center">6.556</td><td colspan="1" rowspan="1" style="text-align:center">6.578</td><td colspan="1" rowspan="1" style="text-align:center">6.591</td><td colspan="1" rowspan="1" style="text-align:center">6.651</td></tr></table><br /></div><b>Tabla No. 4</b><br /><b>Dimensiones m&#237;nimas aceptables para codos y otras curvas</b><br /><div style="width:450px;"><table><tr><td colspan="1" rowspan="1" style="width:120px;height:9px;text-align:center"><b>Tama&#241;o <a href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#" id="version-298" class="externalLink  glosarioLink">nominal</a> o comercial del ducto, in</b></td><td colspan="1" rowspan="1" style="width:80px;text-align:center"><b>Tipo de ducto</b></td><td colspan="1" rowspan="1" style="width:120px;text-align:center"><b>Radio m&#237;nimo R al centro del ducto, in</b></td><td colspan="1" rowspan="1" style="width:130px;text-align:center"><b>Longitud recta m&#237;nima Ls en cada extremo, in</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">1/2</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">4</td><td colspan="1" rowspan="1" style="text-align:center">1/2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">3/4</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">4-1/2</td><td colspan="1" rowspan="1" style="text-align:center">1-1/2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">5-3/4</td><td colspan="1" rowspan="1" style="text-align:center">1-7/8</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">1-1/4</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">7-1/4</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">1-1/2</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">8-1/4</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">9-1/2</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">2-1/2</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">10-1/2</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">3-1/8</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">3-1/2</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">15</td><td colspan="1" rowspan="1" style="text-align:center">3-1/4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">4</td><td colspan="1" rowspan="1" style="text-align:center">IMC</td><td colspan="1" rowspan="1" style="text-align:center">16</td><td colspan="1" rowspan="1" style="text-align:center">3-3/8</td></tr></table><br /></div><b>Tabla No. 5</b><br /><b>Dimensiones de los codos de 90&#186; y pesos de niples por cada cien unidades</b><br /><div style="width:650px;"><table><tr><td colspan="1" rowspan="2" style="width:80px;height:9px;text-align:center"><b>Tama&#241;o <a href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#" id="version-298" class="externalLink  glosarioLink">nominal</a> o comercial del ducto, in</b></td><td colspan="1" rowspan="2" style="width:50px;text-align:center"><b>Tipo de ducto</b></td><td colspan="2" rowspan="1" style="width:260px;text-align:center"><b>Codos</b></td><td colspan="2" rowspan="1" style="width:260px;text-align:center"><b>Niples</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center"><b>Radio m&#237;nimo R al centro del ducto, in</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Longitud recta m&#237;nima Ls en cada extremo, in</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Peso de un niple por pulgada de longitud, lb</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Peso perdido en el roscado de cada cien niples, lb</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">RMC</td><td colspan="1" rowspan="1" style="text-align:center">30</td><td colspan="1" rowspan="1" style="text-align:center">3-3/4</td><td colspan="1" rowspan="1" style="text-align:center">1410</td><td colspan="1" rowspan="1" style="text-align:center">200</td></tr></table><br /></div><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../archivo/570_570.html"><img src="../../media/content/mediafile/570/Dibujo&#32;ET&#32;601&#32;FIG&#32;1.JPG" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../archivo/571_571.html"><img src="../../media/content/mediafile/571/Dibujo&#32;ET&#32;601&#32;FIG&#32;2.JPG" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br />
+<h3 id="heading_10" >6.2 Caracter&#237;sticas de fabricaci&#243;n</h3>
+Los ductos deben ser aptos para utilizaci&#243;n en las condiciones de servicio estipuladas en el numeral 4 de la presente especificaci&#243;n, y deber&#225;n cumplir con las caracter&#237;sticas que se especifican a continuaci&#243;n:<br /><br /><b>6.2.1	Requisitos generales</b><br />Los ductos se suministran en longitudes nominales de 10 ft (3,048 m), roscados en cada uno de sus extremos y con una uni&#243;n anexa. La superficie exterior de la tuber&#237;a deber&#225; estar protegida mediante un recubrimiento met&#225;lico de cinc, y la interior, con un recubrimiento de cinc, esmaltado u otro equivalente que sea resistente a la <a href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a>.<br /><br />Esta especificaci&#243;n tambi&#233;n cubre las uniones (acoplamientos) para los ductos de acero, codos, curvas, niples y otras longitudes diferentes a las de 10 ft (3,048 m).<br />Los ductos de acero deber&#225;n poseer una secci&#243;n transversal suficientemente exacta para permitir el roscado de acuerdo con lo establecido en la tabla No.1.<br /><br />El espesor de pared deber&#225; estar de acuerdo con lo establecido en la tabla No. 2.<br /><br />En el ducto tipo RMC, las imperfecciones superficiales del espesor, no deber&#225;n estar a una profundidad superior al 12,5%.<br /><br />La superficie interior deber&#225; estar libre de defectos perjudiciales.<br /><br />La soldadura de todas las costuras deber&#225; ser continua y deber&#225; poseer un buen terminado.<br /><br />Los ductos se deben limpiar adecuadamente antes de aplicar el recubrimiento protector. El proceso de limpieza deber&#225; dejar las superficies exterior  e interior, en tal condici&#243;n que el recubrimiento protector sea liso y se adhiera firmemente y de una manera uniforme.<br /><br />La superficie exterior deber&#225; estar entera y uniformemente recubierta con cinc met&#225;lico aplicado directamente sobre la superficie del acero, de manera que se obtenga un contacto metal-metal y se suministre protecci&#243;n galv&#225;nica contra la <a href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a>.<br /><br />La superficie interna deber&#225; estar protegida mediante un recubrimiento de cinc, esmaltado u otro recubrimiento equivalente que sea resistente a la <a href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a>.<br /><br /><b>6.2.2	Espesor de cinc</b><br /><br />El contenido de cinc corresponde al recubrimiento aplicado sobre la superficie exterior deber&#225; ser equivalente a un espesor m&#237;nimo de 0.0008 in( 20 <span class="codeInline">&#181;</span>m).<br /><br /><b>6.2.3	Recubrimiento protector</b><br /><br />El esmaltado u otro recubrimiento protector equivalente, debe poseer una superficie lisa y continua.<br /><br />Se aceptar&#225; una rugosidad ocasional originada por el flujo irregular del recubrimiento. Este no se deber&#225; reblandecer a una temperatura de 49 &#186;C y deber&#225; ser lo suficientemente el&#225;stico para que cumpla con el <a href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> de <a href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> de esmaltado.<br /><br /><b>6.2.4	Roscado y biselado</b><br /><br />Cada longitud de tuber&#237;a y cada niple, codo y longitud curvada deber&#225;n ser roscados en ambos extremos, y cada extremo deber&#225; ser biselado o sometido a otro tratamiento que permita eliminar las rebabas y los bordes agudos.<br /><br />Las roscas deber&#225;n cumplir con los requisitos del numeral 6.2.6 de la presente especificaci&#243;n. Si las roscas se tallan despu&#233;s de que el recubrimiento de cinc haya sido aplicado, se deber&#225;n tratar con un recubrimiento protector para prevenir la <a href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a> antes de que se efect&#250;e la instalaci&#243;n. Este tratamiento no deber&#225; impedir la continuidad el&#233;ctrica a trav&#233;s de las uniones o accesorios despu&#233;s de la instalaci&#243;n.<br /><br /><b>6.2.5	Dimensiones</b><br /><br />Las dimensiones (di&#225;metros, espesor, longitud y peso) de los ductos, deber&#225;n estar de acuerdo con lo estipulado en la tabla No. 2.<br /><br /><b>6.2.6	Roscas</b><br /><br />El n&#250;mero de filetes (hilos) por pulgada y la longitud de la porci&#243;n roscada en cada extremo de cada longitud de ducto, niple y codo, deber&#225; ser la indicada en la tabla No. 1, y estar en concordancia con lo estipulado en la norma ICONTEC NTC 332.<br /><br />La rosca deber&#225; ser coniforme en toda su longitud, y dicha conicidad deber&#225; ser de 3/4&quot; /ft.<br /><br /><b>6.2.7	Uniones (acoplamientos)</b><br /><br />La superficie externa de las uniones se deber&#225; proteger mediante un recubrimiento de cinc, el cual deber&#225; cumplir con los requisitos del numeral 6.2.1 de la presente especificaci&#243;n. La superficie interior deber&#225; ser tratada con el prop&#243;sito de inhibir la <a href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a>. Las uniones se deber&#225;n fabricar de manera que todos los filetes de la rosca queden cubiertos cuando se ajusten herm&#233;ticamente sobre las roscas est&#225;ndar de los ductos.<br /><br />Ambos extremos de las uniones deber&#225;n ser biselados para prevenir deterioros en el extremo inicial de la rosca.<br /><br />El di&#225;metro exterior, la longitud, el di&#225;metro de paso y el di&#225;metro del bisel de las uniones, deber&#225;n estar de acuerdo con lo indicado en la tabla No. 3.<br />Las uniones deber&#225;n ser talladas en forma cil&#237;ndrica para los ductos tipo IMC y con rosca recta para los ductos tipo RMC.<br /><br />Cada longitud de ducto terminado deber&#225; poseer una uni&#243;n anexa.<br /><br /><b>6.2.8	Codos y niples</b><br /><br />Los codos de los ductos y los niples deber&#225;n fabricarse con un acero de grado similar al empleado en las longitudes rectas de los ductos, y deber&#225;n ser tratados, recubiertos, roscados y marcados para su identificaci&#243;n de acuerdo con los requisitos exigidos para los ductos, cuando ello sea aplicable.<br />
+<h2 id="heading_11" >7. PRUEBAS</h2>
+<div style="width:400px;"><table><tr><td colspan="1" rowspan="1" style="width:150px;height:9px;"><b>Pruebas</b></td><td colspan="1" rowspan="1" style="width:80px;text-align:center"><b>Tipo</b></td><td colspan="1" rowspan="1" style="width:80px;text-align:center"><b>Rutina</b></td><td colspan="1" rowspan="1" style="width:90px;text-align:center"><b>Aceptaci&#243;n</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Verificaci&#243;n visual y dimensional</td><td colspan="1" rowspan="1" style="text-align:center">X</td><td colspan="1" rowspan="1" style="text-align:center">X</td><td colspan="1" rowspan="1" style="text-align:center">X</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Verificaci&#243;n espesor del galvanizado</td><td colspan="1" rowspan="1" style="text-align:center">X</td><td colspan="1" rowspan="1" style="text-align:center">X</td><td colspan="1" rowspan="1" style="text-align:center">X</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Ensayo de Curvado</td><td colspan="1" rowspan="1" style="text-align:center">X</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr></table><br /></div>Verificaci&#243;n visual y dimensional:<br />
+<ul><li>Cada tramo de tuber&#237;a conduit acorde al nivel de muestreo establecido, se debe examinar visualmente tanto en la superficie exterior e interior, sin evidenciar  defectos superficiales tales como pliegues, sopladuras, burbujas, poros, grietas, rechupe, excesiva rebaba, exfoliaduras, ampolladuras, raspaduras y delaminaci&#243;n u otros defectos no presentes en &#233;ste listado pero identificados durante la inspecci&#243;n que puedan afectar la vida &#250;til del producto.</li>
+<li>Durante la verificaci&#243;n de las dimensiones de las roscas, tubos y uniones deben corresponder a lo que se encuentra aprobado previamente por la compa&#241;&#237;a con la tolerancias indicadas.</li>
+<li>Se realizar&#225; verificaci&#243;n de la identificaci&#243;n acorde a lo requerido en el numeral 8. Marcaci&#243;n.</li></ul>
+<br />Verificaci&#243;n espesor del galvanizado<br />
+<ul><li>La capa m&#237;nima debe corresponder a lo indicado en el numeral 6.2.2 Espesor de cinc. No pueden existir &#225;reas internas o externas sin recubrimiento. As&#237; mismo, el galvanizado no puede afectar el correcto ajuste de las uniones y tubos.</li></ul>
+<br />Ensayo de Curvado<br />
+<ul><li>Temperatura ambiente</li></ul>
+El recubrimiento de protecci&#243;n tanto en el interior como en el exterior, de la tuber&#237;a conduit no se debe agrietar o desprender y se debe ejecutar acorde a lo indicado en la NTC169 y NTC171 en su versi&#243;n m&#225;s reciente.<br />
+<ul><li>Baja temperatura</li></ul>
+Una probeta se debe poder doblar en un cuarto de c&#237;rculo alrededor de un mandril, despu&#233;s de ser acondicionado por una hora a 0 &#186;C, el tubo no deber&#225; desarrollar grietas y las soldaduras no se deben abrir, el recubrimiento no debe sufrir afectaci&#243;n y se debe ejecutar acorde a lo indicado en la NTC169 y NTC171 en su versi&#243;n m&#225;s reciente.<br /><br />
+<h2 id="heading_12" >8. MARCACI&#211;N</h2>
+Excepto cuando los niples roscados no necesiten ser identificados, cada longitud de ducto, niple y codo se deber&#225; identificar con la siguiente informaci&#243;n:<br /><br />- Nombre del fabricante y la marca registrada<br />- Las letras IMC o las palabras “TUBO CONDUIT R&#205;GIDO” (RMC), dependiendo del tipo de ducto.<br />- El di&#225;metro nominal del ducto en mm y en pulgadas<br />- Fecha de fabricaci&#243;n y lote.<br />- ENEL-CODENSA S.A. ESP<br />- Contrato.<br /><br />
+<h2 id="heading_13" >9. CRITERIOS  DE  ACEPTACI&#211;N  O  RECHAZO</h2>
+El muestreo se realizar&#225; acorde a la NTC-ISO 2859-1 utilizando un nivel de inspecci&#243;n I y un nivel de aceptaci&#243;n de 2,5%.<br /><div style="width:520px;"><table><tr><td colspan="4" rowspan="1" style="width:520px;height:9px;text-align:center"><b>Tabla inspecci&#243;n visual-dimensional</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="width:220px;height:9px;text-align:center"><b>Tama&#241;o del <a href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#" id="version-264" class="externalLink  glosarioLink">lote</a></b></td><td colspan="1" rowspan="1" style="width:100px;text-align:center"><b>Muestra</b></td><td colspan="1" rowspan="1" style="width:100px;text-align:center"><b>Aceptado</b></td><td colspan="1" rowspan="1" style="width:100px;text-align:center"><b>Rechazado</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">2             a          8</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">9             a          15</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">16             a          25</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">26             a          50</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">51             a          90</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">91             a          150</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">151             a          280</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">281             a          500</td><td colspan="1" rowspan="1" style="text-align:center">20</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">501             a          1200</td><td colspan="1" rowspan="1" style="text-align:center">32</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">1201             a          3200</td><td colspan="1" rowspan="1" style="text-align:center">50</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">3201             a          10000</td><td colspan="1" rowspan="1" style="text-align:center">80</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">10001             a          35000</td><td colspan="1" rowspan="1" style="text-align:center">125</td><td colspan="1" rowspan="1" style="text-align:center">7</td><td colspan="1" rowspan="1" style="text-align:center">8</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">35001             a          150000</td><td colspan="1" rowspan="1" style="text-align:center">200</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">11</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">150001             a          500000</td><td colspan="1" rowspan="1" style="text-align:center">315</td><td colspan="1" rowspan="1" style="text-align:center">14</td><td colspan="1" rowspan="1" style="text-align:center">15</td></tr></table><br /></div>El muestreo se realizar&#225; acorde a la NTC-ISO 2859-1 utilizando un nivel de inspecci&#243;n S2 y un nivel de aceptaci&#243;n de 2,5%.<br /><div style="width:520px;"><table><tr><td colspan="4" rowspan="1" style="width:520px;height:9px;text-align:center"><b>Tabla inspecci&#243;n ensayos mec&#225;nicos</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="width:220px;height:9px;text-align:center"><b>Tama&#241;o del <a href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#" id="version-264" class="externalLink  glosarioLink">lote</a></b></td><td colspan="1" rowspan="1" style="width:100px;text-align:center"><b>Muestra</b></td><td colspan="1" rowspan="1" style="width:100px;text-align:center"><b>Aceptado</b></td><td colspan="1" rowspan="1" style="width:100px;text-align:center"><b>Rechazado</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">2             a          8</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">9             a          15</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">16             a          25</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">26             a          50</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">51             a          90</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">91             a          150</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">151             a          280</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">281             a          500</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">501             a          1200</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">1201             a          3200</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">3201             a          10000</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">10001             a          35000</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">35001             a          150000</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">150001             a          500000</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr></table><br /></div><h2 id="heading_14" >10. REQUISITOS DE LAS OFERTAS</h2>
+El Oferente debe incluir con su propuesta, la siguiente informaci&#243;n:<br />
+<ul><li>Planilla de caracter&#237;sticas t&#233;cnicas garantizadas, la cual deber&#225; ser diligenciada completamente, firmada y sellada por el oferente.</li></ul>
+ 
+<ul><li>Cat&#225;logos originales completos y actualizados del fabricante, que correspondan a los bienes cotizados, en la planilla de caracter&#237;sticas t&#233;cnicas garantizadas. </li></ul>
+
+<ul><li>Protocolos de pruebas de acuerdo con lo indicado en el numeral 7 de la presente especificaci&#243;n.</li></ul>
+
+<ul><li>Copia de los Certificados de <a href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#" id="version-139" class="externalLink  glosarioLink">conformidad</a> de <a href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#" id="version-338" class="externalLink  glosarioLink">producto</a> y del <a href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#" id="version-363" class="externalLink  glosarioLink">Sistema</a> de <a href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#" id="version-112" class="externalLink  glosarioLink">Calidad</a></li></ul>
+
+<ul><li>Informaci&#243;n adicional que considere aporta explicaci&#243;n a su dise&#241;o (dibujos,  detalles,  caracter&#237;sticas de operaci&#243;n,  dimensiones y pesos de los materiales ofertados). </li></ul>
+<br />CODENSA S.A. podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones, sin expresi&#243;n de causa ni obligaci&#243;n de compensaci&#243;n.<br />
+<h2 id="heading_15" >11.  GARANT&#205;A DE FABRICA</h2>
+CODENSA S.A. E.S.P requiere como m&#237;nimo, un per&#237;odo de garant&#237;a de f&#225;brica de veinticuatro (24) meses, a partir de la entrega de los ductos.<br />
+<h2 id="heading_16" >12. <a href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#" id="version-126" class="externalLink  glosarioLink">CERTIFICADO DE CONFORMIDAD</a> DE <a href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#" id="version-338" class="externalLink  glosarioLink">PRODUCTO</a></h2>
+El proveedor debe demostrar el cumplimiento del RETIE mediante Certificado de Conformidad de Producto, expedido por un organismo de certificaci&#243;n acreditado por el ONAC y mantenerlo vigente durante la duraci&#243;n del contrato.<br /><br /><b>ANEXO 1. CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS</b><br /><div style="width:559px;"><table><tr><td colspan="1" rowspan="1" style="width:258px;height:40px;text-align:center"><b>DESCRIPCI&#211;N</b></td><td colspan="1" rowspan="1" style="width:146px;text-align:center"><b>SOLICITADO</b></td><td colspan="1" rowspan="1" style="width:155px;text-align:center"><b>OFERTADO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Fabricantes</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Normas de fabricaci&#243;n y pruebas</td><td colspan="1" rowspan="1" style="text-align:center">NTC 169 NTC 171 ET-601</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Material</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Tipo</td><td colspan="1" rowspan="1" style="text-align:center">IMC/RMC</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Hilos</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Di&#225;metro de paso en el extremo de la rosca</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Longitud total de la rosca (pulgadas)</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center"><i><b>DIMENSIONES TUBO</b></i></td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Longitud (m)</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Di&#225;metro <a href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#" id="version-298" class="externalLink  glosarioLink">Nominal</a> (pulg)</td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Di&#225;metro Exterior (pulg)</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Espesor de pared (pulg)</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center"><i><b>DIMENSIONES UNIONES</b></i></td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Di&#225;metro externo (pulg)</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Di&#225;metro de paso (pulg)</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Di&#225;metro del bisel (pulg)</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Espesor m&#237;nimo de recubrimiento de cinc (pulg)</td><td colspan="1" rowspan="1" style="text-align:center">0.0008</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Peso</td><td colspan="1" rowspan="1" style="text-align:center">Inf. Fabricante</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Cumple con los ensayos indicados?</td><td colspan="1" rowspan="1" style="text-align:center">Si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Cumple con las marcaciones solicitadas</td><td colspan="1" rowspan="1" style="text-align:center">Si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Certificado de <a href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#" id="version-338" class="externalLink  glosarioLink">producto</a> No.</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Presenta certificado de <a href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de <a href="et601_ductos_metalicos_galvanizados_redes_media_baja.html#" id="version-112" class="externalLink  glosarioLink">calidad</a>?</td><td colspan="1" rowspan="1" style="text-align:center">Si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;"><b>EVALUACI&#211;N</b></td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div><br /><br /><br /><br /><br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 561, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

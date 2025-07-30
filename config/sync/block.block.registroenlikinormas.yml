@@ -1,0 +1,30 @@
+uuid: f3b25170-fc64-4534-bf20-f7e4de3acaac
+langcode: es
+status: true
+dependencies:
+  content:
+    - 'block_content:rules_title_description_and_item:d794a753-9270-43ae-8a13-ca16aa4d1039'
+  module:
+    - block_content
+    - system
+  theme:
+    - likinormas
+id: registroenlikinormas
+theme: likinormas
+region: content
+weight: 0
+provider: null
+plugin: 'block_content:d794a753-9270-43ae-8a13-ca16aa4d1039'
+settings:
+  id: 'block_content:d794a753-9270-43ae-8a13-ca16aa4d1039'
+  label: 'Registro en LikiNormas'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /user/register

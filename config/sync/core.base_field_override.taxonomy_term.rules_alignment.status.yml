@@ -1,0 +1,22 @@
+uuid: e92208e8-5663-47cb-8de7-3ceeb9b5c725
+langcode: es
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.rules_alignment
+id: taxonomy_term.rules_alignment.status
+field_name: status
+entity_type: taxonomy_term
+bundle: rules_alignment
+label: Publicado
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Activado
+  off_label: Desactivado
+field_type: boolean

@@ -1,0 +1,11 @@
+uuid: 510784a8-14d4-46ae-80b3-725907cfa65d
+langcode: es
+status: true
+dependencies:
+  config:
+    - system.menu.rules-site-map
+id: menu_link_content.rules-site-map
+target_entity_type_id: menu_link_content
+target_bundle: rules-site-map
+default_langcode: site_default
+language_alterable: false

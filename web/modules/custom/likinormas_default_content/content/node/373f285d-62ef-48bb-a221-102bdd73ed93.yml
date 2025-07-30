@@ -1,0 +1,67 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 373f285d-62ef-48bb-a221-102bdd73ed93
+  bundle: rules_technical_rules
+  default_langcode: en
+  depends:
+    57eb06d6-4a9e-4489-94e2-7e0b344f4541: taxonomy_term
+    d1d76251-229a-40fc-9507-371892647a4a: taxonomy_term
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: 'AE218 Acometida aérea de baja tensión desde red trenzada'
+  created:
+    -
+      value: 1682612257
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /normas/cables-subterraneos/cables/ae218-acometida-aerea-de-baja-tension-desde-red-trenzada
+      langcode: en
+      pathauto: 1
+  pdf_technical_rule:
+    -
+      uri: 'internal:/'
+      title: 'Descargar PDF'
+      options: {  }
+  rule_category:
+    -
+      entity: 57eb06d6-4a9e-4489-94e2-7e0b344f4541
+  rule_subcategory:
+    -
+      entity: d1d76251-229a-40fc-9507-371892647a4a
+  technical_rule_author:
+    -
+      value: 'Brayan ocampo'
+  technical_rule_content:
+    -
+      value: '<img data-entity-uuid="7ee0d2fb-2ed7-486d-b755-2ffe76459fbc" data-entity-type="file" src="/sites/default/files/inline-images/excelente.jpg" data-align="left">'
+      format: basic_html
+  technical_rule_description:
+    -
+      value: 'La caja para un medidor monofásico con tapa extraíble es un componente esencial para la instalación de un medidor eléctrico en viviendas o edificios. Esta caja protege el medidor de las inclemencias del tiempo y de cualquier daño físico, y su tapa extraíble permite un fácil acceso para la lectura del medidor y su mantenimiento'
+  technical_rule_number:
+    -
+      value: 'ET 602'
+  technical_rule_title:
+    -
+      value: '<h1>AE218 Acometida aérea de baja tensión desde red trenzada</h1>'
+      format: full_html

@@ -1,0 +1,19 @@
+uuid: 3baa3e2b-9e4a-4947-b72a-a64afafafe9a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.specification_author
+    - node.type.rules_technical_specifications
+id: node.rules_technical_specifications.specification_author
+field_name: specification_author
+entity_type: node
+bundle: rules_technical_specifications
+label: 'Elaborado por'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

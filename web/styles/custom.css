@@ -1,0 +1,178 @@
+/* PDF Header */
+.pdf-header {
+  height: 100%;
+  padding-top: 100px;
+}
+
+.right-image {
+  float: right;
+}
+
+.left-image {
+  float: left;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.text-align-right {
+  text-align: right;
+}
+
+.text-align-justify {
+  text-align: justify;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.align-justify {
+  text-align: justify;
+}
+
+/* Header title */
+.pdf-header .section-title {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.pdf-header .section-title .title {
+  font-size: 35px;
+  font-weight: bold;
+  line-height: 45px;
+  margin: 0;
+  padding: 0;
+}
+
+.pdf-header .section-title .subtitle {
+  font-size: 30px;
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+}
+
+/* Data author */
+.pdf-header .data-author {
+  width: 80%;
+  margin: 200px auto 15px auto;
+}
+
+/* Table header */
+.pdf-header table {
+  max-width: 100%;
+  width: 100%;
+  /* border-spacing: 5px; */
+  border-collapse: separate;
+  border-spacing: 5px 1px;
+}
+
+.pdf-header table thead th {
+  background-color: #cccccc;
+  color: #88847f;
+}
+
+.pdf-header table thead tr th:nth-child(1) {
+  width: 200px;
+}
+
+.pdf-header table.table-author tbody td,
+.pdf-header table.table-revision tbody td {
+  background-color: #eeeeee;
+  color: #a3a3a3;
+  text-align: center;
+}
+
+.pdf-header table thead th:nth-child(1),
+.pdf-header table tbody td:nth-child(1) {
+  border-spacing: 3px;
+}
+
+.pdf-header .table-author {
+  margin-bottom: 3px;
+}
+
+.pdf-header .table-revision {
+  margin-bottom: 10px;
+}
+
+/* Footer Header */
+.pdf-header .info-liki {
+  padding-top: 30px;
+  width: 85%;
+}
+
+.info-liki .table-info-liki {
+  padding-top: 10px;
+}
+
+.info-super {
+  float: right;
+}
+
+/* PDF Body */
+.pdf-body {
+}
+
+.pdf-body .content-pdf {
+  /* padding-top: 10px; */
+}
+
+.pdf-body .content-pdf .headings {
+  display: none;
+}
+
+.pdf-body .content-pdf .contenido {
+  padding-top: 25px;
+  font-size: 14px;
+}
+
+.pdf-body .content-pdf .contenido h1,
+.pdf-body .content-pdf .contenido h2,
+.pdf-body .content-pdf .contenido h3,
+.pdf-body .content-pdf .contenido h4,
+.pdf-body .content-pdf .contenido h5,
+.pdf-body .content-pdf .contenido h6 {
+  color: #424141;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  padding-top: 20px 0 5px 0;
+  border-bottom: 1px solid #ccc;
+}
+
+.pdf-body .content-pdf .contenido p {
+  line-height: 20px;
+  color: #666666;
+}
+
+.pdf-body .content-pdf .contenido a {
+  color: #066693;
+  text-decoration: none;
+}
+
+.pdf-body .content-pdf table {
+  margin: 15px 0 10px 0;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.pdf-body .content-pdf table,
+.pdf-body .content-pdf table th,
+.pdf-body .content-pdf table tr,
+.pdf-body .content-pdf table td {
+  border: 1px solid #808080;
+}
+
+.pdf-body .content-pdf table {
+  border-collapse: collapse;
+}
+
+.pdf-body .content-pdf table caption strong {
+  font-weight: normal;
+}

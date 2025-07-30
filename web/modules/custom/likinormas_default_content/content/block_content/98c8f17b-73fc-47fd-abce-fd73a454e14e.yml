@@ -1,0 +1,43 @@
+_meta:
+  version: '1.0'
+  entity_type: block_content
+  uuid: 98c8f17b-73fc-47fd-abce-fd73a454e14e
+  bundle: rules_title_description_and_item
+  default_langcode: es
+  depends:
+    9892aade-e88c-4067-b674-37f5a654cea0: file
+    77d7e2cf-9555-4930-a98d-beee062e5a89: file
+default:
+  status:
+    -
+      value: true
+  info:
+    -
+      value: 'Mensaje de recuperacion'
+  reusable:
+    -
+      value: true
+  revision_translation_affected:
+    -
+      value: true
+  background_image:
+    -
+      entity: 9892aade-e88c-4067-b674-37f5a654cea0
+      alt: city_backgound
+      title: city_backgound
+      width: 1920
+      height: 1080
+  background_image_mobile:
+    -
+      entity: 77d7e2cf-9555-4930-a98d-beee062e5a89
+      alt: city_backgound
+      title: ''
+      width: 1810
+      height: 3200
+  description_section:
+    -
+      value: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.'
+  title_section:
+    -
+      value: '<h1>Inicio de sesión único</h1>'
+      format: full_html

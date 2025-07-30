@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET261 Brazo anti balanceo para red compacta de 15 kV y 34,5 kV | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/1785" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F1785.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/1785" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/1785" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '28');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET261 Brazo anti balanceo para red compacta de 15 kV y 34,5 kV</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET261</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">01/10/23</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/1785">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F1785&amp;nodoid=1785', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et261_brazo_antibalanceo_red_compacta_15_kv.html#heading_0"> 1.	OBJETO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et261_brazo_antibalanceo_red_compacta_15_kv.html#heading_1">2.	ALCANCE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et261_brazo_antibalanceo_red_compacta_15_kv.html#heading_2">3.	CONDICIONES GENERALES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et261_brazo_antibalanceo_red_compacta_15_kv.html#heading_3">3.1.	CONDICIONES AMBIENTALES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et261_brazo_antibalanceo_red_compacta_15_kv.html#heading_4">3.2.	CONDICIONES EL&#201;CTRICAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et261_brazo_antibalanceo_red_compacta_15_kv.html#heading_5">3.3.	CONDICIONES DE SERVICIO Y LUGAR DE INSTALACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et261_brazo_antibalanceo_red_compacta_15_kv.html#heading_6">4.	SISTEMAS DE UNIDADES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et261_brazo_antibalanceo_red_compacta_15_kv.html#heading_7">5.	NORMAS RELACIONADAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et261_brazo_antibalanceo_red_compacta_15_kv.html#heading_8">6.	REQUERIMIENTOS T&#201;CNICOS PARTICULARES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et261_brazo_antibalanceo_red_compacta_15_kv.html#heading_9"> 6.1 MARCACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et261_brazo_antibalanceo_red_compacta_15_kv.html#heading_10">7.	CRITERIOS  DE  ACEPTACI&#211;N  O  RECHAZO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et261_brazo_antibalanceo_red_compacta_15_kv.html#heading_11">8.	PRUEBAS </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et261_brazo_antibalanceo_red_compacta_15_kv.html#heading_12"> 8.1 PRUEBAS TIPO</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et261_brazo_antibalanceo_red_compacta_15_kv.html#heading_13"> 8.1.1. CERTIFICADOS DE MATERIALES</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et261_brazo_antibalanceo_red_compacta_15_kv.html#heading_14"> 8.1.2. INSPECCI&#211;N DIMENSIONAL</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et261_brazo_antibalanceo_red_compacta_15_kv.html#heading_15"> 8.1.3.	INSPECCI&#211;N VISUAL</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et261_brazo_antibalanceo_red_compacta_15_kv.html#heading_16"> 8.1.4.	INSPECCI&#211;N FUNCIONAL</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et261_brazo_antibalanceo_red_compacta_15_kv.html#heading_17"> 8.1.5.	ENSAYO DE CARGA M&#193;XIMA SIN DEFORMACI&#211;N PERMANENTE NI RUPTURA.</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et261_brazo_antibalanceo_red_compacta_15_kv.html#heading_18"> 8.2. PRUEBAS DE RECEPCI&#211;N.</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et261_brazo_antibalanceo_red_compacta_15_kv.html#heading_19">9.	REQUISITOS DE LAS OFERTAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et261_brazo_antibalanceo_red_compacta_15_kv.html#heading_20">10.	GARANT&#205;A DE FABRICA</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" > 1.	OBJETO</h2>
+Establecer las condiciones que debe satisfacer el brazo anti balanceo destinado a ser utilizado en Red Compacta (<a href="../../Norma/lineas_aereas_urbanas_distribucion/red_compacta/la450_generalidades_red_compacta.html" class="externalLink">LA450<span class="externalLinkIcon"></span></a>). <br />
+<h2 id="heading_1" >2.	ALCANCE</h2>
+Esta especificaci&#243;n t&#233;cnica se aplicar&#225; en todos los brazo anti balanceo utilizados en Red Compacta de ENEL CODENSA.<br />
+<h2 id="heading_2" >3.	CONDICIONES GENERALES</h2>
+<h3 id="heading_3" >3.1.	CONDICIONES AMBIENTALES</h3>Estos dispositivos ser&#225;n utilizados en el sistema de distribuci&#243;n de energ&#237;a del &#225;rea de concesi&#243;n de ENEL CODENSA,  bajo las siguientes condiciones:<br /><div style="width:526px;"><table><tr><td colspan="2" rowspan="1" style="width:526px;height:31px;text-align:center"><b>CARACTER&#205;STICAS AMBIENTALES</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:42px;">Altura sobre el nivel del mar</td><td colspan="1" rowspan="1" style="">Hasta 2 700 m.s.n.m.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">Ambiente</td><td colspan="1" rowspan="1" style="">Tropical</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">Humedad</td><td colspan="1" rowspan="1" style="">Mayor al  90 %</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:43px;">Temperatura m&#225;xima y m&#237;nima</td><td colspan="1" rowspan="1" style="">45 &#186;C y - 5 &#186;C respectivamente.</td></tr></table><br /></div><h3 id="heading_4" >3.2.	CONDICIONES EL&#201;CTRICAS</h3><div style="width:476px;"><table><tr><td colspan="2" rowspan="1" style="width:476px;height:22px;text-align:center"><b>CARACTER&#205;STICAS EL&#201;CTRICAS </b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:32px;">Tensi&#243;n Nominal del sistema</td><td colspan="1" rowspan="1" style="">11.4kV, 13.2kV, 34.5kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;">Frecuencia del sistema</td><td colspan="1" rowspan="1" style="">60 Hz</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:36px;">Disposici&#243;n del sistema</td><td colspan="1" rowspan="1" style="">Trif&#225;sico trifilar (3 Fases)</td></tr></table><br /></div><h3 id="heading_5" >3.3.	CONDICIONES DE SERVICIO Y LUGAR DE INSTALACI&#211;N</h3>El brazo anti balanceo aplica en Red Compacta.<br /><br />Deber&#225; tener la fuerza mec&#225;nica necesaria para soportar tormentas meteorol&#243;gicas severas, y  para prevenir contactos fase - fase o fase – tierra.<br />
+<h2 id="heading_6" >4.	SISTEMAS DE UNIDADES</h2>
+En todos los documentos t&#233;cnicos se deben expresar las cantidades num&#233;ricas en unidades del sistema Internacional.  Si se usan cat&#225;logos, folletos o planos, en sistemas diferentes de unidades, deben hacerse  las conversiones respectivas.<br />
+<h2 id="heading_7" >5.	NORMAS RELACIONADAS</h2><div style="width:800px;"><table><tr><td colspan="1" rowspan="1" style="width:120px;height:45px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:680px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">IEC 62073</td><td colspan="1" rowspan="1" style="">Guidance on the measurement of wettability of insulator surfaces</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">ASTM G26 - 70</td><td colspan="1" rowspan="1" style="">Recommended Practice for Operating Light And Water Exposure Apparatus (Xenon Arc Type) For Exposure Of Nonmetallic Materials</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">ASTM G154-98  </td><td colspan="1" rowspan="1" style="">Standard Practice for Operating Light and Water-Exposures (Fluorescent UV Condensation Type) for exposures of no metallic.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">ASTM D2303 </td><td colspan="1" rowspan="1" style="">Standard Test Methods for Liquid-Contaminant, Inclined-Plane Tracking and Erosion of Insulating Materials</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">ASTM D150-98</td><td colspan="1" rowspan="1" style="">Standard test methods for AC loss characteristics and permittivity (Dielectric constant) of solid electrical insulating materials</td></tr></table><br /></div>Pueden emplearse otras normas internacionalmente reconocidas equivalentes o superiores a las se&#241;aladas, siempre y cuando se ajusten a lo solicitado en la presente Especificaci&#243;n T&#233;cnica.<br /><br />Las normas citadas en la presente especificaci&#243;n (o cualquier otra que llegare a ser aceptada por ENEL CODENSA) se refieren a su &#250;ltima versi&#243;n.<br />
+<h2 id="heading_8" >6.	REQUERIMIENTOS T&#201;CNICOS PARTICULARES</h2>
+El brazo anti balanceo es un accesorio, el cual  se usa para estabilizar los espaciadores en &#225;ngulos de l&#237;nea hasta 6 grados.<br /><br />Estos brazos ser&#225;n fabricados por inyecci&#243;n moldeada, con un material polim&#233;rico que cumpla con las siguientes propiedades:<br /><br />•	Auto extinguible.<br />•	No higrosc&#243;pico.<br />•	Alta resistencia al impacto.<br />•	No deben presentar deformaci&#243;n ni cristalizaci&#243;n por temperatura.<br />•	Rigidez diel&#233;ctrica.<br />•	Resistente a rayos UV.<br />•	Fuerza y flexibilidad bajo carga din&#225;mica.<br /><br />La  constante diel&#233;ctrica del material del brazo anti balanceo ser&#225; menor o igual a la del  aislamiento de cable. Se sugiere polietileno de alta densidad o polipropileno.<br /><br />Las superficies deben ser lisas y sin rebabas.<br /><br />Deber&#225;n cumplir con las dimensiones m&#237;nimas, sugeridas en la presente especificaci&#243;n t&#233;cnica. <br /><br />Algunos de los funciones que debe cumplir los brazos anti balanceo:<br />
+<ul><li>Ayudar a reducir al m&#237;nimo el balanceo excesivo del espaciador angular en &#225;reas de  viento fuerte.</li></ul>
+
+<ul><li>Reducir al m&#225;ximo la tensi&#243;n que se ejerce sobre las conexiones debido al movimiento del espaciador.</li></ul>
+Todos los brazos de anti balanceo ser&#225;n suministrados con un pasador pin  moldeado para fijar el accesorio al espaciador.<br /><br /><b>FIGURA 1</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/1785/ET-261.jpg" src="../../media/cache/images/500x355/wikiimages/2d363830343336343638-27568-ET-261.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:500px"></div></div></div><br />Figura 1. Brazo anti balanceo<br /><br /><div style="width:700px;"><table><tr><td colspan="1" rowspan="2" style="width:80px;height:60px;text-align:center"><b>TIPO</b></td><td colspan="1" rowspan="2" style="width:220px;text-align:center"><b>DESCRIPCI&#211;N</b></td><td colspan="4" rowspan="1" style="width:400px;height:30px;text-align:center"><b>DIMENSIONES [mm]</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="width:100px;height:30px;text-align:center"><b>A</b></td><td colspan="1" rowspan="1" style="width:100px;text-align:center"><b>B</b></td><td colspan="1" rowspan="1" style="width:100px;text-align:center"><b>C</b></td><td colspan="1" rowspan="1" style="width:100px;text-align:center"><b>D</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">1</td><td colspan="1" rowspan="1" style="">Soporte antibalanceo para 15 kV</td><td colspan="1" rowspan="1" style="text-align:center">305</td><td colspan="1" rowspan="1" style="text-align:center">320</td><td colspan="1" rowspan="2" style="text-align:center">19,05</td><td colspan="1" rowspan="2" style="text-align:center">25</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">2</td><td colspan="1" rowspan="1" style="">Soporte antibalanceo para 34,5 kV</td><td colspan="1" rowspan="1" style="text-align:center">550</td><td colspan="1" rowspan="1" style="text-align:center">570</td></tr></table><br /></div><b>Tabla 1. Dimensiones</b><br /><div style="width:933px;"><table><tr><td colspan="1" rowspan="1" style="width:90px;height:68px;text-align:center"><b>TIPO</b></td><td colspan="1" rowspan="1" style="width:150px;text-align:center"><b>Tensi&#243;n m&#225;xima de operaci&#243;n [kV]</b></td><td colspan="1" rowspan="1" style="width:135px;text-align:center"><b>&#193;ngulo m&#225;ximo de instalaci&#243;n</b></td><td colspan="1" rowspan="1" style="width:175px;text-align:center"><b>Tensi&#243;n sin deformaci&#243;n permanente [kgf]</b></td><td colspan="1" rowspan="1" style="width:155px;text-align:center"><b>Compresi&#243;n sin deformaci&#243;n permanente [kgf]</b></td><td colspan="1" rowspan="1" style="width:114px;text-align:center"><b>Tensi&#243;n sin ruptura [kgf]</b></td><td colspan="1" rowspan="1" style="width:114px;text-align:center"><b>Esfuerzo lateral [kgf]</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">15</td><td colspan="1" rowspan="2" style="text-align:center">15&#176;</td><td colspan="1" rowspan="2" style="text-align:center">126</td><td colspan="1" rowspan="2" style="text-align:center">126</td><td colspan="1" rowspan="2" style="text-align:center">180</td><td colspan="1" rowspan="2" style="text-align:center">50</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">35</td></tr></table><br /></div><b>Tabla 2. Esfuerzos mec&#225;nicos</b><br />
+<h3 id="heading_9" > 6.1 MARCACI&#211;N</h3>
+El material debe cumplir la siguiente marcaci&#243;n en bajo o en alto relieve. No se acepta pintura ni calcoman&#237;a.<br /><br />-	Logo del fabricante<br />-	Tensi&#243;n de Operaci&#243;n<br />-	Lote<br />-	Mes y a&#241;o de fabricaci&#243;n<br />
+<h2 id="heading_10" >7.	CRITERIOS  DE  ACEPTACI&#211;N  O  RECHAZO</h2>
+Si el n&#250;mero de elementos defectuosos es menor o igual al correspondiente n&#250;mero de defectuosos definidos a continuaci&#243;n, se deber&#225; considerar que el lote cumple con los requisitos t&#233;cnicos exigidos por ENEL CODENSA, en caso contrario, el lote se rechazar&#225;.<br /><br /><b>Inspecci&#243;n Visual y Dimensional</b> <br /><br />De acuerdo a la tabla a continuaci&#243;n.<br /><br /><div style="width:644px;"><table><tr><td colspan="4" rowspan="1" style="width:644px;height:20px;text-align:center">Tabla inspecci&#243;n visual y dimensional</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">Tama&#241;o del lote</td><td colspan="1" rowspan="1" style="text-align:center">Muestra</td><td colspan="1" rowspan="1" style="text-align:center">Aceptado</td><td colspan="1" rowspan="1" style="text-align:center">Rechazado</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">2 a 8</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">9 a 15</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">16 a 25</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">26 a 50</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">51 a 90</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">91 a 150</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">151 a 280</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">281 a 500</td><td colspan="1" rowspan="1" style="text-align:center">20</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">501 a 1200</td><td colspan="1" rowspan="1" style="text-align:center">32</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1201 a 3200</td><td colspan="1" rowspan="1" style="text-align:center">50</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">3201 a 10000</td><td colspan="1" rowspan="1" style="text-align:center">80</td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">7</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">10001 a 35000</td><td colspan="1" rowspan="1" style="text-align:center">125</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">9</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">35001 a 150000</td><td colspan="1" rowspan="1" style="text-align:center">200</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">11</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">150001 a 500000</td><td colspan="1" rowspan="1" style="text-align:center">315</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">11</td></tr></table><br /></div><b>TABLA  3. Plan de muestreo para inspecci&#243;n visual y dimensional.</b><br /><br /><b>Ensayos mec&#225;nicos</b><br /><br />De acuerdo a la tabla a continuaci&#243;n.<br /><br /><div style="width:644px;"><table><tr><td colspan="4" rowspan="1" style="width:644px;height:20px;text-align:center">Tabla inspecci&#243;n visual y dimensional</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">Tama&#241;o del lote</td><td colspan="1" rowspan="1" style="text-align:center">Muestra</td><td colspan="1" rowspan="1" style="text-align:center">Aceptado</td><td colspan="1" rowspan="1" style="text-align:center">Rechazado</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">2 a 8</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">9 a 15</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">16 a 25</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">26 a 50</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">51 a 90</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">91 a 150</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">151 a 280</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">281 a 500</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">501 a 1200</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1201 a 3200</td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">3201 a 10000</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">10001 a 35000</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">35001 a 150000</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">150001 a 500000</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr></table><br /></div><b>TABLA 4. Plan de muestreo para pruebas mec&#225;nicas.</b><br />
+<h2 id="heading_11" >8.	PRUEBAS </h2>
+<h3 id="heading_12" > 8.1 PRUEBAS TIPO</h3>
+El fabricante deber&#225; remitir los protocolos de los siguientes ensayos realizados por un laboratorio acreditado ante la ONAC, o un organismo internacional reconocido para la elaboraci&#243;n de prueba.<br /><br />El brazo anti balanceo debe cumplir con:
+<ul><li>&#173;Certificados de materiales.</li>
+<li>Propiedades de los materiales polim&#233;ricos.  </li>
+<li>Inspecci&#243;n dimensional, inspecci&#243;n visual y funcional.</li>
+<li>Ensayo de resistencia a variaciones de temperatura. </li>
+<li>Ensayo de carga m&#225;xima sin deformaci&#243;n permanente ni ruptura.</li>
+<li>Ensayo de exposici&#243;n acelerada a la intemperie (seg&#250;n ASTM G154).</li></ul>
+
+<h4 id="heading_13" > 8.1.1. CERTIFICADOS DE MATERIALES</h4>Deben presentarse los resultados de los certificados de an&#225;lisis qu&#237;mico y de propiedades del material polim&#233;rico.<br />
+<h4 id="heading_14" > 8.1.2. INSPECCI&#211;N DIMENSIONAL</h4>La verificaci&#243;n de las dimensiones se har&#225; con los instrumentos de medida que den la aproximaci&#243;n requerida (cinta met&#225;lica con divisiones de 1 mm para longitudes y calibrador para los di&#225;metros y espesores). El tama&#241;o de la muestra deber&#225; estar de acuerdo con la tabla 3.<br /><br />Se verificar&#225; con base a:<br />-	Esquemas indicados en las figuras anexas a la presente especificaci&#243;n.<br />-	Planos entregados por el fabricante y aprobados por ENEL CODENSA.<br />
+<h4 id="heading_15" > 8.1.3.	INSPECCI&#211;N VISUAL</h4>Se verificar&#225; la buena terminaci&#243;n del elementos, la ausencia de grietas, sopladuras, poros, exfoliaduras, ampolladuras, raspaduras u otros defectos.<br />
+<h4 id="heading_16" > 8.1.4.	INSPECCI&#211;N FUNCIONAL</h4>Se verificar&#225; el adecuado funcionamiento del dispositivo.<br />
+<h4 id="heading_17" > 8.1.5.	ENSAYO DE CARGA M&#193;XIMA SIN DEFORMACI&#211;N PERMANENTE NI RUPTURA.</h4>Se debe realizar la prueba con los valores indicados en la tabla N&#176;2 y se observar&#225; que no haya deformaciones permanentes, ni rupturas.<br />
+<h3 id="heading_18" > 8.2. PRUEBAS DE RECEPCI&#211;N.</h3>
+Las pruebas de recepci&#243;n son:<br />-	Inspecci&#243;n Visual.<br />-	Verificaci&#243;n Dimensional.<br />-	Verificaci&#243;n de los Certificados de Calidad.<br />-	Ensayo de Tracci&#243;n.<br />-	Ensayo de Compresi&#243;n.<br />-	Ensayo de Rotura.<br />
+<h2 id="heading_19" >9.	REQUISITOS DE LAS OFERTAS</h2>
+El Oferente obligatoriamente deber&#225; incluir con su propuesta, la siguiente informaci&#243;n:<br />
+<ul><li>Tabla de caracter&#237;sticas t&#233;cnicas garantizadas, la cual deber&#225; ser diligenciada completamente, firmada y sellada por el oferente.</li></ul>
+ 
+<ul><li>Cat&#225;logos originales completos y actualizados del fabricante, que correspondan a los elementos cotizados, en la planilla de caracter&#237;sticas t&#233;cnicas garantizadas. </li></ul>
+
+<ul><li>Protocolos de pruebas de acuerdo con las normas indicadas en el numeral 8 de la presente especificaci&#243;n. En tales protocolos se deber&#225;n anotar las fechas de fabricaci&#243;n y pruebas del equipo, para permitir la verificaci&#243;n de las caracter&#237;sticas t&#233;cnicas garantizadas.</li></ul>
+
+<ul><li>En caso que se requiera se podr&#225;n exigir muestras de cada una de las referencias ofertadas sin cargo a devoluci&#243;n, con cada una de las caracter&#237;sticas t&#233;cnicas, solicitadas y mencionadas en la presente especificaci&#243;n.</li></ul>
+
+<ul><li>Informaci&#243;n adicional que considere aporta explicaci&#243;n a su dise&#241;o (dibujos,  detalles,  caracter&#237;sticas de operaci&#243;n,  dimensiones y pesos de los materiales ofertados). </li></ul>
+<br />Certificados:<br />•	Certificado de conformidad del sistema de gesti&#243;n de calidad del fabricante bajo ISO 9001<br />•	Certificado de conformidad del producto bajo norma<br />•	Certificado de conformidad del producto bajo RETIE<br /><br />ENEL CODENSA podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones, sin expresi&#243;n de causa ni obligaci&#243;n de compensaci&#243;n.<br />
+<h2 id="heading_20" >10.	GARANT&#205;A DE FABRICA</h2>
+ENEL CODENSA requiere como m&#237;nimo, un per&#237;odo de garant&#237;a de f&#225;brica de veinticuatro (24) meses, a partir de la entrega de los bienes.<br /><br /><b>ANEXO. PLANILLA DE CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS</b><br /><div style="width:690px;"><table><tr><td colspan="1" rowspan="1" style="width:40px;height:40px;text-align:center"><b>N&#176;</b></td><td colspan="2" rowspan="1" style="width:450px;text-align:center"><b>DESCRIPCI&#211;N</b></td><td colspan="1" rowspan="1" style="width:100px;text-align:center"><b>UNIDAD</b></td><td colspan="1" rowspan="1" style="width:100px;text-align:center"><b>OFERTADO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">1</td><td colspan="2" rowspan="1" style="">Oferente</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">2</td><td colspan="2" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:25px;text-align:center">3</td><td colspan="2" rowspan="1" style="">Pa&#237;s</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">4</td><td colspan="2" rowspan="1" style="">Referencia</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">5</td><td colspan="2" rowspan="1" style="">Normas de fabricaci&#243;n y ensayos</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">6</td><td colspan="2" rowspan="1" style="">Material y caracter&#237;sticas que cumple</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">7</td><td colspan="2" rowspan="1" style="">Tensi&#243;n m&#225;xima de operaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">kV</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">8</td><td colspan="2" rowspan="1" style="">Angulo m&#225;ximo de instalaci&#243;n</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="4" style="width:40px;height:21px;text-align:center">9</td><td colspan="1" rowspan="4" style="width:300px;">Dimensiones</td><td colspan="1" rowspan="1" style="width:150px;">A</td><td colspan="1" rowspan="1" style="width:100px;text-align:center">mm</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">B</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">C</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">D</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">10</td><td colspan="2" rowspan="1" style="">Tensi&#243;n sin deformaci&#243;n permanente</td><td colspan="1" rowspan="1" style="text-align:center">kgf</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">11</td><td colspan="2" rowspan="1" style="">Compresi&#243;n sin deformaci&#243;n permanente</td><td colspan="1" rowspan="1" style="text-align:center">kgf</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">12</td><td colspan="2" rowspan="1" style="">Tensi&#243;n sin ruptura</td><td colspan="1" rowspan="1" style="text-align:center">kgf</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">13</td><td colspan="2" rowspan="1" style="">Esfuerzo lateral</td><td colspan="1" rowspan="1" style="text-align:center">kgf</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">14</td><td colspan="2" rowspan="1" style="">Incluye pasador pin moldeado (Si/No, describir)</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">15</td><td colspan="2" rowspan="1" style="">Garant&#237;a de fabrica</td><td colspan="1" rowspan="1" style="text-align:center">meses</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:30px;"><b>RESULTADO DE EVALUACI&#211;N T&#201;CNICA</b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:21px;text-align:center">16</td><td colspan="1" rowspan="5" style="">Certificado del sistema de gesti&#243;n de la calidad del fabrticante bajo ISO 3001 (Normas ISO) </td><td colspan="2" rowspan="1" style="">Entidad Certificadora</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">N&#250;mero del certificado</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Fecha de aprobaci&#243;n (d&#237;a/mes/a&#241;o) </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Fecha de vencimiento (d&#237;a/mes/a&#241;o)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Adjunta el certificado (si/no)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="6" style="height:21px;text-align:center">17</td><td colspan="1" rowspan="6" style="">Certificado de conformidad de producto bajo norma</td><td colspan="2" rowspan="1" style="">Entidad Certificadora</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">N&#250;mero del certificado</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Fecha de aprobaci&#243;n (d&#237;a/mes/a&#241;o)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Fecha de vencimiento (d&#237;a/mes/a&#241;o)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Norma bajo la cual se certifica</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Adjunta el certificado (si/no)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:21px;text-align:center">18</td><td colspan="1" rowspan="5" style="">Certificado de conformidad producto bajo RETIE</td><td colspan="2" rowspan="1" style="">Entidad certificadora</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">N&#250;mero de certificado</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Fecha de aprobaci&#243;n (d&#237;a/mes/a&#241;o)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Fecha de vencimiento (d&#237;a/mes/a&#241;o)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Adjunta el certificado (si/no)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:30px;"><b>RESULTADO DE EVALUACI&#211;N REGULATORIA</b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:40px;text-align:center">19</td><td colspan="3" rowspan="1" style="">OBSERVACIONES</td><td colspan="1" rowspan="1" style=""> </td></tr></table><br /></div>
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 1785, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

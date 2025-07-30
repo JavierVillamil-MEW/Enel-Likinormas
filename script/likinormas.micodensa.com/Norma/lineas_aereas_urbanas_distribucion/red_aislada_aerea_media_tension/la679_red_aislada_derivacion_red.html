@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>LA679    Red Aislada - Derivación a red desnuda 34,5 kV | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../../index.html"><img src="../../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/2038" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../../Usuario/Registro%3FReturnUrl=%252FNorma%252FDetalles%252F2038.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/2038" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/2038" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			showSubmenu('4', '110');
+		});
+	</script>
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Norma t&#233;cnica
+	</div>
+	<h1>LA679    Red Aislada - Derivaci&#243;n a red desnuda 34,5 kV</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de la norma</div>
+					<div class="caracteristicas">LA679</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">14/09/2023</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../../Home/DownloadPDF/2038">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FNorma%2FDetalles%2F2038&amp;nodoid=2038', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+        <div style="clear:left;"></div>
+		<img src="https://i.ibb.co/kxHxXV6/LA-679-lateral.jpg" /><br /><br /><br /><b>LISTA DE MATERIALES</b><br /><br /><div style="width:727px;"><table><tr><td colspan="1" rowspan="1" style="width:60px;height:20px;text-align:center"><b>S&#205;MB.</b></td><td colspan="1" rowspan="1" style="width:64px;text-align:center"><b>CANT.</b></td><td colspan="1" rowspan="1" style="width:74px;text-align:center"><b>C&#211;DIGO</b></td><td colspan="1" rowspan="1" style="width:111px;text-align:center"><b>ESP. T&#201;CNICA</b></td><td colspan="1" rowspan="1" style="width:418px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">a<sub>19</sub></td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="">Amarre tipo TPR para sujeci&#243;n de aisladores polim&#233;ricos</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">a<sub>11</sub></td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">300538</td><td colspan="1" rowspan="1" style="text-align:center"><a href="http://www.codensa.com.co/empresas/normas-electricas-corporativas" class="externalLink">GSCC010<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style=""><a href="la679_red_aislada_derivacion_red.html#" id="version-78" class="externalLink  glosarioLink">Aislador</a> de suspensi&#243;n polim&#233;rico 36 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center">a<sub>16</sub></td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">300547</td><td colspan="1" rowspan="1" style="text-align:center"><a href="http://www.codensa.com.co/empresas/normas-electricas-corporativas" class="externalLink">GSCC010<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style=""><a href="la679_red_aislada_derivacion_red.html#" id="version-78" class="externalLink  glosarioLink">Aislador</a> Line Post Compuesto Para Cruceta Met&#225;lica 36kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">c<sub>19</sub></td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">251506</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/crucetas_vigas_cercos/et419_crucetas_metalicas_angulo.html" class="externalLink">ET419<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Cruceta met&#225;lica de 2,5 m</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">cs<sub>5</sub></td><td colspan="1" rowspan="1" style="text-align:center">9</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"><a href="https://likinormas.micodensa.com/Especificacion/cables/et103_conductores_semiaislados_lineas_aereas_mt_34" class="externalLink">ET-103<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style=""><a href="la679_red_aislada_derivacion_red.html#" id="version-107" class="externalLink  glosarioLink">Cable</a> semi aislado 100 mm2 35 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">d<sub>1</sub></td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">240083</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et405_diagonal_metalica_varilla.html" class="externalLink">ET405<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Diagonal met&#225;lica en varilla tipo 1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">g<sub>1</sub></td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">251359</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et350_grapa_terminal_tipo_recto_metalica.html" class="externalLink">ET350<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Grapa terminal tipo recto</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">g<sub>33</sub></td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">251577</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et448_herrajes_suspension_retencion_red_aislada_aerea.html" class="externalLink">ET448<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Conjunto retenci&#243;n doble red MT a&#233;rea aislada</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">m<sub>7</sub></td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">251362</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et454_tuerca_ojo_alargado.html" class="externalLink">ET454<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Tuerca de ojo alargado 15,9 mm (5/8”)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">n<sub>5</sub></td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">201013</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et461_perno_ojo.html" class="externalLink">ET461<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Perno de ojo tipo 5 (15,9 mm (5/8”) x 545 mm )</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center">P<sub>2</sub></td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">170893</td><td colspan="1" rowspan="1" style="text-align:center"><a href="http://www.codensa.com.co/empresas/normas-electricas-corporativas" class="externalLink">GSCC016<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">DPS - Descargador de <a href="la679_red_aislada_derivacion_red.html#" id="version-372" class="externalLink  glosarioLink">sobretensi&#243;n</a> &#243;xido met&#225;lico 30 kV , 10 kA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">p<sub>40</sub></td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">6769870</td><td colspan="1" rowspan="1" style="text-align:center"><a href="http://www.codensa.com.co/empresas/normas-electricas-corporativas" class="externalLink">GSS002<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Poste de concreto de 12 m 1350 kgf. GSS002/152 (1)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center">s<sub>50</sub></td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">201059</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et302_conector_terminal_compresion_tipo_pala.html" class="externalLink">ET302<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Conector bimetalico terminal de compresi&#243;n tipo pala1 hueco,4/0AWG (2)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">s<sub>74</sub></td><td colspan="1" rowspan="1" style="text-align:center">9</td><td colspan="1" rowspan="1" style="text-align:center">274318</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et356_conectores_tipo_cuna.html" class="externalLink">ET356<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Conector tipo cu&#241;a P=120 D120mm&#178; o 4/0-4/0AWG (3)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">t<sub>5</sub></td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">251363</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et456_tornillo_carruaje_perno.html" class="externalLink">ET456<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Tornillo de carruaje 15,9 mm (5/8”) x 38,1mm (1 &#189;”)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">t<sub>18</sub></td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">251370</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et457_tornillo_acero.html" class="externalLink">ET457<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Tornillo de acero galvanizado 1/2&quot; x 3&quot;</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">u<sub>1</sub></td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/materiales_puesta_tierra/et492_sistema_puesta_tierra_acero_inoxidable.html" class="externalLink">ET492<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style=""><a href="la679_red_aislada_derivacion_red.html#" id="version-363" class="externalLink  glosarioLink">Sistema</a> de <a href="la679_red_aislada_derivacion_red.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a> en acero</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">y<sub>10</sub></td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">274296</td><td colspan="1" rowspan="1" style="text-align:center"><a href="http://www.codensa.com.co/empresas/normas-electricas-corporativas" class="externalLink">E-MT-026<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Terminal encogible en frio 35kV 120 mm&#178; uso exterior (4)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">z<sub>8</sub></td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">274299</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et431_abrazadera_salida.html" class="externalLink">ET431<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Abrazadera de una salida tipo 3, 180 mm (5)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">z<sub>13</sub></td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">274312</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et432_abrazadera_salidas.html" class="externalLink">ET432<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Abrazadera de dos salidas tipo 3, 180 mm (5)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center">z<sub>43</sub></td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/otros/et494_accesorios_red_mt_aerea_aislada.html" class="externalLink">ET494<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Elementos de sujeci&#243;n de <a href="la679_red_aislada_derivacion_red.html#" id="version-107" class="externalLink  glosarioLink">cable</a> MT aislado monopolar a cruceta met&#225;lica</td></tr></table><br /></div><br /><b>ALTERNATIVAS</b>:<br /><br />(1)	Poste de fibra (<a href="../../../Especificacion/postes/et205_postes_plasticos.html" class="externalLink">ET205<span class="externalLinkIcon"></span></a>) o met&#225;lico (<a href="../../../Especificacion/postes/et208_postes_metalicos_distribucion.html" class="externalLink">ET208<span class="externalLinkIcon"></span></a>). El poste que aparece en la lista es una referencia, consulte la norma (<a href="https://likinormas.micodensa.com/Norma/lineas_aereas_urbanas_distribucion/generalidades/la010_utilizacion_postes_templetes" class="externalLink">LA010<span class="externalLinkIcon"></span></a>) para su selecci&#243;n.<br />(2)	Los terminales de compresi&#243;n tipo pala que aparecen en la lista son una referencia, consulte la <a href="la679_red_aislada_derivacion_red.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a> (<a href="../../../Especificacion/herrajes_conectores/et302_conector_terminal_compresion_tipo_pala.html" class="externalLink">ET302<span class="externalLinkIcon"></span></a>) para su selecci&#243;n.<br />(3)	Los conectores tipo cu&#241;a que aparecen en la lista son una referencia, consulte la <a href="la679_red_aislada_derivacion_red.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a> (<a href="../../../Especificacion/herrajes_conectores/et356_conectores_tipo_cuna.html" class="externalLink">ET356<span class="externalLinkIcon"></span></a>) para su selecci&#243;n.<br />(4)	Los terminales premoldeados que aparecen en la lista es una referencia, consulte la <a href="la679_red_aislada_derivacion_red.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a> (<a href="http://www.codensa.com.co/empresas/normas-electricas-corporativas" class="externalLink">E-MT-026<span class="externalLinkIcon"></span></a>) para su selecci&#243;n.<br />(5)	Las abrazaderas que aparecen en la lista son una referencia, para su selecci&#243;n determine el di&#225;metro del poste del caso a la altura respectiva.<br /><br /><b>NOTAS</b>:<br /><br />-	Ver las consideraciones dadas en la norma <a href="la650_red_aislada_generalidades.html" class="externalLink">LA 650<span class="externalLinkIcon"></span></a> Red Aislada - Generalidades.<br />-	La cimentaci&#243;n debe realizarse seg&#250;n la norma <a href="https://likinormas.micodensa.com/Norma/lineas_aereas_urbanas_distribucion/la0091_cimentacion_postes_estructuras_cable_aislado" class="externalLink">LA009-1<span class="externalLinkIcon"></span></a>. <br />-	El <a href="la679_red_aislada_derivacion_red.html#" id="version-107" class="externalLink  glosarioLink">cable</a> de red MT a&#233;rea aislada se encuentra definido en <a href="http://www.codensa.com.co/empresas/normas-electricas-corporativas" class="externalLink">GSCC008<span class="externalLinkIcon"></span></a> MV Aerial Bundled Cables.<br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 2038, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

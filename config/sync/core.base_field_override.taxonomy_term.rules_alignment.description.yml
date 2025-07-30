@@ -1,0 +1,20 @@
+uuid: 1dd2206f-6c55-49f5-8c02-9738ce3a2d2e
+langcode: es
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.rules_alignment
+  module:
+    - text
+id: taxonomy_term.rules_alignment.description
+field_name: description
+entity_type: taxonomy_term
+bundle: rules_alignment
+label: Descripción
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

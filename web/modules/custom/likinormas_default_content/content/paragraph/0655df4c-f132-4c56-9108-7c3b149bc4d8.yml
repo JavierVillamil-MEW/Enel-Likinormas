@@ -1,0 +1,56 @@
+_meta:
+  version: '1.0'
+  entity_type: paragraph
+  uuid: 0655df4c-f132-4c56-9108-7c3b149bc4d8
+  bundle: rules_section
+  default_langcode: en
+  depends:
+    7a4a3703-dd88-4bed-b773-abe532b6bc21: taxonomy_term
+    d16dbdb2-e3d5-4257-ab13-7a153544e4b7: taxonomy_term
+    60f5ce6d-e598-44f6-ab62-88d4ce515456: file
+    3d5f5863-5ee4-4b31-b2e6-265469a4ca54: file
+default:
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1682436070
+  behavior_settings:
+    -
+      value: {  }
+  revision_translation_affected:
+    -
+      value: true
+  section_alignment:
+    -
+      entity: 7a4a3703-dd88-4bed-b773-abe532b6bc21
+  section_button:
+    -
+      uri: 'internal:/'
+      title: 'Ver normas técnicas'
+      options: {  }
+  section_color:
+    -
+      entity: d16dbdb2-e3d5-4257-ab13-7a153544e4b7
+  section_description:
+    -
+      value: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, \r\nsed diam nonumy eirmod tempor invidunt ut labore et \r\ndolore magna aliquyam erat, sed diam voluptua. At vero eos \r\net accusam et justo duo"
+  section_image:
+    -
+      entity: 60f5ce6d-e598-44f6-ab62-88d4ce515456
+      alt: Image-1
+      title: Image-1
+      width: 960
+      height: 687
+  section_image_mobile:
+    -
+      entity: 3d5f5863-5ee4-4b31-b2e6-265469a4ca54
+      alt: Image-1
+      title: ''
+      width: 414
+      height: 487
+  section_title:
+    -
+      value: '<h2>Normas técnicas</h2>'
+      format: full_html

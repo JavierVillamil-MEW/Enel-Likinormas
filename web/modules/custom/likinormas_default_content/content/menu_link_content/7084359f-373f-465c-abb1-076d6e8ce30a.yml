@@ -1,0 +1,45 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 7084359f-373f-465c-abb1-076d6e8ce30a
+  bundle: rules-user-menu
+  default_langcode: en
+  depends:
+    db876f54-58f1-422e-bf6f-958d8596226d: file
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: user
+  menu_name:
+    -
+      value: rules-user-menu
+  link:
+    -
+      uri: 'internal:/user'
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: true
+  weight:
+    -
+      value: 0
+  expanded:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  icon:
+    -
+      entity: db876f54-58f1-422e-bf6f-958d8596226d
+      alt: user
+      title: user
+      width: 25
+      height: 26

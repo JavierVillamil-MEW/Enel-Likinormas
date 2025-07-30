@@ -1,0 +1,18 @@
+<div class="block-user">
+  {{ content.background_image }}
+
+  <div class="section-info">
+    <div class="block-user-data">
+      <h1 class="block-user-data-title title-primary">{{ content.title_section|render|striptags }}</h1>
+      <p class="block-user-data-description">{{ content.description_section|render|striptags }}</p>
+      <div class="block-user-data-itmes">
+        {{ content.items }}
+      </div>
+    </div>
+
+    <div class="block-user-form">
+    </div>
+  </div>
+
+
+</div>

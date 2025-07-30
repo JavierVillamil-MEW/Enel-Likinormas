@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET-AT932 Cajas prefabricadas con tapa, elaboradas con materiales poliméricos para uso a la intemperie en subestaciones primarias | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/2013" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F2013.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/2013" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/2013" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '54');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET-AT932 Cajas prefabricadas con tapa, elaboradas con materiales polim&#233;ricos para uso a la intemperie en subestaciones primarias</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET-AT932</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">04/01/2019</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/2013">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F2013&amp;nodoid=2013', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#heading_0">1. OBJETO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#heading_1">2. ALCANCE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#heading_2">3. CONDICIONES  DE  SERVICIO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#heading_3">4. SISTEMA  DE  UNIDADES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#heading_4">5. NORMAS  DE  FABRICACI&#211;N  Y  PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#heading_5">6. REQUERIMIENTOS  T&#201;CNICOS  PARTICULARES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#heading_6">7. FABRICACI&#211;N DE LAS TAPAS Y CAJAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#heading_7">8. PAR&#193;METROS GEOM&#201;TRICOS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#heading_8">9.	PRUEBAS DE LABORATORIO </a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#heading_9">9.1	PRUEBAS TIPO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#heading_10">9.2	PRUEBAS DE RUTINA</a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#heading_11">9.3	PRUEBAS DE RECEPCI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#heading_12">10. ENSAYOS DE LABORATORIO  </a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#heading_13">11. MARCAS </a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#heading_14">12. REQUISITOS DE LAS OFERTAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#heading_15">13. SUMINISTRO Y RECEPCION CAJAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#heading_16">13.1 TOLERANCIAS ACEPTADAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#heading_17">13.2 RECEPCI&#211;N DE CAJAS Y TAPAS </a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#heading_18">13.3 MOTIVOS DE RECHAZO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#heading_19">14. GARANT&#205;A DE F&#193;BRICA</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#heading_20">15. INSPECCI&#211;N EN F&#193;BRICA  </a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#heading_21">16. CERTIFICADOS DE CONFORMIDAD</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1. OBJETO</h2>
+Establecer las caracter&#237;sticas, requisitos y ensayos t&#233;cnicos que deben cumplir las cajas y tapas polim&#233;ricas, para ser usadas en subestaciones de alta y <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-277" class="externalLink  glosarioLink">media tensi&#243;n</a>.<br />
+<h2 id="heading_1" >2. ALCANCE</h2>
+Esta <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a> se aplicar&#225; en todas las cajas polim&#233;ricas para subestaciones A.T y M.T que adquiera ENEL-CODENSA. <br /><br />La instalaci&#243;n de estas cajas y tapas est&#225; prevista para zonas de tr&#225;fico vehicular pesado ocasional, en contacto moderado con agentes qu&#237;micos.<br />
+<h2 id="heading_2" >3. CONDICIONES  DE  SERVICIO</h2>
+Las cajas y tapas polim&#233;ricas en subestaciones A.T y M.T, ser&#225;n empleadas a la intemperie bajo las siguientes condiciones:<br /><br /><div style="width:700px;"><table><tr><td colspan="2" rowspan="1" style="width:700px;height:30px;text-align:center"><b>CARACTER&#205;STICAS GENERALES</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><b>Altura sobre el nivel del mar</b></td><td colspan="1" rowspan="1" style="">Desde 2900 a los 600 m.s.n.m.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><b>Ambiente</b></td><td colspan="1" rowspan="1" style="">Tropical</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><b>Humedad relativa</b></td><td colspan="1" rowspan="1" style="">Desde 100% al 20%</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><b>Temperatura m&#225;xima y m&#237;nima</b></td><td colspan="1" rowspan="1" style="">+45 &#176;C y -5 &#176;C respectivamente</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><b>Temperatura promedio </b></td><td colspan="1" rowspan="1" style="">14 &#176;C</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><b>Poluci&#243;n</b></td><td colspan="1" rowspan="1" style="">Alta con productos de combusti&#243;n y altamente contaminada por otros agentes.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><b>Temperatura y radiaci&#243;n solar</b></td><td colspan="1" rowspan="1" style="">Alta teniendo en cuenta las diferentes &#225;reas de Bogot&#225; y Cundinamarca</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><b>Tr&#225;fico </b></td><td colspan="1" rowspan="1" style="">Tr&#225;fico vehicular pesado no deliberado ocasional</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><b>Contacto con agentes qu&#237;micos</b></td><td colspan="1" rowspan="1" style="">Moderado</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><b><a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-384" class="externalLink  glosarioLink">tensi&#243;n nominal</a></b></td><td colspan="1" rowspan="1" style="">220V, 11.400 V,13.200 V,  34.500V</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><b><a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-377" class="externalLink  glosarioLink">Tensi&#243;n</a> M&#225;xima</b></td><td colspan="1" rowspan="1" style="">35.000 V</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><b><a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-210" class="externalLink  glosarioLink">Frecuencia</a> del <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-363" class="externalLink  glosarioLink">sistema</a></b></td><td colspan="1" rowspan="1" style="">60 Hz</td></tr></table><br /></div>
+<h2 id="heading_3" >4. SISTEMA  DE  UNIDADES</h2>
+Todos los documentos tanto de la propuesta como del contrato de suministro, deben expresar las cantidades num&#233;ricas en unidades del <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-363" class="externalLink  glosarioLink">Sistema</a> Internacional (SI). Si el oferente utiliza en sus libros de instrucci&#243;n, folletos o dibujos, unidades en sistemas diferentes, debe hacer las conversiones  respectivas.<br />
+<h2 id="heading_4" >5. NORMAS  DE  FABRICACI&#211;N  Y  PRUEBAS</h2>
+<div style="width:670px;"><table><tr><td colspan="1" rowspan="1" style="width:170px;height:30px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:500px;text-align:center"><b>DESCRIPCION</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">ANSI/SCTE 77- 2017 </td><td colspan="1" rowspan="1" style="">Specifications for Underground Enclosure Integrity</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">ASTM D543-14</td><td colspan="1" rowspan="1" style="">Standard Practices for Evaluating the Resistance of Plastics to Chemical Reagents</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">ASTM D570-98 (2010)</td><td colspan="1" rowspan="1" style="">Standard Test Method for Water Absorption of Plastics</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">ASTM D635-06</td><td colspan="1" rowspan="1" style="">Standard Test Method for Rate of Burning and/or Extent and Time of Burning Plastics in a Horizontal Position</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">ASTM D2444-99 (2010)</td><td colspan="1" rowspan="1" style="">Standard Test Method for Determination of the Impact Resistance of Thermoplastic Pipe and Fittings by Means of a Tup (Falling Weight)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">ASTM G154-12</td><td colspan="1" rowspan="1" style="">Standard Practice for Operating Fluorescent Light Apparatus for UV Exposure of Nonmetallic Materials</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">ASTM C1028-07</td><td colspan="1" rowspan="1" style="">Standard Test Method for Determining the Static Coefficient of Friction of Ceramic Tile and Other Like Surfaces by the Horizontal Dynamometer Pull-Meter Method</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">ASTM D883</td><td colspan="1" rowspan="1" style="">Terminology Relating to plastics</td></tr></table><br /></div><br />Pueden emplearse otras normas internacionalmente reconocidas, equivalentes o superiores a las aqu&#237; se&#241;aladas, siempre y cuando se ajusten a lo solicitado en la presente <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a>.<br /><br />Las normas citadas en la presente especificaci&#243;n (o cualquier otra que llegase a ser aceptada por ENEL-CODENSA.) se refieren a su &#250;ltima revisi&#243;n.<br />
+<h2 id="heading_5" >6. REQUERIMIENTOS  T&#201;CNICOS  PARTICULARES</h2>
+Las cajas y tapas polim&#233;ricas para subestaciones A.T y M.T, estar&#225;n construidas con materiales que cumplan los siguientes requisitos:<br />
+<ul><li>Resistencia a reactivos qu&#237;micos</li>
+<li>Resistencia al efecto de la radiaci&#243;n UV. (Tapa)</li>
+<li>Resistencia absorci&#243;n de agua</li>
+<li>Retardante a la llama</li>
+<li>Alta resistencia a la tracci&#243;n y a la flexi&#243;n.</li>
+<li>Rigidez diel&#233;ctrica elevada Mayor o igual a mayor a 100 Mega-Ohmios</li>
+<li>Resistente a Impactos</li>
+<li>Tapa Resistente al deslizamiento</li>
+<li>Debe ser libre de <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-271" class="externalLink  glosarioLink">mantenimiento</a>.</li>
+<li>No debe contener elementos que sirvan de alimento o permitan ser atacadas por microorganismos.</li>
+<li><a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-406" class="externalLink  glosarioLink">vida &#250;til</a> igual o mayor a 25 a&#241;os.</li></ul>
+
+<h2 id="heading_6" >7. FABRICACI&#211;N DE LAS TAPAS Y CAJAS</h2>
+Las cajas y tapas deber&#225;n ser fabricadas en materiales Polim&#233;ricos, con Medidas externas de 36cm x 36cm de ancho x 38cm de alto indicadas en el numeral 8.0 Par&#225;metros geom&#233;tricos, Ideal para tr&#225;fico pesado ocasional.<br /><br />Cada elemento (caja y/o tapa), no podr&#225;n superar los 25 Kilogramos de peso.<br /><br />La caja y la tapa, deber&#225;n ser productos monol&#237;ticos.<br /><br />No se permite <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-274" class="externalLink  glosarioLink">material</a> en metal, ni concreto, ni derivados de arcillas. S&#243;lo materiales Polim&#233;ricos. (Aplica tambi&#233;n para los refuerzos)<br /><br />Las tapas podr&#225;n traer refuerzos en la parte inferior del mismo <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-274" class="externalLink  glosarioLink">material</a>.<br /><br />La tapa  deber&#225; llevar en la parte frontal en bajo relieve el texto  “NO RECICLABLE”.  El texto deber&#225; ser legible a una altura de  1.60 m.<br /><br />El proveedor debe garantizar el <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de aseguramiento de la tapa a la caja, evitando que la tapa se salga de su lugar por flotaci&#243;n o aplastamientos.<br /><br />La caja ser&#225; perforada en terreno, con campana de freno (3/4”, 1” y 1”&#189;) para que los tubos met&#225;licos no se resbalen y entren a la caja, la caja debe incluir un terminal de frenado que no permita el ingreso del tubo a la caja. Har&#225; parte del suministro la herramienta para hacer la perforaci&#243;n de la caja por cada 100 cajas entregadas.<br /><br />El suministro de campanas elemento de perforaci&#243;n, ser&#225;n a solicitud de Enel-Codensa.<br /><br />Se debe incluir capacitaci&#243;n en Bogot&#225; sobre el armado y perforaci&#243;n del <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-338" class="externalLink  glosarioLink">producto</a> en caso de ser necesario.<br />
+<h2 id="heading_7" >8. PAR&#193;METROS GEOM&#201;TRICOS</h2>
+Las cajas y tapas polim&#233;ricas para subestaciones de A.T y M.T, ser&#225;n de la forma y dimensiones que se muestran en las siguientes figuras.<br /><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/2013/9321.jpg" src="../../media/cache/images/500x355/wikiimages/353934353330363536-31077-9321.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:500px"></div></div></div><br /><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/2013/9322.jpg" src="../../media/cache/images/500x355/wikiimages/2d31323333383538323038-39149-9322.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:500px"></div></div></div><br /><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/2013/9323.jpg" src="../../media/cache/images/500x355/wikiimages/2d31333637373438323536-31524-9323.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:500px"></div></div></div><br /><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/2013/9324.jpg" src="../../media/cache/images/500x355/wikiimages/2d31333336343837353834-37002-9324.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:500px"></div></div></div><br /><br />
+<h2 id="heading_8" >9.	PRUEBAS DE LABORATORIO </h2>
+<h3 id="heading_9" >9.1	PRUEBAS TIPO</h3><b>9.1.1	Prueba de Carga Estructural ANSI/SCTE 77- 2017</b><br /><br /><div style="width:546px;"><table><tr><td colspan="3" rowspan="1" style="width:546px;height:30px;text-align:center"><b>Requerimientos de <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-113" class="externalLink  glosarioLink">Carga</a> (Tier 15)</b></td></tr>
+<tr><td colspan="1" rowspan="2" style="height:20px;text-align:center">Vertical</td><td colspan="1" rowspan="1" style=""><a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-113" class="externalLink  glosarioLink">Carga</a> de Dise&#241;o</td><td colspan="1" rowspan="1" style="">66.7 KN</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-113" class="externalLink  glosarioLink">Carga</a> de Prueba</td><td colspan="1" rowspan="1" style="">100.1 KN</td></tr>
+<tr><td colspan="1" rowspan="2" style="height:20px;text-align:center">Lateral</td><td colspan="1" rowspan="1" style=""><a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-113" class="externalLink  glosarioLink">Carga</a> de Dise&#241;o</td><td colspan="1" rowspan="1" style="">38.3 KN</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-113" class="externalLink  glosarioLink">Carga</a> de Prueba</td><td colspan="1" rowspan="1" style="">57.5 KN</td></tr></table><br /></div><br /><b>Criterios de Aceptaci&#243;n</b><br /><br /><div style="width:980px;"><table><tr><td colspan="1" rowspan="1" style="width:330px;height:20px;">Prueba de <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-113" class="externalLink  glosarioLink">carga</a> estructural</td><td colspan="1" rowspan="1" style="width:350px;">M&#225;xima deflexi&#243;n vertical en la <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-113" class="externalLink  glosarioLink">carga</a> de dise&#241;o</td><td colspan="1" rowspan="1" style="width:300px;">Desviaci&#243;n lateral m&#225;xima en la <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-113" class="externalLink  glosarioLink">carga</a> de dise&#241;o</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Prueba de <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-113" class="externalLink  glosarioLink">carga</a> lateral</td><td colspan="1" rowspan="1" style="">N/A</td><td colspan="1" rowspan="1" style="">21 mil&#237;metros por metro  de longitud promedio de pared</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Prueba de <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-113" class="externalLink  glosarioLink">carga</a> vertical</td><td colspan="1" rowspan="1" style="">13 mil&#237;metros</td><td colspan="1" rowspan="1" style="">21 mil&#237;metros por metro  de longitud promedio de pared</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Prueba de <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-113" class="externalLink  glosarioLink">carga</a> vertical de la cubierta</td><td colspan="1" rowspan="1" style="">13 mil&#237;metros</td><td colspan="1" rowspan="1" style="">N/A</td></tr></table><br /></div><br />El procedimiento de los ensayos de <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-113" class="externalLink  glosarioLink">carga</a> estructural para <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-113" class="externalLink  glosarioLink">carga</a> de dise&#241;o y prueba, se encuentran descritos en la norma ANSI/SCTE 77- 2017.<br /><br /><b>9.1.2	Resistencia a impactos mec&#225;nicos - ASTM D2444</b><br />En la norma ANSI/SCTE 77 2017, se indica que la tapa deber&#225; soportar un impacto de 95 Nm (70Lb/pie) acorde a la norma ASTM D2444.<br /><br />La prueba se realiza sobre la tapa, en una superficie plana y r&#237;gida, como una placa de hormig&#243;n o de acero.<br /><br /><b>9.1.3	Resistencia al deslizamiento – ASTM C1028-06</b><br />El coeficiente est&#225;tico de fricci&#243;n de esta superficie debe ser de un m&#237;nimo de 0.50 seg&#250;n lo determinado en ASTM 1028-06 Secci&#243;n 8.<br /><br /><b>9.1.4	Resistencia a la degradaci&#243;n UV  – ASTM G-154</b><br />La tapa deber&#225; presentar resistencia a la degradaci&#243;n producida por la exposici&#243;n de rayos ultravioleta. <br /><br />Cupones de <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-274" class="externalLink  glosarioLink">material</a> con las mismas dimensiones que los cupones de control se medir&#225;n, pesar&#225;n y probar&#225;n de acuerdo con ASTM G154, durante 1000 horas para simular la radiaci&#243;n solar directa UV. <br /><br />Se deber&#225; conservar m&#237;nimo el 75% de los valores de  <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-113" class="externalLink  glosarioLink">carga</a> de dise&#241;o y deflexi&#243;n y no presentar  variaci&#243;n del 2% en el peso. <br /><br /><b>9.1.5	Resistencia a agentes qu&#237;micos – ASTM D543 - ANSI/SCTE 77- 2017</b><br />Cupones de <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-274" class="externalLink  glosarioLink">material</a> con las mismas dimensiones que los cupones de control, se medir&#225;n, pesar&#225;n y probar&#225;n de acuerdo con ASTM D543, los cuales ser&#225;n expuestos con los reactivos qu&#237;micos de la siguiente tabla:<br /><br />Reactivo / Concentraci&#243;n en agua de la norma ANSI/SCTE 77- 2017.<br /><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/2013/9325.jpg" src="../../media/cache/images/500x355/wikiimages/2d31343730333737363332-91873-9325.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:500px"></div></div></div><br /><br />Se deber&#225; conservar m&#237;nimo el 75% de los valores de  <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-113" class="externalLink  glosarioLink">carga</a> de dise&#241;o y deflexi&#243;n y no presentar  variaci&#243;n del 2% en el peso. <br /><br /><b>9.1.6	Resistencia a la absorci&#243;n de humedad – ASTM D570</b><br />Cupones de <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-274" class="externalLink  glosarioLink">material</a> con las mismas dimensiones que los cupones de control, se medir&#225;n, pesar&#225;n y probar&#225;n de acuerdo con ASTM D570, Secciones 6, 7.1 y 7.5, durante la prueba de 24 horas y para la prueba de ebullici&#243;n.<br /><br />Se deber&#225; conservar m&#237;nimo el 75% de los valores de  <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-113" class="externalLink  glosarioLink">carga</a> de dise&#241;o y deflexi&#243;n y no presentar  variaci&#243;n del 2% en el peso. <br /><br /><b>9.1.7	Retardancia a la llama  ASTM D635</b><br />Al colocar la llama en un extremo de una <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-288" class="externalLink  glosarioLink">muestra</a> de <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-274" class="externalLink  glosarioLink">material</a> de la tapa de 25 mm x 125 mm, la rata de propagaci&#243;n de la llama  no debe ser mayor de 8 mm por minuto por cada 3 mm de espesor.<br /><br /><b>9.1.8	Verificaci&#243;n Dimensional y Visual</b><br />La verificaci&#243;n de las dimensiones se har&#225; con los instrumentos de medida que den la aproximaci&#243;n requerida y calibrador para los espesores. <br /><br />Durante la <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> visual, las cajas y tapas no deben presentar evidencias de agrietamiento transversal o longitudinal, rotura, laminaci&#243;n o desmoronamiento al igual que desprendimiento de las paredes.<br /><br />No se aceptar&#225;n tapas y cajas con resanes, cuando la profundidad sea igual al espesor de pared del <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-338" class="externalLink  glosarioLink">producto</a>.<br />
+<h3 id="heading_10" >9.2	PRUEBAS DE RUTINA</h3>El proveedor realizar&#225; las pruebas establecidas en el numeral 9.1.8<br />
+<h3 id="heading_11" >9.3	PRUEBAS DE RECEPCI&#211;N</h3>En la recepci&#243;n del <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-274" class="externalLink  glosarioLink">material</a>, se realizar&#225;n las pruebas definidas en los numerales 9.1.1, 9.1.2, 9.1.3 y 9.1.8<br /><br />Las pruebas mec&#225;nicas se realizar&#225;n en la primera recepci&#243;n por contrato y al cumplir el 50% de la cantidad total a suministrar.<br />
+<h2 id="heading_12" >10. ENSAYOS DE LABORATORIO  </h2>
+El registro completo de los ensayos  debe estar disponible para  ENEL-CODENSA., durante el tiempo que dure la fabricaci&#243;n y por los dos a&#241;os siguientes a su terminaci&#243;n.<br /><br />Todos los ensayos descritos en esta especificaci&#243;n se deben realizar  por parte del fabricante y se deben entregar a Enel-Codensa, los cuales no podr&#225;n tener m&#225;s de 2 a&#241;os de vigencia a partir del inicio de licitaci&#243;n.<br /><br />Los laboratorios destinados a la ejecuci&#243;n de las pruebas tipo,  deber&#225;n ser laboratorios reconocidos y/o acreditados a nivel nacional.<br /><br />Para la ejecuci&#243;n de las pruebas de recepci&#243;n, los laboratorios no requieren <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-75" class="externalLink  glosarioLink">acreditaci&#243;n</a>.<br />
+<h2 id="heading_13" >11. MARCAS </h2>
+Todas las tapas deber&#225;n llevar, en forma clara una leyenda en bajo relieve la siguiente informaci&#243;n:<br />
+<ul><li>Palabra NO RECICLABLE</li>
+<li>Palabra BOG-CUN  </li>
+<li>Nombre o raz&#243;n social del fabricante</li>
+<li>Peso m&#225;ximo <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-113" class="externalLink  glosarioLink">carga</a> soportada  en kg en el cuerpo de la tapa y la caja.</li>
+<li>Fecha de fabricaci&#243;n, d&#237;a   mes   a&#241;o.</li>
+<li>Peso de la tapa kg</li>
+<li>Peso de la caja kg</li>
+<li>Peso total kg</li>
+<li>No. Contrato u orden de compra</li></ul>
+
+<h2 id="heading_14" >12. REQUISITOS DE LAS OFERTAS</h2>
+La oferta <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a> deber&#225; entregarse en medio magn&#233;tico. El oferente deber&#225; incluir con su propuesta la siguiente informaci&#243;n:<br />
+<ul><li>Relaci&#243;n de los bienes cotizados.</li>
+<li>Informaci&#243;n del oferente, relaci&#243;n de clientes, evidencia de su capacidad <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a> y experiencias relacionadas con los materiales y/o equipos cotizados.</li>
+<li>Listado de normas t&#233;cnicas aplicables a los bienes cotizados.</li>
+<li>Planilla de caracter&#237;sticas t&#233;cnicas garantizadas indicada en el anexo1, la cual deber&#225; ser diligenciada completamente por el oferente. Esta planilla debe entregarse en formato Excel y por ning&#250;n motivo debe ser modificada, ya que puede ser causal de rechazo para la oferta.</li>
+<li>Cat&#225;logos originales, completos y actualizados, que contengan caracter&#237;sticas t&#233;cnicas principales correspondientes a los bienes cotizados en la planilla de caracter&#237;sticas t&#233;cnicas garantizadas. </li>
+<li>Protocolos de pruebas de acuerdo con las normas indicadas en esta especificaci&#243;n en laboratorios acreditados. En tales protocolos se deber&#225;n anotar las fechas de fabricaci&#243;n y de realizaci&#243;n de las pruebas, para permitir la verificaci&#243;n de las caracter&#237;sticas t&#233;cnicas garantizadas. As&#237; mismo las fotocopias de los certificados de laboratorios internacionales cuando las pruebas deban ser hechas fuera del pa&#237;s.</li>
+<li>El oferente adjuntar&#225; con su propuesta el certificado del <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> (ISO 9001).</li>
+<li>Los oferentes deber&#225;n ofrecer una garant&#237;a absoluta de sus productos de por lo menos dos (2) a&#241;os.</li>
+<li>Informaci&#243;n adicional que considere aporta explicaci&#243;n a su dise&#241;o (dibujos, detalles, caracter&#237;sticas de operaci&#243;n, dimensiones y pesos de los materiales ofertados). </li>
+<li>Relaci&#243;n de las excepciones de car&#225;cter exclusivamente t&#233;cnico de la oferta, respecto a los bienes solicitados. Si la oferta no presenta excepci&#243;n, esto se indicar&#237;a expresamente. </li></ul>
+<br />Enel-Codensa. Podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones, sin expresi&#243;n de causa ni obligaci&#243;n de compensaci&#243;n.<br />
+<h2 id="heading_15" >13. SUMINISTRO Y RECEPCION CAJAS</h2>
+<h3 id="heading_16" >13.1 TOLERANCIAS ACEPTADAS</h3>Se acepta una tolerancia en la longitud, ancho y alto de la tapa y el marco de &#177; 3 mil&#237;metros. (Externa)<br />
+<h3 id="heading_17" >13.2 RECEPCI&#211;N DE CAJAS Y TAPAS </h3>Para llevar a cabo las labores de <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> y recepci&#243;n de tapas y cajas, se establece el siguiente plan de muestreo, determinado acorde al tama&#241;o del <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-264" class="externalLink  glosarioLink">lote</a>, el n&#250;mero de unidades a los cuales se les debe practicar la <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> visual y pruebas mec&#225;nicas de recepci&#243;n, para la aceptaci&#243;n o rechazo:<br /><br /><b>INSPECCION VISUAL Y DIMENSIONAL (Nivel de Inspecci&#243;n general II, NCA = 4%)</b><br /><div style="width:672px;"><table><tr><td colspan="1" rowspan="1" style="width:170px;height:30px;text-align:center"><b>Tama&#241;o del lote</b></td><td colspan="1" rowspan="1" style="width:177px;text-align:center"><b>Tama&#241;o de muestra</b></td><td colspan="1" rowspan="1" style="width:173px;text-align:center"><b>Aceptaci&#243;n</b></td><td colspan="1" rowspan="1" style="width:152px;text-align:center"><b>Rechazos</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">2 -    25</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">26 -    90</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">91 -150</td><td colspan="1" rowspan="1" style="text-align:center">20</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">151-280</td><td colspan="1" rowspan="1" style="text-align:center">32</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">281-500</td><td colspan="1" rowspan="1" style="text-align:center">50</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">501-1200</td><td colspan="1" rowspan="1" style="text-align:center">80</td><td colspan="1" rowspan="1" style="text-align:center">7</td><td colspan="1" rowspan="1" style="text-align:center">8</td></tr></table><br /></div><br /><b>PRUEBAS MEC&#193;NICAS (Nivel de Inspecci&#243;n general S1, NCA = 4%)</b><br /><div style="width:672px;"><table><tr><td colspan="1" rowspan="1" style="width:170px;height:30px;text-align:center"><b>Tama&#241;o del lote</b></td><td colspan="1" rowspan="1" style="width:177px;text-align:center"><b>Tama&#241;o de muestra</b></td><td colspan="1" rowspan="1" style="width:173px;text-align:center"><b>Aceptaci&#243;n</b></td><td colspan="1" rowspan="1" style="width:152px;text-align:center"><b>Rechazos</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">2-ago</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">sep-15</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">16-25</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">26-50</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">51-90</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">91-150</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">151-280</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">281-500</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">501-1200</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr></table><br /></div><br />
+<h3 id="heading_18" >13.3 MOTIVOS DE RECHAZO</h3>El incumplimiento a cualquiera de los requisitos establecidos en la <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a>, ser&#225; causal de rechazo para el <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-338" class="externalLink  glosarioLink">producto</a>.  <br />
+<h2 id="heading_19" >14. GARANT&#205;A DE F&#193;BRICA</h2>
+Enel-Codensa requiere como m&#237;nimo, un per&#237;odo de garant&#237;a de f&#225;brica de veinticuatro (24) meses, a partir de la entrega de los bienes.<br />
+<h2 id="heading_20" >15. INSPECCI&#211;N EN F&#193;BRICA  </h2>
+El valor de las pruebas y ensayos debe incluirse en los precios cotizados en la propuesta.  ENEL-CODENSA. Se reserva el derecho de descartar las propuestas que no ofrezcan pruebas, o si las ofrecidas son consideradas insuficientes para garantizar la <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> de los dispositivos. <br />
+<h2 id="heading_21" >16. CERTIFICADOS DE CONFORMIDAD</h2>
+El oferente podr&#225; adjuntar con su propuesta el <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-126" class="externalLink  glosarioLink">certificado de conformidad</a> de <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-338" class="externalLink  glosarioLink">producto</a> con <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-301" class="externalLink  glosarioLink">norma t&#233;cnica</a>, expedido por una entidad autorizada por la  ONAC- Organismo Nacional de <a href="etat932_cajas_prefabricadas_tapa_elaboradas_materiales_polimericos.html#" id="version-75" class="externalLink  glosarioLink">Acreditaci&#243;n</a> de Colombia<br /><br /><b>ANEXO 1. RELACI&#211;N DE LOS BIENES COTIZADOS</b><br /><br /><div style="width:520px;"><table><tr><td colspan="1" rowspan="1" style="width:170px;height:30px;text-align:center"><b>C&#243;digo</b></td><td colspan="1" rowspan="1" style="width:177px;text-align:center"><b>Descripci&#243;n</b></td><td colspan="1" rowspan="1" style="width:173px;text-align:center"><b>cantidad</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr></table><br /></div><br /><b>ANEXO 2. TABLA DE  CARACTERISTICAS T&#201;CNICAS GARANTIZADAS</b><br /><br /><div style="width:950px;"><table><tr><td colspan="1" rowspan="1" style="width:56px;height:30px;text-align:center"><b>ITEM</b></td><td colspan="3" rowspan="1" style="width:531px;"><b>DESCRIPCION</b></td><td colspan="1" rowspan="1" style="width:260px;text-align:center"><b>SOLICITADO</b></td><td colspan="1" rowspan="1" style="width:103px;text-align:center"><b>OFERTADO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1</td><td colspan="3" rowspan="1" style="">Proveedor</td><td colspan="1" rowspan="1" style="text-align:center">A especificar por el fabricante</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">2</td><td colspan="3" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style="text-align:center">A especificar por el fabricante</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">3</td><td colspan="3" rowspan="1" style="">Pais del fabricante</td><td colspan="1" rowspan="1" style="text-align:center">A especificar por el fabricante</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">4</td><td colspan="3" rowspan="1" style="">Normas t&#233;cnicas de dise&#241;o y pruebas</td><td colspan="1" rowspan="1" style="text-align:center"> las indicadas en esta especificaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">5</td><td colspan="3" rowspan="1" style="">Cumple con las dimensiones indicadas en la Especificaci&#243;n T&#233;cnica</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">6</td><td colspan="3" rowspan="1" style="">Peso total (kg)</td><td colspan="1" rowspan="1" style="text-align:center">M&#225;ximo 25 kg por cada elemento</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">7</td><td colspan="3" rowspan="1" style="">Adjunta protocolos de  la prueba  Carga Estructural ANSI/SCTE 77- 2017</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">8</td><td colspan="3" rowspan="1" style="">Adjunta protocolos de  la prueba de &#160;   Resistencia a impactos mec&#225;nicos - ASTM D2444-99</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">9</td><td colspan="3" rowspan="1" style=""> Adjunta protocolos de  la prueba de  Resistencia al deslizamiento – ASTM C1028-06</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">10</td><td colspan="3" rowspan="1" style=""> Adjunta protocolos de  la prueba de  resistencia a la degradaci&#243;n UV  – ASTM G-154</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">11</td><td colspan="3" rowspan="1" style=""> Adjunta protocolos de  la prueba de   &#160; Resistencia a agentes qu&#237;micos – ASTM D543</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">12</td><td colspan="3" rowspan="1" style="">Resistencia a la absorci&#243;n de humedad – ASTM D570</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">13</td><td colspan="3" rowspan="1" style="">Retardancia a la llama  ASTM D635, Sections 4, 5 and 6</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">14</td><td colspan="3" rowspan="1" style=""><b>Capas contructivas  numeral 7:</b></td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">*</td><td colspan="3" rowspan="1" style="">Incluye top coat ASTM- G154.</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">*</td><td colspan="3" rowspan="1" style="">Incluye mantas de fibra de vidrio ANSI C136</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">*</td><td colspan="3" rowspan="1" style="">Incluye resina de poli&#233;ster inyectada que elimina la exposici&#243;n de fibras </td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">15</td><td colspan="3" rowspan="1" style="">Incluye muestra muestra f&#237;sica desde el borde m&#237;nimo 10 cm  de largo x  6,0 cm de altura  del corte de la tapa</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">16</td><td colspan="3" rowspan="1" style="">Incluye foto microscopica ampliada que evidencie  cada una de las capas de fabricaci&#243;n de la tapa</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center"> </td><td colspan="3" rowspan="1" style="">Incluyen tornillos de cabeza perdible y tapon</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">17</td><td colspan="3" rowspan="1" style="">Incluye marcaci&#243;n seg&#250;n numeral 12,1</td><td colspan="1" rowspan="1" style="text-align:center">SI (describir metodo)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">18</td><td colspan="3" rowspan="1" style="">Vida &#250;til (a&#241;os)</td><td colspan="1" rowspan="1" style="text-align:center">minimo 25</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">19</td><td colspan="3" rowspan="1" style="">Garant&#237;a (a&#241;os)</td><td colspan="1" rowspan="1" style="text-align:center">minimo 2</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="5" rowspan="1" style="height:20px;"><b>RESULTADO DE EVALUACI&#211;N T&#201;CNICA</b></td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:20px;text-align:center">20</td><td colspan="2" rowspan="5" style="">Certificaci&#243;n de sistema de calidad</td><td colspan="2" rowspan="1" style="">Entidad acreditadora</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;">Fecha de aprobaci&#243;n (d&#237;a/mes/a&#241;o) </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="6" style="height:20px;text-align:center">21</td><td colspan="2" rowspan="6" style="">Certificaci&#243;n con normas t&#233;cnicas</td><td colspan="2" rowspan="1" style="">Entidad acreditadora</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;">Norma t&#233;cnica con la cual se certifica</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="5" rowspan="1" style="height:20px;"><b>RESULTADO DE EVALUACI&#211;N REGULATORIA</b></td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">22</td><td colspan="4" rowspan="1" style="">OBSERVACIONES</td><td colspan="1" rowspan="1" style=""> </td></tr></table><br /></div><br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 2013, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

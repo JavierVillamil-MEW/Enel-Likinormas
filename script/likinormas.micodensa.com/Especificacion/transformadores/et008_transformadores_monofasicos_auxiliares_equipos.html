@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET008 Transformadores monofásicos auxiliares para equipos | Likinormas</title>
+	<meta name="description" content="transformadores auxiliares para equipos" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/414" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F414.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/414" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/414" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '25');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET008 Transformadores monof&#225;sicos auxiliares para equipos</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET008</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">08/08/2002</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/414">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F414&amp;nodoid=414', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et008_transformadores_monofasicos_auxiliares_equipos.html#heading_0">1.	Caracter&#237;sticas t&#233;cnicas generales</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et008_transformadores_monofasicos_auxiliares_equipos.html#heading_1">2.	 Caracter&#237;sticas t&#233;cnicas particulares</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et008_transformadores_monofasicos_auxiliares_equipos.html#heading_2">2.1	Capacidad:	0,5 kVA</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et008_transformadores_monofasicos_auxiliares_equipos.html#heading_3">2.2	Polaridad:		Sustractiva</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et008_transformadores_monofasicos_auxiliares_equipos.html#heading_4">2.3	Frecuencia:	60 Hz</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et008_transformadores_monofasicos_auxiliares_equipos.html#heading_5">2.4	Tensi&#243;n:</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et008_transformadores_monofasicos_auxiliares_equipos.html#heading_6">3. Hojas de datos garantizados</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et008_transformadores_monofasicos_auxiliares_equipos.html#heading_7">3.1  Caracter&#237;sticas generales</a></li>
+                    <li class="indexitem"><a class="head_h6" href="et008_transformadores_monofasicos_auxiliares_equipos.html#heading_8">3.1.1 PINTURA</a></li>
+                    <li class="indexitem"><a class="head_h6" href="et008_transformadores_monofasicos_auxiliares_equipos.html#heading_9">3.1.2 MATERIALES  AISLANTES      </a></li>
+                    <li class="indexitem"><a class="head_h6" href="et008_transformadores_monofasicos_auxiliares_equipos.html#heading_10">3.1.3. CARACTER&#205;STICAS EL&#201;CTRICAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et008_transformadores_monofasicos_auxiliares_equipos.html#heading_11">3.2. GENERALIDADES</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1.	Caracter&#237;sticas t&#233;cnicas generales</h2>
+Los transformadores objeto de la presente especificaci&#243;n, son requeridos para alimentar el control de equipos como reconectadores y seccionalizadores.<br />Las condiciones generales de funcionamiento requeridas para los transformadores de distribuci&#243;n se&#241;alados en este documento, son comunes en las empresas del grupo Enersis.<br /><br />Por lo tanto para el dise&#241;o, fabricaci&#243;n, pruebas y funcionamiento de los transformadores se debe tener en cuenta lo se&#241;alado en el documento E-MT-0009 REV. 4 “ ESPECIFICACI&#211;N DE TRANSFORMADORES DE DISTRIBUCI&#211;N CONVENCIONALES “ Revisi&#243;n 4 de noviembre de 2001, del grupo ENERSIS.
+<h2 id="heading_1" >2.	 Caracter&#237;sticas t&#233;cnicas particulares</h2><h3 id="heading_2" >2.1	Capacidad:	0,5 kVA</h3><h3 id="heading_3" >2.2	Polaridad:		Sustractiva</h3><h3 id="heading_4" >2.3	<a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-210" class="externalLink  glosarioLink">Frecuencia</a>:	60 Hz</h3><h3 id="heading_5" >2.4	<a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-377" class="externalLink  glosarioLink">Tensi&#243;n</a>:</h3>
+ Monof&#225;sicos<br /><br />	Primario:	<a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-205" class="externalLink  glosarioLink">Fase</a>-<a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-205" class="externalLink  glosarioLink">fase</a>  13.2 &#243; 11.4 kV	Secundario: <a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-205" class="externalLink  glosarioLink">fase</a>-<a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-205" class="externalLink  glosarioLink">fase</a> 120 V (en vac&#237;o)<br /><br />	Primario:	<a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-205" class="externalLink  glosarioLink">Fase</a>- <a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-205" class="externalLink  glosarioLink">fase</a>  34.5 kV		Secundario: <a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-205" class="externalLink  glosarioLink">fase</a>-<a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-205" class="externalLink  glosarioLink">fase</a> 120 V (en vac&#237;o)	<br /><br /> Conexi&#243;n		<br /><br />Ii0 sin  terminal  neutro en baja <a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-377" class="externalLink  glosarioLink">Tensi&#243;n</a>,  y se debe conectar externamente el terminal “v” de <a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a> a la <a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-342" class="externalLink  glosarioLink">Puesta a tierra</a>. Transformadores monof&#225;sicos con conexi&#243;n en MT:  <a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-205" class="externalLink  glosarioLink">Fase</a> - <a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-205" class="externalLink  glosarioLink">Fase</a>.<br />		<br />La <a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-342" class="externalLink  glosarioLink">Puesta a tierra</a> de baja <a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-377" class="externalLink  glosarioLink">Tensi&#243;n</a>, debe soldarse de tal forma que su centro se encuentre a 100 &#177; 30 mm, por debajo del centro del terminal “v”.<br /> Condiciones ambientales:
+<ul><li>Clima	: Tropical</li>
+<li>Temperatura ambiente m&#237;nima:	-2 &#176;C</li>
+<li>Temperatura ambiente m&#225;xima:	30 &#176;C</li>
+<li>Temperatura promedio anual	14 &#176;C</li>
+<li>Humedad relativa:	90 %</li>
+<li>Altura sobre el nivel del mar:	2700 m</li>
+<li>Nivel de <a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-145" class="externalLink  glosarioLink">contaminaci&#243;n</a>: ( IEC 815)	Nivel II</li></ul>
+<br /> Ubicaci&#243;n de Bushings<br />Lado MT en forma vertical sobre la tapa<br /><br />Tabla   1. Cantidad y ubicaci&#243;n de los pasatapas de <a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-277" class="externalLink  glosarioLink">media tensi&#243;n</a><br /><div style="width:571px;"><table><tr><td colspan="1" rowspan="1" style="width:150px;height:62px;text-align:center"><b>Conexi&#243;n del <a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> al cual se conecta el devanado de <a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-88" class="externalLink  glosarioLink">alta tensi&#243;n</a></b></td><td colspan="1" rowspan="1" style="width:150px;text-align:center"><b>El devanado de <a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-88" class="externalLink  glosarioLink">alta tensi&#243;n</a> se conecta entre</b></td><td colspan="1" rowspan="1" style="width:154px;text-align:center"><b>Cantidad de pasatapas</b></td><td colspan="1" rowspan="1" style="width:117px;text-align:center"><b>Ubicaci&#243;n</b></td></tr>
+<tr><td colspan="1" rowspan="2" style="height:59px;text-align:center">Estrella con neutro aterrizado en la <a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-373" class="externalLink  glosarioLink">subestaci&#243;n</a> AT-MT</td><td colspan="1" rowspan="2" style="text-align:center">Fases del <a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-363" class="externalLink  glosarioLink">sistema</a></td><td colspan="1" rowspan="2" style="text-align:center">2</td><td colspan="1" rowspan="2" style="text-align:center">En la tapa del tanque</td></tr></table><br /><br /></div>Tabla 2. Caracter&#237;sticas el&#233;ctricas de los pasatapas (con sujeci&#243;n exterior)<br />y devanados de <a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-277" class="externalLink  glosarioLink">media tensi&#243;n</a>. <br /><br /><div style="width:764px;"><table><tr><td colspan="3" rowspan="1" style="width:450px;height:22px;text-align:center"><b>Pasatapas</b></td><td colspan="2" rowspan="1" style="width:314px;text-align:center"><b>Devanados</b></td></tr>
+<tr><td colspan="1" rowspan="2" style="height:49px;text-align:center"><a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-377" class="externalLink  glosarioLink">Tensi&#243;n</a> de serie del devanado (kV)</td><td colspan="1" rowspan="2" style="text-align:center">Nivel b&#225;sico de impulso (kV)</td><td colspan="1" rowspan="1" style="text-align:center">Distancia de fuga </td><td colspan="1" rowspan="2" style="text-align:center">Nivel b&#225;sico de impulso (kV)</td><td colspan="1" rowspan="2" style="text-align:center"><a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-377" class="externalLink  glosarioLink">Tensi&#243;n</a>aplicada a 60 Hz, durante 1 min. (kV)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">(mm)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">15</td><td colspan="1" rowspan="1" style="text-align:center">110</td><td colspan="1" rowspan="1" style="text-align:center">420</td><td colspan="1" rowspan="1" style="text-align:center">95</td><td colspan="1" rowspan="1" style="text-align:center">34</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">34,5</td><td colspan="1" rowspan="1" style="text-align:center">200</td><td colspan="1" rowspan="1" style="text-align:center">730</td><td colspan="1" rowspan="1" style="text-align:center">170</td><td colspan="1" rowspan="1" style="text-align:center">70</td></tr></table><br /></div><br />Lado de BT :<br /><br />Tabla 3. Cantidad y ubicaci&#243;n de los pasatapas de<a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a><br /><div style="width:609px;"><table><tr><td colspan="1" rowspan="1" style="width:176px;height:52px;text-align:center"><b>Conexi&#243;n del devanado de <a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a></b></td><td colspan="1" rowspan="1" style="width:120px;text-align:center"><b>Cantidad de pasatapas</b></td><td colspan="1" rowspan="1" style="width:313px;text-align:center"><b>Ubicaci&#243;n</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:76px;text-align:center">Una <a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-102" class="externalLink  glosarioLink">bobina</a> para operaci&#243;n a 120 voltios l&#237;nea neutro</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="">En la pared del tanque colocados sim&#233;tricamente al eje de simetr&#237;a vertical del segmento 1, ilustraci&#243;n 4 de la especificaci&#243;n E-MT-0009 NUMERAL 13.2.14. de ENERSIS.</td></tr></table><br /></div><br />Tabla 4.	Caracter&#237;sticas el&#233;ctricas de los pasatapas de <a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a>.<br /><br /><div style="width:764px;"><table><tr><td colspan="3" rowspan="1" style="width:450px;height:21px;text-align:center">Pasatapas</td><td colspan="2" rowspan="1" style="width:314px;text-align:center">Devanados</td></tr>
+<tr><td colspan="1" rowspan="2" style="height:32px;text-align:center"><a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-377" class="externalLink  glosarioLink">Tensi&#243;n</a> de serie del devanado (kV)</td><td colspan="1" rowspan="2" style="text-align:center">Nivel b&#225;sico de impulso (kV)</td><td colspan="1" rowspan="1" style="text-align:center">Distancia de fuga</td><td colspan="1" rowspan="2" style="text-align:center">Nivel b&#225;sico de impulso (kV)</td><td colspan="1" rowspan="2" style="text-align:center"><a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-377" class="externalLink  glosarioLink">Tensi&#243;n</a> aplicada a 60 Hz, durante 1 min. (kV)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">(mm)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">1,2</td><td colspan="1" rowspan="1" style="text-align:center">30</td><td colspan="1" rowspan="1" style="text-align:center">-</td><td colspan="1" rowspan="1" style="text-align:center">30</td><td colspan="1" rowspan="1" style="text-align:center">10</td></tr></table><br /></div><br />Tabla 5:     Distancias m&#237;nimas en aire entre partes energizadas  (IEC 137)<br /><div style="width:335px;"><table><tr><td colspan="1" rowspan="2" style="width:160px;height:35px;text-align:center"><b>Nivel aislamiento (kV)</b></td><td colspan="1" rowspan="1" style="width:175px;text-align:center"><b>M&#237;nima distancia en aire</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center"><b>(mm)</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">1,1</td><td colspan="1" rowspan="1" style="text-align:center">130</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">15</td><td colspan="1" rowspan="1" style="text-align:center">220</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">34,5</td><td colspan="1" rowspan="1" style="text-align:center">720</td></tr></table><br /></div><br />Tabla 7: Accesorios para Transformadores de Distribuci&#243;n Monof&#225;sicos. <br /><div style="width:401px;"><table><tr><td colspan="1" rowspan="1" style="width:401px;height:21px;text-align:center">V&#225;lvula de alivio de presi&#243;n</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">Ganchos para izaje del transformador</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">Placa Caracter&#237;sticas T&#233;cnicas</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-342" class="externalLink  glosarioLink">Puesta a tierra</a> del terminal de B.T. “v”</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-342" class="externalLink  glosarioLink">Puesta a tierra</a> del tanque</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">Ganchos para izaje parte activa</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">Fijaci&#243;n de la parte activa al estanque.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">Dispositivos de fijaci&#243;n al poste</td></tr></table><br /></div>
+<h2 id="heading_6" >3. Hojas de datos garantizados</h2>
+<h3 id="heading_7" >3.1  Caracter&#237;sticas generales</h3>
+<div style="width:639px;"><table><tr><td colspan="1" rowspan="1" style="width:150px;height:24px;text-align:center"><b>1.1 DESCRIPCI&#211;N</b></td><td colspan="1" rowspan="1" style="width:150px;text-align:center"><b>Unidad</b></td><td colspan="1" rowspan="1" style="width:182px;text-align:center"><b>Solicitado</b></td><td colspan="1" rowspan="1" style="width:157px;text-align:center"><b>Garantizado</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:6px;text-align:center">1. Norma aisladores terminales</td><td colspan="1" rowspan="1" style="text-align:center">--</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:6px;text-align:center">2. Material de los aisladores terminales:</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:6px;text-align:center">MT</td><td colspan="1" rowspan="1" style="text-align:center">--</td><td colspan="1" rowspan="1" style="text-align:center">Porcelana</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:6px;text-align:center">BT</td><td colspan="1" rowspan="1" style="text-align:center">--</td><td colspan="1" rowspan="1" style="text-align:center">Porcelana</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:6px;text-align:center">3. Clase de aislaci&#243;n aisladores MT/BT</td><td colspan="1" rowspan="1" style="text-align:center">KV</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:6px;text-align:center">4. Material Placa de Identificaci&#243;n:</td><td colspan="1" rowspan="1" style="text-align:center">--</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:6px;text-align:center">5. Fijaci&#243;n parte activa (tapa / tanque)</td><td colspan="1" rowspan="1" style="text-align:center">--</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div>
+<h6 id="heading_8" >3.1.1 PINTURA</h6><div style="width:598px;"><table><tr><td colspan="1" rowspan="1" style="width:302px;height:9px;">Descripci&#243;n:</td><td colspan="1" rowspan="1" style="width:99px;text-align:center"><b>Unidad</b></td><td colspan="1" rowspan="1" style="width:98px;text-align:center"><b>Solicitado</b></td><td colspan="1" rowspan="1" style="width:99px;text-align:center"><b>Garantizado</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">1. M&#233;todo de limpieza superficies</td><td colspan="1" rowspan="1" style="text-align:center">--</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">2. Pintura:     </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;"><a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-274" class="externalLink  glosarioLink">Material</a> de la pintura anticorrosiva</td><td colspan="1" rowspan="1" style="text-align:center">--</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Espesor de  anticorrosivo</td><td colspan="1" rowspan="1" style="text-align:center">&#181;m</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;"><a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-274" class="externalLink  glosarioLink">Material</a> de la pintura de acabado</td><td colspan="1" rowspan="1" style="text-align:center">--</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Espesor del acabado</td><td colspan="1" rowspan="1" style="text-align:center">&#181;m</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Color de acabado</td><td colspan="1" rowspan="1" style="text-align:center">--</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">M&#233;todo de pintura</td><td colspan="1" rowspan="1" style="text-align:center">--</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div>
+<h6 id="heading_9" >3.1.2 MATERIALES  AISLANTES      </h6><div style="width:595px;"><table><tr><td colspan="1" rowspan="1" style="width:193px;height:20px;text-align:center"><b>1.1.1.1.1.1&#160;&#160;descripci&#243;n</b></td><td colspan="1" rowspan="1" style="width:129px;text-align:center"><b>Unidad </b></td><td colspan="1" rowspan="1" style="width:151px;text-align:center"><b>Solicitado</b></td><td colspan="1" rowspan="1" style="width:122px;text-align:center"><b>Garantizado</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:6px;"><i>1.1.1.1.1.2&#160;1.   Aceite Mineral</i></td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:6px;">Marca</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:6px;">Tipo</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">Inhibido</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:6px;">Clase</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:6px;">Contenido de agua, ppm</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">30</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:6px;"><a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-377" class="externalLink  glosarioLink">Tensi&#243;n</a> interfacial, min. (dina/cm)</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">40</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:6px;">     Gravedad espec&#237;fica  m&#225;xima                        (15&#176;C/15&#176;C)</td><td colspan="1" rowspan="1" style="text-align:center">%</td><td colspan="1" rowspan="1" style="text-align:center">0,895</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:6px;">     No. Neutralizaci&#243;n, m&#225;x.</td><td colspan="1" rowspan="1" style="text-align:center">mg KOH/g</td><td colspan="1" rowspan="1" style="text-align:center">0,025</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:6px;">2. Papel Aislante: </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:6px;">    Norma</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:6px;">    Tipo</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:6px;">     Clase de Aislamiento ( A,H,E, etc.)</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">A</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div>
+<h6 id="heading_10" >3.1.3. CARACTER&#205;STICAS EL&#201;CTRICAS</h6><div style="width:534px;"><table><tr><td colspan="1" rowspan="1" style="width:278px;height:9px;"><b>Descripci&#243;n:</b></td><td colspan="1" rowspan="1" style="width:86px;text-align:center"><b>Unidad</b></td><td colspan="1" rowspan="1" style="width:84px;text-align:center"><b>Solicitado</b></td><td colspan="1" rowspan="1" style="width:86px;text-align:center"><b>Garantizado</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">1. Potencia Nominal </td><td colspan="1" rowspan="1" style="text-align:center">KVA</td><td colspan="1" rowspan="1" style="text-align:center">0,5</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">2. N&#250;mero de Fases:</td><td colspan="1" rowspan="1" style="text-align:center">--</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">3. Tensiones a potencia nominal </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">MT</td><td colspan="1" rowspan="1" style="text-align:center">V</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">BT</td><td colspan="1" rowspan="1" style="text-align:center">V</td><td colspan="1" rowspan="1" style="text-align:center">120</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">4. Relaci&#243;n de transformaci&#243;n </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">5. <a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-210" class="externalLink  glosarioLink">Frecuencia</a> :</td><td colspan="1" rowspan="1" style="text-align:center">Hz</td><td colspan="1" rowspan="1" style="text-align:center">60</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">6. Impedancia secuencia positiva:</td><td colspan="1" rowspan="1" style="text-align:center">%</td><td colspan="1" rowspan="1" style="text-align:center">2,5</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">7. Impedancia secuencia cero (homopolar) :</td><td colspan="1" rowspan="1" style="text-align:center">%</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">8. Grupo de Conexi&#243;n:</td><td colspan="1" rowspan="1" style="text-align:center">--</td><td colspan="1" rowspan="1" style="text-align:center">Ii0</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">9. Polaridad:</td><td colspan="1" rowspan="1" style="text-align:center">--</td><td colspan="1" rowspan="1" style="text-align:center">Sustractiva</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">10. Perdidas en Vac&#237;o:</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Al 100% de Voltaje y <a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-210" class="externalLink  glosarioLink">Frecuencia</a>          Nominal</td><td colspan="1" rowspan="1" style="text-align:center">W</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">       Al 110 % de Voltaje y Frecuencia Nominal</td><td colspan="1" rowspan="1" style="text-align:center">W</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">11. P&#233;rdidas en <a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-113" class="externalLink  glosarioLink">Carga</a>, referidas a 85&#176; C </td><td colspan="1" rowspan="1" style="text-align:center">W</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">12. Nivel de Aislamiento al Impulso en los Devanados (<a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-101" class="externalLink  glosarioLink">BIL</a>) :</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">MT</td><td colspan="1" rowspan="1" style="text-align:center">KV</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">BT</td><td colspan="1" rowspan="1" style="text-align:center">KV</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">13. Tensi&#243;n de Prueba a <a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-210" class="externalLink  glosarioLink">Frecuencia</a> Industrial durante un minuto en seco:</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">MT: serie 15(34)  &#243; serie 36 kV (70)</td><td colspan="1" rowspan="1" style="text-align:center">KV</td><td colspan="1" rowspan="1" style="text-align:center">34 / 70</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">BT</td><td colspan="1" rowspan="1" style="text-align:center">KV</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">14.Corriente de Corto Circuito:</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Valor sim&#233;trico (k veces Inom): </td><td colspan="1" rowspan="1" style="text-align:center">Veces</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Tiempo de Duraci&#243;n (segundos)</td><td colspan="1" rowspan="1" style="text-align:center">S </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">15. Elevaci&#243;n de Temperatura punto m&#225;s caliente a temperatura ambiente m&#225;x.40 &#176;C. </td><td colspan="1" rowspan="1" style="text-align:center">&#186;C</td><td colspan="1" rowspan="1" style="text-align:center">80</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div>
+<h3 id="heading_11" >3.2. GENERALIDADES</h3><div style="width:534px;"><table><tr><td colspan="1" rowspan="1" style="width:278px;height:9px;text-align:center"><b>Descripci&#243;n</b></td><td colspan="1" rowspan="1" style="width:86px;text-align:center"><b>Unidad</b></td><td colspan="1" rowspan="1" style="width:84px;text-align:center"><b>Solicitado</b></td><td colspan="1" rowspan="1" style="width:86px;text-align:center"><b>Garantizado</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">1. <a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-274" class="externalLink  glosarioLink">Material</a> Devanado (bobinas):</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">MT</td><td colspan="1" rowspan="1" style="text-align:center">--</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">BT</td><td colspan="1" rowspan="1" style="text-align:center">--</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">2. Nivel M&#225;ximo de Sonido Audible en condiciones nominales:</td><td colspan="1" rowspan="1" style="text-align:center">Db</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div>TANQUE<br /><div style="width:534px;"><table><tr><td colspan="1" rowspan="1" style="width:278px;height:9px;text-align:center"><b>Descripci&#243;n</b></td><td colspan="1" rowspan="1" style="width:86px;text-align:center"><b>Unid.</b></td><td colspan="1" rowspan="1" style="width:84px;text-align:center"><b>Solicitado</b></td><td colspan="1" rowspan="1" style="width:86px;text-align:center"><b>Garantizado</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">1. <a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-274" class="externalLink  glosarioLink">Material</a></td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">2. Tipo (llenado integral, capa aire) </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">3. Dimensiones m&#225;ximas (Largo x Ancho x Alto)</td><td colspan="1" rowspan="1" style="text-align:center">Mm</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">4. Sobrepresi&#243;n interna m&#225;xima soportada, </td><td colspan="1" rowspan="1" style="text-align:center">Mpa</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">5. Fijaci&#243;n de la tapa al tanque </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">6. Peso Neto del transformador con aceite</td><td colspan="1" rowspan="1" style="text-align:center">(kg)</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">    a. Parte activa</td><td colspan="1" rowspan="1" style="text-align:center">(kg)</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">7.N&#250;mero de Unidades Embaladas Superpuestas para     Almacenamiento en Columnas:</td><td colspan="1" rowspan="1" style="text-align:center">Unid.</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">7. V&#225;lvula de Sobrepresi&#243;n:</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Tipo</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Presi&#243;n de accionamiento</td><td colspan="1" rowspan="1" style="text-align:center">Mpa</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Caudal de gas desalojado</td><td colspan="1" rowspan="1" style="text-align:center">m<sup>3</sup>/s</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">8. Presenta Certificados de <a href="et008_transformadores_monofasicos_auxiliares_equipos.html#" id="version-112" class="externalLink  glosarioLink">calidad</a></td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">EVALUACI&#211;N T&#201;CNICA</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/414/ilustracion 4.jpg" src="http://likinormas.micodensa.com/media/cache/images/500x355/wikiimages/2d31313635333439343031-14893-ilustracion 4.jpg" title="Ilustración 4: Segmentos transformador circular, Codensa"  /></div><div class="texto_imagen_articulos" style="max-width:500px">Ilustración 4: Segmentos transformador circular, Codensa</div></div></div><br /><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/414/ilustracio 7.jpg" src="http://likinormas.micodensa.com/media/cache/images/500x355/wikiimages/2d373931303339333233-13907-ilustracio 7.jpg" title="Ilustración 7: Transformador monofásico vista frontal"  /></div><div class="texto_imagen_articulos" style="max-width:500px">Ilustración 7: Transformador monofásico vista frontal</div></div></div><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 414, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

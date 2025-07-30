@@ -1,0 +1,114 @@
+uuid: bd3919e4-b029-4961-9726-d4f8e4257a7a
+langcode: es
+status: true
+dependencies:
+  config:
+    - core.base_field_override.node.rules_technical_specifications.title
+    - field.field.node.rules_technical_specifications.effective_date
+    - field.field.node.rules_technical_specifications.specification_category
+    - field.field.node.rules_technical_specifications.specification_content
+    - field.field.node.rules_technical_specifications.specification_number
+    - field.field.node.rules_technical_specifications.specification_title
+    - node.type.rules_technical_specifications
+  module:
+    - node
+label: 'Feeds para especificaciones tecnicas'
+id: rules_feeds_local_specifications
+description: 'Permite carga de manera masiva especificaciones tecnicas locales'
+help: ''
+import_period: -1
+fetcher: upload
+fetcher_configuration:
+  allowed_extensions: 'txt csv tsv xml opml'
+  directory: 'public://feeds'
+parser: csv
+parser_configuration:
+  delimiter: ','
+  no_headers: false
+  line_limit: 100
+processor: 'entity:node'
+processor_configuration:
+  values:
+    type: rules_technical_specifications
+  langcode: es
+  insert_new: 1
+  update_existing: 2
+  update_non_existent: _keep
+  skip_hash_check: false
+  authorize: true
+  revision: false
+  expire: -1
+  owner_feed_author: false
+  owner_id: 1
+custom_sources:
+  numero:
+    value: numero
+    label: numero
+    machine_name: numero
+    type: csv
+  nombre:
+    value: nombre
+    label: nombre
+    machine_name: nombre
+    type: csv
+  contenido:
+    value: contenido
+    label: contenido
+    machine_name: contenido
+    type: csv
+  categoria:
+    value: categoria
+    label: categoria
+    machine_name: categoria
+    type: csv
+  fecha:
+    value: fecha
+    label: fecha
+    machine_name: fecha
+    type: csv
+mappings:
+  -
+    target: specification_number
+    map:
+      value: numero
+    settings:
+      language: null
+    unique:
+      value: '1'
+  -
+    target: title
+    map:
+      value: nombre
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: specification_title
+    map:
+      value: nombre
+    settings:
+      language: null
+      format: plain_text
+  -
+    target: specification_content
+    map:
+      value: contenido
+    settings:
+      language: ''
+      format: full_html
+  -
+    target: specification_category
+    map:
+      target_id: categoria
+    settings:
+      language: ''
+      reference_by: name
+      feeds_item: guid
+      autocreate: '1'
+  -
+    target: effective_date
+    map:
+      value: fecha
+    settings:
+      language: null
+      timezone: UTC

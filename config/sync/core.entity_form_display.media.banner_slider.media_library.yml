@@ -1,0 +1,49 @@
+uuid: ec8fffa4-50fe-4306-9c50-d903fb4bd1e4
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.media_library
+    - field.field.media.banner_slider.banner_description
+    - field.field.media.banner_slider.banner_title
+    - field.field.media.banner_slider.field_media_image_1
+    - field.field.media.banner_slider.image_mobile
+    - image.style.thumbnail
+    - media.type.banner_slider
+  module:
+    - image
+id: media.banner_slider.media_library
+targetEntityType: media
+bundle: banner_slider
+mode: media_library
+content:
+  field_media_image_1:
+    type: image_image
+    weight: 5
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  banner_description: true
+  banner_title: true
+  created: true
+  image_mobile: true
+  langcode: true
+  path: true
+  status: true
+  uid: true

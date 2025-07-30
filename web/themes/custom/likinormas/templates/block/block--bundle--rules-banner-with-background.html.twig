@@ -1,0 +1,19 @@
+{% set color = content.background_color[0]['#options'].entity.hex_color.value %}
+
+<div class="hero" style="background-color: {{ color }}">
+  <div class="hero__info">
+    {%- if content.banner_icon -%}
+      <div class="icon">{{ content.banner_icon }}</div>
+    {%- endif %}
+    {%- if content.filter_title -%}
+      <h1 class="hero__info-title title-primary">{{ content.filter_title|render|striptags }}</h1>
+    {%- endif %}
+    {%- if content.filter_description -%}
+      <p class="hero__info-description paragraph-primary">{{ content.filter_description|render|striptags }}</p>
+    {%- endif %}
+  </div>
+
+</div>
+<div class="field-button-mobile">
+  <button class="button-filter-mobile button-pink">Ver filtros</button>
+</div>

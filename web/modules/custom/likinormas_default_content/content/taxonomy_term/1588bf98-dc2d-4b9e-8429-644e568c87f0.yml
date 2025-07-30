@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 1588bf98-dc2d-4b9e-8429-644e568c87f0
+  bundle: rules_specification_category
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'MATERIALES PARA PUESTA A TIERRA'
+  weight:
+    -
+      value: 0
+  parent:
+    -
+      target_id: 0
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /especificaciones/materiales-para-puesta-tierra
+      langcode: en
+      pathauto: 1

@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET935 Modem transparente 4G | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/1936" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F1936.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/1936" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/1936" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '32');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET935 Modem transparente 4G</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET935</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">18/03/2022</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/1936">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F1936&amp;nodoid=1936', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="modem_transparente_gprs3g4g.html#heading_0">1. OBJETO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="modem_transparente_gprs3g4g.html#heading_1">2. NORMAS DE FABRICACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="modem_transparente_gprs3g4g.html#heading_2">3. REQUERIMIENTOS GENERALES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="modem_transparente_gprs3g4g.html#heading_3">3.1. CARACTER&#205;STICAS CONSTRUCTIVAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="modem_transparente_gprs3g4g.html#heading_4">3.2. COMUNICACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h3" href="modem_transparente_gprs3g4g.html#heading_5">3.3. CONFIGURACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h3" href="modem_transparente_gprs3g4g.html#heading_6">3.4. FUNCIONALIDADES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="modem_transparente_gprs3g4g.html#heading_7">3.5. SUPERVISI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="modem_transparente_gprs3g4g.html#heading_8">4. REQUERIMIENTOS PARTICULARES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="modem_transparente_gprs3g4g.html#heading_9">4.1. CARACTER&#205;STICAS CONSTRUCTIVAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="modem_transparente_gprs3g4g.html#heading_10">5. ACCESORIOS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="modem_transparente_gprs3g4g.html#heading_11">5.1. ANTENA</a></li>
+                    <li class="indexitem"><a class="head_h3" href="modem_transparente_gprs3g4g.html#heading_12">5.2. CABLE DE COMUNICACIONES </a></li>
+                    <li class="indexitem"><a class="head_h3" href="modem_transparente_gprs3g4g.html#heading_13">5.3. DISPLAY </a></li>
+                    <li class="indexitem"><a class="head_h2" href="modem_transparente_gprs3g4g.html#heading_14">6. SEGURIDAD</a></li>
+                    <li class="indexitem"><a class="head_h2" href="modem_transparente_gprs3g4g.html#heading_15">7. GARANT&#205;A Y REPUESTOS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="modem_transparente_gprs3g4g.html#heading_16">8. EMBALAJE PARA EL TRANSPORTE Y MARCACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="modem_transparente_gprs3g4g.html#heading_17">9. PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="modem_transparente_gprs3g4g.html#heading_18">9.1. PRUEBAS DE HOMOLOGACI&#211;N Y/O TIPO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="modem_transparente_gprs3g4g.html#heading_19">9.2. PRUEBAS DE RUTINA</a></li>
+                    <li class="indexitem"><a class="head_h3" href="modem_transparente_gprs3g4g.html#heading_20">9.3. PRUEBAS DE RECEPCI&#211;N  </a></li>
+                    <li class="indexitem"><a class="head_h2" href="modem_transparente_gprs3g4g.html#heading_21">10. NIVEL DE ACEPTACI&#211;N Y RECHAZO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="modem_transparente_gprs3g4g.html#heading_22">11. GLOSARIO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="modem_transparente_gprs3g4g.html#heading_23">12. ANEXOS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="modem_transparente_gprs3g4g.html#heading_24">ANEXO A: COMANDOS AT B&#193;SICOS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="modem_transparente_gprs3g4g.html#heading_25">ANEXO B: COMANDOS AT*Z PROPIETARIOS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="modem_transparente_gprs3g4g.html#heading_26">ANEXO C: DETALLE ETIQUETAS TRAP’S</a></li>
+                    <li class="indexitem"><a class="head_h3" href="modem_transparente_gprs3g4g.html#heading_27">ANEXO D: PLANTILLA DE DATOS T&#201;CNICOS</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1. OBJETO</h2>
+El presente documento recoge las caracter&#237;sticas t&#233;cnicas y funcionales m&#237;nimas, generales y particulares para el m&#243;dem transparente a ser utilizado para la telemedida de medidores de energ&#237;a instalados en las redes de Enel Colombia.<br />
+<h2 id="heading_1" >2. NORMAS DE FABRICACI&#211;N</h2>
+ <div style="width:900px;"><table><tr><td colspan="1" rowspan="1" style="width:110px;height:40px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:790px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">IEC 60255-27</td><td colspan="1" rowspan="1" style="">Measuring relays and protection equipment - Part 27: Product safety requirements</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">IEC 60529</td><td colspan="1" rowspan="1" style="">Degrees of protection provided by enclosures (IP Code)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">IEC 61000-4-2</td><td colspan="1" rowspan="1" style="">Electromagnetic compatibility (EMC) - Part 4-2: Testing and measurement techniques - Electrostatic discharge immunity test</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">IEC 61000-4-3</td><td colspan="1" rowspan="1" style="">Electromagnetic compatibility (EMC) - Part 4-3: Testing and measurement techniques - Radiated, radio-frequency, electromagnetic field immunity test</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">IEC 61000-4-4</td><td colspan="1" rowspan="1" style="">Electromagnetic compatibility (EMC) – Part 4-4: Testing and measurement techniques – Electrical fast transient/burst immunity test</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">IEC 61000-4-6</td><td colspan="1" rowspan="1" style="">Electromagnetic compatibility (EMC) - Part 4-6: Testing and measurement techniques - Immunity to conducted disturbances, induced by radio-frequency fields</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">IEC 61000-4-11</td><td colspan="1" rowspan="1" style="">Electromagnetic compatibility (EMC) - Part 4-11: Testing and measurement techniques - Voltage dips, short interruptions and voltage variations immunity tests</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">IEC 61000-4-12</td><td colspan="1" rowspan="1" style="">Electromagnetic Compatibility (EMC) - Part 4-12: Testing and measurement techniques - Ring wave immunity test</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">IEC 61000-6-2</td><td colspan="1" rowspan="1" style="">Electromagnetic compatibility (EMC) - Part 6-2: Generic standards - Immunity standard for industrial environments</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">NTC–ISO 2859-1</td><td colspan="1" rowspan="1" style="">Procedimientos de muestreo para inspecci&#243;n por atributos. Parte 1: Planes de muestreo determinados por el nivel aceptable de calidad -NAC- para inspecci&#243;n lote a lote.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">IEEE 802.1q</td><td colspan="1" rowspan="1" style="">IEEE Standard for Local and Metropolitan Area Networks—Bridges and Bridged Networks</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">Acuerdo CNO 1043</td><td colspan="1" rowspan="1" style="">Condiciones m&#237;nimas de seguridad e integridad para la transmisi&#243;n de las lecturas desde los medidores hacia el Centro de Gesti&#243;n de Medidas y entre este &#250;ltimo y el ASIC</td></tr></table><br /></div>Pueden emplearse otras normas internacionalmente reconocidas equivalentes o superiores a las aqu&#237; se&#241;aladas, siempre y cuando se ajusten a lo solicitado en la presente especificaci&#243;n t&#233;cnica. Las normas citadas en la presente especificaci&#243;n (o cualquier otra que llegare a ser aceptada por Enel Colombia) se refieren a su &#250;ltima revisi&#243;n.<br />
+<h2 id="heading_2" >3. REQUERIMIENTOS GENERALES</h2>
+<h3 id="heading_3" >3.1. CARACTER&#205;STICAS CONSTRUCTIVAS</h3>
+<br /><b>3.1.1. Envolvente</b><br /><br />La envolvente del m&#243;dem podr&#225; ser en aluminio o en material aislante. El grado de protecci&#243;n de la envolvente ser&#225; IP51. El material deber&#225; ser no propagador de incendios.<br /><br />El m&#243;dem dispondr&#225; de una zona adecuada para que Enel Colombia pueda colocar un sticker para precintar la tarjeta SIM.<br /><br /><b>3.1.2. M&#243;dulo de radio</b><br /><br />El componente denominado “M&#243;dulo de radio” debe cumplir con:
+<ul><li>Poseer certificaci&#243;n de producto FCC.</li>
+<li>Cumplimiento con la normativa de compatibilidad electromagn&#233;tica descrita en la IEC61000-6-2, en la que se describen las normas gen&#233;ricas en compatibilidad electromagn&#233;tica.</li>
+<li>Cumplimiento IEC 61000-4-2 clase 4, inmunidad por descargas electroest&#225;ticas</li>
+<li>Cumplimiento IEC 61000-4-3 clase 3, inmunidad campos electromagn&#233;ticos radiados.</li>
+<li>Cumplimiento IEC 61000-4-4 clase 4, inmunidad r&#225;fagas de tr&#225;nsito r&#225;pido</li>
+<li>Cumplimiento IEC 61000-4-6 clase 3, inmunidad perturbaciones inducidas</li>
+<li>Cumplimiento IEC 61000-4-11, interrupciones y rizado de la informaci&#243;n</li>
+<li>Cumplimiento IEC 61000-4-12 clase 3, inmunidad a ondas oscilatorias</li>
+<li>Cumplimiento IEC 60255-27, ensayo rigidez diel&#233;ctrica</li></ul>
+<b>3.1.3. Requisitos ambientales</b> <br /><br />El rango de temperaturas v&#225;lido de trabajo debe oscilar entre -20 &#186;C y 70 &#186;C<br /><br /><b>3.1.4. Alimentaci&#243;n</b><br /><br />Los rangos de tensiones m&#237;nimos de funcionamiento:
+<ul><li>Multirango CA: 100 VCA a 277 VCA &#177;10 % (fase-neutro), 60 Hz</li>
+<li>Consumo: &lt; 10 VA en modo operaci&#243;n y 3VA en modo suspendido.</li>
+<li>La alimentaci&#243;n deber&#225; estar protegida frente a transitorios de tensi&#243;n</li></ul>
+<b>3.1.5. Se&#241;alizaci&#243;n</b><br /><br />El equipo dispondr&#225; una vez anclado de forma visible en su frontal, se&#241;alizados con su r&#243;tulo correspondiente, los siguientes leds:<br /><br /> • <b>Power</b>: Indica la correcta alimentaci&#243;n del equipo<br /> • <b>Com</b>:  Indica puerto comunicaciones activo<br /> • <b>Net</b>: Indica la cobertura mediante led tricolor:<br />
+<ol><li>Verde: &gt; - 77 dBm (AT+CSQ &gt;18)</li>
+<li>Amarillo: &gt; &#243; = - 89 dBm, &lt; &#243; = - 77 dBm (AT+CSQ &gt; &#243; = 12 , &lt; &#243; = 18)</li>
+<li>Rojo: &lt; - 89 dBm (AT+CSQ &lt;12)</li></ol>
+<br />El equipo dispondr&#225; de una etiqueta en el frontal (donde se encuentran los leds) en la que se especificar&#225;n: 
+<ul><li>Rango de tensi&#243;n de funcionamiento.</li>
+<li>Identificaci&#243;n de cada uno de los interfaces de comunicaciones.</li>
+<li>N&#250;mero de serie</li>
+<li>N&#250;mero de contrato</li>
+<li>Nombre y logo del fabricante</li>
+<li>A&#241;o de fabricaci&#243;n</li>
+<li>Logo de la empresa: Enel Colombia (o el que Enel Colombia defina)</li></ul>
+<b>3.1.6. Interfaces del Equipo</b><br /><br />El equipo llevar&#225; implementadas tanto la salida RS-232 como la RS-485 en el mismo equipo, sin necesidad de reemplazar ning&#250;n componente.<br />	<br />El equipo no dispondr&#225; de un medio mec&#225;nico para conmutar manualmente de RS232 a RS485, esto se debe realizar de forma autom&#225;tica o de forma remota desde el Centro de Gesti&#243;n.<br /><br />Los puertos deber&#225;n estar protegidos contra descargas y sobre tensiones.<br /><br /><b>Salida RS-232</b>: El equipo (lado M&#243;dem) dispondr&#225; de un conector DB-9 o conector tipo terminal hembra para las comunicaciones seg&#250;n el standard RS-232, con el pinout siguiente:<br /><div style="width:281px;"><table><tr><td colspan="1" rowspan="1" style="width:117px;height:20px;text-align:center"><b>DB-9 Medidor</b></td><td colspan="1" rowspan="1" style="width:164px;text-align:center"><b>RS-232</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">Circuito Rx</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">Circuito Tx</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">GND</td></tr></table><br /></div><b>Salida RS-485</b>:  El equipo (lado M&#243;dem) dispondr&#225; de un conector DB-9 o conector tipo terminal hembra para las comunicaciones seg&#250;n el standard RS-485 con el pinout siguiente:<br /><div style="width:281px;"><table><tr><td colspan="1" rowspan="1" style="width:117px;height:20px;text-align:center"><b>DB-9 Medidor</b></td><td colspan="1" rowspan="1" style="width:164px;text-align:center"><b>RS-485</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">7</td><td colspan="1" rowspan="1" style="text-align:center">Rx</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">9</td><td colspan="1" rowspan="1" style="text-align:center">Tx</td></tr></table><br /></div>El equipo podr&#225; utilizar el mismo conector DB-9 o conector tipo terminal para la salida RS-232 y RS-485 o en su defecto contar&#225; con dos puertos.<br /><br /><b>3.1.7. Otros requisitos</b><br /><br />Ser&#225;n de obligado cumplimiento y requisitos indispensables los siguientes aspectos:<br />
+<ul><li>El modem debe tener una rutina de autogesti&#243;n que le permita evaluar su estado y de acuerdo a esto generar una operaci&#243;n de autoreinicio. </li></ul>
+
+<ul><li>El equipo podr&#225; ser configurado remotamente mediante mensaje de texto SMS o una sesi&#243;n SSHv2.</li></ul>
+
+<ul><li>La simcard deber&#225; ser accesible sin necesidad de abrir el equipo.</li></ul>
+
+<ul><li>El simcardholder deber&#225; ser del tipo resorte de tal manera que no se requiera de una herramienta externa para retirar la simcard.</li></ul>
+
+<ul><li>El simcardholder estar&#225; en la capacidad de recibir SIM CARD del tipo industrial o MIM card.</li></ul>
+
+<ul><li>El modem debe contar con alg&#250;n tipo de opci&#243;n de protecci&#243;n de los datos al enviar y recibir con el fin de asegurar la informaci&#243;n.</li></ul>
+
+<ul><li>El modem debe contar con conector tipo SMA hembra</li></ul>
+
+<ul><li>Debe poseer en la cubierta un elemento para la instalaci&#243;n de sellos de seguridad. </li></ul>
+
+<ul><li>Cualquier cambio de tecnolog&#237;a deber&#225; ser actualizada por parte del proveedor del sistema, sin costo alguno para Enel Colombia.</li></ul>
+
+<ul><li>El m&#243;dem debe funcionar en modo cliente/servidor para conexiones transparentes entre el Centro de Gesti&#243;n de Medida y el Medidor por el medio de cualquiera de los puertos  seriales (RS232 o RS485)</li></ul>
+<br />
+<h3 id="heading_4" >3.2. COMUNICACI&#211;N</h3>
+<br /><b>3.2.1. General 4G / 3G / 2G LTE / HSUPA / HSDPA / Redes UMTS / EDGE / GPRS</b><br /><br /><div style="width:700px;"><table><tr><td colspan="1" rowspan="1" style="width:70px;height:41px;text-align:center"><b>&#205;tem</b></td><td colspan="1" rowspan="1" style="width:230px;text-align:center"><b>Descripci&#243;n</b></td><td colspan="1" rowspan="1" style="width:400px;text-align:center"><b>Requerimiento</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>1</b></td><td colspan="2" rowspan="1" style=""><b>Especificaciones t&#233;cnicas de referencia</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">1.1</td><td colspan="1" rowspan="1" style="text-align:center">GPRS/EDGE</td><td colspan="1" rowspan="1" style="">ETSI TS 100 910 V8.20.0 (2005-11) Telecomunicaciones celulares digitales sistema (Fase 2+), transmisi&#243;n de radio y recepci&#243;n.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">1.2</td><td colspan="1" rowspan="1" style="text-align:center">UMTS/HSDPA</td><td colspan="1" rowspan="1" style="">ETSI TS 125101 V11.9.2 (2014-04) Telecomunicaciones m&#243;viles universales Sistemas (UMTS), equipo de usuario (UE) transmisi&#243;n y recepci&#243;n de radio (FDD)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">1.3</td><td colspan="1" rowspan="1" style="text-align:center">LTE</td><td colspan="1" rowspan="1" style="">ETSI TS 136101 V13.4.0 (2016-09) LTE, radio terrestre universal evolucionada Acceso (E-UTRA); Equipo de usuario (UE) transmisi&#243;n y recepci&#243;n de radio</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>2</b></td><td colspan="2" rowspan="1" style=""><b>Bandas de frecuencia</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2.1</td><td colspan="1" rowspan="1" style="text-align:center">GPRS/EDGE</td><td colspan="1" rowspan="1" style="">Banda 5 y banda 2, (850 - 1900 Mhz).</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2.2</td><td colspan="1" rowspan="1" style="text-align:center">UMTS/HSDPA</td><td colspan="1" rowspan="1" style="">Banda 5 y banda 2, (850 - 1900 Mhz).</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2.3</td><td colspan="1" rowspan="1" style="text-align:center">LTE</td><td colspan="1" rowspan="1" style="">Banda 4 (1700 y 2100 Mhz)), 7 (2600 Mhz)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>3</b></td><td colspan="2" rowspan="1" style=""><b>Clases de potencia</b></td></tr>
+<tr><td colspan="1" rowspan="2" style="height:21px;text-align:center">3.1</td><td colspan="1" rowspan="2" style="text-align:center">GPRS/EDGE</td><td colspan="1" rowspan="1" style="">Clase de potencia 4 (2W para GSM 900)</td></tr>
+<tr><td colspan="1" rowspan="1" style="">Clase de potencia 1 (1W para GSM 1800)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">3.2</td><td colspan="1" rowspan="1" style="text-align:center">UMTS/HSDPA</td><td colspan="1" rowspan="1" style="">Clase de potencia 3 (24dBm para HSPA)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">3.3</td><td colspan="1" rowspan="1" style="text-align:center">LTE</td><td colspan="1" rowspan="1" style="">Clase de potencia 3 (23 dBm for LTE)</td></tr>
+<tr><td colspan="1" rowspan="2" style="height:21px;text-align:center"><b>4</b></td><td colspan="1" rowspan="2" style="text-align:center">Medici&#243;n BER/BLER</td><td colspan="1" rowspan="1" style="">ETSI TS 100910 V8.20.0 (2005-11) - Telecomunicaciones celulares digitales sistema (Fase 2+); Transmisi&#243;n de radio y Recepci&#243;n ETSI TS 125101 V11.9.2 (2014-04) - M&#243;vil universal Sistema de telecomunicaciones (UMTS); Equipo de usuario (UE) transmisi&#243;n y recepci&#243;n de radio (FDD)</td></tr>
+<tr><td colspan="1" rowspan="1" style="">ETSI TS 136101 V13.4.0 (2016-09) - LTER; Evolucionado Universal Acceso por radio terrestre (E-UTRA); Radio de equipo de usuario (UE transmisi&#243;n y recepci&#243;n. A temperatura ambiente, @ +55&#186;C, @ -20&#186;C y durante la temperatura ciclos por un periodo de 3 horas (-20&#186;C y 55&#186;C): • Para 2G BLER no superior al 10% despu&#233;s de al menos 20 mediciones. • Para 3G BER inferior al 1% despu&#233;s de al menos 100 paquetes. Canal de medidas de referencia 12,2 Kbps. • Para rendimiento LTE = 95% del rendimiento m&#225;ximo.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>5</b></td><td colspan="1" rowspan="1" style="text-align:center">VSWR</td><td colspan="1" rowspan="1" style="">ETSI TS 100 910 V8.20.0 (2005-1) &lt; &#243; = 2,2</td></tr></table><br /></div>M&#237;nimo el equipo tendr&#225; un m&#243;dulo 4G que le permita su funcionamiento en redes 3G, 2.5G y 2G.<br /><br />El m&#243;dem debe soportar comandos AT est&#225;ndar. <br /><br />GPRS:
+<ul><li>GPRS multi-slot clase 10</li>
+<li>GPRS mobile station clase B</li>
+<li>GPRS data downlink transfer: max. 85.6 kbps</li>
+<li>GPRS data uplink transfer: max. 85.6 kbps</li></ul>
+<br />Esquemas de codificaci&#243;n: CS 1, 2, 3 y 4<br /><br />Los equipos ofertados deber&#225;n encapsular y entregar a la red la informaci&#243;n en protocolo IP transparente, con interfaz RS-232 o RS-485<br /><br />El m&#243;dem debe soporta comandos AT est&#225;ndar (adem&#225;s de los especificados en el anexo A) de acuerdo a:<br />
+<ul><li><b>ETSI TS 100 916 V7.5.0</b> (1999-12) Digital cellular telecommunications system (Phase 2+);AT command set for GSM Mobile Equipment (ME) (GSM 07.07 version 7.5.0 Release 1998)</li></ul>
+
+<ul><li><b>ETSI TS 101 356 V7.2.0</b> (2001-03) Digital cellular telecommunications system (Phase 2+); General Packet Radio Service (GPRS); Mobile Station (MS) supporting GPRS (3GPP TS 07.60 versi&#243;n 7.2.0 Release 1998)</li></ul>
+<b>3.2.2. Interfaz m&#243;dem-medidor</b><br /><br />Las comunicaciones (velocidad y formato de palabra) entre el modem y el PC se realizar&#225;n igual que entre el modem y el medidor.<br /><br />El modem debe permitir la configuraci&#243;n del baudrate de los puertos RS232 y RS485 de manera independiente.<br /><br />El modem debe permitir la configuraci&#243;n del bit de paridad de los puertos RS232 y RS485 de manera independiente. <br /><br /><b>3.2.3. Conectividad</b><br /><br />El equipo tras un power-on debe inicializar el m&#243;dulo de comunicaciones, registrarse en la red del operador, conectarse a la VPN correspondiente y autentificarse correctamente en el Radius.<br /><br />Una vez asignada la direcci&#243;n IP por el operador, el equipo debe establecer la conexi&#243;n principal como servidor / cliente seg&#250;n se haya configurado el equipo. En caso de perder la conexi&#243;n, el equipo es responsable de garantizar la conectividad del enlace, el equipo debe intentar la reconexi&#243;n de forma indefinida.<br /><br />El equipo deber&#225; de implementar rutinas de chequeo que permitan tanto de forma activa como pasiva garantizar la conectividad. Los mecanismos activos siempre deber&#225;n ser regulados por temporizadores parametrizables por configuraci&#243;n.<br /><br /><b>3.2.4. Esquema de conectividad</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/1936/3.2.4. Esquema de conectividad.jpg" src="http://likinormas.micodensa.com/media/cache/images/800x800/wikiimages/2d353231323537333839-33284-3.2.4. Esquema de conectividad.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:800px"></div></div></div><br /><br /><b>3.2.5. Protocolos de comunicaci&#243;n</b><br /><br />El equipo deber&#225; soportar como m&#237;nimo los siguientes protocolos:<br /><br />-	791 (IP) RFC 793 (TCP), RFC 768 (UDP), RFC 1006 (transporte ISO en TCP)<br /><div style="width:700px;"><table><tr><td colspan="1" rowspan="1" style="width:70px;height:41px;text-align:center"><b>&#205;tem</b></td><td colspan="1" rowspan="1" style="width:230px;text-align:center"><b>Descripci&#243;n</b></td><td colspan="1" rowspan="1" style="width:400px;text-align:center"><b>Requerimiento</b></td></tr>
+<tr><td colspan="1" rowspan="6" style="height:21px;">1</td><td colspan="1" rowspan="6" style="">Protocolos TCP/IP</td><td colspan="1" rowspan="1" style="">- IPv4; IPv6</td></tr>
+<tr><td colspan="1" rowspan="1" style="">- IPSEC, TLS 1.2 y 1.3</td></tr>
+<tr><td colspan="1" rowspan="1" style="">- GRE</td></tr>
+<tr><td colspan="1" rowspan="1" style="">- ICMP</td></tr>
+<tr><td colspan="1" rowspan="1" style="">- ARP</td></tr>
+<tr><td colspan="1" rowspan="1" style="">- NTP</td></tr>
+<tr><td colspan="1" rowspan="6" style="height:21px;">2</td><td colspan="1" rowspan="6" style="">Protocolos de enrutamiento y est&#225;ndares de red</td><td colspan="1" rowspan="1" style="">- Enrutamiento est&#225;tico</td></tr>
+<tr><td colspan="1" rowspan="1" style="">- RIPV1, RIPV2</td></tr>
+<tr><td colspan="1" rowspan="1" style="">- Sistema de nombres de dominio (DNS)</td></tr>
+<tr><td colspan="1" rowspan="1" style="">- Traducci&#243;n de direcciones de puertos y redes (NAT / NAPT)</td></tr>
+<tr><td colspan="1" rowspan="1" style="">- Reenv&#237;o de puertos</td></tr>
+<tr><td colspan="1" rowspan="1" style="">- VLAN (802.1q)</td></tr></table><br /></div><h3 id="heading_5" >3.3. CONFIGURACI&#211;N</h3>
+<br />Configuraci&#243;n de f&#225;brica:<br /><br />• El equipo podr&#225; llevar de f&#225;brica una configuraci&#243;n “Enel Colombia” que permita facilitar los mecanismos de autoconfiguraci&#243;n.<br /><br />• Debe ser posible volver a la configuraci&#243;n “Enel Colombia” cuantas veces sea necesarios por uno de estos procedimientos:
+<ol><li>Un conector “jumper”</li>
+<li>Env&#237;o de un comando AT &#250;nico “AT&amp;F”</li>
+<li>Configuraci&#243;n mediante p&#225;gina web</li></ol>
+<br />
+<h3 id="heading_6" >3.4. FUNCIONALIDADES</h3>
+<br />• El m&#243;dem debe proporcionar transporte TCP/IP transparente para las tramas de datos desde/hacia el puerto serie del terminal serie local, siempre y cuando exista sesi&#243;n de datos activa (socket n&#186;1).<br /><br />• Actualizaci&#243;n remota del firmware, a trav&#233;s de llamadas a trav&#233;s de la red celular a trav&#233;s de un socket TCP.<br /><br />• Funci&#243;n esp&#237;a del tr&#225;fico del m&#243;dem.<br /><br />• An&#225;lisis y diagn&#243;stico del estado de los puertos.<br /><br />• Mecanismos de Watchdog: Supervisi&#243;n de los elementos cr&#237;ticos del sistema y autochequeo de los mismos, incluyendo el chequeo de conexiones serie (sockets).
+<ul><li>Programar un reset de software desde microcontrolador configurable en tiempo.</li>
+<li>Programar un reset software para cuando se ha perdido la comunicaci&#243;n.</li></ul>
+<br />• Debe permitirse ciertas acciones sobre los socket de conexi&#243;n TCP como:
+<ul><li>Iniciar un socket determinado.</li>
+<li>Cerrar un cierto socket.</li>
+<li>Indicar el estado del m&#243;dem, indicando si existe contexto actual activo, direcci&#243;n IP y estado de los socket.</li></ul>
+<br />• Gesti&#243;n de la informaci&#243;n a trav&#233;s del software que Enel Colombia defina<br /><br />• Posibilidad de ser programado y actualizado en terreno o de forma remota, y en la eventualidad que el equipo se bloquee no se requiera ir al sitio a desbloquearlo. <br /><br />• Posibilidad de gestionar varias marcas de medidores de energ&#237;a tales como: Actaris, Elster, Landis&amp;Gyr, Elgama, EMH, Itron, Wasion, Microstar, entre otros.<br /><br />
+<h3 id="heading_7" >3.5. SUPERVISI&#211;N</h3>
+<br />Los terminales deber&#225;n integrarse en la plataforma de supervisi&#243;n y gesti&#243;n del operador. Por tanto ser&#237;a necesario que el Terminal implemente los comandos propietarios AT*Z o similares, que permitir&#225;n la gesti&#243;n remota del equipo y el envi&#243; de traps SNMP no confirmados para la integraci&#243;n en la supervisi&#243;n.<br /><br />De esta forma se podr&#225; soportar m&#233;todos autom&#225;ticos de puesta en servicio:
+<ul><li>M&#243;dulo de Descubrimiento: que permita ubicar los equipos en funci&#243;n de los datos de la celdat y LAC.</li>
+<li>Descubrimiento autom&#225;tico de la direcci&#243;n IP.</li>
+<li>Informaci&#243;n sobre tecnolog&#237;a de cobertura en la sesi&#243;n.</li>
+<li>Soporte de TimeStamping en comandos de gesti&#243;n.</li>
+<li>Sistema de Eventos mediante env&#237;o de traps.</li>
+<li>Soporte de Telecarga de software y configuraci&#243;n.</li></ul>
+
+<h2 id="heading_8" >4. REQUERIMIENTOS PARTICULARES</h2>
+
+<h3 id="heading_9" >4.1. CARACTER&#205;STICAS CONSTRUCTIVAS</h3>
+<br />Las dimensiones m&#225;ximas deben ser:
+<ul><li>Ancho:        80 mm</li>
+<li>Alto:         100 mm</li>
+<li>Profundidad:	40 mm</li></ul>
+Estas dimensiones incluyen los puntos de fijaci&#243;n.<br /><br />Sera factor de m&#233;rito y se valorar&#225; que el equipo tenga las menores dimensiones posibles.<br /><br />El m&#243;dem se podr&#225; fijar en riel DIN, o como se fijan los medidores de energ&#237;a sobre los armarios, cajas o celdas.<br /><br />
+<h2 id="heading_10" >5. ACCESORIOS</h2>
+El valor unitario ofertado deber&#225; incluir los siguientes accesorios.<br />
+<h3 id="heading_11" >5.1. ANTENA</h3>
+<br />La antena tendr&#225; las siguientes caracter&#237;sticas:
+<ul><li>Tipo: L&#225;tigo de base magn&#233;tica</li>
+<li>Conector: SMA macho</li>
+<li>Longitud cable: 1.8m</li>
+<li>Ganancia: 5Dbi</li></ul>
+
+<h3 id="heading_12" >5.2. CABLE DE COMUNICACIONES </h3>
+<br />El cable de comunicaciones tendr&#225; las siguientes caracter&#237;sticas:<br /><br />- Terminal DB-9 macho con el pinout para RS-485 y RS-232 indicado en el &#237;tem 3.1.6<br /><br />- En el otro extremo:
+<ul><li>Para comunicaci&#243;n RS-232 los siguientes terminales:</li></ul>
+
+<ol><li>RJ-11</li>
+<li>RJ-45</li>
+<li>DB-9 hembra</li></ol>
+
+<ul><li>Para comunicaci&#243;n RS-485 sin terminal, con cables seg&#250;n el pinout indicado en el &#237;tem 3.1.6.</li></ul>
+<br />Cable de 40 cm de terminal de entrada a terminal de salida, con la disposici&#243;n indicada en la siguiente imagen:<br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/1936/0-Cable de comunicaciones.jpg" src="http://likinormas.micodensa.com/media/cache/images/600x900/wikiimages/363134323238393737-44587-0-Cable de comunicaciones.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:600px"></div></div></div><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/1936/Diagrama conexión.JPG" src="../../media/cache/images/900x1200/wikiimages/31393837393432323137-48023-Diagrama&#32;conexión.JPG" title=""  /></div><div class="texto_imagen_articulos" style="max-width:900px"></div></div></div><br />
+<h3 id="heading_13" >5.3. DISPLAY </h3>
+<br />El modem debe incluir un display ubicado en la parte frontal, con las siguientes caracter&#237;sticas <br />•	Dimensiones m&#237;nimas:
+<ul><li>Display PMOLED 1.33&quot; </li></ul>
+•	Rango temperatura de operaci&#243;n -40&#176;C~85&#176;C<br />•	Contraste 10000:1 (diez mil a uno)<br />•	Par&#225;metros a visualizar
+<ul><li>Calidad de la se&#241;al expresada en dBm y de manera gr&#225;fica en barras</li>
+<li>Tecnolog&#237;a de red a la que se registr&#243; el m&#243;dem (2G,3G &#243; 4G)</li>
+<li>Apn configurado</li>
+<li>Puerto TCP configurado</li>
+<li>IP registrada en la sesi&#243;n</li>
+<li>Paridad de puerto configurado</li>
+<li>Puerto configurado (232 &#243; 485)</li>
+<li>Estado de las salidas</li>
+<li>Llamada en curso</li>
+<li>Espera de llamada</li></ul>
+
+<h2 id="heading_14" >6. SEGURIDAD</h2>
+<br />El modem debe cumplir como m&#237;nimo con lo siguiente:
+<ul><li>Contrase&#241;a de cifrado.</li>
+<li>No se debe poder interrumpir la secuencia de inicio del enrutador (inicio ininterrumpido).</li>
+<li>Autenticaci&#243;n CHAP en WAN m&#243;vil.</li>
+<li>Autenticaci&#243;n y contabilidad RADIUS / TACACS para local / remoto conexi&#243;n al dispositivo.</li>
+<li>Gesti&#243;n segura de los procedimientos de autenticaci&#243;n locales.</li>
+<li>Lista de acceso L2 / L3 / L4 para asegurar el acceso solo a usuarios autorizados.</li>
+<li>Cortafuegos con estado.</li>
+<li>Gesti&#243;n de interfaces Ethernet seg&#250;n est&#225;ndar IEEE 802.1q.</li>
+<li>Habilitar y deshabilitar servicios innecesarios u obsoletos (por ejemplo, Telnet, tftp, rlogin, talk-server….) a trav&#233;s del archivo de configuraci&#243;n.</li>
+<li>Deshabilitar los servicios de red cuando no est&#225;n en uso (por ejemplo, DNS, DHCP, transmisi&#243;n directa, enrutamiento de origen ...) a trav&#233;s del archivo de configuraci&#243;n.</li>
+<li>Acceso de seguridad multinivel; SSHv2, HTTPS; sFTP; SNMPv3; Servicio de marca de tiempo; Servidor DHCP / cliente DNS; Configuraci&#243;n de la direcci&#243;n IP para la gesti&#243;n (por ejemplo, cliente RADIUS) Funcionalidad de actualizaci&#243;n de firmware mediante script remoto de los eventos (log) Registro de eventos.</li>
+<li>Deber&#225; contar mecanismo que asegure la confidencialidad, integridad y no repudio de la informaci&#243;n por medio de cefrado sobre cualquier tipo canal o protocolo de comunicaci&#243;n, mediante   VPN IPSEC.</li></ul>
+
+<h2 id="heading_15" >7. GARANT&#205;A Y REPUESTOS</h2>
+<br />La garant&#237;a m&#237;nima debe ser de 5 a&#241;os.<br /><br />Ante un proceso de garant&#237;a el proveedor debe asumir todos los costos asociados a esta. Al ser devuelto alg&#250;n equipo por garant&#237;a, el proveedor lo debe reemplazar a m&#225;s tardar en 15 d&#237;as calendario.<br /><br />Los equipos devueltos por garant&#237;a el proveedor los debe recoger y entregar su reemplazo en bodegas Enel Colombia en la Ciudad de Bogot&#225;, Enel Colombia indicar&#225; al proveedor la ubicaci&#243;n de la bodega cuando se genere la primera devoluci&#243;n.<br /><br />El proveedor debe tener en stock m&#237;nimo el 5% de la cantidad de equipos de la Orden de Compra, con el fin de reponer por garant&#237;a los equipos que presente alguna falla.<br />Si un equipo falla tres veces en un mismo a&#241;o calendario, el proveedor debe cambiar el equipo por uno nuevo, similar o de mayores caracter&#237;sticas, en 15 d&#237;as calendario.<br /><br />El proveedor debe garantizar el suministro de accesorios por garant&#237;a o para cuando est&#233;n fuera de garant&#237;a o su da&#241;o no sea atribuible a la calidad de estos. <br /><br />
+<h2 id="heading_16" >8. EMBALAJE PARA EL TRANSPORTE Y MARCACI&#211;N</h2> <br />Los modem y sus accesorios deben ser embalados para su transporte mar&#237;timo, a&#233;reo o terrestre seg&#250;n corresponda, y adecuado para evitar da&#241;os (golpes, corrosi&#243;n, absorci&#243;n de humedad, etc.).<br /><br />Los embalajes deben soportar las operaciones normales de carga, descarga, y el eventual apilamiento. <br /><br />Se aceptar&#225; otro tipo de embalaje, siempre y cuando sea superior a las condiciones descritas anteriormente.<br /><br />Todas las cajas deber&#225;n llevar los detalles necesarios de identificaci&#243;n y manipulaci&#243;n, en forma clara e indeleble, detallando el contenido de cada caja, m&#237;nimo con la siguiente informaci&#243;n para cada m&#243;dem:
+<ul><li>N&#250;mero de serie</li>
+<li>N&#250;mero de contrato</li>
+<li>Fecha de fabricaci&#243;n</li>
+<li>C&#243;digo de barras</li></ul>
+
+<h2 id="heading_17" >9. PRUEBAS</h2>
+<br />
+<h3 id="heading_18" >9.1. PRUEBAS DE HOMOLOGACI&#211;N Y/O TIPO</h3>
+<ul><li>Grados de protecci&#243;n dado por encerramiento de equipo el&#233;ctrico [Grado IP 51]  IEC 60529</li>
+<li>Ensayo de rigidez diel&#233;ctrica cumplimiento IEC 60255-27</li>
+<li>Verificaci&#243;n de la certificaci&#243;n FCC y requisitos del numeral 3.1.2.</li>
+<li>Validaci&#243;n y aceptaci&#243;n de modelo sobre prototipo antes de fabricaci&#243;n masiva.</li></ul>
+<br />
+<h3 id="heading_19" >9.2. PRUEBAS DE RUTINA</h3>
+<br />El proveedor deber&#225; verificar mediante protocolos de chequeo, la realizaci&#243;n de pruebas de rutina para cada lote fabricado, mediante muestreo acorde al plan de inspecci&#243;n definido en su plan calidad y las cuales deben garantizar la funcionalidad del equipo y su correcta terminaci&#243;n respecto a ensamble, accesorios, embalaje, etc.<br />
+<h3 id="heading_20" >9.3. PRUEBAS DE RECEPCI&#211;N  </h3>
+<br />Las pruebas de recepci&#243;n se realizar&#225;n mediante la instalaci&#243;n de los equipos en condiciones de funcionamiento normal y la validaci&#243;n de las diferentes funcionalidades desde el centro de monitoreo de la compa&#241;&#237;a.<br /><br />Las pruebas a realizar son:<br /><br /><b>9.3.1. Inspecci&#243;n visual/dimensional</b><br /><br />La verificaci&#243;n de las dimensiones se har&#225; con base en:<br />
+<ul><li>Dimensiones indicadas en la presente especificaci&#243;n.</li>
+<li>Planos entregados por el fabricante y aprobados por Enel Colombia.</li></ul>
+<br />Sobre el acabado se verificar&#225;n:<br />a.	Las marcaciones descritas en el numeral 3.1.5.<br />b.	La buena terminaci&#243;n de todos los elementos, incluyendo los accesorios Cap. 5.<br />c.	La ausencia de grietas, sopladuras, poros, exfoliaduras, ampolladuras, raspaduras u otros defectos.<br /><br /><b>9.3.2. Pruebas de funcionalidad</b><br /><br />Se debe validar lo siguiente:<br />a. Funcionamiento con rangos de tensi&#243;n garantizado<br />b. Comunicaci&#243;n entre el concentrador o medidor y el centro de monitoreo<br />c. Se&#241;alizaciones indicadas en el numeral 3.1.5.<br />d. Caracter&#237;sticas seg&#250;n numerales 3.1.7, 3.3, 3.4, 3.5 y cap. 6<br /><br /><b>9.3.3. Prueba de hermeticidad (C&#243;digo IP)</b><br /><br />El &#237;ndice de hermeticidad ser&#225; IP 51, este grado de protecci&#243;n se verificar&#225; de acuerdo a la norma NTC-IEC 60529. Se realizar&#225; la prueba &#250;nicamente a una unidad sobre la primera entrega.<br /><br />
+<h2 id="heading_21" >10. NIVEL DE ACEPTACI&#211;N Y RECHAZO</h2>
+El muestreo y criterios de aceptaci&#243;n/rechazo se presenta en la tabla 1.<br /><br /><b>TABLA 1.</b> <b>PLAN DE MUESTREO NIVEL DE INSPECCI&#211;N ESPECIAL S-3, NAC = 1,5%</b><br /> <b>(NORMA NTC-ISO 2859-1)</b><br /><div style="width:800px;"><table><tr><td colspan="1" rowspan="1" style="width:200px;height:41px;text-align:center"><b>TAMA&#209;O DEL LOTE</b></td><td colspan="1" rowspan="1" style="width:200px;text-align:center"><b>TAMA&#209;O DE LA MUESTRA</b></td><td colspan="1" rowspan="1" style="width:200px;text-align:center"><b>NUMERO PERMITIDO DE DEFECTUOSOS</b></td><td colspan="1" rowspan="1" style="width:200px;text-align:center"><b>NUMERO DEFECTUOSOS PARA RECHAZO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2 a 50</td><td colspan="1" rowspan="1" style="text-align:center">A=2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">51 a 90</td><td colspan="1" rowspan="1" style="text-align:center">C=5</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">91 a 150</td><td colspan="1" rowspan="1" style="text-align:center">C=5</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">151 a 280</td><td colspan="1" rowspan="1" style="text-align:center">D=8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">281 a 500</td><td colspan="1" rowspan="1" style="text-align:center">D=8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">501 a 1200</td><td colspan="1" rowspan="1" style="text-align:center">E=13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">1201 a 3200</td><td colspan="1" rowspan="1" style="text-align:center">E=13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">3201 a 10000</td><td colspan="1" rowspan="1" style="text-align:center">F=20</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr></table><br /></div>
+<h2 id="heading_22" >11. GLOSARIO</h2>
+<b>DCE:</b> 	Equipo de comunicaci&#243;n de datos (equipo)<br /><b>DTE:</b> 	Equipo de terminaci&#243;n de datos (registrador de medida)<br /><b>RTC:</b> 	Red telef&#243;nica conmutada<br /><b>SNMP:</b> Simple Network Management Protocol<br /><b>GPRS:</b> General Packet Radio Service<br /><b>GSM:</b> 	Global System for Mobile communications<br />
+<h2 id="heading_23" >12. ANEXOS</h2>
+
+<h3 id="heading_24" >ANEXO A: COMANDOS AT B&#193;SICOS</h3>
+<b>AT+IPR=&lt;valor&gt;:</b> configura la velocidad del puerto (2400, 4800, 1200, 9600, 115200, 19200..).<br /><br /><b>AT+IFC=&lt;valor&gt;,&lt;valor&gt;:</b> control de flujo del puerto serie.<br />0,0: sin control de flujo<br />1,1: control de flujo sw.<br />2,2: control de flujo hw.<br /><br /><b>AT+ICF=&lt;conf&gt;,&lt;paridad&gt;:</b> configuraci&#243;n del puerto serie.<br />3,4: 8N1<br />2,0: 8O1<br />2,1: 8E1<br /><br /><b>AT+CSQ:</b> Obtiene el valor de cobertura del equipo<br />
+<h3 id="heading_25" >ANEXO B: COMANDOS AT*Z PROPIETARIOS</h3>
+La implementaci&#243;n de estos comandos, o comandos similares es necesaria para su integraci&#243;n en la plataforma de gesti&#243;n del operador.<br /><br />AT*Z6=? _ help, posibles valores.<br />AT*Z6=0 _ Modificar valor.<br />AT*Z6? _ Consultar su valor.<br /><br />Los par&#225;metros AT*Z no requieren de comando de grabaci&#243;n para salvar el contenido.<br /><br /><b>Conexi&#243;n GPRS</b><br /><br /><b><span class="codeInline">*</span>Z1=”&lt;apn&gt;”:</b> APN del operador (M&#225;ximo 19 car&#225;cteres).<br /><b><span class="codeInline">*</span>Z2=”&lt;user&gt;”:</b> Nombre de usuario asociado al APN (M&#225;ximo 19 car&#225;cteres).<br /><b><span class="codeInline">*</span>Z3=”&lt;pass&gt;”:</b> Password asociado al usuario del APN (M&#225;ximo 19 car&#225;cteres).<br /><br /><b>Identificaci&#243;n</b><br /><b><span class="codeInline">*</span>Z4=”&lt;id&gt;”:</b> Cadena de caracteres que identifica al m&#243;dem (M&#225;ximo 12 car&#225;cteres).<br /><br /><b>Gen&#233;ricos</b><br /><br /><b><span class="codeInline">*</span>Z5=&lt;time&gt;:</b> Este registro contiene el valor del tiempo, en milisegundos, que esperar&#225; el terminal para recibir datos y completar las tramas. Valores comprendidos entre 0 (no se realiza espera) y 32.760ms.<br /><br /><b><span class="codeInline">*</span>Z6=&lt;valor&gt;:</b> El valor asignado a este registro indica si este debe enviar si direcci&#243;n IP, junto con su nombre (<b>Z4) a un determinado servidor, definido por su direcci&#243;n IP (</b>Z11).<br /><br />0: No notifica la direcci&#243;n IP<br />1: Notificador a servidor (*Z11) sin confirmaci&#243;n y socket 1 pasivo<br />2: Notificaci&#243;n a servidor (*Z11) con confirmaci&#243;n ACK y socket 1 pasivo<br />3: No se notifica la direcci&#243;n IP asignada por la red y socket 1 activo.<br /><br /><b><span class="codeInline">*</span>Z7=&lt;time&gt;:</b> Este registro debe determinar el tiempo de inactividad (en segundos) que el equipo esperar&#225; antes de dar por concluida la conexi&#243;n TCP/UDP. Valores comprendidos entre 0 y 32.760s.<br /><br /><b><span class="codeInline">*</span>Z8=&lt;time&gt;:</b> Con este se determinar&#225; el tiempo en minutos al cabo del cual, una vez se detecta un evento cr&#237;tico, el equipo se reinicia. Valores comprendidos entre 0 y 120min.Los eventos cr&#237;ticos pueden ser:<br /><br />- No lograr activar un contexto, no obtiene direcci&#243;n IP.<br />- No lograr abrir el socket activo.<br />- Ha notificado su nombre y direcci&#243;n IP a un servidor, pero no ha recibido ACK en el tiempo definido <br /><br /><b><span class="codeInline">*</span>Z9=&lt;time&gt;:</b> Timeout de inactividad para llamadas GSM. Valores comprendidos entre 0 y 32760 sg.<br /><br /><b><span class="codeInline">*</span>Z140=”&lt;string&gt;”:</b> Con este comando se podr&#225; consultar y conmutar entre RS232 y RS485.<br /><br />”RS232”: El m&#243;dem quedar&#225; configurado en RS232<br />“RS485”: El m&#243;dem quedar&#225; configurado en RS485<br /><br /><b><span class="codeInline">*</span>ZKEEPALIVE=”&lt;IP&gt;”,&lt;time&gt;,&lt;n_ping&gt;,”&lt;action&gt;”</b><br /><br />Env&#237;a pings a la direcci&#243;n IP especificada. Un 0 en time o en n&#250;mero de paquetes deshabilita la funci&#243;n keepalive.<br /><br />Time: 0-60 minutos<br />N_ping: 0-10 paquetes<br />Action:<br />“NONE” sin acci&#243;n.<br />“REBOOT” reinicia el dispositivo<br />“RECONNECT” restablece el contexto.<br /><br /><b><span class="codeInline">*</span>ZRESET:</b> reset software del m&#243;dem.<br /><b><span class="codeInline">*</span>ZSTAT:</b> informa del estado del m&#243;dem.<br /><b><span class="codeInline">*</span>Z:</b> muestra la configuraci&#243;n de los registros *Z.<br /><b><span class="codeInline">*</span>ZEXIT:</b> cierra la sesi&#243;n de configuraci&#243;n remota.<br /><b><span class="codeInline">*</span>ZSERIAL:</b> Este comando devuelve la informaci&#243;n del n&#250;mero de serie del m&#243;dem.<br /><br /><b><span class="codeInline">*</span>ZOPEN=&lt;n_socket&gt;:</b> Inicia el socket indicado como par&#225;metro.<br />N_socket:<br />1 socket1<br />2 socket2<br />3 socket3<br />4 socket4<br />5 socket5<br /><br /><b><span class="codeInline">*</span>ZCLOSE=&lt;n_socket&gt;:</b> Finaliza el socket indicado como par&#225;metro.<br />N_socket: 	<br />1 socket1<br />2 socket2<br />3 socket3<br />4 socket4<br />5 socket5<br /><br /><b>Socket 1: Conexi&#243;n de datos</b><br /><br /><b><span class="codeInline">*</span>Z17=&lt;valor&gt;:</b> Comportamiento del socket.<br />0 configurado como servidor.<br />1 configurado como cliente.<br /><br /><b><span class="codeInline">*</span>Z10=&lt;valor&gt;:</b> Si “*Z17=1” indica el n&#250;mero de puerto sobre la que se establecer&#225; la conexi&#243;n. El n&#250;mero de puerto puede variar entre 1 -65535.<br /><br /><b><span class="codeInline">*</span>Z11=”&lt;ip&gt;”:</b> Si “*Z17=1” indica la direcci&#243;n IP del servidor sobre la que se establecer&#225; la conexi&#243;n.<br /><br /><b><span class="codeInline">*</span>Z12=”&lt;ip_msk&gt;”:</b> Si “*Z17=1” contiene la m&#225;scara que limitar&#225; las direcciones IP que pueden establecer una conexi&#243;n con el equipo.<br /><br /><b><span class="codeInline">*</span>Z13=&lt;value&gt;:</b> tipo de protocolo para las conexiones.<br />0 Conexi&#243;n tipo TCP<br />1 Conexi&#243;n tipo UDP<br /><br /><b><span class="codeInline">*</span>Z14=&lt;value&gt;:</b> Si “*Z17=0” contiene el puerto Determina el puerto al es quedar&#225; a la escucha de peticiones de conexiones TCP/UDP. El n&#250;mero de puerto puede variar entre 1 - 65535.<br /><br /><b><span class="codeInline">*</span>Z15=&lt;value&gt;:</b> N&#250;mero de reintentos de conexi&#243;n. Indica el n&#250;mero de reintentos que se desean realizar mientras no se consiga establecer la comunicaci&#243;n. Valores comprendidos entre 0 y 10.<br /><br /><b><span class="codeInline">*</span>Z16=&lt;value&gt;:</b> Tiempo entre reintentos de conexi&#243;n. Valores comprendidos entre 3 y 500sg.<br /><br /><b><span class="codeInline">*</span>Z18=&lt;value&gt;:</b> En este se determina si al realizar el encapsulado/desencapsulado TCP/UDP, interpreta el protocolo 101/102 con objeto de interpretar las tramas 101/102 adecuadamente o realizar la misma en base al timeout definido en el registro *Z5.<br />0: No contempla 101/102<br />1: Contempla los protocolos 101/102<br /><br /><b>Socket 2: Conexi&#243;n para la configuraci&#243;n remota</b><br /><br /><b><span class="codeInline">*</span>Z22=”&lt;ip_msk&gt;”:</b> Contiene la mascara que limitar&#225; las direcciones IP que pueden establecer una conexi&#243;n con el equipo.<br /><br /><b><span class="codeInline">*</span>Z24=&lt;valor&gt;:</b> Puerto de escucha. El n&#250;mero de puerto puede variar entre 1 -65535.<br /><br /><b>Socket 3: Conexi&#243;n Socket Esp&#237;a COM</b><br /><br /><b><span class="codeInline">*</span>Z32=”&lt;ip_msk&gt;”:</b> Contiene la mascara que limitar&#225; las direcciones IP que pueden establecer una conexi&#243;n con el equipo.<br /><br /><b><span class="codeInline">*</span>Z34=”valor”:</b> Puerto de escucha. El n&#250;mero de puerto puede variar entre 1 -65535.<br /><br /><b>Socket 4: Conexi&#243;n Socket Esp&#237;a o puerto socket de servicio.</b><br /><br /><b><span class="codeInline">*</span>Z42=”&lt;ip_msk&gt;”:</b> Contiene la mascara que limitar&#225; las direcciones IP que pueden establecer una conexi&#243;n con el equipo.<br />	<br /><b><span class="codeInline">*</span>Z44=&lt;valor&gt;:</b> Puerto de escucha. El n&#250;mero de puerto puede variar entre 1 - 65535.<br /><br /><b>Socket 5</b><br /><br /><b><span class="codeInline">*</span>Z50=&lt;valor&gt;:</b> contiene el n&#250;mero de puerto sobre la que se establecer&#225; la conexi&#243;n. El n&#250;mero de puerto puede variar entre 1 -65535.<br /><br /><b><span class="codeInline">*</span>Z51=”&lt;ip&gt;”:</b> contiene la direcci&#243;n IP del servidor sobre la que se establecer&#225; la conexi&#243;n.<br /><br /><b><span class="codeInline">*</span>Z55=&lt;valor&gt;:</b> N&#250;mero de reintentos de conexi&#243;n. Indica el n&#250;mero de reintentos que se desean realizar mientras no se consiga establecer la comunicaci&#243;n. Valores comprendidos entre 0 y 10. Tiempo entre reintentos controlado por *Z16.<br /><br /><b>Traps</b><br /><br /><b><span class="codeInline">*</span>ZSNMPIP=”&lt;ip&gt;”:</b> host de gesti&#243;n SNMP.<br /><b><span class="codeInline">*</span>ZSNMPPORT=&lt;valor&gt;:</b> puerto de gesti&#243;n SNMP<br /><b><span class="codeInline">*</span>ZGROUP=”&lt;valor&gt;”:</b> identificaci&#243;n del grupo utilizado en el trap de registro.<br /><b><span class="codeInline">*</span>ZCLT=&lt;min,max&gt;:</b> Umbral de cobertura. Valores entre 0 y 20.<br />=&lt;min,max&gt;<br />Min: fija el nivel de cobertura por debajo del cual el equipo notificara cobertura baja.<br />Max: fija el nivel de cobertura por encima del cual el equipo notificara cobertura normal.<br /><br /><b>Actualizaci&#243;n de sofware</b><br /><b><span class="codeInline">*</span>ZDWL:</b> actualizaci&#243;n software por FTP.<br />
+<h3 id="heading_26" >ANEXO C: DETALLE ETIQUETAS TRAP’S</h3>
+<br />Formato etiquetas trap’s.<br /><br /><b>Nombre gprINICIO_REGISTRO</b><br />Descripci&#243;n Se env&#237;a cada vez que arranca el modem<br />Enterprise X.X.X.X.X.X.XXXXX<br />Generic 6<br />Specific 101<br /><br />Argumentos 			<br />IMSI Octetstring(0..32)<br />IP NetworkAddress<br />Nombre Octetstring(0..32)<br />LAC Octetstring(0..32)<br />Celda Octetstring(0..32)<br />Grupo Octetstring(0..32)<br /><br />Severidad<br />Mensaje Equipo $1 solicitando registro<br />Acci&#243;n<br />Popup<br /><br /><b>Nombre gprCOBERTURA_BAJANombre</b> <br />Descripci&#243;n 	El equipo informa de que la cobertura est&#225; por debajo de un umbral<br />Enterprise  X.X.X.X.X.X.XXXXX<br />Generic 6<br />Specific 121<br /><br />Argumentos Umbral m&#225;ximo Integer<br /><br />Severidad<br />Mensaje Equipo $A tiene cobertura inferior al umbral $1<br />Mensaje Si par&#225;metros no siguen un patr&#243;n: EQUIPO $1 REGISTRADO<br />Acci&#243;n<br />Popup<br /><br /><br /><b>Nombre gprCOBERTURA_NORMAL</b><br />Descripci&#243;n 	El equipo informa de que la cobertura se ha restaurado por encima de un umbral<br />Enterprise X.X.X.X.X.X.XXXXX<br />Generic 6<br />Specific 122<br />Argumentos Umbral m&#237;nimo Integer<br />Severidad<br />Mensaje Equipo $A tiene cobertura superior al umbral $1<br />Mensaje Si par&#225;metros no siguen un patr&#243;n: EQUIPO $1 REGISTRADO<br />Acci&#243;n<br />Popup<br />
+<h3 id="heading_27" >ANEXO D: PLANTILLA DE DATOS T&#201;CNICOS</h3><div style="width:900px;"><table><tr><td colspan="1" rowspan="1" style="width:70px;height:41px;text-align:center"><b>&#205;tem</b></td><td colspan="3" rowspan="1" style="width:497px;text-align:center"><b>Datos</b></td><td colspan="1" rowspan="1" style="width:65px;text-align:center"><b>Unidad</b></td><td colspan="1" rowspan="1" style="width:138px;text-align:center"><b>Solicitado</b></td><td colspan="1" rowspan="1" style="width:60px;text-align:center"><b>Ofertado</b></td><td colspan="1" rowspan="1" style="width:70px;text-align:center"><b>Cumple (SI/NO)</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>1</b></td><td colspan="7" rowspan="1" style=""><b>Envolvente</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">1,1</td><td colspan="3" rowspan="1" style="">Material</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Aluminio o material aislante</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">1,2</td><td colspan="3" rowspan="1" style="">Grado de protecci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">IP 51</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">1,3</td><td colspan="3" rowspan="1" style="">Material no propagador de inc&#234;ndios</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">1,4</td><td colspan="3" rowspan="1" style="">Zona para precintar la tarjeta SIM</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>2</b></td><td colspan="7" rowspan="1" style=""><b>M&#243;dulo de radio</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2,1</td><td colspan="3" rowspan="1" style="">Certificado de producto FCC</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2,2</td><td colspan="3" rowspan="1" style="">Cumplimiento con la normativa de compatibilidad electromagn&#233;tica descrita en la IEC 61000-6-2</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2,3</td><td colspan="3" rowspan="1" style="">Cumplimiento IEC61000-4-2 clase 4, inmunidad por descargas electroest&#225;ticas</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2,4</td><td colspan="3" rowspan="1" style="">Cumplimiento IEC61000-4-3 clase 3, inmunidad campos electromagn&#233;ticos radiados.</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2,5</td><td colspan="3" rowspan="1" style="">Cumplimiento IEC61000-4-4 clase 4, inmunidad r&#225;fagas de tr&#225;nsito r&#225;pido</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2,6</td><td colspan="3" rowspan="1" style="">Cumplimiento IEC61000-4-6 clase 3, inmunidad perturbaciones inducidas</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2,7</td><td colspan="3" rowspan="1" style="">Cumplimiento IEC61000-4-11, interrupciones y rizado de la informaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2,8</td><td colspan="3" rowspan="1" style="">Cumplimiento IEC61000-4-12 clase 3, inmunidad a ondas oscilatorias</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2,9</td><td colspan="3" rowspan="1" style="">Cumplimiento IEC60255-27, ensayo rigidez diel&#233;ctrica</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>3</b></td><td colspan="7" rowspan="1" style=""><b>Requisitos ambientales </b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">3,1</td><td colspan="3" rowspan="1" style="">Rango de temperaturas v&#225;lido de trabajo debe oscilar entre</td><td colspan="1" rowspan="1" style="text-align:center">&#186;C</td><td colspan="1" rowspan="1" style="">-20  y 70 </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>4</b></td><td colspan="7" rowspan="1" style=""><b>Alimentaci&#243;n</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">4,1</td><td colspan="3" rowspan="1" style="">Multirango en tensi&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">VCA</td><td colspan="1" rowspan="1" style="">100  a 277 Fase- Neutro</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">4,2</td><td colspan="3" rowspan="1" style="">Frecuencia</td><td colspan="1" rowspan="1" style="text-align:center">Hz</td><td colspan="1" rowspan="1" style="">60</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">4,3</td><td colspan="3" rowspan="1" style="">Consumo m&#225;ximo</td><td colspan="1" rowspan="1" style="text-align:center">W</td><td colspan="1" rowspan="1" style="">10  en operaci&#243;n y 3 suspendido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">4,4</td><td colspan="3" rowspan="1" style="">Protecci&#243;n frente a transitorios de tensi&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>5</b></td><td colspan="7" rowspan="1" style=""><b>Se&#241;alizaci&#243;n</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">5,1</td><td colspan="3" rowspan="1" style="">Led Power</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">5,2</td><td colspan="3" rowspan="1" style="">Led Com</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">5,3</td><td colspan="3" rowspan="1" style="">Leds Net</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">5,3,1</td><td colspan="3" rowspan="1" style="">Verde</td><td colspan="1" rowspan="1" style="text-align:center">dBm</td><td colspan="1" rowspan="1" style=""><i>&gt; - 77 (AT+CSQ &gt;18)</i></td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">5,3,2</td><td colspan="3" rowspan="1" style="">Amarillo</td><td colspan="1" rowspan="1" style="text-align:center">dBm</td><td colspan="1" rowspan="1" style=""><i>&gt; &#243; = - 89, &lt; &#243; = - 77 (AT+CSQ &gt; &#243; = 12 , &lt; &#243; = 18)</i></td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">5,3,3</td><td colspan="3" rowspan="1" style="">Rojo</td><td colspan="1" rowspan="1" style="text-align:center">dBm</td><td colspan="1" rowspan="1" style=""><i>&lt; - 89 (AT+CSQ &lt;12)</i></td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">5,4</td><td colspan="3" rowspan="1" style="">Etiqueta en la parte frontal </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">5,4,1</td><td colspan="3" rowspan="1" style="">Rango de tensi&#243;n de funcionamiento</td><td colspan="1" rowspan="1" style="text-align:center">V</td><td colspan="1" rowspan="1" style="">100  a 277 Fase- Neutro</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">5,4,2</td><td colspan="3" rowspan="1" style="">Identificaci&#243;n de cada uno de los interfaces de comunicaciones</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">5,4,3</td><td colspan="3" rowspan="1" style="">N&#250;mero de serie</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">5,4,4</td><td colspan="3" rowspan="1" style="">N&#250;mero de contrato</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">5,4,5</td><td colspan="3" rowspan="1" style="">Nombre y logo del fabricante</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">5,4,6</td><td colspan="3" rowspan="1" style="">A&#241;o de fabricaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">5,4,7</td><td colspan="3" rowspan="1" style="">Logo de la Empresa: Enel Colombia (o el que Enel Colombia defina)</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>6</b></td><td colspan="7" rowspan="1" style=""><b>Interfaces</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">6,1</td><td colspan="3" rowspan="1" style="">Puerto RS 232 y RS 485</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">6,2</td><td colspan="3" rowspan="1" style="">Sistema de cambio de RS232 a RS485</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Autom&#225;tico o desde SGM</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">6,3</td><td colspan="3" rowspan="1" style="">Puertos con protecci&#243;n contra descargas y sobre tensiones</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">6,4</td><td colspan="3" rowspan="1" style="">Conector DB-9 o conector tipo terminal hembra (Lado Modem) con el pinout seg&#250;n el standard RS-232</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">6,5</td><td colspan="3" rowspan="1" style="">Conector DB-9 o conector tipo terminal hembra (Lado Modem) con el pinout seg&#250;n el standard RS-485</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">6,6</td><td colspan="3" rowspan="1" style="">El equipo podr&#225; utilizar el mismo conector DB-9 o conector tipo terminal para la salida RS-232 y RS-485 o en su defecto contar&#225; con dos puertos</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>7</b></td><td colspan="7" rowspan="1" style=""><b>Otros requisitos</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">7,1</td><td colspan="3" rowspan="1" style="">El modem debe tener una rutina de autogesti&#243;n que le permita evaluar su estado y de acuerdo a esto generar una operaci&#243;n de autoreinicio</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">7,2</td><td colspan="3" rowspan="1" style="">El equipo podr&#225; ser configurado remotamente mediante mensaje de texto SMS o una sesi&#243;n SSHv2.</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">7,3</td><td colspan="3" rowspan="1" style="">La simcard deber&#225; ser accesible sin necesidad de abrir el equipo</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">7,4</td><td colspan="3" rowspan="1" style="">El simcardholder deber&#225; ser del tipo resorte de tal manera que no se requiera de una herramienta externa para retirar la simcard</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">7,5</td><td colspan="3" rowspan="1" style="">El simcardholder estar&#225; en la capacidad de recibir SIM CARD del tipo industrial o MIM card.</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">7,6</td><td colspan="3" rowspan="1" style="">El modem debe contar con alg&#250;n tipo de opci&#243;n de protecci&#243;n de los datos al enviar y recibir con el fin de asegurar la informaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">7,7</td><td colspan="3" rowspan="1" style="">El modem debe contar con conector tipo SMA hembra</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">7,8</td><td colspan="3" rowspan="1" style="">Debe poseer en la cubierta un elemento para la instalaci&#243;n de sellos de seguridad</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">7,9</td><td colspan="3" rowspan="1" style="">Cualquier cambio de tecnolog&#237;a deber&#225; ser actualizada por parte del proveedor del sistema, sin costo alguno para Enel Colombia</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">7,10</td><td colspan="3" rowspan="1" style="">El m&#243;dem debe funcionar en modo cliente/servidor para conexiones transparentes entre el Centro de Gesti&#243;n de Medida y el Medidor por el medio de cualquiera de los puertos  seriales (RS232 o RS485)</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>8</b></td><td colspan="7" rowspan="1" style=""><b>Comunicaciones </b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">8,1</td><td colspan="3" rowspan="1" style="">Cumplimiento de requerimientos de numeral 3.2.1 de esta especificaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">8,2</td><td colspan="3" rowspan="1" style="">M&#237;nimo el equipo tendr&#225; un m&#243;dulo 4G que le permita su funcionamiento en redes 2.5G y 3G</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">8,3</td><td colspan="3" rowspan="1" style="">El m&#243;dem debe soportar comandos AT est&#225;ndar</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="4" style="height:21px;text-align:center">8,4</td><td colspan="1" rowspan="4" style="">GPRS:</td><td colspan="2" rowspan="1" style="">GPRS multi-slot clase 10</td><td colspan="1" rowspan="4" style="text-align:center">-------</td><td colspan="1" rowspan="4" style="">Requerido</td><td colspan="1" rowspan="4" style=""> </td><td colspan="1" rowspan="4" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">GPRS mobile station clase B</td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">GPRS data downlink transfer: max. 85.6 kbps</td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">GPRS data uplink transfer: max. 85.6 kbps</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">8,5</td><td colspan="3" rowspan="1" style="">Los equipos ofertados deber&#225;n encapsular y entregar a la red la informaci&#243;n en protocolo IP transparente, con interfaz RS232 o RS-485</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">8,6</td><td colspan="3" rowspan="1" style="">El m&#243;dem debe soporta comandos AT est&#225;ndar (adem&#225;s de los especificados en el anexo A)</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>9</b></td><td colspan="7" rowspan="1" style=""><b>Interfaz m&#243;dem-medidor</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">9,1</td><td colspan="3" rowspan="1" style="">Las comunicaciones (velocidad y formato de palabra) entre el modem y el PC se realizar&#225;n igual que entre el modem y el medidor</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">9,2</td><td colspan="3" rowspan="1" style="">El modem debe permitir la configuraci&#243;n del baudrate de los puertos RS232 y RS485 de manera independiente</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">9,3</td><td colspan="3" rowspan="1" style="">El modem debe permitir la configuraci&#243;n del bit de paridad de los puertos RS232 y RS485 de manera independiente</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>10</b></td><td colspan="7" rowspan="1" style=""><b>Conectividad</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">10,1</td><td colspan="3" rowspan="1" style="">El equipo tras un power-on debe inicializar el m&#243;dulo de comunicaciones, registrarse en la red del operador, conectarse a la VPN correspondiente y autentificarse correctamente en el Radius</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">10,2</td><td colspan="3" rowspan="1" style="">Una vez asignada la direcci&#243;n IP por el operador, el equipo debe establecer la conexi&#243;n principal como servidor / cliente seg&#250;n se haya configurado el equipo. En caso de perder la conexi&#243;n, el equipo es responsable de garantizar la conectividad del enlace, el equipo debe intentar la reconexi&#243;n de forma indefinida</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">10,3</td><td colspan="3" rowspan="1" style="">El equipo deber&#225; de implementar rutinas de chequeo que permitan tanto de forma activa como pasiva garantizar la conectividad. Los mecanismos activos siempre deber&#225;n ser regulados por temporizadores parametrizables por configuraci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>11</b></td><td colspan="7" rowspan="1" style=""><b>Protocolos de comunicaci&#243;n</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">11,1</td><td colspan="3" rowspan="1" style="">Protocolos TCP/IP</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">11,1,1</td><td colspan="3" rowspan="1" style="">IPv4; IPv6</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">11,1,2</td><td colspan="3" rowspan="1" style="">IPSEC, TLS 1.2 y 1.3</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">11,1,3</td><td colspan="3" rowspan="1" style="">GRE</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">11,1,4</td><td colspan="3" rowspan="1" style="">ICPM</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">11,1,5</td><td colspan="3" rowspan="1" style="">ARP</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">11,1,6</td><td colspan="3" rowspan="1" style="">NTP</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">11,2</td><td colspan="3" rowspan="1" style="">Protocolos de enrutamiento y est&#225;ndares de red</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">11,2,1</td><td colspan="3" rowspan="1" style="">Enrutamiento est&#225;tico</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">11,2,2</td><td colspan="3" rowspan="1" style="">RIPV1, RIPV2</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">11,2,3</td><td colspan="3" rowspan="1" style="">Sistema de nombres de dominio (DNS)</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">11,2,4</td><td colspan="3" rowspan="1" style="">Traducci&#243;n de direcciones de puertos y redes (NAT/NAPT)</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">11,2,5</td><td colspan="3" rowspan="1" style="">Reenv&#237;o de puertos</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">11,2,6</td><td colspan="3" rowspan="1" style="">VLAN (802.1q</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>12</b></td><td colspan="7" rowspan="1" style=""><b>Configuraci&#243;n</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">12,1</td><td colspan="3" rowspan="1" style="">El equipo podr&#225; llevar de f&#225;brica una configuraci&#243;n “Enel Colombia” que permita facilitar los mecanismos de autoconfiguraci&#243;n.</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">12,2</td><td colspan="3" rowspan="1" style="">Debe ser posible volver a la configuraci&#243;n “Enel Colombia” cuantas veces sea necesarios por uno de estos procedimientos: Un conector “jumper”, Env&#237;o de un comando AT &#250;nico “AT&amp;F”, Configuraci&#243;n mediante p&#225;gina web</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>13</b></td><td colspan="7" rowspan="1" style=""><b>Funcionalidades</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">13,1</td><td colspan="3" rowspan="1" style="">El m&#243;dem debe proporcionar transporte TCP/IP transparente para las tramas de datos desde/hacia el puerto serie del terminal serie local, siempre y cuando exista sesi&#243;n de datos activa (socket n&#186;1).</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">13,2</td><td colspan="3" rowspan="1" style="">Actualizaci&#243;n remota del firmware, a trav&#233;s de llamadas a trav&#233;s de la red celular a trav&#233;s de un socket TCP</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">13,3</td><td colspan="3" rowspan="1" style="">Funci&#243;n esp&#237;a del tr&#225;fico del m&#243;dem</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">13,4</td><td colspan="3" rowspan="1" style="">An&#225;lisis y diagn&#243;stico del estado de los puertos</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">13,5</td><td colspan="3" rowspan="1" style="">Mecanismos de Watchdog: Supervisi&#243;n de los elementos cr&#237;ticos del sistema y autochequeo de los mismos, incluyendo el chequeo de conexiones serie (sockets). • Programar un reset de software desde microcontrolador configurable en tiempo. •	Programar un reset software para cuando se ha perdido la comunicaci&#243;n.</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="3" style="height:21px;text-align:center">13,6</td><td colspan="2" rowspan="3" style="">Debe permitirse ciertas acciones sobre los socket de conexi&#243;n TCP como: </td><td colspan="1" rowspan="1" style="">Iniciar un socket determinado</td><td colspan="1" rowspan="3" style="text-align:center">-------</td><td colspan="1" rowspan="3" style="">Requerido</td><td colspan="1" rowspan="3" style=""> </td><td colspan="1" rowspan="3" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Cerrar un cierto socket.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Indicar el estado del m&#243;dem, indicando si existe contexto actual activo, direcci&#243;n IP y estado de los socket.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">13,7</td><td colspan="3" rowspan="1" style="">Gesti&#243;n de la informaci&#243;n a trav&#233;s del software que Enel Colombia defina</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">13,8</td><td colspan="3" rowspan="1" style="">Posibilidad de ser programado y actualizado en terreno o de forma remota, y en la eventualidad que el equipo se bloquee no se requiera ir al sitio a desbloquearlo</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">13,9</td><td colspan="3" rowspan="1" style="">Posibilidad de gestionar varias marcas de medidores de energ&#237;a tales como: Actaris, Elster, Landis&amp;Gyr, Elgama, EMH, Itron, Wasion, Microstar, entre otros</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>14</b></td><td colspan="7" rowspan="1" style=""><b>Supervisi&#243;n</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">14,1</td><td colspan="3" rowspan="1" style="">M&#243;dulo de Descubrimiento: que permita ubicar los equipos en funci&#243;n de los datos de la celdat y LAC</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">14,2</td><td colspan="3" rowspan="1" style="">Descubrimiento autom&#225;tico de la direcci&#243;n IP</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">14,3</td><td colspan="3" rowspan="1" style="">Informaci&#243;n sobre nivel de cobertura GPRS</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">14,4</td><td colspan="3" rowspan="1" style="">Soporte de TimeStamping en comandos de gesti&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">14,5</td><td colspan="3" rowspan="1" style="">Sistema de Eventos mediante envi&#243; de traps</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">14,6</td><td colspan="3" rowspan="1" style="">Soporte de Telecarga de software y configuraci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>15</b></td><td colspan="7" rowspan="1" style=""><b>Requerimientos particulares</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">15,1</td><td colspan="7" rowspan="1" style=""><b>Caracter&#237;sticas constructivas</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">15,1,1</td><td colspan="3" rowspan="1" style="">Dimensiones m&#225;ximas</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">15,1,1.1</td><td colspan="3" rowspan="1" style="">Ancho</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="">800</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">15,1,1.2</td><td colspan="3" rowspan="1" style="">Alto</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="">100</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">15,1,1.3</td><td colspan="3" rowspan="1" style="">Profundidad</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="">40</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>16</b></td><td colspan="7" rowspan="1" style=""><b>Accesorios</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16,1</td><td colspan="4" rowspan="1" style=""><b>Antena tipo latigo de base magn&#233;tica</b></td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16,1,1</td><td colspan="3" rowspan="1" style="">Conector</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="">SMA macho</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16,1,2</td><td colspan="3" rowspan="1" style="">Longitud del cable</td><td colspan="1" rowspan="1" style="text-align:center">m</td><td colspan="1" rowspan="1" style="">1.8</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16,1,3</td><td colspan="3" rowspan="1" style="">Ganancia</td><td colspan="1" rowspan="1" style="text-align:center">dBi</td><td colspan="1" rowspan="1" style="">5</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16,2</td><td colspan="4" rowspan="1" style=""><b>Cable de comunicaciones</b></td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16,2,1</td><td colspan="3" rowspan="1" style="">Terminal DB-9 macho (al lado de modem) con el pinout para RS-485 y RS-232 indicado en el numeral 5.2</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16,2,2</td><td colspan="3" rowspan="1" style="">Para Conexi&#243;n a medidor RS 232</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16,2,2.1</td><td colspan="3" rowspan="1" style="">Terminal RJ-12</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16,2,2.2</td><td colspan="3" rowspan="1" style="">Terminal RJ45)</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16,2,2.3</td><td colspan="3" rowspan="1" style="">DB-9 hembra</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16,2,3</td><td colspan="3" rowspan="1" style="">Para Conexi&#243;n a medidor RS 485</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16,2,3.1</td><td colspan="3" rowspan="1" style="">Sin terminal, con cables seg&#250;n el pinout indicado en el nuemral 5.2.</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16,2,3</td><td colspan="3" rowspan="1" style="">Longitud total</td><td colspan="1" rowspan="1" style="text-align:center">cm</td><td colspan="1" rowspan="1" style="">40</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16,3</td><td colspan="3" rowspan="1" style="">Display</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="">Opcional</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16,3,1</td><td colspan="3" rowspan="1" style="">Dimensiones m&#237;nimas</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">PMOLED 1.33”</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16,3,2</td><td colspan="3" rowspan="1" style="">Rango de temperatura</td><td colspan="1" rowspan="1" style="text-align:center">&#186;C</td><td colspan="1" rowspan="1" style="">-40 a 85</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16,3,3</td><td colspan="3" rowspan="1" style="">Contraste 10000 a 1</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Opcional</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16,3,4</td><td colspan="3" rowspan="1" style="">Par&#225;metros a visualizar</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16,3,4.1</td><td colspan="3" rowspan="1" style="">Calidad de la se&#241;al en dBm y de manera gr&#225;fica en barras</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Opcional</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16,3,4.2</td><td colspan="3" rowspan="1" style="">Tecnolog&#237;a de la red</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Opcional</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16,3,4.3</td><td colspan="3" rowspan="1" style="">APN configurado</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Opcional</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16,3,4.4</td><td colspan="3" rowspan="1" style="">Puerto TCP configurado</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Opcional</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16,3,4.5</td><td colspan="3" rowspan="1" style="">IP registrada en la sesi&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Opcional</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16,3,4.6</td><td colspan="3" rowspan="1" style="">Paridad de puerto configurado</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Opcional</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16,3,4.7</td><td colspan="3" rowspan="1" style="">Puerto configurado</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Opcional</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16,3,4.8</td><td colspan="3" rowspan="1" style="">Estado de las salidas</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Opcional</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16,3,4.9</td><td colspan="3" rowspan="1" style="">Llamada en curso</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Opcional</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16,3,4.10</td><td colspan="3" rowspan="1" style="">Espera de llamada</td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Opcional</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>17</b></td><td colspan="3" rowspan="1" style=""><b>Cumplimiento de requisitos de seguridad indicados en el numeral 6</b></td><td colspan="1" rowspan="1" style="text-align:center">-------</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>18</b></td><td colspan="7" rowspan="1" style=""><b>Garant&#237;a</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">18,1</td><td colspan="3" rowspan="1" style="">Garant&#237;a m&#237;nima</td><td colspan="1" rowspan="1" style="text-align:center">a&#241;os</td><td colspan="1" rowspan="1" style="">5</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">18,2</td><td colspan="3" rowspan="1" style="">Ante un proceso de garant&#237;a el proveedor debe asumir todos los costos asociados a esta. Al ser devuelto alg&#250;n equipo por garant&#237;a, el proveedor lo debe reemplazar a m&#225;s tardar en 15 d&#237;as calendario</td><td colspan="1" rowspan="1" style="text-align:center">----</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">18,3</td><td colspan="3" rowspan="1" style="">Stock m&#237;nimo el 5% de la cantidad de equipos de la Orden de Compra</td><td colspan="1" rowspan="1" style="text-align:center">----</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">18,4</td><td colspan="3" rowspan="1" style="">Si un equipo falla tres veces en un mismo a&#241;o calendario, el proveedor debe cambiar el equipo por uno nuevo, similar o de mayores caracter&#237;sticas, en 15 d&#237;as calendario</td><td colspan="1" rowspan="1" style="text-align:center">----</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>19</b></td><td colspan="7" rowspan="1" style=""><b>Embalaje y marcaci&#243;n</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">19,1</td><td colspan="3" rowspan="1" style="">Embalaje para su transporte mar&#237;timo, a&#233;reo o terrestre seg&#250;n corresponda, y adecuado para evitar da&#241;os (golpes, corrosi&#243;n, absorci&#243;n de humedad, etc.).</td><td colspan="1" rowspan="1" style="text-align:center">----</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">19,2</td><td colspan="3" rowspan="1" style="">Todas las cajas deber&#225;n llevar los detalles necesarios de identificaci&#243;n y manipulaci&#243;n, en forma clara e indeleble, detallando el contenido de cada caja, m&#237;nimo con la siguiente informaci&#243;n para cada modem: N&#250;mero de serie, N&#250;mero de contrato, Fecha de fabricaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">----</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>20</b></td><td colspan="7" rowspan="1" style=""><b>Pruebas</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">20,1</td><td colspan="3" rowspan="1" style="">Pruebas y Homologaci&#243;n y/o tipo</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">20,1,1</td><td colspan="3" rowspan="1" style="">Grados de protecci&#243;n dado por encerramiento de equipo el&#233;ctrico [Grado IP 51]  IEC 60529</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">20,1,2</td><td colspan="3" rowspan="1" style="">Ensayo de rigidez diel&#233;ctrica cumplimiento IEC 60255-27</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">20,2</td><td colspan="3" rowspan="1" style="">Pruebas de rutina</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">20,2,1</td><td colspan="3" rowspan="1" style="">El proveedor deber&#225; verificar mediante protocolos de chequeo, la realizaci&#243;n de pruebas de rutina para cada lote fabricado, mediante muestreo acorde al plan de inspecci&#243;n definido en su plan calidad y las cuales deben garantizar la funcionalidad del equipo y su correcta terminaci&#243;n respecto a ensamble, accesorios, embalaje, etc.</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">20,3</td><td colspan="3" rowspan="1" style="">Inspecci&#243;n visual y pruebas</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">20,3,1</td><td colspan="3" rowspan="1" style="">Verificaci&#243;n visual del equipo y accesorios</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">20,3,4</td><td colspan="3" rowspan="1" style="">Pruebas de comunicaci&#243;n entre medidor y el centro de monitoreo</td><td colspan="1" rowspan="1" style="text-align:center">-----</td><td colspan="1" rowspan="1" style="">Requerido</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr></table><br /></div>
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 1936, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

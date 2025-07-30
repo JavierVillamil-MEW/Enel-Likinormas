@@ -1,0 +1,11 @@
+uuid: 9d07884f-d731-4e18-8d0a-9473f632db8c
+langcode: es
+status: true
+dependencies:
+  config:
+    - system.menu.admin
+id: menu_link_content.admin
+target_entity_type_id: menu_link_content
+target_bundle: admin
+default_langcode: site_default
+language_alterable: false

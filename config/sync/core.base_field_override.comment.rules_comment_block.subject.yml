@@ -1,0 +1,18 @@
+uuid: 532e0834-849c-45d2-8112-07379192e511
+langcode: es
+status: true
+dependencies:
+  config:
+    - comment.type.rules_comment_block
+id: comment.rules_comment_block.subject
+field_name: subject
+entity_type: comment
+bundle: rules_comment_block
+label: Asunto
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

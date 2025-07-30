@@ -1,0 +1,641 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for Likinormas Base module.
+ */
+
+use Drupal\comment\CommentInterface;
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\RedirectCommand;
+use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\Core\Render\Markup;
+use Drupal\Core\Url;
+use Drupal\taxonomy\Entity\Term;
+use Drupal\user\Entity\User;
+use Drupal\views\ViewExecutable;
+use Drupal\ckeditor5\Plugin\CKEditor5PluginDefinition;
+use Drupal\Core\Template\Attribute;
+use Drupal\node\NodeInterface;
+use Drupal\node\Entity\Node;
+use Drupal\Core\Database\Database;
+use Drupal\webform\WebformInterface;
+use Drupal\webform\WebformSubmissionInterface;
+
+
+/**
+ * Implements hook_form_views_exposed_form_alter().
+ */
+function likinormas_base_form_views_exposed_form_alter(&$form, FormStateInterface $form_state)
+{
+  if (str_contains($form['#id'], 'views-exposed-form-rules-global-search')) {
+    $current_uri = \Drupal::request()->getRequestUri();
+    if ($current_uri == '/') {
+      unset($form['sort_by']);
+      unset($form['effective_date_value']);
+    }
+    if ($form['tipo_de_norma']) {
+      $options = $form['tipo_de_norma']['#options'];
+      if (array_key_exists('rules_technical_specifications', $options) && array_key_exists('rules_technical_rules', $options)) {
+        $form['tipo_de_norma']['#options']['rules_technical_specifications'] = t('Especificaciones Técnicas Locales');
+        $form['tipo_de_norma']['#options']['rules_technical_rules'] = t('Normas Técnicas');
+        unset($form['tipo_de_norma']['#options']['rules_page_404']);
+        unset($form['tipo_de_norma']['#options']['rules_home_content']);
+        unset($form['tipo_de_norma']['#options']['rules_monthly_newsletter']);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function likinormas_base_views_pre_render(ViewExecutable $view)
+{
+  if ($view->id() === 'rules_global_search' || $view->id() === 'rules_list_of_technical_specifications' || $view->id() === 'rules_list_of_technical_rules') {
+    $results = $view->result;
+    $filteredResults = [];
+    $filteredResults2 = [];
+    $value = remove_accents(mb_strtoupper($view->exposed_data['combine'], 'UTF-8'));
+    if (!empty($value)) {
+      foreach ($results as $result) {
+        $title = remove_accents(mb_strtoupper($result->node_field_data_title, 'UTF-8'));
+        if (str_contains($title, $value)) {
+//          array_unshift($filteredResults, $result);
+          $filteredResults[] = $result;
+        } else {
+          $filteredResults2[] = $result;
+        }
+      }
+      if (empty($value)) {
+        $filteredResults = $results;
+      }
+      $filteredResults = array_merge($filteredResults, $filteredResults2);
+      foreach ($filteredResults as $key => $row) {
+        $row->index = $key;
+      }
+      $view->result = $filteredResults;
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function likinormas_base_preprocess_page(&$variables)
+{
+  $variables["#attached"]['drupalSettings']['is_admin'] = $variables['is_admin'];
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function likinormas_base_form_alter(&$form, FormStateInterface $form_state, $form_id)
+{
+
+  if ($form_id == 'node_rules_technical_specifications_form' || $form_id == 'node_rules_technical_specifications_edit_form') {
+
+    $form['specification_subcategory']['#prefix'] = '<div id="select-subcategory">';
+    $form['specification_subcategory']['#suffix'] = '</div>';
+
+    $form['specification_category']['widget']['#ajax'] = [
+      'callback' => 'getSpecificationsSubcategories',
+      'event' => 'change',
+      'wrapper' => 'select-subcategory',
+    ];
+
+
+  }
+
+  if ($form_id == 'node_rules_technical_rules_form' || $form_id == 'node_rules_technical_rules_edit_form') {
+
+    $form['rule_subcategory']['#prefix'] = '<div id="select-subcategory">';
+    $form['rule_subcategory']['#suffix'] = '</div>';
+
+    $form['rule_category']['widget']['#ajax'] = [
+      'callback' => 'getRulesSubcategories',
+      'event' => 'change',
+      'wrapper' => 'select-subcategory',
+
+    ];
+  }
+
+  if ($form_id == 'comment_rules_technical_rules_comments_form' || $form_id == 'comment_rules_comment_block_form') {
+    $form['actions']['submit']['#value'] = t('Comentar');
+    $form['actions']['cancel']['#value'] = t('Cancelar');
+    unset($form['comment_content']['widget'][0]['value']['#title']);
+  }
+
+  if ($form_id == 'user_pass') {
+
+    $form['messages'] = [
+      '#weight' => -9999,
+      '#type' => 'status_messages',
+    ];
+
+    $form['actions']['submit']['#ajax'] = [
+      'callback' => 'resetPassMessage',
+      'progress' => [
+        'type' => 'throbber',
+        'message' => t('Enviando...'),
+      ],
+    ];
+  }
+
+  if ($form_id == 'user_register_form') {
+    $form['actions']['submit']['#submit'][] = 'redirectProfile';
+  }
+
+  if ($form_id == 'user_form') {
+    $form['actions']['submit']['#submit'][] = 'redirectProfile';
+  }
+
+  if ($form_id == "webform_submission_rules_contact_webform_node_1_add_form") {
+    $current_user = \Drupal::currentUser();
+    $account = \Drupal\user\Entity\User::load($current_user->id());
+    if ($account) {
+      $name = $account->getDisplayName();
+      $email = $account->getEmail();
+      if (isset($form['elements']['container_form']['container_row']['container_elements']['nombre_completo'])) {
+        $form['elements']['container_form']['container_row']['container_elements']['nombre_completo']['#default_value'] = $name;
+        $form['elements']['container_form']['container_row']['container_elements']['nombre_completo']['#attributes']['readonly'] = 'readonly';
+      }
+      if (isset($form['elements']['container_form']['container_row']['container_elements']['email'])) {
+        $form['elements']['container_form']['container_row']['container_elements']['email']['#default_value'] = $email;
+        $form['elements']['container_form']['container_row']['container_elements']['email']['#attributes']['readonly'] = 'readonly';
+      }
+    }
+  }
+}
+
+function resetPassMessage(&$form, $form_state)
+{
+  $response = new AjaxResponse();
+  $response->addCommand(new RedirectCommand(Drupal::service('path.current')->getPath()));
+  return $response;
+}
+
+function redirectProfile($form, FormStateInterface $form_state)
+{
+  $url = Url::fromUri('internal:/user');
+  $form_state->setRedirectUrl($url);
+}
+
+function getRulesSubcategories(array &$form, FormStateInterface $form_state)
+{
+  $parent = reset($form_state->getValue('rule_category'));
+
+  if (array_key_exists('target_id', $parent)) {
+    $term = $parent['target_id'];
+    $form['rule_subcategory']['widget']['#options'] = getOrderedSubcategories($term, 'rules_subcategory');
+  }
+  return $form['rule_subcategory'];
+}
+
+function getSpecificationsSubcategories(array &$form, FormStateInterface $form_state)
+{
+  $parent = reset($form_state->getValue('specification_category'));
+  if (array_key_exists('target_id', $parent)) {
+    $term = $parent['target_id'];
+    $form['specification_subcategory']['widget']['#options'] = getOrderedSubcategories($term, 'rules_specification_subcategory');
+    unset($form['specification_subcategory']['widget']['#errors']);
+  }
+  return $form['specification_subcategory'];
+}
+
+function getOrderedSubcategories($categoryId, $vid): array
+{
+  $options = [];
+  $order = [];
+
+  $subcategories = Drupal::entityTypeManager()
+    ->getStorage('taxonomy_term')
+    ->loadByProperties([
+      'vid' => $vid,
+      'related_category' => $categoryId,
+    ]);
+
+  $keys = array_keys($subcategories);
+
+  foreach ($subcategories as $key => $subcategory) {
+    $order[$key] = $subcategory->get('order')->value;
+    $options[$key] = $subcategory->get('name')->value;
+  }
+
+  array_multisort($order, SORT_ASC, $options, $keys);
+  return ['_none' => '- Ninguno -'] + array_combine($keys, $options);
+}
+
+/**
+ * Implements hook_entity_presave().
+ */
+function likinormas_base_entity_presave(EntityInterface $entity)
+{
+  switch ($entity->bundle()) {
+    case 'rules_technical_rules_comments':
+      // Setting the title with the value of subject.
+      $entity->get('subject')->value = t('Comentario');
+    case 'rules_comment_block':
+      // Setting the title with the value of subject.
+      $entity->get('subject')->value = t('Comentario');
+      break;
+  }
+}
+
+/**
+ * Implements hook_comment_links_alter().
+ */
+function likinormas_base_comment_links_alter(array &$links, CommentInterface $entity, array &$context)
+{
+  $author = $entity->getAuthorName();
+  $roles = \Drupal::currentUser()->getRoles();
+
+  if (in_array('authenticated', $roles)) {
+    $links['comment']['#links']['comment-reply']['title'] = t('Responder a @author', ['@author' => $author]);
+  }
+
+  if (in_array('administrator', $roles)) {
+    $links['comment']['#links']['comment-reply']['title'] = t('Responder a @author', ['@author' => $author]);
+    $links['comment']['#links']['comment-delete']['title'] = t('Eliminar');
+    $links['comment']['#links']['comment-edit']['title'] = t('Editar');
+  }
+
+  if (\Drupal::currentUser()->isAnonymous()) {
+    $links['comment']['#links']['comment-forbidden']['title'] = t('<a href="/user/login">Inicie sesión</a> o <a href="/user/register">Registrese</a> para publicar comentarios');
+  }
+}
+
+/**
+ * Prepares variables for comment field templates.
+ *
+ * Default template: field--comment.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - element: An associative array containing render arrays for the list of
+ *     comments, and the comment form. Array keys: comments, comment_form.
+ *
+ * @todo Rename to template_preprocess_field__comment() once
+ *   https://www.drupal.org/node/939462 is resolved.
+ */
+function likinormas_base_preprocess_field(&$variables)
+{
+
+  $user_id = \Drupal::currentUser()->id();
+  $user = User::load($user_id);
+  $picture = $user->get('user_picture');
+
+  if (!$picture->isEmpty()) {
+    $uri = $user->get('user_picture')->entity->getFileUri();
+    $variables['current_picture'] = $uri;
+  }
+}
+
+/**
+ * Implements hook_token_info()
+ */
+
+function likinormas_base_token_info()
+{
+
+  $info['tokens']['site']['user_url_name'] = [
+    'name' => t('Nombre de usuario URL'),
+    'description' => t('Trae el nombre del usuario de la URL actual'),
+  ];
+
+  $info['tokens']['site']['user_url_mail'] = [
+    'name' => t('Email de usuario URL'),
+    'description' => t('Trae el email del usuario de la URL actual'),
+  ];
+
+  return $info;
+}
+
+/**
+ * Implements hook_tokens()
+ */
+
+function likinormas_base_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata)
+{
+  $replacements = [];
+  $user_id = \Drupal::routeMatch()->getRawParameter('user');
+
+  if ($user_id) {
+    $user = Drupal::entityTypeManager()->getStorage('user')->load($user_id);
+    $user_name = $user->get('name')->value;
+    $user_mail = $user->get('mail')->value;
+
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'user_url_id':
+          $replacements[$original] = $user_name;
+          break;
+        case 'user_url_mail':
+          $replacements[$original] = $user_mail;
+          break;
+      }
+    }
+  }
+
+  return $replacements;
+}
+
+/**
+ * Implements hook_mail_alter
+ */
+function likinormas_base_mail_alter(&$message)
+{
+  $message['headers']['Content-Type'] = 'text/html';
+  $message['body'][0] = Markup::create($message['body'][0]);
+}
+
+function likinormas_base_entity_view_mode_alter(&$view_mode, Drupal\Core\Entity\EntityInterface $entity, $context)
+{
+  if (\Drupal::routeMatch()->getRouteName() == 'likinormas_pdf_using_mpdf.generate_pdf') {
+    $view_mode = 'rules_pdf';
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function likinormas_base_theme($existing, $type, $theme, $path)
+{
+  return [
+    'ckeditor5_embedded_content_glossary_link' => [
+      'variables' => [
+        'word_entity' => [],
+      ],
+      'template' => 'embedded-content/glossary-link',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+function likinormas_base_menu_local_tasks_alter(&$data, $route_name, RefinableCacheableDependencyInterface &$cacheability)
+{
+  $roles = \Drupal::currentUser()->getRoles();
+  if (in_array('editor', $roles)) {
+    unset($data['tabs'][0]['system.themes_page']);
+    unset($data['tabs'][1]['system.theme_settings_global']);
+    unset($data['tabs'][1]['system.theme_settings_theme:olivero']);
+    unset($data['tabs'][1]['system.theme_settings_theme:claro']);
+    unset($data['tabs'][1]['system.theme_settings_theme:likinormas']);
+    unset($data['tabs'][1]['system.theme_settings_theme:bootstrap5']);
+  }
+}
+
+function likinormas_base_ckeditor5_plugin_info_alter(array &$plugin_definitions): void
+{
+  assert($plugin_definitions['ckeditor5_link'] instanceof CKEditor5PluginDefinition);
+  $link_plugin_definition = $plugin_definitions['ckeditor5_link']
+    ->toArray();
+  $link_plugin_definition['ckeditor5']['config']['link']['decorators'][] = [
+    'mode' => 'manual',
+    'label' => t('Glosario'),
+    'attributes' => [
+      'class' => 'externalLink glosarioLink use-ajax',
+      'data-dialog-type' => 'modal',
+    ],
+  ];
+  $plugin_definitions['ckeditor5_link'] = new CKEditor5PluginDefinition($link_plugin_definition);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_presave().
+ */
+function likinormas_base_node_presave(EntityInterface $entity)
+{
+
+
+  if ($entity instanceof NodeInterface && $entity->bundle() == 'rules_technical_rules') {
+    if ($entity->hasField('technical_rule_content')) {
+      $technical_rule_content = $entity->get('technical_rule_content')->value;
+      if (!empty($technical_rule_content)) {
+        glossary_normalize('technical_rule_content', $entity);
+      }
+      if ($entity->hasField('validate')) {
+        $fieldValidate = $entity->get('validate')->value;
+        if ($fieldValidate == 1 && !empty($technical_rule_content)) {
+          searchWord($entity, "technical_rule_content");
+        }
+        $entity->set('validate', 0);
+      }
+    }
+
+  }
+  if ($entity->bundle() == 'rules_technical_specifications') {
+    if ($entity->hasField('specification_content')) {
+      $specification_content = $entity->get('specification_content')->value;
+      if (!empty($specification_content)) {
+        glossary_normalize('specification_content', $entity);
+      }
+      if ($entity->hasField('validate')) {
+        $fieldValidate = $entity->get('validate')->value;
+        if ($fieldValidate == 1 && !empty($specification_content)) {
+          searchWord($entity, "specification_content");
+        }
+        $entity->set('validate', 0);
+      }
+    }
+  }
+}
+
+/**
+ * @param NodeInterface|EntityInterface $entity
+ * @return void
+ */
+
+/**
+ *
+ * @param $field_name
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ *
+ */
+function glossary_normalize($field_name, EntityInterface $entity): void
+{
+  $content_html = $entity->get($field_name)->value;
+  $dom = new \DOMDocument();
+  @$dom->loadHTML(mb_convert_encoding($content_html, 'HTML-ENTITIES', 'UTF-8'));
+
+  $images = $dom->getElementsByTagName('img');
+  foreach ($images as $image) {
+    $align = $image->getAttribute('data-align');
+    switch ($align) {
+      case 'right':
+        $image->setAttribute("class", "right-image");
+        break;
+      case 'left':
+        $image->setAttribute("class", "left-image");
+        break;
+      case 'center';
+        $new_p = $dom->createElement('p');
+        $new_p->setAttribute('class', 'text-align-center');
+        $image->parentNode->replaceChild($new_p, $image);
+        $new_p->appendChild($image);
+        break;
+      default:
+        break;
+    }
+    $image->setAttribute("height", "auto");
+  }
+
+  $finder = new DomXPath($dom);
+  $classname = "glosarioLink";
+  $a_tags = $finder->query("//*[contains(concat(' ', normalize-space(@class), ' '), ' $classname ')]");
+  foreach ($a_tags as $a_tag) {
+    foreach ($a_tag->attributes as $attribute) {
+      if ($attribute->name == 'href') {
+        if (!str_contains($attribute->value, 'definition')) {
+          $attribute->value .= '/definition';
+          $a_tag->setAttribute('href', $attribute->value);
+        }
+      }
+    }
+  }
+  $entity->get($field_name)->value = $dom->saveHTML();
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for alerts type 'alert-success'.
+ */
+function likinormas_base_preprocess_status_messages(&$variables)
+{
+  if (isset($variables['message_list']['error'])) {
+    foreach ($variables['message_list']['error'] as $key => $message) {
+      if (isset($message) && !empty($message)) {
+        if ($message instanceof Drupal\Core\Render\Markup) {
+          $tmpString = $message->__toString();
+          if (strpos($tmpString, 'Hay una actualización de seguridad disponible para su versión de Drupal') !== false) {
+            unset($variables['message_list']['error']);
+          }
+        }
+      }
+    }
+  }
+}
+
+
+/**
+ * Fetch and sort taxonomy terms by word count.
+ */
+function get_sorted_taxonomy_terms_by_word_count($vocabulary)
+{
+  $query = \Drupal::entityQuery('taxonomy_term')
+    ->condition('vid', $vocabulary)
+    ->accessCheck(TRUE);
+  $tids = $query->execute();
+
+  $terms = \Drupal\taxonomy\Entity\Term::loadMultiple($tids);
+
+  $terms_with_word_count = [];
+
+  foreach ($terms as $term) {
+    $name = $term->getName();
+    $word_count = str_word_count($name);
+    $terms_with_word_count[] = [
+      'term' => $term,
+      'word_count' => $word_count,
+      'tid' => $term->id(),
+    ];
+  }
+
+  // Sort the array by word count in descending order.
+  usort($terms_with_word_count, function ($a, $b) {
+    return $b['word_count'] <=> $a['word_count'];
+  });
+
+  // Extract sorted terms with their IDs.
+  $sorted_terms = array_map(function ($item) {
+    return [
+      'term' => $item['term'],
+      'tid' => $item['tid'],
+    ];
+  }, $terms_with_word_count);
+
+  return $sorted_terms;
+}
+
+function searchWord(NodeInterface|EntityInterface $entity, $fieldHtml): void
+{
+  $current_value = $entity->get($fieldHtml)->value;
+  $sorted_terms = get_sorted_taxonomy_terms_by_word_count("rules_glossary");
+  $encoding = 'UTF-8';
+
+  foreach ($sorted_terms as $item) {
+    $search_text = $item['term']->getName();
+    $array = [
+      mb_strtoupper($search_text, $encoding),
+      mb_strtolower($search_text, $encoding),
+      mb_convert_case($search_text, MB_CASE_TITLE, $encoding)
+    ];
+
+    foreach ($array as $valor) {
+      $replace_text = '<a class="externalLink glosarioLink use-ajax" href="/taxonomy/term/' . $item['tid'] . '/definition" data-dialog-type="modal" data-entity-type="taxonomy_term" data-entity-substitution="canonical">' . $valor . '</a>';
+      $current_value_decoded = html_entity_decode($current_value, ENT_QUOTES | ENT_HTML5, $encoding);
+      $valor_decoded = html_entity_decode($valor, ENT_QUOTES | ENT_HTML5, $encoding);
+
+      if (mb_strpos($current_value_decoded, $valor_decoded, 0, $encoding) !== false) {
+        $dom = new \DOMDocument();
+        @$dom->loadHTML(mb_convert_encoding($current_value, 'HTML-ENTITIES', $encoding));
+        $xpath = new \DOMXPath($dom);
+        $textNodes = $xpath->query('//text()[not(ancestor::a)]');
+
+        foreach ($textNodes as $textNode) {
+          if (preg_match('/\b' . preg_quote($valor_decoded, '/') . '\b/u', $textNode->nodeValue)) {
+            // Reemplazar la palabra por etiquetas HTML.
+            $newNodeValue = preg_replace('/\b' . preg_quote($valor_decoded, '/') . '\b/u', $replace_text, $textNode->nodeValue);
+            $newFragment = $dom->createDocumentFragment();
+            $newFragment->appendXML($newNodeValue);
+            $textNode->parentNode->replaceChild($newFragment, $textNode);
+          }
+        }
+
+        $body = $dom->saveHTML($dom->getElementsByTagName('body')->item(0));
+        $new_value = str_replace(['<body>', '</body>'], '', $body);
+        $current_value = $new_value;
+      }
+    }
+  }
+
+  $entity->set($fieldHtml, [
+    'value' => $new_value,
+    'format' => 'full_html',
+  ]);
+}
+
+
+/**
+ * Función para eliminar acentos de una cadena.
+ */
+function remove_accents($string)
+{
+  $normalizeChars = array(
+    'Á' => 'A', 'À' => 'A', 'Â' => 'A', 'Ä' => 'A', 'Ã' => 'A', 'Å' => 'A', 'Ā' => 'A', 'Ă' => 'A', 'Ą' => 'A',
+    'á' => 'a', 'à' => 'a', 'â' => 'a', 'ä' => 'a', 'ã' => 'a', 'å' => 'a', 'ā' => 'a', 'ă' => 'a', 'ą' => 'a',
+    'É' => 'E', 'È' => 'E', 'Ê' => 'E', 'Ë' => 'E', 'Ē' => 'E', 'Ĕ' => 'E', 'Ė' => 'E', 'Ę' => 'E', 'Ě' => 'E',
+    'é' => 'e', 'è' => 'e', 'ê' => 'e', 'ë' => 'e', 'ē' => 'e', 'ĕ' => 'e', 'ė' => 'e', 'ę' => 'e', 'ě' => 'e',
+    'Í' => 'I', 'Ì' => 'I', 'Î' => 'I', 'Ï' => 'I', 'Ĩ' => 'I', 'Ī' => 'I', 'Ĭ' => 'I', 'Į' => 'I', 'İ' => 'I',
+    'í' => 'i', 'ì' => 'i', 'î' => 'i', 'ï' => 'i', 'ĩ' => 'i', 'ī' => 'i', 'ĭ' => 'i', 'į' => 'i', 'ı' => 'i',
+    'Ó' => 'O', 'Ò' => 'O', 'Ô' => 'O', 'Ö' => 'O', 'Õ' => 'O', 'Ō' => 'O', 'Ŏ' => 'O', 'Ő' => 'O',
+    'ó' => 'o', 'ò' => 'o', 'ô' => 'o', 'ö' => 'o', 'õ' => 'o', 'ō' => 'o', 'ŏ' => 'o', 'ő' => 'o',
+    'Ú' => 'U', 'Ù' => 'U', 'Û' => 'U', 'Ü' => 'U', 'Ũ' => 'U', 'Ū' => 'U', 'Ŭ' => 'U', 'Ů' => 'U', 'Ű' => 'U', 'Ų' => 'U',
+    'ú' => 'u', 'ù' => 'u', 'û' => 'u', 'ü' => 'u', 'ũ' => 'u', 'ū' => 'u', 'ŭ' => 'u', 'ů' => 'u', 'ű' => 'u', 'ų' => 'u',
+    'Ç' => 'C', 'Ć' => 'C', 'Ĉ' => 'C', 'Ċ' => 'C', 'Č' => 'C',
+    'ç' => 'c', 'ć' => 'c', 'ĉ' => 'c', 'ċ' => 'c', 'č' => 'c',
+    'Ñ' => 'N', 'Ń' => 'N', 'Ņ' => 'N', 'Ň' => 'N',
+    'ñ' => 'n', 'ń' => 'n', 'ņ' => 'n', 'ň' => 'n',
+    'Ý' => 'Y', 'Ÿ' => 'Y', 'Ŷ' => 'Y',
+    'ý' => 'y', 'ÿ' => 'y', 'ŷ' => 'y',
+    'Æ' => 'AE', 'æ' => 'ae',
+    'Þ' => 'TH', 'þ' => 'th',
+    'ß' => 'ss',
+    'Œ' => 'OE', 'œ' => 'oe'
+  );
+  return strtr($string, $normalizeChars);
+}

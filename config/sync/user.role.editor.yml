@@ -1,0 +1,130 @@
+uuid: 17b8a3ff-bfb1-4432-8e34-64b86e69abed
+langcode: es
+status: true
+dependencies:
+  config:
+    - filter.format.full_html
+    - filter.format.webform_default
+    - media.type.audio
+    - media.type.document
+    - media.type.image
+    - media.type.remote_video
+    - media.type.video
+    - node.type.rules_monthly_newsletter
+    - node.type.rules_technical_rules
+    - node.type.rules_technical_specifications
+    - taxonomy.vocabulary.colors
+    - taxonomy.vocabulary.rules_alignment
+    - taxonomy.vocabulary.rules_category
+    - taxonomy.vocabulary.rules_glossary
+    - taxonomy.vocabulary.rules_specification_category
+    - taxonomy.vocabulary.rules_specification_subcategory
+    - taxonomy.vocabulary.rules_subcategory
+  module:
+    - comment
+    - content_moderation
+    - file
+    - filter
+    - layout_builder
+    - likinormas_pdf_using_mpdf
+    - locale
+    - media
+    - node
+    - path
+    - save_edit
+    - system
+    - taxonomy
+    - toolbar
+id: editor
+label: Editor
+weight: 3
+is_admin: null
+permissions:
+  - 'access administration pages'
+  - 'access comments'
+  - 'access content'
+  - 'access content overview'
+  - 'access files overview'
+  - 'access taxonomy overview'
+  - 'access toolbar'
+  - 'access user profiles'
+  - 'administer nodes'
+  - 'change own username'
+  - 'create and edit custom blocks'
+  - 'create audio media'
+  - 'create document media'
+  - 'create image media'
+  - 'create remote_video media'
+  - 'create rules_monthly_newsletter content'
+  - 'create rules_technical_rules content'
+  - 'create rules_technical_specifications content'
+  - 'create terms in colors'
+  - 'create terms in rules_alignment'
+  - 'create terms in rules_category'
+  - 'create terms in rules_glossary'
+  - 'create terms in rules_specification_category'
+  - 'create terms in rules_specification_subcategory'
+  - 'create terms in rules_subcategory'
+  - 'create url aliases'
+  - 'create video media'
+  - 'delete any audio media'
+  - 'delete any document media'
+  - 'delete any image media'
+  - 'delete any remote_video media'
+  - 'delete any rules_monthly_newsletter content'
+  - 'delete any rules_technical_rules content'
+  - 'delete any rules_technical_specifications content'
+  - 'delete any video media'
+  - 'delete own audio media'
+  - 'delete own document media'
+  - 'delete own image media'
+  - 'delete own remote_video media'
+  - 'delete own rules_monthly_newsletter content'
+  - 'delete own rules_technical_rules content'
+  - 'delete own rules_technical_specifications content'
+  - 'delete own video media'
+  - 'delete rules_monthly_newsletter revisions'
+  - 'delete rules_technical_rules revisions'
+  - 'delete rules_technical_specifications revisions'
+  - 'edit any audio media'
+  - 'edit any document media'
+  - 'edit any image media'
+  - 'edit any remote_video media'
+  - 'edit any rules_monthly_newsletter content'
+  - 'edit any rules_technical_rules content'
+  - 'edit any rules_technical_specifications content'
+  - 'edit any video media'
+  - 'edit own audio media'
+  - 'edit own document media'
+  - 'edit own image media'
+  - 'edit own remote_video media'
+  - 'edit own rules_monthly_newsletter content'
+  - 'edit own rules_technical_rules content'
+  - 'edit own rules_technical_specifications content'
+  - 'edit own video media'
+  - 'edit terms in colors'
+  - 'edit terms in rules_alignment'
+  - 'edit terms in rules_category'
+  - 'edit terms in rules_glossary'
+  - 'edit terms in rules_specification_category'
+  - 'edit terms in rules_specification_subcategory'
+  - 'edit terms in rules_subcategory'
+  - 'generate rules_technical_rules pdf'
+  - 'generate rules_technical_specifications pdf'
+  - 'revert rules_monthly_newsletter revisions'
+  - 'revert rules_technical_rules revisions'
+  - 'revert rules_technical_specifications revisions'
+  - 'translate interface'
+  - 'use save and edit'
+  - 'use text format full_html'
+  - 'use text format webform_default'
+  - 'view any unpublished content'
+  - 'view latest version'
+  - 'view media'
+  - 'view own unpublished content'
+  - 'view own unpublished media'
+  - 'view rules_monthly_newsletter revisions'
+  - 'view rules_technical_rules revisions'
+  - 'view rules_technical_specifications revisions'
+  - 'view the administration theme'
+  - 'view user email addresses'

@@ -1,0 +1,106 @@
+.field {
+  &.field--name-user-network {
+    .container-card {
+      padding: 4rem 0;
+
+      @include media-query(mobilexl) {
+        padding: 2rem 0 5rem;
+      }
+
+      @include media-query(desktop) {
+        padding: 10rem 0;
+      }
+
+      .row {
+        align-items: center;
+      }
+
+      .block-card {
+        &-images {
+          @include media-query(maxmobile) {
+            padding-top: 3rem;
+          }
+        }
+
+        &-info {
+          .block-card-body {
+            .title-secondary {
+              color: $color-gray;
+            }
+
+            &-text {
+              color: $color-gray-light-two;
+            }
+
+            .field--name-section-button {
+              a {
+                @extend %button-style-two;
+
+                @include media-query(tablet) {
+                  width: fit-content;
+                }
+
+                @include media-query(desktopLS) {
+                  font-size: 1.8rem;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      &.pos-izq {
+        .block-card {
+          &-images {
+            .field--name-section-image {
+              padding: 3rem var(--margin-width-container-secondary) 0;
+
+              @include media-query(tabletL) {
+                margin-left: var(--margin-width-container-primary);
+                padding: 0 2vw 0 2vw;
+              }
+            }
+          }
+
+          &-info {
+            .block-card-body {
+              margin: 0;
+              padding: 0 var(--margin-width-container-secondary);
+
+              @include media-query(desktop) {
+                padding-left: 8vw;
+              }
+            }
+          }
+        }
+      }
+
+      &.pos-der {
+        .block-card {
+          &-images {
+            .field--name-section-image {
+              padding: 3rem var(--margin-width-container-secondary) 0;
+
+              @include media-query(tabletL) {
+                margin-right: var(--margin-width-container-primary);
+                padding: 0 2vw 0 2vw;
+              }
+            }
+          }
+
+          &-info {
+            .block-card-body {
+              margin: 0;
+              padding: 0 var(--margin-width-container-secondary);
+
+              @include media-query(desktop) {
+                padding-right: 8vw;
+              }
+            }
+          }
+        }
+      }
+
+    }
+  }
+}

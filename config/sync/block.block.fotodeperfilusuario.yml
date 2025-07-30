@@ -1,0 +1,20 @@
+uuid: 9fadecc2-f801-4312-a453-fc6c5b484178
+langcode: es
+status: true
+dependencies:
+  module:
+    - likinormas_base
+  theme:
+    - likinormas
+id: fotodeperfilusuario
+theme: likinormas
+region: nav_additional
+weight: 0
+provider: null
+plugin: profile_picture_block
+settings:
+  id: profile_picture_block
+  label: 'Foto de perfil usuario'
+  label_display: '0'
+  provider: likinormas_base
+visibility: {  }

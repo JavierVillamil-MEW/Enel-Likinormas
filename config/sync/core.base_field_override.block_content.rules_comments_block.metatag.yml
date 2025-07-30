@@ -1,0 +1,18 @@
+uuid: f4c49af8-3651-4ce0-9965-928ed6673b5d
+langcode: es
+status: true
+dependencies:
+  config:
+    - block_content.type.rules_comments_block
+id: block_content.rules_comments_block.metatag
+field_name: metatag
+entity_type: block_content
+bundle: rules_comments_block
+label: 'Metatags (Hidden field for JSON support)'
+description: 'Las metaetiquetas de la entidad.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

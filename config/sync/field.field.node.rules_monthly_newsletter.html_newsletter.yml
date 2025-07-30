@@ -1,0 +1,21 @@
+uuid: dff48274-f13e-45d6-83bb-e9d1fa3ee30c
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.node.html_newsletter
+    - node.type.rules_monthly_newsletter
+  module:
+    - text
+id: node.rules_monthly_newsletter.html_newsletter
+field_name: html_newsletter
+entity_type: node
+bundle: rules_monthly_newsletter
+label: 'Boletín HTML'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

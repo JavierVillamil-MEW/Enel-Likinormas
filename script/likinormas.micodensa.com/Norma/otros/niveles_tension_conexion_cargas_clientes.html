@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>NIVELES DE TENSIÓN DE CONEXIÓN DE CARGAS DE CLIENTES | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1770" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FNorma%252FDetalles%252F1770.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/1770" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1770" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			showSubmenu('4', '22');
+		});
+	</script>
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Norma t&#233;cnica
+	</div>
+	<h1>NIVELES DE TENSI&#211;N DE CONEXI&#211;N DE CARGAS DE CLIENTES</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de la norma</div>
+					<div class="caracteristicas">OT1</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">03/04/2018</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/1770">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FNorma%2FDetalles%2F1770&amp;nodoid=1770', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="niveles_tension_conexion_cargas_clientes.html#heading_0">INTRODUCCI&#211;N </a></li>
+                    <li class="indexitem"><a class="head_h2" href="niveles_tension_conexion_cargas_clientes.html#heading_1">OBJETIVO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="niveles_tension_conexion_cargas_clientes.html#heading_2">PRINCIPIOS REGULATORIOS DEL SISTEMA EL&#201;CTRICO NACIONAL</a></li>
+                    <li class="indexitem"><a class="head_h2" href="niveles_tension_conexion_cargas_clientes.html#heading_3">NIVELES DE TENSI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="niveles_tension_conexion_cargas_clientes.html#heading_4">METODOLOG&#205;A PARA LA DETERMINACI&#211;N DEL NIVEL DE TENSI&#211;N DE CONEXI&#211;N DE UNA CARGA</a></li>
+                    <li class="indexitem"><a class="head_h3" href="niveles_tension_conexion_cargas_clientes.html#heading_5">CONFIGURACI&#211;N DE LA RED DE MEDIA TENSI&#211;N NIVEL II Y III (11.4 KV – 13.2 KV – 34.5 KV)</a></li>
+                    <li class="indexitem"><a class="head_h3" href="niveles_tension_conexion_cargas_clientes.html#heading_6">ESQUEMA ANILLO ABIERTO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="niveles_tension_conexion_cargas_clientes.html#heading_7">ESQUEMA ANILLO ABIERTO CON TRANSFERENCIA</a></li>
+                    <li class="indexitem"><a class="head_h3" href="niveles_tension_conexion_cargas_clientes.html#heading_8">CARGABILIDAD DE LA RED DE MEDIA TENSI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="niveles_tension_conexion_cargas_clientes.html#heading_9">ESTIMACI&#211;N DE LA DEMANDA DE ENERG&#205;A ANUAL</a></li>
+                    <li class="indexitem"><a class="head_h2" href="niveles_tension_conexion_cargas_clientes.html#heading_10">C&#193;LCULO DE REGULACI&#211;N DE TENSI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="niveles_tension_conexion_cargas_clientes.html#heading_11">ESTIMACI&#211;N DE P&#201;RDIDAS DE ENERG&#205;A ANUALES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="niveles_tension_conexion_cargas_clientes.html#heading_12">AN&#193;LISIS DE REMUNERACION DE ACTIVOS DE USO E INVERSI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="niveles_tension_conexion_cargas_clientes.html#heading_13">CALIDAD DE LA POTENCIA</a></li>
+                    <li class="indexitem"><a class="head_h2" href="niveles_tension_conexion_cargas_clientes.html#heading_14">CARACTERIZACI&#211;N DE LA DEMANDA</a></li>
+                    <li class="indexitem"><a class="head_h2" href="niveles_tension_conexion_cargas_clientes.html#heading_15">DEFINICI&#211;N DE NIVELES DE TENSI&#211;N DE CONEXI&#211;N</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >INTRODUCCI&#211;N </h2>Uno de los principios regulatorios m&#225;s importantes dentro del sector el&#233;ctrico es el de libre acceso a las redes. En desarrollo de este principio, CODENSA como Operador de Red (OR), tiene la responsabilidad de asignar un punto de conexi&#243;n que permita al cliente contar con un suministro energ&#233;tico eficiente acorde a sus necesidades de carga y caracter&#237;sticas de operaci&#243;n del Sistema El&#233;ctrico.<br /><br />El Par&#225;grafo 1 del Art&#237;culo 13 de la Resoluci&#243;n CREG 097 de 2008  con la cual se aprob&#243; la metodolog&#237;a para el establecimiento de los cargos por uso de los Sistemas de Transmisi&#243;n Regional y Distribuci&#243;n Local se&#241;ala que los OR deben disponer de un estudio t&#233;cnico, que considere entre otros aspectos: p&#233;rdidas, regulaci&#243;n y calidad de su sistema que permita determinar, seg&#250;n la capacidad de conexi&#243;n solicitada por un usuario, el nivel de tensi&#243;n al cual deber&#237;a conectarse, sujeto a que exista capacidad disponible en el punto de conexi&#243;n solicitado. <br /><br />En cumplimiento de lo expuesto se presentan los resultados del Estudio realizado por CODENSA S.A. ESP, y la metodolog&#237;a que se sigui&#243; para llegar a ellos. <br />
+<h2 id="heading_1" >OBJETIVO</h2>El objetivo de este documento es definir los niveles de tensi&#243;n para la conexi&#243;n de  cargas de clientes, seg&#250;n la capacidad de conexi&#243;n solicitada por un usuario de acuerdo con lo establecido por la CREG en la Resoluci&#243;n CREG 097 de 2008.<br />
+<h2 id="heading_2" >PRINCIPIOS REGULATORIOS DEL SISTEMA EL&#201;CTRICO NACIONAL</h2>El Reglamento de Distribuci&#243;n de Energ&#237;a El&#233;ctrica, contenido en la Resoluci&#243;n CREG 070 de 1998, regula la actividad de Transmisi&#243;n Regional y/o Distribuci&#243;n Local de Energ&#237;a El&#233;ctrica, con base en principios de eficiencia, calidad y neutralidad, conforme a lo establecido en la Ley 142 de 1994 y define los criterios y procedimientos para la ejecuci&#243;n y operaci&#243;n de conexiones de los usuarios. <br /><br />Respecto a la conexi&#243;n de cargas se destacan los siguientes aspectos de la Resoluci&#243;n asociados al objeto de este Documento:<br />
+<ul><li>El Operador de Red est&#225; en la obligaci&#243;n de ofrecer al usuario un punto de conexi&#243;n factible a su sistema cuando &#233;ste lo solicite y garantizar&#225; el libre acceso a la red. Para tal efecto, el usuario deber&#225; informar sobre la localizaci&#243;n del inmueble, la potencia m&#225;xima requerida y el tipo de carga.  </li>
+<li>El OR podr&#225; especificar un nivel de tensi&#243;n de conexi&#243;n diferente al solicitado por el Usuario por razones t&#233;cnicas debidamente sustentadas.</li>
+<li>En el evento de que la confiabilidad y calidad requeridas por el Usuario sean superiores a los est&#225;ndares establecidos y para mejorarlas se requieran obras de infraestructura para reforzar el STR y/o SDL que opera el OR, el pago de los costos que resulten ser&#225;n asumidos por el Usuario.</li>
+<li>Lo dispuesto por el art&#237;culo 4.4.1. “solicitud de factibilidad del servicio y puntos de conexi&#243;n” de la Resoluci&#243;n CREG 070 de 1998.</li>
+<li>El contenido del art&#237;culo 4.4.2 respecto de la “solicitud de conexi&#243;n” de la Resoluci&#243;n CREG 070 de 1998.</li>
+<li>Y el art&#237;culo 4.4.3 de la Resoluci&#243;n CREG 070 de 1998, que se&#241;ala los “plazos y procedimientos para la aprobaci&#243;n o improbaci&#243;n de las solicitudes de conexi&#243;n por parte del OR”.</li></ul>
+La Resoluci&#243;n 108 de 1997, art&#237;culo 17 respecto a la negaci&#243;n del servicio establece: <br /><br />“(…) La empresa solo podr&#225; negar la solicitud de conexi&#243;n del servicio en los siguientes casos:<br /><br />a) Por razones t&#233;cnicas susceptibles de ser probadas que est&#233;n expresamente previstas en el contrato.<br />b) Cuando la zona haya sido declarada como de alto riesgo, seg&#250;n decisi&#243;n de la autoridad competente.<br />c) Cuando el suscriptor potencial no cumpla las condiciones establecidas por la autoridad competente.  <br /><br />La negaci&#243;n de la conexi&#243;n al servicio, deber&#225; comunicarse por escrito al solicitante, con indicaci&#243;n expresa de los motivos que sustentan tal decisi&#243;n. Contra esa  decisi&#243;n procede el recurso de reposici&#243;n ante la empresa, y en subsidio el de apelaci&#243;n ante la Superintendencia de Servicios P&#250;blicos, conforme al art&#237;culo 158 y 159 de la ley 142 de 1994, que regulan los recursos ante las empresas de servicios p&#250;blicos.”<br /><br />De manera complementaria, el usuario debe tener en cuenta los derechos y obligaciones contenidos en el Contrato de Condiciones Uniformes de CODENSA dentro del cual se tienen como obligaciones del Usuario, en particular las siguientes:<br />
+<ul><li>Utilizar el servicio &#250;nicamente en el inmueble para la cuenta, carga y clase de servicio para los que se contrat&#243;, de acuerdo con las condiciones y fines de energ&#237;a estipulados en la respectiva solicitud de servicio o contrato.</li>
+<li>Cumplir con los requisitos y especificaciones t&#233;cnicas establecidas para el dise&#241;o y construcci&#243;n de las instalaciones el&#233;ctricas con observancia de los requisitos espec&#237;ficos definidos en RETIE.</li></ul>
+
+<h2 id="heading_3" >NIVELES DE TENSI&#211;N</h2>Los sistemas de Transmisi&#243;n Regional y/o Distribuci&#243;n Local se clasifican por niveles, en funci&#243;n de la tensi&#243;n  nominal de operaci&#243;n, seg&#250;n la siguiente definici&#243;n: <br /><br />Nivel 4:		Sistemas con tensi&#243;n mayor o igual a 57.5 kV y menor a 220 kV.<br />Nivel 3:		Sistemas con tensi&#243;n mayor o igual a 30 kV y menor a 57.5 kV.<br />Nivel 2:		Sistemas con tensi&#243;n mayor o igual a 1 kV y menor a 30 kV.<br />Nivel 1:		Sistemas con tensi&#243;n menor a 1 kV.<br />
+<h2 id="heading_4" >METODOLOG&#205;A PARA LA DETERMINACI&#211;N DEL NIVEL DE TENSI&#211;N DE CONEXI&#211;N DE UNA CARGA</h2>La metodolog&#237;a utilizada involucra consideraciones regulatorias tales como normas, criterios t&#233;cnicos, criterios de inversi&#243;n, etc; consideraciones del sistema el&#233;ctrico como el nivel de tensi&#243;n, los tipos de conductores, las unidades constructivas, etc; y la informaci&#243;n de la carga, como son la demanda de potencia, el factor de potencia, el factor de carga, etc.<br /><br />As&#237; mediante la utilizaci&#243;n del modelo de la red, la carga y flujos de carga sucesivos se determinan las potencias m&#225;ximas extra&#237;bles y las p&#233;rdidas t&#233;cnicas de energ&#237;a del sistema, verificando que los valores de las variables el&#233;ctricas se encuentren dentro de los l&#237;mites permitidos.<br /><br />Adicionalmente, se consideran los costos t&#237;picos de conexi&#243;n, buscando adem&#225;s de la viabilidad t&#233;cnica de la conexi&#243;n, la eficiencia econ&#243;mica de la misma.<br /><br />En este sentido la informaci&#243;n utilizada se encuentra contenida en la regulaci&#243;n vigente, los requerimientos normativos aplicables a nivel nacional y las normas de construcci&#243;n y especificaciones t&#233;cnicas de CODENSA S. A. E.S.P.<br /><br />Para determinar el Nivel de Tensi&#243;n de conexi&#243;n de una carga se contempla los siguientes aspectos: <br />
+<h3 id="heading_5" >CONFIGURACI&#211;N DE LA RED DE MEDIA TENSI&#211;N NIVEL II Y III (11.4 KV – 13.2 KV – 34.5 KV)</h3>Los circuitos primarios de distribuci&#243;n se construir&#225;n en anillo abierto, mediante la utilizaci&#243;n de suplencias con equipos de operaci&#243;n bajo carga, con telecontrol, con otros circuitos cuando se presenten eventos de contingencia, mantenimiento u operativas. <br /><br />En los casos que aplique, sobre la red principal del circuito deber&#225;n instalarse como m&#237;nimo dos (2) equipos de operaci&#243;n bajo carga (Reconectadores normalmente cerrados) que seccione dicha red en tres (3) tramos, esto con el fin de garantizar la selectividad y operaci&#243;n de la red en caso de fallas y/o mantenimiento. <br /><br />De acuerdo con el criterio de cargabilidad aplicado para cargas homog&#233;neas, el primer seccionamiento (Reconectador) ubicado con 2/3 tercios de la carga total del circuito (66%) se efectuar&#225; con un equipo de operaci&#243;n bajo carga con protecci&#243;n y control  el cual dispondr&#225; de comunicaci&#243;n con el Centro de Control. El segundo seccionamiento ubicado con 1/3 tercio de la carga total del circuito (33%) aplicara el mismo concepto indicado anteriormente.<br /><br />La configuraci&#243;n de los circuitos de Nivel de Tensi&#243;n II es de tipo radial en anillo abierto.<br /><br />La configuraci&#243;n de los circuitos de Nivel de Tensi&#243;n III, estar&#225; dirigida a atender clientes industriales y subestaciones MT/MT, y su esquema podr&#225; ser de anillo abierto o abierto con transferencia. <br />
+<h3 id="heading_6" >ESQUEMA ANILLO ABIERTO</h3>
+La configuraci&#243;n en anillo comprende la operaci&#243;n no simult&#225;nea de dos circuitos en eventos de contingencia sobre cualquiera de ellos. El principio de funcionamiento para aislar la zona de falla o de intervenci&#243;n se efect&#250;a mediante la operaci&#243;n autom&#225;tica de los equipos de maniobra (Interruptor, reconectador y/o seccionalizador), de manera que la zona afectada sea m&#225;xima una tercera parte de la carga total del circuito. <br /><br />Esta configuraci&#243;n utiliza equipos de operaci&#243;n bajo carga entre circuitos normalmente abiertos que permite el restablecimiento del servicio y aislamiento de la zona de falla en forma autom&#225;tica con supervisi&#243;n y control desde el Centro de Control. En la Figura 1 se presenta un esquema de la configuraci&#243;n para circuitos en anillo abierto a&#233;reo.<br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/norma/1770/Figura 1.jpg" src="http://likinormas.micodensa.com/media/cache/images/500x355/wikiimages/2d31343338343430373736-42529-Figura 1.jpg" title="Figura 1. Configuración Anillo Abierto"  /></div><div class="texto_imagen_articulos" style="max-width:500px">Figura 1. Configuración Anillo Abierto</div></div></div>
+<h3 id="heading_7" >ESQUEMA ANILLO ABIERTO CON TRANSFERENCIA</h3>
+Este esquema se plantea para circuitos que atienden zonas con alto impacto10 por interrupci&#243;n del servicio de energ&#237;a y donde las condiciones t&#233;cnicas los permitan. <br /><br />La operaci&#243;n de los equipos de maniobra se realiza de manera bi-direccional con el fin de aislar selectivamente la zona de falla en eventos de contingencia garantizando la continuidad del servicio. El esquema de anillo abierto con transferencia es utilizado para soporte de cargas sensibles como subestaciones MT/MT, clientes industriales, hospitales, etc, para asegurar que el suministro de tensi&#243;n desde una red alternativa en el caso de una falla en la red principal. En la Figura 2 se presenta un esquema de la configuraci&#243;n para circuitos en anillo abierto con transferencia.  <br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/norma/1770/Figura 2.jpg" src="http://likinormas.micodensa.com/media/cache/images/500x355/wikiimages/2d31303838383538363331-37222-Figura 2.jpg" title="Figura 2. Configuración Anillo Abierto con transferencia"  /></div><div class="texto_imagen_articulos" style="max-width:500px">Figura 2. Configuración Anillo Abierto con transferencia</div></div></div><br />
+<h3 id="heading_8" >CARGABILIDAD DE LA RED DE MEDIA TENSI&#211;N</h3>
+Con el fin de garantizar la confiabilidad en el servicio y mejorar la operatividad de los circuitos existentes de media tensi&#243;n, la cargabilidad de circuitos radiales en condiciones normales de operaci&#243;n ser&#225; hasta el 70% de la capacidad nominal del conductor de salida.<br /> <br />En eventos de contingencia sobre configuraciones radiales, un alimentador debe estar en capacidad de asumir una tercera parte de carga real de otro alimentador a trav&#233;s de la suplencia, su cargabilidad m&#225;xima deber&#225; ser el 100 % de la capacidad nominal de la red principal.<br /> <br />En la tabla 1 y 2 se indica las potencias de los circuitos en condiciones normales de operaci&#243;n y en contingencia para los niveles de tensi&#243;n II y III para redes a&#233;reas y subterr&#225;neas.<br /><br /><b>Tabla 1. Capacidad de corriente y potencia de conductores a&#233;reos</b><br /><div style="width:731px;"><table><tr><td colspan="1" rowspan="2" style="width:143px;height:44px;text-align:center"><b>CONDUCTOR</b></td><td colspan="1" rowspan="2" style="width:120px;text-align:center"><b>CAPACIDAD CORRIENTE [A]</b> </td><td colspan="3" rowspan="1" style="width:240px;text-align:center"><b>MVA OPERACI&#211;N (70 %)</b></td><td colspan="3" rowspan="1" style="width:228px;text-align:center"><b>MVA OPERACI&#211;N (100 %)</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center"><b>11,4 kV</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>13,2 kV</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>34,5 kV</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>11,4 kV</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>13,2 kV</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>34,5 kV</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:40px;text-align:center">266,8 MCM ACSR  (DESNUDO)</td><td colspan="1" rowspan="1" style="text-align:center">448</td><td colspan="1" rowspan="1" style="text-align:center">6,19</td><td colspan="1" rowspan="1" style="text-align:center">7,17</td><td colspan="1" rowspan="1" style="text-align:center">18,74</td><td colspan="1" rowspan="1" style="text-align:center">8,85</td><td colspan="1" rowspan="1" style="text-align:center">10,24</td><td colspan="1" rowspan="1" style="text-align:center">26,77</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:40px;text-align:center">4/0 AWG ACSR (DESNUDO)</td><td colspan="1" rowspan="1" style="text-align:center">357</td><td colspan="1" rowspan="1" style="text-align:center">4,93</td><td colspan="1" rowspan="1" style="text-align:center">5,71</td><td colspan="1" rowspan="1" style="text-align:center">14,93</td><td colspan="1" rowspan="1" style="text-align:center">7,05</td><td colspan="1" rowspan="1" style="text-align:center">8,16</td><td colspan="1" rowspan="1" style="text-align:center">21,33</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:40px;text-align:center">2/0 AGW ACSR (DESNUDO)</td><td colspan="1" rowspan="1" style="text-align:center">273</td><td colspan="1" rowspan="1" style="text-align:center">3,77</td><td colspan="1" rowspan="1" style="text-align:center"><b>4,37</b></td><td colspan="1" rowspan="1" style="text-align:center">11,42</td><td colspan="1" rowspan="1" style="text-align:center">5,39</td><td colspan="1" rowspan="1" style="text-align:center">6,24</td><td colspan="1" rowspan="1" style="text-align:center">16,31</td></tr></table><br /></div><br /><b>Tabla 2. Capacidad de corriente y potencia de conductores subterr&#225;neos</b><br /><div style="width:872px;"><table><tr><td colspan="1" rowspan="2" style="width:125px;height:44px;text-align:center"><b>CONDUCTOR</b></td><td colspan="1" rowspan="2" style="width:128px;text-align:center"><b>CONFIGURACI&#211;N</b></td><td colspan="1" rowspan="2" style="width:115px;text-align:center"><b>CAPACIDAD CORRIENTE [A] </b></td><td colspan="3" rowspan="1" style="width:276px;text-align:center"><b>MVA OPERACI&#211;N (70 %)</b></td><td colspan="3" rowspan="1" style="width:228px;text-align:center"><b>MVA OPERACI&#211;N (100 %)</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center"><b>11,4 kV</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>13,2 kV</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>34,5 kV</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>11,4 kV</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>13,2 kV</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>34,5 kV</b></td></tr>
+<tr><td colspan="1" rowspan="3" style="height:20px;text-align:center">300 MCM Cu (A)</td><td colspan="1" rowspan="1" style="text-align:center">1 Circuito-</td><td colspan="1" rowspan="1" style="text-align:center">357</td><td colspan="1" rowspan="1" style="text-align:center">4,93</td><td colspan="1" rowspan="1" style="text-align:center">5,71</td><td colspan="1" rowspan="1" style="text-align:center">15</td><td colspan="1" rowspan="1" style="text-align:center">7,05</td><td colspan="1" rowspan="1" style="text-align:center">8,16</td><td colspan="1" rowspan="1" style="text-align:center">21,33</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">3 Circuitos-</td><td colspan="1" rowspan="1" style="text-align:center">285</td><td colspan="1" rowspan="1" style="text-align:center">3,94</td><td colspan="1" rowspan="1" style="text-align:center">4,56</td><td colspan="1" rowspan="1" style="text-align:center">11,92</td><td colspan="1" rowspan="1" style="text-align:center">5,63</td><td colspan="1" rowspan="1" style="text-align:center">6,52</td><td colspan="1" rowspan="1" style="text-align:center">17,03</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">6 Circuitos</td><td colspan="1" rowspan="1" style="text-align:center">227</td><td colspan="1" rowspan="1" style="text-align:center"><b>3,14</b></td><td colspan="1" rowspan="1" style="text-align:center">3,63</td><td colspan="1" rowspan="1" style="text-align:center">9,5</td><td colspan="1" rowspan="1" style="text-align:center">4,48</td><td colspan="1" rowspan="1" style="text-align:center">5,19</td><td colspan="1" rowspan="1" style="text-align:center">13,56</td></tr>
+<tr><td colspan="1" rowspan="3" style="height:20px;text-align:center">240 mm2 Al (A)</td><td colspan="1" rowspan="1" style="text-align:center">1 Circuito</td><td colspan="1" rowspan="1" style="text-align:center">370</td><td colspan="1" rowspan="1" style="text-align:center"><b>5,11</b></td><td colspan="1" rowspan="1" style="text-align:center">5,92</td><td colspan="1" rowspan="1" style="text-align:center">15,48</td><td colspan="1" rowspan="1" style="text-align:center">7,31</td><td colspan="1" rowspan="1" style="text-align:center">8,46</td><td colspan="1" rowspan="1" style="text-align:center">22,11</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">3 Circuitos</td><td colspan="1" rowspan="1" style="text-align:center">290</td><td colspan="1" rowspan="1" style="text-align:center">4,01</td><td colspan="1" rowspan="1" style="text-align:center">4,64</td><td colspan="1" rowspan="1" style="text-align:center">12,13</td><td colspan="1" rowspan="1" style="text-align:center">5,73</td><td colspan="1" rowspan="1" style="text-align:center">6,63</td><td colspan="1" rowspan="1" style="text-align:center">17,33</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">6 Circuitos</td><td colspan="1" rowspan="1" style="text-align:center">230</td><td colspan="1" rowspan="1" style="text-align:center">3,18</td><td colspan="1" rowspan="1" style="text-align:center">3,68</td><td colspan="1" rowspan="1" style="text-align:center">9,62</td><td colspan="1" rowspan="1" style="text-align:center">4,54</td><td colspan="1" rowspan="1" style="text-align:center">5,26</td><td colspan="1" rowspan="1" style="text-align:center">13,74</td></tr></table><br /></div>
+<h2 id="heading_9" >ESTIMACI&#211;N DE LA DEMANDA DE ENERG&#205;A ANUAL</h2>Esta variable se calcula con ayuda de la demanda m&#225;xima, el factor de potencia y el factor de carga, tal y como lo expresa la siguiente ecuaci&#243;n:<br /><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/norma/1770/111.JPG" src="../../media/cache/images/750x750/wikiimages/2d31323936393137353234-3797-111.JPG" title=""  /></div><div class="texto_imagen_articulos" style="max-width:750px"></div></div></div><br /><br />Donde:<br />DE: 	Demanda de energ&#237;a en un a&#241;o (consumo) <br />Sm&#225;x: Potencia aparente m&#225;xima demandada por el cliente en MVA<br />FP: 	Factor de potencia de la carga<br />FC: 	Factor de carga del consumo y que est&#225; relacionado con el tipo de carga (industrial, comercial, etc.)<br /><br />El factor de potencia (FP) y factor de carga (FC) se selecciona de acuerdo con la actividad industrial de la empresa y seg&#250;n la clasificaci&#243;n de la CIIU (Clasificaci&#243;n Internacional Uniforme) que la Comisi&#243;n Estad&#237;stica de las Naciones Unidas en 1989 propuso.<br />
+<h2 id="heading_10" >C&#193;LCULO DE REGULACI&#211;N DE TENSI&#211;N</h2>La regulaci&#243;n de tensi&#243;n no es otra cosa que la ca&#237;da de tensi&#243;n en una red debido a la impedancia serie de los conductores la cual se opone al paso de la corriente el&#233;ctrica. <br /><br />Dado que la impedancia serie total del conductor depende de la longitud, se puede concluir que la ca&#237;da de tensi&#243;n es funci&#243;n de la configuraci&#243;n de la red, la longitud del alimentador, la distribuci&#243;n de las cargas y las caracter&#237;sticas el&#233;ctricas del conductor. <br /><br />Para estimar esta variable y dar cumplimiento a la norma de regulaci&#243;n de tensi&#243;n se modelaron las configuraciones t&#237;picas de red de media tensi&#243;n de CODENSA con lo cual se establecen los umbrales de operaci&#243;n de los circuitos seg&#250;n los niveles de tensi&#243;n.<br />
+<h2 id="heading_11" >ESTIMACI&#211;N DE P&#201;RDIDAS DE ENERG&#205;A ANUALES</h2>Para estimar esta variable, se tiene en cuenta las p&#233;rdidas t&#233;cnicas por las conexiones de cargas, el cual contiene los siguientes componentes:<br />
+<ul><li>Incremento de las p&#233;rdidas globales del sistema, debidas al crecimiento marginal de los consumos de las redes para llevar la energ&#237;a hasta el cliente. Se modela a trav&#233;s de los factores de p&#233;rdidas reales de CODENSA para referir consumos desde cualquier nivel de tensi&#243;n hasta el STN.</li></ul>
+
+<ul><li>Se presentan p&#233;rdidas t&#233;cnicas en la red de distribuci&#243;n para la conexi&#243;n de la carga y que son funci&#243;n de la longitud de la conexi&#243;n, la tensi&#243;n en el punto de conexi&#243;n, la potencia del usuario y de las caracter&#237;sticas el&#233;ctricas del conductor usado para la conexi&#243;n. Para ello, se modela circuitos t&#237;picos con sus par&#225;metros el&#233;ctricos de conductores y el nivel de tensi&#243;n.</li></ul>
+<br />As&#237;, a partir de las p&#233;rdidas de potencia en demanda m&#225;xima, se procede a calcular las p&#233;rdidas promedio debidas a la carga y convertirlas en estimados en p&#233;rdidas de energ&#237;a a partir de la ecuaci&#243;n de p&#233;rdidas a trav&#233;s del siguiente procedimiento:<br />
+<ul><li>C&#225;lculo del Factor de Carga: el factor de carga relaciona la potencia promedio con la potencia m&#225;xima del cliente a trav&#233;s de la ecuaci&#243;n que se muestra enseguida:</li></ul>
+<br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/norma/1770/222.JPG" src="../../media/cache/images/750x750/wikiimages/2d31393835333037353733-2491-222.JPG" title=""  /></div><div class="texto_imagen_articulos" style="max-width:750px"></div></div></div><br />
+<ul><li>Factor X: es el factor que permite configurar la relaci&#243;n entre el factor de carga y el factor de p&#233;rdidas, de la forma:  </li></ul>
+<div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/norma/1770/333.JPG" src="../../media/cache/images/750x750/wikiimages/2d353533323134393334-2657-333.JPG" title=""  /></div><div class="texto_imagen_articulos" style="max-width:750px"></div></div></div><br />(para la red de CODENSA este valor es de  0.1247).<br />
+<ul><li>Ecuaci&#243;n de relaci&#243;n Factor de Carga – Factor de p&#233;rdidas: Esta ecuaci&#243;n usa el factor X para relacionar la curva de carga del sistema con la curva horaria de p&#233;rdidas, de manera tal que a partir del factor de carga y las p&#233;rdidas en demanda m&#225;xima, se puedan estimar las p&#233;rdidas promedio. Esta ecuaci&#243;n es como se muestra a continuaci&#243;n:</li></ul>
+<br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/norma/1770/333.JPG" src="../../media/cache/images/750x750/wikiimages/2d353533323134393334-2657-333.JPG" title=""  /></div><div class="texto_imagen_articulos" style="max-width:750px"></div></div></div><br /><br />Donde, FC  es el factor de carga, y FP<sub>l</sub>  es el factor de p&#233;rdidas.<br />
+<ul><li>C&#225;lculo de las P&#233;rdidas de Potencia Promedio: Este c&#225;lculo permite dimensionar las p&#233;rdidas de potencia promedio a partir de las p&#233;rdidas en demanda m&#225;xima y el factor de p&#233;rdidas:</li></ul>
+<br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/norma/1770/444.JPG" src="../../media/cache/images/750x750/wikiimages/2d31393732343632373131-3308-444.JPG" title=""  /></div><div class="texto_imagen_articulos" style="max-width:750px"></div></div></div><br />
+<ul><li>Extensi&#243;n de P&#233;rdidas de Potencia Promedio: en esta etapa, se busca que las p&#233;rdidas de potencia promedio (que son horarias) se puedan convertir en p&#233;rdidas de energ&#237;a para todo el a&#241;o m&#243;vil de an&#225;lisis, por lo que este paso no es otra cosa que la multiplicaci&#243;n de las p&#233;rdidas promedio por las 8760 horas que tiene un a&#241;o. </li></ul>
+<br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/norma/1770/555.JPG" src="../../media/cache/images/750x750/wikiimages/2d31383430363034333132-4536-555.JPG" title=""  /></div><div class="texto_imagen_articulos" style="max-width:750px"></div></div></div><br /><br />Al aplicar estos modelos a los resultados de p&#233;rdidas m&#225;ximas, se obtiene el estimado de p&#233;rdidas de energ&#237;a anual para cada nivel de tensi&#243;n.<br />
+<h2 id="heading_12" >AN&#193;LISIS DE REMUNERACION DE ACTIVOS DE USO E INVERSI&#211;N</h2>
+El an&#225;lisis realizado consiste en estimar el costo aproximado de las inversiones en activos nuevos requeridas para la conexi&#243;n de cargas, para ello se utiliza la siguiente metodolog&#237;a:<br /><br />•	El an&#225;lisis se focaliza en activos de uso<br /><br />•	Se calcula el Valor de Reposici&#243;n a nuevo (VNR) de proyectos t&#237;picos seg&#250;n Res. CREG 097 de 2008. En este rubro, se tiene en cuenta las unidades constructivas t&#237;picas para redes de media tensi&#243;n, l&#237;neas de transmisi&#243;n e infraestructura el&#233;ctrica requerida para la conexi&#243;n de la carga del cliente. Esto permite establecer los costos de inversi&#243;n acorde con las configuraciones t&#237;picas utilizadas por la Empresa.<br /><br />•	Se determinan Anualidades Equivalentes seg&#250;n vidas &#250;tiles y tasas de retorno reconocidas (13% STR y 13,9% SDL).<br /><br />•	Para diferentes rangos de potencia real se estima la demanda de energ&#237;a con base en par&#225;metros t&#237;picos tales como: Factor de carga, factor de potencia, factor de demanda y sector socioecon&#243;mico.<br /><br />•	Para determinar los costos de inversi&#243;n se emplearon los costos definidos por la Regulaci&#243;n vigente  y realiza la comparaci&#243;n por niveles de tensi&#243;n entre Costos medios de proyectos t&#237;picos (CPT) y Costos m&#225;ximos reconocidos (CMR) definidos por la CREG. <br /><br />A continuaci&#243;n se presenta un ejemplo de las unidades constructivas t&#237;picas requeridas para una infraestructura de transformaci&#243;n AT/MT en 115 kV. Ver Figura 3<br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/norma/1770/Figura 3.jpg" src="http://likinormas.micodensa.com/media/cache/images/800x800/wikiimages/2d393437363936313330-38512-Figura 3.jpg" title="Figura 3. Unidades Constructivas Típicas Proyecto AT/MT 115 kV"  /></div><div class="texto_imagen_articulos" style="max-width:800px">Figura 3. Unidades Constructivas Típicas Proyecto AT/MT 115 kV</div></div></div>
+<h2 id="heading_13" >CALIDAD DE LA POTENCIA</h2>
+Para la conexi&#243;n de un cliente industrial al sistema de distribuci&#243;n local se requiere que en el punto de conexi&#243;n se cumpla desde el inicio de la conexi&#243;n con los par&#225;metros, l&#237;mites e indicadores de calidad de potencia definidos en la tabla No. 3 y que contempla las siguientes obligaciones:<br /><br />•	La operaci&#243;n de la planta no debe generar eventos en tensi&#243;n sags, swells e interrupciones menores a un minuto de acuerdo con la curva CBEMA que afecten cargas de clientes sensibles conectados al STR y/o SDL de CODENSA.<br /><br />•	Las desviaciones de tensi&#243;n en estado estacionario deben estar comprendidas en el rango de +/- 10% de la tensi&#243;n nominal en el Punto de Conexi&#243;n.<br /><br />•	La m&#225;xima distorsi&#243;n de corriente arm&#243;nica en porcentaje [%] de IL en el Punto de Conexi&#243;n se define de acuerdo con la relaci&#243;n Isc/IL del Anexo L&#237;mites de Calidad de la Potencia El&#233;ctrica en un Punto de Conexi&#243;n.<br /><br />•	El cliente debe mantener un Factor de Potencia &gt;= 0.9 Inductivo en el Punto de Conexi&#243;n.<br /><br />Con el fin de determinar los efectos producidos por el flujo de arm&#243;nicos, transitorios electromagn&#233;ticos y fluctuaciones de tensi&#243;n y corriente causados por el proceso productivo del cliente sobre el SDL de CODENSA, el cliente deber&#225; realizar tres (3) meses despu&#233;s de conectada la carga un estudio de calidad de potencia elaborado por una firma especializada en este tipo de actividades, donde se recolecte informaci&#243;n relacionada con la distorsi&#243;n arm&#243;nica de tensi&#243;n THDv, la distorsi&#243;n total de la demanda TDD, la m&#225;xima corriente de distorsi&#243;n arm&#243;nica individual, el PST y PLT (Flicker), desbalance de tensi&#243;n (V2/V1), generaci&#243;n de sags, swells o interrupciones menores a un minuto y el factor de potencia, de acuerdo con los est&#225;ndares internacionales IEEE 519 de 1992, IEEE 1159 de 1995, IEC 61000-4-30 e IEC 61000-4-15 publicados en 2008, CREG 108/97 y NTC5000, en su frontera comercial durante siete (7) d&#237;as calendario.<br /><br /><b>Tabla 3. L&#237;mites de la potencia el&#233;ctrica en un punto de conexi&#243;n</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/norma/1770/Tabla 3.jpg" src="http://likinormas.micodensa.com/media/cache/images/800x800/wikiimages/373733333438373236-232385-Tabla 3.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:800px"></div></div></div><br />
+<h2 id="heading_14" >CARACTERIZACI&#211;N DE LA DEMANDA</h2>
+Dentro de los par&#225;metros el&#233;ctricos que se consideran en la conexi&#243;n se encuentra la caracterizaci&#243;n de la demanda del cliente, la cual es un instrumento que permite conocer el comportamiento del consumo de energ&#237;a con el fin de realizar un optimo dimensionamiento de los equipos e infraestructura el&#233;ctrica contribuyendo al planeamiento y dimensionamiento adecuado del sistema. <br /><br />A partir del conocimiento de la demanda se puede optimizar la capacidad (cargabilidad de transformadores y redes) y la utilizaci&#243;n de la infraestructura existente, as&#237; mismo, dimensionar en forma eficiente la infraestructura requerida para nuevos suministros de servicios de energ&#237;a y gastos de funcionamiento que logren el cubrimiento de la demanda futura con un adecuado nivel de confiabilidad y calidad del servicio. Tambi&#233;n sirve para determinar los par&#225;metros el&#233;ctricos de las cargas conectadas al sistema as&#237; como la demanda por tipo de clientes.<br /><br />En la caracterizaci&#243;n de la demanda se debe contemplar las siguientes variables:<br /><br /><b>Potencia Instalada:</b> Es la sumatoria de las cargas en KVA continuas y no continuas, diversificadas, previstas para una instalaci&#243;n de uso final.<br /><br /><b>Demanda:</b> Es la carga el&#233;ctrica promedio durante un cierto intervalo de tiempo, puede expresarse en kW, kVAR, kVA, Amperios u otras unidades. El intervalo puede ser de 5, 15, 30 o 60 minutos.<br /><br /><b>Demanda pico &#243; potencia M&#225;xima:</b> La carga real utilizada por un usuario crea una demanda de energ&#237;a que var&#237;a de hora en hora sobre un per&#237;odo de tiempo, pero alcanza su valor pico en cierto punto. Esta se denomina la demanda m&#225;xima instant&#225;nea del consumidor. Sin embargo, la m&#225;xima demanda se toma como la que se ha sostenido sobre un per&#237;odo de tiempo, generalmente de 15, 30 o 60 minutos. <br /><br /><b>Curva de carga:</b> Es el ciclo de carga que muestra la caracter&#237;stica instant&#225;nea a lo largo de un per&#237;odo de tiempo.<br /> <br /><b>Curvas de duraci&#243;n de carga:</b> Esta curva se obtiene con base en la curva de carga y permite obtener la duraci&#243;n de cada valor de demanda promediada en un intervalo. Si se toma un per&#237;odo de un d&#237;a t&#237;pico, y se considera que el ciclo diario es similar, se tendr&#225; una curva de duraci&#243;n de carga que puede extenderse a un per&#237;odo de tiempo mayor, un a&#241;o por ejemplo.<br /><br /><b>Factor de potencia:</b> Es la relaci&#243;n entre la potencia activa (kW) y el producto de tensi&#243;n y corriente (kVA), es decir, es una medida de la relaci&#243;n entre el desfasaje de la corriente y la tensi&#243;n, debido a la reactancia del circuito.<br /><br /><b>Factor de demanda:</b> Es la relaci&#243;n entre la demanda m&#225;xima del sistema y la carga total conectada al sistema. Este factor indica el grado con el que toda la carga conectada se opera simult&#225;neamente.<br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/norma/1770/Factor de demanda.jpg" src="http://likinormas.micodensa.com/media/cache/images/500x355/wikiimages/2d31353732363136323736-6507-Factor de demanda.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:500px"></div></div></div><br /><br /><b>Factor de utilizaci&#243;n:</b> Es la relaci&#243;n entre la demanda m&#225;xima del sistema y la capacidad nominal del sistema. Este factor indica el grado al que un sistema se est&#225; utilizando con respecto a su capacidad. <br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/norma/1770/Factor de utilización.jpg" src="../../media/cache/images/500x355/wikiimages/353236323137313537-7589-Factor&#32;de&#32;utilización.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:500px"></div></div></div><br /><br /><b>Factor de carga:</b> Es la relaci&#243;n entre la carga promedio en cierto per&#237;odo de tiempo y la carga pico durante este per&#237;odo de tiempo. Indica el grado con que la carga pico se sostiene en el intervalo. Este factor se puede calcular con base en las curvas de duraci&#243;n de carga. <br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/norma/1770/Factor de carga.jpg" src="http://likinormas.micodensa.com/media/cache/images/500x355/wikiimages/2d31333236393530383235-7341-Factor de carga.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:500px"></div></div></div><br /><br />En la figura 4 se muestra algunas variables consideradas para la caracterizaci&#243;n de la demanda de una carga.<br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/norma/1770/Figura 4.jpg" src="http://likinormas.micodensa.com/media/cache/images/500x355/wikiimages/2d31333731313833363333-37311-Figura 4.jpg" title="Figura 4. Caracterización de la demanda"  /></div><div class="texto_imagen_articulos" style="max-width:500px">Figura 4. Caracterización de la demanda</div></div></div><br /><br />Para el caso de conexi&#243;n de nuevas cargas, el cliente debe indicar la fecha de conexi&#243;n de la nueva carga, la localizaci&#243;n, el tipo y cuadro de carga y la proyecci&#243;n mensual de la demanda del nuevo proyecto entre otra informaci&#243;n. <br />
+<h2 id="heading_15" >DEFINICI&#211;N DE NIVELES DE TENSI&#211;N DE CONEXI&#211;N</h2>
+Acorde con la normativa de construcci&#243;n de redes de baja tensi&#243;n y acometidas de CODENSA, se establece que para cargas alimentadas a 120/208 voltios (Nivel de Tensi&#243;n I), se atender&#225;n cargas con una potencia igual o menor a 240 kW. <br /><br />Para determinar el nivel de tensi&#243;n de conexi&#243;n de una carga mayor a 240 kW, se utilizaron caracterizaciones de demanda t&#237;picas y se efectuaron flujos de carga sucesivos para los niveles de tensi&#243;n II y III seg&#250;n las configuraciones t&#237;picas de la red, estableciendo la m&#225;xima potencia que puede ser atendida por los circuitos de media tensi&#243;n de CODENSA.<br /><br />Es de anotar que en estos an&#225;lisis se verifica que las variables el&#233;ctricas est&#233;n dentro de los l&#237;mites de capacidad m&#225;xima de corriente y regulaci&#243;n de tensi&#243;n. Para cargas con potencia demandada mayor a la carga m&#225;xima a conectar en nivel de tensi&#243;n III se conectar&#225;n en nivel de tensi&#243;n IV. Al aplicar la metodolog&#237;a descrita se obtienen resultados para varios escenarios de an&#225;lisis el&#233;ctricos considerando longitudes del alimentador, carga demandada, corriente, p&#233;rdidas y regulaci&#243;n de tensi&#243;n.<br /><br />Cabe se&#241;alar que se obtienen potencias m&#225;ximas demandadas cuando se alcanza el l&#237;mite de regulaci&#243;n de tensi&#243;n m&#225;s bajo, en este escenario el circuito a&#250;n no ha alcanzado su l&#237;mite de m&#225;xima corriente. De igual manera, existen potencias m&#225;ximas demandadas cuando se alcanza el l&#237;mite de capacidad de corriente del circuito (100% de la capacidad del circuito) pero a&#250;n se cumple con el porcentaje de regulaci&#243;n de tensi&#243;n. A partir de lo anterior establece la potencia m&#225;xima que puede atender cada nivel de tensi&#243;n. <br /><br />No obstante lo anterior, CODENSA tiene como criterio de operaci&#243;n el trabajar sus circuitos m&#225;ximo al 70% de su capacidad. Por ello al integrar este criterio operativo a los resultados de la metodolog&#237;a se obtienen los valores mostrados en la Figura 5 y en la Tabla 4, para el nivel de tensi&#243;n a conectar una carga seg&#250;n su potencia demandada aplicable al Sistema de Distribuci&#243;n de CODENSA S.A. E.S.P. Las l&#237;neas verdes y rojas de la Figura 5, son las envolventes de los resultados para los diversos escenarios de an&#225;lisis.<br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/norma/1770/Figura 5.jpg" src="http://likinormas.micodensa.com/media/cache/images/500x355/wikiimages/2d31323330303231313332-54461-Figura 5.jpg" title="Figura 5. Nivel de tensión de conexión según la potencia(S)"  /></div><div class="texto_imagen_articulos" style="max-width:500px">Figura 5. Nivel de tensión de conexión según la potencia(S)</div></div></div><br /><br /><b>Tabla 4. Nivel de tensi&#243;n de conexi&#243;n seg&#250;n la potencia m&#225;xima (S) y energ&#237;a (E) demandada</b><br /><div style="width:468px;"><table><tr><td colspan="1" rowspan="2" style="width:150px;height:22px;text-align:center"><b>NIVEL DE TENSI&#211;N</b></td><td colspan="2" rowspan="1" style="width:160px;text-align:center"><b>S [MVA] M&#225;xima Demandada</b></td><td colspan="2" rowspan="1" style="width:158px;text-align:center"><b>E (KHW-MES)</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>DESDE</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>HASTA</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>DESDE</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>HASTA</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center"><b>NIVEL 1</b></td><td colspan="2" rowspan="1" style="text-align:center">MENORES A 0.240</td><td colspan="2" rowspan="1" style="text-align:center">MENORES A 141,178</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>NIVEL 2</b></td><td colspan="1" rowspan="1" style="text-align:center">0.24</td><td colspan="1" rowspan="1" style="text-align:center">4.0</td><td colspan="1" rowspan="1" style="text-align:center">141,178</td><td colspan="1" rowspan="1" style="text-align:center">2,352,960</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>NIVEL 3</b></td><td colspan="1" rowspan="1" style="text-align:center">4.0</td><td colspan="1" rowspan="1" style="text-align:center">15.0</td><td colspan="1" rowspan="1" style="text-align:center">2,352,960</td><td colspan="1" rowspan="1" style="text-align:center">8,823,600</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>NIVEL 4</b></td><td colspan="2" rowspan="1" style="text-align:center">MAYORES A 15.0</td><td colspan="2" rowspan="1" style="text-align:center">MAYORES A 8,823,600</td></tr></table><br /></div>Estos valores conjugan aspectos como la capacidad de corriente, regulaci&#243;n de tensi&#243;n, costos de operaci&#243;n y criterios operativos, todo con el objeto de evitar la desoptimizaci&#243;n de la infraestructura el&#233;ctrica sin tampoco llevarla a niveles cr&#237;ticos que dificulten su operaci&#243;n y que por lo tanto puedan comprometer la seguridad del sistema.<br /><br />Los valores de la Tabla 4, son aplicables para cargas nuevas o para cargas existentes que pretendan realizar cambios de nivel de tensi&#243;n, lo cual debe ser justificado t&#233;cnicamente por el cliente.  No obstante lo anterior, el nivel de tensi&#243;n de conexi&#243;n otorgado a un cliente est&#225; sujeto a la existencia de capacidad disponible en el punto de conexi&#243;n, por ello el nivel de tensi&#243;n puede variar dependiendo del resultado del estudio de conexi&#243;n para el caso puntual. Cabe se&#241;alar que la medida debe ser instalada en el mismo nivel de tensi&#243;n donde se otorga el punto de conexi&#243;n. <br /><br /><br /><br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 1770, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

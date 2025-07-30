@@ -1,0 +1,39 @@
+uuid: a2d06df7-088c-4572-af4b-d56280f209da
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.rules_alignment.alignment_class
+    - taxonomy.vocabulary.rules_alignment
+id: taxonomy_term.rules_alignment.default
+targetEntityType: taxonomy_term
+bundle: rules_alignment
+mode: default
+content:
+  alignment_class:
+    type: string_textfield
+    weight: 1
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  description: true
+  langcode: true
+  path: true
+  simple_sitemap: true
+  status: true

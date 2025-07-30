@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET-AT920 Gabinete de agrupamiento para CT´S y PT´S | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/1929" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F1929.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/1929" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/1929" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '54');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET-AT920 Gabinete de agrupamiento para CT&#180;S y PT&#180;S</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET-AT 920</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">01/10/2005</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/1929">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F1929&amp;nodoid=1929', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat_920_gabinete_agrupamiento_cts_pts.html#heading_0">1. OBJETO </a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat_920_gabinete_agrupamiento_cts_pts.html#heading_1">2. ALCANCE </a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat_920_gabinete_agrupamiento_cts_pts.html#heading_2">3. CONDICIONES DE SERVICIO </a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat_920_gabinete_agrupamiento_cts_pts.html#heading_3">3.1. CONDICIONES AMBIENTALES </a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat_920_gabinete_agrupamiento_cts_pts.html#heading_4">3.2. CONDICIONES DE SERVICIO Y LUGAR DE INSTALACI&#211;N INTERIOR </a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat_920_gabinete_agrupamiento_cts_pts.html#heading_5">4. SISTEMAS DE UNIDADES </a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat_920_gabinete_agrupamiento_cts_pts.html#heading_6">5. NORMAS RELACIONADAS </a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat_920_gabinete_agrupamiento_cts_pts.html#heading_7">6. REQUISITOS T&#201;CNICOS PARTICULARES </a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat_920_gabinete_agrupamiento_cts_pts.html#heading_8">6.1. MATERIALES </a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat_920_gabinete_agrupamiento_cts_pts.html#heading_9">6.2. PROCESO DE PINTURA </a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat_920_gabinete_agrupamiento_cts_pts.html#heading_10">6.3. RESISTENCIA A LA CORROSI&#211;N </a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat_920_gabinete_agrupamiento_cts_pts.html#heading_11">6.4. PUERTAS </a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat_920_gabinete_agrupamiento_cts_pts.html#heading_12">6.5. GRADO DE PROTECCI&#211;N </a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat_920_gabinete_agrupamiento_cts_pts.html#heading_13">6.6. ESTRUCTURA </a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat_920_gabinete_agrupamiento_cts_pts.html#heading_14">7. DIMENSIONES </a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat_920_gabinete_agrupamiento_cts_pts.html#heading_15">8. MARCACI&#211;N </a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat_920_gabinete_agrupamiento_cts_pts.html#heading_16">9. EQUIPOS INVOLUCRADOS </a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat_920_gabinete_agrupamiento_cts_pts.html#heading_17">10. PRUEBAS </a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat_920_gabinete_agrupamiento_cts_pts.html#heading_18">10.1. PRUEBAS TIPO </a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat_920_gabinete_agrupamiento_cts_pts.html#heading_19">10.2. PRUEBAS DE RECEPCI&#211;N </a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat_920_gabinete_agrupamiento_cts_pts.html#heading_20">11. DESPACHO Y TRANSPORTE </a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat_920_gabinete_agrupamiento_cts_pts.html#heading_21">12. REQUISITOS PARA LAS OFERTAS </a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat_920_gabinete_agrupamiento_cts_pts.html#heading_22">13. INFORMACI&#211;N FINAL CERTIFICADA. </a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat_920_gabinete_agrupamiento_cts_pts.html#heading_23">14. GARANT&#205;AS </a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1. OBJETO </h2>Esta especificaci&#243;n t&#233;cnica establece las caracter&#237;sticas y requisitos t&#233;cnicos que deben cumplir y los ensayos a los cuales deben ser sometidos los gabinetes de agrupamiento para uso exterior a ser utilizados en subestaciones el&#233;ctricas de alta y media tensi&#243;n. <br />
+<h2 id="heading_1" >2. ALCANCE </h2>Esta especificaci&#243;n aplica para todos los gabinetes de este tipo que sean instalados en el sistema de distribuci&#243;n de CODENSA S.A. ESP. <br /> <br />
+<h2 id="heading_2" >3. CONDICIONES DE SERVICIO </h2><h3 id="heading_3" >3.1. CONDICIONES AMBIENTALES </h3>Los gabinetes ser&#225;n utilizados a la intemperie bajo las siguientes condiciones: <br /><div style="width:448px;"><table><tr><td colspan="2" rowspan="1" style="width:448px;height:21px;text-align:center"><b>CARACTER&#205;STICAS AMBIENTALES</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">a. Altura sobre el nivel del mar</td><td colspan="1" rowspan="1" style="">600 a 2 900 m</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">b. Ambiente</td><td colspan="1" rowspan="1" style="">Tropical</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">c. Humedad</td><td colspan="1" rowspan="1" style="">Mayor al  90 %</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">d. Temperatura m&#225;xima y m&#237;nima</td><td colspan="1" rowspan="1" style="">45 &#186;C y - 5 &#186;C respectivamente.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">e. Temperatura promedio</td><td colspan="1" rowspan="1" style="">14 &#186;C.</td></tr></table><br /></div>
+<h3 id="heading_4" >3.2. CONDICIONES DE SERVICIO Y LUGAR DE INSTALACI&#211;N INTERIOR </h3>Los mininterruptores y borneras, se alojar&#225;n en el gabinete met&#225;lico autosoportado, con alimentaci&#243;n 120 Vac y 125 Vcc. <br />
+<h2 id="heading_5" >4. SISTEMAS DE UNIDADES </h2>En todos los documentos t&#233;cnicos se deben expresar las cantidades num&#233;ricas en unidades del sistema Internacional. Si se usan folletos o planos, en sistemas diferentes de unidades, deben hacerse las conversiones respectivas. <br /><br />
+<h2 id="heading_6" >5. NORMAS RELACIONADAS </h2>Los gabinetes deber&#225;n cumplir con las normas relacionadas a continuaci&#243;n: <br /><br /><div style="width:592px;"><table><tr><td colspan="2" rowspan="1" style="width:218px;height:21px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:374px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">ASTM</td><td colspan="1" rowspan="1" style="text-align:center">B 117-97 </td><td colspan="1" rowspan="1" style="">Standard practice for operating salt spray (fog) apparatus</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">3279</td><td colspan="1" rowspan="1" style="">Grado de protecci&#243;n dado a los encerramientos. (C&#243;digo IP) IEC 529.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">ASTM</td><td colspan="1" rowspan="1" style="text-align:center">D14000</td><td colspan="1" rowspan="1" style="">Espesor m&#237;nimo de pintura</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center">ASTM </td><td colspan="1" rowspan="1" style="text-align:center">D 4541</td><td colspan="1" rowspan="1" style="">Standard Test Method for Pull-Off Strength of Coatings Using Portable Adhesion Testers</td></tr></table><br /></div>
+<h2 id="heading_7" >6. REQUISITOS T&#201;CNICOS PARTICULARES </h2><h3 id="heading_8" >6.1. MATERIALES </h3>Los gabinetes deber&#225;n ser construidos en l&#225;mina de acero Cold Rolled calibre 14 BWG (2 mm ) . <br />Todos los tornillos, tuercas, arandelas, arandelas tipo helicoidal, bisagras, etc, utilizados, deber&#225;n ser galvanizados, iridizados o cromados. <br /><br /> <h3 id="heading_9" >6.2. PROCESO DE PINTURA </h3>La l&#225;mina de acero utilizada en la construcci&#243;n de los gabinetes debe someterse a un proceso de limpieza, desengrase y fosfatizado, el cual debe garantizar que las superficies est&#233;n libres de grasas, &#243;xidos o cualquier elemento extra&#241;o disminuyan la adherencia (son v&#225;lidos procesos qu&#237;micos y/o mec&#225;nicos); en un tiempo no mayor a dos horas, despu&#233;s de la limpieza debe aplicarse una capa de impr&#237;mante no mayor a 20 micras y en un lapso no menor a 8 ni mayor a 16 horas (o seg&#250;n recomendaci&#243;n de fabricante de pintura) se debe aplicar una pintura ep&#243;xica, color RAL 7032, resistente a los rayos ultravioleta y la intemperie, con espesor no menor a 50 micras (para un total de 70 micras), que deber&#225; ser horneada. El proceso debe garantizar las caracter&#237;sticas de “tropicalizaci&#243;n”. <br /> <br />El espesor de pintura debe medirse con un medidor de espesores debidamente calibrado seg&#250;n la norma ASTM D 14000 y el espesor m&#237;nimo debe estar de acuerdo con el numeral 6.3 <br /><br />Para la medici&#243;n de los espesores de recubrimiento se deben tener en cuenta las siguientes definiciones: <br /><br />a. Lectura del espesor: Medida que muestra el medidor de espesores, al colocar una vez el censor sobre la pieza a medir. <br />b. Medida del espesor: Promedios de 3 lecturas de espesor tomadas a una distancia aproximada de 2,5 cm. <br /><br />En pinturas horneables que garanticen la adherencia y espesores m&#237;nimos no requerir&#225;n imprimante. <br />Cada capa de pintura debe garantizar una adherencia m&#237;nima de 400 PSI (libras/pulgada2) probada seg&#250;n norma NTC 3916 (ASTM D 4541 de 1995) <br />
+<h3 id="heading_10" >6.3. RESISTENCIA A LA CORROSI&#211;N </h3>Las muestras deben ser nuevas y libres de grasa, aceite, polvo y otras impurezas. Para verificar la resistencia a la corrosi&#243;n a dichas muestras se les hacen dos incisiones, de 0.5mm de espesor, en forma de cruz que llegue hasta el substrato.<br />El ensayo de corrosi&#243;n se realizar&#225; de acuerdo con la norma ASTM B 117 (Prueba de C&#225;mara Salina) bajo las siguientes condiciones: Temperatura= 35&#176;C, ph= 6,5- 7,2 y concentraci&#243;n de cloruro de sodio al 5% durante 400 horas. Tiempo al que se verificar&#225;: <br /><br />a. La progresi&#243;n de la corrosi&#243;n en la incisi&#243;n, debe ser inferior a 2mm. <br />b. No deben presentar trazas de corrosi&#243;n ni burbujas. <br />c. El recubrimiento debe permanecer adherido a la capa de pintura conservando su color. <br /> 
+<h3 id="heading_11" >6.4. PUERTAS </h3>La puerta del gabinete, se deber&#225; construir en l&#225;mina Cold Rolled. Todas las puertas deber&#225;n abrir &#250;nicamente en sentido lateral m&#237;nimo 120&#176; respecto a la secci&#243;n horizontal superior de la celda, poseer una manija que facilite su accionamiento y las bisagras deber&#225;n ser fabricadas en acero inoxidable, suficientemente fuertes para asegurar r&#237;gidamente la puerta de la estructura. <br />Los pasadores de las bisagras deber&#225;n ser de acero inoxidable. Las bisagras deben estar instaladas internamente. <br /> 
+<h3 id="heading_12" >6.5. GRADO DE PROTECCI&#211;N </h3>El grado de protecci&#243;n que deber&#225; tener la envoltura exterior de los gabinetes deber&#225; ser como m&#237;nimo un grado de protecci&#243;n IP 54 (protegido contra polvo y proyecci&#243;n de agua en todos los sentidos). <br />
+<h3 id="heading_13" >6.6. ESTRUCTURA </h3>La construcci&#243;n estructural de los gabinetes ser&#225; responsabilidad del fabricante el cual podr&#225; elegir el sistema m&#225;s conveniente, podr&#225; ser en l&#225;mina doblada o perfiles angulares, siempre y cuando de la seguridad especifica. <br /><br />La torniller&#237;a, tuercas, arandelas de presi&#243;n y arandelas planas que fijan la estructura deber&#225;n ser galvanizadas iridizadas o cromadas y los tornillos deber&#225;n tener una longitud tal que sobresalgan de la tuerca por lo menos 3 hilos sin exceder de 10 mm. <br />
+<h2 id="heading_14" >7. DIMENSIONES </h2>Las dimensiones aproximadas del gabinete son las siguientes: <br /><div style="width:232px;"><table><tr><td colspan="1" rowspan="1" style="width:232px;height:21px;text-align:center">Altura: 350 mm</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">Ancho: 400 mm</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">Profundidad: 200 mm</td></tr></table><br /></div><br /><br />El proponente puede ofrecer un gabinete con dimensiones diferentes siempre y cuando cumpla con las caracter&#237;sticas de uso y servicio, para lo cual CODENSA S.A. ESP, se reserva el derecho aceptaci&#243;n. <br />
+<h2 id="heading_15" >8. MARCACI&#211;N </h2>Todos los gabinetes comprendidos en este suministro deber&#225;n llevar una placa de acero inoxidable, con textos en idioma espa&#241;ol, conteniendo la siguiente informaci&#243;n: <br /><br /> - Caracter&#237;sticas generales del gabinete. <br /> - Diagramas o esquemas el&#233;ctricos (Si Aplica) <br /> - N&#250;mero de orden de compra <br /> - Nombre del Cliente. <br />
+<h2 id="heading_16" >9. EQUIPOS INVOLUCRADOS </h2>Formato Excel adjunto de Caracter&#237;sticas T&#233;cnicas Garantizadas. <br />
+<h2 id="heading_17" >10. PRUEBAS </h2><h3 id="heading_18" >10.1. PRUEBAS TIPO </h3>El fabricante de los gabinetes deber&#225; realizar las siguientes pruebas tipo: <br />
+<ul><li>Se efectuar&#225;n pruebas de adherencia de acuerdo con la norma NTC 3916 (ASTM D4541 de 1995). </li>
+<li>Se efectuar&#225;n pruebas de resistencia a la corrosi&#243;n de acuerdo con la norma ASTM B117de 1997). </li>
+<li>Se realizar&#225;n pruebas del espesor de las capas de fosfatizado y acabado final de acuerdo con lo especificado en esta norma. </li>
+<li>Grado de protecci&#243;n IP seg&#250;n Norma NTC 3279. </li></ul>
+
+<h3 id="heading_19" >10.2. PRUEBAS DE RECEPCI&#211;N </h3>Cada una de los gabinetes ser&#225; sometido a las siguientes pruebas: <br />
+<ul><li>Inspecci&#243;n visual </li>
+<li>Inspecci&#243;n dimensional </li>
+<li>Ensamblaje de los equipos y elementos complementarios. </li>
+<li>Medici&#243;n del espesor de pintura </li>
+<li>Se efectuar&#225;n pruebas de adherencia de acuerdo con la norma NTC 3916 (ASTM D4541 de 1995). </li></ul>
+
+<h2 id="heading_20" >11. DESPACHO Y TRANSPORTE </h2>Para el despacho y transporte, el proveedor se pondr&#225; en contacto con el cliente para fijar todos los detalles relativos a este efecto. <br />El gabinete deber&#225; estar provisto de rellenos que aseguren igualmente una buena protecci&#243;n. En caso de que el gabinete sufra da&#241;o en las maniobras de carga y descarga, el proveedor se hace responsable de los da&#241;os ocasionados. <br />De requerirse, se deber&#225; proteger contra la humedad con bolsas de material higrosc&#243;pico. <br />
+<h2 id="heading_21" >12. REQUISITOS PARA LAS OFERTAS </h2>El Oferente deber&#225; incluir con su propuesta, la siguiente informaci&#243;n: <br />
+<ul><li>Planilla de caracter&#237;sticas t&#233;cnicas garantizadas, la cual deber&#225; ser </li></ul>
+diligenciada completamente, firmada y sellada por el oferente. 
+<ul><li>Informaci&#243;n adicional que considere aporta explicaci&#243;n a su dise&#241;o (dibujos, </li></ul>
+detalles, caracter&#237;sticas de operaci&#243;n, dimensiones y pesos de los materiales <br />ofertados). <br /> <br />CODENSA S.A. podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones, sin expresi&#243;n de causa ni obligaci&#243;n de compensaci&#243;n. <br />
+<h2 id="heading_22" >13. INFORMACI&#211;N FINAL CERTIFICADA. </h2>Con la entrega del suministro, el proveedor se compromete a entregar la siguiente <br />informaci&#243;n de car&#225;cter definitivo: <br /><br /> - 1 Copia de esquemas el&#233;ctricos. <br /> - 1 Copia de disposici&#243;n del equipamiento en el gabinete. <br /> - 1 Copia del manual de instalaci&#243;n y mantenimiento. <br /> 
+<h2 id="heading_23" >14. GARANT&#205;AS </h2>El fabricante se comprometer&#225; a establecer una garant&#237;a sobre el suministro por <br />un per&#237;odo m&#237;nimo de 2 a&#241;os a contar inmediatamente despu&#233;s de la recepci&#243;n, <br />sobre defectos de pintura y hermeticidad del gabinete. <br /><br /><b>FIGURA 1: GABINETE PARA USO EXTERIOR EN PATIO. </b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/1929/1.JPG" src="../../media/cache/images/500x355/wikiimages/363231313439383737-54531-1.JPG" title=""  /></div><div class="texto_imagen_articulos" style="max-width:500px"></div></div></div><br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 1929, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

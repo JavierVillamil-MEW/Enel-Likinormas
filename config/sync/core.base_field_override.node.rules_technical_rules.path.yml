@@ -1,0 +1,20 @@
+uuid: 979ef55a-8e68-4aa7-a388-20ec8c0619af
+langcode: es
+status: true
+dependencies:
+  config:
+    - node.type.rules_technical_rules
+  module:
+    - path
+id: node.rules_technical_rules.path
+field_name: path
+entity_type: node
+bundle: rules_technical_rules
+label: 'Alias de URL'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

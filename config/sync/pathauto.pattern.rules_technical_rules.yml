@@ -1,0 +1,22 @@
+uuid: 1255bad5-cec6-48a6-8719-e24df90e46d4
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: rules_technical_rules
+label: 'Rules: technical rules'
+type: 'canonical_entities:node'
+pattern: 'normas/[node:rule_category]/[node:rule_subcategory]/[node:title]'
+selection_criteria:
+  844e1bac-9bbf-4fc3-a67f-314267cc2f54:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 844e1bac-9bbf-4fc3-a67f-314267cc2f54
+    context_mapping:
+      node: node
+    bundles:
+      rules_technical_rules: rules_technical_rules
+selection_logic: and
+weight: -5
+relationships: {  }

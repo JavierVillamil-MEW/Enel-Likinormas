@@ -1,0 +1,20 @@
+uuid: 84ffacf4-281e-487e-93d7-f6a90cb62871
+langcode: es
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.rules_subcategory
+  module:
+    - path
+id: taxonomy_term.rules_subcategory.path
+field_name: path
+entity_type: taxonomy_term
+bundle: rules_subcategory
+label: 'Alias de URL'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

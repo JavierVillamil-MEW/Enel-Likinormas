@@ -1,0 +1,51 @@
+<div  class="technical-rules">
+  <div class="card-container" id="team" style="background-color: #0555FA">
+    <div class="container-fluid px-3 py-3">
+      <div class="row center mx-4 my-4 text-white">
+        <h1>{{ node.technical_rule_title.value }}</h1>
+        <p>{{ node.technical_rule_description.value }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="container info-details">
+    <div class="row column-rigth" style="align-items: flex-start">
+      <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8 technical-external-rule" id="document-content">
+        <ul class="headings" id="toc">
+        <li style="float:none;font-weight:bold;color:#000; text-align:center;">
+         <span>
+          Contenido
+         </span>
+        </ul>
+        {{ content.technical_rule_content }}
+      </div>
+      <div class="card col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <h5 class="card-header text-white" style="background-color: #41B9E6; padding: 13px 20px; font-weight:bolder;">DATOS ADICIONALES</h5>
+        <div class="card-body">
+          <h5 class="card-title">Revisión #</h5>
+          <p class="card-text">{{ node.technical_rule_number.value }}</p>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Fecha de entrada en vigencia</h5>
+          <p class="card-text">{{ content.effective_date }}</p>
+        </div>
+        <h5 class="card-header text-white" style="background-color: #41B9E6; padding: 13px 20px; font-weight:bolder;">HERRAMIENTAS</h5>
+        <div class="card-body">
+          <a href="/node/{{ node.nid.value }}/pdf" target="_blank">Descargar archivo</a>
+          {{ drupal_block("social_sharing_buttons_block") }}
+        </div>
+        <h5 class="card-header text-white" style="background-color: #41B9E6; padding: 13px 20px; font-weight:bolder;">RELACIONADAS</h5>
+        <div class="card-body">
+          {{ content.related_content }}
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="comments">
+    {{ content.technical_rule_comment }}
+  </div>
+
+</div>
+
+

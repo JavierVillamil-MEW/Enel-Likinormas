@@ -1,0 +1,113 @@
+{#
+/**
+ * @file
+ * Theme override to present all user data.
+ *
+ * This template is used when viewing a registered user's page,
+ * e.g., example.com/user/123. 123 being the user's ID.
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ *   print a subset such as 'content.field_example'. Fields attached to a user
+ *   such as 'user_picture' are available as 'content.user_picture'.
+ * - attributes: HTML attributes for the container element.
+ * - user: A Drupal User entity.
+ *
+ * @see template_preprocess_user()
+ */
+#}
+<div class="bg-background-primary"></div>
+<div class="bg-background-secondary"></div>
+
+<div{{ attributes.addClass('user-data-profile') }}>
+  <div class="profile-content">
+    {% if content %}
+      {% set user_picture = user.user_picture.entity.uri.value %}
+      <div class="profile-info">
+        {% if user_picture %}
+          <img src="{{ user_picture|file_url(false) }}" alt="avatar" class="rounded-circle img-fluid">
+        {% else %}
+          <img src="/themes/custom/likinormas/dist/assets/images/avatar-profile..png" alt="avatar"
+               class="rounded-circle img-fluid">
+        {% endif %}
+        <h3 class="profile-info-name">{{ user.name.value|render|striptags }}</h3>
+        {% if content.profession_or_occupation|render|striptags %}
+          <p class="profile-info-profession">{{ content.profession_or_occupation|render|striptags|trim }}</p>
+        {% endif %}
+        {% if content.company|render|striptags %}
+          <p class="profile-info-company">{{ content.company|render|striptags|trim }}</p>
+        {% endif %}
+        {% if current_user_id != 0 %}
+          <div class="container-button d-flex justify-content-center mb-2">
+            {% if current_user_id != user.id %}
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Contactar ahora
+              </button>
+            {% else %}
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editUserModal">
+                Editar Perfil
+              </button>
+              {# <a href="/user/{{ user.id }}/edit" type="button" class="btn btn-primary use-ajax" data-dialog-type="modal">Editar perfil</a> #}
+            {% endif %}
+          </div>
+        {% endif %}
+
+      </div>
+      <div class="profile-activity">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+                    role="tab" aria-controls="home" aria-selected="true">Actividad del usuario
+            </button>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="comments-user-block">
+              <div class="comments">
+                {{ drupal_view('rules_user_comments', 'block_1') }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal modal-contact-now fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        {{ drupal_entity('webform', 'rules_webform_contact_users') }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal edit-user-modal fade" id="editUserModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        {{ drupal_entity_form('user', user.id) }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<dialog tabindex="-1" role="dialog" class="dialog">
+  <div class="dialog-header">
+    <h4 class="dialog-header-title">Estado del comentario</h4>
+    <button type="button" class="dialog-close">X</button>
+  </div>
+  <div class="dialog-body">
+    <p class="dialog-body-description"></p>
+  </div>
+</dialog>

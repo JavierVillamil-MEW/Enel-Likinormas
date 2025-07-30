@@ -1,0 +1,30 @@
+uuid: 845b9202-6c48-4a4d-a685-f39876d66726
+langcode: es
+status: true
+dependencies:
+  content:
+    - 'block_content:rules_title_description_and_item:74411651-9bb4-4ad8-bdcd-983151a9be7e'
+  module:
+    - block_content
+    - system
+  theme:
+    - likinormas
+id: registroconfacebook
+theme: likinormas
+region: content
+weight: -1
+provider: null
+plugin: 'block_content:74411651-9bb4-4ad8-bdcd-983151a9be7e'
+settings:
+  id: 'block_content:74411651-9bb4-4ad8-bdcd-983151a9be7e'
+  label: 'Registro con Facebook'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '/user/*/edit'

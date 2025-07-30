@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 524912e5-1315-43b0-aca1-b5e95ec7a83e
+  bundle: rules_subcategory
+  default_langcode: en
+  depends:
+    789ca787-1452-4781-acf0-12b335337792: taxonomy_term
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'Equipo auxiliar de medición'
+  weight:
+    -
+      value: 0
+  parent:
+    -
+      target_id: 0
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  related_category:
+    -
+      entity: 789ca787-1452-4781-acf0-12b335337792

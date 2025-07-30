@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 521a182f-546e-4f2c-8674-28874cf3318e
+  bundle: rules_subcategory
+  default_langcode: en
+  depends:
+    1544795f-eaa3-4456-a07e-ec50e53413f6: taxonomy_term
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: Otros
+  weight:
+    -
+      value: 0
+  parent:
+    -
+      target_id: 0
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /normas/otros/otros
+      langcode: en
+      pathauto: 1
+  related_category:
+    -
+      entity: 1544795f-eaa3-4456-a07e-ec50e53413f6

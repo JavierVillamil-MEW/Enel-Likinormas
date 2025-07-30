@@ -1,0 +1,29 @@
+uuid: 39400f04-120d-474f-b486-d0cfc86fc20d
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.rules_subcategory.order
+    - field.field.taxonomy_term.rules_subcategory.related_category
+    - taxonomy.vocabulary.rules_subcategory
+  module:
+    - text
+id: taxonomy_term.rules_subcategory.default
+targetEntityType: taxonomy_term
+bundle: rules_subcategory
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  langcode: true
+  order: true
+  related_category: true

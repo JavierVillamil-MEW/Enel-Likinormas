@@ -1,0 +1,31 @@
+_meta:
+  version: '1.0'
+  entity_type: block_content
+  uuid: 9e076622-2761-4682-9a22-8f5292d3a04c
+  bundle: rules_banner_with_background
+  default_langcode: es
+  depends:
+    d16dbdb2-e3d5-4257-ab13-7a153544e4b7: taxonomy_term
+default:
+  status:
+    -
+      value: true
+  info:
+    -
+      value: 'Background Normas tenicas'
+  reusable:
+    -
+      value: true
+  revision_translation_affected:
+    -
+      value: true
+  background_color:
+    -
+      entity: d16dbdb2-e3d5-4257-ab13-7a153544e4b7
+  filter_description:
+    -
+      value: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam faucibus aliquet nibh et porttitor. \r\nNullam consectetur commodo nibh. Ut ac quam metus. Curabitur cursus, nulla eget sodales laoreet, \r\nnibh dolor posuere elit, nec elementum mauris lorem venenatis lectus. "
+  filter_title:
+    -
+      value: '<h1>Normas Técnicas<h1>'
+      format: full_html

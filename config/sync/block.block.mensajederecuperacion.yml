@@ -1,0 +1,30 @@
+uuid: 0d10e0b5-a6a5-44ef-83ea-59a3c9ba8173
+langcode: es
+status: true
+dependencies:
+  content:
+    - 'block_content:rules_title_description_and_item:98c8f17b-73fc-47fd-abce-fd73a454e14e'
+  module:
+    - block_content
+    - system
+  theme:
+    - likinormas
+id: mensajederecuperacion
+theme: likinormas
+region: content
+weight: -3
+provider: null
+plugin: 'block_content:98c8f17b-73fc-47fd-abce-fd73a454e14e'
+settings:
+  id: 'block_content:98c8f17b-73fc-47fd-abce-fd73a454e14e'
+  label: 'Mensaje de recuperacion'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '/user/reset/*'

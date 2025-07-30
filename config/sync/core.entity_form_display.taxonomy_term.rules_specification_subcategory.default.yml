@@ -1,0 +1,40 @@
+uuid: 95d1f8af-f1ec-4534-85cf-dc3a861c8523
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.rules_specification_subcategory.order
+    - field.field.taxonomy_term.rules_specification_subcategory.related_category
+    - taxonomy.vocabulary.rules_specification_subcategory
+id: taxonomy_term.rules_specification_subcategory.default
+targetEntityType: taxonomy_term
+bundle: rules_specification_subcategory
+mode: default
+content:
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  order:
+    type: number
+    weight: 2
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  related_category:
+    type: options_select
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  description: true
+  langcode: true
+  path: true
+  simple_sitemap: true
+  status: true

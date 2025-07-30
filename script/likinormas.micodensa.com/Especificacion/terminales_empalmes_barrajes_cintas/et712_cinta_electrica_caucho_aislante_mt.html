@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET712 Cinta eléctrica de caucho aislante para MT hasta 69 kV | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/590" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F590.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/590" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/590" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '33');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET712 Cinta el&#233;ctrica de caucho aislante para MT hasta 69 kV</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET 712</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">02/07/2013</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/590">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F590&amp;nodoid=590', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et712_cinta_electrica_caucho_aislante_mt.html#heading_0">1. OBJETO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et712_cinta_electrica_caucho_aislante_mt.html#heading_1">2. ALCANCE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et712_cinta_electrica_caucho_aislante_mt.html#heading_2">3. CONDICIONES DE SERVICIO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et712_cinta_electrica_caucho_aislante_mt.html#heading_3">4. NORMAS DE FABRICACI&#211;N Y PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et712_cinta_electrica_caucho_aislante_mt.html#heading_4">5. APLICACIONES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et712_cinta_electrica_caucho_aislante_mt.html#heading_5">6. REQUERIMIENTOS T&#201;CNICOS PARTICULARES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et712_cinta_electrica_caucho_aislante_mt.html#heading_6">6.1 CARACTER&#205;STICAS F&#205;SICAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et712_cinta_electrica_caucho_aislante_mt.html#heading_7">6.2 CARACTER&#205;STICAS EL&#201;CTRICAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et712_cinta_electrica_caucho_aislante_mt.html#heading_8">6.3 CARACTER&#205;STICAS MEC&#193;NICAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et712_cinta_electrica_caucho_aislante_mt.html#heading_9">7. CRITERIOS DE ACEPTACI&#211;N Y RECHAZO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et712_cinta_electrica_caucho_aislante_mt.html#heading_10">8. PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et712_cinta_electrica_caucho_aislante_mt.html#heading_11">8.1 Factor de disipaci&#243;n y permitividad</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et712_cinta_electrica_caucho_aislante_mt.html#heading_12">8.2 Resistividad volum&#233;trica</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et712_cinta_electrica_caucho_aislante_mt.html#heading_13">8.3 Rigidez diel&#233;ctrica</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et712_cinta_electrica_caucho_aislante_mt.html#heading_14">8.4 Resistencia al ozono</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et712_cinta_electrica_caucho_aislante_mt.html#heading_15">8.5 Resistencia al agua y a los rayos UV</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et712_cinta_electrica_caucho_aislante_mt.html#heading_16">8.6 Fusi&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et712_cinta_electrica_caucho_aislante_mt.html#heading_17">8.7 Prueba dimensional</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et712_cinta_electrica_caucho_aislante_mt.html#heading_18">8.8 Resistencia a la tensi&#243;n y elongaci&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et712_cinta_electrica_caucho_aislante_mt.html#heading_19">9. MARCACI&#211;N, EMPAQUE Y ROTULADO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et712_cinta_electrica_caucho_aislante_mt.html#heading_20">10. REQUISITOS PARA LAS OFERTAS</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1. OBJETO</h2>
+Establecer las caracter&#237;sticas t&#233;cnicas que debe cumplir la cinta el&#233;ctrica aislante de caucho EPR (Ethylene Propylene Rubber) utilizada en baja y <a href="et712_cinta_electrica_caucho_aislante_mt.html#" id="version-277" class="externalLink  glosarioLink">media tensi&#243;n</a> (hasta 69 kV)<br />
+<h2 id="heading_1" >2. ALCANCE</h2>
+Esta especificaci&#243;n aplica para todas las cintas de este tipo que adquiera o que sean instaladas en el <a href="et712_cinta_electrica_caucho_aislante_mt.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de distribuci&#243;n de CODENSA S.A. ESP.<br />
+<h2 id="heading_2" >3. CONDICIONES DE SERVICIO</h2>
+ Condiciones ambientales
+<ul><li>Altura sobre el nivel del mar: 2640 m</li>
+<li>Humedad relativa: 90%</li>
+<li>Temperatura ambiente m&#225;xima: 27 &#176;C</li>
+<li>Temperatura ambiente m&#237;nima: -5 &#176;C</li>
+<li>Temperatura ambiente promedio: 14 &#176;C</li></ul>
+
+<h2 id="heading_3" >4. NORMAS DE FABRICACI&#211;N Y PRUEBAS</h2>
+<div style="width:711px;"><table><tr><td colspan="1" rowspan="1" style="width:150px;height:22px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:561px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:41px;text-align:center">ASTM D- 4388  </td><td colspan="1" rowspan="1" style="">Standard Specification for Nonmetallic Semi-Conducting and Electrically Insulating Rubber Tapes</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:41px;text-align:center">ASTM D-4325</td><td colspan="1" rowspan="1" style="">Standard test methods for Nonmetallic Semi-conducting and Electrically Insulating Rubber Tapes</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:41px;text-align:center">ASTM D –1000</td><td colspan="1" rowspan="1" style="">Standard test method for Pressure-Sensitive Adhesive Coated Tapes used for electrical and electronical applications</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:41px;text-align:center">ASTM D-149</td><td colspan="1" rowspan="1" style="">Test method for dielectric breakdown voltage and dielectric strength of solid electrical insulating materials at commercial power frecuencies</td></tr></table><br /></div><h2 id="heading_4" >5. APLICACIONES</h2>
+-	Aislamiento <a href="et712_cinta_electrica_caucho_aislante_mt.html#" id="version-177" class="externalLink  glosarioLink">el&#233;ctrico</a> en empalmes  hasta 69 kV.<br />-	Compatible con todos los aislamientos s&#243;lidos de cables.<br />-	Resistente a temperaturas de <a href="et712_cinta_electrica_caucho_aislante_mt.html#" id="version-183" class="externalLink  glosarioLink">emergencia</a> de 130&#176;C<br />-	Resistente a la humedad como sello en conexiones el&#233;ctricas.<br />
+<h2 id="heading_5" >6. REQUERIMIENTOS T&#201;CNICOS PARTICULARES</h2>
+La cinta de caucho debe ser autofundente, resistente al ozono, dise&#241;ada para aislamiento de cables y conductores en instalaciones secas o h&#250;medas con temperaturas cercanas a los 90&#176;C en operaci&#243;n continua.<br /><br />Puede incluir un liner o separador de poli&#233;ster que no se pegue  a la cinta durante su aplicaci&#243;n.<br />
+<h3 id="heading_6" >6.1 CARACTER&#205;STICAS F&#205;SICAS</h3><div style="width:587px;"><table><tr><td colspan="1" rowspan="1" style="width:72px;height:9px;text-align:center"><b>ITEM</b></td><td colspan="1" rowspan="1" style="width:242px;text-align:center"><b>DESCRIPCI&#211;N</b></td><td colspan="1" rowspan="1" style="width:273px;text-align:center"><b>VALOR</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">1</td><td colspan="1" rowspan="1" style="">Color</td><td colspan="1" rowspan="1" style="text-align:center">Negro</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">2</td><td colspan="1" rowspan="1" style="">Espesor seg&#250;n ASTM D 4325</td><td colspan="1" rowspan="1" style="text-align:center">0,76 mm</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">3</td><td colspan="1" rowspan="1" style="">Temperatura de operaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">90 &#176;C</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">4</td><td colspan="1" rowspan="1" style="">Temperatura de <a href="et712_cinta_electrica_caucho_aislante_mt.html#" id="version-183" class="externalLink  glosarioLink">emergencia</a></td><td colspan="1" rowspan="1" style="text-align:center">130 &#176;C</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">5</td><td colspan="1" rowspan="1" style="">Resistencia al ozono  (ASTM D 4325)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">6</td><td colspan="1" rowspan="1" style="">Resistencia a la humedad y rayos UV (ASTM D 4325)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">7</td><td colspan="1" rowspan="1" style="">Fusi&#243;n (ASTM D 4388)</td><td colspan="1" rowspan="1" style="">Deben pasar a una elongaci&#243;n del 300%</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">8</td><td colspan="1" rowspan="1" style="">Conductividad T&#233;rmica seg&#250;n ASTM D-1518</td><td colspan="1" rowspan="1" style="text-align:center">1200 Btu</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">9</td><td colspan="1" rowspan="1" style="">Ancho</td><td colspan="1" rowspan="1" style="text-align:center">18 - 19 mm</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">10</td><td colspan="1" rowspan="1" style="">Longitud del rollo</td><td colspan="1" rowspan="1" style="text-align:center">9 m </td></tr></table><br /></div><h3 id="heading_7" >6.2 CARACTER&#205;STICAS EL&#201;CTRICAS</h3><div style="width:587px;"><table><tr><td colspan="1" rowspan="1" style="width:72px;height:9px;text-align:center"><b>&#205;TEM</b></td><td colspan="1" rowspan="1" style="width:242px;text-align:center"><b>DESCRIPCI&#211;N</b></td><td colspan="1" rowspan="1" style="width:273px;text-align:center"><b>VALOR</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">1</td><td colspan="1" rowspan="1" style="">Rigidez diel&#233;ctrica m&#237;nima</td><td colspan="1" rowspan="1" style="text-align:center">24 kV/mm </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">2</td><td colspan="1" rowspan="1" style="">Resistencia de aislamiento (ASTM D 1000) </td><td colspan="1" rowspan="1" style="text-align:center">1x10<sup>6</sup> M Ohmio m&#237;nimo</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">3</td><td colspan="1" rowspan="1" style="">Tensi&#243;n m&#225;xima </td><td colspan="1" rowspan="1" style="text-align:center">69 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">4</td><td colspan="1" rowspan="1" style="">Factor de disipaci&#243;n m&#225;ximo</td><td colspan="1" rowspan="1" style="text-align:center">0,05</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">5</td><td colspan="1" rowspan="1" style="">Permitividad m&#225;xima</td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr></table><br /></div><h3 id="heading_8" >6.3 CARACTER&#205;STICAS MEC&#193;NICAS</h3><div style="width:587px;"><table><tr><td colspan="1" rowspan="1" style="width:72px;height:9px;text-align:center"><b>&#205;TEM</b></td><td colspan="1" rowspan="1" style="width:242px;text-align:center"><b>DESCRIPCI&#211;N</b></td><td colspan="1" rowspan="1" style="width:273px;text-align:center"><b>VALOR</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">1</td><td colspan="1" rowspan="1" style="">Tensi&#243;n de ruptura m&#237;nima</td><td colspan="1" rowspan="1" style="text-align:center">1,7 MPa  </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">2</td><td colspan="1" rowspan="1" style="">Elongaci&#243;n en punto de ruptura</td><td colspan="1" rowspan="1" style="text-align:center">700 % M&#237;nimo.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">3</td><td colspan="1" rowspan="1" style="">Vida &#250;til m&#237;nima</td><td colspan="1" rowspan="1" style="text-align:center">5 a&#241;os</td></tr></table><br /></div><h2 id="heading_9" >7. CRITERIOS DE ACEPTACI&#211;N Y RECHAZO</h2>
+Para la <a href="et712_cinta_electrica_caucho_aislante_mt.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> de las cintas se utilizar&#225; la metodolog&#237;a indicada en el Procedimiento para la realizaci&#243;n de inspecciones t&#233;cnicas, utilizando para el muestreo un nivel de <a href="et712_cinta_electrica_caucho_aislante_mt.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> II y un nivel de aceptaci&#243;n de 2.5%. <br /><br />Las pruebas de recepci&#243;n ser&#225;n efectuadas con la presencia de un representante de CODENSA S.A. ESP; en las instalaciones del proveedor. Si los resultados de las pruebas o los equipos de prueba no son confiables, estas igualmente podr&#225;n ser realizadas o repetidas y el costo ser&#225; asumido por el proveedor, en laboratorios oficiales o particulares reconocidos por CODENSA S.A. ESP.<br />
+<h2 id="heading_10" >8. PRUEBAS</h2>
+El proveedor debe entregar protocolos de las siguientes pruebas tipo realizadas en un laboratorio acreditado nacional o internacionalmente.<br />
+<h3 id="heading_11" >8.1 Factor de disipaci&#243;n y permitividad</h3>
+La prueba del factor de disipaci&#243;n y la permitividad de un <a href="et712_cinta_electrica_caucho_aislante_mt.html#" id="version-274" class="externalLink  glosarioLink">material</a> aislante son pruebas no destructivas que ayudan a determinar la uniformidad del <a href="et712_cinta_electrica_caucho_aislante_mt.html#" id="version-338" class="externalLink  glosarioLink">producto</a>, absorci&#243;n de humedad y cambios en la composici&#243;n.<br /><br />Esta prueba debe realizarse de acuerdo a la norma ASTM D-150, aplicando un esfuerzo de 1,6 kV/mm a una frecuencia de 60 ciclos por segundo.<br /><br />El reporte de esta prueba debe incluir la siguiente informaci&#243;n: Espesor promedio de la cinta, m&#233;todo de acondicionamiento, factor de disipaci&#243;n promedio y permitividad promedio.<br />
+<h3 id="heading_12" >8.2 Resistividad volum&#233;trica</h3>
+Esta medida de resistividad es &#250;til para determinar la uniformidad del <a href="et712_cinta_electrica_caucho_aislante_mt.html#" id="version-338" class="externalLink  glosarioLink">producto</a>, la sensibilidad a la humedad y cambios en la composici&#243;n.<br /><br />Debe realizarse seg&#250;n las normas ASTM D 4325 y ASTM D257.<br />
+<h3 id="heading_13" >8.3 Rigidez diel&#233;ctrica</h3>
+Esta prueba da una medida de la capacidad para soportar los esfuerzos el&#233;ctricos. <br /> <br />Esta prueba debe realizarse de acuerdo a la norma ASTM D-149, incrementando la tensi&#243;n a una rata de 500V/s. Todas las medidas de <a href="et712_cinta_electrica_caucho_aislante_mt.html#" id="version-204" class="externalLink  glosarioLink">falla</a> deben realizarse en el aire. Se deben tomar 5 medidas para cada rollo de cinta bajo prueba.<br /><br />El reporte debe incluir la siguiente informaci&#243;n: Espesor y rigidez diel&#233;ctrica promedio en kV/mm.<br />
+<h3 id="heading_14" >8.4 Resistencia al ozono</h3>
+Esta prueba da una importante informaci&#243;n acerca de la resistencia del aislamiento al ataque del ozono al que puede encontrarse expuesta la cinta cuando se encuentra en cables de <a href="et712_cinta_electrica_caucho_aislante_mt.html#" id="version-277" class="externalLink  glosarioLink">media tensi&#243;n</a> en operaci&#243;n.<br /><br />La prueba debe realizarse de acuerdo al m&#233;todo descrito en la norma ASTM D 4325. Al final de la prueba la cinta no debe presentar fisuras o deterioro visible en su superficie.<br />
+<h3 id="heading_15" >8.5 Resistencia al agua y a los rayos UV</h3>
+Para esta prueba se utiliza l&#225;mpara de arco de carbono, que pretende simular el efecto de la luz natural del sol, con un incremento de la intensidad en el rango de las longitudes de onda ultravioleta.<br /><br />El procedimiento es colocar 5 muestras en el <a href="et712_cinta_electrica_caucho_aislante_mt.html#" id="version-189" class="externalLink  glosarioLink">equipo</a> de exposici&#243;n al agua durante un ciclo de 18 minutos con aspersi&#243;n de agua destilada y luego un ciclo de 102 minutos en seco con la luz ultravioleta a una temperatura constante de 40&#176;C.<br /><br />Despu&#233;s de esto ninguna de las muestras debe presentar fisuras o deterioro f&#237;sico.<br />
+<h3 id="heading_16" >8.6 Fusi&#243;n</h3>
+Esta prueba permite ver la capacidad de la cinta de mantenerse en su sitio conservando una fuerza permanente sobre el conductor o la superficie donde ha sido aplicada. Debe realizarse siguiendo el procedimiento indicado en la Norma ASTM D4325. Los resultados obtenidos deben analizarse seg&#250;n la norma ASTM D 4388.<br />
+<h3 id="heading_17" >8.7 Prueba dimensional</h3>
+En esta prueba se miden 3 dimensiones: longitud, ancho y espesor. Estas medidas son necesarias para asegurar que se est&#225; adquiriendo la cantidad correcta de cinta. El espesor en especial permite controlar la uniformidad y as&#237; mismo es importante dentro de las caracter&#237;sticas el&#233;ctricas y mec&#225;nicas.<br /><br />Debe realizarse seg&#250;n el procedimiento indicado en la ASTM D 4325.<br />
+<h3 id="heading_18" >8.8 Resistencia a la tensi&#243;n y elongaci&#243;n</h3>
+La resistencia a la tensi&#243;n es una medida de la uniformidad, <a href="et712_cinta_electrica_caucho_aislante_mt.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> y habilidad de soportar los esfuerzos que se presentan durante la operaci&#243;n.<br /><br />La elongaci&#243;n es una medida de uniformidad, de <a href="et712_cinta_electrica_caucho_aislante_mt.html#" id="version-112" class="externalLink  glosarioLink">calidad</a>, y permite dar una ligera indicaci&#243;n de cuanto puede estirar la cinta un operario en las labores de terreno.<br /><br />Estas pruebas deben realizarse con base en las normas ASTM D 4325 y ASTM D 412.<br />
+<h2 id="heading_19" >9. MARCACI&#211;N, EMPAQUE Y ROTULADO</h2>
+Las cintas deben ir empacadas en paquetes individuales, pero pueden almacenarse varias unidades en cajas. El almacenamiento debe ser preferiblemente en sitios oscuros y fr&#237;os. No deben mantenerse cerca de ninguna fuente de calor, como calderas o radiadores.<br /><br />Las cajas deben ir marcadas con la siguiente informaci&#243;n:<br />
+<ul><li>      BOG-CUN</li>
+<li>N&#250;mero de la orden de compra</li>
+<li>C&#243;digo SAP del material </li>
+<li>Nombre del fabricante</li>
+<li>Caracter&#237;sticas t&#233;cnicas</li>
+<li>Nombre del Fabricante</li>
+<li>Fecha de fabricaci&#243;n  </li>
+<li>Tipo de Cinta</li></ul>
+
+<h2 id="heading_20" >10. REQUISITOS PARA LAS OFERTAS</h2>
+El oferente deber&#225; presentar su oferta <a href="et712_cinta_electrica_caucho_aislante_mt.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a>  en el siguiente orden:<br /><br />-	<b>ANEXO 1:</b> relaci&#243;n de los bienes cotizados.<br /><br />-	<b>ANEXO 2:</b>  informaci&#243;n del oferente.<br /><br />-	<b>ANEXO 3:</b> planillas de caracter&#237;sticas t&#233;cnicas garantizadas debidamente diligenciada.<br /><br />-	<b>EXCEPCIONES T&#201;CNICAS:</b> apartado en el cual se deben relacionar las excepciones de car&#225;cter exclusivamente t&#233;cnico de la oferta, respecto a los bienes solicitados. Si la oferta no presenta excepci&#243;n, se indicar&#237;a expresamente en el mismo “NO HAY EXCEPCIONES” <br /><br />-	<b>PROTOCOLO  DE PRUEBAS:</b> relaci&#243;n de los ensayos realizados, de acuerdo con lo indicado en el apartado 9 de la presente especificaci&#243;n. <br /><br />-	<b>CERTIFICACIONES:</b> El oferente adjuntar&#225; con su propuesta el certificado de conformidad de producto con norma t&#233;cnica,  expedido por una entidad autorizada por la ONAC - Organismo Nacional de Acreditaci&#243;n de Colombia. <br /><br />-	<b>EVIDENCIA <a href="et712_cinta_electrica_caucho_aislante_mt.html#" id="version-376" class="externalLink  glosarioLink">T&#201;CNICA</a>:</b> relaci&#243;n de clientes, evidencia de su capacidad <a href="et712_cinta_electrica_caucho_aislante_mt.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a> y experiencias relacionadas con los materiales y/o equipos cotizados.<br /><br />-	<b>GARANT&#205;A:</b> carta de garant&#237;a de los bienes cotizados. <br /><br />-	<b>NORMAS:</b> normas t&#233;cnicas aplicables a los bienes cotizados.<br /><br />-	<b>CAT&#193;LOGOS:</b> cat&#225;logos originales completos y actualizados del fabricante, que correspondan a los datos bienes cotizados.<br /><br />-	<b>INFORMACI&#211;N ADICIONAL:</b> informaci&#243;n adicional que se considere aporta explicaci&#243;n al dise&#241;o del <a href="et712_cinta_electrica_caucho_aislante_mt.html#" id="version-189" class="externalLink  glosarioLink">equipo</a>.<br /><br />CODENSA S.A. podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones, sin expresi&#243;n de causa ni obligaci&#243;n de compensaci&#243;n.<br /><br /><b>ANEXO 1. CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS</b><br /><div style="width:856px;"><table><tr><td colspan="4" rowspan="1" style="width:856px;height:10px;text-align:center"><b>CINTA EL&#201;CTRICA DE CAUCHO AISLANTE  PARA  M.T. HASTA 69 kV</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="width:56px;height:10px;text-align:center"><b>N&#176;</b></td><td colspan="1" rowspan="1" style="width:350px;text-align:center"><b>Descripci&#243;n</b></td><td colspan="1" rowspan="1" style="width:300px;text-align:center"><b>Solicitado</b></td><td colspan="1" rowspan="1" style="width:150px;text-align:center"><b>Ofertado</b></td></tr>
+<tr><td colspan="4" rowspan="1" style="height:10px;"><b>INFORMACI&#211;N GENERAL</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">1</td><td colspan="1" rowspan="1" style="">Oferente</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">2</td><td colspan="1" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">3</td><td colspan="1" rowspan="1" style="">Referencia</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">4</td><td colspan="1" rowspan="1" style="">Pa&#237;s</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">5</td><td colspan="1" rowspan="1" style="">Normas para fabricaci&#243;n y ensayos</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:10px;"><b>CARACTER&#205;STICAS F&#205;SICAS</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">6</td><td colspan="1" rowspan="1" style="">Color</td><td colspan="1" rowspan="1" style="text-align:center">Negro</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">7</td><td colspan="1" rowspan="1" style="">Espesor seg&#250;n ASTM D 4325</td><td colspan="1" rowspan="1" style="text-align:center">0,76 mm</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">8</td><td colspan="1" rowspan="1" style="">Temperatura de operaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">90 &#176;C</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">9</td><td colspan="1" rowspan="1" style="">Temperatura de <a href="et712_cinta_electrica_caucho_aislante_mt.html#" id="version-183" class="externalLink  glosarioLink">emergencia</a></td><td colspan="1" rowspan="1" style="text-align:center">130 &#176;C</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">10</td><td colspan="1" rowspan="1" style="">Resistencia al ozono  (ASTM D 4325)</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">11</td><td colspan="1" rowspan="1" style="">Resistencia a la humedad y rayos UV (ASTM D 4325)</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">12</td><td colspan="1" rowspan="1" style="">Fusi&#243;n (ASTM D 4388)</td><td colspan="1" rowspan="1" style="text-align:center">Deben pasar a una elongaci&#243;n del 300%</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">13</td><td colspan="1" rowspan="1" style="">Conductividad T&#233;rmica seg&#250;n ASTM D-1518</td><td colspan="1" rowspan="1" style="text-align:center">1200 Btu</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">14</td><td colspan="1" rowspan="1" style="">Ancho</td><td colspan="1" rowspan="1" style="text-align:center">18 - 19 mm</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">15</td><td colspan="1" rowspan="1" style="">Longitud del rollo</td><td colspan="1" rowspan="1" style="text-align:center">9 m </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:10px;"><b>CARACTER&#205;STICAS EL&#201;CTRICAS</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">16</td><td colspan="1" rowspan="1" style="">Rigidez diel&#233;ctrica m&#237;nima</td><td colspan="1" rowspan="1" style="text-align:center">24 kV/mm </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">17</td><td colspan="1" rowspan="1" style="">Resistencia de aislamiento (ASTM D 1000) </td><td colspan="1" rowspan="1" style="text-align:center">1x10<sup>6</sup> M Ohmio m&#237;nimo</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">18</td><td colspan="1" rowspan="1" style="">Tensi&#243;n m&#225;xima </td><td colspan="1" rowspan="1" style="text-align:center">69 kV</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">19</td><td colspan="1" rowspan="1" style="">Factor de disipaci&#243;n m&#225;ximo</td><td colspan="1" rowspan="1" style="text-align:center">0,05</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">20</td><td colspan="1" rowspan="1" style="">Permitividad m&#225;xima</td><td colspan="1" rowspan="1" style="text-align:center">4</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:10px;"><b>CARACTER&#205;STICAS MEC&#193;NICAS</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">21</td><td colspan="1" rowspan="1" style="">Tensi&#243;n de ruptura m&#237;nima</td><td colspan="1" rowspan="1" style="text-align:center">1,7 MPa  </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">22</td><td colspan="1" rowspan="1" style="">Elongaci&#243;n en punto de ruptura</td><td colspan="1" rowspan="1" style="text-align:center">700% m&#237;nimo</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">23</td><td colspan="1" rowspan="1" style="">Vida &#250;til m&#237;nima</td><td colspan="1" rowspan="1" style="text-align:center">5 a&#241;os</td><td colspan="1" rowspan="1" style=""> </td></tr></table><br /></div><br /><br /><br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 590, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

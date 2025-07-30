@@ -1,0 +1,22 @@
+uuid: efbeb623-e31c-4e0e-a82c-f3f4c261ad14
+langcode: es
+status: true
+dependencies:
+  module:
+    - comment
+    - likinormas_pdf_using_mpdf
+    - media
+    - system
+_core:
+  default_config_hash: pq_mEIu_B4widZN7Ap81iCJSjShFFdcL0jEiCi8VrDk
+id: anonymous
+label: 'Usuario anónimo'
+weight: 0
+is_admin: false
+permissions:
+  - 'access comments'
+  - 'access content'
+  - 'access user profiles'
+  - 'generate rules_technical_rules pdf'
+  - 'generate rules_technical_specifications pdf'
+  - 'view media'

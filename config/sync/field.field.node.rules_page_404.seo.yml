@@ -1,0 +1,21 @@
+uuid: ca11da82-98cb-4406-90d1-7cb4158090f7
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.node.seo
+    - node.type.rules_page_404
+  module:
+    - metatag
+id: node.rules_page_404.seo
+field_name: seo
+entity_type: node
+bundle: rules_page_404
+label: SEO
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: metatag

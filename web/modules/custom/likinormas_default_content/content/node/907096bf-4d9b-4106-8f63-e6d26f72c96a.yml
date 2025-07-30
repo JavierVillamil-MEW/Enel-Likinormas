@@ -1,0 +1,252 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 907096bf-4d9b-4106-8f63-e6d26f72c96a
+  bundle: rules_home_content
+  default_langcode: en
+  depends:
+    edd5298b-afaf-4357-a79c-2d71d6ce5e6d: file
+    24a3be63-cb89-438e-921f-53a9fd571db8: file
+    7a4a3703-dd88-4bed-b773-abe532b6bc21: taxonomy_term
+    d16dbdb2-e3d5-4257-ab13-7a153544e4b7: taxonomy_term
+    60f5ce6d-e598-44f6-ab62-88d4ce515456: file
+    3d5f5863-5ee4-4b31-b2e6-265469a4ca54: file
+    fbc20365-b5ae-4527-a6a2-e923530299d3: taxonomy_term
+    1dc42eea-de05-4d05-9c43-933304ba3e38: taxonomy_term
+    3f7b0722-d37b-4c1f-86ef-0ba5392169c0: file
+    20f0bb3f-78db-43eb-b89b-6d13ea1acdc9: file
+    1b0ca6b2-5a14-4414-8959-47738183cb12: file
+    e1322bcb-24c1-44d8-adac-205c0c0017d3: file
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: Home
+  created:
+    -
+      value: 1682436070
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /home
+      langcode: en
+      pathauto: 0
+  background_banner_button:
+    -
+      uri: 'internal:/'
+      title: 'Especificaciones técnicas corporativas'
+      options: {  }
+  background_banner_description:
+    -
+      value: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy \r\neirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam \r\nvoluptua. At vero eos et accusam et justo duo"
+  background_banner_image:
+    -
+      entity: edd5298b-afaf-4357-a79c-2d71d6ce5e6d
+      alt: Image
+      title: Image
+      width: 1920
+      height: 504
+  background_banner_image_mobile:
+    -
+      entity: 24a3be63-cb89-438e-921f-53a9fd571db8
+      alt: Image
+      title: ''
+      width: 414
+      height: 504
+  background_banner_title:
+    -
+      value: '<h2>Especificaciones técnicas corporativas</h2>'
+      format: full_html
+  contact_button:
+    -
+      uri: 'internal:/'
+      title: 'Ver más'
+      options: {  }
+  contact_description:
+    -
+      value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae nulla tortor. Vestibulum blandit purus ullamcorper lacus condimentum porta. Sed in luctus tortor. Integer ullamcorper urna nibh, ut mollis dui pellentesque ut.'
+  contact_title:
+    -
+      value: '<h2 class="title-secondary">Contacto</h2>'
+      format: full_html
+  contact_webform:
+    -
+      target_id: rules_contact_webform
+      default_data: ''
+      status: open
+      open: ''
+      close: ''
+  initial_sections:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 0655df4c-f132-4c56-9108-7c3b149bc4d8
+          bundle: rules_section
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1682436070
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          section_alignment:
+            -
+              entity: 7a4a3703-dd88-4bed-b773-abe532b6bc21
+          section_button:
+            -
+              uri: 'internal:/'
+              title: 'Ver normas técnicas'
+              options: {  }
+          section_color:
+            -
+              entity: d16dbdb2-e3d5-4257-ab13-7a153544e4b7
+          section_description:
+            -
+              value: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, \r\nsed diam nonumy eirmod tempor invidunt ut labore et \r\ndolore magna aliquyam erat, sed diam voluptua. At vero eos \r\net accusam et justo duo"
+          section_image:
+            -
+              entity: 60f5ce6d-e598-44f6-ab62-88d4ce515456
+              alt: Image-1
+              title: Image-1
+              width: 960
+              height: 687
+          section_image_mobile:
+            -
+              entity: 3d5f5863-5ee4-4b31-b2e6-265469a4ca54
+              alt: Image-1
+              title: ''
+              width: 414
+              height: 487
+          section_title:
+            -
+              value: '<h2>Normas técnicas</h2>'
+              format: full_html
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: 4d986a04-6b2e-44ae-be04-4b00db3dec6a
+          bundle: rules_section
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1682436090
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          section_alignment:
+            -
+              entity: fbc20365-b5ae-4527-a6a2-e923530299d3
+          section_button:
+            -
+              uri: 'internal:/'
+              title: 'Especificaciones técnicas locales'
+              options: {  }
+          section_color:
+            -
+              entity: 1dc42eea-de05-4d05-9c43-933304ba3e38
+          section_description:
+            -
+              value: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, \r\nsed diam nonumy eirmod tempor invidunt ut labore et \r\ndolore magna aliquyam erat, sed diam voluptua. At vero eos \r\net accusam et justo duo"
+          section_image:
+            -
+              entity: 3f7b0722-d37b-4c1f-86ef-0ba5392169c0
+              alt: Image-2
+              title: Image-2
+              width: 960
+              height: 691
+          section_image_mobile:
+            -
+              entity: 20f0bb3f-78db-43eb-b89b-6d13ea1acdc9
+              alt: Image-2
+              title: ''
+              width: 414
+              height: 489
+          section_title:
+            -
+              value: '<h2>Especificaciones técnicas locales</h2>'
+              format: full_html
+  user_network:
+    -
+      entity:
+        _meta:
+          version: '1.0'
+          entity_type: paragraph
+          uuid: d1e0ac93-2abf-457a-a35e-fb36b2afc007
+          bundle: rules_section
+          default_langcode: en
+        default:
+          status:
+            -
+              value: true
+          created:
+            -
+              value: 1682436070
+          behavior_settings:
+            -
+              value: {  }
+          revision_translation_affected:
+            -
+              value: true
+          section_alignment:
+            -
+              entity: 7a4a3703-dd88-4bed-b773-abe532b6bc21
+          section_button:
+            -
+              uri: 'internal:/'
+              title: 'Registrarme ahora'
+              options: {  }
+          section_description:
+            -
+              value: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, \r\nsed diam nonumy eirmod tempor invidunt ut labore et \r\ndolore magna aliquyam erat, sed diam voluptua. At vero eos \r\net accusam et justo duo"
+          section_image:
+            -
+              entity: 1b0ca6b2-5a14-4414-8959-47738183cb12
+              alt: users
+              title: users
+              width: 374
+              height: 296
+          section_image_mobile:
+            -
+              entity: e1322bcb-24c1-44d8-adac-205c0c0017d3
+              alt: users
+              title: ''
+              width: 374
+              height: 296
+          section_title:
+            -
+              value: '<h2>Red del usuario</h2>'
+              format: full_html

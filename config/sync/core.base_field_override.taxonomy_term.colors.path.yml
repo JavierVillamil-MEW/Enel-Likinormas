@@ -1,0 +1,20 @@
+uuid: 616ed3a0-ef67-4df5-b682-d36b52f4d2a4
+langcode: es
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.colors
+  module:
+    - path
+id: taxonomy_term.colors.path
+field_name: path
+entity_type: taxonomy_term
+bundle: colors
+label: 'Alias de URL'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

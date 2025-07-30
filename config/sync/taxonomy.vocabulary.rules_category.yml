@@ -1,0 +1,8 @@
+uuid: 8f4067ad-1726-473f-b021-570f51990ba4
+langcode: es
+status: true
+dependencies: {  }
+name: 'Categorías de normas'
+vid: rules_category
+description: 'Listado de categorías a los que puede pertenecer una norma'
+weight: -10

@@ -1,0 +1,3 @@
+RewriteCond %{REQUEST_URI} !/[^/]*\.php$
+RewriteRule ^ index.php [L]
+

@@ -1,0 +1,20 @@
+uuid: ee0ab531-68f8-439d-ad4d-a374261456f6
+langcode: es
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.colors
+  module:
+    - text
+id: taxonomy_term.colors.description
+field_name: description
+entity_type: taxonomy_term
+bundle: colors
+label: Descripción
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

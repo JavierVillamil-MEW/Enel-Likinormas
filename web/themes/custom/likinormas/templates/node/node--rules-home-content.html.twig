@@ -1,0 +1,41 @@
+<div class="content-home">
+
+  {{ content.initial_sections }}
+
+  <div class="container-card-100 bg-overlay">
+    <div class="block-card-images w-100">
+      {{ content.background_banner_image }}
+    </div>
+    <div class="block-card-info w-100">
+      <div class="block-card-body">
+        <div class="block-card-body-data">
+          <h2 class="title-secondary">{{ content.background_banner_title|render|striptags }}</h2>
+          <p class="block-card-body-text">{{ node.background_banner_description.value }}</p>
+        </div>
+        {{ content.background_banner_button }}
+      </div>
+    </div>
+  </div>
+
+  {{ content.user_network }}
+  {% if logged_in %}
+    <div class="block-contact">
+      <div class="block-contact-info">
+        <div class="block-contact-data">
+          <h2 class="title-secondary">{{ content.contact_title|render|striptags }}</h2>
+          <p class="block-contact-data-text">{{ content.contact_description|render|striptags }}</p>
+        </div>
+
+        <div class="field field--name-contact-button button-secondary">
+          {{ content.contact_button[0] }}
+        </div>
+      </div>
+
+      <div class="block-contact-form">
+        {{ content.contact_webform }}
+      </div>
+    </div>
+  {% endif %}
+
+</div>
+

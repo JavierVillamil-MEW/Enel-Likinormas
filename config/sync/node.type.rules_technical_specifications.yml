@@ -1,0 +1,17 @@
+uuid: 7aa731e0-dc2a-43e8-a0dc-7986d2324328
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'Especificación técnica'
+type: rules_technical_specifications
+description: 'Contenido por el cual se administran las especificaciones técnicas locales'
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: false

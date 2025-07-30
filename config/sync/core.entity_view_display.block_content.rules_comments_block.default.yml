@@ -1,0 +1,26 @@
+uuid: 25be7f95-1148-4421-a4cd-44b3f247f9ca
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.rules_comments_block
+    - core.entity_view_display.comment.rules_comment_block.default
+    - field.field.block_content.rules_comments_block.comment
+  module:
+    - comment
+id: block_content.rules_comments_block.default
+targetEntityType: block_content
+bundle: rules_comments_block
+mode: default
+content:
+  comment:
+    type: comment_default
+    label: hidden
+    settings:
+      view_mode: default
+      pager_id: 1
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  langcode: true

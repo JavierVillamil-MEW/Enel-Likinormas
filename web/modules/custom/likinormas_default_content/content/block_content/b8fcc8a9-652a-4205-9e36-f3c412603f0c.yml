@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: block_content
+  uuid: b8fcc8a9-652a-4205-9e36-f3c412603f0c
+  bundle: rules_banner_slider
+  default_langcode: es
+  depends:
+    84c5e812-b03d-4288-94bd-08f65a0e1622: media
+    e3f7c895-e40e-44db-85ec-ed6c952d13c6: media
+default:
+  status:
+    -
+      value: true
+  info:
+    -
+      value: 'Rules: Banner home'
+  reusable:
+    -
+      value: true
+  revision_translation_affected:
+    -
+      value: true
+  media_banner:
+    -
+      entity: 84c5e812-b03d-4288-94bd-08f65a0e1622
+    -
+      entity: e3f7c895-e40e-44db-85ec-ed6c952d13c6

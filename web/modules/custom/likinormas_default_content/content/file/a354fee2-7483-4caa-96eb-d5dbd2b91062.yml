@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: a354fee2-7483-4caa-96eb-d5dbd2b91062
+  default_langcode: es
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: hub-hero-desktop_1.png
+  uri:
+    -
+      value: 'public://2023-04/hub-hero-desktop_1_3.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 669422
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1682435606

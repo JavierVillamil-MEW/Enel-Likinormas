@@ -1,0 +1,29 @@
+uuid: a54ad19f-7253-467a-b1d3-0daf34eacbbb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.section_color
+    - paragraphs.paragraphs_type.rules_section
+    - taxonomy.vocabulary.colors
+id: paragraph.rules_section.section_color
+field_name: section_color
+entity_type: paragraph
+bundle: rules_section
+label: 'Color de la sección'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      colors: colors
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

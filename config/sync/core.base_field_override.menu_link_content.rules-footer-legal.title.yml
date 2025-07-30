@@ -1,0 +1,18 @@
+uuid: 23f74f5d-8093-40b3-b560-832ff994b14f
+langcode: es
+status: true
+dependencies:
+  config:
+    - system.menu.rules-footer-legal
+id: menu_link_content.rules-footer-legal.title
+field_name: title
+entity_type: menu_link_content
+bundle: rules-footer-legal
+label: 'Título del enlace del menú.'
+description: 'El texto que se usará en el menú para este enlace.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

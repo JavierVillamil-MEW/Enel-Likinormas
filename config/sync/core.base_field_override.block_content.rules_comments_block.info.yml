@@ -1,0 +1,18 @@
+uuid: 27b44365-e7e1-49bb-8082-e136575a86a5
+langcode: es
+status: true
+dependencies:
+  config:
+    - block_content.type.rules_comments_block
+id: block_content.rules_comments_block.info
+field_name: info
+entity_type: block_content
+bundle: rules_comments_block
+label: 'Descripción del bloque'
+description: 'Una breve descripción de su bloque.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

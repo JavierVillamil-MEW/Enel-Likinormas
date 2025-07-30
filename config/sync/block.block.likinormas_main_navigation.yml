@@ -1,0 +1,27 @@
+uuid: 05b8b4a4-41f0-4761-bcfa-4a30ab2b8608
+langcode: es
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - likinormas
+_core:
+  default_config_hash: qgmh3yS00dSgYMu8__RsbTPmHdsuUncfkwQ6SYFD8mw
+id: likinormas_main_navigation
+theme: likinormas
+region: nav_main
+weight: 0
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Navegación principal'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: true
+visibility: {  }

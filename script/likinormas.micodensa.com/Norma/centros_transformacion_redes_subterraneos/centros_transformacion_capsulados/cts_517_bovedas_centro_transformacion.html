@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CTS517 Bóvedas para centro de transformación | Likinormas</title>
+	<meta name="description" content="Bóvedas para centro de transformación.Presenta las características que deben tener los locales para instalar los transformadores" />
+	<script src="../../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../../index.html"><img src="../../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1602" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../../Usuario/Registro%3FReturnUrl=%252FNorma%252FDetalles%252F1602.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/1602" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1602" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			showSubmenu('4', '84');
+		});
+	</script>
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Norma t&#233;cnica
+	</div>
+	<h1>CTS517 B&#243;vedas para centro de transformaci&#243;n</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de la norma</div>
+					<div class="caracteristicas">CTS 517</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">27/02/2007</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../../Home/DownloadPDF/1602">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FNorma%2FDetalles%2F1602&amp;nodoid=1602', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+    <div class="modulo">
+        <div class="titu_modulo">
+            Relacionados
+        </div>
+            <div class="modulo_contenido" style="">
+                <div class="subtitulos_internos">
+                    <a href="cts5171_bovedas_centro_transformacion_pasamuros_prueba.html">CTS517-1 B&#243;vedas para centro de transformaci&#243;n. Pasamuros a prueba de fuego</a>
+                </div>
+                    <div class="relacionadotipo">Norma t&#233;cnica</div>
+            </div>
+    </div>
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+        <div style="clear:left;"></div>
+		<b>B&#211;VEDAS PARA TRANSFORMADORES</b><br /><br />La parte  C  del Articulo 450  del C&#243;digo <a href="cts_517_bovedas_centro_transformacion.html#" id="version-177" class="externalLink  glosarioLink">El&#233;ctrico</a> Nacional, norma NTC 2050 establece condiciones  generales que deben tener  los locales para instalar dentro de edificaciones los transformadores aislados en aceite. B&#225;sicamente se aplican los art&#237;culos 450 - 26 “Transformadores en aceite instalados en interiores “ y art&#237;culos 450 - 41 al 450 - 48 de la norma NTC 2050.<br /><br />Las B&#243;vedas (locales  reforzados) para transformadores aislados en aceite deben ser ubicadas donde  tengan ventilaci&#243;n al aire exterior de manera  natural. En caso contrario  se utilizar&#225;n  ductos a prueba de <a href="cts_517_bovedas_centro_transformacion.html#" id="version-213" class="externalLink  glosarioLink">fuego</a> y ventilaci&#243;n forzada.<br /><br />A continuaci&#243;n se relacionan los par&#225;metros de construcci&#243;n que deben  tener  las B&#243;vedas (locales  reforzados)  para transformadores aislados en aceite .<br /><br /><b>PAREDES, TECHOS Y PISOS.</b><br /><br />Las paredes y techos de las b&#243;vedas deben ser construidos en materiales  que tengan la resistencia  estructural adecuada para las condiciones de uso y que sean resistentes al <a href="cts_517_bovedas_centro_transformacion.html#" id="version-213" class="externalLink  glosarioLink">fuego</a>, m&#237;nimo 3 horas.<br /><br />El piso debe ser de concreto, con un espesor m&#237;nimo de 10 cm cuando la b&#243;veda se construya directamente en contacto con el terreno natural y cuando  se construya  sobre &#225;reas vac&#237;as o s&#243;tanos, adem&#225;s  de soportar la carga estructural  tambi&#233;n debe  resistir el <a href="cts_517_bovedas_centro_transformacion.html#" id="version-213" class="externalLink  glosarioLink">fuego</a> durante m&#237;nimo 3 horas.<br /><br />Cuando la capacidad del transformador aislado en aceite no exceda de 112,5 kVA, las paredes  podr&#225;n construirse en hormig&#243;n armado de un espesor no menor de 4” (10,2 cm).<br /><br />Una construcci&#243;n  t&#237;pica de resistencia al <a href="cts_517_bovedas_centro_transformacion.html#" id="version-213" class="externalLink  glosarioLink">fuego</a> durante 3 horas es una pared o placa de concreto reforzada de 6 pulgadas  (15,2 cm) de espesor o un muro construido en ladrillo recocido instalado en tabique de 20 cm de ancho.  Como excepci&#243;n, se permite  la construcci&#243;n de b&#243;vedas para transformadores con resistencia  al <a href="cts_517_bovedas_centro_transformacion.html#" id="version-213" class="externalLink  glosarioLink">fuego</a> de una hora, cuando est&#233;n dotados de rociadores autom&#225;ticos de agua o elementos qu&#237;micos apropiados para extinci&#243;n de incendios.<br /><br />Los transformadores aislados en aceite deben tener foso y brocal  en el umbral de la puerta del local para confinar el l&#237;quido <a href="cts_517_bovedas_centro_transformacion.html#" id="version-160" class="externalLink  glosarioLink">diel&#233;ctrico</a> y evitar que se trasmita a otras &#225;reas. La altura debe dimensionarse de forma que permita confinar dentro de la b&#243;veda el aceite del transformador. En ning&#250;n caso la altura del brocal debe ser menor de 10 cm.<br /><br /><b>PUERTAS PARA B&#211;VEDAS</b><br /><br />En b&#243;vedas para transformadores instaladas en edificios con acceso desde el interior o en algunos casos con acceso desde el exterior, cuando exista <a href="cts_517_bovedas_centro_transformacion.html#" id="version-274" class="externalLink  glosarioLink">material</a> <a href="cts_517_bovedas_centro_transformacion.html#" id="version-233" class="externalLink  glosarioLink">inflamable</a> cercano,  tanto la puerta como el marco deben ser resistentes al <a href="cts_517_bovedas_centro_transformacion.html#" id="version-213" class="externalLink  glosarioLink">fuego</a> m&#237;nimo de tres (3) horas, de dos (2) hojas y cierre herm&#233;tico, del tipo oscilante abriendo hacia afuera, fabricada en l&#225;mina de acero galvanizado calibre 14 BWG como m&#237;nimo de 2mm de espesor, con aislamiento t&#233;rmico que garantice las caracter&#237;sticas dadas en la Norma NFPA - 80, vigente. La chapa de la puerta debe ser de acero, de f&#225;cil apertura  y solo se permitir&#225; el acceso a personal autorizado. La puerta debe tener incluida una manija antip&#225;nico resistente al <a href="cts_517_bovedas_centro_transformacion.html#" id="version-213" class="externalLink  glosarioLink">fuego</a> por tres (3) horas que abra desde el interior de la b&#243;veda y un cierra puerta que garantice que la puerta se cierre ante una salida r&#225;pida de la b&#243;veda.<br /><br /><b>VENTILACI&#211;N PARA B&#211;VEDA Y COMPUERTAS DE <a href="cts_517_bovedas_centro_transformacion.html#" id="version-213" class="externalLink  glosarioLink">FUEGO</a></b><br /><br />La ventilaci&#243;n estar&#225; ubicada lo m&#225;s lejos posible de puertas, salidas de <a href="cts_517_bovedas_centro_transformacion.html#" id="version-230" class="externalLink  glosarioLink">incendio</a> o escape y de <a href="cts_517_bovedas_centro_transformacion.html#" id="version-274" class="externalLink  glosarioLink">material</a>  combustible.<br /><br />Las b&#243;vedas ventiladas por circulaci&#243;n natural de aire al exterior  tendr&#225;n no m&#225;s del 50% de aberturas en la parte inferior del local  para entrada del aire, lo que implica que el otro 50% de aberturas para la salida del aire estar&#225;n por la parte superior  de las paredes, aproximadamente  mitad y mitad del &#225;rea de ventilaci&#243;n  necesaria  en cada pared, o la  totalidad en la parte superior  cerca del techo.<br /><br />Para el caso de b&#243;vedas  ventiladas  por circulaci&#243;n  natural del aire hacia el exterior, deber&#225; tenerse un &#225;rea efectiva de ventilaci&#243;n, despu&#233;s de  descontar el &#225;rea de rejillas, persianas o celos&#237;as, no menor de veinte cent&#237;metros cuadrados  (20 cm<sup>2</sup>) por kVA de transformador(es) en servicio mayores de 50 kVA y para transformadores  menores de 50 kVA no  ser&#225; menor de 929 cm&#178; .<br /><br />Las &#225;reas de ventilaci&#243;n  estar&#225;n cubiertas con rejillas  y persianas con el objeto de evitar condiciones peligrosas e inseguras. Las &#225;reas de ventilaci&#243;n  dirigidas hacia el interior del edificio  deber&#225;n tener compuertas de <a href="cts_517_bovedas_centro_transformacion.html#" id="version-213" class="externalLink  glosarioLink">fuego</a> de cierre autom&#225;tico que operen en respuesta al <a href="cts_517_bovedas_centro_transformacion.html#" id="version-213" class="externalLink  glosarioLink">fuego</a> dentro de la b&#243;veda.<br /><br />Cuando se necesite la instalaci&#243;n de ductos hacia el exterior de la <a href="cts_517_bovedas_centro_transformacion.html#" id="version-173" class="externalLink  glosarioLink">edificaci&#243;n</a> para la ventilaci&#243;n de las b&#243;vedas  de transformadores, estos ser&#225;n  construidos con <a href="cts_517_bovedas_centro_transformacion.html#" id="version-274" class="externalLink  glosarioLink">material</a> resistente al <a href="cts_517_bovedas_centro_transformacion.html#" id="version-213" class="externalLink  glosarioLink">fuego</a>.<br /><br />Por la b&#243;veda del transformador no podr&#225; pasar tuber&#237;as de agua, alcantarillado, gas o cualquier otro tipo de instalaci&#243;n, excepto cuando las tuber&#237;as de agua alimentan los aspersores del <a href="cts_517_bovedas_centro_transformacion.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> contra incendio  del local del Centro de Transformaci&#243;n.<br />Se recomienda la ventilaci&#243;n apropiada tanto para las condiciones normales de operaci&#243;n del transformador como para el caso de <a href="cts_517_bovedas_centro_transformacion.html#" id="version-230" class="externalLink  glosarioLink">incendio</a>, de modo que se permita la evacuaci&#243;n del aire caliente, humos y gases nocivos al exterior del edificio y hacia un lugar adecuado, donde puedan diluirse en el ambiente y se minimicen los riesgos para la salud de las personas que se encuentren cerca y evitar la propagaci&#243;n del <a href="cts_517_bovedas_centro_transformacion.html#" id="version-213" class="externalLink  glosarioLink">fuego</a> a otros  edificios vecinos. Las b&#243;vedas sin ventilaci&#243;n apropiada o herm&#233;ticas ocasionan el calentamiento del transformador y en caso de <a href="cts_517_bovedas_centro_transformacion.html#" id="version-230" class="externalLink  glosarioLink">incendio</a>, existe riesgo de <a href="cts_517_bovedas_centro_transformacion.html#" id="version-199" class="externalLink  glosarioLink">explosi&#243;n</a> como consecuencia del aumento de la presi&#243;n y temperatura interna.<br /><br /><b>PASAMUROS</b><br /><br />Al cruzar  la pared de la b&#243;veda del transformador con  cables de M.T. y B.T. se deben realizar las perforaciones adecuadas con barreras o sellantes de acuerdo con los di&#225;metros de los conductores de tal forma que no se permita el paso del <a href="cts_517_bovedas_centro_transformacion.html#" id="version-213" class="externalLink  glosarioLink">fuego</a> o el aceite del transformador que se pueda haber derramado. Para el caso de transformadores secos abiertos clase H o encapsulados en resina clase F, no se requiere de este pasamuros. Ver norma <a href="cts5171_bovedas_centro_transformacion_pasamuros_prueba.html" class="externalLink">CTS 517-1<span class="externalLinkIcon"></span></a>.
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 1602, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

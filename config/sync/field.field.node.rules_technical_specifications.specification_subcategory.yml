@@ -1,0 +1,29 @@
+uuid: f3b36008-a2b5-425b-96b6-f1e05cb13d66
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.node.specification_subcategory
+    - node.type.rules_technical_specifications
+    - taxonomy.vocabulary.rules_specification_subcategory
+id: node.rules_technical_specifications.specification_subcategory
+field_name: specification_subcategory
+entity_type: node
+bundle: rules_technical_specifications
+label: 'Subcategoría de la especificación'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      rules_specification_subcategory: rules_specification_subcategory
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

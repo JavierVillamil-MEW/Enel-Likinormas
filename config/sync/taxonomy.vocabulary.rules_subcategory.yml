@@ -1,0 +1,8 @@
+uuid: c192d841-b55c-4f0c-b903-a9c5d87f81ca
+langcode: es
+status: true
+dependencies: {  }
+name: 'Subcategorías de normas'
+vid: rules_subcategory
+description: 'Listado de subcategorías a las que puede pertenecer una norma'
+weight: -9

@@ -1,0 +1,18 @@
+uuid: ae4a3bb9-8af2-4c17-8309-0f064648916b
+langcode: es
+status: true
+dependencies:
+  config:
+    - comment.type.rules_comment_block
+id: comment.rules_comment_block.homepage
+field_name: homepage
+entity_type: comment
+bundle: rules_comment_block
+label: 'Página principal'
+description: 'Dirección de la página del autor del comentario.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: uri

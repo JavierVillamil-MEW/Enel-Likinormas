@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET932 Caja para protección de transformadores de corriente tipo ventana utilizados en macromedición | Likinormas</title>
+	<meta name="description" content="caja para medidor; medidor; instalaciones; medida" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/727" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F727.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/727" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/727" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '32');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET932 Caja para protecci&#243;n de transformadores de corriente tipo ventana utilizados en macromedici&#243;n</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET 932</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">05/08/2004</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/727">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F727&amp;nodoid=727', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et932.html#heading_0">1. OBJETO DE LA ESPECIFICACI&#211;N </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et932.html#heading_1">2. ALCANCE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et932.html#heading_2">3.  CONDICIONES DE SERVICIO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et932.html#heading_3">4.  SISTEMA DE UNIDADES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et932.html#heading_4">5. NORMAS DE FABRICACI&#211;N Y PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et932.html#heading_5">6. REQUERIMIENTOS T&#201;CNICOS PARTICULARES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et932.html#heading_6">7. INSTALACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et932.html#heading_7">8. PRUEBAS </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et932.html#heading_8">8.1 Resistencia al impacto seg&#250;n UL 746 C</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et932.html#heading_9">8.2 Resistencia a rayos UV seg&#250;n UL 746C</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et932.html#heading_10">8.3 Rigidez Diel&#233;ctrica seg&#250;n UL 746C</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et932.html#heading_11">8.4 Flamabilidad seg&#250;n UL 94</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et932.html#heading_12">8.5 Resistencia a la flexi&#243;n seg&#250;n ASTM D790 y UL 746C</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et932.html#heading_13">8.6 Resistencia a la tensi&#243;n seg&#250;n ASTM D638</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et932.html#heading_14">9. INSPECCI&#211;N EN FABRICA </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et932.html#heading_15">10.  EMPAQUE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et932.html#heading_16">11. REQUISITOS DE LAS OFERTAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et932.html#heading_17">12.  GARANT&#205;A DE FABRICA</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et932.html#heading_18">13. PRESENTACI&#211;N DE LAS OFERTAS</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1. OBJETO DE LA ESPECIFICACI&#211;N </h2>
+Establecer las caracter&#237;sticas t&#233;cnicas que deben poseer las cajas de uso exterior para protecci&#243;n de los transformadores de corriente tipo ventana utilizados en los procesos de macromedici&#243;n, de forma que brinden la protecci&#243;n adecuada contra hurto e intervenciones de personas no autorizadas. <br />
+<h2 id="heading_1" >2. ALCANCE</h2>
+La presente especificaci&#243;n se aplicar&#225; a todas las cajas para CTs que adquiera CODENSA S.A. <br />
+<h2 id="heading_2" >3.  CONDICIONES DE SERVICIO</h2>
+Las cajas ser&#225;n para uso exterior. Estar&#225;n ubicadas en el frente de los transformadores de distribuci&#243;n (tipo poste) protegiendo los transformadores de corriente instalados en las bajantes del transformador.<br /><br />Estar&#225;n sometidas a las siguientes condiciones ambientales y el&#233;ctricas: <br /><div style="width:528px;"><table><tr><td colspan="2" rowspan="1" style="width:528px;height:10px;text-align:center"><b>CARACTER&#205;STICAS AMBIENTALES</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">a. Altura sobre el nivel del mar</td><td colspan="1" rowspan="1" style="">2 640 m</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">b. Ambiente</td><td colspan="1" rowspan="1" style="">Tropical</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">c. Humedad</td><td colspan="1" rowspan="1" style="">Mayor al  90 %</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">d. Temperatura m&#225;xima y m&#237;nima</td><td colspan="1" rowspan="1" style="">45 &#186;C y - 5 &#186;C respectivamente.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">e. Temperatura promedio</td><td colspan="1" rowspan="1" style="">14 &#186;C.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">f.  Instalaci&#243;n</td><td colspan="1" rowspan="1" style="">A la intemperie</td></tr></table><br /></div><div style="width:528px;"><table><tr><td colspan="2" rowspan="1" style="width:528px;height:10px;text-align:center"><b>CARACTER&#205;STICAS EL&#201;CTRICAS</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">a.  <a href="et932.html#" id="version-384" class="externalLink  glosarioLink">Tensi&#243;n Nominal</a> del <a href="et932.html#" id="version-363" class="externalLink  glosarioLink">sistema</a></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">L&#237;nea – L&#237;nea</td><td colspan="1" rowspan="1" style="">208, 240 V – 440/480 V</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">L&#237;nea – Neutro</td><td colspan="1" rowspan="1" style="">120 V – 254/277 V</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">b. Frecuencia del <a href="et932.html#" id="version-363" class="externalLink  glosarioLink">sistema</a></td><td colspan="1" rowspan="1" style="">60 Hz</td></tr></table><br /></div><h2 id="heading_3" >4.  <a href="et932.html#" id="version-363" class="externalLink  glosarioLink">SISTEMA</a> DE UNIDADES</h2>
+Todos los documentos t&#233;cnicos, deben expresar las cantidades num&#233;ricas en unidades del <a href="et932.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> Internacional (S.I ).  Si se utilizan cat&#225;logos, folletos o planos, en sistemas diferentes de unidades, deben hacerse  las conversiones respectivas.<br />
+<h2 id="heading_4" >5. NORMAS DE FABRICACI&#211;N Y PRUEBAS</h2><div style="width:508px;"><table><tr><td colspan="2" rowspan="1" style="width:116px;height:10px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:392px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">UL</td><td colspan="1" rowspan="1" style="text-align:center">746 C</td><td colspan="1" rowspan="1" style="">Standard for Polymeric Materials - Use in Electrical Equipment Evaluations</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">UL</td><td colspan="1" rowspan="1" style="text-align:center">746 A</td><td colspan="1" rowspan="1" style="">Resistance to ignition of polymeric materials</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">UL</td><td colspan="1" rowspan="1" style="text-align:center">94</td><td colspan="1" rowspan="1" style="">Tests for Flammability of Plastic Materials</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">3279</td><td colspan="1" rowspan="1" style="">Grados de protecci&#243;n dados por encerramiento de <a href="et932.html#" id="version-189" class="externalLink  glosarioLink">equipo</a> el&#233;ctrico c&#243;digo IP. ( equivalente a IEC 529)</td></tr></table><br /></div>Pueden emplearse otras normas internacionalmente reconocidas equivalentes o superiores a las aqu&#237; se&#241;aladas, siempre y cuando se ajusten a lo solicitado en la presente <a href="et932.html#" id="version-196" class="externalLink  glosarioLink">Especificaci&#243;n T&#233;cnica</a>.<br /><br />Las normas citadas en la presente especificaci&#243;n (o cualquier otra que llegare a ser aceptada por CODENSA S.A ESP) se refieren a su &#250;ltima revisi&#243;n.<br />
+<h2 id="heading_5" >6. REQUERIMIENTOS T&#201;CNICOS PARTICULARES</h2>
+Las cajas deben poseer las siguientes caracter&#237;sticas:<br />
+<ul><li>Ser construidas en <a href="et932.html#" id="version-274" class="externalLink  glosarioLink">material</a> polim&#233;rico color gris retardante a la llama.</li>
+<li>Alta resistencia al impacto seg&#250;n UL 746 C –1995 </li>
+<li>Resistencia a los rayos UV</li>
+<li>Temperatura de trabajo de hasta 80&#176;C</li>
+<li>Las bisagras deben permitir el retiro f&#225;cil de la tapa para la instalaci&#243;n en terreno. </li>
+<li>El cierre debe ser por medio de un tornillo de <a href="et932.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a> en acero inoxidable u otro <a href="et932.html#" id="version-274" class="externalLink  glosarioLink">material</a> resistente a la <a href="et932.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a>.</li></ul>
+ <br />Debe tener las dimensiones indicadas a continuaci&#243;n con una tolerancia de +20mm / -5 mm:<br />
+<ul><li>Altura: 345 mm</li>
+<li>Ancho: 290 mm</li>
+<li>Profundidad base de la caja: 80 mm</li>
+<li>Profundidad tapa de la caja: 90 mm</li></ul>
+<br />Adicionalmente la base de la caja debe tener cuatro perforaciones rectangulares con las esquinas redondeadas en la parte superior e inferior de 70 mm de longitud aproximadamente, de forma que permitan el paso de las bajantes del transformador (1,2 o 3 seg&#250;n corresponda) y el neutro seg&#250;n se <a href="et932.html#" id="version-288" class="externalLink  glosarioLink">muestra</a> en la Figura 1.<br /><br />En su parte lateral debe tener una perforaci&#243;n de di&#225;metro 1“ con prensaestopa, por donde saldr&#225; el <a href="et932.html#" id="version-107" class="externalLink  glosarioLink">cable</a> multiconductor hacia el medidor. El <a href="et932.html#" id="version-107" class="externalLink  glosarioLink">cable</a> ir&#225; cubierto por una coraza met&#225;lica que lo proteger&#225; contra intervenciones fraudulentas.<br />
+<h2 id="heading_6" >7. INSTALACI&#211;N</h2>
+La caja debe quedar instalada tal como se <a href="et932.html#" id="version-288" class="externalLink  glosarioLink">muestra</a> en la Figura 2. <br />
+<h2 id="heading_7" >8. PRUEBAS </h2>
+El fabricante deber&#225; remitir los protocolos de los siguientes ensayos realizados por un laboratorio acreditado ante la Superintendencia de Industria y Comercio SIC, o un organismo internacional reconocido para la elaboraci&#243;n de pruebas.<br />
+<ul><li>Resistencia al impacto seg&#250;n UL 746C</li>
+<li>Resistencia a rayos UV seg&#250;n UL 746C</li>
+<li>Rigidez diel&#233;ctrica seg&#250;n UL 746C</li>
+<li>Prueba de flamabilidad seg&#250;n UL 94</li>
+<li>Resistencia a la flexi&#243;n seg&#250;n ASTM D790  y UL 746C</li>
+<li>Resistencia a la <a href="et932.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> seg&#250;n ASTM D638 y UL 746C</li></ul>
+<br />Durante la recepci&#243;n se realizar&#225; <a href="et932.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> visual, dimensional y funcional, verificando entre otros aspectos que las perforaciones sean del tama&#241;o adecuado y presenten una superficie lisa sin ning&#250;n tipo de arista cortante que pueda afectar los cables.<br /> 
+<h2 id="heading_8" >8.1 Resistencia al impacto seg&#250;n UL 746 C</h2>
+El impacto debe realizarse arrojando una esfera de acero con un di&#225;metro de 50,8 mm y un peso de 0,535 kg desde una altura suficiente para producir un impacto de 6,8 Joules.<br /><br />Despu&#233;s de la prueba la caja no debe mostrar evidencia de cualquier afectaci&#243;n al desempe&#241;o mec&#225;nico de la caja. <br />
+<h3 id="heading_9" >8.2 Resistencia a rayos UV seg&#250;n UL 746C</h3>
+De acuerdo a los m&#233;todos de exposici&#243;n se&#241;alados en la norma ASTM G 26 o ASTM G155. <br /><br />El valor promedio de la <a href="et932.html#" id="version-288" class="externalLink  glosarioLink">muestra</a> despu&#233;s de ser sometida a la prueba de envejecimiento acelerado con radiaci&#243;n UV no debe ser menor que el 70% de su valor inicial, es decir que se permite una variaci&#243;n de <span class="codeInline">&#177; </span>30%.<br />
+<h3 id="heading_10" >8.3 Rigidez Diel&#233;ctrica seg&#250;n UL 746C</h3>
+Se aplica una <a href="et932.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> de 5kV despu&#233;s de someter la <a href="et932.html#" id="version-288" class="externalLink  glosarioLink">muestra</a> a un ciclo de 40 horas a 23<span class="codeInline">&#177; </span>2&#176;C y humedad relativa de 50<span class="codeInline">&#177; </span>5% mas un ciclo de 96 horas a 35<span class="codeInline">&#177; </span>2&#176;C y humedad relativa de 90<span class="codeInline">&#177; </span>5%.<br /><br />La caja debe soportar la <a href="et932.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> aplicada.<br />
+<h3 id="heading_11" >8.4 Flamabilidad seg&#250;n UL 94</h3>
+La prueba debe aplicarse a muestras moldeadas con el mismo <a href="et932.html#" id="version-274" class="externalLink  glosarioLink">material</a> utilizado para el cuerpo y tapa de la caja, o tomando un pedazo de alguna de estas.<br /><br />Despu&#233;s de la prueba de UV el <a href="et932.html#" id="version-274" class="externalLink  glosarioLink">material</a> de la caja debe mantener sus propiedades de flamabilidad.<br />
+<h3 id="heading_12" >8.5 Resistencia a la flexi&#243;n seg&#250;n ASTM D790 y UL 746C</h3>
+Se aplica la prueba a un grupo de muestras antes de realizar la prueba de envejecimiento acelerado, se calculan los valores promedio. Se selecciona otro grupo al cual se le halla realizado la prueba de envejecimiento acelerado, se somete a la prueba de flexi&#243;n y de nuevo se calculan los valores promedio y se comparan con los valores obtenidos inicialmente.<br /><br />Los valores obtenidos con el segundo grupo no deben ser inferiores al 70% de los valores obtenidos con el primer grupo.<br />
+<h3 id="heading_13" >8.6 Resistencia a la <a href="et932.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> seg&#250;n ASTM D638</h3>
+Se aplica la prueba a una <a href="et932.html#" id="version-288" class="externalLink  glosarioLink">muestra</a> antes de realizar la prueba de envejecimiento acelerado, se calculan los valores promedio. Se selecciona otra <a href="et932.html#" id="version-288" class="externalLink  glosarioLink">muestra</a> a la cual se le halla realizado la prueba de envejecimiento acelerado, se somete a la prueba de <a href="et932.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> y de nuevo se calculan los valores promedio y se comparan con los valores obtenidos inicialmente.<br /><br />Los valores obtenidos con la segunda <a href="et932.html#" id="version-288" class="externalLink  glosarioLink">muestra</a> no deben ser inferiores al 70% de los valores obtenidos con la primera.<br />
+<h2 id="heading_14" >9. <a href="et932.html#" id="version-235" class="externalLink  glosarioLink">INSPECCI&#211;N</a> EN FABRICA </h2>
+El suministrador enviar&#225; con no menos de quince (15) d&#237;as calendario de anticipaci&#243;n, a la fecha programada para la realizaci&#243;n de las pruebas en f&#225;brica, el formato de protocolos de pruebas y copia de las normas en Ingl&#233;s o Castellano utilizadas para tal fin. CODENSA informar&#225; por escrito su <a href="et932.html#" id="version-139" class="externalLink  glosarioLink">conformidad</a> con las pruebas requeridas.<br /><br />El Ingeniero RESPONSABLE de CODENSA podr&#225; inspeccionar en las instalaciones del PROVEEDOR o FABRICANTE y de sus Subcontratistas el proceso de fabricaci&#243;n y pruebas, y solicitar la informaci&#243;n y ensayos que a su juicio resulten necesarias para verificar el cumplimiento de los requisitos estipulados en este documento. <br /><br />El PROVEEDOR debe brindar plena colaboraci&#243;n al RESPONSABLE en el cumplimiento de sus funciones.<br /><br />El valor de las pruebas y ensayos debe incluirse en los precios cotizados en la propuesta.  CODENSA se reserva el derecho de descartar las propuestas que no ofrezcan pruebas, o si las ofrecidas son consideradas insuficientes para garantizar la <a href="et932.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> de las cajas.<br />
+<h2 id="heading_15" >10.  EMPAQUE</h2>
+Toda caja debe ir completa y cerrada, debe protegerse contra rayaduras y da&#241;os dentro del transporte, para esto cada una debe embalarse en una caja de cart&#243;n grueso, en cuyo exterior debe indicarse en forma impresa el “nombre del fabricante”,  propiedad de “CODENSA S.A.- E.S.P.”, descripci&#243;n del <a href="et932.html#" id="version-338" class="externalLink  glosarioLink">producto</a>, n&#250;mero de contrato y c&#243;digo de inventario CODENSA S.A.- E.S.P.<br /><br />Para el transporte debe embalarse en estibas con un n&#250;mero de unidades no mayor a 90 unidades por estiba y la estiba recubierta y sellada con <a href="et932.html#" id="version-274" class="externalLink  glosarioLink">material</a> pl&#225;stico, sobre el cual se adherir&#225; una etiqueta de por lo menos 30 x 30 cm que indique que no se puede almacenar m&#225;s de dos estibas en sentido vertical.<br />
+<h2 id="heading_16" >11. REQUISITOS DE LAS OFERTAS</h2>
+El Oferente obligatoriamente deber&#225; incluir con su propuesta, la siguiente informaci&#243;n:<br />
+<ul><li>Planilla de caracter&#237;sticas t&#233;cnicas garantizadas, la cual deber&#225; ser diligenciada completamente, firmada y sellada por el oferente.</li></ul>
+ 
+<ul><li>Cat&#225;logos originales completos y actualizados del fabricante, que correspondan a los bienes cotizados, en la planilla de caracter&#237;sticas t&#233;cnicas garantizadas. </li></ul>
+
+<ul><li>Protocolos de pruebas seg&#250;n el numeral 8 de la presente especificaci&#243;n. En tales protocolos se deber&#225;n anotar las fechas de fabricaci&#243;n y pruebas del <a href="et932.html#" id="version-189" class="externalLink  glosarioLink">equipo</a>, para permitir la verificaci&#243;n de las caracter&#237;sticas t&#233;cnicas garantizadas.</li></ul>
+
+<ul><li>En caso que se requiera se podr&#225;n exigir muestras de cada una de las referencias ofertadas sin cargo a devoluci&#243;n, con cada una de las caracter&#237;sticas t&#233;cnicas, solicitadas y mencionadas en la presente especificaci&#243;n. </li></ul>
+
+<ul><li>Informaci&#243;n adicional que considere aporta explicaci&#243;n a su dise&#241;o (dibujos,  detalles,  caracter&#237;sticas de operaci&#243;n,  dimensiones y pesos de los materiales ofertados). </li></ul>
+<br />CODENSA S.A. podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones, sin expresi&#243;n de causa ni obligaci&#243;n de compensaci&#243;n.<br />
+<h2 id="heading_17" >12.  GARANT&#205;A DE FABRICA</h2>
+CODENSA S.A. E.S.P requiere como m&#237;nimo, un per&#237;odo de garant&#237;a de f&#225;brica de veinticuatro (24) meses, a partir de la entrega de las cajas.<br />
+<h2 id="heading_18" >13. PRESENTACI&#211;N DE LAS OFERTAS</h2>
+El oferente deber&#225; presentar su oferta <a href="et932.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a>  (en medio impreso) en el siguiente orden:<br />
+<ul><li><b>ANEXO 1:</b> relaci&#243;n de los bienes cotizados.</li></ul>
+
+<ul><li><b>ANEXO 2:</b> informaci&#243;n del oferente.</li></ul>
+
+<ul><li><b>ANEXO 3:</b> planillas de caracter&#237;sticas t&#233;cnicas garantizadas.</li></ul>
+
+<ul><li><b>EXCEPCIONES T&#201;CNICAS:</b> apartado en el cual se deben relacionar las excepciones de car&#225;cter exclusivamente t&#233;cnico de la oferta, respecto a los bienes solicitados. Si la oferta no presenta excepci&#243;n, se indicar&#237;a expresamente en el mismo “NO HAY EXCEPCIONES” </li></ul>
+
+<ul><li><b>PROTOCOLOS  DE PRUEBAS:</b> relaci&#243;n de los ensayos realizados a la caja y a sus accesorios de acuerdo con lo indicado en el apartado 8 de la presente especificaci&#243;n. </li></ul>
+
+<ul><li><b>CERTIFICACIONES:</b> <a href="et932.html#" id="version-124" class="externalLink  glosarioLink">Certificaci&#243;n</a> del <a href="et932.html#" id="version-338" class="externalLink  glosarioLink">producto</a> </li></ul>
+
+<ul><li><b>EVIDENCIA <a href="et932.html#" id="version-376" class="externalLink  glosarioLink">T&#201;CNICA</a></b>: relaci&#243;n de clientes, evidencia de su capacidad <a href="et932.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a> y experiencias relacionadas con los materiales y/o equipos cotizados.</li></ul>
+
+<ul><li><b>GARANT&#205;A:</b> carta de garant&#237;a de los bienes cotizados.</li></ul>
+ 
+<ul><li><b>CAT&#193;LOGOS:</b> cat&#225;logos originales completos y actualizados del fabricante, que correspondan a los datos bienes cotizados.</li></ul>
+
+<ul><li><b>INFORMACI&#211;N ADICIONAL:</b> informaci&#243;n adicional que se considere aporta explicaci&#243;n al dise&#241;o de la caja, as&#237; como las instrucciones de instalaci&#243;n, operaci&#243;n y <a href="et932.html#" id="version-271" class="externalLink  glosarioLink">mantenimiento</a>. </li></ul>
+<br />El fabricante debe incluir la anterior informaci&#243;n en medio magn&#233;tico.<br /><br />CODENSA S.A. podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones, sin expresi&#243;n de causa ni obligaci&#243;n de compensaci&#243;n.<br /><br /><b>FIGURA No. 1 ESQUEMA GENERAL DE LA CAJA</b> <br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/727/ET932(1A).jpg" src="../../media/cache/images/750x750/wikiimages/31323639353939303338-295589-ET932(1A).jpg" title="VISTA FRONTAL"  /></div><div class="texto_imagen_articulos" style="max-width:750px">VISTA FRONTAL</div></div></div><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/727/ET932(1B).jpg" src="../../media/cache/images/750x750/wikiimages/323638313635313031-612007-ET932(1B).jpg" title="VISTA ISOMÉTRICA"  /></div><div class="texto_imagen_articulos" style="max-width:750px">VISTA ISOMÉTRICA</div></div></div><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/727/ET932(1C).jpg" src="../../media/cache/images/750x750/wikiimages/2d31333338333234373932-261827-ET932(1C).jpg" title="DETALLE DEL CIERRE"  /></div><div class="texto_imagen_articulos" style="max-width:750px">DETALLE DEL CIERRE</div></div></div><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/727/ET932(1D).jpg" src="../../media/cache/images/750x750/wikiimages/31393535323038353637-306884-ET932(1D).jpg" title="VISTA INFERIOR"  /></div><div class="texto_imagen_articulos" style="max-width:750px">VISTA INFERIOR</div></div></div><br /><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/727/Dibujo ET 932 Fig 2.JPG" src="http://likinormas.micodensa.com/media/cache/images/900x1200/wikiimages/313634343830323634-50293-Dibujo ET 932 Fig 2.JPG" title="FIGURA No. 2 ESQUEMA DE INSTALACIÓN DE LA CAJA"  /></div><div class="texto_imagen_articulos" style="max-width:900px">FIGURA No. 2 ESQUEMA DE INSTALACIÓN DE LA CAJA</div></div></div><br /><b>ANEXO 1. TABLA DE CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS</b><br /><div style="width:608px;"><table><tr><td colspan="1" rowspan="1" style="width:299px;height:10px;text-align:center"><b>&#205;tem</b></td><td colspan="1" rowspan="1" style="width:88px;text-align:center"><b>Unidad</b></td><td colspan="1" rowspan="1" style="width:113px;text-align:center"><b>Exigido por CODENSA</b></td><td colspan="1" rowspan="1" style="width:108px;text-align:center"><b>Ofertado</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">FABRICANTE</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">REFERENCIA</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Normas de fabricaci&#243;n y Pruebas</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">Numeral 4</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;"><a href="et932.html#" id="version-274" class="externalLink  glosarioLink">Material</a>  de la caja</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">Polimero</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Retardante a la llama</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">Si</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Resistencia al impacto </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">IK 08 o equivalente</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Rigidez diel&#233;ctrica</td><td colspan="1" rowspan="1" style="text-align:center">kV</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Tipo de instalaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Perforaciones (dimensi&#243;n y n&#250;mero)</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Prueba de flamabilidad</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">S&#237;</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Prueba de resistencia a <a href="et932.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> y flexi&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">S&#237;</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Resistencia a Rayos UV</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">S&#237;</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Temperatura m&#225;xima de operaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">&#176;C</td><td colspan="1" rowspan="1" style="text-align:center">80</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Tipo de cierre (<a href="et932.html#" id="version-274" class="externalLink  glosarioLink">material</a> y <a href="et932.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a>)</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Dimensiones (Largo-Ancho- Profundidad)</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Garant&#237;a</td><td colspan="1" rowspan="1" style="text-align:center">meses</td><td colspan="1" rowspan="1" style="text-align:center">24</td><td colspan="1" rowspan="1" style=""> </td></tr></table><br /></div>
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 727, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

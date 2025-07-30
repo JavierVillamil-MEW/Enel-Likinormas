@@ -1,0 +1,35 @@
+uuid: 0047cdb7-f987-4229-9c49-398574d07755
+langcode: es
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.rules_page_404.button_404
+    - field.field.node.rules_page_404.description_404
+    - field.field.node.rules_page_404.image_404
+    - field.field.node.rules_page_404.image_mobile_404
+    - field.field.node.rules_page_404.pre_title_404
+    - field.field.node.rules_page_404.seo
+    - field.field.node.rules_page_404.title_404
+    - node.type.rules_page_404
+  module:
+    - user
+id: node.rules_page_404.teaser
+targetEntityType: node
+bundle: rules_page_404
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  button_404: true
+  description_404: true
+  image_404: true
+  image_mobile_404: true
+  langcode: true
+  pre_title_404: true
+  seo: true
+  title_404: true

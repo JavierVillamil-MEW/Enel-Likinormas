@@ -1,0 +1,21 @@
+uuid: ead910c5-dd60-479f-b4b5-95e1b8bdf821
+langcode: en
+status: true
+dependencies:
+  module:
+    - image_replace
+name: rules_replace_and_webp
+label: 'Rules: replace and WEBP'
+effects:
+  a274f3a4-a52a-4e61-928b-1031e3cb1682:
+    uuid: a274f3a4-a52a-4e61-928b-1031e3cb1682
+    id: image_replace
+    weight: 1
+    data:
+      image_style: rules_replace_and_webp
+  cfa6b35a-4804-4e21-b3a8-7b3b3172ddef:
+    uuid: cfa6b35a-4804-4e21-b3a8-7b3b3172ddef
+    id: image_convert
+    weight: 1
+    data:
+      extension: webp

@@ -1,0 +1,20 @@
+uuid: f466561b-5b6f-4550-abdc-6ca1bed2ef7e
+langcode: es
+status: true
+dependencies:
+  config:
+    - node.type.rules_technical_rules
+id: node.rules_technical_rules.menu_link
+field_name: menu_link
+entity_type: node
+bundle: rules_technical_rules
+label: 'Enlace del menu'
+description: 'Enlace de menú calculado para el nodo (solo disponible durante el guardado del nodo).'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: db876f54-58f1-422e-bf6f-958d8596226d
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: 'Grupo 36521.png'
+  uri:
+    -
+      value: 'public://2023-04/Grupo 36521.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 576
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1682435806

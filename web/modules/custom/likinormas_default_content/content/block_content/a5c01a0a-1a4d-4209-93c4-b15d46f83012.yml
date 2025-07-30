@@ -1,0 +1,36 @@
+_meta:
+  version: '1.0'
+  entity_type: block_content
+  uuid: a5c01a0a-1a4d-4209-93c4-b15d46f83012
+  bundle: rules_banner_with_background
+  default_langcode: es
+  depends:
+    d16dbdb2-e3d5-4257-ab13-7a153544e4b7: taxonomy_term
+    2c6713a5-fe12-4fe2-a6ee-b7bda7b15610: file
+default:
+  status:
+    -
+      value: true
+  info:
+    -
+      value: 'Banner Buscador Global'
+  reusable:
+    -
+      value: true
+  revision_translation_affected:
+    -
+      value: true
+  background_color:
+    -
+      entity: d16dbdb2-e3d5-4257-ab13-7a153544e4b7
+  banner_icon:
+    -
+      entity: 2c6713a5-fe12-4fe2-a6ee-b7bda7b15610
+      alt: lupa
+      title: lupa
+      width: 512
+      height: 512
+  filter_title:
+    -
+      value: '<h1>Busqueda</h1>'
+      format: full_html

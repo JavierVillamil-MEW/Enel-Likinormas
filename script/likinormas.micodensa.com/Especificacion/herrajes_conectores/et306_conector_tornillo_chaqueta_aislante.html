@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET306 Conector de tornillo con chaqueta aislante | Likinormas</title>
+	<meta name="description" content="conector; redes aereas; acometidas" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/493" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F493.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/493" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/493" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '23');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET306 Conector de tornillo con chaqueta aislante</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET 306</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">31/01/2001</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/493">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F493&amp;nodoid=493', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et306_conector_tornillo_chaqueta_aislante.html#heading_0">1.- GENERALIDADES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et306_conector_tornillo_chaqueta_aislante.html#heading_1">1.1 - Objeto de la especificaci&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et306_conector_tornillo_chaqueta_aislante.html#heading_2">1.2 - Condiciones Generales</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et306_conector_tornillo_chaqueta_aislante.html#heading_3">2.- REQUISITOS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et306_conector_tornillo_chaqueta_aislante.html#heading_4">2.1 - Secciones abarcadas</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et306_conector_tornillo_chaqueta_aislante.html#heading_5">2.2 - Detalles constructivos</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et306_conector_tornillo_chaqueta_aislante.html#heading_6">2.3 - Control del Par de Apriete</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et306_conector_tornillo_chaqueta_aislante.html#heading_7">2.4 - Aislamiento</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et306_conector_tornillo_chaqueta_aislante.html#heading_8">2.5 - Grasa neutra</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et306_conector_tornillo_chaqueta_aislante.html#heading_9">3.- MARCADO, ROTULADO Y EMBALAJE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et306_conector_tornillo_chaqueta_aislante.html#heading_10">4.- ENSAYOS Y RECEPCI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et306_conector_tornillo_chaqueta_aislante.html#heading_11">4.1 - Ensayos  Tipo</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et306_conector_tornillo_chaqueta_aislante.html#heading_12">4.2 - Ensayos de recepci&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et306_conector_tornillo_chaqueta_aislante.html#heading_13">5.- METODOLOGIA Y EVALUACION DE LOS ENSAYOS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et306_conector_tornillo_chaqueta_aislante.html#heading_14">5.1 - Inspecci&#243;n visual, control dimensional y caracter&#237;sticas funcionales</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et306_conector_tornillo_chaqueta_aislante.html#heading_15">5.2 - Montaje a baja temperatura</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et306_conector_tornillo_chaqueta_aislante.html#heading_16">5.3 - Actuaci&#243;n del limitador de torque</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et306_conector_tornillo_chaqueta_aislante.html#heading_17">5.4 - Da&#241;o sobre el conductor principal o pasante</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et306_conector_tornillo_chaqueta_aislante.html#heading_18">5.5 - Da&#241;o sobre el conductor derivado</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et306_conector_tornillo_chaqueta_aislante.html#heading_19">5.6 - Control diel&#233;ctrico</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et306_conector_tornillo_chaqueta_aislante.html#heading_20">5.7 - Corrosi&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et306_conector_tornillo_chaqueta_aislante.html#heading_21">5.8 - Envejecimiento clim&#225;tico</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et306_conector_tornillo_chaqueta_aislante.html#heading_22">5.9 - Calentamiento y sobrecarga</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et306_conector_tornillo_chaqueta_aislante.html#heading_23">5.10 - Inalterabilidad de la marcaci&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et306_conector_tornillo_chaqueta_aislante.html#heading_24">6.- DOCUMENTACION E INFORMACION T&#201;CNICA A SUMINISTRAR POR EL OFERENTE</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1.- GENERALIDADES</h2>
+<h3 id="heading_1" >1.1 - Objeto de la especificaci&#243;n</h3>
+Establecer las condiciones que deben satisfacer los conectores de tornillo con chaqueta aislante los cuales deben ser, aislados y herm&#233;ticos, destinados a ser utilizados en conexiones de l&#237;neas a&#233;reas trenzadas de <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-98" class="externalLink  glosarioLink">Baja Tensi&#243;n</a> para unir  cables de circuitos principales, derivaciones, acometidas a cajas de barrajes y luminarias de alumbrado p&#250;blico .<br />
+<h3 id="heading_2" >1.2 - Condiciones Generales</h3>
+<b>1.2.1 - Clim&#225;ticas</b><br /><br />Ser&#225;n empleados a la intemperie, siendo &#233;sta generalmente de clima fr&#237;o y h&#250;medo.<br />Los par&#225;metros de operaci&#243;n son los siguientes:<br /><br />- Altura sobre el nivel del mar: 2640 m<br />- Humedad relativa: 90%<br />- Temperatura ambiente m&#225;xima: 27 &#176;C<br />- Temperatura ambiente m&#237;nima: -5 &#176;C<br />- Temperatura ambiente promedio: 14 &#176;C<br />		<br /><b>1.2.2 - De servicio</b><br /><br />Ser&#225;n dimensionados para el funcionamiento continuo, a <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-238" class="externalLink  glosarioLink">intensidad</a> <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-298" class="externalLink  glosarioLink">nominal</a>, de acuerdo al conductores de mayor secci&#243;n que puedan derivar. Debiendo adem&#225;s ser aptos para resistir las sobrecargas y corrientes de <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-152" class="externalLink  glosarioLink">cortocircuito</a> que pudieran producirse en servicio.<br />	<br />Las temperaturas de servicio de los conductores pasantes, ser&#225;n las siguientes:<br /><br /><b>a)</b> En operaci&#243;n normal: 90&#176; C en forma permanente durante la <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-406" class="externalLink  glosarioLink">vida &#250;til</a> del conductor.<br /><br /><b>b)</b> Bajo <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-371" class="externalLink  glosarioLink">sobrecarga</a> de emergencia: 130&#176; C durante 100 horas en 12 meses consecutivos, con un m&#225;ximo de 500 horas de la <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-406" class="externalLink  glosarioLink">vida &#250;til</a> del conductor.<br /><br /><b>c</b>) En <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-152" class="externalLink  glosarioLink">cortocircuito</a>: 250&#176; C durante per&#237;odos de 1 segundo como m&#225;ximo.<br /> <br /><b>1.2.3 - El&#233;ctricas</b><br /><br />Se instalar&#225;n sobre conductores aislados con polietileno reticulado o PVC. Las piezas de conexi&#243;n  est&#225;n formadas por una carcaza de soporte mec&#225;nico fabricada en <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-274" class="externalLink  glosarioLink">material</a> sint&#233;tico reforzados con platos de presi&#243;n externos fabricados en acero galvanizado de tal manera que garantice la presi&#243;n de contacto; las carcazas sint&#233;ticas van provistas en su interior de mordazas dentadas, fabricadas en aleaci&#243;n de cobre esta&#241;adas (bimet&#225;licas) o aleaci&#243;n de aluminio, para efectuar el <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-143" class="externalLink  glosarioLink">contacto el&#233;ctrico</a> perforando el aislante, seg&#250;n la aplicaci&#243;n ver tabla 1.<br /><br />Los platos deben ser de un <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-274" class="externalLink  glosarioLink">material</a> de acero m&#237;nimo SAE 1030; ASTM A 36.<br /><br />Los insertos que protegen las mordazas deben ser fabricados en neopreno o un <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-274" class="externalLink  glosarioLink">material</a> similar.<br /> <br />Los conectores deben poseer tapones para la derivaci&#243;n elaborados del  mismo <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-274" class="externalLink  glosarioLink">material</a> de los insertos. <br /><br />La conexi&#243;n se realiza mediante la actuaci&#243;n de un <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> tornillo/tuerca, de acondicionamiento roscado, que a su vez lleva incorporado un <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de control del par de apriete aplicado. (ver n&#250;meral 2.3). <br /><br />La tuerca dinamom&#233;trica del conector es del tipo hexagonal con doble cabeza, y est&#225; fabricada en aleaci&#243;n de aluminio. <br />	<br />Los conductores pasantes en rango principal, pertenecientes a las fases o <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-290" class="externalLink  glosarioLink">neutro</a>, son de aluminio, ACSR  o aleaci&#243;n de aluminio respectivamente.<br />	<br />Los conductores en el rango derivado de <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-205" class="externalLink  glosarioLink">fase</a> y <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-290" class="externalLink  glosarioLink">neutro</a>, son de aluminio , aleaci&#243;n de aluminio, ACSR o cobre sin esta&#241;ar, aislados con polietileno o PVC.<br />	<br />La conexi&#243;n con el conductor pasante puede realizarse bajo tensi&#243;n de servicio y el conductor derivado en circuito abierto.<br />
+<h2 id="heading_3" >2.- REQUISITOS</h2>
+<h3 id="heading_4" >2.1 - Secciones abarcadas</h3>
+Es de fundamental importancia que los rangos de secciones comprendidas para cada tama&#241;o de conector sean estrictamente observados por los oferentes, ya que no se considerar&#225; apto un modelo que por abarcar un rango muy amplio de secciones, incluya dentro de ellas a los tama&#241;os requeridos por CODENSA S.A.<br /><br />Los tama&#241;os de conectores, por secci&#243;n de conductores abarcados, se indican en la tabla siguiente :<br /><br /><b>TABLA 1</b><br /><div style="width:516px;"><table><tr><td colspan="1" rowspan="1" style="width:60px;height:40px;text-align:center"><b>S&#237;mb</b></td><td colspan="1" rowspan="1" style="width:93px;text-align:center"><b>Secci&#243;n (mm2)</b></td><td colspan="1" rowspan="1" style="width:93px;text-align:center"><b>Material</b></td><td colspan="1" rowspan="1" style="width:76px;text-align:center"><b>Secci&#243;n (mm2)</b></td><td colspan="1" rowspan="1" style="width:76px;text-align:center"><b>Material</b></td><td colspan="1" rowspan="1" style="width:118px;text-align:center"><b>Aplicaci&#243;n</b></td></tr>
+<tr><td colspan="1" rowspan="5" style="height:20px;text-align:center">S140</td><td colspan="1" rowspan="1" style="text-align:center">95</td><td colspan="1" rowspan="18" style="text-align:center">Al</td><td colspan="1" rowspan="1" style="text-align:center">95</td><td colspan="1" rowspan="5" style="text-align:center">Al</td><td colspan="1" rowspan="5" style="">Derivaci&#243;n cable -cable</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">70</td><td colspan="1" rowspan="1" style="text-align:center">70</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">50</td><td colspan="1" rowspan="1" style="text-align:center">50</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">35</td><td colspan="1" rowspan="1" style="text-align:center">35</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">25</td><td colspan="1" rowspan="1" style="text-align:center">25</td></tr>
+<tr><td colspan="1" rowspan="4" style="height:20px;text-align:center">S141</td><td colspan="1" rowspan="1" style="text-align:center">95</td><td colspan="1" rowspan="4" style="text-align:center">35</td><td colspan="1" rowspan="13" style="text-align:center">Cu</td><td colspan="1" rowspan="4" style="">Derivaci&#243;n a caja de barrajes para conexi&#243;n de acometidas</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">70</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">50</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">35</td></tr>
+<tr><td colspan="1" rowspan="4" style="height:20px;text-align:center">S142</td><td colspan="1" rowspan="1" style="text-align:center">95</td><td colspan="1" rowspan="4" style="text-align:center">2.5</td><td colspan="1" rowspan="4" style="">Derivaci&#243;n a luminarias de alumbrado p&#250;blico</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">70</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">35</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">25</td></tr>
+<tr><td colspan="1" rowspan="5" style="height:20px;text-align:center">S143</td><td colspan="1" rowspan="1" style="text-align:center">95</td><td colspan="1" rowspan="1" style="text-align:center">35</td><td colspan="1" rowspan="5" style="">Derivaci&#243;n conexi&#243;n a medidor</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">70</td><td colspan="1" rowspan="1" style="text-align:center">25</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">50</td><td colspan="1" rowspan="1" style="text-align:center">16</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">35</td><td colspan="1" rowspan="1" style="text-align:center">10</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr></table><br /></div>
+<h3 id="heading_5" >2.2 - Detalles constructivos</h3>
+El conector ser&#225; del tipo de disposici&#243;n paralela, la conexi&#243;n se realiza mediante la actuaci&#243;n  de un <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de tornillo/tuerca, de cabeza hexagonal que rosque sobre  la tuerca o plato de presi&#243;n ubicados en la parte inferior.<br /><br />Las dimensiones de los dientes ser&#225;n tales que permitan una buena conexi&#243;n el&#233;ctrica y suficiente resistencia mec&#225;nica, cumpliendo satisfactoriamente con los ensayos de tracci&#243;n, sin perjudicar las caracter&#237;sticas mec&#225;nicas y de conducci&#243;n el&#233;ctrica de los conductores.<br /><br />Adem&#225;s tendr&#225;n un dise&#241;o tal, que perforen el aislamiento de polietileno reticulado y se inserten superficialmente en el conductor a una profundidad que asegure un correcto <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-143" class="externalLink  glosarioLink">contacto el&#233;ctrico</a> ante las variaciones naturales en los espesores del aislamiento por sus respectivas tolerancias. <br /><br />	No se deber&#225;n formar pares electroqu&#237;micos con el <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-274" class="externalLink  glosarioLink">material</a> de los conductores, o entre s&#237;, para evitar que se origine <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a> localizada en los mismos bajo presencia de humedad, alterando de esta manera la conexi&#243;n el&#233;ctrica y la resistencia mec&#225;nica. <br /><br />Sus componentes formar&#225;n un conjunto de piezas imperdibles entre si.<br />	<br />Todos los conectores luego de su instalaci&#243;n deber&#225;n quedar aislados, en s&#237; mismos, el&#233;ctricamente en forma total y herm&#233;ticamente sellados a la entrada de humedad.<br />	<br />El oferente deber&#225; indicar en forma clara y detallada las caracter&#237;sticas de las herramientas a utilizar para el ajuste, indicando tipo de llave y todos los datos que sea de utilidad.<br />
+<h3 id="heading_6" >2.3 - Control del Par de Apriete</h3>
+El <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> se fundamenta en limitar la fuerza ejercida sobre el conductor mediante torniller&#237;a dinamom&#233;trica con secci&#243;n de rotura controlada, lo que permite garantizar la estabilidad de la conexi&#243;n al establecerse presiones de contacto &#243;ptimas para valores del par de apriete predeterminados.<br /><br />Podr&#225;n estar provistos, de acuerdo al dise&#241;o, de arandelas el&#225;sticas para evitar que se aflojen debido a las vibraciones y esfuerzos propios del servicio, del tipo Bellville de acuerdo a las norma DIN 2093 o similar.<br />Luego de instalado el conector deber&#225; ser factible su desarme mediante herramienta com&#250;n.<br />Los torques m&#225;ximos a emplear  no superar&#225;n los indicados a continuaci&#243;n :<br /><br />20 Nm para S &lt; 95 mm<sup>2</sup>      <br />30 Nm para S <span class="codeInline">&gt;= </span> 95 mm<sup>2</sup><br />
+<h3 id="heading_7" >2.4 - Aislamiento</h3>
+El conector instalado deber&#225; quedar totalmente aislado, desde el punto de vista <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-177" class="externalLink  glosarioLink">el&#233;ctrico</a> y sellado herm&#233;ticamente a la entrada de la humedad.<br />Las partes met&#225;licas accesibles estar&#225;n libres de potencial y permitir&#225;n su instalaci&#243;n bajo tensi&#243;n.<br />El cuerpo del conector ser&#225; de <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-274" class="externalLink  glosarioLink">material</a> sint&#233;tico aislante, con platos de presi&#243;n.<br />
+<h3 id="heading_8" >2.5 - Grasa neutra</h3>
+Deber&#225; ser inhibidora de la <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a>.<br />Las materias primas a utilizar en su elaboraci&#243;n ser&#225;n grasas sint&#233;ticas sin base de jab&#243;n met&#225;lico, aptas para evitar la oxidaci&#243;n en el aluminio o en el aluminio/cobre y que no desarrollen ataque qu&#237;mico sobre los materiales en contacto.<br />No deber&#225; contener part&#237;culas met&#225;licas en suspensi&#243;n.<br />	<br />No deber&#225; sufrir transformaciones en contacto con el aire y no debe oxidarse. Si desprende productos vol&#225;tiles, &#233;stos no deber&#225;n tampoco agredir a los materiales del conector, conductores y aislamiento.<br />El punto de goteo ser&#225; como m&#237;nimo de 130&#176; C.<br />
+<h2 id="heading_9" >3.- MARCADO, ROTULADO Y EMBALAJE</h2>
+Los conectores llevar&#225;n grabados en forma legible e indeleble los siguientes datos, como m&#237;nimo :<br /><br /><b>a)	Secciones que abarca, en mm<sup>2</sup>.</b><br /><b>b)	Marca o logotipo del fabricante.</b><br /><b>c)	Modelo seg&#250;n cat&#225;logo.</b><br /><b>d)	Referencia del <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-274" class="externalLink  glosarioLink">material</a></b><br /><b>e)	No Lote/ Fecha de fabricaci&#243;n.</b><br /> <br />Cada conector completo se entregar&#225; en una bolsa, sellada herm&#233;ticamente, de polietileno con un espesor m&#237;nimo de 50 micrones.<br /><br />Estas bolsas llevar&#225;n impresos, en forma legible e indeleble, los mismos datos anteriormente indicados m&#225;s el n&#250;mero de tama&#241;o correspondiente al conector, de acuerdo a la tabla del n&#250;meral 2.1<br /><br />Los conectores as&#237; embalados se dispondr&#225;n dentro de cajas de cart&#243;n corrugado resistente al manipuleo, en cantidad tal que el peso total no exceda los 10 kg.<br /><br />Cada caja incluir&#225; un folleto explicativo de la secuencia y operaci&#243;n de montaje y del tipo de herramientas que deber&#225;n utilizarse para su correcta instalaci&#243;n.<br />
+<h2 id="heading_10" >4.- ENSAYOS Y RECEPCI&#211;N</h2>
+La recepci&#243;n ser&#225; efectuada por personal de CODENSA S.A., a tal fin &#233;sta  o sus representantes, deber&#225;n ser avisados por lo menos con 15 d&#237;as de anticipaci&#243;n a fin de asistir a las Pruebas y/o Ensayos de entrega. La ausencia de los representantes de CODENSA S.A. en el momento de ejecutarlos seg&#250;n lo programado, a&#250;n cuando hayan sido debidamente avisados, no eximir&#225; al proveedor de efectuarlos con la <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-139" class="externalLink  glosarioLink">conformidad</a> previa de CODENSA S.A., debiendo comunicar inmediatamente a &#233;sta el resultado de los mismos.<br /><br />Los Ensayos tipo podr&#225;n ser efectuados en laboratorios particulares u oficiales, nacionales o extranjeros, reconocidos por CODENSA S.A.. Su costo total y el de todas las piezas destruidas en los mismos ser&#225; por cuenta y cargo del proveedor.      <br />	<br />Los gastos de los representantes de CODENSA S.A., para presenciarlos y/o supervisarlos, no estar&#225;n incluidos en el precio, si los Ensayos Tipo se realizan en Santa f&#233; de Bogot&#225;. 	De realizarse en otra ciudad o en el exterior de pa&#237;s, tambi&#233;n estar&#225;n a cargo del proveedor.<br />	<br />CODENSA S.A. se reserva el derecho de realizar una <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> durante el proceso de fabricaci&#243;n, para lo cual el proveedor facilitar&#225; los medios necesarios.<br />La recepci&#243;n quedar&#225; subordinada al cumplimiento satisfactorio de los Ensayos tipo y entrega correspondientes.<br /> 
+<h3 id="heading_11" >4.1 - Ensayos  Tipo</h3>
+El oferente deber&#225;  presentar, junto con la oferta, los protocolos de los ensayos tipo indicados a continuaci&#243;n, extendidos por laboratorios nacionales o internacionales de reconocido prestigio a satisfacci&#243;n de  CODENSA S.A., y sobre  espec&#237;menes id&#233;nticos a los ofrecidos.<br />	<br />Si el oferente hubiera realizado los ensayos tipo de acuerdo a una Norma o Recomendaci&#243;n diferente a la solicitada, deber&#225; presentar los protocolos de ensayos correspondientes  acompa&#241;ados de una copia de la Norma respectiva en idioma de origen y su traducci&#243;n al castellano o ingl&#233;s, reserv&#225;ndose CODENSA S.A. el derecho de aceptarlos o de solicitar la repetici&#243;n de los Ensayos tipo de acuerdo a lo indicado en la presente <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a>, a cargo del oferente.<br />Los Ensayos tipo deber&#225;n ser repetidos toda vez que sobre un modelo aprobado se introduzcan cambios de dise&#241;o que var&#237;en, o hagan presumir variaciones, en las prestaciones conocidas de los mismos.<br /><br /><b>4.1.1 - Normas a emplear en los ensayos</b><br /><br />Los ensayos seguir&#225;n las prescripciones establecidas, que correspondan, en las normas : ANSI C 119.4, HN 33-E-61, NFC 33-020, NFC 20-540, ASTM G26, &#243; similares.<br />A tal fin se define el nivel de exigencia general, de acuerdo a ANSI C 119.4, que tienen que satisfacer los conectores como:<br /><br /><b>ENSAYOS EL&#201;CTRICOS</b><br /><br />Clase &quot;A&quot;  (1000 ciclos): Para los ensayos el&#233;ctricos de conectores de conexi&#243;n l&#237;nea a l&#237;nea de hasta <br />	 	 25/95 mm<sup>2</sup> - 25/95 mm<sup>2</sup>.<br /><br />Clase &quot;B&quot; (500 ciclos): Para los ensayos el&#233;ctricos de conectores de derivaci&#243;n a cliente de hasta   <br />                  25/150 mm<sup>2</sup> - 4/10 mm<sup>2</sup>.<br /><br /><b>ENSAYOS MEC&#193;NICOS</b><br /><br />Clase &quot;3&quot; (5% tensi&#243;n de ruptura del conductor de mayor calibre) : Para los ensayos mec&#225;nicos de todos los conectores.<br /><br />Se podr&#225;n adoptar otros grados de exigencia siempre y cuando lo contemplen normas de ensayos espec&#237;ficas para &#233;stos conectores, a satisfacci&#243;n de CODENSA SA.<br /><br /><b>4.1.2 - Enumeraci&#243;n de los Ensayos Tipo</b><br /><br />	  <b>1</b> - <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-235" class="externalLink  glosarioLink">Inspecci&#243;n</a> visual, control dimensional y caracter&#237;sticas funcionales.<br />	  <b>2</b> - Montaje a baja temperatura<br />	  <b>3</b> - Actuaci&#243;n del limitador de torque.<br />	  <b>4</b> - <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-153" class="externalLink  glosarioLink">Da&#241;o</a> sobre el conductor principal.  <br />	  <b>5</b> - <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-153" class="externalLink  glosarioLink">Da&#241;o</a> sobre el conductor derivado.<br />	  <b>6</b> - Control <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-160" class="externalLink  glosarioLink">diel&#233;ctrico</a>.<br />          <b>7</b> - Envejecimiento clim&#225;tico.<br />	  <b>8</b> - <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-151" class="externalLink  glosarioLink">Corrosi&#243;n</a>.<br />          <b>9</b> - Calentamiento y <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-371" class="externalLink  glosarioLink">sobrecarga</a>.<br />	 <b>10</b> - Inalterabilidad de la marcaci&#243;n.<br />         <b>11</b>- Ciclado t&#233;rmico<br /><br />Los ensayos podr&#225;n ser complementados mediante la aprobaci&#243;n de los protocolos de <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> correspondientes, presentados conjuntamente con la oferta, a satisfacci&#243;n de CODENSA SA.<br /><br /><b>4.1.3 - Aceptaci&#243;n o rechazo del tipo</b><br /><br />Para la aprobaci&#243;n del tipo se deber&#225; satisfacer la totalidad de los ensayos enumerados anteriormente, sin tolerancias superiores a las especificadas.<br /><br />El resultado no satisfactorio de todos o algunos de los ensayos de tipo, indicados en este cap&#237;tulo ser&#225; causal de rechazo de las muestras, sin que ello implique ampliar los plazos de entrega fijados.<br />
+<h3 id="heading_12" >4.2 - Ensayos de recepci&#243;n</h3>
+Los ensayos de recepci&#243;n tendr&#225;n por objeto verificar si el <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-274" class="externalLink  glosarioLink">material</a> cumple satisfactoriamente con todas las caracter&#237;sticas y dem&#225;s requisitos estipulados en la presente, aprobados por medio de los ensayos tipo, para la entrega de cada entrega.<br /><br />Previamente a los ensayos de entrega el fabricante deber&#225; haber realizado, sobre la totalidad de la compra, todos los ensayos de rutina necesarios (durante la fabricaci&#243;n de las partes componentes y sobre cada modelo armado completamente), a fin de asegurar a la <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> de CODENSA S.A., la buena y uniforme <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> de fabricaci&#243;n y funcionamiento de los modelos a ensayar.<br /><br /><b>4.2.1 - Enumeraci&#243;n de los ensayos y verificaci&#243;n de recepci&#243;n</b><br /><br />	<b>1</b> - <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-235" class="externalLink  glosarioLink">Inspecci&#243;n</a> visual y control dimensional.<br />	<b>2</b> - Verificaci&#243;n del marcado, rotulado y embalaje.<br />	<b>3</b> - Actuaci&#243;n del limitador de torque.<br />	<b>4</b> - <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-153" class="externalLink  glosarioLink">Da&#241;o</a> sobre el conductor principal.<br />	<b>5</b> - <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-153" class="externalLink  glosarioLink">Da&#241;o</a> sobre el conductor derivado.<br />        <b>6</b>- Protecci&#243;n superficial m&#237;nimo 15 micras<br />
+<h2 id="heading_13" >5.- METODOLOGIA Y EVALUACION DE LOS ENSAYOS</h2>
+La metodolog&#237;a general ser&#225; tomada y seguida de acuerdo a la norma NFC 33-020.<br />Los ensayos deber&#225;n ser repetidos si durante la ejecuci&#243;n de alguno de ellos se modifican las condiciones, de forma tal que pueda influir en los resultados.<br />
+<h3 id="heading_14" >5.1 - <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-235" class="externalLink  glosarioLink">Inspecci&#243;n</a> visual, control dimensional y caracter&#237;sticas funcionales</h3>
+Se verificar&#225; la correcta terminaci&#243;n de las superficies, detalles constructivos y la marcaci&#243;n correspondiente, de acuerdo a los num&#233;rales 2.2 y 3 respectivamente.<br />	<br />Las dimensiones y tolerancias de los conectores bajo <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> se confrontar&#225;n con las indicadas en el plano anexado, junto con la oferta, a los protocolos de ensayos tipo, el cual una vez aprobado ser&#225; tomado como patr&#243;n para las verificaciones dimensionales a realizar durante los ensayos de recepci&#243;n.<br /><br />Esta <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> y verificaci&#243;n se considerar&#225; satisfactoria si los conectores cumplen tambi&#233;n con las caracter&#237;sticas funcionales propias del modelo ensayado como tipo.<br />
+<h3 id="heading_15" >5.2 - Montaje a baja temperatura</h3>
+Seg&#250;n numeral 2.3 de la norma NFC 33-020.<br />
+<h3 id="heading_16" >5.3 - Actuaci&#243;n del limitador de torque</h3>
+Seg&#250;n numeral 2.4.1 de la norma NFC 33.020<br /> 
+<h3 id="heading_17" >5.4 - <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-153" class="externalLink  glosarioLink">Da&#241;o</a> sobre el conductor principal o pasante</h3>
+Seg&#250;n numeral 2.4.2 de la norma NFC 33-020 o que no sobrepase el 85% de la tensi&#243;n de ruptura del <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-107" class="externalLink  glosarioLink">cable</a>.<br />
+<h3 id="heading_18" >5.5 - <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-153" class="externalLink  glosarioLink">Da&#241;o</a> sobre el conductor derivado</h3>
+Seg&#250;n numeral 2.4.3 de la norma NFC 33-020 o que no sobrepase el 85% de la tensi&#243;n de ruptura del <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-107" class="externalLink  glosarioLink">cable</a>.<br />
+<h3 id="heading_19" >5.6 - Control <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-160" class="externalLink  glosarioLink">diel&#233;ctrico</a></h3>
+Seg&#250;n numeral 2.5.1 de la norma NFC 33-020.<br />
+<h3 id="heading_20" >5.7 - <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-151" class="externalLink  glosarioLink">Corrosi&#243;n</a></h3>
+Seg&#250;n numeral 2.7 de la norma NFC 33-020 &#243; ASTM B.117, durante 1.000 horas, con el mismo resultado esperado.<br />
+<h3 id="heading_21" >5.8 - Envejecimiento clim&#225;tico</h3>
+Seg&#250;n numeral 2.6 de la norma NFC 33-020.<br /><br />La prueba de envejecimiento clim&#225;tico puede reemplazarse seg&#250;n la norma ASTM G26 (<a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-278" class="externalLink  glosarioLink">M&#233;todo</a> &quot;I&quot;, sobre el conector armado con conductores de las secciones m&#225;xima y m&#237;nima abarcadas, durante 600 horas.<br />
+<h3 id="heading_22" >5.9 - Calentamiento y <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-371" class="externalLink  glosarioLink">sobrecarga</a></h3>
+Seg&#250;n punto 2.9 de la norma NFC 33-020.<br />
+<h3 id="heading_23" >5.10 - Inalterabilidad de la marcaci&#243;n</h3>
+Seg&#250;n punto 3.2 de la norma NFC 33-020.<br />
+<h2 id="heading_24" >6.- DOCUMENTACION E INFORMACION <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-376" class="externalLink  glosarioLink">T&#201;CNICA</a> A SUMINISTRAR POR EL OFERENTE</h2>
+Para su debido an&#225;lisis t&#233;cnico ser&#225; imprescindible que la oferta incluya la siguiente documentaci&#243;n <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a> y muestras, sin cuyo <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-351" class="externalLink  glosarioLink">requisito</a> podr&#225; no ser tenida en cuenta:<br /><br />- Dos muestras de cada uno de los modelos ofrecidos, por tama&#241;o.<br />- Protocolos de los Ensayos de Tipo requeridos en la presente, ejecutados de acuerdo a lo estipulado en las normas correspondientes.<br /><br />Deber&#225; constar en ellos la metodolog&#237;a aplicada, valores medidos y calculados, instrumentos empleados, circuitos de <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a>, estando perfectamente identificadas las muestras sometidas a <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a>, los que ser&#225;n de id&#233;ntico dise&#241;o y tama&#241;o de los ofrecidos.<br /><br />- Antecedentes de suministros efectuados en los &#250;ltimos 3 a&#241;os, indicando como m&#237;nimo modelo, cantidades y destinatario.<br /><br />- Planos completos con medidas y tolerancias en mm, detalles de materiales empleados para todas sus partes y tratamientos superficiales empleados.<br /><br />-	Folletos y / o cat&#225;logos comerciales.<br /><br />-	Instrucciones de montaje con indicaci&#243;n completa de la herramienta necesaria y el torque de ajuste a aplicar durante el montaje.<br /><br /><b>PLANILLA DE DATOS GARANTIZADOS.</b><br /><div style="width:550px;"><table><tr><td colspan="1" rowspan="1" style="width:30px;height:10px;text-align:center"><b>ITEM</b></td><td colspan="1" rowspan="1" style="width:420px;text-align:center"><b>CARACTER&#205;STICAS T&#201;CNICAS</b></td><td colspan="1" rowspan="1" style="width:100px;text-align:center"><b>OFERTADO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"><b>1</b></td><td colspan="1" rowspan="1" style=""><b>RANGOS</b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"> </td><td colspan="1" rowspan="1" style="">Principal</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"> </td><td colspan="1" rowspan="1" style="">Derivado</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"><b>2</b></td><td colspan="1" rowspan="1" style=""><b>MORDAZA</b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"> </td><td colspan="1" rowspan="1" style=""><a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-274" class="externalLink  glosarioLink">Material</a> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"><b>3</b></td><td colspan="1" rowspan="1" style=""><b>INSERTOS</b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"> </td><td colspan="1" rowspan="1" style=""><a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-274" class="externalLink  glosarioLink">Material</a> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"><b>4</b></td><td colspan="1" rowspan="1" style=""><b>CUERPO</b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"> </td><td colspan="1" rowspan="1" style=""><a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-274" class="externalLink  glosarioLink">Material</a> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"><b>5</b></td><td colspan="1" rowspan="1" style=""><b>PLATOS DE PRESI&#211;N</b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"> </td><td colspan="1" rowspan="1" style=""><a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-274" class="externalLink  glosarioLink">Material</a> de los platos de presi&#243;n</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"><b>6</b></td><td colspan="1" rowspan="1" style=""><b>CABEZA FUSIBLE</b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"> </td><td colspan="1" rowspan="1" style=""><a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-274" class="externalLink  glosarioLink">Material</a> de la cabeza fusible</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"> </td><td colspan="1" rowspan="1" style="">Torque de ruptura</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"><b>7</b></td><td colspan="1" rowspan="1" style=""><b>TAPON DE PROTECCI&#211;N</b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"> </td><td colspan="1" rowspan="1" style="">Derivado (SI/NO)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"> </td><td colspan="1" rowspan="1" style=""><a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-274" class="externalLink  glosarioLink">Material</a></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"><b>8</b></td><td colspan="1" rowspan="1" style=""><b>CICLADO TERMICO </b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"> </td><td colspan="1" rowspan="1" style="">Tipo A (1000 ciclos)Tipo B (500 ciclos)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"><b>9</b></td><td colspan="1" rowspan="1" style=""><b>CARGA DE RUPTURA</b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"> </td><td colspan="1" rowspan="1" style="">Tipo 3 (5% de tensi&#243;n de ruptura del <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-107" class="externalLink  glosarioLink">cable</a> de mayor calibre)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"><b>10</b></td><td colspan="1" rowspan="1" style=""><b>NIVEL DE <a href="et306_conector_tornillo_chaqueta_aislante.html#" id="version-152" class="externalLink  glosarioLink">CORTOCIRCUITO</a></b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"> </td><td colspan="1" rowspan="1" style="">soportado 1 s</td><td colspan="1" rowspan="1" style=""> </td></tr></table><br /></div><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/493/ET306.jpg" src="../../media/cache/images/800x800/wikiimages/31373138363631383231-908172-ET306.jpg" title="FIGURA 1 Y 2"  /></div><div class="texto_imagen_articulos" style="max-width:800px">FIGURA 1 Y 2</div></div></div>
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 493, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+_meta:
+  version: '1.0'
+  entity_type: media
+  uuid: e3f7c895-e40e-44db-85ec-ed6c952d13c6
+  bundle: banner_slider
+  default_langcode: es
+  depends:
+    3c02c9b9-0f30-485f-b179-81b529dccf63: file
+    f60dc187-c10e-48c2-93d0-850acec03bc9: file
+default:
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  name:
+    -
+      value: hub-hero-desktop_2.png
+  created:
+    -
+      value: 1682440644
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: es
+      pathauto: 0
+  banner_description:
+    -
+      value: 'dfhdfhLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.fsdgdf'
+  banner_title:
+    -
+      value: '<h1>Likinormas test 2</h1>'
+      format: full_html
+  field_media_image_1:
+    -
+      entity: 3c02c9b9-0f30-485f-b179-81b529dccf63
+      alt: fdgfd
+      title: dfg
+      width: 1920
+      height: 975
+  image_mobile:
+    -
+      entity: f60dc187-c10e-48c2-93d0-850acec03bc9
+      alt: fgd
+      title: ''
+      width: 417
+      height: 839

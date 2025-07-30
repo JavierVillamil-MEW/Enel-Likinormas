@@ -1,0 +1,10 @@
+uuid: 157e3e53-59db-4c17-ade7-ff245d5c09f4
+langcode: en
+status: true
+dependencies: {  }
+id: rules_items_forms
+label: 'Elementos login y registro'
+icon_uuid: null
+icon_default: null
+description: 'Elementos utilizados en el bloque de registro, inicio de sesión y recuperación de contraseña'
+behavior_plugins: {  }

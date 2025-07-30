@@ -1,0 +1,45 @@
+// Bootstrap variables
+
+// override default bootstrap colors for accessibility
+$color-white: #ffffff;
+$color-black: #000000;
+$color-black-light: #393939;
+$color-gray: #5D5D5D;
+$color-gray-primary: #707070;
+$color-gray-light: #B8B8B8;
+$color-gray-light-two: #8A8A8A;
+$color-pink: #FC0F64;
+$color-pink-light: #FF4687;
+$color-pink-light-two: #FC2C77;
+$color-blue: #0555FA;
+$color-green-light: #47B5DD;
+$color-green-light-two: #41B9E6;
+$color-footer-legal: #222222;
+$color-red: #ff0000;
+
+// ==================== BREAKPOINTS ====================
+$mobilex: 375px !default;
+$mobilexl: 480px !default;
+$mobile: 576px !default;
+$tablet: 768px !default;
+$tabletL: 992px !default;
+$desktop: 1024px !default;
+$desktopM: 1200px !default;
+$desktopL: 1440px !default;
+$desktopLS: 1600px !default;
+$desktopXLS: 2560px !default;
+
+
+// ==================== FONTS ====================
+$roobert_enel-light: "RoobertENEL-Light";
+$roobert_enel-regular: "RoobertENEL-Regular";
+$roobert_enel-bold: "RoobertENEL-Bold";
+$roobert_enel-black: "RoobertENEL-Black";
+
+// ==================== FONT WEIGHTS ====================
+$light: 300;
+$regular: 400;
+$medium: 500;
+$semibold: 600;
+$bold: 700;
+$extrabold: 800;

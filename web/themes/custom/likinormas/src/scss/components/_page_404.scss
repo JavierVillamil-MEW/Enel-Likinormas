@@ -1,0 +1,107 @@
+.page-node-type-rules-page-404 {
+  .region-breadcrumb {
+    display: none;
+  }
+
+  .pages-not-found {
+    @include media-query(mobile) {
+      align-items: center;
+    }
+
+    .info {
+      padding: 0 var(--margin-width-container-secondary);
+      margin-top: 10rem;
+      width: 100%;
+      z-index: 1;
+
+      @include media-query(mobile) {
+        width: 50%;
+        padding: 0 0 0 var(--margin-width-container-secondary);
+        margin-top: initial;
+      }
+
+      &-subtitle {
+        color: white;
+        font-size: 3.8rem;
+        font-family: 'RoobertENEL-Light';
+        margin: 0;
+
+
+        @include media-query(mobile) {
+          font-size: 5rem;
+        }
+
+        @include media-query(desktopLS) {
+          font-size: 6rem;
+        }
+      }
+
+      &-title {
+        color: white;
+        font-family: 'RoobertENEL-Bold';
+        font-size: 10rem;
+        margin: -2rem 0 0rem;
+
+
+        @include media-query(mobile) {
+          font-size: 12rem;
+          margin: -2rem 0 1rem;
+        }
+
+        @include media-query(desktopLS) {
+          font-size: 15rem;
+        }
+      }
+
+      &-description {
+        color: white;
+        font-size: 1.8rem;
+        font-family: 'RoobertENEL-Light';
+        line-height: 2.8rem;
+        margin-bottom: 3.5rem;
+
+
+        @include media-query(mobile) {
+          font-size: 2rem;
+        }
+
+        @include media-query(desktopLS) {
+          font-size: 2.3rem;
+        }
+      }
+
+      .field--name-button-404 {
+        a {
+          @extend %button-style-one;
+
+          @include media-query(mobile) {
+            width: fit-content;
+          }
+
+          @include media-query(desktopLS) {
+            font-size: 1.8rem;
+          }
+        }
+      }
+    }
+
+    .image-404 {
+      .field--name-image-404 {
+        img {
+          width: 100%;
+          height: 100vh;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          display: block;
+          object-fit: cover;
+          object-position: center;
+        }
+      }
+    }
+  }
+
+
+}

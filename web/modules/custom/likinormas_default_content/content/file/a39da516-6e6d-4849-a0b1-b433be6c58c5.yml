@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: a39da516-6e6d-4849-a0b1-b433be6c58c5
+  default_langcode: es
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: Mobile_backgroung.jpg
+  uri:
+    -
+      value: 'public://2023-05/Mobile_backgroung.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 1069198
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1684333010

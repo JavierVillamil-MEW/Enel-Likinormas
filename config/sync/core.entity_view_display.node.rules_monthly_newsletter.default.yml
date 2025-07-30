@@ -1,0 +1,30 @@
+uuid: 2b3d653e-1557-4a27-9e7a-510fedceef76
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.field.node.rules_monthly_newsletter.html_newsletter
+    - field.field.node.rules_monthly_newsletter.seo
+    - node.type.rules_monthly_newsletter
+  module:
+    - text
+    - user
+id: node.rules_monthly_newsletter.default
+targetEntityType: node
+bundle: rules_monthly_newsletter
+mode: default
+content:
+  html_newsletter:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  langcode: true
+  links: true
+  seo: true

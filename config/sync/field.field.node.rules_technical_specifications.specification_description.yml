@@ -1,0 +1,19 @@
+uuid: ce4b5fce-fd90-4a87-86ae-99f55f5d414e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.specification_description
+    - node.type.rules_technical_specifications
+id: node.rules_technical_specifications.specification_description
+field_name: specification_description
+entity_type: node
+bundle: rules_technical_specifications
+label: 'Descripción corta de la especificación'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

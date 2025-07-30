@@ -1,0 +1,129 @@
+uuid: 7bc1f2b4-8193-467f-878a-3e8112377a2b
+langcode: es
+status: true
+dependencies:
+  config:
+    - core.base_field_override.node.rules_technical_rules.title
+    - field.field.node.rules_technical_rules.effective_date
+    - field.field.node.rules_technical_rules.rule_category
+    - field.field.node.rules_technical_rules.rule_subcategory
+    - field.field.node.rules_technical_rules.technical_rule_content
+    - field.field.node.rules_technical_rules.technical_rule_number
+    - field.field.node.rules_technical_rules.technical_rule_title
+    - node.type.rules_technical_rules
+  module:
+    - node
+label: 'Feeds para normas tecnicas'
+id: rules_feed_technical_rules
+description: 'Carga masiva de normas tecnicas'
+help: ''
+import_period: -1
+fetcher: upload
+fetcher_configuration:
+  allowed_extensions: 'txt csv tsv xml opml'
+  directory: 'public://feeds'
+parser: csv
+parser_configuration:
+  delimiter: ','
+  no_headers: false
+  line_limit: 100
+processor: 'entity:node'
+processor_configuration:
+  values:
+    type: rules_technical_rules
+  langcode: es
+  insert_new: 1
+  update_existing: 2
+  update_non_existent: _keep
+  skip_hash_check: false
+  authorize: true
+  revision: false
+  expire: -1
+  owner_feed_author: false
+  owner_id: 1
+custom_sources:
+  numero:
+    value: numero
+    label: numero
+    machine_name: numero
+    type: csv
+  nombre:
+    value: nombre
+    label: nombre
+    machine_name: nombre
+    type: csv
+  contenido:
+    value: contenido
+    label: contenido
+    machine_name: contenido
+    type: csv
+  categoria:
+    value: categoria
+    label: categoria
+    machine_name: categoria
+    type: csv
+  sub_categoria:
+    value: sub_categoria
+    label: sub_categoria
+    machine_name: sub_categoria
+    type: csv
+  fecha:
+    value: fecha
+    label: fecha
+    machine_name: fecha
+    type: csv
+mappings:
+  -
+    target: technical_rule_number
+    map:
+      value: numero
+    settings:
+      language: null
+    unique:
+      value: '1'
+  -
+    target: title
+    map:
+      value: nombre
+    settings:
+      language: null
+    unique: {  }
+  -
+    target: technical_rule_title
+    map:
+      value: nombre
+    settings:
+      language: ''
+      format: plain_text
+  -
+    target: technical_rule_content
+    map:
+      value: contenido
+    settings:
+      language: ''
+      format: full_html
+  -
+    target: rule_category
+    map:
+      target_id: categoria
+    settings:
+      language: ''
+      reference_by: name
+      feeds_item: guid
+      autocreate: '1'
+  -
+    target: rule_subcategory
+    map:
+      target_id: sub_categoria
+    settings:
+      language: ''
+      reference_by: name
+      feeds_item: guid
+      autocreate: '1'
+  -
+    target: effective_date
+    map:
+      value: fecha
+    settings:
+      language: null
+      timezone: UTC

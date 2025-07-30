@@ -1,0 +1,8 @@
+uuid: 013f3079-a694-477a-845f-3a6983ddaf35
+langcode: es
+status: true
+dependencies: {  }
+name: 'Subcategorías de especificaciones'
+vid: rules_specification_subcategory
+description: 'Listado de subcategorías a las que puede pertenecer una especificación'
+weight: -7

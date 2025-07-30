@@ -1,0 +1,29 @@
+uuid: afef82aa-015e-40ff-9faf-9539c0857299
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.section_alignment
+    - paragraphs.paragraphs_type.rules_section
+    - taxonomy.vocabulary.rules_alignment
+id: paragraph.rules_section.section_alignment
+field_name: section_alignment
+entity_type: paragraph
+bundle: rules_section
+label: 'Orientación de la sección'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      rules_alignment: rules_alignment
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

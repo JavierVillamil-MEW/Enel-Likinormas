@@ -1,0 +1,22 @@
+uuid: 1dce29ff-af11-4516-86f6-7a3978336274
+langcode: es
+status: true
+dependencies:
+  config:
+    - node.type.rules_home_content
+id: node.rules_home_content.status
+field_name: status
+entity_type: node
+bundle: rules_home_content
+label: Publicado
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Activado
+  off_label: Desactivado
+field_type: boolean

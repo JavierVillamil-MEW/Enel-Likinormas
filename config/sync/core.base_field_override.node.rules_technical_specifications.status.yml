@@ -1,0 +1,22 @@
+uuid: a7b12c19-86b6-4be7-a7bb-3d116bb4b3d2
+langcode: es
+status: true
+dependencies:
+  config:
+    - node.type.rules_technical_specifications
+id: node.rules_technical_specifications.status
+field_name: status
+entity_type: node
+bundle: rules_technical_specifications
+label: Publicado
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Activado
+  off_label: Desactivado
+field_type: boolean

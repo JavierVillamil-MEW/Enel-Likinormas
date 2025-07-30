@@ -1,0 +1,8 @@
+uuid: b724631d-b007-4e62-bcc6-bee0e93ace34
+langcode: und
+status: true
+dependencies: {  }
+id: rules_technical_rules_list
+label: 'Normas: Formato de fecha'
+locked: false
+pattern: 'd F Y'

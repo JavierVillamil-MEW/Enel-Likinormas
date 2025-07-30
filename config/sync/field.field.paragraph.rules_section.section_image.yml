@@ -1,0 +1,44 @@
+uuid: 9266ff11-46e2-4e64-ab5e-7114884709e4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.section_image
+    - paragraphs.paragraphs_type.rules_section
+  module:
+    - image
+    - image_replace
+third_party_settings:
+  image_replace:
+    image_style_map:
+      rules_replace_and_webp:
+        source_field: section_image_mobile
+id: paragraph.rules_section.section_image
+field_name: section_image
+entity_type: paragraph
+bundle: rules_section
+label: 'Imagen de la sección'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'png gif jpg jpeg'
+  max_filesize: ''
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: true
+  title_field: true
+  title_field_required: true
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+field_type: image

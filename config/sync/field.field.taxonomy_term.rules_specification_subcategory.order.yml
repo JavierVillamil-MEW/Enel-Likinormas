@@ -1,0 +1,23 @@
+uuid: 1bf0631f-87de-4911-93c4-9c8a7e8e51d1
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.order
+    - taxonomy.vocabulary.rules_specification_subcategory
+id: taxonomy_term.rules_specification_subcategory.order
+field_name: order
+entity_type: taxonomy_term
+bundle: rules_specification_subcategory
+label: Orden
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

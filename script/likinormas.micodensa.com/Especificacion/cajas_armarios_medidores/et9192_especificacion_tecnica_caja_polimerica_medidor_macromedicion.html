@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET919-2 Caja polimérica para un medidor de macromedición | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/2112" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F2112.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/2112" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/2112" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '32');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET919-2 Caja polim&#233;rica para un medidor de macromedici&#243;n</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET-919-2</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">17/04/2024</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/2112">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F2112&amp;nodoid=2112', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#heading_0">1.	OBJETO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#heading_1">2. ALCANCE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#heading_2">3. CONDICIONES DE SERVICIO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#heading_3">4. SISTEMA DE UNIDADES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#heading_4">5. NORMAS DE FABRICACI&#211;N Y PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#heading_5">6.	REQUERIMIENTOS T&#201;CNICOS PARTICULARES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#heading_6">6.1	Caracter&#237;sticas Generales</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#heading_7">6.2	Caracter&#237;sticas geom&#233;tricas y de construcci&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#heading_8">6.3	Identificaci&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#heading_9">7.	PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#heading_10"> 7.1	Certificados de materiales</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#heading_11"> 7.2	Propiedades materiales polim&#233;ricos</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#heading_12"> 7.3	Inspecci&#243;n dimensional</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#heading_13"> 7.4	Inspecci&#243;n visual</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#heading_14"> 7.5	Inspecci&#243;n funcional</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#heading_15"> 7.6	Prueba contra impacto (C&#243;digo IK)</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#heading_16"> 7.7	Ensayo de grado de protecci&#243;n (C&#243;digo IP)</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#heading_17"> 7.8	Ensayo de autoextinci&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#heading_18"> 7.9	Ensayo de resistencia a variaciones de temperatura (resistencia a la estufa)</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#heading_19"> 7.10	Ensayo de resistencia a la penetraci&#243;n de una bolilla</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#heading_20"> 7.11	Ensayo de envejecimiento clim&#225;tico</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#heading_21">8.	 MUESTREO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#heading_22">9.	EMPAQUE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#heading_23">10.	GARANT&#205;A DE F&#193;BRICA</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#heading_24">11.	CERTIFICADOS DE CONFORMIDAD</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#heading_25">12.	PRESENTACI&#211;N DE LAS OFERTAS</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1.	OBJETO</h2>
+Establecer las condiciones que deben satisfacer las cajas para medidor de macromedici&#243;n, las cuales deben poseer excelentes caracter&#237;sticas t&#233;cnicas de desempe&#241;o, durabilidad y calidad para cumplir las condiciones actuales de operaci&#243;n en los sistemas de distribuci&#243;n de energ&#237;a.<br />
+<h2 id="heading_1" >2. ALCANCE</h2>
+La presente especificaci&#243;n se aplicar&#225; a todas las cajas para macromedici&#243;n que adquiera Enel Colombia.<br />
+<h2 id="heading_2" >3. CONDICIONES DE SERVICIO</h2>
+Las cajas para macromedici&#243;n ser&#225;n utilizadas en el sistema de <a href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a> del &#225;rea de concesi&#243;n de Enel Colombia, bajo las siguientes condiciones:<br /><div style="width:456px;"><table><tr><td colspan="2" rowspan="1" style="width:456px;height:34px;text-align:center"><b>CARACTER&#205;STICAS AMBIENTALES</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">a. Altura sobre el nivel del mar </td><td colspan="1" rowspan="1" style="">2 640 m</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">b. Ambiente </td><td colspan="1" rowspan="1" style="">Tropical</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">c. Humedad </td><td colspan="1" rowspan="1" style="">Mayor al 90 %</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">d. Temperatura m&#225;xima y m&#237;nima </td><td colspan="1" rowspan="1" style="">45 &#186;C y - 5 &#186;C respectivamente.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">e. Temperatura promedio </td><td colspan="1" rowspan="1" style="">14 &#186;C.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">f. Instalaci&#243;n </td><td colspan="1" rowspan="1" style="">Sobrepuesta</td></tr></table><br /></div><div style="width:456px;"><table><tr><td colspan="2" rowspan="1" style="width:456px;height:21px;text-align:center"><b>CARACTER&#205;STICAS EL&#201;CTRICAS</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">a. <a href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#" id="version-384" class="externalLink  glosarioLink">Tensi&#243;n nominal</a> del sistema  </td><td colspan="1" rowspan="1" style="">120/208 V.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">b. Tensi&#243;n m&#225;xima </td><td colspan="1" rowspan="1" style="">600 V</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">c. Disposici&#243;n del sistema </td><td colspan="1" rowspan="1" style="">Trif&#225;sico tetrafilar (3 Fases + Neutro)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">d. Frecuencia del sistema </td><td colspan="1" rowspan="1" style="">60 Hz</td></tr></table><br /></div><h2 id="heading_3" >4. SISTEMA DE UNIDADES</h2>
+En todos los documentos t&#233;cnicos se deben expresar las cantidades num&#233;ricas en unidades del sistema Internacional (S.I.). Si se usan cat&#225;logos, folletos o planos, en sistemas diferentes de unidades, deben hacerse las conversiones respectivas.<br />
+<h2 id="heading_4" >5. NORMAS DE FABRICACI&#211;N Y PRUEBAS</h2>
+<div style="width:900px;"><table><tr><td colspan="1" rowspan="1" style="width:100px;height:35px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:800px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">IEC 60529</td><td colspan="1" rowspan="1" style="">Degrees of protection provided by enclosures (IP Code).</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">IEC 60695-11-10</td><td colspan="1" rowspan="1" style="">Fire hazard testing - Part 11-10: Test flames - 50 W horizontal and vertical flame test methods</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">IEC 144</td><td colspan="1" rowspan="1" style="">Degrees of protection of enclosures for low voltage switchgear and control gear”.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">ISO 2859-1 </td><td colspan="1" rowspan="1" style="">Muestreo para inspecci&#243;n.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">NTC 2154</td><td colspan="1" rowspan="1" style="">Bloques de Terminales para uso industrial.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">NTC 3279</td><td colspan="1" rowspan="1" style="">Grados de protecci&#243;n dados por encerramiento de equipo el&#233;ctrico c&#243;digo IP.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">NTC 3916</td><td colspan="1" rowspan="1" style="">M&#233;todo de ensayo para la resistencia a la tracci&#243;n de recubrimientos, utilizando probadores port&#225;tiles de adherencia</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">NCT 5991</td><td colspan="1" rowspan="1" style="">Envases y embalajes. requisitos de los envases y embalajes valorizables mediante compostaje y biodegradaci&#243;n. Programa de ensayo y criterios de evaluaci&#243;n para la aceptaci&#243;n final del envase o embalaje</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">NTC-IEC 62262</td><td colspan="1" rowspan="1" style="">Grados de protecci&#243;n proporcionados por los encerramientos de equipos el&#233;ctricos contra los impactos mec&#225;nicos externos (c&#243;digo ik)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">UL 486A </td><td colspan="1" rowspan="1" style="">Wire connectors and soldering lugs for use with cooper conductors</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">UL 1059</td><td colspan="1" rowspan="1" style="">Terminal Blocks</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">ASTM D6400</td><td colspan="1" rowspan="1" style="">Standard Specification for Labeling of Plastics Designed to be Aerobically Composted in Municipal or Industrial Facilities</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">ASTM D635</td><td colspan="1" rowspan="1" style="">Standard Test Method for Rate of Burning and/or Extent and Time of Burning of Plastics in a Horizontal Position</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">ASTM G155</td><td colspan="1" rowspan="1" style="">Standard Practice for Operating Xenon Arc Lamp Apparatus for Exposure of Materials</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">UNE-EN 13432</td><td colspan="1" rowspan="1" style="">Envases y embalajes. Requisitos de los envases y embalajes valorizables mediante compostaje y biodegradaci&#243;n. Programa de ensayo y criterios de evaluaci&#243;n para la aceptaci&#243;n final del envase o embalaje.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">DIN V 54900-2</td><td colspan="1" rowspan="1" style="">Testing of the compostability of plastics - Part 2: Testing of the complete biodegradability of plastics in laboratory tests</td></tr></table><br /></div>Pueden emplearse otras normas internacionalmente reconocidas equivalentes o superiores a las aqu&#237; se&#241;aladas, siempre y cuando se ajusten a lo solicitado en la presente <a href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a>.<br /><br />Las normas citadas en la presente especificaci&#243;n (o cualquier otra que llegare a ser aceptada por Enel Colombia.) se refieren a su &#250;ltima revisi&#243;n.<br />
+<h2 id="heading_5" >6.	REQUERIMIENTOS T&#201;CNICOS PARTICULARES</h2>
+<h3 id="heading_6" >6.1	Caracter&#237;sticas Generales</h3>
+Las cajas para medidor de macromedici&#243;n requeridas por Enel Colombia, deben cumplir con las siguientes condiciones:<br />a.	Ser construida con materiales de la mejor calidad debi&#233;ndose descartar el empleo de materiales<br />alterables por la humedad, radiaci&#243;n solar y otras condiciones ambientales desfavorables.<br />b.	En caso de ser construida con material reciclado, debe indicarse en la marcaci&#243;n de identificaci&#243;n de la caja el porcentaje de material reciclado utilizado. <br />c.	Ser autosoportable, compacta, liviana y con una estructura completamente r&#237;gida e indeformable, sin aristas, bordes ni esquinas vivas, agudas o cortantes.<br />d.	La posici&#243;n de trabajo de la caja ser&#225; vertical, para facilitar la lectura de los medidores.<br />e.	El espesor m&#237;nimo de toda la envolvente es de 3mm.<br />f.	El material polim&#233;rico debe tener las siguientes propiedades seg&#250;n aplique:
+<ul><li>Autoextinguible,</li>
+<li>No higrosc&#243;pico,</li>
+<li>Alta resistencia al impacto,</li>
+<li>No deben presentar deformaci&#243;n ni cristalizaci&#243;n por temperatura,</li>
+<li>Resistencia al ataque de qu&#237;micos usados en la industria de la construcci&#243;n, especialmente el alcalino debido al cemento.</li>
+<li>Protecci&#243;n UV, sin que se decolore u opaque ni se pierdan propiedades qu&#237;micas y mec&#225;nicas al estar a la intemperie.</li>
+<li>Rigidez diel&#233;ctrica.</li>
+<li>Tanto la tapa como el cuerpo deber&#225;n ser de color gris.</li></ul>
+g.	La caja debe tener un &#237;ndice de hermeticidad IP54 de acuerdo con la norma IEC 60529, y con grado de protecci&#243;n contra choques IK 10 (20,0. julios).<br />h.	La caja debe estar compuesta por el cuerpo y una tapa, la cual deber&#225; poseer todos los accesorios necesarios y suficientes para su correcta utilizaci&#243;n, funcionamiento y f&#225;cil transporte.<br />i.	Deben permitir el montaje de un medidor trif&#225;sico multifuncional, bornera de prueba y modem.<br />j.	Debe incluir accesorios para fijaci&#243;n al poste de concreto con cinta de acero<br />inoxidable de 5/8&quot; (Band it).<br />k.	La caja incluye por la cara inferior del cuerpo, en el costado derecho un prensaestopa PG 29 y un prensaestopa PG11, a su vez debe incluir un sistema para asegurar el cable multiconductor al interior de la caja para garantizar que este no se desconecte de la bornera de pruebas.<br />l.	Demostrar la ausencia de las siguientes sustancias:  Retardantes de llama bromados, el &#193;cido Perfluorooctano Sulf&#243;nico (PFOS) y sus sales, Fluoruro de Perfluorooctano Sulfonilo (PFOSF) y el Pentaclorobenceno (PeCB). Debe ser demostrado mediante ficha t&#233;cnica.<br />
+<h3 id="heading_7" >6.2	Caracter&#237;sticas geom&#233;tricas y de construcci&#243;n</h3>
+La caja ser&#225; de la forma y dimensiones que se muestran en las figuras anexas, teniendo en cuenta:<br /><div style="width:500px;"><table><tr><td colspan="1" rowspan="1" style="width:150px;height:35px;text-align:center"><b>DESCRIPCI&#211;N</b></td><td colspan="1" rowspan="1" style="width:350px;text-align:center"><b>DIMENSI&#211;N (mm)</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">Ancho</td><td colspan="1" rowspan="1" style="text-align:center">330</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">Alto</td><td colspan="1" rowspan="1" style="text-align:center">460</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">Profundidad</td><td colspan="1" rowspan="1" style="text-align:center">170 (Del fondo de la caja a la parte exterior de la tapa) 190 (Incluido el herraje de sujeci&#243;n)</td></tr></table><br /></div>En la parte inferior de la cara posterior de la caja se ubicar&#225; el terminal de tierra, d&#225;ndole una altura suficiente para que sobresalga y facilite la conexi&#243;n de la caja a la red.<br /><br />Adicionalmente, se debe incluir bandeja con los accesorios respectivos para el montaje del medidor, bornera de pruebas y modem.<br /><br />Las cajas deber&#225;n contar en su cuerpo con buje roscado 1/4-20 UNC, que permita la instalaci&#243;n de pernos de seguridad seg&#250;n lo indicado en la <a href="../otros/et910_tornillos_seguridad.html" class="externalLink">ET910<span class="externalLinkIcon"></span></a>. Los pernos ser&#225;n suministrados por Enel Colombia, por lo cual la caja se deber&#225; entregar sin pernos.<br /><br /><b>6.2.1	Tapa</b><br />La tapa ser&#225; gris y se unir&#225; a la caja con bisagras que permitan apertura m&#237;nima de 180 grados.<br /><br />La tapa estar&#225; dispuesta para ser asegurada a la base con perno roscado precintable como el indicado en la <a href="https://likinormas.micodensa.com/Especificacion/otros/et910_tornillos_seguridadET910" class="externalLink">ET910<span class="externalLinkIcon"></span></a>.<br /><br /><b>6.2.2	Bornera de <a href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a></b><br />El interior de la caja debe contener una bornera de puesta a tierra para aterrizar el neutro, la caja y el medidor. Deber&#225; tener una capacidad no inferior de 50 A.<br /><br /><b>6.2.3	Sistema fijaci&#243;n conductor</b><br />El sistema elegido para fijar el conductor debe garantizar su correcta sujeci&#243;n sin que se presenten:<br />a.	Desconexiones accidentales del cable multiconductor.<br />b.	Da&#241;os al conductor como rotura o el trozado de alguno de los hilos.<br />c.	Anomal&#237;as por esfuerzos mec&#225;nicos y el&#233;ctricos y t&#233;rmicos que generen fallas en la sujeci&#243;n o conexi&#243;n.<br />
+<h3 id="heading_8" >6.3	Identificaci&#243;n</h3>
+La caja tendr&#225; grabado en alto relieve:<br />a.	Inscripci&#243;n en letras may&#250;sculas que diga “USO EXCLUSIVO DE ENEL COLOMBIA” en la parte frontal de la tapa de la caja.<br />b.	Logotipo o nombre del fabricante, el tama&#241;o de la letra ser&#225; de 6mm m&#237;nimo.<br />c.	Logotipo o nombre del comercializador si aplica<br />d.	S&#237;mbolo de puesta a tierra en la parte posterior del cuerpo de la caja, correspondiente a cada bornera.<br />e.	Si aplica, debe indicarse cantidad de material reciclado incorporado<br />f.	Incluir una etiqueta en la parte inferior de (8 x 11) o (11x16) cm en letras negras y fondo amarillo, seg&#250;n modelo indicado como etiqueta NFPA 70E, en tinta indeleble y resistente a los rayos UV.<br /><br /><img src="https://i.ibb.co/JsWTZH2/1.png" /><br /><br />El recuadro remarcado en rojo estar&#225; destinado a un c&#243;digo QR, el cual ser&#225; indicado por Enel Codensa al momento de la generar la respectiva orden de compra.<br /><br />g.	Debe marcarse con el C&#243;digo de Identificaci&#243;n correspondiente a la materia prima, seg&#250;n codificaci&#243;n internacional ”Sociedad de la Industria de Pl&#225;sticos (SPI)”:<br /><br /><img src="https://i.ibb.co/L8Dn6sY/2.png" /><br /><i>*Gr&#225;fico tomado de: https://www.vertederocero.com/tipos-de-plasticos-y-sus-numeros/</i><br />*En caso de corresponder al grupo #7 “Other”, se debe indicar sus componentes.<br /><br />Tambi&#233;n tendr&#225; una placa especificando como m&#237;nimo: Nombre, tel&#233;fono y ciudad donde se ubica el fabricante, datos t&#233;cnicos, fecha de fabricaci&#243;n, lote, serie de fabricaci&#243;n, n&#250;mero y fecha de la certificaci&#243;n RETIE.<br /><br />Adicionalmente debe incluirse el s&#237;mbolo de riesgo el&#233;ctrico con las m&#237;nimas dimensiones indicadas en el RETIE.<br />
+<h2 id="heading_9" >7.	PRUEBAS</h2>
+Las cajas de medidores deben cumplir con:<br /><br /><div style="width:800px;"><table><tr><td colspan="1" rowspan="2" style="width:368px;height:35px;text-align:center"><b>VALIDACIONES / PRUEBAS A REALIZAR</b></td><td colspan="3" rowspan="1" style="width:432px;text-align:center"><b>TIPOS DE PRUEBAS</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>Tipo / Homologaci&#243;n</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Rutina / Fabricaci&#243;n</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Aceptaci&#243;n / Recepci&#243;n</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">7.1. Certificados de materiales</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">7.2.&#160;Propiedades materiales polim&#233;ricos</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">7.3.&#160;Inspecci&#243;n dimensional</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center">X</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">7.4. Inspecci&#243;n visual y funcional: cierre - apertura de la tapa</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center">X</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">7.5. Inspecci&#243;n funcional </td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center">X</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">7.6. Prueba contra impacto (c&#243;digo IK)</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">X</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">7.7.&#160;Ensayo de grado de protecci&#243;n (c&#243;digo IP)</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">X</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">7.8.&#160;Ensayo de autoextinci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">7.9. Ensayo de resistencia a variaciones de temperatura</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">7.10.&#160;Ensayo de resistencia a la penetraci&#243;n de una bolilla</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">7.11.&#160;Ensayo de envejecimiento clim&#225;tico</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div>
+<h3 id="heading_10" > 7.1	Certificados de materiales</h3>
+Deben presentarse los resultados de los siguientes an&#225;lisis qu&#237;micos:<br />a.	Certificado de an&#225;lisis qu&#237;mico del material sint&#233;tico del fabricante (subproveedor).<br />b.	Certificado de an&#225;lisis qu&#237;mico y de propiedades del material polim&#233;rico.<br />
+<h3 id="heading_11" > 7.2	Propiedades materiales polim&#233;ricos</h3>
+Deben poseer las siguientes caracter&#237;sticas:<br />a.	Resistencia a la tracci&#243;n 612 kg/cm<sup>2</sup><br />b.	Resistencia a la flexi&#243;n de 730 kg/cm<sup>2</sup><br />c.	Resistencia a la rotura 856kg/cm<sup>2</sup><br />d.	Dureza Brinell de R-scale 120<br />e.	Auto extinguible (V2)<br />f.	No higrosc&#243;pico<br />g.	No degradaci&#243;n<br />
+<h3 id="heading_12" > 7.3	Inspecci&#243;n dimensional</h3>
+La verificaci&#243;n de las dimensiones se har&#225; con los instrumentos de medida que den la aproximaci&#243;n requerida (cinta met&#225;lica con divisiones de 1 mm para longitudes y calibrador para los di&#225;metros y espesores). El tama&#241;o de la muestra deber&#225; estar de acuerdo con la Tabla 1.<br /><br />Las dimensiones se verificar&#225;n con base a:<br />- Esquemas indicados en las figuras anexas a la presente especificaci&#243;n.<br />- Planos entregados por el fabricante y aprobados por Enel Colombia.<br /><br />Las tolerancias generales son:<br />a.	Para la tapa y la base: &#177;20 mm,<br />b.	Perno, platina y llave del sistema de seguridad: &#177;0.5 mm.<br />
+<h3 id="heading_13" > 7.4	Inspecci&#243;n visual</h3>
+Se verificar&#225;n:<br />a.	Las marcaciones descritas en el numeral 6.3<br />b.	La buena terminaci&#243;n de todos los elementos constitutivos de la tapa y sus accesorios.<br />c.	La ausencia de grietas, sopladuras, poros, exfoliaduras, ampolladuras, raspaduras u otros defectos.<br />
+<h3 id="heading_14" > 7.5	Inspecci&#243;n funcional</h3>
+Se verificar&#225; el correcto cierre y apertura de la tapa al cuerpo, el adecuado funcionamiento del dispositivo de cierre.<br />
+<h3 id="heading_15" > 7.6	Prueba contra impacto (C&#243;digo IK)</h3>
+El ensamble del cuerpo y la puerta deben tener una resistencia al impacto de 20 julios, prueba realizada con un martillo pendular de 5kg. Luego del impacto, la caja debe conservar su grado de protecci&#243;n IP, manteniendo su funcionalidad en la apertura y cierre de la puerta. Adicionalmente, no se deben presentar roturas en la tapa ni en la base y el conjunto debe permanecer ensamblado. Se verificar&#225; seg&#250;n lo indicado en la NTC-IEC 62262<br />
+<h3 id="heading_16" > 7.7	Ensayo de grado de protecci&#243;n (C&#243;digo IP)</h3>
+El &#237;ndice de hermeticidad para las cajas ser&#225; IP54, este grado de protecci&#243;n se verificar&#225; de acuerdo a la norma NTC-IEC 60529.<br />
+<h3 id="heading_17" > 7.8	Ensayo de autoextinci&#243;n</h3>
+Este ensayo deber&#225; realizarse en dos unidades de diferentes muestras y ser&#225; ejecutado seg&#250;n lo descrito en la norma ASTM D635.<br /><br />El ensayo ser&#225; satisfactorio si se cumple con la clasificaci&#243;n HB (Horizontal Burning), en la cual al retirar la fuente de ignici&#243;n, no se consume completamente el material, no contin&#250;a quem&#225;ndose el material m&#225;s de 5 segundos y si no presenta desprendimiento de gotas inflamadas o part&#237;culas incandescentes.<br /><br />En los casos que se consuma el material hasta la marca de 100 mm la ratio de quema (burnibg rate) no debe exceder de 40 mm/min para probetas con espesor entre 3 y 13 mm, o 75 mm/min para probetas con espesor inferior a 3 mm.<br /><br />Tambi&#233;n ser&#225; aceptable material ensayado bajo norma IEC 60695-11-10, con un criterio de clasificaci&#243;n m&#237;nimo V2.<br />
+<h3 id="heading_18" > 7.9	Ensayo de resistencia a variaciones de temperatura (resistencia a la estufa)</h3>
+Se debe realizar sobre la caja completa y armada. La temperatura deber&#225; se elevada a 80&#176;C &#177; 2&#176;C, durante el ensayo el material no deber&#225; sufrir ninguna deformaci&#243;n que afecte el correcto funcionamiento posterior. <br />
+<h3 id="heading_19" > 7.10	Ensayo de resistencia a la penetraci&#243;n de una bolilla</h3>
+Deber&#225; realizarse sobre el cuerpo de la caja y de la puerta. Durante el ensayo la temperatura de la estufa ser&#225; mantenida a 80&#176;C &#177; 2&#176;C. Al finalizar la ejecuci&#243;n del ensayo el di&#225;metro de la impronta producida por la bolilla no debe ser superior a 2mm.<br />
+<h3 id="heading_20" > 7.11	Ensayo de envejecimiento clim&#225;tico</h3>
+Este ensayo se efectuar&#225; sobre dos cajas o dos puertas; una de ellas debi&#243; haberse sometido con antelaci&#243;n al ensayo de resistencia a la estufa. El ensayo se efectuar&#225; siguiendo la metodolog&#237;a se&#241;alada en la norma ASTM G155, aplicando el m&#233;todo 1 durante 600 horas.<br /><br />Al t&#233;rmino de las 600 horas no deben presentarse degradaci&#243;n, grietas, oclusiones, ampolladuras y otros defectos que provoquen la rotura y las dos muestras deber&#225;n someterse nuevamente al ensayo de resistencia a choques mec&#225;nicos (c&#243;digo IK10)<br /><br />
+<h2 id="heading_21" >8.	 MUESTREO</h2>
+Para las pruebas de aceptaci&#243;n se realizar&#225; muestreo acorde a las siguientes tablas:<br /><br /><b>TABLA 1. PLAN DE MUESTREO PARA INSPECCI&#211;N VISUAL Y DIMENSIONAL (NIVEL DE INSPECCI&#211;N II, NAC = 2,5%) (NORMA NTC-ISO 2859-1 TABLA1 - TABLA 2A)</b><br /><div style="width:650px;"><table><tr><td colspan="1" rowspan="1" style="width:144px;height:52px;text-align:center"><b>TAMA&#209;O DEL&#160;LOTE</b></td><td colspan="1" rowspan="1" style="width:173px;text-align:center"><b>TAMA&#209;O DE LA&#160;MUESTRA</b></td><td colspan="1" rowspan="1" style="width:171px;text-align:center"><b>NUMERO PERMITIDO DE DEFECTUOSOS</b></td><td colspan="1" rowspan="1" style="width:162px;text-align:center"><b>NUMERO DEFECTUOSOS PARA RECHAZO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2 a 8</td><td colspan="1" rowspan="1" style="text-align:center">A = 2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">9 a 15</td><td colspan="1" rowspan="1" style="text-align:center">B = 3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16 a 25</td><td colspan="1" rowspan="1" style="text-align:center">C = 5</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">26 a 50</td><td colspan="1" rowspan="1" style="text-align:center">D = 8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">51 a 90</td><td colspan="1" rowspan="1" style="text-align:center">E = 13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">91 a 150</td><td colspan="1" rowspan="1" style="text-align:center">F = 20</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">151 a 280</td><td colspan="1" rowspan="1" style="text-align:center">G = 32</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">281 a 500</td><td colspan="1" rowspan="1" style="text-align:center">H = 50</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">501 a 1200</td><td colspan="1" rowspan="1" style="text-align:center">J = 80</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">1201 a 3200</td><td colspan="1" rowspan="1" style="text-align:center">K = 125</td><td colspan="1" rowspan="1" style="text-align:center">7</td><td colspan="1" rowspan="1" style="text-align:center">8</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">3201 a 10000</td><td colspan="1" rowspan="1" style="text-align:center">L = 200</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">11</td></tr></table><br /></div><br /><b>TABLA 2. PLAN DE MUESTREO PARA LOS ENSAYOS MEC&#193;NICOS (NIVEL DE INSPECCI&#211;N ESPECIAL S-3, NAC = 2,5%) (NORMA NTC-ISO 2859-1 TABLA1 - TABLA 2A)</b><br /><div style="width:650px;"><table><tr><td colspan="1" rowspan="1" style="width:144px;height:52px;text-align:center"><b>TAMA&#209;O DEL&#160;LOTE</b></td><td colspan="1" rowspan="1" style="width:173px;text-align:center"><b>TAMA&#209;O DE LA&#160;MUESTRA</b></td><td colspan="1" rowspan="1" style="width:171px;text-align:center"><b>NUMERO PERMITIDO DE DEFECTUOSOS</b></td><td colspan="1" rowspan="1" style="width:162px;text-align:center"><b>NUMERO DEFECTUOSOS PARA RECHAZO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2 a 8</td><td colspan="1" rowspan="1" style="text-align:center">A = 2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">9 a 15</td><td colspan="1" rowspan="1" style="text-align:center">A = 2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16 a 25</td><td colspan="1" rowspan="1" style="text-align:center">B = 3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">26 a 50</td><td colspan="1" rowspan="1" style="text-align:center">B = 3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">51 a 90</td><td colspan="1" rowspan="1" style="text-align:center">C = 5</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">91 a 150</td><td colspan="1" rowspan="1" style="text-align:center">C = 5</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">151 a 280</td><td colspan="1" rowspan="1" style="text-align:center">D = 8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">281 a 500</td><td colspan="1" rowspan="1" style="text-align:center">D = 8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">501 a 1200</td><td colspan="1" rowspan="1" style="text-align:center">E = 13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">1201 a 3200</td><td colspan="1" rowspan="1" style="text-align:center">E = 13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">3201 a 10000</td><td colspan="1" rowspan="1" style="text-align:center">F = 20</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr></table><br /></div>
+<h2 id="heading_22" >9.	EMPAQUE</h2>
+Toda caja para medidor debe ir completa y cerrada, debe protegerse contra rayaduras y da&#241;os dentro del transporte, para esto cada una debe embalarse en una caja de cart&#243;n grueso, en cuyo exterior debe indicarse en forma impresa el “nombre del fabricante”, propiedad de “Enel Colombia”, descripci&#243;n del producto “Caja para medidor de macromedici&#243;n”, n&#250;mero de contrato, orden de compra y c&#243;digo de inventario Enel Colombia.<br /><br />Para el transporte debe embalarse en estibas con un n&#250;mero de unidades no mayor a 90 unidades por estiba y la estiba recubierta y sellada con material pl&#225;stico, sobre el cual se adherir&#225; una etiqueta de por lo menos 30 x 30 cm que indique que no se puede almacenar m&#225;s de dos estibas en sentido vertical.<br /><br />Los materiales usados para el empaque (Cart&#243;n, Pl&#225;stico, etc) deben contener como m&#237;nimo un 40% de material reciclado pos consumo o pos industrial, lo cual se demostrar&#225; conforme a lo dispuesto en la ficha t&#233;cnica del producto.   <br /><br />Adicionalmente los pl&#225;sticos usados deben ser biodegradables en un porcentaje igual o superior al 30% seg&#250;n lo indicado en las normas NTC 5991, ASTM D6400, UNE-EN 13432, DIN V 54900-2. De la misma manera el proveedor debe asegurar que los materiales pl&#225;sticos requeridos para el empaque no deben contener sustancias de inter&#233;s ambiental en su composici&#243;n como Zinc (Zn), Cobre (Cu), N&#237;quel (Ni), Cadmio (Cd), Plomo (Pb), Mercurio (Hg), Cromo (Cr), Ars&#233;nico (As) y Cobalto (Co).<br /><br />Los requisitos deber&#225;n ser demostrables con una ficha t&#233;cnica del material utilizado.<br />
+<h2 id="heading_23" >10.	GARANT&#205;A DE F&#193;BRICA</h2>
+Enel Colombia requiere como m&#237;nimo, un per&#237;odo de garant&#237;a de f&#225;brica de veinticuatro (24) meses, a partir de la entrega de los bienes.<br />
+<h2 id="heading_24" >11.	CERTIFICADOS DE CONFORMIDAD</h2>
+El oferente adjuntar&#225; con su propuesta el <a href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#" id="version-126" class="externalLink  glosarioLink">certificado de conformidad</a> de producto con <a href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#" id="version-301" class="externalLink  glosarioLink">norma t&#233;cnica</a> y RETIE, expedido por una entidad autorizada por el Organismo Nacional de Acreditaci&#243;n de Colombia-ONAC.<br />
+<h2 id="heading_25" >12.	PRESENTACI&#211;N DE LAS OFERTAS</h2>
+El oferente deber&#225; presentar su oferta t&#233;cnica con la siguiente informaci&#243;n:
+<ul><li><b>ANEXO 1:</b> planillas de caracter&#237;sticas t&#233;cnicas garantizadas, la cual deber&#225; ser diligenciada completamente y presentada en formato Excel.</li></ul>
+
+<ul><li><b>EXCEPCIONES T&#201;CNICAS:</b> apartado en el cual se deben relacionar las excepciones de car&#225;cter exclusivamente t&#233;cnico de la oferta, respecto a los bienes solicitados. Si la oferta no presenta excepci&#243;n, se indicar&#237;a expresamente en el mismo “NO HAY EXCEPCIONES”</li></ul>
+
+<ul><li><b>CERTIFICACIONES:</b> Certificaci&#243;n del sistema de calidad y de producto con norma t&#233;cnica y RETIE.</li></ul>
+
+<ul><li><b>EVIDENCIA T&#201;CNICA:</b> relaci&#243;n de clientes, evidencia de su capacidad t&#233;cnica y experiencias relacionadas con los materiales y/o equipos cotizados.</li></ul>
+
+<ul><li><b>GARANT&#205;A:</b> carta de garant&#237;a de los bienes cotizados.</li></ul>
+
+<ul><li><b>NORMAS:</b> normas t&#233;cnicas aplicables a los bienes cotizados.</li></ul>
+
+<ul><li><b>CAT&#193;LOGOS:</b> cat&#225;logos originales completos y actualizados del fabricante, que correspondan a los bienes cotizados.</li></ul>
+
+<ul><li><b>INFORMACI&#211;N ADICIONAL:</b> informaci&#243;n adicional que se considere aporta explicaci&#243;n al dise&#241;o de la caja (dibujos, detalles, dimensiones y pesos de los materiales ofertados), as&#237; como las instrucciones de instalaci&#243;n, caracter&#237;sticas de operaci&#243;n y mantenimiento.</li></ul>
+<br />En caso de que se requiera se podr&#225;n exigir muestras de cada una de las referencias ofertadas sin cargo a devoluci&#243;n, con cada una de las caracter&#237;sticas t&#233;cnicas, solicitadas y mencionadas en la presente especificaci&#243;n.<br /><br />Enel Colombia podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones, sin expresi&#243;n de causa ni obligaci&#243;n de compensaci&#243;n.<br /><br /><b>Figura 1. VISTA FRONTAL</b><br /><img src="https://i.ibb.co/61xxrQz/3.png" /><br /><br /><b>Figura 2. VISTA LATERAL</b><br /><img src="https://i.ibb.co/X3vx87s/4.png" /><br /><br /><b>Figura 3. VISTA INFERIOR</b><br /><img src="https://i.ibb.co/VtCj5yM/5.png" /><br /><br /><b>Figura 4. VISTA GENERAL</b><br /><img src="https://i.ibb.co/Ny0b5T3/6.png" /><br /><br /><b>ANEXO 1. CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS</b><br /><div style="width:800px;"><table><tr><td colspan="4" rowspan="1" style="width:800px;height:35px;text-align:center"><b>CAJA POLIMERICA PARA UN MEDIDOR&#160;DE MACROMEDICION</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="width:20px;height:35px;text-align:center"><b>N&#176;</b></td><td colspan="1" rowspan="1" style="width:150px;height:21px;text-align:center"><b>DESCRIPCI&#211;N</b></td><td colspan="1" rowspan="1" style="width:500px;height:21px;text-align:center"><b>CARACTER&#205;STICA</b></td><td colspan="1" rowspan="1" style="width:130px;height:21px;text-align:center"><b>OFERTADO</b></td></tr>
+<tr><td colspan="1" rowspan="3" style="height:21px;text-align:center">1</td><td colspan="1" rowspan="3" style="">Proponente</td><td colspan="1" rowspan="1" style="">Pa&#237;s de fabricaci&#243;n</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Fabricante</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Representante del fabricante</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2</td><td colspan="1" rowspan="1" style="">Normas</td><td colspan="1" rowspan="1" style="">Fabricaci&#243;n y pruebas</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">3</td><td colspan="1" rowspan="1" style="">Caracter&#237;sticas el&#233;ctricas</td><td colspan="1" rowspan="1" style=""><a href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#" id="version-384" class="externalLink  glosarioLink">tensi&#243;n nominal</a>&#160;[V]</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="3" style="height:21px;text-align:center">4</td><td colspan="1" rowspan="3" style="">Componentes</td><td colspan="1" rowspan="1" style="">Una bandeja portamedidor (si/no)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Una bornera de&#160;<a href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a>&#160;(si/no)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Dos prensaestopas en la parte inferior PG 29 y PG 11</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">5</td><td colspan="1" rowspan="1" style="">Acabado</td><td colspan="1" rowspan="1" style="">Sin grietas, sopladuras, poros, exfoliaduras, ampolladuras, raspaduras u otros defectos</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="4" style="height:21px;text-align:center">6</td><td colspan="1" rowspan="4" style="">Marcaci&#243;n</td><td colspan="1" rowspan="1" style="">Logo: Terminal de&#160;<a href="et9192_especificacion_tecnica_caja_polimerica_medidor_macromedicion.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a>&#160;y riesgo&#160;el&#233;ctrico</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Texto: &quot;USO EXCLUSIVO ENEL COLOMBIA&quot;</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Placa con datos t&#233;cnicos e informaci&#243;n del Fabricante</td><td colspan="1" rowspan="2" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">y todas las marcaciones indicadas en cap&#237;tulo. 6.3</td></tr>
+<tr><td colspan="1" rowspan="3" style="height:21px;text-align:center">7</td><td colspan="1" rowspan="3" style="">Material y color</td><td colspan="1" rowspan="1" style="">Material polim&#233;rico (si/no)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Base de color Gris (si/no)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Tapa de color gris (si/no)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="4" style="height:21px;text-align:center">8</td><td colspan="1" rowspan="4" style="">Dimensionales (mm)</td><td colspan="1" rowspan="1" style="">Ancho</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Alto</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Profundo (Del fondo de la caja a la parte exterior de la tapa)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Profundo Incluido el herraje de sujeci&#243;n)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">9</td><td colspan="1" rowspan="1" style="">Grado de protecci&#243;n </td><td colspan="1" rowspan="1" style="">IP 54 (si/no)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center">10</td><td colspan="1" rowspan="1" style="">Empaque</td><td colspan="1" rowspan="1" style="">Cumple con lo solicitado en el numeral 9 (Presentan ficha t&#233;cnica del material utilizado) (si/no)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:21px;text-align:center">11</td><td colspan="1" rowspan="5" style="">Certificado&#160;Sistema&#160;de&#160;calidad&#160;(Norma ISO9001)</td><td colspan="1" rowspan="1" style="">Entidad certificadora</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">N&#250;mero de certificado</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Vigencia</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:21px;text-align:center">12</td><td colspan="1" rowspan="5" style="">Certificaci&#243;n&#160;de&#160;producto&#160;con&#160;RETIE</td><td colspan="1" rowspan="1" style="">Entidad certificadora</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">N&#250;mero de certificado</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Vigencia</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">13</td><td colspan="2" rowspan="1" style="">Desviaciones presentadas</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">14</td><td colspan="2" rowspan="1" style="">Garant&#237;a (meses)</td><td colspan="1" rowspan="1" style=""> </td></tr></table><br /></div><br /><br /><br /><br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 2112, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

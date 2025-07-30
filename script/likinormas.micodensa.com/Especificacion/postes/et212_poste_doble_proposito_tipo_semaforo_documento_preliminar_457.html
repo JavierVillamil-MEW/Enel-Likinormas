@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET212 Poste doble propósito tipo semáforo (documento preliminar) | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/457" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F457.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/457" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/457" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '24');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET212 Poste doble prop&#243;sito tipo sem&#225;foro (documento preliminar)</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET 212 </div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">22/07/2011</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/457">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F457&amp;nodoid=457', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#heading_0">1.	OBJETO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#heading_1">2.	ALCANCE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#heading_2">3.	CONDICIONES AMBIENTALES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#heading_3">4.	SISTEMA DE UNIDADES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#heading_4">5.	NORMAS DE FABRICACI&#211;N Y PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#heading_5">6.	REQUERIMIENTOS T&#201;CNICOS PARTICULARES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#heading_6">  6.1 Caracter&#237;sticas Generales</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#heading_7">  6.2 Caracter&#237;sticas qu&#237;micas</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#heading_8">6.3 Caracter&#237;sticas mec&#225;nicas</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#heading_9">6.4 Caracter&#237;sticas del recubrimiento</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#heading_10">6.5 Acabado</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#heading_11">7.	CRITERIOS  DE  ACEPTACI&#211;N  O  RECHAZO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#heading_12"> 7.1  Muestreo</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#heading_13"> 7.2  Aceptaci&#243;n o Rechazo</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#heading_14">8.	PRUEBAS </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#heading_15">8.1 Prueba Dimensional</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#heading_16">8.2 An&#225;lisis Qu&#237;mico</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#heading_17">8.3 Prueba Mec&#225;nica</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#heading_18">8.4 Prueba del Galvanizado</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#heading_19">9.	MARCACI&#211;N Y EMPAQUE</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#heading_20">9.1 Marcaci&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#heading_21">9.2  Empaque </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#heading_22">10.	REQUISITOS DE LAS OFERTAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#heading_23">11.	GARANT&#205;A DE F&#193;BRICA</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#heading_24">12.	INSPECCI&#211;N EN F&#193;BRICA </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#heading_25">13.	SISTEMA DE CALIDAD</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#heading_26">14.	CERTIFICADOS DE CONFORMIDAD</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#heading_27">15.	  ANEXOS</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1.	OBJETO</h2>
+Establecer las condiciones que deben satisfacer los postes met&#225;licos doble prop&#243;sito tipo sem&#225;foro, los cuales deben poseer excelentes caracter&#237;sticas t&#233;cnicas de desempe&#241;o, durabilidad y <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> para cumplir las condiciones actuales de desempe&#241;o en los sistemas de distribuci&#243;n de energ&#237;a  de B.T.<br />
+<h2 id="heading_1" >2.	ALCANCE</h2>
+La presente especificaci&#243;n se aplicar&#225; en todos los postes met&#225;licos doble prop&#243;sito tipo sem&#225;foro para Alumbrado P&#250;blico que adquiera CODENSA S.A. ESP.<br />
+<h2 id="heading_2" >3.	CONDICIONES AMBIENTALES</h2>
+Los postes met&#225;licos doble prop&#243;sito tipo sem&#225;foro ser&#225;n utilizados en el <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de Alumbrado P&#250;blico del &#225;rea de concesi&#243;n de CODENSA S.A. E.S.P,  bajo las siguientes condiciones:<br /><div style="width:703px;"><table><tr><td colspan="2" rowspan="1" style="width:703px;height:21px;text-align:center"><b>CARACTER&#205;STICAS AMBIENTALES</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="width:200px;height:9px;">a. Altura sobre el nivel del mar</td><td colspan="1" rowspan="1" style="width:270px;"> 2 640 m</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">b. Ambiente</td><td colspan="1" rowspan="1" style="">Tropical</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">c. Humedad</td><td colspan="1" rowspan="1" style="">Mayor al  90 %</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">d. Temperatura m&#225;xima y m&#237;nima</td><td colspan="1" rowspan="1" style="">45 &#186;C y - 5 &#186;C respectivamente.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">e. Temperatura promedio</td><td colspan="1" rowspan="1" style="">14 &#186;C.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">f.  Instalaci&#243;n</td><td colspan="1" rowspan="1" style="">A la intemperie bajo condiciones de <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-145" class="externalLink  glosarioLink">contaminaci&#243;n</a> atmosf&#233;rica, humedad, humo, polvo, ozono y a cambios repentinos de temperatura.</td></tr></table><br /></div><div style="width:576px;"><table><tr><td colspan="2" rowspan="1" style="width:576px;height:21px;text-align:center"><b>CARACTER&#205;STICAS EL&#201;CTRICAS</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:60px;">a.  <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-384" class="externalLink  glosarioLink">Tensi&#243;n Nominal</a> del <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> L&#237;nea-L&#237;nea, L&#237;nea-Neutro</td><td colspan="1" rowspan="1" style="">                                                                                                                                       208 V, 240 V, 380 V, 480V                                    208 V, 240 V, 380 V, 480V</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">b. Frecuencia del <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-363" class="externalLink  glosarioLink">sistema</a></td><td colspan="1" rowspan="1" style="">60 Hz</td></tr></table><br /></div>
+<h2 id="heading_3" >4.	<a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-363" class="externalLink  glosarioLink">SISTEMA</a> DE UNIDADES</h2>
+Todos los documentos t&#233;cnicos, deben expresar las cantidades num&#233;ricas en unidades del <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> Internacional (S.I.).  Si se usan cat&#225;logos, folletos o planos, en sistemas diferentes de unidades, deben hacerse  las conversiones respectivas.<br />
+<h2 id="heading_4" >5.	NORMAS DE FABRICACI&#211;N Y PRUEBAS</h2><div style="width:698px;"><table><tr><td colspan="2" rowspan="1" style="width:230px;height:21px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:468px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style=""><a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de doblamiento para productos met&#225;licos</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="">Ensayos de tracci&#243;n para productos de acero.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:40px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">23</td><td colspan="1" rowspan="1" style="">Determinaci&#243;n gravim&#233;trica de carbono por combusti&#243;n directa en aceros al carbono.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">24</td><td colspan="1" rowspan="1" style="">Determinaci&#243;n del manganeso en aceros al carbono.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:40px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">25</td><td colspan="1" rowspan="1" style="">Determinaci&#243;n del manganeso en aceros al carbono. M&#233;todo del Bismutato.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">26</td><td colspan="1" rowspan="1" style="">Determinaci&#243;n del silicio en aceros al carb&#243;n.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:40px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">27</td><td colspan="1" rowspan="1" style="">Determinaci&#243;n de azufre en aceros al carbono. M&#233;todo de evoluci&#243;n.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:40px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">28</td><td colspan="1" rowspan="1" style="">Determinaci&#243;n del silicio en aceros al carbono. M&#233;todo del &#225;cido sulf&#250;rico.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:40px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">180</td><td colspan="1" rowspan="1" style="">M&#233;todo gasom&#233;trico para determinaci&#243;n de carbono por combusti&#243;n directa en hierros y aceros al Carbono.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:40px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">181</td><td colspan="1" rowspan="1" style="">Aceros al carbono y fundiciones de hierro, m&#233;todo alcalim&#233;trico para determinaci&#243;n de f&#243;sforo.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">422</td><td colspan="1" rowspan="1" style="">Perfiles livianos y barras de acero al carbono acabadas en fr&#237;o.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:40px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">858-3</td><td colspan="1" rowspan="1" style="">Discontinuidades superficiales en pernos, tornillos y esp&#225;rragos para aplicaciones generales.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:40px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">1097</td><td colspan="1" rowspan="1" style="">Control estad&#237;stico de <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-112" class="externalLink  glosarioLink">calidad</a>, <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> por atributo, planeo de <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-288" class="externalLink  glosarioLink">muestra</a> &#250;nica, doble y m&#250;ltiple.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">1645</td><td colspan="1" rowspan="1" style="">Tuercas cuadradas y hexagonales. Serie inglesa.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">1920</td><td colspan="1" rowspan="1" style="">Metalurgia. Acero estructural.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:40px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">2076</td><td colspan="1" rowspan="1" style="">Electricidad. Galvanizado por inmersi&#243;n en caliente para herrajes y perfiles estructurales de hierro y Acero.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:40px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">3320</td><td colspan="1" rowspan="1" style="">Siderurgia. Recubrimiento de zinc (galvanizado) por inmersi&#243;n en caliente en productos de hierro y Acero.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:40px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">2120</td><td colspan="1" rowspan="1" style=""><a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-182" class="externalLink  glosarioLink">Electrotecnia</a>. Gu&#237;a para <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> de soldadura por medio de ensayos no destructivos.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:40px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">2618</td><td colspan="1" rowspan="1" style="">Herrajes y accesorios para l&#237;neas y redes de distribuci&#243;n de energ&#237;a el&#233;ctrica. Tornillos y tuercas de Acero galvanizados</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:40px;text-align:center">ASTM</td><td colspan="1" rowspan="1" style="text-align:center">A-370</td><td colspan="1" rowspan="1" style="">Methods and definitions for mechanicals testing of steel products.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">AWS</td><td colspan="1" rowspan="1" style="text-align:center">D.1.1</td><td colspan="1" rowspan="1" style="">Structural welding code.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:40px;text-align:center">AWS</td><td colspan="1" rowspan="1" style="text-align:center">D 10.9</td><td colspan="1" rowspan="1" style="">Standard for qualification of welding procedures and welders for piping and tubing.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:40px;text-align:center">ASTM</td><td colspan="1" rowspan="1" style="text-align:center">A53</td><td colspan="1" rowspan="1" style="">Standard Specification for Pipe, Steel, Black and Hot-Dipped, Zinc-Coated, Welded and Seamless.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:40px;text-align:center">ASTM</td><td colspan="1" rowspan="1" style="text-align:center">A385</td><td colspan="1" rowspan="1" style="">Standard practice for providing high quality zinc coatings (hot dip)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:60px;text-align:center">ASTM</td><td colspan="1" rowspan="1" style="text-align:center">A500</td><td colspan="1" rowspan="1" style="">Standard Specification for Cold-Formed Welded and Seamless Carbon Steel Structural Tubing in Rounds and Shapes.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">ASTM</td><td colspan="1" rowspan="1" style="text-align:center">A563</td><td colspan="1" rowspan="1" style="">Standard Specification for carbon and alloy steel nuts.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">ANS&#205; / ASME</td><td colspan="1" rowspan="1" style="text-align:center">B1.1</td><td colspan="1" rowspan="1" style="">Unified Inch Screw Threads.</td></tr></table><br /></div><br />Pueden emplearse otras normas internacionalmente reconocidas equivalentes o superiores a las aqu&#237; se&#241;aladas, siempre y cuando se ajusten a lo solicitado en la presente Especificaci&#243;n <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-376" class="externalLink  glosarioLink">T&#233;cnica</a>.<br /><br />Las normas citadas en la presente especificaci&#243;n (o cualquier otra que llegare a ser aceptada por CODENSA S.A.) se refieren a su &#250;ltima revisi&#243;n.<br />
+<h2 id="heading_5" >6.	REQUERIMIENTOS T&#201;CNICOS PARTICULARES</h2><h3 id="heading_6" >  6.1 Caracter&#237;sticas Generales</h3>
+Los postes son elementos mec&#225;nicos que trabajan a flexi&#243;n y cuya &#250;nica funci&#243;n es la de sostener la <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-269" class="externalLink  glosarioLink">luminaria</a> y su brazo; estos elementos ser&#225;n empleados a la intemperie, en climas que van desde el c&#225;lido hasta el fr&#237;o, y desde el h&#250;medo hasta el seco.<br /><br />Los postes tambi&#233;n ser&#225;n sometidos a la <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-145" class="externalLink  glosarioLink">contaminaci&#243;n</a> atmosf&#233;rica de la ciudad y al ataque fitosanitario, cumpliendo con las siguientes condiciones:<br /><br />-	Ser met&#225;lico con una longitud total de 8,2 m discriminados as&#237;: 4 m de longitud de forma c&#243;nica con un di&#225;metro en la base de 158 mm y un di&#225;metro en la cima de 127 mm , fabricado  en l&#225;mina de espesor 3 mm ; el  brazo vehicular  debe alcanzar 3,7 m de avance sobre la v&#237;a, el cual se construye mediante un tubo de 1 metro de longitud en 3” con di&#225;metro curvo, luego se empata a un tubo de 3 m de longitud en 2&#189;”, para terminar un miple de 20 cm de longitud en 1&#189;”. Ver Figura 1<br /><br />-	Para la iluminaci&#243;n peatonal, se utilizar&#225; un soporte &#243; brazo met&#225;lico sencillo de acuerdo con la Figura 2, el cual deber&#225; permitir la instalaci&#243;n de una <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-269" class="externalLink  glosarioLink">luminaria</a> a una altura de 4,5 m desde el nivel del piso y a una separaci&#243;n horizontal de 0,8 m al centro de la <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-269" class="externalLink  glosarioLink">luminaria</a>.<br /><br />-	El brazo peatonal deber&#225;  ser fabricado con tuber&#237;a de acero de di&#225;metro <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-384" class="externalLink  glosarioLink">Tensi&#243;n Nominal</a> de 1 1/2&quot; y con espesor m&#237;nimo de 3 mm.<br /><br />-	El soporte del brazo de la <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-269" class="externalLink  glosarioLink">luminaria</a> peatonal se fabricar&#225; en platina de acero de por lo menos 3/16&quot; de espesor.<br /><br />-	Los brazos para la fijaci&#243;n de las <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-269" class="externalLink  glosarioLink">luminaria</a> peatonal y vehicular, deber&#225;n permitir la fijaci&#243;n de la <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-269" class="externalLink  glosarioLink">luminaria</a> a trav&#233;s de un tornillo pasante de 3/8”x 80mm y tuerca (galvanizados en caliente y con rosca est&#225;ndar).<br /><br />-	Ser fabricados en laminas de acero tipo HR-A36 &#243; similar. <br /><br />-	Tener en su extremo inferior una base o placa rectangular debidamente soldada de dimensiones 40 x 40 cm en un espesor m&#237;nimo de 9,5 mm (3/8&quot;).<br /><br />-	Tener  en la uni&#243;n del poste con la base met&#225;lica cuatro refuerzos &#243; aletas, en platina triangular de 9,5 mm. (3/8&quot;) de espesor m&#237;nimo.<br /><br />-	Las uniones de la base se deben realizar con uno o dos pases de soldadura norma AWS E-6010 con el suficiente amperaje para obtener una penetraci&#243;n completa, con pases sucesivos de soldadura norma AWS E-7018 hasta alcanzar una altura m&#237;nima del refuerzo de 1/4&quot;; todas las soldaduras deben ser libres de defectos tales como escorias, inclusiones, poros, etc., y de la misma forma deben cumplir el c&#243;digo ASME capitulo IX. <br /><br />-	El espesor de recubrimiento (galvanizado) debe ser como m&#237;nimo de 75 micras con acabado liso y uniforme.<br /><br />-	Se debe proteger adicionalmente con una barrera ep&#243;xica de curado poliamida para metales (la barrera ep&#243;xica puede ir precedido de imprimante si es necesario) en el primer 1,5 metro contado desde la base, de por lo menos 70 micras y un recubrimiento final en toda la longitud con pintura epoxica de acabado de por lo menos 60 micras. Todo el esquema de pintura  deber&#225; tener una adherencia m&#237;nima de 400 psi.<br /><br />-	Adicionalmente y en forma separada del poste se debe tener como m&#233;todo de fijaci&#243;n un <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de anclaje con 4 pernos roscados de &#190; por una longitud de 1.20 m, galvanizados en caliente seg&#250;n norma NTC2076.<br /><br />-	Los tornillos, pernos y tuercas deben cumplir en cuanto las roscas la norma ANS&#205;/ASME B1.1 –1982<br /><br />-	El poste debe ser instalado sobre una base nivelada de concreto (m&#237;nimo 4 000 PSI), de acuerdo con las condiciones se&#241;aladas en la figura 2. El constructor evaluar&#225; las condiciones del suelo para determinar dimensiones finales y adecuadas, que garanticen<br /><br />-	el cumplimiento del C&#243;digo de Sismo Resistencia (CSR-98) aprobado por el decreto 33 del 9 de diciembre de 1998.<br /><br />-	Para la conexi&#243;n a tierra todos los postes deben incluir un tornillo galvanizado de &#189;” x 1” soldando la cabeza en la parte interna del poste a 50mm de la base y despu&#233;s hacer reparaci&#243;n de galvanizado con pintura a base de zinc y aplicar esmalte color plateado. Debe incluir una tuerca de &#189;” galvanizada en caliente para conexi&#243;n del <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-107" class="externalLink  glosarioLink">cable</a>.<br /><br />-	Buscando garantizar que la conexi&#243;n a tierra sea continua, la varilla de <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a> debe ir dentro de la base de anclaje del poste antes de fundir el concreto.<br /><br />-	Las tolerancias aceptadas para la conformaci&#243;n del poste se relacionan en la siguiente tabla:<br /><br /><b>Tabla 1. Tolerancias aceptadas</b><br /><div style="width:387px;"><table><tr><td colspan="1" rowspan="1" style="width:231px;height:10px;text-align:center"><b>ITEM</b></td><td colspan="1" rowspan="1" style="width:156px;text-align:center"><b>VALOR ACEPTADO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Longitud total del poste</td><td colspan="1" rowspan="1" style="">Entre +20 mm y –10 mm</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Desviaci&#243;n longitudinal (deformaci&#243;n permanente al eje longitudinal)</td><td colspan="1" rowspan="1" style="">Menor o igual a +10 mm.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Secci&#243;n transversal</td><td colspan="1" rowspan="1" style="">Entre +3 mm y -1 mm</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Espesores</td><td colspan="1" rowspan="1" style="">Entre +1 mm y –0 mm</td></tr></table><br /></div><ul><li>En ning&#250;n caso se aceptar&#225;n postes soldados despu&#233;s de galvanizados.</li></ul>
+
+<ul><li>El acabado exterior del poste debe ser de color <b>gris RAL 7004.</b></li></ul>
+<h3 id="heading_7" >  6.2 Caracter&#237;sticas qu&#237;micas</h3>
+<div style="width:427px;"><table><tr><td colspan="1" rowspan="1" style="width:165px;height:10px;text-align:center"><b>ELEMENTO</b></td><td colspan="1" rowspan="1" style="width:126px;text-align:center"><b>SAE 1010</b></td><td colspan="1" rowspan="1" style="width:136px;text-align:center"><b>SAE 1020</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">% Carbono</td><td colspan="1" rowspan="1" style="text-align:center">0,08 a 0,13</td><td colspan="1" rowspan="1" style="text-align:center">0,18 a 0,22</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">% F&#243;sforo, m&#225;x.</td><td colspan="1" rowspan="1" style="text-align:center">0,05</td><td colspan="1" rowspan="1" style="text-align:center">0,05</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">% Azufre, m&#225;x.</td><td colspan="1" rowspan="1" style="text-align:center">0,05</td><td colspan="1" rowspan="1" style="text-align:center">0,05</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">% Manganeso</td><td colspan="1" rowspan="1" style="text-align:center">0,3 a 0,6</td><td colspan="1" rowspan="1" style="text-align:center">0,3 a 0,6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">% Silicio, m&#225;x.</td><td colspan="1" rowspan="1" style="text-align:center">0,05</td><td colspan="1" rowspan="1" style="text-align:center">0,05</td></tr></table><br /><b>Nota:</b> Se pueden usar aceros equivalentes como ASTM A36, y otros con la previa autorizaci&#243;n de CODENSA S.A. ESP<br /></div><b>Tabla 2. Caracter&#237;sticas qu&#237;micas de l&#225;minas</b><br /><br />Para el recubrimiento del anterior elemento, se deber&#225;n  tener en cuenta las siguientes caracter&#237;sticas del cinc:<br /><div style="width:690px;"><table><tr><td colspan="1" rowspan="1" style="width:115px;height:42px;text-align:center"><b>GRADO</b></td><td colspan="1" rowspan="1" style="width:146px;text-align:center"><b>Plomo M&#225;ximo ( % )</b></td><td colspan="1" rowspan="1" style="width:157px;text-align:center"><b>Hierro M&#225;ximo ( % )</b></td><td colspan="1" rowspan="1" style="width:146px;text-align:center"><b>Cadmio M&#225;ximo ( % )</b></td><td colspan="1" rowspan="1" style="width:126px;text-align:center"><b>Cinc M&#237;nimo ( % )</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">Especial</td><td colspan="1" rowspan="1" style="text-align:center">0,03</td><td colspan="1" rowspan="1" style="text-align:center">0,02</td><td colspan="1" rowspan="1" style="text-align:center">0,02</td><td colspan="1" rowspan="1" style="text-align:center">99,9</td></tr></table><br /></div><b>Tabla 3. Caracter&#237;sticas qu&#237;micas del cinc</b><br /><br />Los pernos deber&#225;n ser fabricados en acero inoxidable martensitico de la serie 300.<br />
+<h3 id="heading_8" >6.3 Caracter&#237;sticas mec&#225;nicas</h3>
+Las l&#225;minas, tubos y platinas utilizadas para la fabricaci&#243;n de los postes met&#225;licos doble prop&#243;sito tipo sem&#225;foro, deber&#225;n poseer las siguientes caracter&#237;sticas mec&#225;nicas m&#237;nimas:<br /><table><tr><td colspan="1" rowspan="1" style="width:249px;height:9px;text-align:center"><b>ITEM</b></td><td colspan="1" rowspan="1" style="width:303px;text-align:center"><b>VALOR</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Presi&#243;n del viento</td><td colspan="1" rowspan="1" style="">60 Km/m<sup>2</sup>  </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Carga de rotura</td><td colspan="1" rowspan="1" style="">150 Kg</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">L&#237;mite m&#237;nimo de fluencia del acero</td><td colspan="1" rowspan="1" style="">18,4 Kg/mm<sup>2</sup>   (180 MN/m<sup>2</sup>  )</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Resistencia a la tracci&#243;n</td><td colspan="1" rowspan="1" style="">34,7 Kg/mm<sup>2</sup>   (340 MN/m<sup>2</sup>  )</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Elongaci&#243;n</td><td colspan="1" rowspan="1" style="">30% en 50 mm (2 pulgadas)</td></tr></table><br /><b>Tabla 4. Caracter&#237;sticas mec&#225;nicas</b><br />
+<h3 id="heading_9" >6.4 Caracter&#237;sticas del recubrimiento</h3>
+Los postes met&#225;licos doble prop&#243;sito tipo sem&#225;foro, deber&#225;n ser totalmente galvanizados por inmersi&#243;n en caliente, de acuerdo con la <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-301" class="externalLink  glosarioLink">Norma T&#233;cnica</a> Colombiana NTC 2076. Su acabado, debe estar libre de burbujas, &#225;reas sin revestimiento, dep&#243;sitos de escoria, manchas negras y cualquier otro tipo de inclusiones o imperfecciones.<br /><br />Las l&#225;minas, tubos y platinas se galvanizan con clase B-2 seg&#250;n Norma NTC 2076, en la cual se mencionan: <br /><div style="width:522px;"><table><tr><td colspan="1" rowspan="2" style="width:108px;height:13px;text-align:center"><b>ELEMENTO</b></td><td colspan="2" rowspan="1" style="width:234px;text-align:center"><b>PROMEDIO</b></td><td colspan="2" rowspan="1" style="width:180px;text-align:center"><b>M&#205;NIMO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:13px;text-align:center"><b>gr/m<sup>2</sup>  </b></td><td colspan="1" rowspan="1" style="text-align:center"><b><span class="codeInline">&#181;</span>mm</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>gr/m<sup>2</sup>  </b></td><td colspan="1" rowspan="1" style="text-align:center"><b><span class="codeInline">&#181;</span>mm</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:13px;">Platinas y l&#225;minas</td><td colspan="1" rowspan="1" style="text-align:center">458</td><td colspan="1" rowspan="1" style="text-align:center">65,4</td><td colspan="1" rowspan="1" style="text-align:center">381</td><td colspan="1" rowspan="1" style="text-align:center">54,4</td></tr></table><br /></div><b>Tabla 5. Caracter&#237;sticas del galvanizado</b>
+<h3 id="heading_10" >6.5 Acabado</h3>
+Las l&#225;minas y los tubos deben ser de una sola pieza, libres de soldaduras intermedias, libres de deformaciones, fisura, aristas cortantes, y defectos de laminaci&#243;n. No se permiten dobleces ni rebajas en las zonas de corte, perforadas o punzadas. El galvanizado debe estar libre de burbujas, dep&#243;sitos de escorias, manchas negras, excoriaciones y/u otro tipo de inclusiones.<br />
+<h2 id="heading_11" >7.	CRITERIOS  DE  ACEPTACI&#211;N  O  RECHAZO</h2>
+Para este caso se considerar&#225; que existe un <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-264" class="externalLink  glosarioLink">lote</a> cuando:
+<ul><li>Los materiales de producci&#243;n pertenecen a un mismo <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-264" class="externalLink  glosarioLink">lote</a> de materia prima.</li>
+<li>Los postes se fabrican en diferentes lotes.</li></ul>
+
+<h3 id="heading_12" > 7.1  Muestreo</h3>
+El muestreo se realizar&#225; con base en los procedimientos y tablas estipuladas en la norma NTC-ISO 2859-1 “Procedimientos de muestreo para <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a>por Atributos. Parte 1: Planes de muestreo determinados por el nivel aceptable de <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> para <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-264" class="externalLink  glosarioLink">lote</a> a <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-264" class="externalLink  glosarioLink">lote</a>” (Militar Standard 105 D &quot;Sampling procedures and tables for inspection by atributes&quot;) y se acordar&#225; por las partes, previamente a la fecha de la realizaci&#243;n de las pruebas y recepci&#243;n de los bienes. <br /><br />Para el desarrollo de las pruebas es indispensable que los instrumentos involucrados est&#233;n calibrados.<br />
+<h3 id="heading_13" > 7.2  Aceptaci&#243;n o Rechazo</h3>
+Si el n&#250;mero de elementos defectuosos es menor o igual al correspondiente n&#250;mero de defectuosos (dado en la norma <b>NTC-ISO 2859-1</b> en la tercera columna de las tablas 6 y 7), se deber&#225; considerar que el <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-264" class="externalLink  glosarioLink">lote</a> cumple con los requisitos t&#233;cnicos exigidos por CODENSA S.A., pero en caso contrario, el <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-264" class="externalLink  glosarioLink">lote</a> se rechazar&#225;.<br /><div style="width:532px;"><table><tr><td colspan="1" rowspan="1" style="width:126px;height:10px;text-align:center"><b>TAMA&#209;O DEL <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-264" class="externalLink  glosarioLink">LOTE</a></b></td><td colspan="1" rowspan="1" style="width:143px;text-align:center"><b>TAMA&#209;O DE LA <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-288" class="externalLink  glosarioLink">MUESTRA</a></b></td><td colspan="1" rowspan="1" style="width:138px;text-align:center"><b>NUMERO PERMITIDO DE DEFECTUOSOS</b></td><td colspan="1" rowspan="1" style="width:125px;text-align:center"><b>NUMERO DEFECTUOSOS PARA RECHAZO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">2  a           8</td><td colspan="1" rowspan="1" style="text-align:center">A  =   2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">        9  a         15</td><td colspan="1" rowspan="1" style="text-align:center">B  =   3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">      16  a         25</td><td colspan="1" rowspan="1" style="text-align:center">C  =   5</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">26  a         50</td><td colspan="1" rowspan="1" style="text-align:center">D  =   8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">      51  a         90</td><td colspan="1" rowspan="1" style="text-align:center">E  = 13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">      91  a       150</td><td colspan="1" rowspan="1" style="text-align:center">F  = 20</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">    151  a       280</td><td colspan="1" rowspan="1" style="text-align:center">G  = 32</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">    281  a       500</td><td colspan="1" rowspan="1" style="text-align:center">H  = 50</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">    501  a     1200</td><td colspan="1" rowspan="1" style="text-align:center">J  = 80</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">  1201  a     3200</td><td colspan="1" rowspan="1" style="text-align:center">K  =125</td><td colspan="1" rowspan="1" style="text-align:center">7</td><td colspan="1" rowspan="1" style="text-align:center">8</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">  3201  a   10000</td><td colspan="1" rowspan="1" style="text-align:center">L  =200</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">11</td></tr></table><br /></div><b>TABLA 6. PLAN DE MUESTREO PARA <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-235" class="externalLink  glosarioLink">INSPECCI&#211;N</a> VISUAL Y  DIMENSIONAL, NIVEL DE <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-235" class="externalLink  glosarioLink">INSPECCI&#211;N</a> II,  NAC = 2,5%(NORMA NTC-ISO 2859-1 TABLA1 - TABLA 2A)</b><br /><div style="width:532px;"><table><tr><td colspan="1" rowspan="1" style="width:126px;height:10px;text-align:center"><b>TAMA&#209;O DEL <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-264" class="externalLink  glosarioLink">LOTE</a></b></td><td colspan="1" rowspan="1" style="width:143px;text-align:center"><b>TAMA&#209;O DE LA <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-288" class="externalLink  glosarioLink">MUESTRA</a></b></td><td colspan="1" rowspan="1" style="width:138px;text-align:center"><b>NUMERO PERMITIDO DE DEFECTUOSOS</b></td><td colspan="1" rowspan="1" style="width:125px;text-align:center"><b>NUMERO DEFECTUOSOS PARA RECHAZO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">2  a           8</td><td colspan="1" rowspan="1" style="text-align:center">A  =   2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">        9  a         15</td><td colspan="1" rowspan="1" style="text-align:center">A  =   2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">      16  a         25</td><td colspan="1" rowspan="1" style="text-align:center">B  =   3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">26  a         50</td><td colspan="1" rowspan="1" style="text-align:center">B  =   3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">      51  a         90</td><td colspan="1" rowspan="1" style="text-align:center">C  =   5</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">      91  a       150</td><td colspan="1" rowspan="1" style="text-align:center">C  =   5</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">    151  a       280</td><td colspan="1" rowspan="1" style="text-align:center">D  =   8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">    281  a       500</td><td colspan="1" rowspan="1" style="text-align:center">D  =   8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">    501  a     1200</td><td colspan="1" rowspan="1" style="text-align:center">E  = 13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">  1201  a     3200</td><td colspan="1" rowspan="1" style="text-align:center">E  =13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">  3201  a   10000</td><td colspan="1" rowspan="1" style="text-align:center">F  =20</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr></table><br /></div><b>TABLA 7. PLAN DE MUESTREO PARA LOS ENSAYOS MECANICOS, NIVEL DE <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-235" class="externalLink  glosarioLink">INSPECCI&#211;N</a> ESPECIAL  S-3,  NAC =            2,5%(NORMA NTC-ISO 2859-1 TABLA1 - TABLA 2A)</b><br /><br />CODENSA S.A. se reserva el derecho de descartar las propuestas que no ofrezcan pruebas o si las ofrecidas son consideradas insuficientes para garantizar la <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> de los postes met&#225;licos.<br /><br />Para efectuar cualquier despacho, es <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-351" class="externalLink  glosarioLink">requisito</a> indispensable una autorizaci&#243;n escrita de CODENSA S.A., la cual ser&#225; expedida con base en los resultados de las pruebas realizadas en f&#225;brica y/o la aprobaci&#243;n del protocolo de pruebas realizadas por el fabricante a los bienes solicitados.<br />
+<h2 id="heading_14" >8.	PRUEBAS </h2>
+Las pruebas y ensayos para la recepci&#243;n de los materiales ser&#225;n efectuados en presencia de los representantes de CODENSA S.A.; as&#237; mismo se realizar&#225;n en las instalaciones del proveedor quien deber&#225; asumir su costo y proporcionar el <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-274" class="externalLink  glosarioLink">material</a>, equipos y personal necesario para tal fin.<br /><br />Si los resultados de las pruebas o los equipos de prueba no son confiables, &#233;stas igualmente podr&#225;n ser realizadas o repetidas a costa del proveedor en laboratorios acreditados ante la ONAC (Organismo Nacional de <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-75" class="externalLink  glosarioLink">Acreditaci&#243;n</a> de Colombia), o un organismo internacional reconocido para la elaboraci&#243;n de pruebas.<br /><br />CODENSA S.A. se reserva el derecho de realizar una <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> durante el proceso de fabricaci&#243;n; para tal efecto el proveedor suministrar&#225; los medios necesarios para facilitar la misma.<br />
+<h3 id="heading_15" >8.1 Prueba Dimensional</h3>
+La verificaci&#243;n de las dimensiones se har&#225; con los instrumentos de medida que den la aproximaci&#243;n requerida (cinta met&#225;lica con divisiones de 1mm para longitudes y calibrador para los di&#225;metros y espesores). El tama&#241;o de la <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-288" class="externalLink  glosarioLink">muestra</a> deber&#225; estar de acuerdo con el apartado 7 de la presente especificaci&#243;n.<br />
+<h3 id="heading_16" >8.2 An&#225;lisis Qu&#237;mico</h3>Se efectuar&#225; el an&#225;lisis qu&#237;mico de acuerdo a lo requerido en el numeral 6.2 de la presente especificaci&#243;n y las normas NTC 23 y 180 (carbono), NTC 27 (azufre), NTC 181 (f&#243;sforo), NTC 24 o 25 (manganeso), NTC 26 o 28 (silicio) o en su defecto se aceptar&#225; un certificado de <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> de los materiales empleados, emitido por un laboratorio acreditado &#243; reconocido por la ONAC (Organismo Nacional de <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-75" class="externalLink  glosarioLink">Acreditaci&#243;n</a> de Colombia).<br /><br />El an&#225;lisis qu&#237;mico puede ser realizado en un espect&#243;metro calibrado con los patrones correspondientes.<br />
+<h3 id="heading_17" >8.3 Prueba Mec&#225;nica</h3>Los postes met&#225;licos doble prop&#243;sito tipo sem&#225;foro, deben ser sometidos a doblamiento, y los valores de flexi&#243;n deber&#225;n ser inferiores a los siguientes valores:<br /><div style="width:566px;"><table><tr><td colspan="2" rowspan="1" style="width:276px;height:13px;text-align:center"><b>CARACTER&#205;STICA</b></td><td colspan="2" rowspan="1" style="width:290px;text-align:center"><b>DEFLEXI&#211;N MAX&#205;MA</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:13px;text-align:center"><b>Descripci&#243;n</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Carga de Rotura [kg]</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Carga Aplicada [kg]</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Deflexi&#243;n m&#225;xima [mm]</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:13px;">Poste met&#225;lico doble prop&#243;sito tipo sem&#225;foro</td><td colspan="1" rowspan="1" style="text-align:center">150</td><td colspan="1" rowspan="1" style="text-align:center">120</td><td colspan="1" rowspan="1" style="text-align:center">330 a 200 mm de la cima</td></tr></table><br /></div>                      <b>TABLA 8. Prueba  de  resistencia mec&#225;nica</b>
+<h3 id="heading_18" >8.4 Prueba del Galvanizado</h3>Esta prueba se har&#225; de acuerdo con la norma NTC 2076. <br /><br />La prueba de espesor de galvanizado puede realizarse con  un elcometro debidamente calibrado.<br />
+<h2 id="heading_19" >9.	MARCACI&#211;N Y EMPAQUE</h2>
+<h3 id="heading_20" >9.1 Marcaci&#243;n</h3>La marcaci&#243;n del poste debe ir en una placa met&#225;lica remachada (en sus cuatro esquinas) y a una altura de 2 m, incluyendo la siguiente informaci&#243;n en altorrelieve o bajorrelieve:
+<ul><li>Marca del fabricante</li>
+<li>Longitud del poste en m</li>
+<li>Peso del poste en kg</li>
+<li>Resistencia mec&#225;nica de ruptura en kgf</li>
+<li>Garant&#237;a</li>
+<li>Palabra BOG-CUN</li>
+<li>Mes y a&#241;o de fabricaci&#243;n</li>
+<li>Numero de orden de compra o contrato</li></ul>
+<h3 id="heading_21" >9.2  Empaque </h3>
+Los bienes, objeto de la presente especificaci&#243;n <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a>, deben ser empacados en forma individual, adecuadamente para resistir las condiciones de humedad e impacto que pueden presentarse durante el transporte desde f&#225;brica hasta las bodegas de la compa&#241;&#237;a y durante su almacenamiento. As&#237; mismo, los tornillos deber&#225;n estar engrasados, con sus tuercas y arandelas instaladas.<br /><br />Para ello los postes met&#225;licos deben contar con un recubrimiento total elaborado de cart&#243;n resistente y pl&#225;stico. <br /><br />En caso de que los postes no cuenten con la protecci&#243;n indicada, o si &#233;sta no cumple con los requerimientos para la conservaci&#243;n de su estado original, CODENSA S.A. rechazar&#225; los materiales.<br /><br />Es obligaci&#243;n del CONTRATISTA, una vez aceptado el <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-274" class="externalLink  glosarioLink">material</a>, solicitar al fabricante las recomendaciones especiales a tener en cuenta para la manipulaci&#243;n, transporte e instalaci&#243;n de los postes met&#225;licos, as&#237; como de sus elementos y accesorios (luminarias, bases, brazos, etc.). Estas recomendaciones deben acatadas y adoptadas por el CONTRATISTA, durante el transporte, almacenamiento, manipulaci&#243;n, e instalaci&#243;n del poste.<br />
+<h2 id="heading_22" >10.	REQUISITOS DE LAS OFERTAS</h2>
+El Oferente obligatoriamente deber&#225; incluir con su propuesta, la siguiente informaci&#243;n:<br />
+<ul><li>Relaci&#243;n de los bienes cotizados.</li></ul>
+
+<ul><li>Informaci&#243;n del oferente.</li></ul>
+
+<ul><li>Planilla de caracter&#237;sticas <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a> garantizadas, la cual deber&#225; ser diligenciada completamente, firmada y sellada por el oferente.</li></ul>
+
+<ul><li>Cat&#225;logos originales completos y actualizados del fabricante, que correspondan a los bienes cotizados, en la planilla de caracter&#237;sticas <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a> garantizadas. </li></ul>
+
+<ul><li>Protocolos   de   pruebas de acuerdo con las normas indicadas en el numeral 5 de la presente especificaci&#243;n. En tales protocolos se deber&#225;n anotar las fechas de fabricaci&#243;n y pruebas del <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-189" class="externalLink  glosarioLink">equipo</a>, para permitir la verificaci&#243;n de las caracter&#237;sticas t&#233;cnicas garantizadas.</li></ul>
+
+<ul><li>Certificaciones del <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-363" class="externalLink  glosarioLink">sistema</a>de <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> y de <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-338" class="externalLink  glosarioLink">producto</a> con <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-301" class="externalLink  glosarioLink">norma t&#233;cnica</a> y RETILAP.</li></ul>
+
+<ul><li>Informaci&#243;n adicional que considere aporta explicaci&#243;n a su dise&#241;o (dibujos,  detalles,  caracter&#237;sticas de operaci&#243;n,  dimensiones y pesos de los materiales ofertados). </li></ul>
+<br />CODENSA S.A. podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones, sin expresi&#243;n de causa ni obligaci&#243;n de compensaci&#243;n.<br />
+<h2 id="heading_23" >11.	GARANT&#205;A DE F&#193;BRICA</h2>
+CODENSA S.A E.S.P requiere como m&#237;nimo, un per&#237;odo de garant&#237;a de f&#225;brica de veinticuatro (24) meses, a partir de la entrega de los postes met&#225;licos.<br />
+<h2 id="heading_24" >12.	<a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-235" class="externalLink  glosarioLink">INSPECCI&#211;N</a> EN F&#193;BRICA </h2>
+El suministrador enviar&#225; con no menos de quince (15) d&#237;as calendario de anticipaci&#243;n, a la fecha programada para la realizaci&#243;n de las pruebas en f&#225;brica, el formato de protocolos de pruebas y copia de las normas en ingl&#233;s o castellano utilizadas para tal fin. CODENSA informar&#225; por escrito su <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-139" class="externalLink  glosarioLink">conformidad</a> con las pruebas requeridas.<br /><br />El Ingeniero RESPONSABLE de CODENSA podr&#225; inspeccionar en las instalaciones del PROVEEDOR o FABRICANTE y de sus Subcontratistas el proceso de fabricaci&#243;n y pruebas, y solicitar la informaci&#243;n y ensayos que a su juicio resulten necesarias para verificar el cumplimiento de los requisitos estipulados en este documento. El PROVEEDOR debe brindar plena colaboraci&#243;n al RESPONSABLE en el cumplimiento de sus funciones.<br /><br />El valor de las pruebas y ensayos debe incluirse en los precios cotizados en la propuesta.  CODENSA se reserva el derecho de descartar las propuestas que no ofrezcan pruebas, o si las ofrecidas son consideradas insuficientes para garantizar la <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> de  los bienes.<br />
+<h2 id="heading_25" >13.	<a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-363" class="externalLink  glosarioLink">SISTEMA</a> DE <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-112" class="externalLink  glosarioLink">CALIDAD</a></h2>
+El oferente adjuntara con su propuesta, para el fabricante de los bienes cotizados, el certificado de <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-139" class="externalLink  glosarioLink">conformidad</a> con norma y/o el perfil de <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> de acuerdo con cualquier norma NTC-ISO serie 9000 o norma equivalente en el pa&#237;s de origen, expedida por una entidad id&#243;nea del mismo pa&#237;s de origen.<br />
+<h2 id="heading_26" >14.	CERTIFICADOS DE <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-139" class="externalLink  glosarioLink">CONFORMIDAD</a></h2>
+El oferente adjuntar&#225; con su propuesta el certificado de <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-139" class="externalLink  glosarioLink">conformidad</a> de <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-338" class="externalLink  glosarioLink">producto</a> con <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-301" class="externalLink  glosarioLink">norma t&#233;cnica</a> y con RETILAP, expedido por una entidad autorizada por la ONAC (Organismo Nacional de <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-75" class="externalLink  glosarioLink">Acreditaci&#243;n</a> de Colombia).<br /><br />No se admiten certificados de productos que presente exclusiones a la presente especificaci&#243;n <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a>.<br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/457/ET-212(1).jpg" src="../../media/cache/images/750x750/wikiimages/2d32303730353630343037-139616-ET-212(1).jpg" title="FIGURA 1. Poste metálico doble propósito tipo semáforo"  /></div><div class="texto_imagen_articulos" style="max-width:750px">FIGURA 1. Poste metálico doble propósito tipo semáforo</div></div></div><br /><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/457/ET-212(2).jpg" src="../../media/cache/images/750x750/wikiimages/2d373636353938343932-109548-ET-212(2).jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:750px"></div></div></div><br /><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/457/ET212(3).jpg" src="../../media/cache/images/750x750/wikiimages/31323336383637363331-833713-ET212(3).jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:750px"></div></div></div><br />
+<h2 id="heading_27" >15.	  ANEXOS</h2>
+<b>ANEXO 1: INFORMACION GENERAL DEL PROPONENTE</b><br /><div style="width:590px;"><table><tr><td colspan="2" rowspan="1" style="width:590px;height:20px;text-align:center"><b>DATOS DEL PROPONENTE</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="width:300px;height:20px;"><b>NOMBRE DEL PROPONENTE</b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><b>DIRECCI&#211;N</b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><b>CIUDAD</b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><b>PAIS</b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><b>TEL&#201;FONO</b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><b>FAX</b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><b>E-MAIL</b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><b>PERSONA DE CONTACTO</b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;">La persona de contacto, es la responsable de la oferta t&#233;cnica a la cual se  acudir&#225; en caso de consulta o aclaraci&#243;n.</td></tr></table><br /></div><b>ANEXO 2: PLANILLA DE CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS POSTES</b><br /><div style="width:606px;"><table><tr><td colspan="6" rowspan="1" style="width:606px;height:10px;text-align:center"><b>CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"><b>ITEM</b></td><td colspan="4" rowspan="1" style="text-align:center"><b>CARACTERISTICA</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>OFERTADO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">1</td><td colspan="4" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="2" style="height:10px;text-align:center">2</td><td colspan="2" rowspan="2" style=""> Normas aplicadas</td><td colspan="2" rowspan="1" style="">Fabricaci&#243;n </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Pruebas</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">3</td><td colspan="4" rowspan="1" style="">Adjunta planos dimensionados (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">4</td><td colspan="4" rowspan="1" style=""><a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-274" class="externalLink  glosarioLink">Material</a> de fabricaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">5</td><td colspan="4" rowspan="1" style="">Longitud [m]</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">6</td><td colspan="4" rowspan="1" style="">Peso del poste [kg]</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="17" style="height:10px;text-align:center">7</td><td colspan="2" rowspan="17" style="">Dimensiones</td><td colspan="1" rowspan="5" style="">Base</td><td colspan="1" rowspan="1" style="">Longitud</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Di&#225;metro</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Espesor</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Di&#225;metro de la cima</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Di&#225;metro de la base</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="4" style="height:10px;">Secci&#243;n curva</td><td colspan="1" rowspan="1" style="">Longitud</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Di&#225;metro</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Espesor</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Tubular (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="4" style="height:10px;">Brazo </td><td colspan="1" rowspan="1" style="">Longitud</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Di&#225;metro</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Espesor</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Tubular (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="4" style="height:10px;">Reducci&#243;n</td><td colspan="1" rowspan="1" style="">Longitud</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Di&#225;metro</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Espesor</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Tubular (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">8</td><td colspan="4" rowspan="1" style="">Resistencia a la tensi&#243;n [Kg/cm2]</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="3" style="height:10px;text-align:center">9</td><td colspan="2" rowspan="3" style="">Prueba mec&#225;nica</td><td colspan="2" rowspan="1" style="">Carga rotura</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Carga aplicada</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Deflexi&#243;n m&#225;xima </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="3" style="height:10px;text-align:center">10</td><td colspan="2" rowspan="3" style="">Galvanizaci&#243;n. </td><td colspan="2" rowspan="1" style="">Norma </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Clase</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Espesor Revestimiento</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="2" style="height:10px;text-align:center">11</td><td colspan="2" rowspan="2" style="">Tipo de Soldadura</td><td colspan="2" rowspan="1" style="">Del poste</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Del anclaje</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:10px;text-align:center">12</td><td colspan="2" rowspan="5" style="">Flanche</td><td colspan="2" rowspan="1" style="">Espesor</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Ancho</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Di&#225;metro perforaci&#243;n central</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Di&#225;metro agujeros</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Distancia entre agujeros</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="20" style="height:10px;text-align:center">13</td><td colspan="1" rowspan="12" style="">Brazo <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-269" class="externalLink  glosarioLink">luminaria</a> Peatonal</td><td colspan="1" rowspan="4" style="">Dimensiones</td><td colspan="2" rowspan="1" style="">Longitud total [mm]</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Di&#225;metro (pulgadas)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Espesor [mm]</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Longitudes de los tramos [mm]</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="2" style="height:10px;">Radios de curvatura</td><td colspan="2" rowspan="1" style="">&#193;ngulos (grados)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Tramo</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="3" style="height:10px;">Soporte</td><td colspan="2" rowspan="1" style="">Espesor platina (pulgadas)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Dimensi&#243;n [mm]</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Tuerca platina (pulgadas)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="3" style="height:10px;">Tornillo pasante</td><td colspan="2" rowspan="1" style="">Tipo  </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Di&#225;metro (pulgadas)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Longitud [mm]</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="8" style="height:10px;">Brazo <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-269" class="externalLink  glosarioLink">luminaria</a> Vehicular</td><td colspan="1" rowspan="3" style="">Dimensiones</td><td colspan="2" rowspan="1" style="">Longitud total [mm]</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Di&#225;metro (pulgadas)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Espesor [mm]</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="2" style="height:10px;">Radios de curvatura</td><td colspan="2" rowspan="1" style="">&#193;ngulos (grados)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Tramo</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="3" style="height:10px;">Tornillo pasante</td><td colspan="2" rowspan="1" style="">Tipo  </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Di&#225;metro (pulgadas)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Longitud [mm]</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="15" style="height:10px;text-align:center">14</td><td colspan="1" rowspan="15" style="">Anclaje</td><td colspan="1" rowspan="3" style="">Zapata de anclaje</td><td colspan="2" rowspan="1" style="">Tipo de concreto [PSI]</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Dimensi&#243;n [mm]</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Profundidad base [mm]</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="9" style="height:10px;">Pernos<div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/457/Dibujo ET 204 Figura de tabla.JPG" src="http://likinormas.micodensa.com/media/cache/images/500x355/wikiimages/323135313032383239-6404-Dibujo ET 204 Figura de tabla.JPG" title=""  /></div><div class="texto_imagen_articulos" style="max-width:500px"></div></div></div></td><td colspan="2" rowspan="1" style="">Di&#225;metro (pulgadas)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Distancia entre pernos [mm]</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Longitud roscada [Lr]</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Longitud galvanizada [Lg]</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Arandela de presi&#243;n helicoidal [Ah] de</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Arandela plana [Ap] de:</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Tuerca [T] de:</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Longitud [L1]</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Longitud [L2]</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="3" style="height:10px;">Fleje</td><td colspan="2" rowspan="1" style="">Di&#225;metro</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Tipo de varilla</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Distancia entre flejes</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">15</td><td colspan="4" rowspan="1" style="">Posee recubrimiento con una barrera ep&#243;xica con curado poliamida para metales en el primer 1,5 metro contado  desde la base (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">16</td><td colspan="4" rowspan="1" style="">Tornillo galvanizado para <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a> de &#189;” x 1” soldado a 50mm de la base (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">17</td><td colspan="4" rowspan="1" style="">Color gris RAL 7004 (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">18</td><td colspan="4" rowspan="1" style="">Cumple la marcaci&#243;n solicitada en el numeral 9.3</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">19</td><td colspan="4" rowspan="1" style="">Desviaciones  a las condiciones t&#233;cnicas</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="5" rowspan="1" style="height:10px;">RESULTADO DE EVALUACI&#211;N <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-376" class="externalLink  glosarioLink">T&#201;CNICA</a></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:10px;text-align:center">20</td><td colspan="2" rowspan="5" style=""><a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-124" class="externalLink  glosarioLink">Certificaci&#243;n</a> del <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> (Normas ISO) </td><td colspan="2" rowspan="1" style="">Entidad acreditadora</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">N&#250;mero de <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-75" class="externalLink  glosarioLink">acreditaci&#243;n</a></td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="6" style="height:10px;text-align:center">21</td><td colspan="2" rowspan="6" style=""><a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-124" class="externalLink  glosarioLink">Certificaci&#243;n</a> de <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-338" class="externalLink  glosarioLink">producto</a> con <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-301" class="externalLink  glosarioLink">norma t&#233;cnica</a> </td><td colspan="2" rowspan="1" style="">Entidad acreditadora</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">N&#250;mero de <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-75" class="externalLink  glosarioLink">acreditaci&#243;n</a></td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;"><a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-301" class="externalLink  glosarioLink">Norma t&#233;cnica</a> con la cual se certifica</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:10px;text-align:center">22</td><td colspan="2" rowspan="5" style=""><a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-124" class="externalLink  glosarioLink">Certificaci&#243;n</a> de <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-338" class="externalLink  glosarioLink">producto</a> con RETILAP</td><td colspan="2" rowspan="1" style="">Entidad acreditadora</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">N&#250;mero de <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-75" class="externalLink  glosarioLink">acreditaci&#243;n</a></td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="5" rowspan="1" style="height:10px;">RESULTADO DE EVALUACI&#211;N <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-376" class="externalLink  glosarioLink">T&#201;CNICA</a></td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">23</td><td colspan="4" rowspan="1" style="">Observaciones</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div><b>ANEXO 5: PROCEDIMIENTO PARA EL MANEJO DE POSTES MET&#193;LICOS DE ALUMBRADO P&#218;BLICO</b><br /><br /> <b>A. OBJETIVO</b><br />Establecer los procedimientos y las condiciones que deben satisfacer los postes met&#225;licos (incluyendo su soporte o brazo para <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-269" class="externalLink  glosarioLink">luminaria</a>), conservando y garantizando su estado original  desde su entrega en f&#225;brica hasta su puesta en servicio.<br /><br />Estos elementos deber&#225;n conservarse durante las actividades de <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-271" class="externalLink  glosarioLink">mantenimiento</a> y operaci&#243;n que adelante CODENSA S.A. en todas sus &#225;reas de influencia o de concesi&#243;n.<br /><br /> <b>B. ALCANCE</b><br /><br />El Procedimiento para el Manejo de la Poster&#237;a Met&#225;lica debe ser del total conocimiento de los ingenieros que hacen parte de la Divisi&#243;n Alumbrado P&#250;blico, los gestores de contratos con entidades distritales que construyen el alumbrado p&#250;blico y del contratista de alumbrado p&#250;blico de CODENSA S.A. Su divulgaci&#243;n e implementaci&#243;n son de obligatorio cumplimiento.<br /><br />El procedimiento involucra la manipulaci&#243;n general de los postes met&#225;licos a utilizar, luego de que &#233;stos son inspeccionados y aprobados por parte de la Divisi&#243;n de Ingenier&#237;a y Obras de CODENSA S.A. directamente en las f&#225;bricas. Incluye el transporte inicial del <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-274" class="externalLink  glosarioLink">material</a> desde la f&#225;brica, su almacenamiento, el transporte desde las bodegas hacia terreno, la hincada y plomada en terreno, y la instalaci&#243;n de elementos y accesorios en el poste. <br /><br /> <b>C. RECEPCI&#211;N EN F&#193;BRICA</b> <br /><br />La recepci&#243;n de los postes met&#225;licos por parte del CONTRATISTA a los fabricantes debe llevarse a cabo solamente si los postes cuentan con una protecci&#243;n especial para dicho <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-274" class="externalLink  glosarioLink">material</a>. Esta protecci&#243;n consiste de un recubrimiento total para  el poste, elaborado de cart&#243;n resistente y pl&#225;stico. El poste debe estar completamente protegido, incluyendo sus extremos y contornos.<br /><br />En caso de que los postes no cuenten con la protecci&#243;n indicada, o si &#233;sta no cumple con los requerimientos para la conservaci&#243;n del estado original del poste, el CONTRATISTA debe abstenerse de recibir el <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-274" class="externalLink  glosarioLink">material</a>, y comunicar inmediatamente a CODENSA S.A. ESP.<br /> <br />Es obligaci&#243;n del CONTRATISTA, una vez aceptado el <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-274" class="externalLink  glosarioLink">material</a>, solicitar al fabricante las recomendaciones especiales a tener en cuenta para la manipulaci&#243;n, transporte e instalaci&#243;n de los postes met&#225;licos, as&#237; como de sus elementos y accesorios (luminarias, bases, brazos, etc.). Estas recomendaciones deben acatadas y adoptadas por el CONTRATISTA, durante el transporte, almacenamiento, manipulaci&#243;n, e instalaci&#243;n del poste.<br /><br /><b>D. TRANSPORTE DE LOS ELEMENTOS HACIA LAS BODEGAS</b><br /><br />Una vez aceptados los postes, teniendo en cuenta su adecuada  protecci&#243;n, el CONTRATISTA debe transportarlos con absoluto cuidado hacia sus almacenes o bodegas para el correspondiente almacenamiento del <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-274" class="externalLink  glosarioLink">material</a>.<br /><br />Los postes met&#225;licos deben ser cargados en veh&#237;culos especiales (gr&#250;as, camiones, remolques, etc.) que garanticen un adecuado transporte, sin que ellos sufran ning&#250;n tipo de <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-153" class="externalLink  glosarioLink">da&#241;o</a> tanto en su contorno (abolladuras, rayas, hundimientos, etc.) como en su recubrimiento; para ello los postes se deben agrupar paralelamente (uno al costado de otro), sin ser golpeados contra la superficie o unos con otros, y sin que sufran presiones excesivas.<br /><br /><b>E. ALMACENAMIENTO</b><br /><br />Una vez transportados hacia sus bodegas, el CONTRATISTA debe descargar los postes met&#225;licos y depositarlos adecuadamente en sus respectivos lugares de almacenamiento.<br /><br />El CONTRATISTA debe observar el mismo cuidado para bajar los postes del veh&#237;culo, que el necesario para subirlos. Se debe manipular la gr&#250;a sin que en ning&#250;n momento se da&#241;e la protecci&#243;n de cart&#243;n o de pl&#225;stico. As&#237; mismo, los postes deben ser depositados suavemente en el piso o en los apoyos, teniendo en cuenta que no deben ser golpeados contra la superficie o unos con otros; por consiguiente, durante el descargue del <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-274" class="externalLink  glosarioLink">material</a> no se debe presentar un <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-153" class="externalLink  glosarioLink">da&#241;o</a> f&#237;sico en el acabado ni en la l&#237;nea del poste.<br /><br />El CONTRATISTA ser&#225; responsable del cuidado de los postes met&#225;licos en sus bodegas de almacenamiento, teniendo en cuenta que durante su permanencia se debe cumplir con:<br />
+<ul><li>No colocar objetos de ning&#250;n tipo sobre o contra los postes. </li>
+<li>No ocasionarle ruptura a las protecciones especiales del poste (cart&#243;n y pl&#225;stico).</li></ul>
+<br /><b>F. TRANSPORTE HACIA EL LUGAR DE INSTALACI&#211;N</b><br /><br />Para el transporte de los postes hacia el lugar de instalaci&#243;n, se  debe considerar y aplicar  el procedimiento descrito en el <b>apartado D</b> del presente documento, teniendo en cuenta cada una de las recomendaciones e instrucciones definidas por el fabricante.<br /><br />Se debe observar que la protecci&#243;n no se vea afectada y que se conserve en su totalidad. Por lo tanto, durante el transporte de los postes hacia el lugar de instalaci&#243;n &#233;stos no deben sufrir da&#241;os f&#237;sicos o estructurales.<br /><br />En caso de que alg&#250;n poste no conserve su protecci&#243;n contra da&#241;os, deber&#225; corregirse y arreglarse antes de su despacho. <br /><br />Para los postes que hayan sufrido da&#241;os estructurales o en su acabado durante el bodegaje, el CONTRATISTA no debe transportarlos hacia el lugar de instalaci&#243;n.<br /><br /><b>G. INSTALACI&#211;N</b><br /><br />La instalaci&#243;n del poste met&#225;lico consiste b&#225;sicamente en el descargue del poste desde el veh&#237;culo especial de transporte para su posterior alambrado, hincada, plomada, fijaci&#243;n del brazo y <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-269" class="externalLink  glosarioLink">luminaria</a>.<br /><br />El CONTRATISTA debe manipular con extremo cuidado el poste al descargarlo del veh&#237;culo. Se debe seguir el mismo procedimiento descrito en el <b>apartado D</b> del presente documento en lo concerniente a la operaci&#243;n de la gr&#250;a y al descenso del <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-274" class="externalLink  glosarioLink">material</a>.<br /><br />Para los procesos de alambrado, hincada y posterior plomada, el CONTRATISTA debe retirar la protecci&#243;n de cart&#243;n y pl&#225;stico solamente en el extremo inferior del poste met&#225;lico, en una longitud que permita la correcta instalaci&#243;n. En ning&#250;n momento se debe retirar la protecci&#243;n a lo largo de toda la extensi&#243;n del poste.<br /><br />De esta forma el poste instalado conserva la totalidad de la protecci&#243;n y al seguir este procedimiento, se garantiza que en esta instancia el poste no tenga ning&#250;n tipo de peladura, raya, hundimiento o abolladura.<br /> <br /><b>H. INSTALACI&#211;N DE LUMINARIAS Y ACCESORIOS</b><br /><br />La instalaci&#243;n del brazo, la <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-269" class="externalLink  glosarioLink">luminaria</a> y los dem&#225;s accesorios de los postes met&#225;licos debe hacerse con canasta &#243; escalera. <b>No se deben utilizar pretales para subir al poste</b>. Durante la instalaci&#243;n de estos elementos no se debe retirar la protecci&#243;n de cart&#243;n y pl&#225;stico, y &#233;sta debe haberse conservado en muy buena forma.<br /><br />Durante el proceso de instalaci&#243;n de elementos y accesorios en el poste met&#225;lico para alumbrado p&#250;blico, el CONTRATISTA debe tener en cuenta las recomendaciones impartidas por el fabricante respectivo, las cuales debi&#243; solicitar al momento de entrega de los materiales en la f&#225;brica, como se especifica en el <b>apartado C</b>.<br /><br />La protecci&#243;n de cart&#243;n y pl&#225;stico que se suministra con el poste debe retirarse &#250;nicamente cuando se concluye la instalaci&#243;n de la <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-269" class="externalLink  glosarioLink">luminaria</a> correspondiente. En &#233;ste momento el poste debe presentar un estado impecable tanto en su aspecto f&#237;sico y estructural, como en su apariencia est&#233;tica.<br /><br />En caso de presentarse da&#241;os en la pintura del poste ocasionados por errores involuntarios u omisiones del presente procedimiento, el CONTRATISTA debe realizar los retoques de pintura al poste de acuerdo con procedimiento descrito en el apartado  “<a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-271" class="externalLink  glosarioLink">mantenimiento</a> de postes met&#225;licos” del presente documento<br /><br /><b>I. <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-271" class="externalLink  glosarioLink">MANTENIMIENTO</a> DE POSTES MET&#193;LICOS</b><br /><br />Un poste para alumbrado p&#250;blico y sus accesorios requiere fundamentalmente de limpieza de la suciedad, por la acumulaci&#243;n  de sedimentos y  part&#237;culas del ambiente (poluci&#243;n).<br /><br />Esta condici&#243;n obliga a que se hagan peri&#243;dicamente programas de <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-271" class="externalLink  glosarioLink">mantenimiento</a>, en  periodos de tiempo razonables de limpieza, seg&#250;n la zona en la cual se instalen los postes met&#225;licos.<br /><table><tr><td colspan="2" rowspan="1" style="width:442px;height:13px;text-align:center"><b>PROGRAMA DE <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-271" class="externalLink  glosarioLink">MANTENIMIENTO</a> DE POSTES MET&#193;LICOS</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:13px;text-align:center"><b>ZONA DE POLUCI&#211;N</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>PERIODO DE LIMPIEZA (t en a&#241;os)</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:13px;text-align:center">Baja</td><td colspan="1" rowspan="1" style="text-align:center">t <span class="codeInline">&gt;= </span> 2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:13px;text-align:center">Media</td><td colspan="1" rowspan="1" style="text-align:center">1 <span class="codeInline">&lt;= </span> t <span class="codeInline">&lt;= </span> 2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:13px;text-align:center">Alta</td><td colspan="1" rowspan="1" style="text-align:center">T <span class="codeInline">&lt;= </span> 1</td></tr></table><br /><i><b>ELEMENTOS NECESARIOS</b></i><br /><br />Las cuadrillas de <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-271" class="externalLink  glosarioLink">mantenimiento</a> deben disponer de los siguientes elementos:<br />
+<ul><li>Pa&#241;o o estopa.</li>
+<li>Detergentes y esponjas necesarios para la limpieza.</li>
+<li>Agua.</li>
+<li>Lija de agua.</li>
+<li>Pintura rica en zinc.</li>
+<li>Imprimante (anticorrosivo).</li>
+<li>Pintura con curado poliamida para metales.</li>
+<li>Pintura de acabado (RAL 7004).</li>
+<li>Herramientas para el ajuste de los elementos pernados (llaves de boca fija para tuercas y tornillos).</li></ul>
+	Elcometro<br /><br /><i><a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-271" class="externalLink  glosarioLink">MANTENIMIENTO</a> DE LA PINTURA</i><br /><br />Si la superficie del poste met&#225;lico se encuentra en buen estado, pero aun as&#237; se requiere pintar,  se debe limpiar &#243; lijar la superficie con el prop&#243;sito de garantizar m&#225;xima adherencia en la nueva aplicaci&#243;n del imprimante (anticorrosivo), la pintura poliamida en caso de ser necesario y la pintura de acabado. <br /><br />Si la pintura se encuentra en malas condiciones, debe removerse totalmente realizando una limpieza manual y una limpieza mec&#225;nica, seguida por un procedimiento de reparaci&#243;n recomendado por la ficha <a href="et212_poste_doble_proposito_tipo_semaforo_documento_preliminar_457.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a> del proveedor de pintura.<br /><br />Luego de la aplicaci&#243;n de la pintura se deber&#225; garantizar un  acabado liso y uniforme teniendo que:<br /><br />-	La barrera ep&#243;xica con curado poliamida para metales (que puede ir precedida de impr&#237;mante si es necesario) deber&#225; aplicarse en el primer 1,5 metro contado desde la base; su recubrimiento deber&#225; ser de por lo menos 70 micras.<br /><br />-	Recubrimiento en la superficie del poste con pintura de acabado e impr&#237;mante de por lo menos 60 micras.<br /><br />-	Una adherencia m&#237;nima de 400 psi.<br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/457/ET-212fluograma.jpg" src="../../media/cache/images/700x700/wikiimages/2d31393838343932363837-212122-ET-212fluograma.jpg" title="DIAGRAMA DE FLUJO MANEJO DE POSTERÍA METÁLICA PARA ALUMBRADO PÚBLICO "  /></div><div class="texto_imagen_articulos" style="max-width:700px">DIAGRAMA DE FLUJO MANEJO DE POSTERÍA METÁLICA PARA ALUMBRADO PÚBLICO </div></div></div><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /> <br /><br /><br /><br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 457, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

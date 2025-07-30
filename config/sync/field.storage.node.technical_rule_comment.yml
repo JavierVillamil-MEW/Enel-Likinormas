@@ -1,0 +1,20 @@
+uuid: 1d5a1bcd-b594-4071-95b6-6b63c45a47fa
+langcode: en
+status: true
+dependencies:
+  module:
+    - comment
+    - node
+id: node.technical_rule_comment
+field_name: technical_rule_comment
+entity_type: node
+type: comment
+settings:
+  comment_type: rules_technical_rules_comments
+module: comment
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

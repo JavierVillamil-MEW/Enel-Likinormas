@@ -1,0 +1,27 @@
+uuid: d6bf5701-a92b-4f8d-9083-0c54d06e8c4e
+langcode: es
+status: true
+dependencies:
+  config:
+    - system.menu.footer
+  module:
+    - system
+  theme:
+    - likinormas
+_core:
+  default_config_hash: wcQstujnjmy1DWPn7rz3Y2uvr_aN4fxxehjSUpKBDBY
+id: likinormas_footer
+theme: likinormas
+region: footer
+weight: -5
+provider: null
+plugin: 'system_menu_block:footer'
+settings:
+  id: 'system_menu_block:footer'
+  label: CONTACTO
+  label_display: visible
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

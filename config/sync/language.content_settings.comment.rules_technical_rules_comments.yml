@@ -1,0 +1,11 @@
+uuid: 5f182fbe-c014-485a-bd01-2a4d1d602681
+langcode: es
+status: true
+dependencies:
+  config:
+    - comment.type.rules_technical_rules_comments
+id: comment.rules_technical_rules_comments
+target_entity_type_id: comment
+target_bundle: rules_technical_rules_comments
+default_langcode: site_default
+language_alterable: false

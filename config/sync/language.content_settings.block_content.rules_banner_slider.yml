@@ -1,0 +1,11 @@
+uuid: 37eb04c7-cc07-4b6c-bf0f-4b2f81c9f9d3
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.rules_banner_slider
+id: block_content.rules_banner_slider
+target_entity_type_id: block_content
+target_bundle: rules_banner_slider
+default_langcode: site_default
+language_alterable: false

@@ -1,0 +1,29 @@
+uuid: b4bec327-b0e3-4d0f-a910-57f2ef173e4c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.rule_category
+    - node.type.rules_technical_rules
+    - taxonomy.vocabulary.rules_category
+id: node.rules_technical_rules.rule_category
+field_name: rule_category
+entity_type: node
+bundle: rules_technical_rules
+label: 'Categoría de la norma técnica'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      rules_category: rules_category
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

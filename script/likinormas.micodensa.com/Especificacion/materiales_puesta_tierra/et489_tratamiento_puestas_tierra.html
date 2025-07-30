@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET489 Tratamiento de puestas a tierra  | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/557" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F557.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/557" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/557" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '31');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET489 Tratamiento de puestas a tierra </h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET 489</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">02/06/1998</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/557">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F557&amp;nodoid=557', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et489_tratamiento_puestas_tierra.html#heading_0">1.	GENERALIDADES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et489_tratamiento_puestas_tierra.html#heading_1">1.1 	Objeto de la Especificaci&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et489_tratamiento_puestas_tierra.html#heading_2">1.2 	Condiciones de Utilizaci&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et489_tratamiento_puestas_tierra.html#heading_3">1.3	 Lugar de instalaci&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et489_tratamiento_puestas_tierra.html#heading_4">1.4	 Condiciones ambientales</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et489_tratamiento_puestas_tierra.html#heading_5">1.5	 REQUISITOS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et489_tratamiento_puestas_tierra.html#heading_6">1.6	  Identificaci&#243;n y acondicionamiento para la entrega</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et489_tratamiento_puestas_tierra.html#heading_7">2.	ENSAYOS Y RECEPCION</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et489_tratamiento_puestas_tierra.html#heading_8">2.1	- Ensayos Tipo</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et489_tratamiento_puestas_tierra.html#heading_9">2.2	- Ensayo de Recepci&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et489_tratamiento_puestas_tierra.html#heading_10">2.3	 INFORMACI&#211;N T&#201;CNICA A SUMINISTRAR POR EL OFERENTE</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1.	GENERALIDADES</h2>
+<h3 id="heading_1" >1.1 	Objeto de la Especificaci&#243;n</h3>
+La misma establece las condiciones que deben tenerse en cuenta para el tratamiento de las puestas a tierra.<br />
+<h3 id="heading_2" >1.2 	Condiciones de Utilizaci&#243;n</h3>
+Este tipo de tratamiento es recomendado en terrenos cuya resistividad supera los 60 Ohmios - m, teniendo en cuenta que donde se especifica la necesidad que los sistemas de <a href="et489_tratamiento_puestas_tierra.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a> de los transformadores en poste no deben exceder los 10 Ohmios , por lo tanto en muchas de las zonas se requiere mejorar la <a href="et489_tratamiento_puestas_tierra.html#" id="version-353" class="externalLink  glosarioLink">resistencia de puesta a tierra</a> de una forma f&#225;cil y econ&#243;mica, al tiempo que cumpla las exigencias t&#233;cnicas.<br />
+<h3 id="heading_3" >1.3	 Lugar de instalaci&#243;n</h3>
+Aunque los suelos se han tipificado de diferentes maneras este tipo de tratamientos fue concebido para aplicaci&#243;n en terrenos con problemas de alta resistividad as&#237;:<br /><br /><b>Clase A:</b> Suelo blando &#225;cido, que a pesar de su baja resistividad (50 a 200 OHMIO -m) presenta una acci&#243;n corrosiva por las aguas que circulan.<br /><b>Clase B:</b> Suelo arenoso seco, f&#225;cil de trabajar, con mediana resistividad, entre 500 y 1000 OHMIO -m.<br /><b>Clase C:</b> Suelo de rocas duras, con alta resistividad, normalmente entre 1000 y 10.000 OHMIO -m.<br /> <br /><b>1.3.1 	Campos de Aplicaci&#243;n</b> <br />
+<ul><li>En subestaciones nuevas y en servicio.</li>
+<li>En redes de MT y BT.</li>
+<li>En l&#237;neas de transmisi&#243;n.</li>
+<li>En edificios residenciales, comerciales, industriales, institucionales.</li></ul>
+
+<h3 id="heading_4" >1.4	 Condiciones ambientales</h3>
+Ser&#225;n empleados a la intemperie, siendo &#233;sta generalmente de clima c&#225;lido y h&#250;medo.<br />Los par&#225;metros de operaci&#243;n son los siguientes:<br /><br />- Altura sobre el nivel del mar: 2640 m<br />- Humedad relativa: 90%<br />- Temperatura ambiente m&#225;xima: 27 &#176;C<br />- Temperatura ambiente m&#237;nima: -5 &#176;C<br />- Temperatura ambiente promedio: 14 &#176;C
+<h3 id="heading_5" >1.5	 REQUISITOS</h3>
+<b>1.5.1	- Baja Resistividad</b><br /><br />Una vez humedecido el <a href="et489_tratamiento_puestas_tierra.html#" id="version-274" class="externalLink  glosarioLink">material</a> debe mantener su resistividad inferior a 1 OHMIO -m y un coeficiente de resistividad negativo hasta 80&#186;C, lo que permite un mejoramiento de la resistencia del terreno en un 90%. Para fallas de baja frecuencia, el compuesto debe comportarse como resistivo y para alta frecuencia es un circuito R-C en sinton&#237;a, para lograr almacenar y disipar la energ&#237;a transitoria a una velocidad mayor o igual a la que se desplaza por las l&#237;neas de transmisi&#243;n. <br /><br /><b>1.5.2	  Tixotropia</b><br /><br />El <a href="et489_tratamiento_puestas_tierra.html#" id="version-274" class="externalLink  glosarioLink">material</a> debe tener la capacidad, de pasar del estado coloidal al estado liquido y viceversa.<br /><br /><b>1.5.3 	Retenci&#243;n de Humedad</b><br /><br />El <a href="et489_tratamiento_puestas_tierra.html#" id="version-274" class="externalLink  glosarioLink">material</a> debe tener capacidad de absorber y retener la humedad (higrosc&#243;pico).<br /><br /><b>1.5.4	 Anticorrosivo</b><br /><br />El  P.H del <a href="et489_tratamiento_puestas_tierra.html#" id="version-274" class="externalLink  glosarioLink">material</a> debe ser igual o superior a 7, para minimizar la <a href="et489_tratamiento_puestas_tierra.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a> en los electrodos.<br /><br /><b>1.5.5	 Amortiguador</b> <br /><br />Con el fin de soportar el esfuerzo mec&#225;nico de la onda de choque, el <a href="et489_tratamiento_puestas_tierra.html#" id="version-274" class="externalLink  glosarioLink">material</a> debe estar dise&#241;ado para cumplir esta funci&#243;n. <br />
+<h3 id="heading_6" >1.6	  Identificaci&#243;n y acondicionamiento para la entrega</h3>
+Para la entrega del <a href="et489_tratamiento_puestas_tierra.html#" id="version-274" class="externalLink  glosarioLink">material</a> se deben tener en cuenta los siguientes aspectos:<br /><br />1.	Cada dosis ser&#225; entregada en una bolsa sellada de polipropileno de alta resistencia, con una cantidad suficiente para realizar un mejoramiento de la <a href="et489_tratamiento_puestas_tierra.html#" id="version-353" class="externalLink  glosarioLink">resistencia de puesta a tierra</a>.<br />2.	Las bolsas llevar&#225;n impresa en forma indeleble la identificaci&#243;n del producto.  <br />3.	Dichas bolsas llevar&#225;n, como m&#237;nimo, la siguiente identificaci&#243;n:<br /><br />-	Marca del fabricante.<br />-	N&#176; de Orden de Compra.<br />-	Masa y peso aproximado del bulto.<br />-	Indicaciones para su manipuleo, almacenamiento y conservaci&#243;n.<br />
+<h2 id="heading_7" >2.	ENSAYOS Y RECEPCION</h2>
+La recepci&#243;n del <a href="et489_tratamiento_puestas_tierra.html#" id="version-274" class="externalLink  glosarioLink">material</a> ser&#225; efectuada por representantes de CODENSA S.A., a tal fin, &#233;sta o sus representantes ser&#225;n avisados por lo menos con 15 d&#237;as de anticipaci&#243;n a fin de asistir a las pruebas.<br />La ausencia de los representantes de CODENSA S.A. en el momento de ejecutar los ensayos y pruebas seg&#250;n lo programado, a&#250;n cuando hayan sido debidamente avisados, no eximir&#225; al proveedor de efectuarlos, previa conformidad de CODENSA S.A. y deber&#225; comunicar inmediatamente a &#233;sta el resultado de los mismos.<br /><br />Los ensayos tipo ser&#225;n efectuados en laboratorios particulares u oficiales reconocidos por CODENSA S.A., o en laboratorios propios de &#233;sta.<br /><br />Los ensayos y todas las piezas destruidas en los mismos ser&#225;n por cuenta y cargo del proveedor.      <br />CODENSA S.A. se reserva el derecho de realizar una <a href="et489_tratamiento_puestas_tierra.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> permanente durante todo el proceso de fabricaci&#243;n, para lo cual el proveedor suministrar&#225; los medios necesarios para facilitar la misma.<br />La recepci&#243;n del <a href="et489_tratamiento_puestas_tierra.html#" id="version-274" class="externalLink  glosarioLink">material</a> quedar&#225; subordinada a:<br />
+<ul><li>Resultado satisfactorio de los ensayos tipo.</li>
+<li>Resultado satisfactorio de los ensayos de entrega.</li></ul>
+
+<h3 id="heading_8" >2.1	- Ensayos Tipo</h3>
+El fabricante deber&#225; presentar protocolos de los ensayos tipo, efectuados en laboratorios de reconocido prestigio, a satisfacci&#243;n de CODENSA S.A.. Las pruebas consisten en determinar el comportamiento de la resistencia el&#233;ctrica de la <a href="et489_tratamiento_puestas_tierra.html#" id="version-288" class="externalLink  glosarioLink">muestra</a> de acuerdo con los siguientes factores:<br /><br />1.	Influencia de la humedad: comportamiento de las muestras seca y la <a href="et489_tratamiento_puestas_tierra.html#" id="version-288" class="externalLink  glosarioLink">muestra</a> con un contenido de agua del 35% del volumen.<br />2.	Determinaci&#243;n de la resistividad y la permitividad de la <a href="et489_tratamiento_puestas_tierra.html#" id="version-288" class="externalLink  glosarioLink">muestra</a> en condiciones de baja humedad y alta humedad.<br />3.	Medici&#243;n del PH, el cual debe ser igual o superior a 7<br /><br /><b>NOTA:</b> CODENSA S.A. se reserva el derecho de repetir, a su costo, la totalidad de los ensayos solicitados.   En caso de que las normas no correspondan a las solicitadas, se deber&#225; mencionar bajo cuales fueron realizados y acompa&#241;ar a los protocolos con un ejemplar de la misma, en idioma de origen con una copia en castellano o ingl&#233;s.<br /> 
+<h3 id="heading_9" >2.2	- <a href="et489_tratamiento_puestas_tierra.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de Recepci&#243;n</h3>
+De cada remesa se tomar&#225; una <a href="et489_tratamiento_puestas_tierra.html#" id="version-288" class="externalLink  glosarioLink">muestra</a> al azar, a la cual se le realizar&#225;n las siguientes verificaciones:<br />
+<ul><li>Embalaje.</li>
+<li>Control visual y peso.</li>
+<li>Identificaci&#243;n.</li>
+<li>Resistividad OHMIO - m</li>
+<li>PH</li></ul>
+
+<h3 id="heading_10" >2.3	 INFORMACI&#211;N T&#201;CNICA A SUMINISTRAR POR EL OFERENTE</h3>
+Para su an&#225;lisis, ser&#225; imprescindible que la oferta incluya la siguiente documentaci&#243;n:<br />
+<ul><li>Protocolos de los ensayos tipo requeridos en esta <a href="et489_tratamiento_puestas_tierra.html#" id="version-196" class="externalLink  glosarioLink">Especificaci&#243;n T&#233;cnica</a>, deber&#225; constar la metodolog&#237;a aplicada, los valores y resultados del <a href="et489_tratamiento_puestas_tierra.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a>, estando perfectamente identificadas las muestras sometidas a <a href="et489_tratamiento_puestas_tierra.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a>.</li></ul>
+	
+<ul><li>Antecedentes de suministros efectuados en los &#250;ltimos tres a&#241;os, indicando como m&#237;nimo, modelo, cantidades y destinatario.</li></ul>
+
+<ul><li>Descripci&#243;n detallada de la herramienta necesaria para su instalaci&#243;n, con instrucciones de instalaci&#243;n y <a href="et489_tratamiento_puestas_tierra.html#" id="version-271" class="externalLink  glosarioLink">mantenimiento</a>.</li></ul>
+
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 557, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

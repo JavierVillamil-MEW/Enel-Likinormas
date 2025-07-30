@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 5eb0c2c5-1194-4fd3-b87c-af2876fa51e0
+  default_langcode: es
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: 'MicrosoftTeams-image (1).png'
+  uri:
+    -
+      value: 'public://2023-06/MicrosoftTeams-image (1).png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 41794
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1685632009

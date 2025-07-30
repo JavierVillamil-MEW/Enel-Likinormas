@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AP520 Centro de transformación de pedestal para alumbrado público | Likinormas</title>
+	<meta name="description" content="Centro de transformación de pedestal para alumbrado público. Esta norma presenta pautas a considerar en el diseño y construcción" />
+	<script src="../../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../../index.html"><img src="../../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1355" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../../Usuario/Registro%3FReturnUrl=%252FNorma%252FDetalles%252F1355.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/1355" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1355" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			showSubmenu('4', '100');
+		});
+	</script>
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Norma t&#233;cnica
+	</div>
+	<h1>AP520 Centro de transformaci&#243;n de pedestal para alumbrado p&#250;blico</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de la norma</div>
+					<div class="caracteristicas">AP520</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">02/07/2013</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../../Home/DownloadPDF/1355">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FNorma%2FDetalles%2F1355&amp;nodoid=1355', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+    <div class="modulo">
+        <div class="titu_modulo">
+            Relacionados
+        </div>
+            <div class="modulo_contenido" style="">
+                <div class="subtitulos_internos">
+                    <a href="ap524_centro_transformacion_pedestal_p.html">AP524 Centro de transformaci&#243;n de pedestal para A.P. Malla de puesta a tierra</a>
+                </div>
+                    <div class="relacionadotipo">Norma t&#233;cnica</div>
+            </div>
+            <div class="modulo_contenido" style="">
+                <div class="subtitulos_internos">
+                    <a href="ap527_senal_preventiva_ubicar_puertas_1313.html">AP527 Se&#241;al preventiva a ubicar sobre puertas</a>
+                </div>
+                    <div class="relacionadotipo">Norma t&#233;cnica</div>
+            </div>
+            <div class="modulo_contenido" style="">
+                <div class="subtitulos_internos">
+                    <a href="../../lineas_aereas_urbanas_distribucion/puesta_tierra/la400_puestas_tierra.html">LA400 Puestas a tierra </a>
+                </div>
+                    <div class="relacionadotipo">Norma t&#233;cnica</div>
+            </div>
+            <div class="modulo_contenido" style="display:none">
+                <div class="subtitulos_internos">
+                    <a href="../../../Especificacion/materiales_puesta_tierra/et490_varilla_puesta_tierra.html">ET490 Varilla de puesta a tierra</a>
+                </div>
+                    <div class="relacionadotipo">Especificaci&#243;n t&#233;cnica</div>
+            </div>
+            <a class="modulo_vermas" id="modulo_vermas" href="javascript:void(0)">Ver más</a>
+    </div>
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#heading_0">TRANSFORMADOR DE PEDESTAL</a></li>
+                    <li class="indexitem"><a class="head_h3" href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#heading_1">SECCIONADORES DE MANIOBRAS TIPO PEDESTAL (pad mounted):</a></li>
+                    <li class="indexitem"><a class="head_h2" href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#heading_2">MECANISMOS DE OPERACI&#211;N</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		De acuerdo a lo dispuesto en el MUAP Manual &#218;nico de Alumbrado P&#250;blico  cap&#237;tulo VI  los transformadores exclusivos de alumbrado p&#250;blico deber&#225;n ser del tipo subterr&#225;neos, los cuales se componen de  caja de maniobras tipo inundable y transformador(es) sumergibles u  ocasionalmente sumergibles. Ver AP 534, AP 535, AP 535-1, AP535-2. La presente norma  aplica para instalaciones existentes.<br /><br />El <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-122" class="externalLink  glosarioLink">Centro de Transformaci&#243;n</a> tipo pedestal para alumbrado p&#250;blico esta compuesto de dos gabinetes independientes tipo intemperie, uno para el transformador internamente autoprotegido contra <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-152" class="externalLink  glosarioLink">cortocircuito</a> y <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-371" class="externalLink  glosarioLink">sobrecarga</a>, y el otro gabinete para el <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> de maniobras con terminales de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-277" class="externalLink  glosarioLink">media tensi&#243;n</a> de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-212" class="externalLink  glosarioLink">frente muerto</a>. Los gabinetes deben estar provistos de puertas con cerraduras, de tal forma que los mandos, accesorios y conexiones el&#233;ctricas queden inaccesibles al p&#250;blico.<br /><br />Las capacidades de los transformadores de pedestal para alumbrado p&#250;blico, utilizados por CODENSA S.A. ESP son: 30 kVA, 45 kVA y 75 kVA. Actualmente se encuentran instalados transformadores a 480/277 V con sus circuitos pero la nueva infraestructura ser&#225; a 380/220 V. <br />
+<h2 id="heading_0" >TRANSFORMADOR DE PEDESTAL</h2>
+El gabinete de los transformadores de pedestal debe ser fabricado en l&#225;mina cold-rolled calibre n&#250;mero 12 BWG (1.9872 mm) como m&#237;nimo. En el caso de que los radiadores del transformador queden a la vista, estos deben tener refuerzos met&#225;licos que los protejan del vandalismo. El <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de pintura de los gabinetes debe estar de acuerdo con la Norma CS 502-2/CS 502-3 de Cables Subterr&#225;neos. En los costados laterales de la subestaci&#243;n, deben existir se&#241;ales preventivas de &quot;<a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-317" class="externalLink  glosarioLink">Peligro</a> <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-88" class="externalLink  glosarioLink">Alta Tensi&#243;n</a>&quot; y una flecha indicadora de arco (ver Norma <a href="ap527_senal_preventiva_ubicar_puertas_1313.html" class="externalLink">AP527<span class="externalLinkIcon"></span></a>).<br /><br />El transformador tipo pedestal debe tener dos compartimientos:<br /><br />• Un compartimiento al lado izquierdo para los terminales de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-277" class="externalLink  glosarioLink">media tensi&#243;n</a> y la perilla del conmutador de derivaciones del transformador.<br /><br />• Un compartimiento al lado derecho para los terminales de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a> y la palanca de maniobras del <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-241" class="externalLink  glosarioLink">interruptor autom&#225;tico</a> de BT que &#233;sta localizado dentro del tanque. Los dos compartimientos se deben separar internamente mediante una barrera met&#225;lica, de tal forma que cada uno tenga su propia puerta. Los dos compartimientos se deben separar internamente mediante una barrera met&#225;lica, de tal forma que cada uno tenga su propia puerta.<br /><br />Los transformadores de pedestal de bajas potencias tienen incremento de ferroresonancia por lo que se debe considerar la capacitancia del circuito subterr&#225;neo de M.T que lo alimenta con el fin de evitarlas, en casos de aperturas monopolares del transformador.<br />La protecci&#243;n de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-277" class="externalLink  glosarioLink">media tensi&#243;n</a> del transformador tipo pedestal para alumbrado p&#250;blico, consiste en un fusible de expulsi&#243;n tipo bayoneta en serie con un fusible limitador de corriente. La protecci&#243;n en <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a> consiste en un <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-241" class="externalLink  glosarioLink">interruptor autom&#225;tico</a>, instalado en aceite dentro del tanque del transformador, seleccionado de acuerdo con la curva de capacidad t&#233;rmica que puede soportar el transformador y la corriente de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-152" class="externalLink  glosarioLink">cortocircuito</a>. El <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-241" class="externalLink  glosarioLink">interruptor autom&#225;tico</a>, debe estar previsto con una manija exterior para su operaci&#243;n, en raz&#243;n de la inseguridad y el vandalismo, adem&#225;s debe llevar l&#225;mpara exterior de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-358" class="externalLink  glosarioLink">se&#241;alizaci&#243;n</a>, que se encienda cuando la <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-371" class="externalLink  glosarioLink">sobrecarga</a> llegue a los l&#237;mites de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-334" class="externalLink  glosarioLink">prevenci&#243;n</a>. La siguiente tabla describe los fusibles de protecci&#243;n para los transformadores tipo pedestal:<br /><br /><div style="width:562px;"><table><tr><td colspan="1" rowspan="1" style="width:150px;height:20px;text-align:center"><b>CAPACIDAD</b></td><td colspan="2" rowspan="1" style="width:412px;text-align:center"><b>FUSIBLES</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>kVA</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>TIPO BAYONETA</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>LIMITADOR DE CORRIENTE</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">30</td><td colspan="1" rowspan="1" style="text-align:center">6 A</td><td colspan="1" rowspan="1" style="text-align:center">40 A</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">45</td><td colspan="1" rowspan="1" style="text-align:center">6 A</td><td colspan="1" rowspan="1" style="text-align:center">40 A</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">75</td><td colspan="1" rowspan="1" style="text-align:center">10 A</td><td colspan="1" rowspan="1" style="text-align:center">40 A</td></tr></table><br /></div><br />Cuando act&#250;a el fusible limitador de corriente, se asegura que la <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-204" class="externalLink  glosarioLink">falla</a> fue interna del transformador, lo cual permite una mayor seguridad para los operarios, puesto que el transformador no puede ser energizado nuevamente en el sitio de instalaci&#243;n ya que el fusible esta ubicado en el interior del tanque obligando el retiro del transformador para su revisi&#243;n.<br /><br />Las fallas externas en <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a> deben ser despejadas por el <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-241" class="externalLink  glosarioLink">interruptor autom&#225;tico</a> de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a> y como respaldo del fusible de expulsi&#243;n tipo bayoneta.<br /><br />Para la aceptaci&#243;n del proyecto por CODENSA S.A ESP se deber&#225;n presentar las curvas de coordinaci&#243;n de protecciones, teniendo en cuenta las caracter&#237;sticas del fusible tipo bayoneta, el fusible limitador de corriente utilizado, la impedancia del transformador, la curva de capacidad t&#233;rmica del transformador y las curvas del <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-240" class="externalLink  glosarioLink">interruptor</a> de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a>, con el fin de tener la mejor y m&#225;s adecuada coordinaci&#243;n en el funcionamiento.<br /><br />El compartimiento de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-277" class="externalLink  glosarioLink">media tensi&#243;n</a> debe tener una platina de cobre de 20  mm<sup>2</sup>  de secci&#243;n, para la <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a> de los cables de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-277" class="externalLink  glosarioLink">media tensi&#243;n</a> y los descargadores de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-372" class="externalLink  glosarioLink">sobretensi&#243;n</a>. Esta platina se aterriza a la malla de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a>desde dos puntos diferentes.<br /><br />Bajo el pedestal del <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> de maniobras y transformador se debe colocar una malla de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a>, la cual se calcula teniendo en cuenta los siguientes par&#225;metros:<br /><br />• <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-0" class="externalLink  glosarioLink">Nivel</a> de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a>= 11,4 kV<br />• M&#225;xima corriente de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-204" class="externalLink  glosarioLink">falla</a>= 11 kA (la del sitio de instalaci&#243;n)<br /><br />• <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-353" class="externalLink  glosarioLink">Resistencia de puesta a tierra</a>= 5 Ohmios<br />• Tiempo de despeje de la <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-204" class="externalLink  glosarioLink">falla</a>= 1 segundo<br />• Enterramiento de la malla= 0,6 metros<br /><br /><br />• La resistividad del terreno ser&#225; medida en cada caso especifico de acuerdo con la Norma <a href="../../lineas_aereas_urbanas_distribucion/puesta_tierra/la400_puestas_tierra.html" class="externalLink">LA400<span class="externalLinkIcon"></span></a>. En el caso de resistividades del terreno altas se debe tratar el terreno o instalar suelo artificial.<br />• El calibre del conductor para la malla es 2/0 AWG Cobre.<br />• La malla debe tener por lo menos tres varillas de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a>de 5/8&quot; x 2,44 (<a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-196" class="externalLink  glosarioLink">Especificaci&#243;n T&#233;cnica</a> <a href="../../../Especificacion/materiales_puesta_tierra/et490_varilla_puesta_tierra.html" class="externalLink">ET490<span class="externalLinkIcon"></span></a>). Las varillas deben estar espaciadas a una distancia mayor de dos veces su longitud.<br /><br />La <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-353" class="externalLink  glosarioLink">resistencia de puesta a tierra</a>del <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-122" class="externalLink  glosarioLink">centro de transformaci&#243;n</a> tipo pedestal debe ser menor o igual a cinco (5) ohmios. A esta <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> se deben conectar s&#243;lidamente todas las partes met&#225;licas que no transporten corriente y est&#233;n descubiertas, el neutro del transformador, la pantalla de los cables de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-277" class="externalLink  glosarioLink">media tensi&#243;n</a>, los puntos de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> de los terminales preformados y los descargadores de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-372" class="externalLink  glosarioLink">sobretensi&#243;n</a>.<br /><br />Por razones de seguridad el <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> o transformador tipo pedestal, debe presentar <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-212" class="externalLink  glosarioLink">frente muerto</a> en el compartimiento de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-277" class="externalLink  glosarioLink">media tensi&#243;n</a>, es por eso que los terminales del <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-107" class="externalLink  glosarioLink">cable</a> deben ser terminales preformados tipo codo, los cuales debe tener punto de prueba, para identificar fases y comprobar ausencia de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a>.<br /><br />La puerta de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-277" class="externalLink  glosarioLink">media tensi&#243;n</a>, debe llevar pasadores que impidan la apertura directa y la puerta de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a> debe llevar manija de cierre-apertura con llave bristol de 9/16&quot;, portacandado cubiertos para protecci&#243;n de intemperie. En la puerta del compartimento de M.T. se debe colocar una se&#241;al preventiva de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-317" class="externalLink  glosarioLink">peligro</a>, de acuerdo con la norma <a href="ap527_senal_preventiva_ubicar_puertas_1313.html" class="externalLink">AP 527<span class="externalLinkIcon"></span></a><br /><br />El transformador de pedestal se alimenta desde un <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> de maniobras, de operaci&#243;n selectiva con <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-107" class="externalLink  glosarioLink">cable</a> monopolar de cobre, calibre 2 AWG aislado para 15 kV y terminales tipo codo de 200 A de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-212" class="externalLink  glosarioLink">frente muerto</a>.<br /><br />En el transformador tipo pedestal se utilizan, adem&#225;s de los terminales preformados tipo codo de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-277" class="externalLink  glosarioLink">media tensi&#243;n</a>, recept&#225;culos de parqueo.<br /><br />
+<h3 id="heading_1" >SECCIONADORES DE MANIOBRAS TIPO PEDESTAL (pad mounted):</h3>
+El <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> de maniobras se compone de tres v&#237;as (entrada - salida - derivaci&#243;n). Mediante estas se conecta dentro de la configuraci&#243;n de los circuitos de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-277" class="externalLink  glosarioLink">media tensi&#243;n</a> de anillo abierto, utiliz&#225;ndose la flexibilidad de &#233;sta configuraci&#243;n en cuanto al cambio del sentido de la alimentaci&#243;n y puntos de suplencia. Este <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-270" class="externalLink  glosarioLink">maniobra</a> debe tener terminales tipo codo de 600 A cuando el <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-107" class="externalLink  glosarioLink">cable</a> subterr&#225;neo que alimenta el <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> es calibre No. 300 kcmil y 4/0 AWG,  y puede tener terminales tipo codo de 200 A cuando el <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-107" class="externalLink  glosarioLink">cable</a> que alimenta el <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> es calibre No. 2/0 AWG.<br /><br />Los seccionadores de maniobras tipo pedestal, consisten de varios seccionadores tripolares de operaci&#243;n bajo <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-113" class="externalLink  glosarioLink">carga</a>  dentro de una envolvente met&#225;lica. Est&#225;n dise&#241;ados para ser instalados a la intemperie, deben ser resistentes contra la lluvia, sol, humedad, insectos, polvo y todas las condiciones clim&#225;ticas adversas que puedan causar deterioro de sus elementos constructivos y que originen un <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-271" class="externalLink  glosarioLink">mantenimiento</a> frecuente o la alteraci&#243;n de las partes el&#233;ctricas o mec&#225;nicas, grado de protecci&#243;n IP54.<br /><br />El medio de aislamiento para este tipo de cajas debe ser en aceite o SF6 y el medio de extinci&#243;n del arco en aceite, SF6 o vac&#237;o.<br /><br />En el <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> de maniobras cuando se requiera instalar descargadores de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-372" class="externalLink  glosarioLink">sobretensi&#243;n</a>, se deben emplear interfaces reductoras del terminal tipo T y descargadores de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-372" class="externalLink  glosarioLink">sobretensi&#243;n</a> tipo terminal preformado.<br /><br />
+<h2 id="heading_2" >MECANISMOS DE OPERACI&#211;N</h2>
+Los seccionadores de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-270" class="externalLink  glosarioLink">maniobra</a> ser&#225;n para operaci&#243;n manual mediante palanca removible individual para cada <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> con o sin p&#233;rtiga, f&#225;cil de maniobrar, con mecanismos de resorte para enganche y desenganche de los contactos principales del <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-270" class="externalLink  glosarioLink">maniobra</a>, cuya velocidad de apertura y cierre sea independiente de la acci&#243;n manual del operador.<br /><br />Los seccionadores de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-270" class="externalLink  glosarioLink">maniobra</a>, los hay con tres posiciones: abierto - cerrado - puesto a <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> y de dos posiciones: abierto - cerrado.<br /><br />La <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a>de los seccionadores de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-270" class="externalLink  glosarioLink">maniobra</a> var&#237;a de acuerdo con el dise&#241;o de los mismos, los hay con posici&#243;n fija de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a>(abierto - cerrado - aterrizado) o por medio de terminales preformados externos tipo codo de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a>que al conectarlos ponen a <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> cada polo de la correspondiente v&#237;a que se encuentre abierta. Por <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a>, cuando uno de los circuitos de entrada, salida o derivaci&#243;n es abierto y se van a realizar trabajos sobre el circuito, se debe poner a <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> cada una de las v&#237;as que se encuentran desenergizadas.<br /><br />Normalmente los codos preformados de 600 A - 15 kV, son fijos y no son desconectables con <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a>. Existen conectores de 600 A en los que se cumplen las funciones integradas de aislamiento, prueba de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> y <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a>, para lo cual utilizan una interfase reductora de 600 A  a  200 A aislada, retirando el tap&#243;n y colocando el codo preformado de 15 kV para <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a>.<br /><br />La carcasa de los seccionadores de maniobras deben ser aterrizadas mediante electrodos de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a>(varillas o mallas), dependiendo de la resistividad del terreno, la corriente de <a href="ap520_centros_transformacion_tipo_pedestal_alumbrado_publico.html#" id="version-204" class="externalLink  glosarioLink">falla</a> calculada en el sitio de la instalaci&#243;n y las tensiones de toque y paso admisibles (ver <a href="ap524_centro_transformacion_pedestal_p.html" class="externalLink">AP524<span class="externalLinkIcon"></span></a>).
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 1355, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+uuid: f1650ed0-836e-441a-b467-b31c90b875f8
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.node.seo
+    - node.type.rules_monthly_newsletter
+  module:
+    - metatag
+id: node.rules_monthly_newsletter.seo
+field_name: seo
+entity_type: node
+bundle: rules_monthly_newsletter
+label: SEO
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: metatag

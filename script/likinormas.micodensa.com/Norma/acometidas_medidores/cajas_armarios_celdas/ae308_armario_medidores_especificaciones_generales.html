@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AE308 Armario de medidores. Especificaciones generales  | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../../index.html"><img src="../../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1536" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../../Usuario/Registro%3FReturnUrl=%252FNorma%252FDetalles%252F1536.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/1536" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1536" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			showSubmenu('4', '105');
+		});
+	</script>
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Norma t&#233;cnica
+	</div>
+	<h1>AE308 Armario de medidores. Especificaciones generales </h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de la norma</div>
+					<div class="caracteristicas">AE308</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">23/08/2023</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../../Home/DownloadPDF/1536">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FNorma%2FDetalles%2F1536&amp;nodoid=1536', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="ae308_armario_medidores_especificaciones_generales.html#heading_0">COMPARTIMIENTO DEL INTERRUPTOR GENERAL Y BARRAJE </a></li>
+                    <li class="indexitem"><a class="head_h2" href="ae308_armario_medidores_especificaciones_generales.html#heading_1">COMPARTIMIENTO DE MEDIDORES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="ae308_armario_medidores_especificaciones_generales.html#heading_2">COMPARTIMIENTO DE INTERRUPTORES AUTOMATICOS </a></li>
+                    <li class="indexitem"><a class="head_h2" href="ae308_armario_medidores_especificaciones_generales.html#heading_3">DIMENSIONES DE LOS ARMARIOS  DE MEDIDORES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="ae308_armario_medidores_especificaciones_generales.html#heading_4">NOTAS GENERALES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="ae308_armario_medidores_especificaciones_generales.html#heading_5">FIGURA 1 - ARMARIO DE MEDIDORES DE 6 A 10 CUENTAS TRIFASICAS ACOMETIDA POR DEBAJO Y PARCIALES POR DEBAJO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="ae308_armario_medidores_especificaciones_generales.html#heading_6">FIGURA 2 - ARMARIO DE MEDIDORES DE 12 A 15 CUENTAS TRIFASICAS ACOMETIDA POR ENCIMA PARCIALES POR ABAJO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="ae308_armario_medidores_especificaciones_generales.html#heading_7">FIGURA 2A - ACOMETIDA Y PARCIALES POR DEBAJO </a></li>
+                    <li class="indexitem"><a class="head_h2" href="ae308_armario_medidores_especificaciones_generales.html#heading_8">FIGURA 3 - ACOMETIDA POR DEBAJO PARCIALES POR ENCIMA</a></li>
+                    <li class="indexitem"><a class="head_h2" href="ae308_armario_medidores_especificaciones_generales.html#heading_9">FIGURA 3A - ACOMETIDA Y PARCIALES POR ENCIMA</a></li>
+                    <li class="indexitem"><a class="head_h2" href="ae308_armario_medidores_especificaciones_generales.html#heading_10">FIGURA 4 - DETALLE DE FIJACI&#211;N DE BANDEJAS, DISTRIBUCI&#211;N CENTRAL DEL ARMARIO DE DOS PUERTAS Y CABLEADO INTERNO DEL ARMARIO DE MEDIDORES </a></li>
+                    <li class="indexitem"><a class="head_h2" href="ae308_armario_medidores_especificaciones_generales.html#heading_11">FIGURA 5 - ARMARIO CON TOTALIZADOR Y BARRAJE LATERAL</a></li>
+                    <li class="indexitem"><a class="head_h2" href="ae308_armario_medidores_especificaciones_generales.html#heading_12">FIGURA 6- ARMARIO DE MEDIDORES DE 18  A 24 CUENTAS TRIFASICAS ACOMETIDA POR DEBAJO PARCIALES POR ENCIMA</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		Los armarios para medidores de energ&#237;a ser&#225;n instalados sobrepuestos o empotrados en paredes de edificios, fuera del local del centro de transformaci&#243;n, con alimentaci&#243;n trif&#225;sica desde las redes de distribuci&#243;n secundaria (Distribuci&#243;n trif&#225;sica tetrafilar 120/208 V).<br /><br />Los armarios deber&#225;n ser construidos en l&#225;mina de acero Cold Rolled calibre 16 BWG (1,588 como m&#237;nimo) o en poli&#233;ster reforzado con fibra de vidrio. <br /><br />Los armarios para medidores pueden construirse en forma modular para facilitar el reemplazo de partes, montaje y desmontaje de piezas, el acople entre estructuras y los trabajos de mantenimiento.<br /><br />Cuando se utilicen materiales sint&#233;ticos o fibra de vidrio para la construcci&#243;n de los armarios para medidores de energ&#237;a, deber&#225;n garantizarse entre otros, los siguientes aspectos:
+<ul><li>Alta resistencia al impacto.</li></ul>
+
+<ul><li>Auto extinguible.</li></ul>
+
+<ul><li>No higrosc&#243;pico.</li></ul>
+
+<ul><li>Baja degradaci&#243;n.</li></ul>
+
+<ul><li>Resistencia a la deformaci&#243;n por altas temperatura.</li></ul>
+
+<ul><li>Excelentes propiedades diel&#233;ctricas.</li></ul>
+	<br />Sobre el armario fabricado en l&#225;mina de acero se debe aplicar una pintura ep&#243;xica, color gris RAL serie 70 (similar al RAL 7032), la cual debe ser horneada y  resistente a los rayos ultravioleta. El total de la capa de recubrimiento ser&#225;  m&#237;nimo de 60 <span class="codeInline">&#181;</span>m en el &#225;rea exterior y de 50 <span class="codeInline">&#181;</span>m en el &#225;rea interior, sin la presencia de &#225;reas sin recubrimiento. <br /><br />Todas las capas de pintura deben garantizar una adherencia m&#237;nima de 400 libras/pulg<sup>2</sup>, garantizada y probada seg&#250;n norma ASTM D 4541 de 1995.<br /><br />Para instalaci&#243;n exterior el grado de protecci&#243;n que deber&#225; tener la envoltura exterior del armario deber&#225; ser como m&#237;nimo IP 43 seg&#250;n norma IEC 60144. Cuando el armario est&#233; localizado junto a tableros de registros de gas, o muy cercano, se deber&#225; dar un grado de protecci&#243;n IP 55 y una energ&#237;a de choque de 20 Julios IK10.<br /><br />El armario de medidores deber&#225; quedar anclado al piso. El <a href="ae308_armario_medidores_especificaciones_generales.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de anclaje no deber&#225; estar en un lugar fijo de la base del armario, sino que pueda ser desplazado sobre su base para adaptarlo a la parte civil de la obra sin necesidad de hacerle modificaci&#243;n alguna. <br /><br />Para proteger la estructura del armario durante la manipulaci&#243;n e instalaci&#243;n del mismo se debe instalar un &#225;ngulo en hierro de 1 &#189;” x 1/8” en la parte inferior. <br /><br />Los armarios deber&#225;n instalarse sobre una base de 5 cm de altura, m&#237;nimo. <br /><br />Para armarios hasta 10 cuentas, se permitir&#225; reducir su altura y podr&#225; tener dos bandejas porta-medidores. En este caso, el centro de la bandeja inferior para los medidores, deber&#225; estar a 1,2 m del nivel del piso y deben ser instalados sobre un mach&#243;n al cual se fijar&#225;n los armarios.<br /><br />El interior del armario est&#225; dividido en tres compartimientos separados, de los cuales el superior e inferior ser&#225;n intercambiables en su funci&#243;n seg&#250;n las caracter&#237;sticas de instalaci&#243;n, cada una con las particularidades definidas a continuaci&#243;n. <br />
+<h2 id="heading_0" >COMPARTIMIENTO DEL <a href="ae308_armario_medidores_especificaciones_generales.html#" id="version-240" class="externalLink  glosarioLink">INTERRUPTOR</a> GENERAL Y BARRAJE </h2>
+El acceso a este compartimiento es exclusivo del personal de Enel Colombia debidamente autorizado. Este compartimiento tendr&#225; instalado un barraje tetrapolar protegido por policarbonato o acr&#237;lico con portasello. <br /><br />Se colocar&#225; una ventana exclusiva al totalizador para evitar que los clientes tengan que abrir la puerta del compartimiento en caso de fallas o desenergizaci&#243;n total. El totalizador se instalar&#225; sobre un soporte ajustable en su altura.<br /><br />Sobre esta puerta se remachar&#225; una placa de acero inoxidable, aluminio, pl&#225;stico o acr&#237;lico con la siguiente inscripci&#243;n: <br /><br /><div style="width:211px;"><table><tr><td colspan="1" rowspan="1" style="width:211px;height:42px;text-align:center"><b>TOTALIZADOR Y BARRAJE USO EXCLUSIVO DE ENEL COLOMBIA</b></td></tr></table><br /></div><br />Si entre el transformador y el armario, la distancia es inferior a 15m no se requiere instalar totalizador adicional al del armario.<br /><br />Este compartimiento debe contar con chapa de seguridad con sistema porta-sello.<br />
+<h2 id="heading_1" >COMPARTIMIENTO DE MEDIDORES</h2> <br />De acuerdo con la cantidad de cuentas, en este compartimiento se colocar&#225;n las bandejas removibles sobre las cuales se instalar&#225;n los medidores; en ning&#250;n caso se aceptar&#225;n bandejas soldadas. <br /><br />En armarios con ancho inferior o igual a 120 cm se aceptar&#225;n puertas de una sola hoja por compartimiento. Con ancho superior a 120 cm las puertas deber&#225;n tener dos hojas; en estos casos se deber&#225;n hacer las perforaciones para los medidores de tal forma que no queden medidores en la uni&#243;n de las dos hojas, cumpliendo con las distancias a cada lado de uni&#243;n de las puertas indicadas en esta norma. Se debe garantizar que la ubicaci&#243;n de los equipos de medida permita la toma de la lectura sin ning&#250;n inconveniente.<br /><br />A este compartimiento s&#243;lo tendr&#225; acceso el personal de Enel Colombia debidamente autorizado. <br /><br />La puerta de este compartimiento deber&#225; tener por fila de medidores una ventana con policarbonato transparente de 3 mm de espesor  y 23 cm de altura. La ventana debe garantizar que la lectura de los medidores de energ&#237;a se pueda realizar sin ning&#250;n inconveniente desde el exterior, por lo cual la altura podr&#225; ser mayor a 23 cm si se requiere.<br /><br />Sobre la puerta ir&#225; remachada, una placa de similares caracter&#237;sticas a la descrita anteriormente, con la siguiente inscripci&#243;n:<br /><br /><div style="width:193px;"><table><tr><td colspan="1" rowspan="1" style="width:193px;height:42px;text-align:center"><b>MEDIDORES USO EXCLUSIVO DE ENEL COLOMBIA</b></td></tr></table><br /></div><br />Este compartimiento debe contar chapa de seguridad con sistema porta-sello<br />
+<h2 id="heading_2" >COMPARTIMIENTO DE INTERRUPTORES AUTOMATICOS </h2>
+Se instalar&#225;n mini-interruptores que posean perforaciones para la instalaci&#243;n de sellos al suspender el servicio, estos mini-interruptores cumplen la doble funci&#243;n de protecci&#243;n y suspensi&#243;n de los diferentes circuitos que se deriven del armario. Se montar&#225;n en este compartimiento sobre bandejas met&#225;licas removibles frontalmente.<br /><br />En el caso de requerirse interruptores autom&#225;ticos por la carga a manejar, deben incluir bloqueador mec&#225;nico para la suspensi&#243;n del servicio.   <br /><br />A &#233;ste compartimiento podr&#225;n tener acceso los usuarios. Este compartimiento podr&#225; tener una o dos bandejas. <br /><br />Sobre la puerta ir&#225; remachada una placa de acero inoxidable, aluminio, pl&#225;stico o acr&#237;lico, con la siguiente inscripci&#243;n de letras indelebles: <br /><br /><div style="width:193px;"><table><tr><td colspan="1" rowspan="1" style="width:193px;height:42px;text-align:center"><b>AUTOMATICOS – CLIENTES</b></td></tr></table><br /></div><br />Igualmente se remachar&#225; sobre la puerta de mayor altura una placa del fabricante con  caracter&#237;sticas similares a la anterior y  la siguiente informaci&#243;n (el tama&#241;o de las letras ser&#225; de 3 mm como m&#237;nimo):
+<ul><li><a href="ae308_armario_medidores_especificaciones_generales.html#" id="version-117" class="externalLink  glosarioLink">Capacidad de corriente</a> del barraje en amperios</li></ul>
+
+<ul><li><a href="ae308_armario_medidores_especificaciones_generales.html#" id="version-384" class="externalLink  glosarioLink">Tensi&#243;n nominal</a></li></ul>
+
+<ul><li>N&#250;mero de fases</li></ul>
+
+<ul><li>N&#250;mero de hilos</li></ul>
+
+<ul><li>N&#250;mero de cuentas (capacidad total del armario)</li></ul>
+
+<ul><li>Nombre del fabricante</li></ul>
+
+<ul><li>N&#250;mero de serie de fabricaci&#243;n</li></ul>
+
+<ul><li>Direcci&#243;n de la f&#225;brica</li></ul>
+
+<ul><li>Fecha de fabricaci&#243;n</li></ul>
+
+<ul><li>N&#250;mero de certificado de <a href="ae308_armario_medidores_especificaciones_generales.html#" id="version-338" class="externalLink  glosarioLink">producto</a> con <a href="ae308_armario_medidores_especificaciones_generales.html#" id="version-301" class="externalLink  glosarioLink">norma t&#233;cnica</a> y con <a href="ae308_armario_medidores_especificaciones_generales.html#" id="version-354" class="externalLink  glosarioLink">RETIE</a>.</li></ul>
+<br />Este compartimiento no requiere chapa de seguridad, debe ser de f&#225;cil acceso y no requiere sistema porta-sello.<br /><br />Se incluye en este compartimento la opci&#243;n de adicionar un mini-interruptor por cada cuenta que se dise&#241;e con cargador de carros el&#233;ctricos. Esto se hace teniendo en cuenta que en edificios, el cargador va en primer piso o s&#243;tanos y la cuenta es de pisos superiores. Esta opci&#243;n se aclara con el siguiente diagrama unifilar.<br /><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../../archivo/1841_1841.html"><img src="../../../media/content/mediafile/1841/AE308(ET911)-DIAGRAMA&#32;UNIFILAR&#32;-&#32;CARGADOR&#32;VEHÍCULO&#32;ELÉCTRICO.jpg" title="DIAGRAMA UNIFILAR: DERIVACIÓN A CARGADOR VEHÍCULO ELÉCTRICO"  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx">DIAGRAMA UNIFILAR: DERIVACIÓN A CARGADOR VEHÍCULO ELÉCTRICO</div></div><div style="width:100%;overflow:hidden"></div></div><br />
+<h2 id="heading_3" >DIMENSIONES DE LOS ARMARIOS  DE MEDIDORES</h2>
+<div style="width:743px;"><table><tr><td colspan="1" rowspan="1" style="width:127px;height:30px;text-align:center"><b>N&#176; de cuentas</b></td><td colspan="1" rowspan="1" style="width:113px;text-align:center"><b>N&#176; de bandejas</b></td><td colspan="1" rowspan="1" style="width:127px;text-align:center"><b>Ancho (cm)</b></td><td colspan="1" rowspan="1" style="width:120px;text-align:center"><b>Alto (cm)</b></td><td colspan="1" rowspan="1" style="width:170px;text-align:center"><b>Profundidad (cm)</b></td><td colspan="1" rowspan="1" style="width:86px;text-align:center"><b>N&#176; de puertas</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">24</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">200</td><td colspan="1" rowspan="1" style="text-align:center">175</td><td colspan="1" rowspan="1" style="text-align:center">40</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">21</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">180</td><td colspan="1" rowspan="1" style="text-align:center">175</td><td colspan="1" rowspan="1" style="text-align:center">40</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">18</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">160</td><td colspan="1" rowspan="1" style="text-align:center">175</td><td colspan="1" rowspan="1" style="text-align:center">40</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">15</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">120</td><td colspan="1" rowspan="1" style="text-align:center">175</td><td colspan="1" rowspan="1" style="text-align:center">40</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">12</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">100</td><td colspan="1" rowspan="1" style="text-align:center">175</td><td colspan="1" rowspan="1" style="text-align:center">40</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">120</td><td colspan="1" rowspan="1" style="text-align:center">142</td><td colspan="1" rowspan="1" style="text-align:center">40</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">100</td><td colspan="1" rowspan="1" style="text-align:center">142</td><td colspan="1" rowspan="1" style="text-align:center">40</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">80</td><td colspan="1" rowspan="1" style="text-align:center">142</td><td colspan="1" rowspan="1" style="text-align:center">40</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr></table><br /></div><b>Tabla 1.</b> Dimensiones para armarios con medidores exclusivamente trif&#225;sicos o bif&#225;sicos<br /><br /><br /><br /><div style="width:743px;"><table><tr><td colspan="1" rowspan="1" style="width:127px;height:30px;text-align:center"><b>N&#176; de cuentas</b></td><td colspan="1" rowspan="1" style="width:113px;text-align:center"><b>N&#176; de bandejas</b></td><td colspan="1" rowspan="1" style="width:127px;text-align:center"><b>Ancho (cm)</b></td><td colspan="1" rowspan="1" style="width:120px;text-align:center"><b>Alto (cm)</b></td><td colspan="1" rowspan="1" style="width:170px;text-align:center"><b>Profundidad (cm)</b></td><td colspan="1" rowspan="1" style="width:86px;text-align:center"><b>N&#176; de puertas</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">24</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">160</td><td colspan="1" rowspan="1" style="text-align:center">154</td><td colspan="1" rowspan="1" style="text-align:center">40</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">21</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">144</td><td colspan="1" rowspan="1" style="text-align:center">154</td><td colspan="1" rowspan="1" style="text-align:center">40</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">18</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">112</td><td colspan="1" rowspan="1" style="text-align:center">154</td><td colspan="1" rowspan="1" style="text-align:center">40</td><td colspan="1" rowspan="1" style="text-align:center">1 o 2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">15</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">96</td><td colspan="1" rowspan="1" style="text-align:center">154</td><td colspan="1" rowspan="1" style="text-align:center">40</td><td colspan="1" rowspan="1" style="text-align:center">1 o 2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">12</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">80</td><td colspan="1" rowspan="1" style="text-align:center">154</td><td colspan="1" rowspan="1" style="text-align:center">40</td><td colspan="1" rowspan="1" style="text-align:center">1 o 2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">96</td><td colspan="1" rowspan="1" style="text-align:center">128</td><td colspan="1" rowspan="1" style="text-align:center">30</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">80</td><td colspan="1" rowspan="1" style="text-align:center">128</td><td colspan="1" rowspan="1" style="text-align:center">30</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">64</td><td colspan="1" rowspan="1" style="text-align:center">128</td><td colspan="1" rowspan="1" style="text-align:center">30</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr></table><br /></div><b>Tabla 2.</b> Dimensiones para armarios con medidores exclusivamente monof&#225;sicos<br /><br /><br />Si el armario tiene combinaci&#243;n de medidores trif&#225;sicos o bif&#225;sicos  y monof&#225;sicos las dimensiones del armario pueden modificarse siempre y cuando se mantengan las siguientes distancias: <br /><br />o Separaci&#243;n entre ejes:
+<ul><li>20 cm para medidores trif&#225;sicos y/o bif&#225;sicos</li></ul>
+
+<ul><li>16 cm para medidores monof&#225;sicos</li></ul>
+
+<ul><li>18 cm para medidores trif&#225;sicos, bif&#225;sicos y monof&#225;sicos</li></ul>
+ <br /><br />o Separaci&#243;n entre eje del  medidor y estructura del armario:
+<ul><li>20 cm para trif&#225;sicos y/o bif&#225;sicos</li></ul>
+
+<ul><li>16 cm para monof&#225;sicos</li></ul>
+ <br />En el caso de usar interruptores de caja moldeada, la altura total del armario se incremental en 10 cm debido a que el alto del compartimento de interruptores  aumenta en 10 cm.<br /><br />Las dimensiones indicadas en las tablas 1 y 2 son valores m&#237;nimos. Estas dimensiones deben ser verificadas por el fabricante del armario para el caso de los dise&#241;os con cargadores para carros el&#233;ctricos que incluyan un mini-interruptor adicional (ver diagrama unifilar). En esta revisi&#243;n se debe considerar el numero de cuentas por armario que tengan esta opci&#243;n, para verificar las dimensiones del compartimento de interruptores autom&#225;ticos.<br /><br />Para casos especiales, se podr&#225;n modificar las dimensiones del armario siempre que se cumpla con todas las distancias de seguridad y dem&#225;s condiciones estipuladas en la especificaci&#243;n ET911.<br /><br />Incluyendo el medidor para la cuenta de servicios comunes, alumbrado exterior y alumbrado de punto fijo (escaleras), todo armario deber&#225; contar como m&#237;nimo con un espacio de reserva para instalar un medidor trif&#225;sico en ampliaciones futuras. Estas cuentas de reserva deben ubicarse al final del armario, debidamente identificadas.<br /><br />El calibre del conductor de <a href="ae308_armario_medidores_especificaciones_generales.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a> y el del conductor entre el neutro y la barra de <a href="ae308_armario_medidores_especificaciones_generales.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> del armario deber&#225; cumplir lo estipulado en la tabla 250-94  de la  norma NTC 2050, donde se especifica que el calibre m&#237;nimo del conductor de <a href="ae308_armario_medidores_especificaciones_generales.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a>, es el N&#186;8 AWG.<br /><br /><br />Tanto la barra del neutro como la estructura del armario deber&#225;n estar conectadas a <a href="ae308_armario_medidores_especificaciones_generales.html#" id="version-387" class="externalLink  glosarioLink">tierra</a>.<br /><br /><br />Todos los dispositivos de protecci&#243;n y alambrado, deber&#225;n ser de caracter&#237;sticas tales que se obtenga una coordinaci&#243;n y selectividad completas. El alambrado deber&#225; hacerse de tal forma que los puntos vivos se conecten al “ON&quot; (encendido) del dispositivo y los puntos muertos al &quot;OFF&quot; (apagado) , en posici&#243;n vertical u horizontal del dispositivo. En posici&#243;n vertical, el dispositivo deber&#225; ser alimentado por la parte superior en donde deber&#225; estar al “ON&quot;, y en posici&#243;n horizontal “ON&quot; a la derecha.<br /><br />Enel Colombia instalar&#225; los medidores y har&#225; la conexi&#243;n de los mismos una vez el <a href="ae308_armario_medidores_especificaciones_generales.html#" id="version-403" class="externalLink  glosarioLink">usuario</a> haya cumplido con los requisitos exigidos y adelantado los tr&#225;mites requeridos.<br /><br />Los sitios para ubicaci&#243;n medidores e interruptores de protecci&#243;n, deber&#225;n identificarse claramente con la direcci&#243;n y n&#250;mero del apartamento o local respectivo, mediante marquillas de acero inoxidable, aluminio o pl&#225;stico firmemente remachadas.  No se permitir&#225;n marquillas  pegadas, atornilladas, hechas con rotuladora, pintura, cinta, marcador o similar. (NTC 2050 art. 110-22).<br /><br /><br />El <a href="ae308_armario_medidores_especificaciones_generales.html#" id="version-403" class="externalLink  glosarioLink">usuario</a> suministrar&#225; el armario debidamente instalado y alambrado con todas las cuentas identificadas y con los suficientes espacios de trabajo para accionar los aparatos de <a href="ae308_armario_medidores_especificaciones_generales.html#" id="version-270" class="externalLink  glosarioLink">maniobra</a> y protecci&#243;n. (NTC 2050 art. 110-16 y 230-64).<br /><br />La identificaci&#243;n de las cuentas o medidores y su disposici&#243;n, deber&#225; estar ordenada de menor a mayor y de arriba hacia abajo, ejemplo:<br /><table><tr><td colspan="1" rowspan="1" style="width:100px;height:16px;text-align:center">Cuentas</td><td colspan="1" rowspan="1" style="width:48px;text-align:center">1</td><td colspan="1" rowspan="1" style="width:56px;text-align:center">4</td><td colspan="1" rowspan="1" style="width:82px;text-align:center">7</td><td colspan="1" rowspan="1" style="width:105px;text-align:center">Etc</td><td colspan="1" rowspan="1" style="width:76px;text-align:center">Bandeja N&#176; 1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;text-align:center">Cuentas</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">Etc</td><td colspan="1" rowspan="1" style="text-align:center">Bandeja N&#176; 2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;text-align:center">Cuentas</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">9</td><td colspan="1" rowspan="1" style="text-align:center">Etc</td><td colspan="1" rowspan="1" style="text-align:center">Bandeja N&#176; 3</td></tr></table><br /><br />En el caso de centros comerciales con medidores para islas, bah&#237;as, zonas comunes o cajeros electr&#243;nicos, estas cuentas se incluir&#225;n (ordenadas de menor a mayor) al final identific&#225;ndolas claramente por el piso y ubicaci&#243;n. <br /><br />Si en un mismo armario se tienen medidores de cuentas residenciales, locales y servicios comunes (punto fijo o escaleras), los medidores deben ubicarse ordenados de menor a mayor empezando por los medidores residenciales, luego por los locales y finalizando por los medidores de servicios comunes. Todas estas cuentas deben ir debidamente identificadas.<br /><br />El orden para los diferentes tipos de cuentas indicado en los p&#225;rrafos anteriores se aplica para armarios nuevos. Cuando se solicitan cuentas nuevas en armarios existentes, se usar&#225;n las cuentas de reserva disponibles en el lugar donde est&#233;n ubicadas sin requerirse realizar reordenamiento de las cuentas existentes.<br /><br />Los interruptores de protecci&#243;n se deben identificar de menor a mayor de izquierda a derecha. Las protecciones de las islas, cajeros o servicios comunes se incluir&#225;n al final tambi&#233;n en forma ordenada.<br /><br />El instalador deber&#225; garantizar que las marquillas correspondan a la  cuenta indicada para evitar problemas de inversi&#243;n de cuentas; En cuyo caso, Enel Colombia no tendr&#225; ninguna responsabilidad de los problemas ocasionados al <a href="ae308_armario_medidores_especificaciones_generales.html#" id="version-403" class="externalLink  glosarioLink">usuario</a> derivados por los cruces  de   facturas de cobro de energ&#237;a.<br /><br />El extremo de cada conductor de entrada o salida que va a la bornera del correspondiente medidor, deber&#225; estar claramente identificado mediante sendas marquillas en cinta de enmascarar firmemente adherida al conductor.<br /><br /><br />No se permitir&#225; localizar en un armario cuentas de diferentes bloques de apartamentos.  <br />Cada bloque deber&#225; tener su propio armario de medidores.<br /><br /><br />La acometida de B.T. para armarios de medidores debe ser en tuber&#237;a met&#225;lica galvanizada tipo IMC o r&#237;gido de di&#225;metro acorde con la carga que alimenta.<br /><br />
+<h2 id="heading_4" >NOTAS GENERALES</h2>
+Desde el armario de medidores no deben hacerse derivaciones a otros armarios o cajas de medidores, excepto cuando se derive para un <a href="ae308_armario_medidores_especificaciones_generales.html#" id="version-189" class="externalLink  glosarioLink">equipo</a> de medida indirecta en BT (Ver norma <a href="ae3142_alternativas_localizacion_equipos_medicion_indirecta.html" class="externalLink">AE 314-2<span class="externalLinkIcon"></span></a>). En caso de requerirse m&#225;s de un armario debe utilizarse un tablero general de acometidas.<br /><br /><br />En condiciones est&#225;ndar los armarios de medidores son instalados en s&#243;tanos, semis&#243;tanos o halls de acceso en primer piso. Para construcciones donde se utiliza bus de barras se permite la instalaci&#243;n de armarios en pisos superiores siguiendo las indicaciones de la norma AE229. <br /><br /><br />En edificaciones de gran altura  (superiores a 15 pisos)  se permite utilizar armarios en m&#225;ximo un piso diferente  al s&#243;tano, semis&#243;tano  y/o primer piso.<br /><br /><br />Para mejorar la regulaci&#243;n de tensi&#243;n se presentan las siguientes alternativas:<br />
+<ul><li>Se deben realizar c&#225;lculos para determinar hasta que altura se pueden colocar los armarios</li></ul>
+
+<ul><li>Emplear el uso de subestaciones adicionales en pisos superiores siempre y cuando su tecnolog&#237;a sea aislamiento en aire o resina  y se disponga de ascensores adecuados para el traslado de los equipos para facilitar la instalaci&#243;n, operaci&#243;n y el mantenimiento.</li></ul>
+
+<ul><li>Se permiten tambi&#233;n instalar armarios en pisos superiores cuando se ubiquen s/e en pisos superiores</li></ul>
+ 
+<ul><li>En conjuntos de varias torres colocar m&#225;s de una subestaci&#243;n, buscando ubicarlas cerca  al centro de carga de alimentadores a los armarios.</li></ul>
+<br /><br />La instalaci&#243;n de armarios en pisos superiores se acepta siempre y cuando se cumpla con las siguientes condiciones:<br />
+<ul><li>La acometida al armario debe ir en tuber&#237;a met&#225;lica galvanizada tipo IMC o r&#237;gido</li></ul>
+
+<ul><li>El armario debe ubicarse en &#225;reas comunes donde se permita el libre acceso para la lectura de los medidores.</li></ul>
+
+<ul><li>Cuando la distancia entre el transformador y el armario supere los 15 m se debe ubicar una  protecci&#243;n de acometidas fuera del &#225;rea destinada al transformador (Ver norma <a href="http://likinormas.micodensa.com/Norma/acometidas_medidores/cajas_armarios_celdas/ae310_caja_proteccion_acometidaAE 310" class="externalLink">AE310<span class="externalLinkIcon"></span></a>).</li></ul>
+
+<ul><li>Se deben cumplir las condiciones de espacio libre indicadas en la norma <a href="http://likinormas.micodensa.com/Norma/acometidas_medidores/cajas_armarios_celdas/generalidades_7_3_generalidades_cajas_armarios_celdasGeneralidades 7.3)" class="externalLink">Generalidades 7.3<span class="externalLinkIcon"></span></a>.</li></ul>
+<br /><br />Cuando el armario se ubique en exteriores y no pueda empotrarse totalmente, se deber&#225;n construir muros laterales y un techo en desnivel para protecci&#243;n contra la intemperie. Los muros deben permitir una f&#225;cil instalaci&#243;n y/o retiro del armario.<br /><br /><br />Para una informaci&#243;n m&#225;s detallada de los armarios para medidores, se puede consultar la especificaci&#243;n t&#233;cnica ET-911.<br /><br /><br />
+<h2 id="heading_5" >FIGURA 1 - ARMARIO DE MEDIDORES DE 6 A 10 CUENTAS TRIFASICAS <a href="ae308_armario_medidores_especificaciones_generales.html#" id="version-72" class="externalLink  glosarioLink">ACOMETIDA</a> POR DEBAJO Y PARCIALES POR DEBAJO</h2><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../../archivo/683.html"><img src="../../../media/content/mediafile/683/AE308&#32;Fig1(ET911&#32;Fig1).jpg" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br /><br /><br /><br />
+<h2 id="heading_6" >FIGURA 2 - ARMARIO DE MEDIDORES DE 12 A 15 CUENTAS TRIFASICAS <a href="ae308_armario_medidores_especificaciones_generales.html#" id="version-72" class="externalLink  glosarioLink">ACOMETIDA</a> POR ENCIMA PARCIALES POR ABAJO</h2><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../../archivo/684_684.html"><img src="../../../media/content/mediafile/684/AE308&#32;Fig2(ET911&#32;Fig2).jpg" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br /><br /><br /><br />
+<h2 id="heading_7" >FIGURA 2A - <a href="ae308_armario_medidores_especificaciones_generales.html#" id="version-72" class="externalLink  glosarioLink">ACOMETIDA</a> Y PARCIALES POR DEBAJO </h2><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../../archivo/1839_1839.html"><img src="../../../media/content/mediafile/1839/AE308&#32;Fig2A(ET911&#32;Fig2A).jpg" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br />•	Para acometidas (general y parcial) por debajo, se instalar&#225; dos canaletas cerradas por detr&#225;s de los comportamientos de “autom&#225;ticos-clientes” y de “medidores”<br /><br /><br />
+<h2 id="heading_8" >FIGURA 3 - <a href="ae308_armario_medidores_especificaciones_generales.html#" id="version-72" class="externalLink  glosarioLink">ACOMETIDA</a> POR DEBAJO PARCIALES POR ENCIMA</h2><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../../archivo/685_685.html"><img src="../../../media/content/mediafile/685/AE308&#32;Fig3(ET911&#32;Fig3).jpg" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br /><br /><br />
+<h2 id="heading_9" >FIGURA 3A - <a href="ae308_armario_medidores_especificaciones_generales.html#" id="version-72" class="externalLink  glosarioLink">ACOMETIDA</a> Y PARCIALES POR ENCIMA</h2><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../../archivo/1840_1840.html"><img src="../../../media/content/mediafile/1840/AE308&#32;Fig3A(ET911&#32;Fig3A).jpg" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br />•	Para acometidas (general y parcial) por encima, se instalar&#225; dos canaletas cerradas por detr&#225;s de los comportamientos de “autom&#225;ticos-clientes” y de “medidores”<br /><br />
+<h2 id="heading_10" >FIGURA 4 - DETALLE DE FIJACI&#211;N DE BANDEJAS, DISTRIBUCI&#211;N CENTRAL DEL ARMARIO DE DOS PUERTAS Y CABLEADO INTERNO DEL ARMARIO DE MEDIDORES </h2><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../../archivo/687_687.html"><img src="../../../media/content/mediafile/687/AE&#32;308&#32;Fig4(ET911Fig5).jpg" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br /><br /><br />
+<h2 id="heading_11" >FIGURA 5 - ARMARIO CON TOTALIZADOR Y BARRAJE LATERAL</h2><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../../archivo/688.html"><img src="../../../media/content/mediafile/688/AE&#32;308&#32;Fig5(ET911&#32;Fig6).jpg" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br /><br /><br />
+<h2 id="heading_12" >FIGURA 6- ARMARIO DE MEDIDORES DE 18  A 24 CUENTAS TRIFASICAS <a href="ae308_armario_medidores_especificaciones_generales.html#" id="version-72" class="externalLink  glosarioLink">ACOMETIDA</a> POR DEBAJO PARCIALES POR ENCIMA</h2><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../../archivo/686_686.html"><img src="../../../media/content/mediafile/686/AE&#32;308&#32;Fig6(ET911&#32;Fig4).jpg" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div>
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 1536, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

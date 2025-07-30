@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Save & Edit module.
+ */
+
+/**
+ * Remove dropbutton configuration
+ */
+function save_edit_update_8101() {
+  $config_factory = \Drupal::configFactory();
+  $config = $config_factory->getEditable('save_edit.settings');
+  $config->clear('dropbutton')->save();
+}

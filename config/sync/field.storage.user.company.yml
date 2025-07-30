@@ -1,0 +1,21 @@
+uuid: b21a1d5c-48ad-4034-a118-b189bceedf0b
+langcode: es
+status: true
+dependencies:
+  module:
+    - user
+id: user.company
+field_name: company
+entity_type: user
+type: string
+settings:
+  max_length: 255
+  case_sensitive: false
+  is_ascii: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

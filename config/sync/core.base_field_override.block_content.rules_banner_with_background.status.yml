@@ -1,0 +1,22 @@
+uuid: 32fdfd35-0e21-4838-abd2-35efa98a1ab9
+langcode: es
+status: true
+dependencies:
+  config:
+    - block_content.type.rules_banner_with_background
+id: block_content.rules_banner_with_background.status
+field_name: status
+entity_type: block_content
+bundle: rules_banner_with_background
+label: Publicado
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Activado
+  off_label: Desactivado
+field_type: boolean

@@ -1,0 +1,24 @@
+uuid: f0fc4043-07b0-4560-b93f-bf7cf3a846b0
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.rules_technical_rules_comments
+    - field.storage.comment.comment_date
+  module:
+    - datetime
+id: comment.rules_technical_rules_comments.comment_date
+field_name: comment_date
+entity_type: comment
+bundle: rules_technical_rules_comments
+label: Fecha
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    default_date_type: now
+    default_date: now
+default_value_callback: ''
+settings: {  }
+field_type: datetime

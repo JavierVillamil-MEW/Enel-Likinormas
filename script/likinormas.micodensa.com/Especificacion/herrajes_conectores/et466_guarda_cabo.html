@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET466 Guardacabo | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/565" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F565.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/565" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/565" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '23');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET466 Guardacabo</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET466</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">28/03/2023</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/565">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F565&amp;nodoid=565', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et466_guarda_cabo.html#heading_0">1.	OBJETO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et466_guarda_cabo.html#heading_1">2.	ALCANCE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et466_guarda_cabo.html#heading_2">3.	SERVICIO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et466_guarda_cabo.html#heading_3">4.	REQUISITOS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et466_guarda_cabo.html#heading_4">4.1	GEOM&#201;TRICOS.</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et466_guarda_cabo.html#heading_5">4.2	QU&#205;MICOS.</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et466_guarda_cabo.html#heading_6">4.3	MEC&#193;NICOS.</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et466_guarda_cabo.html#heading_7">4.4	REQUISITOS DEL RECUBRIMIENTO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et466_guarda_cabo.html#heading_8">4.5	REQUISITOS DEL ACABADO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et466_guarda_cabo.html#heading_9">5.	CRITERIOS DE ACEPTACI&#211;N O RECHAZO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et466_guarda_cabo.html#heading_10">6.	PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et466_guarda_cabo.html#heading_11">6.1	PRUEBAS TIPO</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et466_guarda_cabo.html#heading_12">6.1.1 Prueba dimensional</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et466_guarda_cabo.html#heading_13">6.1.2 An&#225;lisis Qu&#237;mico</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et466_guarda_cabo.html#heading_14"> 6.1.3 Prueba mec&#225;nica</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et466_guarda_cabo.html#heading_15">6.1.4 Prueba del Galvanizado</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et466_guarda_cabo.html#heading_16">6.2	PRUEBAS DE RECEPCI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et466_guarda_cabo.html#heading_17">7.	EMPAQUE, ROTULADO Y MARCACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et466_guarda_cabo.html#heading_18">7.1	EMPAQUE</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et466_guarda_cabo.html#heading_19">7.2	ROTULADO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et466_guarda_cabo.html#heading_20">7.3	MARCACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et466_guarda_cabo.html#heading_21">8.	NORMAS  ADICIONALES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et466_guarda_cabo.html#heading_22">ANEXO. TABLA DE CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1.	OBJETO</h2>
+Esta <a href="et466_guarda_cabo.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a> tiene por objeto establecer las caracter&#237;sticas y requisitos t&#233;cnicos que deben cumplir y los ensayos a los cuales deben ser sometidos los guarda cabos que solicitar&#225; ENEL CODENSA, para el <a href="et466_guarda_cabo.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> <a href="et466_guarda_cabo.html#" id="version-177" class="externalLink  glosarioLink">el&#233;ctrico</a> de distribuci&#243;n.<br />
+<h2 id="heading_1" >2.	ALCANCE</h2>
+Esta <a href="et466_guarda_cabo.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a> se aplicar&#225; en todas los guarda cabos que adquiera ENEL CODENSA.<br />
+<h2 id="heading_2" >3.	SERVICIO</h2>
+Estos herrajes se usan para proteger los cables de acero contra dobleces excesivos que los deteriore; son de servicio continuo.<br />
+<h2 id="heading_3" >4.	REQUISITOS</h2>
+Son elementos de caracter&#237;sticas geom&#233;tricas y mec&#225;nicas tales que les permiten adaptarse a los cables.<br /><br />Los guarda cabos deber&#225;n estar formados por un elemento en acero, la lamina de acero  deben ser de alta <a href="et466_guarda_cabo.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> y cumplir la norma NTC – 6; el proceso de fabricaci&#243;n es por corte en el sentido del laminado y doblado de la l&#225;mina<br />
+<h3 id="heading_4" >4.1	GEOM&#201;TRICOS.</h3>
+Las dimensiones se muestran en la figura 1<br />
+<h3 id="heading_5" >4.2	QU&#205;MICOS.</h3>
+Las platinas deben cumplir con los siguientes requisitos, de la tabla 1, y la norma NTC 6 correspondiente a l&#225;mina grado A24.<br /> <br /><b>TABLA  1</b><br /><div style="width:240px;"><table><tr><td colspan="2" rowspan="1" style="width:240px;height:10px;text-align:center"><b>REQUISITOS QU&#205;MICOS</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"><b>ELEMENTO</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>LAMINA  PERFILES</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">% Carbono,.m&#225;x</td><td colspan="1" rowspan="1" style="text-align:center">0,25</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">% F&#243;sforo, m&#225;x.</td><td colspan="1" rowspan="1" style="text-align:center">0,04</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">% Azufre, m&#225;x</td><td colspan="1" rowspan="1" style="text-align:center">0,05</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">% Manganeso </td><td colspan="1" rowspan="1" style="text-align:center">0,3 – 0,6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">% Silicio, m&#225;x </td><td colspan="1" rowspan="1" style="text-align:center">0,1</td></tr></table><br /></div><i>Nota</i> : Se pueden usar aceros equivalentes u otros aceros con la previa autorizaci&#243;n de ENEL CODENSA<br /><br />La capa de <a href="et466_guarda_cabo.html#" id="version-274" class="externalLink  glosarioLink">material</a> de cinc utilizado ser&#225; de <a href="et466_guarda_cabo.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> especial seg&#250;n norma NTC 2076 (tabla 3)<br /><br /><b>TABLA  2</b><br /><div style="width:375px;"><table><tr><td colspan="5" rowspan="1" style="width:375px;height:10px;text-align:center"><b>COMPOSICI&#211;N QU&#205;MICA DEL CINC ( % )</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"><b>GRADO</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Plomo m&#225;x</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Hierro m&#225;x</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Cadmio m&#225;x</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Cinc, m&#237;n</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">Especial</td><td colspan="1" rowspan="1" style="text-align:center">0,03</td><td colspan="1" rowspan="1" style="text-align:center">0,02</td><td colspan="1" rowspan="1" style="text-align:center">0,02</td><td colspan="1" rowspan="1" style="text-align:center">99,9</td></tr></table><br /></div>
+<h3 id="heading_6" >4.3	MEC&#193;NICOS.</h3>
+Las l&#225;minas deben cumplir con resistencia m&#237;nima a la fluencia de 24 Kg/mm<sup>2</sup> y una resistencia ultima a la tracci&#243;n de 42 kg mm<sup>2</sup>; adicionalmente las l&#225;minas deben ser sometidas al <a href="et466_guarda_cabo.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> de doblamiento especificado en la norma NTC 1<br />
+<h3 id="heading_7" >4.4	REQUISITOS DEL RECUBRIMIENTO</h3>
+Los guarda cabo ser&#225;n totalmente galvanizadas por inmersi&#243;n en caliente y deber&#225;n cumplir con las especificaciones t&#233;cnicas de la norma NTC 2076 y deben estar libres de burbujas, &#225;reas sin revestimiento, dep&#243;sitos de escoria, manchas negras y cualquier otro tipo de inclusiones o imperfecciones.<br /> <br />Los guarda cabo se galvanizan con clase B-2 (tabla 3).<br /><br /><b>TABLA  3</b><br /><div style="width:365px;"><table><tr><td colspan="5" rowspan="1" style="width:365px;height:10px;text-align:center"><b>REQUISITOS  DE  GALVANIZADO</b></td></tr>
+<tr><td colspan="1" rowspan="2" style="height:10px;text-align:center"><b>ELEMENTO</b></td><td colspan="2" rowspan="1" style="text-align:center"><b>PROMEDIO</b></td><td colspan="2" rowspan="1" style="text-align:center"><b>M&#205;NIMO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"><b>g/m<sup>2</sup></b></td><td colspan="1" rowspan="1" style="text-align:center"><b><span class="codeInline">&#181;</span>m</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>g/m<sup>2</sup></b></td><td colspan="1" rowspan="1" style="text-align:center"><b><span class="codeInline">&#181;</span>m</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">Guarda Cabo</td><td colspan="1" rowspan="1" style="text-align:center">458</td><td colspan="1" rowspan="1" style="text-align:center">65,4</td><td colspan="1" rowspan="1" style="text-align:center">381</td><td colspan="1" rowspan="1" style="text-align:center">54,4</td></tr></table><br /></div><h3 id="heading_8" >4.5	REQUISITOS DEL ACABADO</h3>
+Las laminas deben ser de una sola pieza, libres de deformaciones, fisura, aristas cortantes, y defectos de laminaci&#243;n. No se permiten dobleces ni rebabas en las zonas de corte, perforadas o punzadas. El galvanizado debe estar libre de burbujas, dep&#243;sitos de escorias, manchas negras, excoriaciones y/u otro tipo de inclusiones.<br />
+<h2 id="heading_9" >5.	CRITERIOS DE ACEPTACI&#211;N O RECHAZO</h2>
+Si el n&#250;mero de elementos defectuosos es menor o igual al correspondiente n&#250;mero de defectuosos definidos a continuaci&#243;n, se deber&#225; considerar que el lote cumple con los requisitos t&#233;cnicos exigidos por ENEL CODENSA, en caso contrario, el lote se rechazar&#225;.<br /><br /><b>Inspecci&#243;n Visual y Dimensional</b> <br /><br />De acuerdo a la tabla a continuaci&#243;n.<br /><br /><div style="width:644px;"><table><tr><td colspan="4" rowspan="1" style="width:644px;height:20px;text-align:center">Tabla inspecci&#243;n visual y dimensional</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">Tama&#241;o del lote</td><td colspan="1" rowspan="1" style="text-align:center">Muestra</td><td colspan="1" rowspan="1" style="text-align:center">Aceptado</td><td colspan="1" rowspan="1" style="text-align:center">Rechazado</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">2 a 8</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">9 a 15</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">16 a 25</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">26 a 50</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">51 a 90</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">91 a 150</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">151 a 280</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">281 a 500</td><td colspan="1" rowspan="1" style="text-align:center">20</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">501 a 1200</td><td colspan="1" rowspan="1" style="text-align:center">32</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1201 a 3200</td><td colspan="1" rowspan="1" style="text-align:center">50</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">3201 a 10000</td><td colspan="1" rowspan="1" style="text-align:center">80</td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">7</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">10001 a 35000</td><td colspan="1" rowspan="1" style="text-align:center">125</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">9</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">35001 a 150000</td><td colspan="1" rowspan="1" style="text-align:center">200</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">11</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">150001 a 500000</td><td colspan="1" rowspan="1" style="text-align:center">315</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">11</td></tr></table><br /></div><b>TABLA 4. Plan de muestreo para inspecci&#243;n visual y dimensional.</b><br /><br /><b>Ensayos mec&#225;nicos</b><br /><br />De acuerdo a la tabla a continuaci&#243;n.<br /><br /><div style="width:644px;"><table><tr><td colspan="4" rowspan="1" style="width:644px;height:20px;text-align:center">Tabla inspecci&#243;n visual y dimensional</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">Tama&#241;o del lote</td><td colspan="1" rowspan="1" style="text-align:center">Muestra</td><td colspan="1" rowspan="1" style="text-align:center">Aceptado</td><td colspan="1" rowspan="1" style="text-align:center">Rechazado</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">2 a 8</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">9 a 15</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">16 a 25</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">26 a 50</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">51 a 90</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">91 a 150</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">151 a 280</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">281 a 500</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">501 a 1200</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1201 a 3200</td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">3201 a 10000</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">10001 a 35000</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">35001 a 150000</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">150001 a 500000</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr></table><br /></div><b>TABLA 5. Plan de muestreo para pruebas mec&#225;nicas.</b><br />
+<h2 id="heading_10" >6.	PRUEBAS</h2>
+<h3 id="heading_11" >6.1	PRUEBAS TIPO</h3>
+<h4 id="heading_12" >6.1.1 Prueba dimensional</h4>La verificaci&#243;n de las dimensiones se har&#225; con los instrumentos de medida que den la aproximaci&#243;n requerida, entre otros calibrador pie de rey, micr&#243;metros de interiores y exteriores, etc. El plan de muestreo es deber&#225; estar de acuerdo con la Tabla 4.<br />
+<h4 id="heading_13" >6.1.2 An&#225;lisis Qu&#237;mico</h4>Se efectuar&#225; el an&#225;lisis qu&#237;mico de acuerdo a lo requerido en el numeral 4.2 y las normas NTC 23 y 180 (carbono), NTC 27 (azufre), NTC 181 (f&#243;sforo), NTC 24 o 25 (manganeso), NTC 26 o 28 (silicio) o en su defecto se aceptar&#225; un certificado de <a href="et466_guarda_cabo.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> de los materiales empleados, emitido por un laboratorio reconocido y aprobado por ENEL CODENSA.  El an&#225;lisis qu&#237;mico puede ser realizado en un espectr&#243;metro calibrado con los patrones correspondientes.<br />
+<h4 id="heading_14" > 6.1.3 Prueba mec&#225;nica</h4>
+<b>6.1.3.1	<a href="et466_guarda_cabo.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de tracci&#243;n y dureza</b><br />Se tomara una l&#225;mina del <a href="et466_guarda_cabo.html#" id="version-264" class="externalLink  glosarioLink">lote</a> de producci&#243;n y se somete a la prueba de tracci&#243;n, deben poder soportar una carga m&#237;nima al l&#237;mite de fluencia de 24 kg/mm<sup>2</sup> y una resistencia m&#237;nima a la tracci&#243;n de 42 kg/mm<sup>2</sup> <br /><br /><b>6.1.3.2	<a href="et466_guarda_cabo.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de doblamiento</b><br /><br />Las platinas deben ser sometidas a doblamiento de 180&#186; sin que se presente agrietamiento del acero en la parte exterior, seg&#250;n norma NTC 1.<br /><br /><b>6.1.3.3	<a href="et466_guarda_cabo.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de Desdoblamiento</b><br /><br />Como prueba de rutina se debe efectuar un enderezamiento de 30&#186;  despu&#233;s de la prueba de doblamiento sin que se presente ning&#250;n agrietamiento.<br /> 
+<h4 id="heading_15" >6.1.4 Prueba del Galvanizado</h4>Esta prueba se har&#225; de acuerdo a la norma NTC 2076, se usar&#225; elcometro para medir espesores de galvanizado.<br />
+<h3 id="heading_16" >6.2	PRUEBAS DE RECEPCI&#211;N</h3>Las pruebas de recepci&#243;n son:<br />
+<ul><li>Inspecci&#243;n visual</li>
+<li>Verificaci&#243;n dimensional</li>
+<li>Verificaci&#243;n certificados de calidad</li>
+<li>Verificaci&#243;n espesor de galvanizado</li>
+<li>Ensayo de doblamiento y desdoblamiento</li></ul>
+<br />
+<h2 id="heading_17" >7.	EMPAQUE, ROTULADO Y MARCACI&#211;N</h2>
+<h3 id="heading_18" >7.1	EMPAQUE</h3>
+Los guarda cabo se empacar&#225;n en cajas de madera de tal manera que no sufran durante el transporte, manipuleo y almacenamiento.<br />
+<h3 id="heading_19" >7.2	ROTULADO</h3>
+En cada caja se colocar&#225; un r&#243;tulo con la siguiente informaci&#243;n.<br />
+<ul><li>Especificaci&#243;n del contenido con su referencia.</li>
+<li>Nombre y raz&#243;n social del proveedor.</li>
+<li>Pa&#237;s de origen.</li>
+<li>Cantidad de elementos.</li>
+<li>Peso unitario, peso total bruto y neto.</li>
+<li>ENEL CODENSA</li>
+<li>N&#250;mero de contrato o pedido.</li>
+<li>Fecha de entrega.</li>
+<li>C&#243;digo de Almac&#233;n.</li></ul>
+
+<h3 id="heading_20" >7.3	MARCACI&#211;N</h3>
+El material debe cumplir la siguiente marcaci&#243;n en bajo o en alto relieve. No se acepta pintura ni calcoman&#237;a.<br />
+<ul><li>ENEL CODENSA</li>
+<li>Logo del fabricante</li>
+<li>Di&#225;metro del cable</li></ul>
+<br />
+<h2 id="heading_21" >8.	NORMAS  ADICIONALES</h2>
+<br />NTC   2076 Electricidad.  Galvanizado por inmersi&#243;n en caliente para herrajes y perfiles estructurales de hierro y acero.<br />NTC   2606 ELECTROTECNIA. HERRAJES Y ACCESORIOS PARA REDES Y L&#205;NEAS A&#201;REAS DE DISTRIBUCI&#211;N DE ENERG&#205;A EL&#201;CTRICA. GUARDACABOS<br /><br /><img src="https://i.ibb.co/3MC2HKb/et466.png" /><br /><br /><div style="width:1153px;"><table><tr><td colspan="1" rowspan="1" style="width:66px;height:31px;text-align:center"><b>S&#237;mbolo</b></td><td colspan="1" rowspan="1" style="width:67px;text-align:center"><b>Tipo</b></td><td colspan="2" rowspan="1" style="width:178px;text-align:center"><b>Di&#225;metro del cable</b></td><td colspan="2" rowspan="1" style="width:136px;text-align:center"><b>L (m&#237;nimo)</b></td><td colspan="2" rowspan="1" style="width:140px;text-align:center"><b>P (M&#237;nimo)</b></td><td colspan="2" rowspan="1" style="width:110px;text-align:center"><b>D (M&#237;nimo)</b></td><td colspan="2" rowspan="1" style="width:152px;text-align:center"><b>D(M&#225;ximo)</b></td><td colspan="2" rowspan="1" style="width:152px;text-align:center"><b>A (M&#237;nimo)</b></td><td colspan="2" rowspan="1" style="width:152px;text-align:center"><b>F (M&#237;nimo)</b></td></tr>
+<tr><td colspan="1" rowspan="2" style="height:21px;text-align:center">g7</td><td colspan="1" rowspan="2" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="text-align:center">pulg</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="text-align:center">pulg.</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="text-align:center">pulg.</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="text-align:center">pulg.</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="text-align:center">pulg.</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="text-align:center">pulg.</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="text-align:center">pulg.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">1/4</td><td colspan="1" rowspan="1" style="text-align:center">41, 3</td><td colspan="1" rowspan="1" style="text-align:center">1 5/8</td><td colspan="1" rowspan="1" style="text-align:center">19&#39;1</td><td colspan="1" rowspan="1" style="text-align:center">3/4</td><td colspan="1" rowspan="1" style="text-align:center">7,1</td><td colspan="1" rowspan="1" style="text-align:center">9/32</td><td colspan="1" rowspan="1" style="text-align:center">7,9</td><td colspan="1" rowspan="1" style="text-align:center">5/16</td><td colspan="1" rowspan="1" style="text-align:center">4,8</td><td colspan="1" rowspan="1" style="text-align:center">3/16</td><td colspan="1" rowspan="1" style="text-align:center">1,6</td><td colspan="1" rowspan="1" style="text-align:center">1/16</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">5/16</td><td colspan="1" rowspan="1" style="text-align:center">47,6</td><td colspan="1" rowspan="1" style="text-align:center">1 7/8</td><td colspan="1" rowspan="1" style="text-align:center">25,4</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">8,7</td><td colspan="1" rowspan="1" style="text-align:center">11/32</td><td colspan="1" rowspan="1" style="text-align:center">9,5</td><td colspan="1" rowspan="1" style="text-align:center"><i>318</i></td><td colspan="1" rowspan="1" style="text-align:center">7,1</td><td colspan="1" rowspan="1" style="text-align:center">9/32</td><td colspan="1" rowspan="1" style="text-align:center">2,0</td><td colspan="1" rowspan="1" style="text-align:center">5/64</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">g8</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">3/8</td><td colspan="1" rowspan="1" style="text-align:center">54,0</td><td colspan="1" rowspan="1" style="text-align:center">2 1/8</td><td colspan="1" rowspan="1" style="text-align:center">28,6</td><td colspan="1" rowspan="1" style="text-align:center">1 1/8</td><td colspan="1" rowspan="1" style="text-align:center">10,3</td><td colspan="1" rowspan="1" style="text-align:center">13/32</td><td colspan="1" rowspan="1" style="text-align:center">11,1</td><td colspan="1" rowspan="1" style="text-align:center">7/16</td><td colspan="1" rowspan="1" style="text-align:center">6,7</td><td colspan="1" rowspan="1" style="text-align:center">16/64</td><td colspan="1" rowspan="1" style="text-align:center">2,8</td><td colspan="1" rowspan="1" style="text-align:center">7/64</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">4</td><td colspan="1" rowspan="1" style="text-align:center">11</td><td colspan="1" rowspan="1" style="text-align:center">7/16</td><td colspan="1" rowspan="1" style="text-align:center">57,2</td><td colspan="1" rowspan="1" style="text-align:center">2 1/4</td><td colspan="1" rowspan="1" style="text-align:center">31,8</td><td colspan="1" rowspan="1" style="text-align:center">1 1/4</td><td colspan="1" rowspan="1" style="text-align:center">11,9</td><td colspan="1" rowspan="1" style="text-align:center">15/32</td><td colspan="1" rowspan="1" style="text-align:center">12,7</td><td colspan="1" rowspan="1" style="text-align:center">1/2</td><td colspan="1" rowspan="1" style="text-align:center">7,9</td><td colspan="1" rowspan="1" style="text-align:center">5/16</td><td colspan="1" rowspan="1" style="text-align:center">3,2</td><td colspan="1" rowspan="1" style="text-align:center">1/8</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1/2</td><td colspan="1" rowspan="1" style="text-align:center">66,7</td><td colspan="1" rowspan="1" style="text-align:center">2 5/8</td><td colspan="1" rowspan="1" style="text-align:center">38,1</td><td colspan="1" rowspan="1" style="text-align:center">1 1/2</td><td colspan="1" rowspan="1" style="text-align:center">13,5</td><td colspan="1" rowspan="1" style="text-align:center">17/32</td><td colspan="1" rowspan="1" style="text-align:center">15,9</td><td colspan="1" rowspan="1" style="text-align:center">5/8</td><td colspan="1" rowspan="1" style="text-align:center">9,5</td><td colspan="1" rowspan="1" style="text-align:center">3/8</td><td colspan="1" rowspan="1" style="text-align:center">3,6</td><td colspan="1" rowspan="1" style="text-align:center">9/64</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">14</td><td colspan="1" rowspan="1" style="text-align:center">9/16</td><td colspan="1" rowspan="1" style="text-align:center">69,9</td><td colspan="1" rowspan="1" style="text-align:center">2 3/4</td><td colspan="1" rowspan="1" style="text-align:center">38,1</td><td colspan="1" rowspan="1" style="text-align:center">1 1/2</td><td colspan="1" rowspan="1" style="text-align:center">15,1</td><td colspan="1" rowspan="1" style="text-align:center">19/32</td><td colspan="1" rowspan="1" style="text-align:center">15,9</td><td colspan="1" rowspan="1" style="text-align:center">5/8</td><td colspan="1" rowspan="1" style="text-align:center">9,5</td><td colspan="1" rowspan="1" style="text-align:center"><i>3/8</i></td><td colspan="1" rowspan="1" style="text-align:center">3,6</td><td colspan="1" rowspan="1" style="text-align:center">9/64</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">g10</td><td colspan="1" rowspan="1" style="text-align:center">7</td><td colspan="1" rowspan="1" style="text-align:center">16</td><td colspan="1" rowspan="1" style="text-align:center">5/8</td><td colspan="1" rowspan="1" style="text-align:center">82,6</td><td colspan="1" rowspan="1" style="text-align:center">3 1/ 4</td><td colspan="1" rowspan="1" style="text-align:center">44,5</td><td colspan="1" rowspan="1" style="text-align:center">1 3/4</td><td colspan="1" rowspan="1" style="text-align:center">16,7</td><td colspan="1" rowspan="1" style="text-align:center">21/32</td><td colspan="1" rowspan="1" style="text-align:center">17,5</td><td colspan="1" rowspan="1" style="text-align:center">11/16</td><td colspan="1" rowspan="1" style="text-align:center">10,3</td><td colspan="1" rowspan="1" style="text-align:center">13/32</td><td colspan="1" rowspan="1" style="text-align:center">4,0</td><td colspan="1" rowspan="1" style="text-align:center">5/32</td></tr></table><br /></div>
+<h2 id="heading_22" ><b>ANEXO. TABLA DE CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS</b></h2>
+<div style="width:658px;"><table><tr><td colspan="1" rowspan="1" style="width:60px;height:38px;text-align:center">1</td><td colspan="2" rowspan="1" style="width:450px;">Oferente</td><td colspan="1" rowspan="1" style="width:150px;text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">2</td><td colspan="2" rowspan="1" style="">Fabricante </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">3</td><td colspan="2" rowspan="1" style="">Pa&#237;s de fabricaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">4</td><td colspan="2" rowspan="1" style="">Normas de fabricaci&#243;n y pruebas</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">5</td><td colspan="2" rowspan="1" style="">Material de fabricaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="6" style="height:58px;text-align:center">6</td><td colspan="1" rowspan="6" style="">DIMENSIONES</td><td colspan="1" rowspan="1" style="">Diametro del Cable (mm -pulg)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:58px;">Espesor de la l&#224;mina F (mm -pulg)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;">Ancho &quot;D&quot; (mm -pulg)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;">Longitud &quot;L&quot; (mm -pulg)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;">Longitud &quot;P&quot; (mm -pulg)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;">Longitud &quot;A&quot; (mm -pulg)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:41px;text-align:center">7</td><td colspan="2" rowspan="1" style="">Resistencia m&#237;nima a la fluencia  (kg/mm2 )</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:41px;text-align:center">8</td><td colspan="2" rowspan="1" style="">Resistencia m&#237;nima a la tracci&#243;n (kg/mm2 )</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">9</td><td colspan="2" rowspan="1" style="">Espesor del Galvanizado (gr/m2 - &#181;mm)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="4" style="height:77px;text-align:center">10</td><td colspan="1" rowspan="4" style="">ENSAYOS</td><td colspan="1" rowspan="1" style="">Prueba de recubrimiento (espesor y adherencia)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;">Prueba de traccion</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;">Prueba de doblamiento</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;">Pruebas quimicas</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">11</td><td colspan="2" rowspan="1" style="">Cumple con la marcaci&#243;n solicitada (Si/No, describir)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">12</td><td colspan="2" rowspan="1" style="">Desviaciones presentadas</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">13</td><td colspan="2" rowspan="1" style="">Garant&#237;a (meses)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:21px;">           RESULTADO DE EVALUACI&#211;N T&#201;CNICA</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:21px;">Observaciones           </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:39px;text-align:center">14</td><td colspan="1" rowspan="5" style="">Certificado Sistema de calidad (Norma ISO9001)</td><td colspan="1" rowspan="1" style="">Entidad certificadora</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;">N&#250;mero de certificado</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:77px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:58px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="6" style="height:39px;text-align:center">15</td><td colspan="1" rowspan="6" style="">Certificaci&#243;n de producto con norma t&#233;cnica</td><td colspan="1" rowspan="1" style="">Entidad certificadora</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;">N&#250;mero de certificado</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:77px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:77px;">Norma t&#233;cnica con la cual se certifica</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:58px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:39px;text-align:center">16</td><td colspan="1" rowspan="5" style="">Certificaci&#243;n de producto con RETIE</td><td colspan="1" rowspan="1" style="">Entidad certificadora</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;">N&#250;mero de certificado</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:77px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:58px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:40px;">*           RESULTADO DE EVALUACI&#211;N REGULATORIA*</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">17</td><td colspan="2" rowspan="1" style="">Observaciones</td><td colspan="1" rowspan="1" style=""> </td></tr></table><br /></div><br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 565, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

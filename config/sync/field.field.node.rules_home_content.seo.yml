@@ -1,0 +1,21 @@
+uuid: bc43340c-99e7-4628-9908-6f588eca78dc
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.node.seo
+    - node.type.rules_home_content
+  module:
+    - metatag
+id: node.rules_home_content.seo
+field_name: seo
+entity_type: node
+bundle: rules_home_content
+label: SEO
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: metatag

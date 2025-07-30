@@ -1,0 +1,22 @@
+uuid: 1d4b38ab-df87-4056-888f-f22a2d970c1c
+langcode: es
+status: true
+dependencies:
+  config:
+    - block_content.type.rules_comments_block
+id: block_content.rules_comments_block.status
+field_name: status
+entity_type: block_content
+bundle: rules_comments_block
+label: Publicado
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Activado
+  off_label: Desactivado
+field_type: boolean

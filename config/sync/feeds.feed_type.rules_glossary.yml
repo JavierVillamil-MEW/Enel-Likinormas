@@ -1,0 +1,65 @@
+uuid: acaae2e5-8a34-434f-9d89-e7a9109cf17b
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.base_field_override.taxonomy_term.rules_glossary.description
+    - core.base_field_override.taxonomy_term.rules_glossary.name
+    - taxonomy.vocabulary.rules_glossary
+  module:
+    - taxonomy
+label: Glosario
+id: rules_glossary
+description: 'Carga masiva de palabras al glosario'
+help: ''
+import_period: -1
+fetcher: upload
+fetcher_configuration:
+  allowed_extensions: 'txt csv tsv xml opml'
+  directory: 'public://feeds'
+parser: csv
+parser_configuration:
+  delimiter: ','
+  no_headers: false
+  line_limit: 100
+processor: 'entity:taxonomy_term'
+processor_configuration:
+  values:
+    vid: rules_glossary
+  langcode: es
+  insert_new: 1
+  update_existing: 2
+  update_non_existent: _keep
+  skip_hash_check: false
+  authorize: false
+  revision: false
+  expire: -1
+  owner_feed_author: false
+  owner_id: 0
+custom_sources:
+  name:
+    value: Name
+    label: Name
+    machine_name: name
+    type: csv
+  description:
+    value: Description
+    label: Description
+    machine_name: description
+    type: csv
+mappings:
+  -
+    target: name
+    map:
+      value: name
+    settings:
+      language: null
+    unique:
+      value: 1
+  -
+    target: description
+    map:
+      value: description
+    settings:
+      language: null
+      format: plain_text

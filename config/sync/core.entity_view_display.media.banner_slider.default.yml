@@ -1,0 +1,49 @@
+uuid: dbc867b6-e88a-419e-adf5-578c2908e833
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.banner_slider.banner_description
+    - field.field.media.banner_slider.banner_title
+    - field.field.media.banner_slider.field_media_image_1
+    - field.field.media.banner_slider.image_mobile
+    - media.type.banner_slider
+    - responsive_image.styles.rules_responsive_image
+  module:
+    - responsive_image
+    - text
+id: media.banner_slider.default
+targetEntityType: media
+bundle: banner_slider
+mode: default
+content:
+  banner_description:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  banner_title:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_media_image_1:
+    type: responsive_image
+    label: hidden
+    settings:
+      responsive_image_style: rules_responsive_image
+      image_link: ''
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  image_mobile: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

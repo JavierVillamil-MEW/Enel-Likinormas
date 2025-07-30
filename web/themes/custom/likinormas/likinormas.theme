@@ -1,0 +1,160 @@
+<?php
+
+/**
+ * @file
+ * Likinormas theme file.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function likinormas_preprocess_html(&$variables)
+{
+  $user_id = \Drupal::routeMatch()->getRawParameter('user');
+  $current_path = \Drupal::service('path.current')->getPath();
+  $result = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
+  if (str_contains($result, '/definition')) {
+    $variables['attributes']['class'][] = "is-term-pdf";
+  }
+  if ($user_id) {
+    $variables['attributes']['class'][] = "user-profile";
+  }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter() for form templates.
+ * @param array $suggestions
+ * @param array $variables
+ */
+function likinormas_theme_suggestions_block_alter(array &$suggestions, array $variables)
+{
+  if (isset($variables['elements']['content']['#block_content'])) {
+    array_splice($suggestions, 1, 0, 'block__bundle__' . $variables['elements']['content']['#block_content']->bundle());
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function likinormas_form_alter(&$form, FormStateInterface $form_state, $form_id)
+{
+  switch ($form_id) {
+    case 'user_register_form':
+      $form['boolean_setting'] = theme_get_setting('boolean_setting');
+      $form["#theme"][0] = 'likinormas-register-form';
+      unset($form['account']['name']['#description']);
+      unset($form['account']['mail']['#description']);
+      unset($form['account']['pass']['#description']);
+      $form['account']['name']['#weight'] = -1;
+      $form['account']['name']['#title'] = t('Nombre completo');
+      $form['account']['mail']['#title'] = t('Correo electrónico');
+      $form['actions']['submit']['#value'] = t('Registrarme ahora');
+      break;
+    case 'user_login_form':
+      $form['boolean_setting'] = theme_get_setting('boolean_setting');
+      $form["#theme"][0] = 'likinormas-login-form';
+      unset($form['name']['#description']);
+      unset($form['pass']['#description']);
+      $form['pass']['#title'] = t('Clave');
+      $form['actions']['submit']['#value'] = t('Iniciar sesión');
+      break;
+    case 'user_pass':
+      $form["#theme"][0] = 'likinormas-pass-form';
+      unset($form['mail']['#markup']);
+      $form['name']['#title'] = t('Correo');
+      $form['actions']['submit']['#value'] = t('Ingresar correo');
+      break;
+    case 'user_form':
+      if (array_key_exists('password_policy_status', $form["account"])) {
+        unset($form["account"]["password_policy_status"]);
+      }
+      if (\Drupal::request()->query->get('pass-reset-token')) {
+        $form["#theme"][0] = 'likinormas-reset-pass-form';
+        $form['account']['name']['#access'] = FALSE;
+        $form['account']['mail']['#access'] = FALSE;
+        $form['user_picture']['#access'] = FALSE;
+        $form['language']['#access'] = FALSE;
+        $form['profession_or_occupation']['#access'] = FALSE;
+        $form['company']['#access'] = FALSE;
+        $form['notifications']['#access'] = FALSE;
+        $form['terms_and_conditions']['#access'] = FALSE;
+        if (array_key_exists('password_policy_status', $form["account"])) {
+          unset($form["account"]["password_policy_status"]);
+        }
+      }
+      $form['social_auth']['#access'] = FALSE;
+
+      break;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function likinormas_theme($existing, $type, $theme, $path)
+{
+  return [
+    'likinormas-register-form' => [
+      'render element' => 'form',
+      'template' => 'form/likinormas_register_form'
+    ],
+    'likinormas-login-form' => [
+      'render element' => 'form',
+      'template' => 'form/likinormas_login_form'
+    ],
+    'likinormas-pass-form' => [
+      'render element' => 'form',
+      'template' => 'form/likinormas_pass_form'
+    ],
+    'likinormas-reset-pass-form' => [
+      'render element' => 'form',
+      'template' => 'form/likinormas_reset_pass_form'
+    ],
+    'profile-picture-block' => [
+      'render element' => 'form',
+      'template' => 'block/profile-picture-block'
+    ],
+  ];
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+
+function likinormas_preprocess_menu(&$variables)
+{
+  $variables['#cache']['contexts'][] = 'user';
+  if ($variables['menu_name'] == 'account') {
+    if (array_key_exists('user.page', $variables['items'])) {
+      $user_name = \Drupal::currentUser()->getAccount()->name;
+      $user_name = explode(" ", $user_name);
+
+      $variables['items']['user.page']['title'] = reset($user_name);
+      unset($variables['items']['user.logout']);
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function likinormas_preprocess_user(&$variables)
+{
+  $current_user_id = \Drupal::currentUser()->id();
+  $variables['current_user_id'] = $current_user_id;
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function likinormas_preprocess_comment(&$variables)
+{
+  //$route_name = \Drupal::routeMatch()->getRouteName();
+  $user_url = \Drupal::routeMatch()->getRawParameter('user');
+  if ($user_url) {
+    $variables['user_url'] = $user_url;
+  }
+}

@@ -1,0 +1,11 @@
+uuid: 71cda83a-0f84-4507-8ba8-4d6865468641
+langcode: es
+status: true
+dependencies:
+  config:
+    - system.menu.tools
+id: menu_link_content.tools
+target_entity_type_id: menu_link_content
+target_bundle: tools
+default_langcode: site_default
+language_alterable: false

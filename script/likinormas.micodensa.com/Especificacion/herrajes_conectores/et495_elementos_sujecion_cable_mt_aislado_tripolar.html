@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET495 Elementos de sujeción de cable MT aislado tripolar a poste | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/1979" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F1979.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/1979" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/1979" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '23');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET495 Elementos de sujeci&#243;n de cable MT aislado tripolar a poste</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET495</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">08/11/2021</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/1979">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F1979&amp;nodoid=1979', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#heading_0">1	OBJETIVO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#heading_1">2	ALCANCE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#heading_2">3	SISTEMA DE UNIDADES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#heading_3">4	NORMAS DE FABRICACI&#211;N Y PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#heading_4">5	REQUISITOS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#heading_5">5.1	REQUISITOS DEL RECUBRIMIENTO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#heading_6">6. CRITERIOS DE ACEPTACI&#211;N O RECHAZO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#heading_7">6.1	MUESTREO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#heading_8">6.2	ACEPTACI&#211;N O RECHAZO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#heading_9">7	PRUEBAS E INFORME</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#heading_10">7.1	Prueba Dimensional</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#heading_11">8	EMPAQUE Y ROTULADO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#heading_12">8.1	Empaque</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#heading_13">8.2	Rotulado</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#heading_14">8.3	MARCACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#heading_15">9	REQUISITOS DE LAS OFERTAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#heading_16">10	GARANT&#205;A DE F&#193;BRICA</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#heading_17">11	INSPECCI&#211;N EN F&#193;BRICA 	</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1	OBJETIVO</h2>
+Esta <a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a> tiene por objeto establecer las caracter&#237;sticas y requisitos t&#233;cnicos que deben cumplir y los ensayos a los cuales deben ser sometidos los elementos de sujeci&#243;n de <a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-107" class="externalLink  glosarioLink">cable</a> MT aislado tripolar a poste que solicitar&#225; la Compa&#241;&#237;a, para el <a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> <a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-177" class="externalLink  glosarioLink">el&#233;ctrico</a> de distribuci&#243;n.<br />
+<h2 id="heading_1" >2	ALCANCE</h2>
+Esta <a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a> se aplicar&#225; en todos los elementos de sujeci&#243;n de <a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-107" class="externalLink  glosarioLink">cable</a> MT aislado tripolar a poste que adquiera la Compa&#241;&#237;a.<br />
+<h2 id="heading_2" >3	<a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-363" class="externalLink  glosarioLink">SISTEMA</a> DE UNIDADES</h2>
+En todos los documentos t&#233;cnicos se deben expresar las cantidades num&#233;ricas en unidades del <a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> Internacional (S.I.).  Si se usan cat&#225;logos, folletos o planos, en sistemas diferentes de unidades, deben hacerse las conversiones respectivas.<br />
+<h2 id="heading_3" >4	NORMAS DE FABRICACI&#211;N Y PRUEBAS</h2>
+<div style="width:650px;"><table><tr><td colspan="1" rowspan="1" style="width:114px;height:21px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:536px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:52px;">NTC ISO 2859-1</td><td colspan="1" rowspan="1" style="">Procedimientos de muestreo para <a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> por atributos. Parte 1: planes de muestreo determinados por el nivel aceptable de <a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> -NAC- para inspecci&#243;n <a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-264" class="externalLink  glosarioLink">lote</a> a <a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-264" class="externalLink  glosarioLink">lote</a>.</td></tr></table><br /></div><br />Las normas citadas en la presente especificaci&#243;n (o cualquier otra que llegar&#233; a ser aceptada por la Compa&#241;&#237;a) se refieren a su &#250;ltima revisi&#243;n.<br />
+<h2 id="heading_4" >5	REQUISITOS</h2>
+Los elementos de sujeci&#243;n de cable MT tripolar a poste, deben estar formados por dos partes met&#225;licas, cada una con una protecci&#243;n de <a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-107" class="externalLink  glosarioLink">cable</a> (goma, caucho, pol&#237;mero, etc). Este material debe poderse instalar sobre poste mediante cinta de acero 5/8” (band it) bajo <a href="et450_cinta_hebilla_acero_inoxidable.html" class="externalLink">ET-450<span class="externalLinkIcon"></span></a>.<br /><br />El material debe poder ser instalado en el poste para paso de cable de forma horizontal o vertical.<br /><br />El material debe suministrarse con los respectivos tornillos, tuercas, arandelas y arandelas de presi&#243;n para unir las dos partes del material.<br /><br />El material debe ser para uso en intemperie y soportar durante toda su vida &#250;til la lluvia, los rayos solares, etc., sin degradarse.<br /><br />Los elementos de sujeci&#243;n de <a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-107" class="externalLink  glosarioLink">cable</a> MT tripolar a poste, deben cumplir la forma y las dimensiones dadas en las figuras a continuaci&#243;n.<br /><br />En la parte interna del material, marcado como D, debe poderse instalar cualquiera de las siguientes configuraciones de cables de media tensi&#243;n.<br /><br />GSCC008, Cable MT A&#233;reo Aislado<br /><br /><div style="width:454px;"><table><tr><td colspan="1" rowspan="1" style="width:73px;height:21px;text-align:center"><b><u>#</u></b></td><td colspan="1" rowspan="1" style="width:381px;text-align:center"><b><u>Descripci&#243;n</u></b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><u>1</u></td><td colspan="1" rowspan="1" style=""><u>Cable aislado a&#233;reo 3f 34,5kV 3x150<span class="codeInline">+</span>50mm^2</u></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><u>2</u></td><td colspan="1" rowspan="1" style=""><u>Cable aislado a&#233;reo 3f 34,5kV 3x95<span class="codeInline">+</span>50mm^2</u></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><u>3</u></td><td colspan="1" rowspan="1" style=""><u>Cable aislado a&#233;reo 3f 15kV 3x150<span class="codeInline">+</span>50mm^2</u></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><u>4</u></td><td colspan="1" rowspan="1" style=""><u>Cable aislado a&#233;reo 3f 15kV 3x95<span class="codeInline">+</span>50mm^2</u></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><u>5</u></td><td colspan="1" rowspan="1" style=""><u>Cable aislado a&#233;reo 3f 15kV 3x50<span class="codeInline">+</span>50mm^2</u></td></tr></table><br /></div><br />GSC001, Cable MT Subterr&#225;neo<br /><br /><div style="width:569px;"><table><tr><td colspan="1" rowspan="1" style="width:69px;height:21px;text-align:center"><b><u>#</u></b></td><td colspan="1" rowspan="1" style="width:500px;text-align:center"><b><u>Descripci&#243;n</u></b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;text-align:center"><u>1</u></td><td colspan="1" rowspan="1" style=""><u>20/34(37.95) kV 240 mm^2 conductor Aluminio aislamiento XLPE apantallamiento hilos de cobre (25 mm^2), cubierta en polietileno.</u></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;text-align:center"><u>2</u></td><td colspan="1" rowspan="1" style=""><u>8.7/15(17.5) kV 95 mm^2 conductor Aluminio aislamiento XLPE apantallamiento hilos de cobre (25 mm^2), cubierta en polietileno.</u></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;text-align:center"><u>4</u></td><td colspan="1" rowspan="1" style=""><u>8.7/15(17.5) kV 185 mm^2 conductor Aluminio aislamiento XLPE apantallamiento hilos de cobre (25 mm^2), cubierta en polietileno.</u></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;text-align:center"><u>5</u></td><td colspan="1" rowspan="1" style=""><u>8.7/15(17.5) kV 240 mm^2 conductor Aluminio aislamiento XLPE apantallamiento hilos de cobre (25 mm^2), cubierta en polietileno.</u></td></tr></table><br /></div><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/1979/0-ET495.jpg" src="../../media/cache/images/750x750/wikiimages/31303438323435313332-49458-0-ET495.jpg" title="Figura 1.1. Vista superior."  /></div><div class="texto_imagen_articulos" style="max-width:750px">Figura 1.1. Vista superior.</div></div></div><br />A = 142 mm, B = 115 mm.<br /><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/1979/ET495-2.jpg" src="../../media/cache/images/750x750/wikiimages/2d393439363534343235-15749-ET495-2.jpg" title="Figura 1.2. Vista lado poste."  /></div><div class="texto_imagen_articulos" style="max-width:750px">Figura 1.2. Vista lado poste.</div></div></div><br /><br /><b>NOTA:</b><br />En las figuras 1.1 y 1.2, la forma de los tornillos y cabeza de los mismos, es ilustrativa, no restringe a cierto tipo de tornillo, el fabricante debe definir el tornillo &#243;ptimo t&#233;cnico econ&#243;mico que cumpla el objeto del material, que sea un tornillo bajo una Norma T&#233;cnica Colombiana (NTC).<br />
+<h3 id="heading_5" >5.1	REQUISITOS DEL RECUBRIMIENTO</h3>
+Los elementos de sujeci&#243;n de <a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-107" class="externalLink  glosarioLink">cable</a> MT tripolar a poste, deben tener recubrimiento que evite la <a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a>.<br />
+<h2 id="heading_6" >6. CRITERIOS DE ACEPTACI&#211;N O RECHAZO</h2>
+Para este caso se considerar&#225; que existe un <a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-264" class="externalLink  glosarioLink">lote</a> cuando, los materiales de fabricaci&#243;n pertenecen a un mismo <a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-264" class="externalLink  glosarioLink">lote</a> de materia prima y un mismo <a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-264" class="externalLink  glosarioLink">lote</a> de producci&#243;n, de no ser as&#237; deber&#225; tomarse como lotes diferentes, por los aspectos de materia prima y de producci&#243;n.<br /><br /><div style="width:561px;"><table><tr><td colspan="1" rowspan="1" style="width:114px;height:43px;text-align:center"><b>TAMA&#209;O DEL <a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-264" class="externalLink  glosarioLink">LOTE</a></b></td><td colspan="1" rowspan="1" style="width:128px;text-align:center"><b>TAMA&#209;O DE LA <a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-288" class="externalLink  glosarioLink">MUESTRA</a></b></td><td colspan="1" rowspan="1" style="width:171px;text-align:center"><b>NUMERO PERMITIDO DE DEFECTUOSOS</b></td><td colspan="1" rowspan="1" style="width:148px;text-align:center"><b>NUMERO DEFECTUOSOS PARA RECHAZO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2 a 8</td><td colspan="1" rowspan="1" style="text-align:center">A  =   2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">9 a 15</td><td colspan="1" rowspan="1" style="text-align:center">B  =   3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16 a 25</td><td colspan="1" rowspan="1" style="text-align:center">C  =   5</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">26 a 50</td><td colspan="1" rowspan="1" style="text-align:center">D  =   8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">51 a 90</td><td colspan="1" rowspan="1" style="text-align:center">E  = 13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">91 a 150</td><td colspan="1" rowspan="1" style="text-align:center">F  = 20</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">151 a 280</td><td colspan="1" rowspan="1" style="text-align:center">G  = 32</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">281 a 500</td><td colspan="1" rowspan="1" style="text-align:center">H  = 50</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">501 a 1200</td><td colspan="1" rowspan="1" style="text-align:center">J  = 80</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">1201 a 3200</td><td colspan="1" rowspan="1" style="text-align:center">K  = 125</td><td colspan="1" rowspan="1" style="text-align:center">7</td><td colspan="1" rowspan="1" style="text-align:center">8</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">3201 a 10000</td><td colspan="1" rowspan="1" style="text-align:center">L  = 200</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">11</td></tr></table><br /></div><b>TABLA 1. PLAN DE MUESTREO PARA INSPECCION VISUAL Y DIMENSIONAL (NIVEL DE INSPECCION II,  NAC = 2,5%) (NORMA NTC-ISO 2859-1 TABLA 1 - TABLA 2A)</b><br />
+<h3 id="heading_7" >6.1	MUESTREO</h3>
+A menos que se especifique otra condici&#243;n, el muestreo se llevar&#225; a cabo tomando muestras para cada prueba de acuerdo a lo indicado en las tabla 1, seg&#250;n la norma NTC –ISO 2859-1.<br />
+<h3 id="heading_8" >6.2	ACEPTACI&#211;N O RECHAZO</h3>
+Si el n&#250;mero de elementos defectuosos es menor o igual al correspondiente n&#250;mero de defectuosos dado en la tercera columna de la tabla 1, se deber&#225; considerar que el <a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-264" class="externalLink  glosarioLink">lote</a> cumple con los requisitos relacionados en el numeral 6 de esta especificaci&#243;n; en caso contrario el <a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-264" class="externalLink  glosarioLink">lote</a> se rechazar&#225;.<br />
+<h2 id="heading_9" >7	PRUEBAS E INFORME</h2>
+<h3 id="heading_10" >7.1	Prueba Dimensional</h3>
+La verificaci&#243;n de las dimensiones se har&#225; con los instrumentos de medida que den la aproximaci&#243;n requerida (cinta met&#225;lica con divisiones de 1 mm para longitudes y calibrador para los di&#225;metros y espesores). El tama&#241;o de la <a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-288" class="externalLink  glosarioLink">muestra</a> deber&#225; estar de acuerdo con la tabla 1.<br />
+<h2 id="heading_11" >8	EMPAQUE Y ROTULADO</h2>
+<h3 id="heading_12" >8.1	Empaque</h3>
+Los elementos de sujeci&#243;n de <a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-107" class="externalLink  glosarioLink">cable</a> MT tripolar a poste, se deben empacar de tal manera que no sufran durante el transporte, manipulaci&#243;n y almacenamiento. Los tornillos ir&#225;n engrasados, con sus tuercas y arandelas instaladas y a su vez instalados en las platinas.<br />
+<h3 id="heading_13" >8.2	Rotulado</h3>
+En cada caja se colocar&#225; un r&#243;tulo con la siguiente informaci&#243;n.<br /><br />•	Especificaci&#243;n del contenido con su referencia.<br />•	Nombre y raz&#243;n social del proveedor.<br />•	Pa&#237;s de origen.<br />•	Cantidad de elementos.<br />•	Peso unitario, peso total bruto y neto.<br />•	N&#250;mero de contrato o pedido.<br />•	Fecha de entrega.<br />•	C&#243;digo de Almac&#233;n (SAP).<br />
+<h3 id="heading_14" >8.3	MARCACI&#211;N</h3>
+Se deben marcar las piezas en altorrelieve o bajorrelieve con la palabra ENEL y el logotipo o nombre del fabricante con letras de 6 mm o m&#225;s.<br />
+<h2 id="heading_15" >9	REQUISITOS DE LAS OFERTAS</h2>
+El oferente obligatoriamente deber&#225; incluir con su propuesta, la siguiente informaci&#243;n:<br /><br />•	Relaci&#243;n de los bienes cotizados.<br /><br />•	Informaci&#243;n del oferente.<br /><br />•	Planilla de caracter&#237;sticas t&#233;cnicas garantizadas, la cual deber&#225; ser diligenciada completamente, firmada y sellada por el oferente. Debe ser diligenciado en formato Excel.<br /><br />•	Cat&#225;logos originales, completos y actualizados del fabricante, que correspondan al <a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-274" class="externalLink  glosarioLink">material</a>. <br /><br />•	Se deben relacionar las excepciones de car&#225;cter exclusivamente t&#233;cnico de la oferta, respecto a los bienes solicitados. Si la oferta no presenta excepci&#243;n, se indicar&#237;a expresamente en el mismo “NO HAY EXCEPCIONES”<br /><br />•	Informaci&#243;n adicional que considere aporta explicaci&#243;n a su dise&#241;o (dibujos, detalles, caracter&#237;sticas de operaci&#243;n, dimensiones y pesos de los materiales ofertados). <br /><br />CODENSA S.A. podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones, sin expresi&#243;n de causa ni obligaci&#243;n de compensaci&#243;n.<br />
+<h2 id="heading_16" >10	GARANT&#205;A DE F&#193;BRICA</h2>
+CODENSA S.A. E.S.P requiere como m&#237;nimo, un per&#237;odo de garant&#237;a de f&#225;brica de cuarenta y ocho (48) meses, a partir de la entrega de los bienes.<br />
+<h2 id="heading_17" >11	<a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-235" class="externalLink  glosarioLink">INSPECCI&#211;N</a> EN F&#193;BRICA 	</h2>
+El proveedor deber&#225; informar con la anticipaci&#243;n acordada en las condiciones contractuales, la fecha programada para la realizaci&#243;n de las pruebas en f&#225;brica.<br /><br />Las pruebas de recepci&#243;n son:<br /><br />•	Dimensiones de las muestras.<br /><br />El Ingeniero responsable de CODENSA podr&#225; inspeccionar en las instalaciones del proveedor o fabricante y de sus subcontratistas el proceso de fabricaci&#243;n y pruebas, y solicitar la informaci&#243;n y ensayos que a su juicio resulten necesarias para verificar el cumplimiento de los requisitos estipulados en este documento. <br /><br />El proveedor debe brindar plena colaboraci&#243;n al responsable en el cumplimiento de sus funciones.<br /><br />El valor de las pruebas y ensayos debe incluirse en los precios cotizados en la propuesta.  CODENSA se reserva el derecho de descartar las propuestas que no ofrezcan pruebas, o si las ofrecidas son consideradas insuficientes para garantizar la <a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> del <a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-274" class="externalLink  glosarioLink">material</a>.<br /><br /><b>ANEXO 1. CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS</b><br /><br /><div style="width:877px;"><table><tr><td colspan="1" rowspan="1" style="width:55px;height:21px;text-align:center"><b>N&#176;</b></td><td colspan="2" rowspan="1" style="width:276px;text-align:center"><b>DESCRIPCI&#211;N</b></td><td colspan="1" rowspan="1" style="width:146px;text-align:center"><b>OFERTADO</b></td></tr>
+<tr><td colspan="1" rowspan="3" style="height:21px;text-align:center">1</td><td colspan="1" rowspan="3" style="">Proponente</td><td colspan="1" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Representante del fabricante</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Dimensi&#243;n</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2</td><td colspan="1" rowspan="1" style="">Normas</td><td colspan="1" rowspan="1" style="">Fabricaci&#243;n y pruebas</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="6" style="height:35px;text-align:center">3</td><td colspan="1" rowspan="6" style="">Elementos de sujeci&#243;n de <a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-107" class="externalLink  glosarioLink">cable</a> MT aislado tripolar a poste</td><td colspan="1" rowspan="1" style=""><a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-274" class="externalLink  glosarioLink">Material</a> de las partes met&#225;licas</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;"><a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-274" class="externalLink  glosarioLink">Material</a> de la protecci&#243;n del <a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-107" class="externalLink  glosarioLink">cable</a></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;"><a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-274" class="externalLink  glosarioLink">Material</a> recubrimiento</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;"><a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-274" class="externalLink  glosarioLink">Material</a> tornillos y elementos de apriete</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Dimensi&#243;n A</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Dimensi&#243;n B</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">4</td><td colspan="2" rowspan="1" style="">Cumple con la marcaci&#243;n solicitada (Si/No, describir)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">5</td><td colspan="2" rowspan="1" style="">Desviaciones presentadas (Si/No, describir)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">6</td><td colspan="2" rowspan="1" style="">Garant&#237;a (a&#241;os)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">7</td><td colspan="2" rowspan="1" style=""><a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-406" class="externalLink  glosarioLink">Vida &#250;til</a> (a&#241;os)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">8</td><td colspan="2" rowspan="1" style="">Desviaciones con la <a href="et495_elementos_sujecion_cable_mt_aislado_tripolar.html#" id="version-196" class="externalLink  glosarioLink">Especificaci&#243;n T&#233;cnica</a></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">9</td><td colspan="2" rowspan="1" style="">Observaciones</td><td colspan="1" rowspan="1" style=""> </td></tr></table><br /></div><br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 1979, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

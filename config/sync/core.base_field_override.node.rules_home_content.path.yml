@@ -1,0 +1,20 @@
+uuid: ddcec164-bf92-4390-9de7-1a48fa24b6f9
+langcode: es
+status: true
+dependencies:
+  config:
+    - node.type.rules_home_content
+  module:
+    - path
+id: node.rules_home_content.path
+field_name: path
+entity_type: node
+bundle: rules_home_content
+label: 'Alias de URL'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

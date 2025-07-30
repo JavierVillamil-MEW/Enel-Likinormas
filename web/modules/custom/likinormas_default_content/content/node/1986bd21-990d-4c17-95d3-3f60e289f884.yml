@@ -1,0 +1,67 @@
+_meta:
+  version: '1.0'
+  entity_type: node
+  uuid: 1986bd21-990d-4c17-95d3-3f60e289f884
+  bundle: rules_page_404
+  default_langcode: es
+  depends:
+    01d8813b-7af8-407f-bb2d-9a6cec3ebbfc: file
+    5eb0c2c5-1194-4fd3-b87c-af2876fa51e0: file
+default:
+  revision_uid:
+    -
+      target_id: 1
+  status:
+    -
+      value: true
+  uid:
+    -
+      target_id: 1
+  title:
+    -
+      value: '404'
+  created:
+    -
+      value: 1685630500
+  promote:
+    -
+      value: false
+  sticky:
+    -
+      value: false
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /404
+      langcode: es
+      pathauto: 1
+  button_404:
+    -
+      uri: 'internal:/'
+      title: 'Volver al Home'
+      options: {  }
+  description_404:
+    -
+      value: "Desafortunadamente, la energía se fue en esta página, pero\r\nno te preocupes. ¡Estamos trabajando a todo voltaje para\r\nsolucionarlo!"
+  image_404:
+    -
+      entity: 01d8813b-7af8-407f-bb2d-9a6cec3ebbfc
+      alt: fondo
+      title: fondo
+      width: 1921
+      height: 975
+  image_mobile_404:
+    -
+      entity: 5eb0c2c5-1194-4fd3-b87c-af2876fa51e0
+      alt: mobile
+      title: ''
+      width: 413
+      height: 837
+  pre_title_404:
+    -
+      value: ERROR
+  title_404:
+    -
+      value: '404'

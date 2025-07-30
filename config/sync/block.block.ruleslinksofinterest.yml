@@ -1,0 +1,25 @@
+uuid: 1b557c2e-bf9a-41ed-8dbf-b6cb1a246bc5
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.rules-links-of-interest
+  module:
+    - system
+  theme:
+    - likinormas
+id: ruleslinksofinterest
+theme: likinormas
+region: footer
+weight: -3
+provider: null
+plugin: 'system_menu_block:rules-links-of-interest'
+settings:
+  id: 'system_menu_block:rules-links-of-interest'
+  label: 'ENLACES DE INTERÉS'
+  label_display: visible
+  provider: system
+  level: 1
+  depth: 0
+  expand_all_items: false
+visibility: {  }

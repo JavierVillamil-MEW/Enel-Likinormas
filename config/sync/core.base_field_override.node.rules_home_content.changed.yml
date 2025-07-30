@@ -1,0 +1,18 @@
+uuid: 9b8603f0-6f69-40f3-9148-b6a1cb456545
+langcode: es
+status: true
+dependencies:
+  config:
+    - node.type.rules_home_content
+id: node.rules_home_content.changed
+field_name: changed
+entity_type: node
+bundle: rules_home_content
+label: Modificado
+description: 'La fecha en que el nodo fue editado por última vez.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

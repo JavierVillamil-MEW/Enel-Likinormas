@@ -1,0 +1,8 @@
+uuid: bbfdf7dc-08b8-49ca-bfb5-9c0f2f2174ea
+langcode: es
+status: true
+dependencies: {  }
+id: rules-site-map
+label: 'Enlaces mapa del sitio del footer'
+description: 'Mapa del sitio footer'
+locked: false

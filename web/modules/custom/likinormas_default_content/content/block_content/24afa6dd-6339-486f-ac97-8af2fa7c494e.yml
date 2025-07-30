@@ -1,0 +1,31 @@
+_meta:
+  version: '1.0'
+  entity_type: block_content
+  uuid: 24afa6dd-6339-486f-ac97-8af2fa7c494e
+  bundle: rules_banner_with_background
+  default_langcode: es
+  depends:
+    1dc42eea-de05-4d05-9c43-933304ba3e38: taxonomy_term
+default:
+  status:
+    -
+      value: true
+  info:
+    -
+      value: 'Background Especificaciones tecnicas'
+  reusable:
+    -
+      value: true
+  revision_translation_affected:
+    -
+      value: true
+  background_color:
+    -
+      entity: 1dc42eea-de05-4d05-9c43-933304ba3e38
+  filter_description:
+    -
+      value: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam faucibus aliquet nibh et porttitor. \r\nNullam consectetur commodo nibh. Ut ac quam metus. Curabitur cursus, nulla eget sodales laoreet, \r\nnibh dolor posuere elit, nec elementum mauris lorem venenatis lectus. "
+  filter_title:
+    -
+      value: '<h1>Especificaciones tecnicas<h1>'
+      format: full_html

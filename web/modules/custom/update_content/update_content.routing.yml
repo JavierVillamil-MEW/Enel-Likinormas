@@ -1,0 +1,9 @@
+update_content.example:
+  path: '/update-content/{content}/{field}/{validate}'
+  defaults:
+    _title: 'Update...'
+    _controller: '\Drupal\update_content\Controller\UpdateContentController::build'
+  requirements:
+    _permission: 'access content'
+
+

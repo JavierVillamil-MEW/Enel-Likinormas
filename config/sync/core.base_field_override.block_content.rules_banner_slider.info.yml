@@ -1,0 +1,18 @@
+uuid: 0b636f3b-9404-44fd-b9b2-a6394247d4ee
+langcode: es
+status: true
+dependencies:
+  config:
+    - block_content.type.rules_banner_slider
+id: block_content.rules_banner_slider.info
+field_name: info
+entity_type: block_content
+bundle: rules_banner_slider
+label: 'Descripción del bloque'
+description: 'Una breve descripción de su bloque.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

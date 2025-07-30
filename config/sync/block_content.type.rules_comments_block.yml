@@ -1,0 +1,8 @@
+uuid: 9b853795-bbb9-40c1-ba26-3b0b870f4bd8
+langcode: en
+status: true
+dependencies: {  }
+id: rules_comments_block
+label: 'Bloque de comentarios listado'
+revision: 0
+description: 'Bloque que permite añadir comentarios en los listados de normas y especificaciones'

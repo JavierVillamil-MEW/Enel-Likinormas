@@ -1,0 +1,24 @@
+uuid: 0a4489ea-6845-444b-a917-c3e739dad1cd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.background_banner_title
+    - node.type.rules_home_content
+  module:
+    - text
+id: node.rules_home_content.background_banner_title
+field_name: background_banner_title
+entity_type: node
+bundle: rules_home_content
+label: 'Título del banner de fondo'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: '<h2></h2>'
+    format: full_html
+default_value_callback: ''
+settings: {  }
+field_type: text

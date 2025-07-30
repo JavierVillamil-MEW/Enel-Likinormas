@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>LA510 Linea 13,2 – 11,4 kV montaje de reconectador | Likinormas</title>
+	<meta name="description" content="Reconectador" />
+	<script src="../../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../../index.html"><img src="../../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1844" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../../Usuario/Registro%3FReturnUrl=%252FNorma%252FDetalles%252F1844.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/1844" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1844" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			showSubmenu('4', '60');
+		});
+	</script>
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Norma t&#233;cnica
+	</div>
+	<h1>LA510 Linea 13,2 – 11,4 kV montaje de reconectador</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de la norma</div>
+					<div class="caracteristicas">LA510</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">03/04/2017</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../../Home/DownloadPDF/1844">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FNorma%2FDetalles%2F1844&amp;nodoid=1844', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h3" href="la510_linea_13_2_11_4_kv_montaje.html#heading_0">MONTAJE DE RECONECTADOR SIN BY-PASS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="la510_linea_13_2_11_4_kv_montaje.html#heading_1">LISTADO  DE MATERIALES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="la510_linea_13_2_11_4_kv_montaje.html#heading_2">MONTAJE DE RECONECTADOR CON SECCIONADORES MONOPOLARES PARA ENTRADA - SALIDA Y BY - PASS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="la510_linea_13_2_11_4_kv_montaje.html#heading_3">LISTADO  DE MATERIALES</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h3 id="heading_0" >MONTAJE DE RECONECTADOR SIN BY-PASS</h3>
+<br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/norma/1844/0-LA510Fig1-Model.jpg" src="../../../media/cache/images/900x900/wikiimages/31373233353631333436-322000-0-LA510Fig1-Model.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:900px"></div></div></div><br /><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/norma/1844/LA 510 Mod Fig.2.jpg" src="http://likinormas.micodensa.com/media/cache/images/900x900/wikiimages/31323336333339303735-67206-LA 510 Mod Fig.2.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:900px"></div></div></div><br /><br /><br /><br /><br />
+<h3 id="heading_1" >LISTADO  DE MATERIALES</h3><div style="width:636px;"><table><tr><td colspan="1" rowspan="1" style="width:50px;height:56px;text-align:center"><b>S&#205;MB.</b></td><td colspan="1" rowspan="1" style="width:66px;text-align:center"><b>CANT.</b></td><td colspan="1" rowspan="1" style="width:60px;text-align:center"><b>C&#211;DIGO SAP</b></td><td colspan="1" rowspan="1" style="width:60px;text-align:center"><b>ESP. T&#201;CNICA</b></td><td colspan="1" rowspan="1" style="width:400px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">a<sub>1</sub></td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">6762327</td><td colspan="1" rowspan="1" style="text-align:center">E-MT-011</td><td colspan="1" rowspan="1" style="">Aislador de suspensi&#243;n  ANSI 52-1 (1)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">c<sub>4</sub></td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">6762481</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/crucetas_vigas_cercos/et401_crucetas_vigas_suplementos.html" class="externalLink">ET401<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Cruceta de madera inmunizada de 2,5 m</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">d<sub>1</sub></td><td colspan="1" rowspan="1" style="text-align:center">4</td><td colspan="1" rowspan="1" style="text-align:center">6762466</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et405_diagonal_metalica_varilla.html" class="externalLink">ET405<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Diagonal met&#225;lica en varilla tipo 1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:50px;text-align:center">g<sub>0</sub></td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">6762316</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et350_grapa_terminal_tipo_recto_metalica.html" class="externalLink">ET350<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Grapa terminal tipo recto para cables entre 6 AWG – 3/0 AWG</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">m<sub>7</sub></td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">6762209</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et454_tuerca_ojo_alargado.html" class="externalLink">ET454<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Tuerca de ojo alargada 5/8”</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">n<sub>5</sub></td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">6762181</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et461_perno_ojo.html" class="externalLink">ET461<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Perno de ojo tipo 5 ( 5/8” x 545 mm)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">o<sub>45</sub></td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">6762340</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/cables/et121_conductores_cobre_duro_desnudos.html" class="externalLink">ET121<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Metros de cable desnudo de cobre calibre 4 AWG</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">7</td><td colspan="1" rowspan="1" style="text-align:center">6769253</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/cables/et119_cables_multiconductores_medida_control_proteccion.html" class="externalLink">ET119<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Cable multiconductor 2x12 AWG </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:50px;text-align:center">P</td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">6781248</td><td colspan="1" rowspan="1" style="text-align:center">E-MT-031</td><td colspan="1" rowspan="1" style="">DPS- Descargador de sobretensi&#243;n de &#243;xido met&#225;lico 12 kV, 10 kA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">p<sub>6</sub></td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">6762467</td><td colspan="1" rowspan="1" style="text-align:center"><a href="http://likinormas.micodensa.com/Especificacion/postes/et201_postes_concreto" class="externalLink">ET201<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Poste Concreto 12 m, 1050 kg </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">R<sub>2</sub></td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">6764357</td><td colspan="1" rowspan="1" style="text-align:center">E-MT-004</td><td colspan="1" rowspan="1" style="">Reconectador (13,2 / 11,4 kV)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">s<sub>74</sub></td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">6762362</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et356_conectores_tipo_cuna.html" class="externalLink">ET356<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Conector tipo cu&#241;a P=120 D120 mm&#178; o 4/0-4/0 AWG</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">s<sub>78</sub></td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">6762444</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et356_conectores_tipo_cuna.html" class="externalLink">ET356<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Conector tipo cu&#241;a P=95 D=25 mm&#178;(4/0 AWG /4 AWG)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">t<sub>2</sub></td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">6762255</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et455_esparrago_acero.html" class="externalLink">ET455<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Esp&#225;rrago de 16 x 508 mm (5/8&quot; x 20&quot;)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">t<sub>5</sub></td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">6762212</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et456_tornillo_carruaje_perno.html" class="externalLink">ET456<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Tornillo de carruaje  5/8” x 1 1/2”</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">t<sub>10</sub></td><td colspan="1" rowspan="1" style="text-align:center">14</td><td colspan="1" rowspan="1" style="text-align:center">6762213</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et457_tornillo_acero.html" class="externalLink">ET457<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Tornillo de acero galvanizado 5/8” x 5”</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">t<sub>12</sub></td><td colspan="1" rowspan="1" style="text-align:center">4</td><td colspan="1" rowspan="1" style="text-align:center">6801240</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et457_tornillo_acero.html" class="externalLink">ET457<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Tornillo de acero galvanizado 5/8&quot; x 10&quot;</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">t<sub>15</sub></td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">6762299</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et457_tornillo_acero.html" class="externalLink">ET457<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Tornillo de acero galvanizado 1/2&quot; x 6&quot;</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">TP</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/transformadores/et923_transformadores_tension_medida_11_4.html" class="externalLink">ET923<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Transformador de potencial</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">u<sub>1</sub></td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">6790991</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/materiales_puesta_tierra/et492_sistema_puesta_tierra_acero_inoxidable.html" class="externalLink">ET492<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Kit puesta a tierra MT en acero inoxidable</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">Z<sub>9</sub></td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">6762237</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et431_abrazadera_salida.html" class="externalLink">ET431<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Abrazadera de una salida tipo 4 – 200 mm</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">Z<sub>11</sub></td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">6764090</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et438_abrazadera_23_x_14_transformador_distribucion.html" class="externalLink">ET438<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Abrazadera 1 salida, 3&quot; x 1/4&quot; 200 mm</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">Z<sub>14</sub></td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">6762313</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et432_abrazadera_salidas.html" class="externalLink">ET432<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Abrazadera de dos salidas tipo 4 – 200 mm</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">35</td><td colspan="1" rowspan="1" style="text-align:center">6779600</td><td colspan="1" rowspan="1" style="text-align:center">E-MT-010</td><td colspan="1" rowspan="1" style="">Metros de cable AAAC 100 mm<sup>2</sup> semiaislado 15 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">6762416</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et356_conectores_tipo_cuna.html" class="externalLink">ET356<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Cartucho azul para herramienta de Cu&#241;a</td></tr></table><br /></div><br /><br />
+<h3 id="heading_2" >MONTAJE DE RECONECTADOR CON SECCIONADORES MONOPOLARES PARA ENTRADA - SALIDA Y BY - PASS</h3>
+<div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/norma/1844/LA510Fig3-Model.jpg" src="../../../media/cache/images/900x900/wikiimages/2d31393435363336353634-384130-LA510Fig3-Model.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:900px"></div></div></div><br /><br /><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/norma/1844/LA510Fig4-Model.jpg" src="../../../media/cache/images/900x900/wikiimages/2d31363830313530323238-270174-LA510Fig4-Model.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:900px"></div></div></div><br />
+<h3 id="heading_3" >LISTADO  DE MATERIALES</h3><div style="width:636px;"><table><tr><td colspan="1" rowspan="1" style="width:50px;height:61px;text-align:center"><b>S&#205;MB.</b></td><td colspan="1" rowspan="1" style="width:66px;text-align:center"><b>CANT.</b></td><td colspan="1" rowspan="1" style="width:60px;text-align:center"><b>C&#211;DIGO SAP</b></td><td colspan="1" rowspan="1" style="width:60px;text-align:center"><b>ESP. T&#201;CNICA</b></td><td colspan="1" rowspan="1" style="width:400px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">a<sub>1</sub></td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">6762327</td><td colspan="1" rowspan="1" style="text-align:center">E-MT-011</td><td colspan="1" rowspan="1" style="">Aislador de suspensi&#243;n  ANSI 52-1 (1)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">c<sub>4</sub></td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">6762481</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/crucetas_vigas_cercos/et401_crucetas_vigas_suplementos.html" class="externalLink">ET401<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Cruceta de madera inmunizada de 2,5 m</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">d<sub>1</sub></td><td colspan="1" rowspan="1" style="text-align:center">12</td><td colspan="1" rowspan="1" style="text-align:center">6762466</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et405_diagonal_metalica_varilla.html" class="externalLink">ET405<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Diagonal met&#225;lica en varilla tipo 1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:50px;text-align:center">g<sub>0</sub></td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">6762316</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et350_grapa_terminal_tipo_recto_metalica.html" class="externalLink">ET350<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Grapa terminal tipo recto para cables entre 6 AWG – 3/0 AWG</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">M</td><td colspan="1" rowspan="1" style="text-align:center">9</td><td colspan="1" rowspan="1" style="text-align:center">6762301</td><td colspan="1" rowspan="1" style="text-align:center"><a href="http://www.codensa.com.co/empresas/normas-electricas-corporativas" class="externalLink">E-MT-006<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Desconectador cuchillo monof&#225;sico 400 A – 15 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">m<sub>7</sub></td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">6762209</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et454_tuerca_ojo_alargado.html" class="externalLink">ET454<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Tuerca de ojo alargada 5/8”</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">n<sub>5</sub></td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">6762181</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et461_perno_ojo.html" class="externalLink">ET461<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Perno de ojo tipo 5 ( 5/8 x 545 mm)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">o<sub>45</sub></td><td colspan="1" rowspan="1" style="text-align:center">25</td><td colspan="1" rowspan="1" style="text-align:center">6762340</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/cables/et121_conductores_cobre_duro_desnudos.html" class="externalLink">ET121<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Metros de cable desnudo de cobre calibre 4 AWG</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">7</td><td colspan="1" rowspan="1" style="text-align:center">6769253</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/cables/et119_cables_multiconductores_medida_control_proteccion.html" class="externalLink">ET119<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Cable multiconductor 2x12 AWG </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:50px;text-align:center">P</td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">6781248</td><td colspan="1" rowspan="1" style="text-align:center">E-MT-031</td><td colspan="1" rowspan="1" style="">DPS- Descargador de sobretensi&#243;n de &#243;xido met&#225;lico 12 kV, 10 kA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">p<sub>6</sub></td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">6762467</td><td colspan="1" rowspan="1" style="text-align:center"><a href="http://likinormas.micodensa.com/Especificacion/postes/et201_postes_concreto" class="externalLink">ET201<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Poste Concreto 12 m, 1050 kg</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">R<sub>2</sub></td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">6764357</td><td colspan="1" rowspan="1" style="text-align:center">E-MT-004</td><td colspan="1" rowspan="1" style="">Reconectador (13.2 / 11.4 kV)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">s<sub>74</sub></td><td colspan="1" rowspan="1" style="text-align:center">12</td><td colspan="1" rowspan="1" style="text-align:center">6762362</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et356_conectores_tipo_cuna.html" class="externalLink">ET356<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Conector tipo cu&#241;a P=120 D120 mm&#178; o 4/0-4/0 AWG</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">s<sub>78</sub></td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">6762444</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et356_conectores_tipo_cuna.html" class="externalLink">ET356<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Conector tipo cu&#241;a P=95 D=25 mm&#178;(4/0 AWG /4 AWG)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">t<sub>2</sub></td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">6762255</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et455_esparrago_acero.html" class="externalLink">ET455<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Esp&#225;rrago de 16 x 508 mm (5/8&quot; x 20&quot;)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">t<sub>5</sub></td><td colspan="1" rowspan="1" style="text-align:center">14</td><td colspan="1" rowspan="1" style="text-align:center">6762212</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et456_tornillo_carruaje_perno.html" class="externalLink">ET456<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Tornillo de carruaje  5/8” x 1 1/2”</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">t<sub>10</sub></td><td colspan="1" rowspan="1" style="text-align:center">12</td><td colspan="1" rowspan="1" style="text-align:center">6762213</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et457_tornillo_acero.html" class="externalLink">ET457<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Tornillo de acero galvanizado 5/8” x 5”</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">t<sub>12</sub></td><td colspan="1" rowspan="1" style="text-align:center">4</td><td colspan="1" rowspan="1" style="text-align:center">6801240</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et457_tornillo_acero.html" class="externalLink">ET457<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Tornillo de acero galvanizado 5/8&quot; x 10&quot;</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">t<sub>15</sub></td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">6762299</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et457_tornillo_acero.html" class="externalLink">ET457<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Tornillo de acero galvanizado 1/2&quot; x 6&quot;</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">TP</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/transformadores/et923_transformadores_tension_medida_11_4.html" class="externalLink">ET923<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Transformador de potencial</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">u<sub>1</sub></td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">6790991</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/materiales_puesta_tierra/et492_sistema_puesta_tierra_acero_inoxidable.html" class="externalLink">ET492<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Kit puesta a tierra MT en acero inoxidable</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">Z<sub>9</sub></td><td colspan="1" rowspan="1" style="text-align:center">4</td><td colspan="1" rowspan="1" style="text-align:center">6762237</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et431_abrazadera_salida.html" class="externalLink">ET431<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Abrazadera de una salida tipo 4 – 200 mm</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">Z<sub>11</sub></td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">6764090</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et438_abrazadera_23_x_14_transformador_distribucion.html" class="externalLink">ET438<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Abrazadera  1 salida, 3&quot; x 1/4&quot; 200 mm</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">Z<sub>14</sub></td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">6762313</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et432_abrazadera_salidas.html" class="externalLink">ET432<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Abrazadera de dos salidas tipo 4 – 200 mm</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">Z<sub>15</sub></td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">6762308</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et432_abrazadera_salidas.html" class="externalLink">ET432<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Abrazadera  2 salida, 1 1/2&quot; x 1/4&quot; 250 mm</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">35</td><td colspan="1" rowspan="1" style="text-align:center">6779600</td><td colspan="1" rowspan="1" style="text-align:center">E-MT-010</td><td colspan="1" rowspan="1" style="">Metros de cable AAAC 100 mm<sup>2</sup> semiaislado 15 KV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">14</td><td colspan="1" rowspan="1" style="text-align:center">6762416</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et356_conectores_tipo_cuna.html" class="externalLink">ET356<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Cartucho azul para herramienta de Cu&#241;a</td></tr></table><br /></div><b>ALTERNATIVAS:</b><br />(1)	Aislador polim&#233;rico de suspensi&#243;n 15 kV horquilla-ojo (6762292).<br /><br /><b>NOTAS:</b>
+<ul><li>Todos los terminales de tierra (reconectador, tablero de control, descargadores de sobre tensi&#243;n y el TP) deben ser conectados y aterrizados a un mismo punto. </li>
+<li>Los descargadores de sobretensiones para l&#237;neas de 11,4 kV y 13,2 kV ser&#225;n de &#243;xido met&#225;lico 12 kV, 10 kA.</li>
+<li>Para 13,2 kV, la relaci&#243;n de transformaci&#243;n del TP es 13,2 kV – 120 V seg&#250;n tensi&#243;n de la red.</li>
+<li>El TP debe energizarse del lado de la fuente.</li>
+<li>Se debe hacer la verificaci&#243;n del sistema de puesta a tierra, siguiendo las recomendaciones de la <a href="../puesta_tierra/la400_puestas_tierra.html" class="externalLink">LA400<span class="externalLinkIcon"></span></a> y <a href="../../lineas_aereas_rurales_distribucion/puesta_tierra_cables_guarda_templetes/lar400_puesta_tierra.html" class="externalLink">LAR400<span class="externalLinkIcon"></span></a></li></ul>
+<br /><b>RECOMENDACIONES DEL FABRICANTE “NOJA” PARA SU INSTALACI&#211;N:</b>
+<ul><li>Garantizar la estanqueidad IP65 de la caja de control manteniendo los empaques y utilizando prensaestopas en los cables de alimentaci&#243;n.</li>
+<li>Mantener cerrada la puerta de la caja de control para evitar ingreso de agua que afecte los componentes.</li>
+<li>Emplear filtros de RFI tipo ferritas en acopladores &#243;pticos en los cables de comunicaci&#243;n. El cable debe ser apantallado y aterrizado en un solo extremo, es decir, en el Reconectador.</li>
+<li>El conductor de cobre para puesta a tierra debe ser m&#237;nimo 35 mm<sup>2</sup> (2 AWG).</li>
+<li>La resistencia de puesta a tierra debe ser menor a 10 Ohmios.</li>
+<li>El conductor para puesta a tierra de la caja de control debe ser lo m&#225;s corta y firme posible (menor a 1,5 m). No se aceptan empalmes en los conductores.</li>
+<li>Debe existir una distancia m&#237;nima de 20 cm entre el cable de control y el conductor de puesta a tierra. En lo posible por lados opuestos debe asegurarse el cable de control al poste.</li>
+<li>Cuando el punto de aterrizaje no tenga conector, se utilizar&#225; borne terminal tipo ojo o conector adecuado. No se aceptan conexiones entorchadas.</li></ul>
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 1844, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+uuid: e9a65029-d3cc-4b82-a5f1-e10d17e2910e
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.node.seo
+    - node.type.rules_technical_rules
+  module:
+    - metatag
+id: node.rules_technical_rules.seo
+field_name: seo
+entity_type: node
+bundle: rules_technical_rules
+label: SEO
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: metatag

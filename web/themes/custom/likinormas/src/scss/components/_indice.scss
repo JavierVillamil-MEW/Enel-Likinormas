@@ -1,0 +1,291 @@
+.view__indice {
+  .view-header {
+    .container-fluid {
+      min-height: 38rem;
+      padding: 0 var(--margin-width-container-secondary) !important;
+
+      .row {
+        flex-direction: column;
+        justify-content: flex-end;
+        height: inherit;
+        padding: 15rem 0 10rem;
+        width: 100%;
+        margin: 0 auto !important;
+
+        @include media-query(tablet) {
+          align-items: center;
+          width: 90%;
+        }
+
+        @include media-query(tabletL) {
+          align-items: center;
+          padding: 20rem 0 6rem;
+          width: 55%;
+        }
+
+        @include media-query(desktopLS) {
+          padding: 22rem 0 7rem;
+        }
+
+        h1 {
+          margin: 0 0 1.7rem;
+          text-align: center;
+
+          @include media-query(tabletL) {
+            margin: 0 0 2rem;
+          }
+
+          .field--name-name {
+            margin: inherit;
+            text-align: inherit;
+          }
+        }
+      }
+    }
+  }
+
+  .field-button-mobile {
+    @extend %button-mobile-filter;
+  }
+
+  .view-filters {
+    margin-bottom: 5rem;
+
+    @include media-query(maxtabletL) {
+      display: none;
+      margin-bottom: 0;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      z-index: 2000;
+
+      .block-form-filter-list {
+        padding: 2.5rem var(--margin-width-container-secondary) 5rem;
+
+        .form-filter-list {
+          row-gap: 2rem;
+        }
+
+        .content-button {
+          width: 100%;
+          padding: 0;
+          margin: 0.5rem 0 0;
+        }
+      }
+    }
+
+    .block-form-filter-list {
+      .form-filter-list {
+
+        @include media-query(tabletL) {
+          display: grid;
+          grid-template-columns: auto 45%;
+        }
+
+        form {
+          width: 100%;
+        }
+
+        .form--inline {
+          display: flex;
+          flex-direction: column;
+
+          @include media-query(tabletL) {
+            flex-direction: row;
+            align-items: flex-end;
+          }
+
+          .form-item,
+          .form-actions {
+            margin: 0;
+          }
+
+          .form-item {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin: 0 0 2.2rem;
+
+            @include media-query(tabletL) {
+              margin: 0 2rem 0 0;
+            }
+
+            label {
+              color: $color-white;
+              font-size: 1.3rem;
+              font-family: 'RoobertENEL-Bold';
+            }
+
+            input {
+              width: 100%;
+              color: $color-gray-primary;
+              height: 4.5rem;
+              border: 0;
+              border-radius: 0;
+              font-size: 1.5rem;
+              font-family: 'RoobertENEL-Light';
+              padding: 1rem 3.5rem 1rem 1rem;
+
+              &:focus {
+                border: 1px solid $color-pink;
+                box-shadow: 0 0 0 0.1rem rgba($color: $color-pink, $alpha: 25%);
+              }
+            }
+
+            &.form-item-search {
+              &::after {
+                content: "";
+                display: block;
+                position: absolute;
+                right: 1rem;
+                top: 53%;
+                width: 2rem;
+                height: 2rem;
+                background-image: url('../assets/images/icon-search.svg');
+                background-size: contain;
+                background-repeat: no-repeat;
+              }
+
+            }
+
+
+          }
+
+          .form-actions {
+            @include media-query(tabletL) {
+              width: 100%;
+            }
+
+            input {
+              @extend %button-form-secondary;
+              height: 4.5rem;
+              font-size: 1.8rem;
+              background-color: #ffffff;
+              color: #FC0F64;
+              width: 100%;
+
+              &:hover {
+                background-color: #FC0F64;
+                color: #ffffff;
+              }
+
+              @include media-query(tabletL) {
+                max-width: 23rem;
+                border: 0;
+                border-radius: 0;
+                background-color: #FC0F64;
+                color: #ffffff;
+                font-size: 1.6rem;
+
+                &:hover {
+                  background-color: $color-pink-light;
+                  color: #ffffff;
+                }
+              }
+
+            }
+          }
+        }
+
+
+      }
+    }
+  }
+
+  .view-content {
+    padding: 1.5rem var(--margin-width-container-secondary) 1rem;
+
+    .table {
+      thead {
+        border: 1px solid #393939;
+
+        tr {
+          th {
+            font-size: 1.8rem;
+            font-family: 'RoobertENEL-Bold';
+            color: #393939;
+
+            &:first-child {
+              padding: 0.5rem 0.75rem 0.5rem 2.5rem;
+            }
+
+            &:nth-child(3) {
+              width: 24rem;
+              padding-right: 3rem;
+            }
+
+            &:last-child {
+              padding: 0.5rem 4rem 0.5rem 0.75rem;
+              font-size: 0;
+              width: 16rem;
+            }
+          }
+        }
+      }
+
+      tbody {
+        border: 1px solid #8A8A8A;
+
+        tr {
+          td {
+            font-size: 1.8rem;
+            color: #393939;
+            padding: 1.7rem 0.75rem;
+            vertical-align: middle;
+
+            &:first-child {
+              padding: 0.5rem 0.75rem 0.5rem 2.5rem;
+            }
+
+            &:last-child {
+              padding: 0.5rem 4rem 0.5rem 0.75rem;
+            }
+
+            h1 {
+              font-size: inherit;
+              color: inherit;
+            }
+
+            p,
+            h1 {
+              margin: 0;
+            }
+
+            a {
+              color: #41B9E6;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .view-empty {
+    padding: 1.5rem var(--margin-width-container-secondary) 1rem;
+    margin-bottom: 8rem;
+
+    .title-filter-result {
+      color: $color-black-light;
+      font-size: 2rem;
+      font-family: 'RoobertENEL-Bold';
+
+      @include media-query(tabletL) {
+        font-size: 2.2rem;
+      }
+    }
+  }
+
+  .no-pager,
+  .pager {
+    margin-bottom: 8rem;
+  }
+
+}
+
+.path-taxonomy {
+  .select2-dropdown {
+    z-index: 2001;
+  }
+
+}

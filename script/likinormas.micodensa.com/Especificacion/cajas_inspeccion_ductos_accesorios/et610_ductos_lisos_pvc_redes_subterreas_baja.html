@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET610 Ductos lisos de pvc para redes subterréas de baja tensión | Likinormas</title>
+	<meta name="description" content="ductos; redes subterráneas" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/574" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F574.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/574" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/574" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '27');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET610 Ductos lisos de pvc para redes subterr&#233;as de baja tensi&#243;n</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET 610</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">30/06/1999</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/574">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F574&amp;nodoid=574', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#heading_0">1.	REQUISITOS GENERALES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#heading_1">1.1	 Condiciones de servicio</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#heading_2">1.2	 Ductos normalizados</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#heading_3">1.3	Normas de fabricaci&#243;n y pruebas</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#heading_4">2.	REQUISITOS T&#201;CNICOS PARTICULARES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#heading_5">2.1	 Marcaci&#243;n de los ductos</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#heading_6">3.	CARACTER&#205;STICAS DE FABRICACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#heading_7">3.1	 Materia prima</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#heading_8">3.2	 Requisitos generales</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#heading_9">3.3	 Requisitos espec&#237;ficos</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#heading_10">4.	ENSAYOS</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1.	REQUISITOS GENERALES</h2>
+<h3 id="heading_1" >1.1	 Condiciones de servicio</h3>
+Los ductos de que trata esta especificaci&#243;n ser&#225;n instalados en sistemas subterr&#225;neos de distribuci&#243;n primaria y secundaria de CODENSA S.A. E.S.P., de acuerdo con las siguientes condiciones generales del <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-363" class="externalLink  glosarioLink">sistema</a>:<br /><br /><b>1.1.1	 Condiciones ambientales</b><br /><br />- Altura sobre el nivel del mar: 2640 m<br />- Humedad relativa: 90%<br />- Temperatura ambiente m&#225;xima: 27 &#176;C<br />- Temperatura ambiente m&#237;nima: -5 &#176;C<br />- Temperatura ambiente promedio: 14 &#176;C<br /><br /><b>1.1.2	 Caracter&#237;sticas el&#233;ctricas del <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-363" class="externalLink  glosarioLink">sistema</a></b><br /><br />- <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-384" class="externalLink  glosarioLink">Tensi&#243;n nominal</a> m&#225;xima: 208 V /120 V<br /><br /><b>1.1.3	 Condiciones de instalaci&#243;n</b><br /><br />- Directamente enterrados, y conectando cajas de <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a><br />
+<h3 id="heading_2" >1.2	 Ductos normalizados</h3>
+Los ductos deber&#225;n ser de poli(cloruro de vinilo) (PVC) r&#237;gido, lisos interior y exteriormente, del tipo pesado (DB), para proteger conductores el&#233;ctricos aislados.<br /><br />Los ductos normalizados por la Empresa son:<br />- 2”<br />
+<h3 id="heading_3" >1.3	Normas de fabricaci&#243;n y pruebas</h3>
+El ducto y sus componentes, deben estar de acuerdo con los requerimientos de la &#250;ltima revisi&#243;n de las siguientes normas (donde sean aplicables):<br /><br />•	ICONTEC NTC 1630 – Pl&#225;sticos. Tubos de poli(cloruro de vinilo) (PVC) r&#237;gido para alojar y proteger conductores subterr&#225;neos el&#233;ctricos y telef&#243;nicos<br />•	ICONTEC NTC 369 – Especificaciones para compuestos r&#237;gidos de pol&#237;meros de cloruro de vinilo (PVC, CPVC y copol&#237;meros)<br />•	ICONTEC NTC 576 – Cementos solventes para tubos y accesorios de PVC<br />•	ICONTEC NTC 718 – Pl&#225;sticos. Acondicionamientos de pl&#225;sticos y materiales aislantes el&#233;ctricos para ensayos<br />•	ICONTEC NTC 979 – Pl&#225;sticos. Tubos y curvas de poli(cloruro de vinilo) (PVC) r&#237;gido para alojar y proteger conductores el&#233;ctricos aislados<br />•	ICONTEC NTC 1125 – Pl&#225;sticos. Determinaci&#243;n de la resistencia al impacto de tubos y accesorios termopl&#225;sticos por medio de una baliza (peso en ca&#237;da)<br />•	ICONTEC NTC-ISO 2859-1 – Procedimientos de muestreo para <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> por atributos. Parte 1. Planes de muestreo determinados por el nivel aceptable de <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> (NAC) para <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-264" class="externalLink  glosarioLink">lote</a> a <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-264" class="externalLink  glosarioLink">lote</a><br />•	ICONTEC NTC-ISO 2859-2 – Procedimientos de muestreo para <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> por atributos. Parte 3. Planes de muestreo determinados para la <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> l&#237;mite para la <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> de un <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-264" class="externalLink  glosarioLink">lote</a> aislado<br />•	ICONTEC NTC-ISO 2859-3 – Procedimientos de muestreo para <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> por atributos. Parte 3. Procedimientos de muestreo intermitentes<br />•	ICONTEC NTC 2983 – Pl&#225;sticos. Determinaci&#243;n del grado de ablandamiento de tuber&#237;a de poli(cloruro de vinilo) (PVC) extru&#237;do y accesorios moldeados por inmersi&#243;n en acetona<br />•	ICONTEC NTC 3358 – Pl&#225;sticos. Determinaci&#243;n de las dimensiones de tuber&#237;a y accesorios termopl&#225;sticos<br />•	ICONTEC NTC-ISO 3951 – Procedimientos de muestreo y gr&#225;ficos de <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> por variables para porcentaje no conforme<br />
+<h2 id="heading_4" >2.	REQUISITOS T&#201;CNICOS PARTICULARES</h2>
+El ducto y sus componentes deber&#225;n cumplir con las caracter&#237;sticas y ensayos dadas en la norma ICONTEC NTC 1630, y con las caracter&#237;sticas generales dadas en las Tablas No. 1 y No. 2.<br />
+<h3 id="heading_5" >2.1	 Marcaci&#243;n de los ductos</h3>
+Los ductos deber&#225;n llevar estampado, como m&#237;nimo, mediante un <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> apropiado y a intervalos no mayores a 1,5 m , un r&#243;tulo legible en el que aparezcan las siguientes indicaciones:<br /><br />- La sigla PVC<br />- La clase del <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-274" class="externalLink  glosarioLink">material</a> seg&#250;n lo establecido en el numeral 3.1 de la presente especificaci&#243;n<br />- Tipo de ducto (DB)<br />- El di&#225;metro <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-298" class="externalLink  glosarioLink">nominal</a> del ducto en mm y en pulgadas<br />- La leyenda “Ducto telef&#243;nico y el&#233;ctrico”<br />- Nombre del fabricante<br />- Fecha de fabricaci&#243;n<br />- CODENSA S.A. ESP<br />- N&#250;mero de pedido y/o contrato<br />-	Pa&#237;s de origen<br /><br /><b>Tabla No. 1</b><br /><b>Requisitos generales del ducto de PVC</b><br /><div style="width:494px;"><table><tr><td colspan="5" rowspan="1" style="width:350px;height:10px;text-align:center"><b><a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-274" class="externalLink  glosarioLink">Material</a></b></td><td colspan="2" rowspan="1" style="width:144px;text-align:center"><b>Poli(cloruro de vinilo) r&#237;gido</b></td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;text-align:center"><b>Di&#225;metro <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-298" class="externalLink  glosarioLink">nominal</a></b></td><td colspan="3" rowspan="1" style="text-align:center"><b>Di&#225;metro exterior en mm</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Espesor m&#237;nimo de pared</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Di&#225;metro interior m&#237;nimo</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"><b>Pulgadas</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>mm</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Promedio</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Tolerancia</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Ovalamiento m&#225;ximo</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>mm</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>mm</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">60</td><td colspan="1" rowspan="1" style="text-align:center">60,32</td><td colspan="1" rowspan="1" style="text-align:center">&#177; 0,15</td><td colspan="1" rowspan="1" style="text-align:center">1,52</td><td colspan="1" rowspan="1" style="text-align:center">1,52</td><td colspan="1" rowspan="1" style="text-align:center">50,80</td></tr></table><br /></div><b>Tabla No. 2</b><br /><b>Requisitos generales de las campanas</b><br /><div style="width:574px;"><table><tr><td colspan="5" rowspan="1" style="width:310px;height:10px;text-align:center"><b><a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-274" class="externalLink  glosarioLink">Material</a></b></td><td colspan="4" rowspan="1" style="width:264px;text-align:center"><b>Poli(cluroro de vinilo) r&#237;gido</b></td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;text-align:center"><b>Di&#225;metro <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-298" class="externalLink  glosarioLink">nominal</a></b></td><td colspan="3" rowspan="1" style="text-align:center"><b>Di&#225;metro de entrada A, en mm</b></td><td colspan="3" rowspan="1" style="text-align:center"><b>Di&#225;metro del fondo B, en mm</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Longitud m&#237;nima de la campana C</b></td></tr>
+<tr><td colspan="1" rowspan="2" style="height:10px;text-align:center"><b>Pulgadas</b></td><td colspan="1" rowspan="2" style="text-align:center"><b>mm</b></td><td colspan="1" rowspan="2" style="text-align:center"><b>Promedio</b></td><td colspan="2" rowspan="1" style="text-align:center"><b>Tolerancia</b></td><td colspan="1" rowspan="2" style="text-align:center"><b>Promedio</b></td><td colspan="2" rowspan="1" style="text-align:center"><b>Tolerancia</b></td><td colspan="1" rowspan="2" style="text-align:center"><b>mm</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"><b>Para el promedio</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Ovalamiento m&#225;ximo</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Para el promedio</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Ovalamiento m&#225;ximo</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">60</td><td colspan="1" rowspan="1" style="text-align:center">60,96</td><td colspan="1" rowspan="1" style="text-align:center">&#177; 0,15</td><td colspan="1" rowspan="1" style="text-align:center">1,52</td><td colspan="1" rowspan="1" style="text-align:center">60,30</td><td colspan="1" rowspan="1" style="text-align:center">&#177; 0,15</td><td colspan="1" rowspan="1" style="text-align:center">1,52</td><td colspan="1" rowspan="1" style="text-align:center">45</td></tr></table><br /></div><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/574/Dibujo ET 610.JPG" src="http://likinormas.micodensa.com/media/cache/images/500x355/wikiimages/3532343334353032-6725-Dibujo ET 610.JPG" title=""  /></div><div class="texto_imagen_articulos" style="max-width:500px"></div></div></div>
+<h2 id="heading_6" >3.	CARACTER&#205;STICAS DE FABRICACI&#211;N</h2>
+Los ductos deben ser aptos para utilizaci&#243;n en las condiciones de servicio estipuladas en el numeral 1.1. de la presente especificaci&#243;n, y deber&#225;n cumplir con las caracter&#237;sticas que se especifican a continuaci&#243;n:<br />
+<h3 id="heading_7" >3.1	 Materia prima</h3>
+Los ductos deber&#225;n fabricarse &#250;nicamente con compuestos de poli(cloruro de vinilo) iguales o superiores a las celdas especificadas en la norma ICONTEC NTC 1630, de acuerdo con la norma ICONTEC NTC 369.<br /><br />Podr&#225; utilizarse <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-274" class="externalLink  glosarioLink">material</a> recuperado limpio, proveniente de la elaboraci&#243;n de ductos de la misma f&#225;brica, si el ducto producido cumple con todos los requisitos establecidos en la presente especificaci&#243;n.<br />
+<h3 id="heading_8" >3.2	 Requisitos generales</h3>
+Cuando se observen a simple vista, los extremos de los ductos aunque sean biselados deben tener un corte perpendicular a su eje.<br /><br />A simple vista y a lo largo del ducto, las superficies interna y externa de los ductos deben ser lisas y uniformes en color, y deben estar exentas de grietas, fisuras y perforaciones o incrustaciones de <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-274" class="externalLink  glosarioLink">material</a> extra&#241;o.<br /><br />Los ductos deber&#225;n ser acampanados en uno de sus extremos, de acuerdo con las dimensiones especificadas en la tabla No. 2. La longitud del ducto, incluyendo la campana deber&#225; ser de 6 m.<br />
+<h3 id="heading_9" >3.3	 Requisitos espec&#237;ficos</h3>
+Las dimensiones de los ductos y de las campanas soldadas as&#237; como el espesor m&#237;nimo de pared, deber&#225;n cumplir con los requisitos establecidos en las tablas No. 1 y No.2, cuando se determinen de acuerdo con la norma ICONTEC NTC 3358.<br /><br />La diferencia entre los di&#225;metros m&#225;ximo y m&#237;nimo medidos, no debar&#225; exceder los valores establecidos para ovalamiento en la tabla No.1, cuando se determine seg&#250;n el m&#233;todo indicado en la norma ICONTEC NTC 3358.<br /><br />Cuando se determine seg&#250;n lo indicado en la norma ICONTEC NTC 3358, la longitud m&#237;nima, ser&#225; la definida en la presente especificaci&#243;n, con una tolerancia de –0,2%.<br /><br />Los ductos no deber&#225;n presentar evidencias de laminaci&#243;n o desmoronamiento en ning&#250;n &#225;rea del ducto, al igual que desprendimiento de las paredes, cuando sean sometidos al <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> de <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> de extrusi&#243;n, de acuerdo con la norma ICONTEC NTC 2983.<br /><br />Los ductos deber&#225;n soportar una energ&#237;a de impacto de 54 J sin presentar astillamientos, rajaduras o separaci&#243;n de las paredes, cuando sean sometidos al <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> de resistencia al impacto, de acuerdo con la norma ICONTEC NTC 1125. La huella interna o externa producida por el golpe de la baliza sobre la superficie de la <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-288" class="externalLink  glosarioLink">muestra</a> no deber&#225; considerarse como <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-204" class="externalLink  glosarioLink">falla</a>.<br /><br />Los ductos deber&#225;n cumplir con una rigidez m&#237;nima de 60 psi, cuando sean sometidos al <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> de rigidez del ducto, de acuerdo con la norma ICONTEC NTC 1630.<br /><br />Las uniones de los ductos deber&#225;n ser herm&#233;ticas e impermeables y no deber&#225;n presentar goteo ni p&#233;rdida de presi&#243;n en el ensamble, cuando se ensayen de acuerdo con la norma ICONTEC NTC 1630, <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> de determinaci&#243;n de la impermeabilidad de las uniones.<br /><br />Los ductos no deber&#225;n presentar ninguna de las fallas descritas en el numeral de “inflamabilidad” de la norma ICONTEC NTC 979, cuando se ensayen de acuerdo con dicha norma.<br /><br />Se deber&#225;n considerar en el dise&#241;o, los cambios de temperatura del terreno, del agua o del ambiente, los cuales producen esfuerzos de corte longitudinales en las uniones de cemento solvente.<br />
+<h2 id="heading_10" >4.	ENSAYOS</h2>
+Las pruebas y recepci&#243;n de los ductos ser&#225;n efectuadas por representantes de CODENSA S.A. E.S.P. Distribuidora de Energ&#237;a de Bogot&#225;, realiz&#225;ndose las pruebas en las instalaciones del fabricante quien deber&#225; asumir su costo y proporcionar el <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-274" class="externalLink  glosarioLink">material</a>, los equipos y el personal necesario para tal fin. <br /><br />Las pruebas podr&#225;n ser repetidas en laboratorios oficiales o particulares reconocidos por CODENSA S.A. E.S.P. Distribuidora de Energ&#237;a de Bogot&#225;, la que a su vez se reservar&#225; el derecho de realizar una <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> previamente durante el proceso de fabricaci&#243;n, para lo cual el fabricante deber&#225; suministrar los medios necesarios para facilitar la misma.<br /><br />Los ensayos deber&#225;n realizarse en las condiciones de <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> y de acondicionamiento de muestras descritas en la norma ICONTEC NTC 1630.<br /><br />Los ensayos incluyen:<br /><br />- Determinaci&#243;n de las dimensiones, de acuerdo con la norma ICONTEC NTC 3358.<br />- <a href="et610_ductos_lisos_pvc_redes_subterreas_baja.html#" id="version-112" class="externalLink  glosarioLink">Calidad</a> de extrusi&#243;n, de acuerdo con la norma ICONTEC NTC 2983.<br />- Resistencia al impacto, de acuerdo con la norma ICONTEC NTC 1125. <br />- Rigidez del ducto, de acuerdo con la norma ICONTEC NTC 1630.<br />- Impermeabilidad de las uniones, de acuerdo con la norma ICONTEC NTC 1630.<br /><br />Para la selecci&#243;n del plan de muestreo se utilizar&#225; la norma ICONTEC NTC-ISO 2859, partes 1,2 y 3 o la norma ICONTEC NTC-ISO 3951.<br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 574, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

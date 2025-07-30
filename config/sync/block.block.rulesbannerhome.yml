@@ -1,0 +1,33 @@
+uuid: 28d75f2c-ccc8-4225-9232-236bc14aa039
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:rules_banner_slider:b8fcc8a9-652a-4205-9e36-f3c412603f0c'
+  module:
+    - block_content
+    - node
+  theme:
+    - likinormas
+id: rulesbannerhome
+theme: likinormas
+region: content
+weight: -9
+provider: null
+plugin: 'block_content:b8fcc8a9-652a-4205-9e36-f3c412603f0c'
+settings:
+  id: 'block_content:b8fcc8a9-652a-4205-9e36-f3c412603f0c'
+  label: 'Rules: Banner home'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      rules_home_content: rules_home_content

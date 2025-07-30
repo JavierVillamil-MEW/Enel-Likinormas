@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 24a3be63-cb89-438e-921f-53a9fd571db8
+  default_langcode: en
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: Image_0.png
+  uri:
+    -
+      value: 'public://2023-04/Image_0.png'
+  filemime:
+    -
+      value: image/png
+  filesize:
+    -
+      value: 409046
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1682436194

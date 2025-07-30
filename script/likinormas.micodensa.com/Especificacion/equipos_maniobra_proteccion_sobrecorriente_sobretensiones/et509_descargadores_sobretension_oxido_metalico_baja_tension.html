@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET509 Descargadores de sobretensión de óxido metálico en baja tensión | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/426" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F426.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/426" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/426" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '53');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET509 Descargadores de sobretensi&#243;n de &#243;xido met&#225;lico en baja tensi&#243;n</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET509</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">04/09/2014</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/426">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F426&amp;nodoid=426', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#heading_0">1. Objeto </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#heading_1">2.	ALCANCE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#heading_2">3.	CONDICIONES DE SERVICIO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#heading_3">3.1	CONDICIONES AMBIENTALES:</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#heading_4">3.2  CONDICIONES EL&#201;CTRICAS:</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#heading_5">3.3  CONDICIONES DE INSTALACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#heading_6">4.	SISTEMA DE UNIDADES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#heading_7">5.	NORMAS DE FABRICACI&#211;N Y PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#heading_8">6.	REQUERIMIENTOS T&#201;CNICOS PARTICULARES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#heading_9">7.  ENSAYOS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#heading_10">7.1  Ensayos tipo</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#heading_11">7.2  Ensayos de entrega</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#heading_12">8.	CRITERIOS  DE  ACEPTACI&#211;N  O  RECHAZO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#heading_13">8.1  Muestreo</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#heading_14"> 8.2  Aceptaci&#243;nn o Rechazo</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#heading_15">9.	MARCACI&#211;N Y EMPAQUE</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#heading_16">9.1 Marcaci&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#heading_17">9.2  Empaque</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#heading_18">10.	REQUISITOS DE LAS OFERTAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#heading_19">11.	SISTEMA DE CALIDAD</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#heading_20">12.	CERTIFICADOS DE CONFORMIDAD</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#heading_21">13.	ANEXOS</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1. Objeto </h2>
+La presente especificaci&#243;n tiene por objeto establecer las condiciones que deben satisfacer los descargadores de <a href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#" id="version-372" class="externalLink  glosarioLink">sobretensi&#243;n</a> de &#243;xido met&#225;lico para redes de baja <a href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> rural 240/120 V y  208/120 V  .<br /><br />De acuerdo al material del cuerpo o envoltura, los descargadores podr&#225;n ser de los siguientes tipos:<br />
+<ol><li>Descargadores de Oxido de Zn. con cuerpo de porcelana de In = 10 kA &#243; 5 kA.</li>
+<li>Descargadores de Oxido de Zn. con envoltura polim&#233;rica ( inorg&#225;nica ) de In  = 10 kA &#243; 5  kA.</li>
+<li>Descargadores de Oxido de Zn. con envoltura polim&#233;rica ( org&#225;nica ) de In =10 kA &#243; 5 kA.</li></ol>
+<br />Codensa  indicar&#225; en el pedido de cotizaci&#243;n el tipo de descargador solicitado.<br />
+<h2 id="heading_1" >2.	ALCANCE</h2>
+La presente especificaci&#243;n se aplicar&#225; a todos los descargadores de sobretensi&#243;n de &#243;xido met&#225;lico para redes de baja tensi&#243;n que adquiera CODENSA S.A. ESP.<br /><br />
+<h2 id="heading_2" >3.	CONDICIONES DE SERVICIO</h2>
+El material objeto de la presente especificaci&#243;n t&#233;cnica, ser&#225; utilizado en las redes de distribuci&#243;n de baja de tensi&#243;n, dentro del &#225;rea de influencia de CODENSA  S.A. ,  bajo las siguientes condiciones:<br />
+<h3 id="heading_3" >3.1	CONDICIONES AMBIENTALES:</h3>
+<div style="width:650px;"><table><tr><td colspan="2" rowspan="1" style="width:650px;height:37px;text-align:center"><b>CARACTER&#205;STICAS AMBIENTALES</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="width:250px;height:20px;">a. Altura sobre el nivel del mar</td><td colspan="1" rowspan="1" style="width:400px;">2 640 m</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">b. Ambiente</td><td colspan="1" rowspan="1" style="">Tropical</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">c. Humedad</td><td colspan="1" rowspan="1" style="">Mayor al  90 %</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">d. Temperatura m&#225;xima y m&#237;nima</td><td colspan="1" rowspan="1" style="">45 &#186;C y - 5 &#186;C respectivamente.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">e. Temperatura promedio</td><td colspan="1" rowspan="1" style="">14 &#186;C.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:60px;">f. Instalaci&#243;n</td><td colspan="1" rowspan="1" style="">A la intemperie bajo condiciones    de contaminaci&#243;n atmosf&#233;rica, humedad, humo, polvo, ozono y a cambios repentinos de temperatura.</td></tr></table><br /></div>
+<h3 id="heading_4" >3.2  CONDICIONES EL&#201;CTRICAS:</h3>
+<div style="width:650px;"><table><tr><td colspan="2" rowspan="1" style="width:650px;height:37px;text-align:center"><b>CARACTER&#205;STICAS EL&#201;CTRICAS</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">Tensi&#243;n nominal del sistema</td><td colspan="1" rowspan="1" style="">240 /120  V  &#243;   208/120 V</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Tensi&#243;n m&#225;xima de servicio</td><td colspan="1" rowspan="1" style="">264  V  &#243;  229 V</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Frecuencia del sistema</td><td colspan="1" rowspan="1" style="">60 Hz</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Potencia nominal de cortocircuito</td><td colspan="1" rowspan="1" style="">1,248 MVA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:23px;">Corriente de cortocircuito trif&#225;sico sim&#233;trico</td><td colspan="1" rowspan="1" style="">5,2  kA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Sistema</td><td colspan="1" rowspan="1" style="">Dos fases y neutro, Trif&#225;sico tetrafilar</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">Neutro</td><td colspan="1" rowspan="1" style="">R&#237;gido a tierra en el transformador MT-BT</td></tr></table><br /></div>
+<h3 id="heading_5" >3.3  CONDICIONES DE INSTALACI&#211;N</h3>
+Los descargadores ser&#225;n conectados entre cada fase y tierra, y fijados sobre el tanque del transformador mediante soportes que ser&#225;n provistas con el descargador y  formar&#225;n parte del suministro.<br /><br />El r&#233;gimen de utilizaci&#243;n es continuo.<br /><br />
+<h2 id="heading_6" >4.	SISTEMA DE UNIDADES</h2>
+Todos los documentos t&#233;cnicos, deben expresar las cantidades num&#233;ricas en unidades del sistema Internacional (S.I.).  Si se usan cat&#225;logos, folletos o planos, en sistemas diferentes de unidades, deben hacerse  las conversiones respectivas.<br /><br />
+<h2 id="heading_7" >5.	NORMAS DE FABRICACI&#211;N Y PRUEBAS</h2>
+<div style="width:670px;"><table><tr><td colspan="2" rowspan="1" style="width:196px;height:20px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:474px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:43px;">IEC</td><td colspan="1" rowspan="1" style="">60099-4</td><td colspan="1" rowspan="1" style="">Surge arresters - Part 4: Metal-oxide surge arresters without gaps for a.c. systems</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;">ANSI/IEEE</td><td colspan="1" rowspan="1" style="">C 62.11</td><td colspan="1" rowspan="1" style="">Standard for Metal-Oxide Surge Arresters for Alternating Current Power Circuits</td></tr></table><br /></div>Pueden emplearse otras normas internacionalmente reconocidas equivalentes o superiores a las aqu&#237; se&#241;aladas, siempre y cuando se ajusten a lo solicitado en la presente especificaci&#243;n t&#233;cnica.<br /><br />Las normas citadas en la presente especificaci&#243;n (o cualquier otra que llegare a ser aceptada por CODENSA S.A.) se refieren a su &#250;ltima revisi&#243;n.<br /><br />
+<h2 id="heading_8" >6.	REQUERIMIENTOS T&#201;CNICOS PARTICULARES</h2>
+Los descargadores ser&#225;n del tipo de varistores de &#243;xido de zinc.<br /><br />Cada unidad estar&#225; constituida por un cuerpo r&#237;gido aislante conteniendo en su interior el conjunto de varistores de ZnO, sin espacios entre ellos. <br /><br />Los cuerpos podr&#225;n ser totalmente de porcelana esmaltada o de otro material aislante con envoltura polim&#233;rica, pudiendo CODENSA  S.A. a su solo juicio, solicitar una u otra  alternativa.  <br /><br />La construcci&#243;n del descargador deber&#225; garantizar que no se produzcan da&#241;os internos debido al transporte, manipuleo, etc. El descargador tendr&#225; sellado exterior tal  que asegure su estanqueidad,  teniendo en cuenta el envejecimiento de los dispositivos de cierre herm&#233;tico. Los terminales de conexi&#243;n a l&#237;nea y a <a href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> ser&#225;n bimet&#225;licos .<br /><br />                          
+<h2 id="heading_9" >7.  ENSAYOS</h2>
+La recepci&#243;n del material ser&#225; efectuada por  representantes de CODENSA  S.A. A tal fin CODENSA  S.A. o sus representantes ser&#225;n avisados, por lo menos con quince (15) d&#237;as de anticipaci&#243;n, por el fabricante a fin de asistir a las pruebas.<br /><br />La ausencia de los representantes de CODENSA  S.A. en el momento de efectuar los ensayos y pruebas seg&#250;n lo programado, a&#250;n cuando hayan sido debidamente avisados, no eximir&#225; al proveedor de realizarlos (previa conformidad de CODENSA  S.A.) debiendo comunicar a &#233;sta  inmediatamente  el  resultado  de  los mismos.<br /><br />Los ensayos se efectuar&#225;n en f&#225;brica del proveedor, quien deber&#225; proporcionar el material y el personal necesarios. Estos igualmente podr&#225;n realizarse en laboratorio particular u oficial reconocido por CODENSA  S.A.   &#243; certificado por la Superintendencia de Industria y Comercio, Todas las  piezas  destruidas  en  los  ensayos  ser&#225;n  por  cuenta  y  cargo  del proveedor.<br /><br />El costo de los ensayos, salvo los gastos de los representantes de CODENSA  S.A., estar&#225; incluido en el precio, a excepci&#243;n de los correspondientes a los  Ensayos Tipo, para lo cual vale lo establecido en el &#237;tem respectivo de la presente.<br />
+<h3 id="heading_10" >7.1  Ensayos tipo</h3>
+El fabricante deber&#225; presentar los protocolos de <a href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> tipo indicados a  continuaci&#243;n, efectuados sobre unidades iguales o similares a las solicitadas por CODENSA  S.A., seg&#250;n la presente especificaci&#243;n:<br />
+<ul><li>Prueba  de  aislaci&#243;n  exterior  con  <a href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a>  aplicada  de  frecuencia industrial en seco y bajo lluvia, y con onda de <a href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> de impulso de 1,2/50  <span class="codeInline">&#181;</span>seg  con  los valores de <a href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> indicados en la planilla de datos garantizados seg&#250;n IEC  60099-4 cl&#225;usula 7.2 &#243; ANSI/IEEE C62.11 de 1987; 8.1.</li></ul>
+
+<ul><li>Prueba de <a href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> residual  seg&#250;n IEC  60099-4 cl&#225;usula 7.3 &#243; ANSI/IEEE C62.11 de 1987; 8.1.</li></ul>
+
+<ul><li>Prueba de resistencia  a las corrientes de impulso de larga duraci&#243;n seg&#250;n IEC 60099-4 (cl&#225;usula 7.4).</li></ul>
+
+<ul><li>Prueba de ciclos de funcionamiento seg&#250;n IEC 60099-4 (cl&#225;usula 7.5).</li></ul>
+
+<ul><li>Prueba de nivel de protecci&#243;n a <a href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> de impulso de frente de onda escarpada seg&#250;n ANSI C62.11 (cl&#225;usula 6.5).</li></ul>
+
+<ul><li>Prueba de envejecimiento acelerado mediante aplicaci&#243;n de <a href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> y temperatura seg&#250;n ANSI  C62.11 (cl&#225;usula 6.12).</li></ul>
+<br />En caso que el oferente presente protocolos de ensayos tipo de equipos similares a los ofrecidos, fabricados bajo licencia, CODENSA  S.A. se  reserva el derecho de tenerlos en cuenta o  desestimar la oferta a su solo juicio.<br /><br />Los ensayos ser&#225;n realizados en un laboratorio oficial o independiente de reconocido prestigio a satisfacci&#243;n de CODENSA  S.A. &#243; autorizado por la Superintendencia de Industria y Comercio.<br /><br />CODENSA  S.A. se reserva el derecho de solicitar al fabricante la repetici&#243;n en un laboratorio especializado, a satisfacci&#243;n de la misma, de estos ensayos. A tal fin el oferente deber&#225; cotizar por separado el costo de cada uno de estos ensayos.<br /><br />
+<h3 id="heading_11" >7.2  Ensayos de entrega</h3>
+Enumeraci&#243;n y metodolog&#237;a de los ensayos de entrega:<br />
+<ol><li>Prueba de hermeticidad interna propuesta por el fabricante y aceptada por CODENSA  S.A.</li>
+<li>Prueba de aislaci&#243;n exterior con tensi&#243;n aplicada de frecuencia  industrial en seco, bajo lluvia y con onda de    <a href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> de impulso  1,2/50 <span class="codeInline">&#181;</span>seg.</li>
+<li>Prueba de <a href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> residual (IEC  60099-4 de 1991 numeral 7.3 &#243; ANSI/IEEE C62.11 1987 numeral 8.1)</li>
+<li>Prueba de nivel de <a href="et509_descargadores_sobretension_oxido_metalico_baja_tension.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> de ionizaci&#243;n interna seg&#250;n  ANSI  C 62.11 (6.8).</li></ol>
+<br />
+<h2 id="heading_12" >8.	CRITERIOS  DE  ACEPTACI&#211;N  O  RECHAZO</h2>
+La recepci&#243;n de una entrega estar&#225; subordinada a:<br />
+<ul><li>Resultado satisfactorio de los ensayos tipo.</li></ul>
+
+<ul><li>Resultado satisfactorio de los ensayos de entrega establecidos en el punto 7.2.</li></ul>
+<br />Se considerar&#225; que existe un lote cuando los materiales de producci&#243;n pertenecen a un mismo lote de materia prima.<br />
+<h3 id="heading_13" >8.1  Muestreo</h3>
+El muestreo se realizar&#225; con base en los procedimientos y tablas estipuladas en la norma NTC-ISO 2859-1 “Procedimientos de muestreo para Inspecci&#243;n por Atributos. Parte 1: Planes de muestreo determinados por el nivel aceptable de calidad para inspecci&#243;n lote a lote” (Militar Standard 105 D &quot;Sampling procedures and tables for inspection by atributes&quot;) y se acordar&#225; por las partes, previamente a la fecha de la realizaci&#243;n de las pruebas y recepci&#243;n de los bienes. Para el desarrollo de las pruebas es indispensable que los instrumentos involucrados est&#233;n calibrados.<br />
+<h3 id="heading_14" > 8.2  Aceptaci&#243;nn o Rechazo</h3>
+Si el n&#250;mero de elementos defectuosos es menor o igual al correspondiente n&#250;mero de defectuosos (dado en la norma NTC-ISO 2859-1 en la tercera columna de la tabla 1), se deber&#225; considerar que el lote cumple con los requisitos t&#233;cnicos exigidos por CODENSA S.A., pero en caso contrario, el lote se rechazar&#225;.<br /><br /><br /><div style="width:570px;"><table><tr><td colspan="1" rowspan="1" style="width:158px;height:68px;text-align:center"><b>TAMA&#209;O DEL LOTE</b></td><td colspan="1" rowspan="1" style="width:176px;text-align:center"><b>TAMA&#209;O DE LA MUESTRA</b></td><td colspan="1" rowspan="1" style="width:115px;text-align:center"><b>NUMERO PERMITIDO DE DEFECTUOSOS</b></td><td colspan="1" rowspan="1" style="width:121px;text-align:center"><b>NUMERO DEFECTUOSOS PARA RECHAZO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2  a           8</td><td colspan="1" rowspan="1" style="text-align:center">A  =   2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">        9  a         15</td><td colspan="1" rowspan="1" style="text-align:center">B  =   3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">      16  a         25</td><td colspan="1" rowspan="1" style="text-align:center">C  =   5</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">26  a         50</td><td colspan="1" rowspan="1" style="text-align:center">D  =   8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">      51  a         90</td><td colspan="1" rowspan="1" style="text-align:center">E  = 13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">      91  a       150</td><td colspan="1" rowspan="1" style="text-align:center">F  = 20</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">    151  a       280</td><td colspan="1" rowspan="1" style="text-align:center">G  = 32</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">    281  a       500</td><td colspan="1" rowspan="1" style="text-align:center">H  = 50</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">    501  a     1200</td><td colspan="1" rowspan="1" style="text-align:center">J  = 80</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">  1201  a     3200</td><td colspan="1" rowspan="1" style="text-align:center">K  =125</td><td colspan="1" rowspan="1" style="text-align:center">7</td><td colspan="1" rowspan="1" style="text-align:center">8</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">  3201  a   10000</td><td colspan="1" rowspan="1" style="text-align:center">L  =200</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">11</td></tr></table><br /></div><b>TABLA  1 PLAN DE MUESTREO PARA INSPECCION, NIVEL DE INSPECCION II,  NAC = 2,5% (NORMA NTC-ISO 2859-1 TABLA1 - TABLA 2A)</b><br /><br />CODENSA S.A. se reserva el derecho de descartar las propuestas que no ofrezcan pruebas o si las ofrecidas son consideradas insuficientes para garantizar la calidad de los descagadores.<br /><br />Para efectuar cualquier despacho, es requisito indispensable una autorizaci&#243;n escrita de CODENSA S.A., la cual ser&#225; expedida con base en los resultados de las pruebas realizadas en f&#225;brica y/o la aprobaci&#243;n del protocolo de pruebas realizadas por el fabricante a los bienes solicitados.<br />
+<h2 id="heading_15" >9.	MARCACI&#211;N Y EMPAQUE</h2>
+
+<h3 id="heading_16" >9.1 Marcaci&#243;n</h3>Los descargadores ser&#225;n identificados por la siguiente informaci&#243;n m&#237;nima:
+<ul><li>Tipo: ZnO</li>
+<li>Tensi&#243;n m&#225;xima de operaci&#243;n permanente.</li>
+<li>Tensi&#243;n nominal.</li>
+<li>Frecuencia nominal.</li>
+<li>Corriente nominal de descarga.</li>
+<li>Marca, modelo.</li>
+<li>A&#241;o de fabricaci&#243;n.</li>
+<li>N&#250;mero de polos</li></ul>
+ 
+<h3 id="heading_17" >9.2  Empaque</h3>
+Los bienes, objeto de la presente especificaci&#243;n t&#233;cnica, deben ser embalados para su entrega, en cajas de cart&#243;n individuales incluido un conjunto de ellos, en armazones de madera, que eviten todo da&#241;o por transporte o manipuleo.<br /><br />Sobre dichas cajas se indicar&#225; en forma indeleble, el c&#243;digo del material, el N &#186; de orden de compra y la sigla  BOG-CUN<br /><br />
+<h2 id="heading_18" >10.	REQUISITOS DE LAS OFERTAS</h2>
+Para su debido an&#225;lisis ser&#225; imprescindible que la oferta incluya la siguiente informaci&#243;n, sin cuyo requisito no ser&#225; tenida en cuenta:<br /><br />1.	Relaci&#243;n de los bienes cotizados.<br /><br />2.	Informaci&#243;n del oferente.<br /><br />3.	Planilla de caracter&#237;sticas t&#233;cnicas garantizadas la cual deber&#225; ser diligenciada completamente. Debe entregarse en medio magenetico y en formatol Excel.<br /><br />4.	Descripci&#243;n completa del descargador ofrecido.<br /><br />5.	Protocolos   de   pruebas de los ensayos de tipo, indicados en 7.1, llevados  a cabo  sobre descargadores iguales a los ofrecidos, y realizados  en un  laboratorio de reconocido prestigio.<br /><br />6.	Descripci&#243;n completa de los ensayos de aislaci&#243;n exterior y de hermeticidad mediante vac&#237;o, indicando  para este  &#250;ltimo,   las    condiciones   de  aceptaci&#243;n  y  rechazo del descargador  ensayado, propios de su control de calidad interno.<br /><br />7.	Plano a escala y de detalle de montaje del descargador ofrecido, con dimensiones en unidades m&#233;tricas.<br /><br />8.	Cat&#225;logos, que correspondan a los bienes cotizados, en la planilla de caracter&#237;sticas t&#233;cnicas garantizadas.<br /><br />9.	Curvas caracter&#237;sticas de Tensi&#243;n residual - Intensidad de descarga.<br /><br />10.	Curva caracter&#237;stica de la corriente de fuga en funci&#243;n de la tensi&#243;n, entre 0,8 y 1,2 de Un.<br /><br />11.	Curva caracter&#237;stica de tiempo admisible en funci&#243;n de la  tensi&#243;n, entre 1 y 1,5 de Un, a  60 &#186;C.<br /><br />12.	Certificado del sistema de calida<br /><br />13.	Certificados de producto con norma t&#233;cnica y RETIE.<br /><br />14.	Relaci&#243;n de las excepciones de car&#225;cter exclusivamente t&#233;cnico de la oferta, respecto a los bienes solicitados. Si la oferta no presenta excepci&#243;n, se indicar&#237;a expresamente en el mismo “NO HAY EXCEPCIONES”<br /><br />15.	Informaci&#243;n adicional que considere aporta explicaci&#243;n a su dise&#241;o (dibujos,  detalles,  caracter&#237;sticas de operaci&#243;n,  dimensiones y pesos de los materiales ofertados).<br /><br />CODENSA S.A. podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones, sin expresi&#243;n de causa ni obligaci&#243;n de compensaci&#243;n.<br /><br />
+<h2 id="heading_19" >11.	SISTEMA DE CALIDAD</h2>
+El oferente adjuntara con su propuesta, para el fabricante de los bienes cotizados, el certificado de conformidad con norma y/o el perfil de calidad de acuerdo con cualquier norma NTC-ISO serie 9000 o norma equivalente en el pa&#237;s de origen, expedida por una entidad id&#243;nea del mismo pa&#237;s de origen.<br />
+<h2 id="heading_20" >12.	CERTIFICADOS DE CONFORMIDAD</h2>
+El oferente adjuntar&#225; con su propuesta el certificado de conformidad de producto con norma t&#233;cnica y con RETIE, expedido por una entidad autorizada por la ONAC.<br /><br />No se admiten certificados de productos que presente exclusiones a la presente especificaci&#243;n t&#233;cnica.<br /> <br /> 
+<h2 id="heading_21" >13.	ANEXOS</h2><b>ANEXO 1: INFORMACION GENERAL DEL PROPONENTE</b><br /><div style="width:500px;"><table><tr><td colspan="2" rowspan="1" style="width:500px;height:20px;text-align:center"><b>DATOS DEL PROPONENTE</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="width:250px;height:21px;">NOMBRE DEL PROPONENTE</td><td colspan="1" rowspan="1" style="width:250px;height:21px;"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">DIRECCI&#211;N</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">CIUDAD</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">PAIS</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">TEL&#201;FONO</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">FAX</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">E-MAIL</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">PERSONA DE CONTACTO</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:35px;">La persona de contacto, es la responsable de la oferta t&#233;cnica a la cual se  acudir&#225; en caso de consulta o aclaraci&#243;n.</td></tr></table><br /></div><br /><br /><b>ANEXO 2: PLANILLA DE CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS. Descargador de sobretensi&#243;n de &#243;xido met&#225;lico para redes de baja tensi&#243;n 240/120 V   10 kA</b><br /><div style="width:681px;"><table><tr><td colspan="1" rowspan="1" style="width:49px;height:40px;text-align:center"><b>N&#186;</b></td><td colspan="3" rowspan="1" style="width:378px;text-align:center"><b>CARACTER&#205;STICAS</b></td><td colspan="1" rowspan="1" style="width:76px;text-align:center"><b>UNIDAD</b></td><td colspan="1" rowspan="1" style="width:89px;text-align:center"><b>SOLICITADAS</b></td><td colspan="1" rowspan="1" style="width:89px;text-align:center"><b>GARANTIZADAS</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1</td><td colspan="3" rowspan="1" style="">Oferente</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">(  *  )</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">2</td><td colspan="3" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">(  *  )</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">3</td><td colspan="3" rowspan="1" style="">Referencia</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">(  *  )</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:51px;text-align:center">4</td><td colspan="3" rowspan="1" style="">Normas de fabricaci&#243;n y ensayos</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">IEC 99-4, ANSI  C62.11</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="4" style="height:20px;text-align:center">5</td><td colspan="2" rowspan="4" style="">Caracter&#237;sticasde la red</td><td colspan="1" rowspan="1" style="">Tensi&#243;n de servicio</td><td colspan="1" rowspan="1" style="text-align:center">V</td><td colspan="1" rowspan="1" style="text-align:center">240/120</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Tensi&#243;n m&#225;x. de servicio</td><td colspan="1" rowspan="1" style="text-align:center">V</td><td colspan="1" rowspan="1" style="text-align:center">264</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Frecuencia</td><td colspan="1" rowspan="1" style="text-align:center">Hz</td><td colspan="1" rowspan="1" style="text-align:center">60</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Neutro</td><td colspan="1" rowspan="1" style="text-align:center">----</td><td colspan="1" rowspan="1" style="text-align:center">R&#237;gido a tierra</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">6</td><td colspan="3" rowspan="1" style="">Tensi&#243;n nominal del descargador</td><td colspan="1" rowspan="1" style="text-align:center">V</td><td colspan="1" rowspan="1" style="text-align:center">175</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:28px;text-align:center">7</td><td colspan="3" rowspan="1" style="">Tensi&#243;n m&#225;xima de operaci&#243;n continua (MCOV)  ( valor eficaz)</td><td colspan="1" rowspan="1" style="text-align:center">V</td><td colspan="1" rowspan="1" style="text-align:center">175</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;text-align:center">8</td><td colspan="3" rowspan="1" style="">Intensidad nominal de descarga onda 8/20 <span class="codeInline">&#181;</span>seg (valor  eficaz m&#237;nimo)</td><td colspan="1" rowspan="1" style="text-align:center">A</td><td colspan="1" rowspan="1" style="text-align:center">10.000</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;text-align:center">9</td><td colspan="1" rowspan="1" style="">Tensi&#243;n residual</td><td colspan="2" rowspan="1" style="">P/intens. Nominal de descar- ga con onda de 8/20 <span class="codeInline">&#181;</span>seg (valor de cresta)</td><td colspan="1" rowspan="1" style="text-align:center">kV</td><td colspan="1" rowspan="1" style="text-align:center">1,33</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:55px;text-align:center">10</td><td colspan="1" rowspan="1" style="">Tensiones de prueba deaislaci&#243;nexterna</td><td colspan="2" rowspan="1" style="">A onda de impulso de 1,2/50  <span class="codeInline">&#181;</span>seg ( valor cresta )</td><td colspan="1" rowspan="1" style="text-align:center">kV</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="2" style="height:25px;text-align:center">11</td><td colspan="1" rowspan="2" style="">Tensiones de descarga</td><td colspan="2" rowspan="1" style="">A 60 Hz</td><td colspan="1" rowspan="1" style="text-align:center">kV</td><td colspan="1" rowspan="1" style="text-align:center">(  *  )</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:22px;">A frente de onda  ( valor Cresta )</td><td colspan="1" rowspan="1" style="text-align:center">kV</td><td colspan="1" rowspan="1" style="text-align:center">(  *  )</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">12</td><td colspan="3" rowspan="1" style="">Atmosf&#233;ra Interna</td><td colspan="1" rowspan="1" style="text-align:center">----</td><td colspan="1" rowspan="1" style="text-align:center">(  *  )</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">13</td><td colspan="3" rowspan="1" style="">Peso</td><td colspan="1" rowspan="1" style="text-align:center">kg</td><td colspan="1" rowspan="1" style="text-align:center">(  *  )</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">14</td><td colspan="3" rowspan="1" style="">N&#250;mero de polos</td><td colspan="1" rowspan="1" style="text-align:center">U</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">15</td><td colspan="3" rowspan="1" style="">Cumple con la marcaci&#243;n BOG-CUN</td><td colspan="1" rowspan="1" style="text-align:center">----</td><td colspan="1" rowspan="1" style="text-align:center">Si</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;text-align:center">16</td><td colspan="3" rowspan="1" style="">Cumple con la marcaci&#243;n del elemento especificada en la ET-509 en su totalidad</td><td colspan="1" rowspan="1" style="text-align:center">----</td><td colspan="1" rowspan="1" style="text-align:center">Si</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:42px;text-align:center">17</td><td colspan="3" rowspan="1" style="">Cumple con la prueba de ciclo de trabajo &#243; Duty Cycle ( ** ) </td><td colspan="1" rowspan="1" style="text-align:center">----</td><td colspan="1" rowspan="1" style="text-align:center">Si</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="6" rowspan="1" style="height:30px;"><b>RESULTADO EVALUACI&#211;N T&#201;CNICA</b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:20px;text-align:center">18</td><td colspan="1" rowspan="5" style="">Sistema de calidad (Normas ISO)</td><td colspan="4" rowspan="1" style="">Entidad acreditadora</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Vigencia</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:17px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="6" style="height:20px;text-align:center">19</td><td colspan="1" rowspan="6" style="">Certificaci&#243;n de producto con norma tecnica</td><td colspan="4" rowspan="1" style="">Entidad Acreditadora</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Fecha de aprobaci&#243;n </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Vigencia</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Norma tecnica con la cual se certifica</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Adjunta el certfificado (Si/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:20px;text-align:center">20</td><td colspan="1" rowspan="5" style="">Certificaci&#243;n de producto con RETIE</td><td colspan="4" rowspan="1" style="">Entidad Acreditadora</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Fecha de aprobaci&#243;n </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Vigencia</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Adjunta el certfificado (Si/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="6" rowspan="1" style="height:30px;"><b>RESULTADO EVALUACI&#211;N REGULATORIA</b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">21</td><td colspan="5" rowspan="1" style="">Observaciones</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div>(  *  ) Dato suministrado por el fabricante.<br />(  **  ) Prueba donde se  aplican 20 impulsos con forma de onda 8/20 &#181;s y valor de cresta igual a 10 kA, seguidos de 2 impulsos de gran amplitud con valor cresta igual a 100 kA.<br /><br /><br /><b>ANEXO 3: PLANILLA DE CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS. Descargador de sobretensi&#243;n de &#243;xido met&#225;lico para redes de baja tensi&#243;n 208/120 V   10 kA</b><br /><div style="width:681px;"><table><tr><td colspan="1" rowspan="1" style="width:49px;height:40px;text-align:center"><b>N&#186;</b></td><td colspan="4" rowspan="1" style="width:378px;text-align:center"><b>CARACTER&#205;STICAS</b></td><td colspan="1" rowspan="1" style="width:76px;text-align:center"><b>UNIDAD</b></td><td colspan="1" rowspan="1" style="width:89px;text-align:center"><b>SOLICITADAS</b></td><td colspan="1" rowspan="1" style="width:89px;text-align:center"><b>GARANTIZADAS</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1</td><td colspan="4" rowspan="1" style="">Oferente</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">(  *  )</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">2</td><td colspan="4" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">(  *  )</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">3</td><td colspan="4" rowspan="1" style="">Referencia</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">(  *  )</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:51px;text-align:center">4</td><td colspan="4" rowspan="1" style="">Normas de fabricaci&#243;n y ensayos</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">IEC 99-4, ANSI  C62.11</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="4" style="height:20px;text-align:center">5</td><td colspan="3" rowspan="4" style="">Caracter&#237;sticasde la red</td><td colspan="1" rowspan="1" style="">Tensi&#243;n de servicio</td><td colspan="1" rowspan="1" style="text-align:center">V</td><td colspan="1" rowspan="1" style="text-align:center">208/120</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Tensi&#243;n m&#225;x. de servicio</td><td colspan="1" rowspan="1" style="text-align:center">V</td><td colspan="1" rowspan="1" style="text-align:center">229</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Frecuencia</td><td colspan="1" rowspan="1" style="text-align:center">Hz</td><td colspan="1" rowspan="1" style="text-align:center">60</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Neutro</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">R&#237;gido a tierra</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">6</td><td colspan="4" rowspan="1" style="">Tensi&#243;n nominal del descargador</td><td colspan="1" rowspan="1" style="text-align:center">V</td><td colspan="1" rowspan="1" style="text-align:center">175</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;text-align:center">7</td><td colspan="4" rowspan="1" style="">Tensi&#243;n m&#225;xima de operaci&#243;n continua (MCOV)  ( valor eficaz)</td><td colspan="1" rowspan="1" style="text-align:center">V</td><td colspan="1" rowspan="1" style="text-align:center">175</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;text-align:center">8</td><td colspan="4" rowspan="1" style="">Intensidad nominal de descarga onda 8/20 <span class="codeInline">&#181;</span>seg (valor  eficaz m&#237;nimo)</td><td colspan="1" rowspan="1" style="text-align:center">A</td><td colspan="1" rowspan="1" style="text-align:center">10.000</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;text-align:center">9</td><td colspan="1" rowspan="1" style="">Tensi&#243;n residual</td><td colspan="3" rowspan="1" style="">P/intens. Nominal de descar- ga con onda de 8/20 <span class="codeInline">&#181;</span>seg (valor de cresta)</td><td colspan="1" rowspan="1" style="text-align:center">kV</td><td colspan="1" rowspan="1" style="text-align:center">1,33</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;text-align:center">10</td><td colspan="1" rowspan="1" style="">Tensiones de prueba de aislaci&#243;n externa</td><td colspan="3" rowspan="1" style="">A onda de impulso de 1,2/50   <span class="codeInline">&#181;</span>seg ( valor cresta )</td><td colspan="1" rowspan="1" style="text-align:center">kV</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="2" style="height:30px;text-align:center">11</td><td colspan="1" rowspan="2" style="">Tensiones de descarga</td><td colspan="3" rowspan="1" style="">A 60 Hz</td><td colspan="1" rowspan="1" style="text-align:center">kV</td><td colspan="1" rowspan="1" style="text-align:center">(  *  )</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:20px;">A frente de onda  ( valor Cresta )</td><td colspan="1" rowspan="1" style="text-align:center">kV</td><td colspan="1" rowspan="1" style="text-align:center">(  *  )</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">12</td><td colspan="4" rowspan="1" style="">Atmosf&#233;ra Interna</td><td colspan="1" rowspan="1" style="text-align:center">----</td><td colspan="1" rowspan="1" style="text-align:center">(  *  )</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">13</td><td colspan="4" rowspan="1" style="">Peso</td><td colspan="1" rowspan="1" style="text-align:center">kg</td><td colspan="1" rowspan="1" style="text-align:center">(  *  )</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">14</td><td colspan="4" rowspan="1" style="">N&#250;mero de polos</td><td colspan="1" rowspan="1" style="text-align:center">U</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">15</td><td colspan="4" rowspan="1" style="">Cumple con la marcaci&#243;n BOG-CUN</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">Si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;text-align:center">16</td><td colspan="4" rowspan="1" style="">Cumple con la marcaci&#243;n del elemento especificada en la ET-509 en su totalidad</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">Si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;text-align:center">17</td><td colspan="4" rowspan="1" style="">Cumple con la prueba de ciclo de trabajo &#243; Duty Cycle ( ** )</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">Si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="7" rowspan="1" style="height:30px;"><b>RESULTADO EVALUACI&#211;N T&#201;CNICA</b></td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:20px;text-align:center">18</td><td colspan="2" rowspan="5" style="">Sistema de calidad (Normas ISO)</td><td colspan="4" rowspan="1" style="">Entidad acreditadora</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="6" style="height:20px;text-align:center">19</td><td colspan="2" rowspan="6" style="">Certificaci&#243;n de producto con norma tecnica</td><td colspan="4" rowspan="1" style="">Entidad Acreditadora</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Fecha de aprobaci&#243;n </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Norma tecnica con la cual se certifica</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Adjunta el certfificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:20px;text-align:center">20</td><td colspan="2" rowspan="5" style="">Certificaci&#243;n de producto con RETIE</td><td colspan="4" rowspan="1" style="">Entidad Acreditadora</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Fecha de aprobaci&#243;n </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:21px;">Adjunta el certfificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="7" rowspan="1" style="height:30px;"><b>RESULTADO EVALUACI&#211;N REGULATORIA</b></td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">21</td><td colspan="6" rowspan="1" style="">Observaciones</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div>(  *  ) Dato suministrado por el fabricante.<br />(  **  ) Prueba donde se  aplican 20 impulsos con forma de onda 8/20 &#181;s y valor de cresta igual a 10 kA, seguidos de 2 impulsos de gran amplitud con valor cresta igual a 100 kA.<br /><br /><br /><b>ANEXO 4: PLANILLA DE CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS. Descargador de sobretensi&#243;n de &#243;xido met&#225;lico para redes de baja tensi&#243;n 240/120 V 5 kA</b><br /><div style="width:681px;"><table><tr><td colspan="1" rowspan="1" style="width:49px;height:40px;text-align:center"><b>N&#186;</b></td><td colspan="4" rowspan="1" style="width:378px;text-align:center"><b>CARACTER&#205;STICAS</b></td><td colspan="1" rowspan="1" style="width:76px;text-align:center"><b>UNIDAD</b></td><td colspan="1" rowspan="1" style="width:89px;text-align:center"><b>SOLICITADAS</b></td><td colspan="1" rowspan="1" style="width:89px;text-align:center"><b>GARANTIZADAS</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1</td><td colspan="4" rowspan="1" style="">Oferente</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">(  *  )</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">2</td><td colspan="4" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">(  *  )</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">3</td><td colspan="4" rowspan="1" style="">Referencia</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">(  *  )</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:51px;text-align:center">4</td><td colspan="4" rowspan="1" style="">Normas de fabricaci&#243;n y ensayos</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">IEC 99-4, ANSI  C62.11</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="4" style="height:34px;text-align:center">5</td><td colspan="3" rowspan="4" style="">Caracter&#237;sticasde la red</td><td colspan="1" rowspan="1" style="">Tensi&#243;n de servicio</td><td colspan="1" rowspan="1" style="text-align:center">V</td><td colspan="1" rowspan="1" style="text-align:center">240/120</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Tensi&#243;n m&#225;x. de servicio</td><td colspan="1" rowspan="1" style="text-align:center">V</td><td colspan="1" rowspan="1" style="text-align:center">264</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Frecuencia</td><td colspan="1" rowspan="1" style="text-align:center">Hz</td><td colspan="1" rowspan="1" style="text-align:center">60</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Neutro</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">R&#237;gido a tierra</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">6</td><td colspan="4" rowspan="1" style="">Tensi&#243;n nominal del descargador</td><td colspan="1" rowspan="1" style="text-align:center">V</td><td colspan="1" rowspan="1" style="text-align:center">175</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">7</td><td colspan="4" rowspan="1" style="">Tensi&#243;n m&#225;xima de operaci&#243;n continua (MCOV)  ( valor eficaz)</td><td colspan="1" rowspan="1" style="text-align:center">V</td><td colspan="1" rowspan="1" style="text-align:center">175</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;text-align:center">8</td><td colspan="4" rowspan="1" style="">Intensidad nominal de descarga onda 8/20 <span class="codeInline">&#181;</span>seg (valor  eficaz m&#237;nimo)</td><td colspan="1" rowspan="1" style="text-align:center">A</td><td colspan="1" rowspan="1" style="text-align:center">5 000</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;text-align:center">9</td><td colspan="1" rowspan="1" style="">Tensi&#243;n residual</td><td colspan="3" rowspan="1" style="">P/intens. Nominal de descar- ga con onda de 8/20 <span class="codeInline">&#181;</span>seg (valor de cresta)</td><td colspan="1" rowspan="1" style="text-align:center">kV</td><td colspan="1" rowspan="1" style="text-align:center">1,06</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:68px;text-align:center">10</td><td colspan="1" rowspan="1" style="">Tensiones de prueba de aislaci&#243;n externa</td><td colspan="3" rowspan="1" style="">A ondad de impulso de  1,2/50 <span class="codeInline">&#181;</span>seg (valor de cresta)</td><td colspan="1" rowspan="1" style="text-align:center">kV</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="2" style="height:30px;text-align:center">11</td><td colspan="1" rowspan="2" style="">Tensiones de descarga</td><td colspan="3" rowspan="1" style=""> A 60 Hz</td><td colspan="1" rowspan="1" style="text-align:center">kV</td><td colspan="1" rowspan="1" style="text-align:center">(  *  )</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:20px;"> A frente de onda  ( valor cresta )</td><td colspan="1" rowspan="1" style="text-align:center">kV</td><td colspan="1" rowspan="1" style="text-align:center">(  *  )</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">12</td><td colspan="4" rowspan="1" style="">Atmosf&#233;ra interna</td><td colspan="1" rowspan="1" style="text-align:center">----</td><td colspan="1" rowspan="1" style="text-align:center">(  *  )</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">13</td><td colspan="4" rowspan="1" style="">Peso</td><td colspan="1" rowspan="1" style="text-align:center">kg</td><td colspan="1" rowspan="1" style="text-align:center">(  *  )</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">14</td><td colspan="4" rowspan="1" style="">N&#250;mero de polos</td><td colspan="1" rowspan="1" style="text-align:center">U</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">15</td><td colspan="4" rowspan="1" style="">Cumple con la marcaci&#243;n BOG-CUN</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">Si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;text-align:center">16</td><td colspan="4" rowspan="1" style="">Cumple con la marcaci&#243;n del elemento especificada en la ET-509 en su totalidad</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">Si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;text-align:center">17</td><td colspan="4" rowspan="1" style="">Cumple con la prueba de ciclo de trabajo &#243; Duty Cycle ( ** )</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">Si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="7" rowspan="1" style="height:30px;"><b>RESULTADO EVALUACI&#211;N T&#201;CNICA</b></td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:20px;text-align:center">18</td><td colspan="2" rowspan="5" style="">Sistema de calidad (Normas ISO)</td><td colspan="4" rowspan="1" style="">Entidad acreditadora</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="6" style="height:20px;text-align:center">19</td><td colspan="2" rowspan="6" style="">Certificaci&#243;n de producto con norma tecnica</td><td colspan="4" rowspan="1" style="">Entidad Acreditadora</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Fecha de aprobaci&#243;n </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Norma tecnica con la cual se certifica</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Adjunta el certfificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:20px;text-align:center">20</td><td colspan="2" rowspan="5" style="">Certificaci&#243;n de producto con RETIE</td><td colspan="4" rowspan="1" style="">Entidad Acreditadora</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:21px;">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Fecha de aprobaci&#243;n </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Adjunta el certfificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="7" rowspan="1" style="height:30px;"><b>RESULTADO EVALUACI&#211;N REGULATORIA</b></td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">21</td><td colspan="6" rowspan="1" style="">Observaciones</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div><br />(  *  )  Dato suministrado por el fabricante.<br />(  **  ) Prueba donde se  aplican 20 impulsos con forma de onda 8/20 &#181;s y valor de cresta igual a 10 kA, seguidos de 2 impulsos de gran amplitud con valor cresta igual a 100 kA.<br /><br /><br /><br /><b>ANEXO 5: PLANILLA DE CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS. Descargador de sobretensi&#243;n de &#243;xido met&#225;lico para redes de baja tensi&#243;n 208/120 V   5 kA</b><br /><br /><div style="width:681px;"><table><tr><td colspan="1" rowspan="1" style="width:49px;height:40px;text-align:center"><b>N&#186;</b></td><td colspan="4" rowspan="1" style="width:378px;text-align:center"><b>CARACTER&#205;STICAS</b></td><td colspan="1" rowspan="1" style="width:76px;text-align:center"><b>UNIDAD</b></td><td colspan="1" rowspan="1" style="width:89px;text-align:center"><b>SOLICITADAS</b></td><td colspan="1" rowspan="1" style="width:89px;text-align:center"><b>GARANTIZADAS</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1</td><td colspan="4" rowspan="1" style="">Oferente</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">(  *  )</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">2</td><td colspan="4" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">(  *  )</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">3</td><td colspan="4" rowspan="1" style="">Referencia</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">(  *  )</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:51px;text-align:center">4</td><td colspan="4" rowspan="1" style="">Normas de fabricaci&#243;n y ensayos</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">IEC 99-4, ANSI  C62.11</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="4" style="height:34px;text-align:center">5</td><td colspan="3" rowspan="4" style="">Caracter&#237;sticasde la red</td><td colspan="1" rowspan="1" style="">Tensi&#243;n de servicio</td><td colspan="1" rowspan="1" style="text-align:center">V</td><td colspan="1" rowspan="1" style="text-align:center">208/120</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Tensi&#243;n m&#225;x. de servicio</td><td colspan="1" rowspan="1" style="text-align:center">V</td><td colspan="1" rowspan="1" style="text-align:center">229</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Frecuencia</td><td colspan="1" rowspan="1" style="text-align:center">Hz</td><td colspan="1" rowspan="1" style="text-align:center">60</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Neutro</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">R&#237;gido a tierra</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">6</td><td colspan="4" rowspan="1" style="">Tensi&#243;n nominal del descargador</td><td colspan="1" rowspan="1" style="text-align:center">V</td><td colspan="1" rowspan="1" style="text-align:center">175</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:36px;text-align:center">7</td><td colspan="4" rowspan="1" style="">Tensi&#243;n m&#225;xima de operaci&#243;n continua (MCOV)  ( valor eficaz)</td><td colspan="1" rowspan="1" style="text-align:center">V</td><td colspan="1" rowspan="1" style="text-align:center">175</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:36px;text-align:center">8</td><td colspan="4" rowspan="1" style="">Intensidad nominal de descarga onda 8/20 <span class="codeInline">&#181;</span>seg (valor  eficaz m&#237;nimo)</td><td colspan="1" rowspan="1" style="text-align:center">A</td><td colspan="1" rowspan="1" style="text-align:center">5 000</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:36px;text-align:center">9</td><td colspan="1" rowspan="1" style="">Tensi&#243;n residual</td><td colspan="3" rowspan="1" style="">P/intens. Nominal de descar- ga con onda de 8/20 <span class="codeInline">&#181;</span>seg (valor de cresta)</td><td colspan="1" rowspan="1" style="text-align:center">kV</td><td colspan="1" rowspan="1" style="text-align:center">1,06</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:68px;text-align:center">10</td><td colspan="1" rowspan="1" style="">Tensiones de prueba de aislaci&#243;n externa</td><td colspan="3" rowspan="1" style="">A ondad de impulso de  1,2/50 <span class="codeInline">&#181;</span>seg (valor de cresta)</td><td colspan="1" rowspan="1" style="text-align:center">kV</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="2" style="height:30px;text-align:center">11</td><td colspan="1" rowspan="2" style="">Tensiones de descarga</td><td colspan="3" rowspan="1" style=""> A 60 Hz</td><td colspan="1" rowspan="1" style="text-align:center">kV</td><td colspan="1" rowspan="1" style="text-align:center">(  *  )</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:20px;"> A frente de onda  ( valor cresta )</td><td colspan="1" rowspan="1" style="text-align:center">kV</td><td colspan="1" rowspan="1" style="text-align:center">(  *  )</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">12</td><td colspan="4" rowspan="1" style="">Atmosf&#233;ra interna</td><td colspan="1" rowspan="1" style="text-align:center">----</td><td colspan="1" rowspan="1" style="text-align:center">(  *  )</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">13</td><td colspan="4" rowspan="1" style="">Peso</td><td colspan="1" rowspan="1" style="text-align:center">kg</td><td colspan="1" rowspan="1" style="text-align:center">(  *  )</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">14</td><td colspan="4" rowspan="1" style="">N&#250;mero de polos</td><td colspan="1" rowspan="1" style="text-align:center">U</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">15</td><td colspan="4" rowspan="1" style="">Cumple con la marcaci&#243;n BOG-CUN</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">Si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;text-align:center">16</td><td colspan="4" rowspan="1" style="">Cumple con la marcaci&#243;n del elemento especificada en la ET-509 en su totalidad</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">Si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;text-align:center">17</td><td colspan="4" rowspan="1" style="">Cumple con la prueba de ciclo de trabajo &#243; Duty Cycle ( ** )</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">Si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="7" rowspan="1" style="height:30px;"><b>RESULTADO EVALUACI&#211;N T&#201;CNICA</b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:20px;text-align:center">18</td><td colspan="2" rowspan="5" style="">Sistema de calidad (Normas ISO)</td><td colspan="4" rowspan="1" style="">Entidad acreditadora</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="6" style="height:20px;text-align:center">19</td><td colspan="2" rowspan="6" style="">Certificaci&#243;n de producto con norma tecnica</td><td colspan="4" rowspan="1" style="">Entidad Acreditadora</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Fecha de aprobaci&#243;n </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Norma tecnica con la cual se certifica</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Adjunta el certfificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:20px;text-align:center">20</td><td colspan="2" rowspan="5" style="">Certificaci&#243;n de producto con RETIE</td><td colspan="4" rowspan="1" style="">Entidad Acreditadora</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Fecha de aprobaci&#243;n </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:20px;">Adjunta el certfificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="7" rowspan="1" style="height:30px;"><b>RESULTADO EVALUACI&#211;N REGULATORIA</b></td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">21</td><td colspan="6" rowspan="1" style="">Observaciones</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div>(  *  )  Dato suministrado por el fabricante.<br />(  **  ) Prueba donde se  aplican 20 impulsos con forma de onda 8/20 &#181;s y valor de cresta igual a 10 kA, seguidos de 2 impulsos de gran amplitud con valor cresta igual a 100 kA.<br /><br /><b>FIGURA 1. Imagen descargador de sobretensi&#243;n de &#243;xido met&#225;lico para redes de baja tensi&#243;n</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/426/ET 509 FIG.jpg" src="http://likinormas.micodensa.com/media/cache/images/600x600/wikiimages/343639343337383039-16955-ET 509 FIG.jpg" title="Figura 1"  /></div><div class="texto_imagen_articulos" style="max-width:600px">Figura 1</div></div></div><br /> 
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 426, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

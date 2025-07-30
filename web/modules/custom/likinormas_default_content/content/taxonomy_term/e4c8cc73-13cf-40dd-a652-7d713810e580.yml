@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: e4c8cc73-13cf-40dd-a652-7d713810e580
+  bundle: rules_subcategory
+  default_langcode: en
+  depends:
+    27e24322-79fa-4ee6-8b8d-90d460ea11ba: taxonomy_term
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'Índice - Centros de transformación para redes aéreas urbanas y rurales'
+  weight:
+    -
+      value: 0
+  parent:
+    -
+      target_id: 0
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /normas/centros-de-transformacion-para-redes-aereas-urbanos-y-rurales/indice-centros-de
+      langcode: en
+      pathauto: 1
+  related_category:
+    -
+      entity: 27e24322-79fa-4ee6-8b8d-90d460ea11ba

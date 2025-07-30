@@ -1,0 +1,19 @@
+uuid: 3fdc5f86-229d-4f90-a716-c22967606147
+langcode: es
+status: true
+dependencies:
+  module:
+    - link
+    - node
+id: node.button_404
+field_name: button_404
+entity_type: node
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

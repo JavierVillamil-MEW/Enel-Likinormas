@@ -1,0 +1,8 @@
+name: Cdi Dependent Select
+type: module
+description: Dependent select for filters in views
+package: Custom
+core_version_requirement: ^9 || ^10
+dependencies:
+  - drupal:views
+

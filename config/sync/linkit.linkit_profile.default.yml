@@ -1,0 +1,23 @@
+uuid: 2b57865f-eba6-4126-a39a-23dfc5ba44c6
+langcode: es
+status: true
+dependencies:
+  module:
+    - taxonomy
+_core:
+  default_config_hash: 0Jw_BFJCCtWk187tIYvME58VFpYwPaAdrc4eRtAyHH0
+label: 'Por defecto'
+id: default
+description: 'A default Linkit profile'
+matchers:
+  90380f1f-bda6-4462-a0c1-466927fc883a:
+    id: 'entity:taxonomy_term'
+    uuid: 90380f1f-bda6-4462-a0c1-466927fc883a
+    settings:
+      metadata: ''
+      bundles:
+        rules_glossary: rules_glossary
+      group_by_bundle: false
+      substitution_type: canonical
+      limit: 100
+    weight: 0

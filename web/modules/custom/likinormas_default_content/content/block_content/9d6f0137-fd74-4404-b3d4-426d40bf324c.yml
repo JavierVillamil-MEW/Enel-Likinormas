@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: block_content
+  uuid: 9d6f0137-fd74-4404-b3d4-426d40bf324c
+  bundle: rules_comments_block
+  default_langcode: es
+default:
+  status:
+    -
+      value: true
+  info:
+    -
+      value: 'Technical rules list comments'
+  reusable:
+    -
+      value: true
+  revision_translation_affected:
+    -
+      value: true
+  comment:
+    -
+      status: 2
+      cid: 0
+      last_comment_timestamp: 1684276622
+      last_comment_name: ''
+      last_comment_uid: 0
+      comment_count: 0

@@ -1,0 +1,30 @@
+_core:
+  default_config_hash: XcgosOepJxgEPlITLHaf0iS0kKeA_-Zus_XcQGrN-Rg
+langcode: es
+cancel_confirm:
+  subject: 'Solicitud de cancelación de cuenta para [user:display-name] en [site:name]'
+  body: "<p><b>[user:display-name],</b><br><br><br>\r\n\r\nSe ha realizado una petición para eliminar su cuenta en [site:name]. <br><br>\r\n\r\nPuede cancelar su cuenta en <a  target=\"_blank\" href=\"[site:url-brief]\">[site:url-brief]</a> haciendo click en este enlace o copiándolo y pegándolo en su navegador:<br><br>\r\n\r\n<a  target=\"_blank\" href=\"[user:cancel-url]\">[user:cancel-url]</a><br><br>\r\n\r\n<b>IMPORTANTE:</b> La cancelación de su cuenta es un proceso irreversible.<br><br>\r\n\r\nEste enlace caducará en un día y si no es utilizado no ocurrirá nada.<br><br><br>\r\n\r\n<b>--  El equipo de [site:name]</b></p>"
+password_reset:
+  subject: 'Reemplazo de información de inicio de sesión para [user:display-name] en [site:name]'
+  body: "<p><b>[user:display-name],</b><br><br><br>\r\n\r\nUna petición para reestablecer la contraseña de su cuenta ha sido realizada en [site:name].<br><br>\r\n\r\nAhora puede iniciar sesión haciendo clic en este enlace o copiándolo y pegándolo en su navegador:<br><br>\r\n\r\n<a  target=\"_blank\" href=\"[user:one-time-login-url]\">[user:one-time-login-url]</a><br><br>\r\n\r\nEste enlace solo puede ser usado una vez para iniciar sesión y le llevará a una página donde puede establecer su contraseña. Caduca después de un día y nada ocurrirá si no se usa.<br><br><br>\r\n\r\n<b>--  El equipo de [site:name]</b></p>"
+register_admin_created:
+  subject: 'Un administrador ha creado una cuenta para usted en [site:name]'
+  body: "<p>\r\n<b>[user:display-name],</b><br><br><br>\r\n\r\nUn administrador del sitio en [site:name] ha creado una cuenta para usted. Puede ahora iniciar sesión haciendo clic en este enlace o copiando y pegándolo en su navegador:\r\n<br><br>\r\n\r\n<a  target=\"_blank\" href=\"[user:one-time-login-url]\">[user:one-time-login-url]</a>\r\n<br><br>\r\nEste enlace solo puede ser usado una vez para iniciar sesión y le conducirá a la página donde podrá establecer su contraseña.\r\n<br><br>\r\nDespués de establecer su contraseña, será capaz de iniciar sesión en [site:login-url] en el futuro usando:\r\n<br><br>\r\n<b>Nombre de usuario:</b> [user:name]\r\n<b>Contraseña:</b> Su contraseña<br><br><br>\r\n\r\n<b>--  Equipo de [site:name]</b></p>"
+register_no_approval_required:
+  subject: 'Detalles de la cuenta para [user:display-name] en [site:name]'
+  body: "<p><b>[user:display-name],</b><br><br><br>\r\n\r\nGracias por registrarse en [site:name]. Puede ahora iniciar sesión haciendo clic en este enlace o copiando y pegandolo en su navegador:<br><br>\r\n\r\n<a  target=\"_blank\" href=\"[user:one-time-login-url]\">[user:one-time-login-url]</a><br><br>\r\n\r\nEste enlace solo puede ser usado una vez para iniciar sesión y le conducirá a una página donde podrá establecer sus contraseña.<br><br>\r\n\r\nDespués de establecer su contraseña, será capaz de iniciar sesión en <a  target=\"_blank\" href=\"[site:login-url]\">[site:login-url]</a> en el futuro usando:<br><br>\r\n\r\n\r\n<b>Nombre de usuario:</b> [user:name]\r\n<b>Contraseña:</b> Su contraseña<br><br><br>\r\n\r\n<b>--  Equipo de [site:name]</b></p>"
+register_pending_approval:
+  subject: 'Detalles de cuenta para [user:display-name] en [site:name] (pendiente de aprobación por el administrador)'
+  body: "<p><b>[user:display-name],</b><br><br><br>\r\n\r\nGracias por registrarse en [site:name]. Su solicitud de una cuenta actualmente está pendiente de aprobación. Una vez que haya sido aprobada, recibirá otro correo electrónico con información sobre cómo iniciar sesión, establecer su contraseña y otros detalles.<br><br><br>\r\n\r\n<b>--  El equipo de [site:name]</b></p>"
+register_pending_approval_admin:
+  subject: 'Detalles de cuenta para [user:display-name] en [site:name] (pendiente de aprobación por el administrador)'
+  body: "<p><b>[user:display-name], </b> ha solicitado una cuenta.<br><br><br>\r\n\r\n<a  target=\"_blank\" href=\"[user:edit-url]\">[user:edit-url]</a></p>"
+status_activated:
+  subject: 'Detalles de cuenta para [user:display-name] en [site:name] (aprobado)'
+  body: "<p><b>[user:display-name],</b><br><br><br>\r\n\r\nSu cuenta en [site:name] ha sido activada.<br><br>\r\n\r\nUsted puede ahora iniciar sesión haciendo click en este enlace o copiándolo y pegándolo en su navegador:<br><br>\r\n\r\n\r\n<a  target=\"_blank\" href=\"[user:one-time-login-url]\">[user:one-time-login-url]</a><br><br>\r\n\r\nEste enlace solo puede ser usado una vez para iniciar sesión y lo llevará a usted a una página donde podrá establecer su clave personal.<br><br>\r\n\r\nDespués de establecer su clave personal, usted podrá iniciar sesión en <a  target=\"_blank\" href=\"[site:login-url]\">[site:login-url]</a> utilizando:<br><br>\r\n\r\n<b>Usuario:</b> [user:account-name]\r\n<b>Clave personal:</b> Su contraseña<br><br><br>\r\n\r\n<b>--  Equipo [site:name]</b></p>"
+status_blocked:
+  subject: 'Detalles de la cuenta de [user:display-name] en [site:name] (bloqueada)'
+  body: "[user:display-name],\r\n\r\nSu cuenta en [site:name] ha sido bloqueada.\r\n\r\n--  El equipo de [site:name]"
+status_canceled:
+  subject: 'Detalles de cuenta para [user:display-name] en [site:name] (cancelado)'
+  body: "[user:display-name],\r\n\r\nSu cuenta en [site:name] ha sido cancelada.\r\n\r\n--  El equipo de [site:name]"

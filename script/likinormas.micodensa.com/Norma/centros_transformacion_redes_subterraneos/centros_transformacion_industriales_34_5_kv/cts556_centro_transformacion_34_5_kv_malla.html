@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CTS556 Centro de transformación de 34,5 kV. Malla de puesta a tierra | Likinormas</title>
+	<meta name="description" content="Centro de transformación de 34,5 kV. Malla de puesta a tierra.Esta norma presenta características técnicas" />
+	<script src="../../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../../index.html"><img src="../../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1701" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../../Usuario/Registro%3FReturnUrl=%252FNorma%252FDetalles%252F1701.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/1701" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1701" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			showSubmenu('4', '88');
+		});
+	</script>
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Norma t&#233;cnica
+	</div>
+	<h1>CTS556 Centro de transformaci&#243;n de 34,5 kV. Malla de puesta a tierra</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de la norma</div>
+					<div class="caracteristicas">CTS 556</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">04/03/2014</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../../Home/DownloadPDF/1701">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FNorma%2FDetalles%2F1701&amp;nodoid=1701', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+    <div class="modulo">
+        <div class="titu_modulo">
+            Relacionados
+        </div>
+            <div class="modulo_contenido" style="">
+                <div class="subtitulos_internos">
+                    <a href="../../../Especificacion/materiales_puesta_tierra/et490_varilla_puesta_tierra.html">ET490 Varilla de puesta a tierra</a>
+                </div>
+                    <div class="relacionadotipo">Especificaci&#243;n t&#233;cnica</div>
+            </div>
+    </div>
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+        <div style="clear:left;"></div>
+		Bajo el &#225;rea  ocupada por el <a href="cts556_centro_transformacion_34_5_kv_malla.html#" id="version-122" class="externalLink  glosarioLink">Centro de Transformaci&#243;n</a> se debe instalar una malla de <a href="cts556_centro_transformacion_34_5_kv_malla.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a>, calculada de acuerdo con el procedimiento mencionado en la Norma de la  IEEE St 80-2000.<br /><br />La malla de <a href="cts556_centro_transformacion_34_5_kv_malla.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a> se debe construir antes de fundir la placa del piso destinado a <a href="cts556_centro_transformacion_34_5_kv_malla.html#" id="version-122" class="externalLink  glosarioLink">centro de transformaci&#243;n</a>.<br /><br />Para las uniones entre los diferentes segmentos de la malla se debe hacer uso de uniones soldadas, unicamente.<br /><br /> Los par&#225;metros para el c&#225;lculo de la malla son :<br />
+<ul><li>Valor de referencia de la <a href="cts556_centro_transformacion_34_5_kv_malla.html#" id="version-353" class="externalLink  glosarioLink">resistencia de puesta a tierra</a> : 10 <a href="cts556_centro_transformacion_34_5_kv_malla.html#" id="version-0" class="externalLink  glosarioLink">Ohmios</a></li></ul>
+
+<ul><li>Corriente de <a href="cts556_centro_transformacion_34_5_kv_malla.html#" id="version-204" class="externalLink  glosarioLink">falla</a> : Se toma normalmente el valor de la corriente de <a href="cts556_centro_transformacion_34_5_kv_malla.html#" id="version-204" class="externalLink  glosarioLink">falla</a> monof&#225;sica, aproximadamente 1,5 kA</li></ul>
+	
+<ul><li>Tiempo m&#225;ximo de despeje de la <a href="cts556_centro_transformacion_34_5_kv_malla.html#" id="version-204" class="externalLink  glosarioLink">falla</a> (t) en seg. : Este valor se toma de los tiempos de operaci&#243;n  en las curvas caracter&#237;sticas de los equipos de protecci&#243;n como interruptores, reconectadores o fusibles, el cual puede estar entre 0,5 y 1,5 segundos.</li></ul>
+		
+<ul><li>Resistividad del terreno : Ser&#225; medido en cada caso espec&#237;fico.</li></ul>
+		
+<ul><li>Profundidad de enterramiento de la malla : 600 mm.</li></ul>
+		
+<ul><li>Resistividad superficial : En el caso de centros de transformaci&#243;n de instalaci&#243;n interior el piso es de concreto y por tanto la resistividad superficial esta entre 20 - 50 ohmios-metro; luego con el fin de cumplir las normas de <a href="cts556_centro_transformacion_34_5_kv_malla.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a> de las tensiones tolerables de paso y de contacto cuando no se alcanzan, es necesario recubrir el piso, una vez instalados los equipos (transformadores y celdas), con baldosas aislantes no propagadores del <a href="cts556_centro_transformacion_34_5_kv_malla.html#" id="version-213" class="externalLink  glosarioLink">fuego</a> que presenten una resistividad superior a 20 000 ohmios-metro.</li></ul>
+
+<ul><li>Selectividad del conductor : La Empresa exige como calibre m&#237;nimo el conductor 2/0 AWG cobre, con el fin de tener mejor la rigidez mec&#225;nica del conductor.</li></ul>
+		
+<ul><li>Longitud necesaria del conductor para la malla : Se necesita calcular las constantes K<sub>m</sub> y K<sub>i</sub>.</li></ul>
+ <br /><b>K<sub>m</sub>:</b>  es una constante que tiene en cuenta la cantidad, el espaciamiento, el di&#225;metro y la profundidad de enterramiento de los conductores de la malla.<br /><br /><b>K<sub>i</sub>:</b> es una constante que tiene en cuenta la irregularidad del fluido de corriente desde las diferentes partes de la malla.<br /><br /><br />El n&#250;mero de conductores (n) es tomado en una sola direcci&#243;n, excluyendo las conexiones cruzadas.<br />En el c&#225;lculo de la resistencia de la malla debe complementarse con lo estipulado en la norma <a href="../../lineas_aereas_urbanas_distribucion/puesta_tierra/la400_puestas_tierra.html" class="externalLink">LA 400<span class="externalLinkIcon"></span></a> <i>Puestas a tierra</i>, de la categor&#237;a Normas de Construcci&#243;n de L&#237;neas A&#233;reas Urbanas de Distribuci&#243;n.<br /><br />A veces puede disminuirse su valor mediante la adici&#243;n de varillas de <a href="cts556_centro_transformacion_34_5_kv_malla.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a> (<a href="../../../Especificacion/materiales_puesta_tierra/et490_varilla_puesta_tierra.html" class="externalLink">ET 490<span class="externalLinkIcon"></span></a>). Estas varillas deben instalarse en aquellos puntos de mayor densidad de corriente, tales como conexi&#243;n de la <a href="cts556_centro_transformacion_34_5_kv_malla.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> de los descargadores de <a href="cts556_centro_transformacion_34_5_kv_malla.html#" id="version-372" class="externalLink  glosarioLink">sobretensi&#243;n</a> (DPS) y la conexi&#243;n del neutro del transformador. Las varillas deben estar espaciadas a una distancia mayor que el doble de su longitud.<br /><br />Se define como <a href="cts556_centro_transformacion_34_5_kv_malla.html#" id="version-380" class="externalLink  glosarioLink">tensi&#243;n de paso</a>, a la m&#225;xima <a href="cts556_centro_transformacion_34_5_kv_malla.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> a que quedan sometidos los pies de una persona, separados un metro, cuando se encuentra caminando sobre el &#225;rea de la malla del <a href="cts556_centro_transformacion_34_5_kv_malla.html#" id="version-122" class="externalLink  glosarioLink">centro de transformaci&#243;n</a> en el momento de ocurrir una <a href="cts556_centro_transformacion_34_5_kv_malla.html#" id="version-204" class="externalLink  glosarioLink">falla</a>. Para conocer la <a href="cts556_centro_transformacion_34_5_kv_malla.html#" id="version-380" class="externalLink  glosarioLink">tensi&#243;n de paso</a> (E<sub>s</sub>) se necesita calcular la constante K<sub>s</sub> , que tiene en cuenta la cantidad, el espaciamiento y la profundidad de enterramiento de los conductores. El n&#250;mero de t&#233;rminos entre par&#233;ntesis es igual al n&#250;mero de conductores en paralelo en la malla tomados en un solo sentido.<br /><br />Se define como <a href="cts556_centro_transformacion_34_5_kv_malla.html#" id="version-379" class="externalLink  glosarioLink">tensi&#243;n de contacto</a> (E<sub>t</sub>) a la <a href="cts556_centro_transformacion_34_5_kv_malla.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> que queda sometida una persona que se encuentra de pie dentro del &#225;rea del <a href="cts556_centro_transformacion_34_5_kv_malla.html#" id="version-122" class="externalLink  glosarioLink">centro de transformaci&#243;n</a>, y que en el momento de la <a href="cts556_centro_transformacion_34_5_kv_malla.html#" id="version-204" class="externalLink  glosarioLink">falla</a> est&#233; tocando con una o ambas manos una estructura o cualquier elemento conductor unido a la malla de <a href="cts556_centro_transformacion_34_5_kv_malla.html#" id="version-387" class="externalLink  glosarioLink">tierra</a>.<br /><br />El RETIE en su art&#237;culo 15.2 <i>Dise&#241;o del sistema de puesta a tierra</i>, sugiere para el c&#225;lculo de la malla de tierra el siguiente procedimiento b&#225;sico:<br /><br /><i>a. Investigar las caracter&#237;sticas del suelo, especialmente la resistividad.</i> <br /><br /><i>b. Determinar la corriente m&#225;xima de falla a tierra, que debe ser entregada por el Operador de Red, en media y alta tensi&#243;n para cada caso particular.</i><br /> <br /><i>c. Determinar el tiempo m&#225;ximo de despeje de la falla para efectos de simulaci&#243;n.</i> <br /><br /><i>d. Investigar el tipo de carga.</i> <br /><br /><i>e. Calcular de forma preliminar la resistencia de puesta a tierra.</i> <br /><br /><i>f. Calcular de forma preliminar las tensiones de paso, contacto y transferidas en la instalaci&#243;n.</i> <br /><br /><i>g. Evaluar el valor de las tensiones de paso, contacto y transferidas calculadas con respecto a la soportabilidad del ser humano.</i> <br /><br /><i>h. Investigar las posibles tensiones transferidas al exterior, debidas a tuber&#237;as, mallas, conductores de neutro, blindaje de cables, circuitos de se&#241;alizaci&#243;n, adem&#225;s del estudio de las formas de mitigaci&#243;n.</i> <br /><br /><i>i. Ajustar y corregir el dise&#241;o inicial hasta que se cumpla los requerimientos de seguridad.</i> <br /><br /><i>j. Presentar un dise&#241;o definitivo.</i> <br /><br />El RETIE en su art&#237;culo 15.4 VALORES DE REFERENCIA DE RESISTENCIA DE PUESTA A TIERRA, indica recomendaciones cuando se tienen valores elevados de  resistividad del terreno, corrientes de falla a tierra o prolongados tiempos de despeje de las fallas,  para no exponer a las personas a tensiones por encima de los umbrales de tolerancia del ser humano: <br /><br />a. Hacer inaccesibles zonas donde se prevea la superaci&#243;n de los umbrales de soportabilidad para seres humanos. <br /><br />b. Instalar pisos o pavimentos de gran aislamiento. <br /><br />c. Aislar todos los dispositivos que puedan ser sujetados por una persona. <br /><br />d. Establecer conexiones equipotenciales en las zonas cr&#237;ticas. <br /><br />e. Aislar el conductor del electrodo de puesta a tierra a su entrada en el terreno. <br /><br />f. Disponer de se&#241;alizaci&#243;n en las zonas cr&#237;ticas donde puedan trabajar profesionales competentes, siempre que cuenten con las instrucciones sobre el tipo de riesgo y est&#233;n dotados de los elementos de protecci&#243;n personal con aislamiento adecuado. <br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 1701, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+_meta:
+  version: '1.0'
+  entity_type: paragraph
+  uuid: 54bec8cc-af3c-497f-9446-604c6a0651e0
+  bundle: rules_items_forms
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1684267232
+  behavior_settings:
+    -
+      value: {  }
+  revision_translation_affected:
+    -
+      value: true
+  description_item:
+    -
+      value: "Podrás acceder a información exclusiva y actualizada sobre los\r\ncambios en las normativas, nuevos procedimientos y tecnologías"
+  title_item:
+    -
+      value: 'Acceso a la información exclusiva'

@@ -1,0 +1,39 @@
+uuid: 923857af-5bff-4b78-b9b6-3661c7953d5f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.technical_rule_comment
+    - node.type.rules_technical_rules
+  module:
+    - comment
+    - comments_order
+third_party_settings:
+  comments_order:
+    order: DESC
+    children_natural_order: 1
+    created_order: 0
+id: node.rules_technical_rules.technical_rule_comment
+field_name: technical_rule_comment
+entity_type: node
+bundle: rules_technical_rules
+label: 'Comentarios de la norma técnica'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    status: 2
+    cid: 0
+    last_comment_timestamp: 0
+    last_comment_name: null
+    last_comment_uid: 0
+    comment_count: 0
+default_value_callback: ''
+settings:
+  default_mode: 1
+  per_page: 10
+  anonymous: 0
+  form_location: true
+  preview: 0
+field_type: comment

@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET918 Caja para medidor trifásico de una cuenta 50 (150) A | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/705" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F705.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/705" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/705" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '32');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET918 Caja para medidor trif&#225;sico de una cuenta 50 (150) A</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET 918</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">02/07/2013</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/705">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F705&amp;nodoid=705', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_0">1.  OBJETO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_1">2.	 ALCANCE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_2"> 3.  CONDICIONES  DE  SERVICIO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_3">4.	 SISTEMA  DE  UNIDADES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_4">5.	  NORMAS  DE  FABRICACI&#211;N  Y  PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_5">6. REQUERIMIENTOS  T&#201;CNICOS  PARTICULARES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_6">6.1  	GEOM&#201;TRICOS.</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_7">6.2. BORNERA DE PUESTA A TIERRA</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_8">6.3	 IDENTIFICACI&#211;N </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_9">6.4  QU&#205;MICOS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_10">6.5  	MEC&#193;NICOS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_11">7.	  CRITERIOS  DE  ACEPTACI&#211;N  O  RECHAZO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_12">7.1	  Muestreo</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_13">7.2	  Aceptaci&#243;n o Rechazo</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_14">8.	  PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_15">8.1 	Inspecci&#243;n visual</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_16">8.2	  Verificaci&#243;n dimensional</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_17">8.3	  Verificaci&#243;n del cierre y apertura de la tapa</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_18">8.4 Prueba contra impacto</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_19">8.5  Ensayo de grado de protecci&#243;n (C&#243;digo IP)</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_20">8.6 Resistencia a la corrosi&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_21">8.7	 Espesor de la pintura</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_22">8.8	 Ensayo de adherencia por tracci&#243;n a pintura.</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_23">8.9 Ensayo de resistencia a los choques mec&#225;nicos provocados por objetos </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_24">8.10  Ensayo de autoextinci&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_25">8.11	  Ensayo de resistencia a las variaciones de temperatura &#243; resistencia en la   estufa</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_26">8.12 Ensayo de resistencia a la penetraci&#243;n de una bolilla.</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_27">8.13 Envejecimiento clim&#225;tico</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_28">8.14 An&#225;lisis qu&#237;mico a borneras</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_29">8.15 C&#225;mara de amoniaco a borneras</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_30">8.16 Corto circuito a bornera de puesta a tierra</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_31">8.17 Calentamiento est&#225;tico a bornera de puesta a tierra</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_32">8.18 Ensayo de tracci&#243;n a borneras</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_33">8.19 Ensayo de seguridad de montaje a borneras</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_34">8.20 Ensayo de ensamble a borneras</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_35">9.  EMPAQUE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_36">10. REQUISITOS DE LAS OFERTAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_37">11.  GARANT&#205;A DE FABRICA</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_38">12. INSPECCI&#211;N EN FABRICA </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_39">13. CERTIFICADOS DE CONFORMIDAD</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et918_caja_medidor_trifasico_cuenta_50_150.html#heading_40">14. PRESENTACI&#211;N DE LAS OFERTAS</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1.  OBJETO</h2>
+Establecer las caracter&#237;sticas, requisitos y ensayos t&#233;cnicos que deben cumplir las cajas para medidores trif&#225;sicos de una cuenta 50/150 A, 3x120/208 V.<br />
+<h2 id="heading_1" >2.	 ALCANCE</h2>
+Esta <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a> se aplicar&#225; en todas las cajas para medidores trif&#225;sicos de una cuenta que sean instalados en el <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de Enel Codensa.<br />
+<h2 id="heading_2" > 3.  CONDICIONES  DE  SERVICIO</h2>
+Las cajas de una cuenta ser&#225;n utilizadas para instalar los medidores trif&#225;sicos, conectando a los diferentes usuarios al <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de distribuci&#243;n; estos elementos ser&#225;n empleados empotrados y sometidos a la intemperie bajo las siguientes condiciones:<br /><div style="width:532px;"><table><tr><td colspan="2" rowspan="1" style="width:532px;height:10px;text-align:center"><b>CARACTER&#205;STICAS  AMBIENTALES</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">a.  Altura sobre el nivel del mar</td><td colspan="1" rowspan="1" style="">Desde 2900 a los 600 m.s.n.m.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">b.  Ambiente</td><td colspan="1" rowspan="1" style="">Tropical</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">c. Humedad relativa</td><td colspan="1" rowspan="1" style="">Desde 100% al 20%</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">d. Temperatura m&#225;xima y m&#237;nima</td><td colspan="1" rowspan="1" style="">+45 &#176;C y -5 &#176;C respectivamente</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">e. Temperatura promedio </td><td colspan="1" rowspan="1" style="">14 &#176;C</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">f.  Poluci&#243;n</td><td colspan="1" rowspan="1" style="">Alta con productos de la combusti&#243;n y altamente contaminada por otros agentes.</td></tr></table><br /></div><div style="width:452px;"><table><tr><td colspan="2" rowspan="1" style="width:452px;height:10px;text-align:center"><b>CARACTER&#205;STICAS  EL&#201;CTRICAS</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">a.  <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-384" class="externalLink  glosarioLink">Tensi&#243;n Nominal</a></td><td colspan="1" rowspan="1" style="">120/208 V</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">b.  <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-377" class="externalLink  glosarioLink">Tensi&#243;n</a> M&#225;xima</td><td colspan="1" rowspan="1" style="">600 V</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">c.  Frecuencia del <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-363" class="externalLink  glosarioLink">sistema</a></td><td colspan="1" rowspan="1" style="">60 Hz</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">d. Disposici&#243;n de la acometida</td><td colspan="1" rowspan="1" style="">Trif&#225;sica  tetrafilar</td></tr></table><br /></div><h2 id="heading_3" >4.	 <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-363" class="externalLink  glosarioLink">SISTEMA</a>  DE  UNIDADES</h2>
+Todos los documentos tanto de la propuesta como del contrato de suministro, deben expresar las cantidades num&#233;ricas en unidades del <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-363" class="externalLink  glosarioLink">Sistema</a> Internacional (SI). Si el OFERENTE utiliza en sus libros de instrucci&#243;n, folletos o dibujos, unidades en sistemas diferentes, debe hacer las conversiones  respectivas.<br />
+<h2 id="heading_4" >5.	  NORMAS  DE  FABRICACI&#211;N  Y  PRUEBAS</h2><div style="width:546px;"><table><tr><td colspan="1" rowspan="1" style="width:131px;height:10px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:415px;"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">ASTM/SAE 1010</td><td colspan="1" rowspan="1" style="">Tipos de acero al carb&#243;n</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">ASTM 4541 de 1995</td><td colspan="1" rowspan="1" style="">Prueba de adherencia de la pintura.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC –ISO 2859-1</td><td colspan="1" rowspan="1" style="">Muestreo para <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">AN 60-E-01</td><td colspan="1" rowspan="1" style="">C&#243;digo de Ensayos de Electricit&#233; de France</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">HN 60-E-01</td><td colspan="1" rowspan="1" style="">C&#243;digo de Ensayos de Electricit&#233; de France apartado 6.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">ANSI/ASTM 635</td><td colspan="1" rowspan="1" style=""><a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de autoextinci&#243;n.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">ASTM  B117</td><td colspan="1" rowspan="1" style="">Prueba de C&#225;mara Salina</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">ASTM G26</td><td colspan="1" rowspan="1" style="">Prueba de envejecimiento clim&#225;tico</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">EN 50102</td><td colspan="1" rowspan="1" style="">Verificaci&#243;n Grado de Protecci&#243;n Contra Impactos mec&#225;nicos externos</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">IEC 60529</td><td colspan="1" rowspan="1" style="">Degrees of protection provided by enclosures (IP Code)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC 2244</td><td colspan="1" rowspan="1" style="">Pruebas el&#233;ctricas de herrajes el&#233;ctricos.</td></tr></table><br /></div><h2 id="heading_5" >6. REQUERIMIENTOS  T&#201;CNICOS  PARTICULARES</h2>
+La caja estar&#225; construida con materiales de la mejor <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> para ese fin, debi&#233;ndose descartar el empleo de materiales alterables por la humedad, radiaci&#243;n solar y otras condiciones ambientales desfavorables.<br /><br />La caja ser&#225; compacta y liviana, deber&#225; construirse en forma soldada (no troquelada), en l&#225;mina de acero SAE 1010 &#243; similar debidamente autorizada por Enel Codensa.; estas cajas, tambi&#233;n podr&#225;n fabricarse en materiales polim&#233;ricos, que permitan limarse, cortarse, agujerearse y frezarse sin sobrecalentamientos y que no sean atacados por el cemento.<br /><br />La caja debe ser autosoportable, r&#237;gida y no debe presentar desajustes durante su transporte e instalaci&#243;n. Debe cumplir con todas las propiedades y caracter&#237;sticas de las cajas fabricadas en l&#225;mina de acero o <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-274" class="externalLink  glosarioLink">material</a> polim&#233;rico seg&#250;n sea el caso.<br /><br />El &#237;ndice de hermeticidad para las cajas ser&#225; IP 44 de acuerdo a la norma IEC 60529, grado de protecci&#243;n contra choques IK 10 ( 20.00 julios).<br /><br />Las cajas se componen de dos (2) partes: La base y la puerta. Deber&#225;n poseer todos los accesorios necesarios y suficientes para su correcta utilizaci&#243;n, funcionamiento y f&#225;cil transporte.<br />
+<h3 id="heading_6" >6.1  	GEOM&#201;TRICOS.</h3>
+La caja para medidor trif&#225;sico ser&#225; de la forma y dimensiones que se muestran en las figuras adjuntas.<br /><br /><b>6.1.1	  Base</b><br /><br />Dimensiones de la base:<br /><br />•	Ancho 600 mm<br /><br />•	Altura: 600 mm<br /><br />•	Profundidad: 200 mm.<br /><br />La base de la caja debe poseer cinco pretroquelados para di&#225;metros de tubos met&#225;licos galvanizados de 1 &#189;” y 2” para la entrada del <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-107" class="externalLink  glosarioLink">cable</a> de la acometida y la salida para la caja de distribuci&#243;n de interruptores termomagn&#233;ticos del <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-403" class="externalLink  glosarioLink">usuario</a> adem&#225;s en la parte inferior debe tener un pretroquelado para tubo de &#189;” para la conexi&#243;n a <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-387" class="externalLink  glosarioLink">tierra</a>. ( ver figura 2 )<br /><br />En la base de la caja se deben colocar los medios para soportar el terminal de <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> de 175 A, adem&#225;s de darle la altura suficiente para que sobresalga, logrando as&#237; facilidad en la conexi&#243;n. Se podr&#225; instalar en la pared posterior o en alguna de las caras laterales.<br /><br /><b>6.1.2  	Puerta</b><br /><br />En la parte superior, la caja para medidor posee una ventana de <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> con un marco (145 x 120 mm) y una transparencia de <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a> en policarbonato de 3 mm de espesor (125mm x 100mm). Adem&#225;s posee una ventana con portacandado para maniobrar el <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-240" class="externalLink  glosarioLink">interruptor</a>, sin riesgo de tocar partes energizadas y evitar el ingreso de agua. <br /><br />La puerta tendr&#225; dos orificios para el buje de cerradura de 16 mm con perno RW &#188;” y en parte superior del buje se tendr&#225;n dos perforaciones que permitan la instalaci&#243;n de un sello de <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a> de la compa&#241;&#237;a. La localizaci&#243;n del centro del buje triangular debe ser conc&#233;ntrica con la rosca que lo recibe. (ver figura 6 y 7)<br /><br />La caja debe ser fabricada con un marco alrededor como se indica en la figura 2 con una pesta&#241;a, de forma que permita el cierre y ajuste, impidiendo el acceso del agua al interior de la caja. La pesta&#241;a alrededor de la caja evita el ingreso de agua, las intervenciones y el acceso no autorizado o fraudulento de los usuarios o extra&#241;os.<br /><br />La tapa de la caja debe ser abatible para facilitar la conexi&#243;n, y debe abrir como m&#237;nimo 120o desde la posici&#243;n cerrada; deber&#225; estar sujeta lateralmente a la base con dos bisagras en <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-274" class="externalLink  glosarioLink">material</a> inoxidable, resistente a la <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a> y al lado derecho, de tal forma que abra de izquierda a derecha (vista de frente) garantizando una apertura f&#225;cil, y deben tener la misma protecci&#243;n superficial que la l&#225;mina que forma la caja. En caso de que se requieran, deben incluirse limitadores de giro para prevenir el <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-153" class="externalLink  glosarioLink">da&#241;o</a> de las bisagras.<br /><br />La tapa de la caja debe incluir un <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de cierre mediante un perno especial de cabeza triangular, que consta de una pieza torneada met&#225;lica en la cual se aloja el <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a>, un buje met&#225;lico a prueba de intemperie. El perno de cabeza  triangular estar&#225; incluido y las llaves para accionarlo  ser&#225;n suministradas por el fabricante &#250;nicamente a Enel Codensa. en el n&#250;mero que se solicite. Adicionalmente, &#233;ste <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> debe permitir la instalaci&#243;n de un sello de <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a>. (ver figuras 6 y 7).<br /><br />Las dimensiones del tornillo de cabeza triangular y llave se muestran en las figuras 8 y 9<br />
+<h3 id="heading_7" >6.2. BORNERA DE <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-342" class="externalLink  glosarioLink">PUESTA A TIERRA</a></h3>
+El interior de la caja, debe contener una bornera de <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a> para aterrizar el neutro, la caja y el medidor, as&#237; como los conductores de continuidad el&#233;ctrica y el electrodo de <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a>.  Deber&#225; tener una capacidad no inferior de 150 A y tener la disposici&#243;n de alojar conductores de calibre No.6 AWG hasta 2 AWG; para lo cual tendr&#225; cuatro orificios en las partes laterales y cuatro en su parte superior. La sujeci&#243;n de los conductores  que pasan a trav&#233;s de la bornera por los orificios laterales, deber&#225; hacerse mediante tornillos de punta redondeada colocados a 90&#176; de la perforaci&#243;n; esto asegurar&#225; una mayor superficie de contacto entre los conductores y la bornera.  Esta bornera se debe sujetar a la carcasa mediante dos tornillos soldados a la cara posterior o caras laterales de la caja. El <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-274" class="externalLink  glosarioLink">material</a> de la bornera debe ser cobre o aleaci&#243;n de cobre.<br />
+<h3 id="heading_8" >6.3	 IDENTIFICACI&#211;N </h3>
+La caja tendr&#225; grabado en alto relieve:<br /><br />a.	Inscripci&#243;n en letras may&#250;sculas que diga “USO EXCLUSIVO DE ENEL CODENSA” en la puerta corrediza.<br />b.	S&#237;mbolo de puesta a tierra en la parte posterior del cuerpo de la caja, correspondiente a cada bornera.<br />c.	La tapa corrediza del interruptor, tendr&#225; marcada en su parte inferior la leyenda “CLIENTE&quot;.<br /><br />En la parte inferior derecha de la misma tendr&#225; una placa especificando como m&#237;nimo: Nombre, tel&#233;fono y ciudad donde se ubica el fabricante, fecha de fabricaci&#243;n, serie de fabricaci&#243;n,  n&#250;mero y fecha del certificado de conformidad de producto con norma t&#233;cnica y RETIE.<br /><br />Debe incluirse el s&#237;mbolo de riesgo el&#233;ctrico con las m&#237;nimas dimensiones indicadas en el art. 11.2.2 y art. 11.3 del RETIE.<br /><br />Adicionalmente se instalar&#225; en la parte media de la puerta una calcoman&#237;a de advertencia al cliente de 10 x 10 cm de fondo amarillo y letras negras, que contenga el siguiente texto: <br /><div style="width:600px;"><table><tr><td colspan="4" rowspan="1" style="width:600px;height:132px;"><b>Estimados clientes : El acceso y la manipulaci&#243;n del medidor y conexiones el&#233;ctricas contenidas en est&#225; caja, es prohibido. Cualquier operaci&#243;n y/o arreglo, debe hacerlo personal autorizado por Enel Codensa. Por lo tanto no rompa, ni permita la rotura de los sellos por personal no autorizado.                                                                                          El incumplimiento a lo anterior ocasiona sanciones pecuniarias y suspensiones del servicio, de acuerdo con la resoluci&#243;n No. 108 de 1997 de la Comisi&#243;n de Regulaci&#243;n de Energ&#237;a y Gas (Art. 54) y con el Contrato de Condiciones Uniformes de Enel Codensa. </b></td></tr></table><br /></div>
+<h3 id="heading_9" >6.4  QU&#205;MICOS</h3>
+<b>6.4.1 Caja de <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-274" class="externalLink  glosarioLink">Material</a> Met&#225;lico</b><br /><br />La caja debe construirse (soldada), en l&#225;mina de acero SAE 1010 que debe cumplir con las normas ASTM; el calibre de la l&#225;mina sin pintura debe ser como m&#237;nimo 0,912 mm, elaborada por el proceso de doblado y soldado. Debe ser una estructura completamente r&#237;gida e indeformable, sin aristas cortantes.<br /><br /><b>Proceso de Pintura</b><br /><br />La l&#225;mina de acero utilizada en la construcci&#243;n de las cajas debe someterse a un tratamiento de limpieza, igualmente la caja ya elaborada tambi&#233;n debe someterse a un tratamiento de limpieza, el cual debe garantizar que las superficies est&#233;n libres de grasas, &#243;xidos o cualquier elemento extra&#241;o.  Se debe aplicar una pintura de color gris RAL serie 70, similar al RAL 7032, resistente a los rayos ultravioleta resistente a los rayos ultravioleta.<br /><br />Para procesos de recubrimiento con pintura l&#237;quida, luego del proceso de limpieza y fosfato, se debe aplicar una base de pintura ep&#243;xica con un espesor en las &#225;reas interior y exterior de 50 &#181;m, luego se debe aplicar un recubrimiento de pintura poli&#233;ster o acr&#237;lica con un espesor m&#237;nimo en el &#225;rea exterior de 50 &#181;m y en el &#225;rea interior de 25 &#181;m. El total de la capa de recubrimiento ser&#225; de 100 &#181;m m&#237;nimo en el &#225;rea exterior y 70 &#181;m m&#237;nimo en el &#225;rea interior.<br /><br />Para procesos de recubrimiento con pintura electrost&#225;tica en polvo, luego del proceso de limpieza y fosfato, se debe aplicar un recubrimiento de pintura epoxipoli&#233;ster. El total de la capa de recubrimiento ser&#225; m&#237;nimo de 65 &#181;m en el &#225;rea exterior y de 50 &#181;m en el &#225;rea interior.<br /><br /><b>6.4.2  	Caja de <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-274" class="externalLink  glosarioLink">Material</a> Polim&#233;rico</b><br /><br />La caja tambi&#233;n se puede fabricar en <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-274" class="externalLink  glosarioLink">material</a> polim&#233;rico de cualquier tipo como pl&#225;stico, poli&#233;ster o fibra de vidrio, el color debe ser incorporado en el momento de la fabricaci&#243;n. El <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-274" class="externalLink  glosarioLink">material</a> de las cajas debe tener una resistencia a la tracci&#243;n y a la flexi&#243;n de 2 500 kg/cm<sup>2</sup>; a la compresi&#243;n de 3000 kg/cm<sup>2</sup> y una dureza brinell de 100 kg/cm<sup>2</sup>. Los materiales deben tener adem&#225;s las siguientes caracter&#237;sticas:<br />
+<ul><li>Alta resistencia al impacto ( IK10).</li>
+<li>Auto – extinguible.</li>
+<li>No higrosc&#243;pico.</li>
+<li>No degradaci&#243;n.</li>
+<li>Resistencia a la deformaci&#243;n por temperatura.</li>
+<li>Espesor m&#237;nimo 4 mm.</li></ul>
+
+<h3 id="heading_10" >6.5  	MEC&#193;NICOS</h3>
+Las cajas para medidor trif&#225;sico, deber&#225;n tener las siguientes cualidades mec&#225;nicas:<br /><br /><b>6.5.1  Cajas  Met&#225;licas</b><br /><br />Ser resistentes al envejecimiento clim&#225;tico (c&#225;mara salina), ausencia de grietas, sopladuras, poros, exfoliaduras, ampolladuras, cascaduras u otros defectos, tener una buena aplicaci&#243;n y resistencia en la pintura, deber&#225;n poseer un <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de cierre y apertura libre de obst&#225;culo, y resistencia al impacto IK 10  (20 julios).<br /><br /><b>6.5.2	Cajas  Polim&#233;ricas</b><br /><br />Ser resistentes a los choques mec&#225;nicos provocados por objetos punzantes, a las llamas (autoextinci&#243;n), al impacto IK 10 (20 julios), a las variaciones de temperatura, envejecimiento clim&#225;tico (rayos UV), penetraci&#243;n de la bolilla y adem&#225;s, debe tener una buena terminaci&#243;n de todos sus elementos constitutivos en la tapa y sus accesorios; deber&#225;n poseer un <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de cierre y apertura libre de obst&#225;culos.<br />
+<h2 id="heading_11" >7.	  CRITERIOS  DE  ACEPTACI&#211;N  O  RECHAZO</h2>
+Para este caso se considerar&#225; que existe un <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-264" class="externalLink  glosarioLink">lote</a> cuando:<br /><br />•	Cuando los materiales de producci&#243;n pertenecen a un mismo <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-264" class="externalLink  glosarioLink">lote</a> de materia prima.<br /><br />•	Cuando las cajas se construyen en un mismo <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-264" class="externalLink  glosarioLink">lote</a> de producci&#243;n<br />
+<h3 id="heading_12" >7.1	  Muestreo</h3>
+A menos que se especifique otra condici&#243;n por parte del representante de Enel Codensa, el muestreo se llevar&#225; a cabo tomando muestras para cada prueba de acuerdo a lo indicado en las Tablas 1 y 2, seg&#250;n la norma NTC –ISO 2859-1.<br />
+<h3 id="heading_13" >7.2	  Aceptaci&#243;n o Rechazo</h3>
+Si el n&#250;mero de elementos defectuosos es menor o igual al correspondiente n&#250;mero de defectuosos (dado en la norma NTC-ISO 2859-1 en la tercera columna de las Tablas 1 y 2), se deber&#225; considerar que el <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-264" class="externalLink  glosarioLink">lote</a> cumple con los requisitos relacionados en el numeral 6 de esta Especificaci&#243;n; en caso contrario se considerar&#225; la posibilidad de rechazar el <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-264" class="externalLink  glosarioLink">lote</a>.<br /> <br /><b>TABLA  1 PLAN DE MUESTREO PARA <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-235" class="externalLink  glosarioLink">INSPECCI&#211;N</a> VISUAL Y DIMENSIONAL(NIVEL DE <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-235" class="externalLink  glosarioLink">INSPECCI&#211;N</a> II,  NAC = 2,5%)</b><br /><b>(NORMA NTC-ISO 2859-1 TABLA1 - TABLA 2A)</b><br /><div style="width:448px;"><table><tr><td colspan="1" rowspan="1" style="width:112px;height:10px;text-align:center"><b>TAMA&#209;O DEL  <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-264" class="externalLink  glosarioLink">LOTE</a></b></td><td colspan="1" rowspan="1" style="width:116px;text-align:center"><b>TAMA&#209;O DE LA <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-288" class="externalLink  glosarioLink">MUESTRA</a></b></td><td colspan="1" rowspan="1" style="width:110px;text-align:center"><b>NUMERO PERMITIDO DE DEFECTUOSOS</b></td><td colspan="1" rowspan="1" style="width:110px;text-align:center"><b>NUMERO DEFECTUOSOS PARA RECHAZO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">2  a           8</td><td colspan="1" rowspan="1" style="text-align:center">A  =   2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">        9  a         15</td><td colspan="1" rowspan="1" style="text-align:center">B  =   3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">      16  a         25</td><td colspan="1" rowspan="1" style="text-align:center">C  =   5</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">26  a         50</td><td colspan="1" rowspan="1" style="text-align:center">D  =   8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">      51  a         90</td><td colspan="1" rowspan="1" style="text-align:center">E  = 13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">      91  a       150</td><td colspan="1" rowspan="1" style="text-align:center">F  = 20</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">    151  a       280</td><td colspan="1" rowspan="1" style="text-align:center">G  = 32</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">    281  a       500</td><td colspan="1" rowspan="1" style="text-align:center">H  = 50</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">    501  a     1200</td><td colspan="1" rowspan="1" style="text-align:center">J  = 80</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">  1201  a     3200</td><td colspan="1" rowspan="1" style="text-align:center">K  =125</td><td colspan="1" rowspan="1" style="text-align:center">7</td><td colspan="1" rowspan="1" style="text-align:center">8</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">  3201  a   10000</td><td colspan="1" rowspan="1" style="text-align:center">L  =200</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">11</td></tr></table><br /></div><b>TABLA 2 PLAN DE MUESTREO PARA LOS ENSAYOS MEC&#193;NICOS(NIVEL DE <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-235" class="externalLink  glosarioLink">INSPECCI&#211;N</a> ESPECIAL  S-3,  NAC = 2,5%)</b><br /><b>(NORMA NTC-ISO 2859-1 TABLA1 - TABLA 2A)</b><br /><div style="width:448px;"><table><tr><td colspan="1" rowspan="1" style="width:112px;height:10px;text-align:center"><b>TAMA&#209;O DEL  <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-264" class="externalLink  glosarioLink">LOTE</a></b></td><td colspan="1" rowspan="1" style="width:116px;text-align:center"><b>TAMA&#209;O DE LA <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-288" class="externalLink  glosarioLink">MUESTRA</a></b></td><td colspan="1" rowspan="1" style="width:110px;text-align:center"><b>NUMERO PERMITIDO DE DEFECTUOSOS</b></td><td colspan="1" rowspan="1" style="width:110px;text-align:center"><b>NUMERO DEFECTUOSOS PARA RECHAZO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">2  a           8</td><td colspan="1" rowspan="1" style="text-align:center">A  =   2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">        9  a         15</td><td colspan="1" rowspan="1" style="text-align:center">A  =   2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">      16  a         25</td><td colspan="1" rowspan="1" style="text-align:center">B  =   3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">26  a         50</td><td colspan="1" rowspan="1" style="text-align:center">B  =   3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">      51  a         90</td><td colspan="1" rowspan="1" style="text-align:center">C  =   5</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">      91  a       150</td><td colspan="1" rowspan="1" style="text-align:center">C  =   5</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">    151  a       280</td><td colspan="1" rowspan="1" style="text-align:center">D  =   8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">    281  a       500</td><td colspan="1" rowspan="1" style="text-align:center">D  =   8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">    501  a     1200</td><td colspan="1" rowspan="1" style="text-align:center">E  = 13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">  1201  a     3200</td><td colspan="1" rowspan="1" style="text-align:center">E  =13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">  3201  a   10000</td><td colspan="1" rowspan="1" style="text-align:center">F  =20</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr></table><br /></div><h2 id="heading_14" >8.	  PRUEBAS</h2>
+<h3 id="heading_15" >8.1 	<a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-235" class="externalLink  glosarioLink">Inspecci&#243;n</a> visual</h3>
+Se verificar&#225;:<br /><br />-	 La marcaci&#243;n de la leyenda <b>&quot;USO EXCLUSIVO DE ENEL CODENSA &quot;</b> en la puerta y en la ventana de <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> del <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-240" class="externalLink  glosarioLink">interruptor</a> “CLIENTE”. (Ver figura 4)<br />-	 Placa del Fabricante. <br />-	 Adhesivo interno con la informaci&#243;n solicitada.<br />-	 La buena terminaci&#243;n de todos los elementos constitutivos de la tapa y sus accesorios.<br />-	 La ausencia de grietas, sopladuras, poros, exfoliaduras, ampolladuras, raspaduras u otros defectos.<br />
+<h3 id="heading_16" >8.2	  Verificaci&#243;n dimensional</h3>
+La verificaci&#243;n de las dimensiones se har&#225; con los instrumentos de medida que den la aproximaci&#243;n requerida (cinta met&#225;lica con divisiones de 1 mm para longitudes y calibrador para los di&#225;metros y espesores). El tama&#241;o de la <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-288" class="externalLink  glosarioLink">muestra</a> deber&#225; estar de acuerdo con la Tabla 1.<br /><br />Se verificar&#225; con base en:<br /><br />-	  Esquemas indicados en las figuras anexas a la presente norma.<br />-	  Planos entregados por el fabricante y aprobados por Enel Codensa.<br />
+<h3 id="heading_17" >8.3	  Verificaci&#243;n del cierre y apertura de la tapa</h3>
+Se verificar&#225; la correcta instalaci&#243;n de la puerta y el adecuado funcionamiento del dispositivo de cierre.<br /><br /><b>PRUEBAS MEC&#193;NICAS Y QU&#205;MICAS PARA CAJAS MET&#193;LICAS</b><br />
+<h3 id="heading_18" >8.4 Prueba contra impacto</h3>
+El ensamble de la ventana de <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> (marco y transparencia de <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a>) a la tapa y el ensamble del cuerpo y la puerta deben ser resistentes al impacto de un martillo pendular de 5kg a 20 julios.  Luego del impacto, la caja debe conservar su grado de protecci&#243;n IP manteniendo su funcionalidad en la apertura y cierre de la puerta. Adicionalmente, no se deben presentar roturas en el lente ni en el marco y el conjunto debe permanecer ensamblado.<br />
+<h3 id="heading_19" >8.5  <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de grado de protecci&#243;n (C&#243;digo IP)</h3>
+El &#237;ndice de hermeticidad para las cajas ser&#225; IP44, este grado de protecci&#243;n se verificar&#225; de acuerdo a la norma NTC 3279.<br />
+<h3 id="heading_20" >8.6 Resistencia a la <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a></h3>
+Las muestras deben ser nuevas y libres de grasa, aceite, polvo y otras impurezas.  A dichas muestras se les hacen dos incisiones, de 0.5mm de espesor, en forma de cruz que llegue hasta el substrato.<br /><br />El <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> de <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a> se realizar&#225; de acuerdo con la norma ASTM B 117 (Prueba de C&#225;mara Salina) bajo las siguientes condiciones: Temperatura= 35&#176;C, pH= 6,5-7,2 y concentraci&#243;n de cloruro de sodio al 5% durante 400 horas.  Tiempo al que se verificar&#225;:<br /><br />a.	  La progresi&#243;n de la <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a> en la incisi&#243;n, debe ser inferior a 2mm.<br />b.	  No deben presentar trazas de <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a> ni burbujas.<br />c.	  El recubrimiento debe permanecer adherido a la capa de pintura conservando su   color.<br />d.	  Los cierres y medios de acceso deben funcionar normalmente, esto, cuando se someta toda la caja a c&#225;mara salina.<br />
+<h3 id="heading_21" >8.7	 Espesor de la pintura</h3>
+El espesor de pintura debe medirse con un medidor de espesores debidamente calibrado seg&#250;n la norma ASTM D 14000 y el espesor m&#237;nimo debe estar de acuerdo con el numeral 6.3<br /><br />Para la medici&#243;n de los espesores de recubrimiento se deben tener en cuenta las siguientes definiciones:<br /><br />a.	  Lectura del espesor: Medida que <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-288" class="externalLink  glosarioLink">muestra</a> el medidor de espesores, al colocar una vez el censor sobre la pieza a medir.<br />b.	  Medida del espesor: Promedios de 3 lecturas de espesor tomadas a una distancia aproximada de 2,5 cm.<br />
+<h3 id="heading_22" >8.8	 <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de adherencia por tracci&#243;n a pintura.</h3>
+Todas las capas de pintura deben garantizar una adherencia m&#237;nima de 400 libras/pulg<sup>2</sup>, dicha adherencia ser&#225; evaluada seg&#250;n Norma ASTM D 4541.<br /><br /><b>PRUEBAS MEC&#193;NICAS Y QU&#205;MICAS PARA CAJAS POLIM&#201;RICAS</b><br />
+<h3 id="heading_23" >8.9 <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de resistencia a los choques mec&#225;nicos provocados por objetos </h3>
+Las cajas construidas en materiales polim&#233;ricos se deben someter al siguiente <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a>:<br /><br />Estando el conjunto armado, se fijar&#225; siguiendo las modalidades de la norma AN 60-E-01 apartado 2.2.2. En tales condiciones se aplicar&#225;n sobre el centro de la parte inferior de la tapa de manera uniforme y en direcci&#243;n perpendicular a la misma 3 choques de 20 joules (igual o aproximadamente 2 Kg) desde 1 metro de altura.<br />
+<h3 id="heading_24" >8.10  <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de autoextinci&#243;n</h3>
+Las cajas se deben someter al <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> descrito en la norma HN 60-E-01 apartado 6 o la norma ANSI/ASTM 635.<br /><br />El <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> ser&#225; satisfactorio s&#237;:<br /><br />•	 No se consume completamente el <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-274" class="externalLink  glosarioLink">material</a>.<br /><br />•	 No contin&#250;a quem&#225;ndose el <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-274" class="externalLink  glosarioLink">material</a> m&#225;s de 5 segundos despu&#233;s de retirado el <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-84" class="externalLink  glosarioLink">alambre</a> del dispositivo de <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a>.<br /><br />•	 No presente desprendimiento de gotas inflamadas o part&#237;culas incandescentes.<br /><br />Nota: Este <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> deber&#225; realizarse en 2 unidades de distintas muestras.<br />
+<h3 id="heading_25" >8.11	  <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de resistencia a las variaciones de temperatura &#243; resistencia en la   estufa</h3>
+Deber&#225; realizarse sobre la caja completa y armada.<br /><br />La temperatura deber&#225; ser elevada a 80 &#176;C <span class="codeInline">&#177; </span> 2&#176;C, durante el <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> el <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-274" class="externalLink  glosarioLink">material</a> no deber&#225; sufrir ninguna deformaci&#243;n que afecte el correcto funcionamiento posterior.<br />
+<h3 id="heading_26" >8.12 <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de resistencia a la penetraci&#243;n de una bolilla.</h3>
+Deber&#225; realizarse sobre el cuerpo de la caja y tapa siguiendo las modalidades indicadas en la norma HN 60-E-01, Apartado 5.1<br /><br />Durante el <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> la temperatura en la estufa ser&#225; mantenida a 80 &#176;C <span class="codeInline">&#177; </span> 2&#176;C.<br /><br />Finalizado el mismo, el di&#225;metro de la impronta producida por la bolilla no debe ser superior a 2mm.<br />
+<h3 id="heading_27" >8.13 Envejecimiento clim&#225;tico</h3>
+Este <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> se realiza sobre 2 tapas; una que haya sido sometida al <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> de resistencia a la estufa y  otra tapa nueva.<br /><br />Este <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> se realiza siguiendo la metodolog&#237;a se&#241;alada en la norma ASTM G26, aplicando el m&#233;todo 1 durante 600 horas.<br /><br />Luego del <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> de envejecimiento clim&#225;tico la superficie exterior no deber&#225; presentar degradaci&#243;n, grietas, oclusiones, ampolladuras u otros defectos que provoquen la rotura.<br /><br />Al finalizar el <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> las 2 tapas ser&#225;n nuevamente sometidas al <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> de resistencia a los choques mec&#225;nicos.<br /><br /><b>PRUEBAS A BORNERAS</b><br />
+<h3 id="heading_28" >8.14 An&#225;lisis qu&#237;mico a borneras</h3>
+Se debe determinar la composici&#243;n qu&#237;mica de la bornera bien sea de cobre, aleaci&#243;n de cobre, seg&#250;n norma DIN 1709 o su equivalente.  Para las borneras de cobre o aleaci&#243;n de cobre cuya composici&#243;n qu&#237;mica en zinc exceda el 15%, aplica el <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> de c&#225;mara de amoniaco del numeral 8.11.<br />
+<h3 id="heading_29" >8.15 C&#225;mara de amoniaco a borneras</h3>
+Las borneras de cobre o aleaci&#243;n de cobre y cuyo porcentaje de zinc sea superior al 15%, no deben mostrar evidencia de fisuras luego de someterlas a la c&#225;mara de amoniaco con un aumento de 25X, seg&#250;n norma UL 486A.<br />
+<h3 id="heading_30" >8.16 Corto circuito a bornera de <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a></h3>
+Se debe ensayar la bornera con el conductor de calibre m&#225;ximo de uso especificado en el numeral 6.2 de esta especificaci&#243;n.<br /><br />Para determinar el cumplimiento de este <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a>, se debe seguir la secuencia de actividades especificadas en la UL1059 con las corrientes y mediciones establecidas para borneras de tipo comercial o industrial. <br />
+<h3 id="heading_31" >8.17 Calentamiento est&#225;tico a bornera de <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a></h3>
+Se debe ensayar la bornera con el conductor de calibre m&#225;ximo de uso especificado en el numeral 6.2 de esta especificaci&#243;n.<br /><br />Para determinar el cumplimiento de este <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a>, se debe seguir la secuencia de actividades especificadas en la NTC 2154 para el calibre del conductor especificado.<br />
+<h3 id="heading_32" >8.18 <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de tracci&#243;n a borneras</h3>
+Se aplicar&#225; a la bornera una fuerza de tracci&#243;n correspondiente a la secci&#243;n trasversal del conductor, seg&#250;n valores establecidos en la NTC 2154, sin que el  conductor se salga de la bornera ni la bornera se desprenda de la l&#225;mina.<br />
+<h3 id="heading_33" >8.19 <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a> de montaje a borneras</h3>
+Se monta una bornera sobre una placa de acero o un riel suministrado por el fabricante, a cada lado de la bornera se fija un pin de acero de longitud y di&#225;metro establecidos en la NTC 2154.  Se aplica gradualmente la fuerza indicada a una distancia de 100 mm del centro de la fijaci&#243;n, una vez en cada direcci&#243;n, alternadamente sobre cada lado de la bornera.<br /><br />No se permiten golpes para aplicar la fuerza. Una vez que se ha terminado el <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> no se deben presentar deterioros en la bornera, ni soltarse algunos los medios de montaje de la misma.<br />
+<h3 id="heading_34" >8.20 <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de ensamble a borneras</h3>
+De acuerdo con la norma NTC 2154, se monta una bornera sobre una placa de acero o un riel suministrado por el fabricante, se inserta el conductor y se aprietan los tornillos de fijaci&#243;n al 110% del torque especificado por el fabricante.  Luego se deben aflojar los tornillos de fijaci&#243;n e insertar nuevos conductores apret&#225;ndolos al 110% del torque. Se repite el <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> hasta completar 5 montajes usando las mismas borneras. <br /><br />Este procedimiento se debe efectuar para el conductor de mayor di&#225;metro y el de menor di&#225;metro; en ninguno de los dos casos debe presentarse deterioro de los tornillos, de la bornera ni del conductor.<br />
+<h2 id="heading_35" >9.  EMPAQUE</h2>
+Toda caja para medidor debe ir completa y cerrada, debe protegerse contra rayaduras y da&#241;os dentro del transporte, para esto cada una debe embalarse en una caja de cart&#243;n grueso, en cuyo exterior debe indicarse en forma impresa el “nombre del fabricante”,  propiedad de “Enel Codensa.”, descripci&#243;n del <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-338" class="externalLink  glosarioLink">producto</a> “Caja  para medidor trif&#225;sico de una cuenta 50(150) A”, n&#250;mero de contrato y c&#243;digo de inventario Enel Codensa.<br /><br />Para el transporte debe embalarse en estibas con un n&#250;mero de unidades no mayor a 90 unidades por estiba y la estiba recubierta y sellada con <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-274" class="externalLink  glosarioLink">material</a> pl&#225;stico, sobre el cual se adherir&#225; una etiqueta de por lo menos 30 x 30 cm que indique que no se puede almacenar m&#225;s de dos estibas en sentido vertical.<br />
+<h2 id="heading_36" >10. REQUISITOS DE LAS OFERTAS</h2>
+El Oferente obligatoriamente deber&#225; incluir con su propuesta, la siguiente informaci&#243;n:<br /><br />-	    Planilla de caracter&#237;sticas t&#233;cnicas garantizadas, la cual deber&#225; ser diligenciada completamente, firmada y sellada por el oferente.<br /> <br />-	    Cat&#225;logos originales completos y actualizados del fabricante, que correspondan a los bienes cotizados, en la planilla de caracter&#237;sticas t&#233;cnicas garantizadas. <br /><br />-	    Protocolos de pruebas de acuerdo con las normas indicadas en el numeral 5 de la presente especificaci&#243;n. En tales protocolos se deber&#225;n anotar las fechas de fabricaci&#243;n y pruebas del <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-189" class="externalLink  glosarioLink">equipo</a>, para permitir la verificaci&#243;n de las caracter&#237;sticas t&#233;cnicas garantizadas.<br /><br />-	    En caso que se requiera se podr&#225;n exigir muestras de cada una de las referencias ofertadas sin cargo a devoluci&#243;n, con cada una de las caracter&#237;sticas t&#233;cnicas, solicitadas y mencionadas en la presente especificaci&#243;n. <br /><br />-	    Informaci&#243;n adicional que considere aporta explicaci&#243;n a su dise&#241;o (dibujos,  detalles,  caracter&#237;sticas de operaci&#243;n,  dimensiones y pesos de los materiales ofertados). <br /><br />Enel Codensa. podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones, sin expresi&#243;n de causa ni obligaci&#243;n de compensaci&#243;n.<br />
+<h2 id="heading_37" >11.  GARANT&#205;A DE FABRICA</h2>
+Enel Codensa requiere como m&#237;nimo, un per&#237;odo de garant&#237;a de f&#225;brica de veinticuatro (24) meses, a partir de la entrega de las cajas.<br /> 
+<h2 id="heading_38" >12. <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-235" class="externalLink  glosarioLink">INSPECCI&#211;N</a> EN FABRICA </h2>
+El suministrador enviar&#225; con no menos de quince (15) d&#237;as calendario de anticipaci&#243;n, a la fecha programada para la realizaci&#243;n de las pruebas en f&#225;brica, el formato de protocolos de pruebas y copia de las normas en Ingl&#233;s o Castellano utilizadas para tal fin. CODENSA informar&#225; por escrito su <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-139" class="externalLink  glosarioLink">conformidad</a> con las pruebas requeridas.<br /><br />El Ingeniero RESPONSABLE de CODENSA podr&#225; inspeccionar en las instalaciones del PROVEEDOR o FABRICANTE y de sus Subcontratistas el proceso de fabricaci&#243;n y pruebas, y solicitar la informaci&#243;n y ensayos que a su juicio resulten necesarias para verificar el cumplimiento de los requisitos estipulados en este documento. <br /><br />El PROVEEDOR debe brindar plena colaboraci&#243;n al RESPONSABLE en el cumplimiento de sus funciones.<br /><br />El valor de las pruebas y ensayos debe incluirse en los precios cotizados en la propuesta.  CODENSA se reserva el derecho de descartar las propuestas que no ofrezcan pruebas, o si las ofrecidas son consideradas insuficientes para garantizar la <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> de las cajas.<br />
+<h2 id="heading_39" >13. CERTIFICADOS DE <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-139" class="externalLink  glosarioLink">CONFORMIDAD</a></h2>
+El oferente adjuntar&#225; con su propuesta el “<a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-126" class="externalLink  glosarioLink">Certificado de Conformidad</a> de <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-338" class="externalLink  glosarioLink">Producto</a>”, expedido por una entidad autorizada por la Superintendencia de Industria y Comercio.<br />
+<h2 id="heading_40" >14. PRESENTACI&#211;N DE LAS OFERTAS</h2>
+El oferente deber&#225; presentar su oferta <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a>  (en medio impreso) en el siguiente orden:<br /><br />-	  <b>ANEXO 1</b>: relaci&#243;n de los bienes cotizados.<br /><br />-	  <b>ANEXO 2</b>: informaci&#243;n del oferente.<br /><br />-	  <b>ANEXO 3</b>: planillas de caracter&#237;sticas t&#233;cnicas garantizadas.<br /><br />-	  <b>EXCEPCIONES T&#201;CNICAS</b>: apartado en el cual se deben relacionar las excepciones de car&#225;cter exclusivamente t&#233;cnico de la oferta, respecto a los bienes solicitados. Si la oferta no presenta excepci&#243;n, se indicar&#237;a expresamente en el mismo “NO HAY EXCEPCIONES” <br /><br />-	  <b>PROTOCOLO  DE PRUEBAS</b>: relaci&#243;n de los ensayos realizados a la caja y a sus accesorios de acuerdo con lo indicado en el apartado 8 de la presente especificaci&#243;n. <br /><br />-	  <b>CERTIFICACIONES</b>: <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-124" class="externalLink  glosarioLink">Certificaci&#243;n</a> del <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-338" class="externalLink  glosarioLink">producto</a> <br /><br />-	  <b>EVIDENCIA <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-376" class="externalLink  glosarioLink">T&#201;CNICA</a></b>: relaci&#243;n de clientes, evidencia de su capacidad <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a> y experiencias relacionadas con los materiales y/o equipos cotizados.<br /><br />-	  <b>GARANT&#205;A</b>: carta de garant&#237;a de los bienes cotizados.<br /> <br />-	  <b>CAT&#193;LOGOS</b>: cat&#225;logos originales completos y actualizados del fabricante, que correspondan a los datos bienes cotizados.<br /><br />-	  <b>INFORMACI&#211;N ADICIONAL</b>: informaci&#243;n adicional que se considere aporta explicaci&#243;n al dise&#241;o de la caja, as&#237; como las instrucciones de instalaci&#243;n, operaci&#243;n y <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-271" class="externalLink  glosarioLink">mantenimiento</a>. <br /><br />La oferta <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a> deber&#225; presentarse en carpeta blanca de tres aros (tipo cat&#225;logo), con separadores en el orden anteriormente se&#241;alado. <br /><br />Adicionalmente, el fabricante debe incluir la anterior informaci&#243;n en medio magn&#233;tico en un CD o Disquete.<br /><br />CODENSA S.A. podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones, sin expresi&#243;n de causa ni obligaci&#243;n de compensaci&#243;n.<br /><br /><b>ANEXO 1</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/705/Dibujo ET 918 Fig 1.JPG" src="http://likinormas.micodensa.com/media/cache/images/500x355/wikiimages/2d31353431333835353231-31596-Dibujo ET 918 Fig 1.JPG" title="FIGURA 1.  ESPECIFICACIONES  DE  LA  CAJA  ISOMETRICA"  /></div><div class="texto_imagen_articulos" style="max-width:500px">FIGURA 1.  ESPECIFICACIONES  DE  LA  CAJA  ISOMETRICA</div></div></div><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/705/Dibujo ET 918 Fig 2.JPG" src="http://likinormas.micodensa.com/media/cache/images/1200x2000/wikiimages/2d31353335323930363733-60324-Dibujo ET 918 Fig 2.JPG" title="FIGURA 2DIMENSIONES  DE  LA  CAJA"  /></div><div class="texto_imagen_articulos" style="max-width:1200px">FIGURA 2DIMENSIONES  DE  LA  CAJA</div></div></div><br /><b>FIGURA 3.  BANDEJA  PARA  MEDIDOR</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../archivo/706_706.html"><img src="../../media/content/mediafile/706/Dibujo&#32;ET&#32;918&#32;Fig&#32;3.JPG" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br /><b>FIGURA 4: SOPORTE, VENTANA  Y CAJA  DE  <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-235" class="externalLink  glosarioLink">INSPECCI&#211;N</a> PARA  <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-240" class="externalLink  glosarioLink">INTERRUPTOR</a> TERMOM&#193;GNETICO</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../archivo/707.html"><img src="../../media/content/mediafile/707/ET-918-2.jpg" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br /><b>FIGURA 5.  VENTANA  DE  <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-235" class="externalLink  glosarioLink">INSPECCI&#211;N</a> DEL MEDIDOR</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../archivo/708.html"><img src="../../media/content/mediafile/708/ET-918-2(7).jpg" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br /><b>FIGURA 6. PERNOS <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-363" class="externalLink  glosarioLink">SISTEMA</a> DE <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-357" class="externalLink  glosarioLink">SEGURIDAD</a></b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../archivo/641.html"><img src="../../media/content/mediafile/641/ET901(13).jpg" title="PERNOS SISTEMA DE SEGURIDAD"  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx">PERNOS SISTEMA DE SEGURIDAD</div></div><div style="width:100%;overflow:hidden"></div></div><br /><b>FIGURA 7. BUJE DEL <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-363" class="externalLink  glosarioLink">SISTEMA</a> DE <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-357" class="externalLink  glosarioLink">SEGURIDAD</a></b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../archivo/642_642.html"><img src="../../media/content/mediafile/642/Dibujo&#32;ET&#32;900&#32;Figura&#32;13.JPG" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br /><b>FIGURA 8.  PLATINA DE CIERRE</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../archivo/643_643.html"><img src="../../media/content/mediafile/643/Dibujo&#32;ET&#32;900&#32;Figura&#32;14.JPG" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br /><b>FIGURA 9.  LLAVE PARA PERNO DEL <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-363" class="externalLink  glosarioLink">SISTEMA</a> DE <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-357" class="externalLink  glosarioLink">SEGURIDAD</a></b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../archivo/644_644.html"><img src="../../media/content/mediafile/644/ET901(15).jpg" title=" LLAVE PARA PERNO DEL SISTEMA DE SEGURIDAD "  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"> LLAVE PARA PERNO DEL SISTEMA DE SEGURIDAD </div></div><div style="width:100%;overflow:hidden"></div></div><br /><br /><b>ANEXO  2</b><br /><div style="width:765px;"><table><tr><td colspan="5" rowspan="1" style="width:765px;height:10px;text-align:center"><b>CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS CAJAS PARA MEDIDOR TRIF&#193;SICO DE UNA CUENTA 50(150)A</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"><b>N&#176;</b></td><td colspan="3" rowspan="1" style="text-align:center"><b>CARACTER&#205;STICA</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>OFRECIDO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">1</td><td colspan="3" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">2</td><td colspan="1" rowspan="1" style="">Normas</td><td colspan="2" rowspan="1" style="">ET-918 (fabricaci&#243;n y pruebas)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="3" style="height:10px;text-align:center">3</td><td colspan="1" rowspan="3" style="">Caracter&#237;sticas el&#233;ctricas</td><td colspan="2" rowspan="1" style=""><a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-384" class="externalLink  glosarioLink">Tensi&#243;n nominal</a></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Tipo de conexi&#243;n</td><td colspan="1" rowspan="1" style="">Trifasica tetrafilar (Si/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Frecuencia [Hz]</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:10px;text-align:center">4</td><td colspan="1" rowspan="5" style=""><a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-342" class="externalLink  glosarioLink">Puesta a tierra</a></td><td colspan="2" rowspan="1" style="">Posee bornera de <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a> para aterrizar el neutro (Si/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Est&#225; sujeto a la carcaza de la caja (Si/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Capacidad de la bornera</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;"><a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-274" class="externalLink  glosarioLink">Material</a> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Rango de conductores (en AWG)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="7" style="height:10px;text-align:center">5</td><td colspan="1" rowspan="7" style="">Caja</td><td colspan="2" rowspan="1" style="">Acero SAE 1010, A36 &#243; similar (Si/No/Aclarar)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Proceso de fabricaci&#243;n </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Calibre de lamina sin pintura</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Posee perforaciones pretroqueladas para ductos (Si/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">N&#250;mero de perforaciones laterales</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">N&#250;mero de perforaciones parte inferior</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">N&#250;mero de perforaciones de 1/2&quot; para <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="2" style="height:10px;text-align:center">6</td><td colspan="1" rowspan="2" style="">Bandeja</td><td colspan="2" rowspan="1" style="">Calibre de lamina de bandeja</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">La bandeja posee tres tornillos con arandela de <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a>, arandela plana y tuerca para sujeci&#243;n para sujetar el medidor (Si/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="3" style="height:10px;text-align:center">7</td><td colspan="1" rowspan="3" style="">Soporte porta <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-240" class="externalLink  glosarioLink">interruptor</a></td><td colspan="2" rowspan="1" style=""><a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-274" class="externalLink  glosarioLink">Material</a></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Espesor (en mil&#237;metros)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Es ajustable seg&#250;n la altura del <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-240" class="externalLink  glosarioLink">interruptor</a> (Si/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:10px;text-align:center">8</td><td colspan="1" rowspan="5" style="">Pintura</td><td colspan="2" rowspan="1" style="">Capa de imprimante que posee (en micras)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Color (Referencia RAL)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Espesor (en micras) </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Adherencia m&#237;nima (en PSI)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Cumple con ASTM 4541 (Si/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="2" style="height:10px;text-align:center">9</td><td colspan="1" rowspan="2" style="">Ventana de <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-235" class="externalLink  glosarioLink">Inspecci&#243;n</a></td><td colspan="2" rowspan="1" style=""><a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-274" class="externalLink  glosarioLink">Material</a></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Espesor (en mil&#237;metros)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="4" style="height:10px;text-align:center">10</td><td colspan="1" rowspan="4" style=""><a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-363" class="externalLink  glosarioLink">Sistema</a> de <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a> de la caja (Si/No/Aclarar)</td><td colspan="2" rowspan="1" style="">Posee buje </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Posee perno de <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Posee llave para perno de <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;"><a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-274" class="externalLink  glosarioLink">Material</a> del <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> (describir)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="3" style="height:10px;text-align:center">11</td><td colspan="1" rowspan="3" style="">Marcaci&#243;n(Si/No/Aclarar)</td><td colspan="2" rowspan="1" style="">Bornera de <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">En la puerta en alto relieve con: &quot;USO EXCLUSIVO CODENSA&quot; </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">En la ventana del <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-240" class="externalLink  glosarioLink">interruptor</a> con: &quot;CLIENTE&quot;</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">12</td><td colspan="1" rowspan="1" style="">Grado de hermeticidad</td><td colspan="2" rowspan="1" style="">IP</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">13</td><td colspan="1" rowspan="1" style="">Grado de resistencia al impacto</td><td colspan="2" rowspan="1" style="">IK</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="9" style="height:10px;text-align:center">14</td><td colspan="1" rowspan="9" style="">Dimensiones (En mil&#237;metros)</td><td colspan="1" rowspan="3" style="">Caja</td><td colspan="1" rowspan="1" style="">Alto</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Ancho</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Profundidad</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Puerta</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Bandeja</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Entre tornillos de la bandeja</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Marco de la ventana</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Ventana</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Buje</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="3" style="height:10px;text-align:center">15</td><td colspan="1" rowspan="3" style=""><a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-124" class="externalLink  glosarioLink">Certificaci&#243;n</a> de <a href="et918_caja_medidor_trifasico_cuenta_50_150.html#" id="version-338" class="externalLink  glosarioLink">Producto</a> (Por el ente Competente)</td><td colspan="2" rowspan="1" style="">Posee acreditaci&#243;n (Si/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Ente certificador</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">N&#176; de Certificado</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">16</td><td colspan="3" rowspan="1" style="">Desviaciones </td><td colspan="1" rowspan="1" style=""> </td></tr></table><br /></div>
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 705, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

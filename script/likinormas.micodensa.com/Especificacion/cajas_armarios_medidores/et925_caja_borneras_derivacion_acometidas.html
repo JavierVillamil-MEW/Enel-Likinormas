@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET925 Caja de borneras para derivación de acometidas | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/724" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F724.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/724" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/724" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '32');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET925 Caja de borneras para derivaci&#243;n de acometidas</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET 925</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">24/06/2021</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/724">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F724&amp;nodoid=724', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et925_caja_borneras_derivacion_acometidas.html#heading_0">1.	OBJETO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et925_caja_borneras_derivacion_acometidas.html#heading_1">2.	 ALCANCE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et925_caja_borneras_derivacion_acometidas.html#heading_2">3.	CONDICIONES DE SERVICIO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et925_caja_borneras_derivacion_acometidas.html#heading_3">4.	    SISTEMA  DE  UNIDADES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et925_caja_borneras_derivacion_acometidas.html#heading_4">5.    NORMAS  DE  FABRICACI&#211;N  Y  PRUEBAS </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et925_caja_borneras_derivacion_acometidas.html#heading_5">6.	    REQUERIMIENTOS  T&#201;CNICOS  PARTICULARES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et925_caja_borneras_derivacion_acometidas.html#heading_6">6.1  GEOM&#201;TRICOS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et925_caja_borneras_derivacion_acometidas.html#heading_7">6.2  QU&#205;MICOS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et925_caja_borneras_derivacion_acometidas.html#heading_8">6.3	EL&#201;CTRICAS. Borneras de conexi&#243;n y barra de neutro.</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et925_caja_borneras_derivacion_acometidas.html#heading_9">6.4	MEC&#193;NICOS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et925_caja_borneras_derivacion_acometidas.html#heading_10">7.	 PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et925_caja_borneras_derivacion_acometidas.html#heading_11">7.1 INSPECCI&#211;N VISUAL</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et925_caja_borneras_derivacion_acometidas.html#heading_12">7.2 VERIFICACI&#211;N DIMENSIONAL</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et925_caja_borneras_derivacion_acometidas.html#heading_13">7.3 VERIFICACI&#211;N DEL CIERRE Y APERTURA DE LA TAPA</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et925_caja_borneras_derivacion_acometidas.html#heading_14">7.4	AN&#193;LISIS QU&#205;MICO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et925_caja_borneras_derivacion_acometidas.html#heading_15">7.5	PRUEBAS MEC&#193;NICAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et925_caja_borneras_derivacion_acometidas.html#heading_16">7.6	ENSAYOS EL&#201;CTRICOS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et925_caja_borneras_derivacion_acometidas.html#heading_17">8. MUESTREO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et925_caja_borneras_derivacion_acometidas.html#heading_18">9.	MARCACI&#211;N,  EMPAQUE  Y  ROTULADO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et925_caja_borneras_derivacion_acometidas.html#heading_19">9.1	MARCACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et925_caja_borneras_derivacion_acometidas.html#heading_20">9.2	EMPAQUE</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et925_caja_borneras_derivacion_acometidas.html#heading_21">9.3       ROTULADO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et925_caja_borneras_derivacion_acometidas.html#heading_22">10. GARANT&#205;A DE F&#193;BRICA</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et925_caja_borneras_derivacion_acometidas.html#heading_23">11.	REQUISITOS DE LAS OFERTAS</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1.	OBJETO</h2>
+Establecer las caracter&#237;sticas, requisitos y ensayos t&#233;cnicos que deben cumplir las cajas con borneras para acometidas BT en sistemas de distribuci&#243;n.<br />
+<h2 id="heading_1" >2.	 ALCANCE</h2>
+Esta <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a> se aplicar&#225; en todas las cajas con bornera para acometidas BT que adquiera Enel Codensa.<br />
+<h2 id="heading_2" >3.	CONDICIONES DE SERVICIO</h2>
+Las cajas con bornera para acometidas ser&#225;n utilizadas para conectar las derivaciones de las diferentes acometidas en las l&#237;neas a&#233;reas de B.T.; estos elementos ser&#225;n empleados a la intemperie bajo las siguientes condiciones:<br /><br /><b>a.	Condiciones ambientales</b><br /><div style="width:530px;"><table><tr><td colspan="2" rowspan="1" style="width:530px;height:10px;text-align:center"><b>CARACTER&#205;STICAS  AMBIENTALES</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">a. Altura sobre el nivel del mar</td><td colspan="1" rowspan="1" style="">Desde 2900 a los 600 m.s.n.m.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">b. Ambiente</td><td colspan="1" rowspan="1" style="">Tropical</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">c. Humedad relativa</td><td colspan="1" rowspan="1" style="">Desde 100% a el 20%</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">d. Temperatura m&#225;xima y m&#237;nima</td><td colspan="1" rowspan="1" style="">+45 &#176;C y -5 &#176;C respectivamente</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">e. Temperatura promedio </td><td colspan="1" rowspan="1" style="">14 &#176;C</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;"> f. Poluci&#243;n</td><td colspan="1" rowspan="1" style="">Alta con productos de la combusti&#243;n y altamente contaminada por otros agentes.</td></tr></table><br /></div><b>b.	Caracteristicas electricas del <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-363" class="externalLink  glosarioLink">sistema</a></b> <br /><div style="width:384px;"><table><tr><td colspan="2" rowspan="1" style="width:384px;height:10px;text-align:center"><b>CARACTER&#205;STICAS  ELECTRICAS</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">a. <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-384" class="externalLink  glosarioLink">Tensi&#243;n Nominal</a></td><td colspan="1" rowspan="1" style="">120/240 V,  120/208 V,  120V</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">b. <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-377" class="externalLink  glosarioLink">Tensi&#243;n</a> M&#225;xima</td><td colspan="1" rowspan="1" style="">600 V</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">c. Frecuencia del <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-363" class="externalLink  glosarioLink">sistema</a></td><td colspan="1" rowspan="1" style="">60 Hz</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">d. Disposici&#243;n del barraje</td><td colspan="1" rowspan="1" style="">Trif&#225;sica  tetrafilar</td></tr></table><br /></div><h2 id="heading_3" >4.	    <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-363" class="externalLink  glosarioLink">SISTEMA</a>  DE  UNIDADES</h2>
+Todos los documentos tanto de la propuesta como del contrato de suministro, deben expresar las cantidades num&#233;ricas en unidades del <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-363" class="externalLink  glosarioLink">Sistema</a> Internacional (SI). Si el OFERENTE utiliza en sus libros de instrucci&#243;n, folletos o dibujos, unidades en sistemas diferentes, debe hacer las conversiones  respectivas.<br />
+<h2 id="heading_4" >5.    NORMAS  DE  FABRICACI&#211;N  Y  PRUEBAS </h2><div style="width:537px;"><table><tr><td colspan="1" rowspan="1" style="width:138px;height:10px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:399px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="width:138px;height:10px;text-align:center">IEC  29</td><td colspan="1" rowspan="1" style="width:399px;">“Degrees of protection provided by enclosures.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC –ISO 2859-1</td><td colspan="1" rowspan="1" style="">Muestreo para <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">AN 60-E-01</td><td colspan="1" rowspan="1" style="">C&#243;digo de Ensayos de Electricit&#233; de France </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">IEC 144</td><td colspan="1" rowspan="1" style="">“Degrees of protection of enclosures for low voltage switchgear and controlgear”.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">HN 60-E-01</td><td colspan="1" rowspan="1" style="">C&#243;digo de Ensayos de Electricit&#233; de France apartado 6. </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">ANSI/ASTM 635</td><td colspan="1" rowspan="1" style=""><a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de autoextinci&#243;n.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">ASTM  B117</td><td colspan="1" rowspan="1" style="">Prueba de C&#225;mara Salina</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">ASTM G26</td><td colspan="1" rowspan="1" style="">Prueba de envejecimiento clim&#225;tico</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">UNE-EN  50298</td><td colspan="1" rowspan="1" style="">Requisitos generales para las envolventes vac&#237;as</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">UNE-EN 50102</td><td colspan="1" rowspan="1" style="">Verificaci&#243;n Grado de Protecci&#243;n Contra Impactos mec&#225;nicos externos</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">IEC 529</td><td colspan="1" rowspan="1" style="">Degrees of protection provided by enclosures (IP Code)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC 2244</td><td colspan="1" rowspan="1" style="">Pruebas el&#233;ctricas de herrajes el&#233;ctricos</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">IEC 62262</td><td colspan="1" rowspan="1" style="">Degrees of protection provided by enclosures for electrical equipment against external mechanical impacts (IK code)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC 2154</td><td colspan="1" rowspan="1" style="">Bloques de terminales para uso industrial</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC 3279</td><td colspan="1" rowspan="1" style="">Grados de protecci&#243;n dados por encerramiento de <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-189" class="externalLink  glosarioLink">equipo</a> el&#233;ctrico c&#243;digo IP</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">UL 746C</td><td colspan="1" rowspan="1" style="">Polymeric Materials - Use in Electrical Equipment Evaluations</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">UL 1059</td><td colspan="1" rowspan="1" style="">Terminal Blocks</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">UL 94</td><td colspan="1" rowspan="1" style="">Auto extinci&#243;n o flamabilidad</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">ASTM D14000</td><td colspan="1" rowspan="1" style="">Medici&#243;n de espesores de recubrimiento </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NCT 5991</td><td colspan="1" rowspan="1" style="">Envases y embalajes. requisitos de los envases y embalajes valorizables mediante compostaje y biodegradaci&#243;n. programa de <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> y criterios de evaluaci&#243;n para la aceptaci&#243;n final del envase o embalaje</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">ASTM D6400-04</td><td colspan="1" rowspan="1" style="">Standard Specification for Compostable Plastics</td></tr></table><br /></div><h2 id="heading_5" >6.	    REQUERIMIENTOS  T&#201;CNICOS  PARTICULARES</h2>
+La caja polim&#233;rica con bornera para acometidas BT estar&#225; construida con materiales con la mejor <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> para ese fin, debi&#233;ndose descartar el empleo de materiales alterables por la humedad, radiaci&#243;n solar y otras condiciones ambientales desfavorables.<br /><br />La caja con sus borneras ser&#225; compacta y liviana, deber&#225; construirse en materiales pl&#225;sticos, f&#225;cilmente mecanizables que se puedan limar, cortar, agujerear y frezar sin que se sobrecalienten. Adem&#225;s debe ser autosoportable, completamente  r&#237;gida e indeformable, sin aristas, bordes ni esquinas vivas, agudas o cortantes y no debe presentar desajustes durante su transporte e instalaci&#243;n. <br /><br />Cada caja con sus borneras debe permitir adem&#225;s del cableado de alimentaci&#243;n 3 x 2 AWG (Pi 6,543 mm) + 1 x 4 AWG (Pi 5,189 mm) la derivaci&#243;n de hasta seis (6) acometidas trif&#225;sicas o doce (12) monof&#225;sicas y maniobrar f&#225;cilmente tanto la conexi&#243;n a la red secundaria, como la derivaci&#243;n de las acometidas.<br /><br />El &#237;ndice de hermeticidad para las cajas ser&#225; IP 44 de acuerdo a la norma IEC 529, grado de protecci&#243;n contra choques IK10 ( 20.00 julios).<br /><br />Para una instalaci&#243;n segura deber&#225; poseer en la parte posterior unos pasadores de l&#225;mina o del mismo <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-274" class="externalLink  glosarioLink">material</a> de la base, que permitan a la caja ser sujetada directamente a la red trenzada en el vano mediante amarres pl&#225;sticos o met&#225;licos, igualmente deber&#225; permitir montaje al poste por medio de dos cintas de acero inoxidable de 5/8” (Band it) y debe permitir la instalaci&#243;n en Muro o Fachada mediante pernos. Los pasadores deben estar debidamente centrados y unidos a la caja (la uni&#243;n debe garantizar la fusi&#243;n de las dos partes “soldadas”). <br /><br />La posici&#243;n de la caja debe quedar en forma tal que facilite la derivaci&#243;n vertical de las acometidas a&#233;reas. <br /><br />Las cajas con borneras para derivaci&#243;n de acometidas a&#233;reas se componen de dos (2) partes: La base con las borneras y la puerta. As&#237; mismo, estas deber&#225;n poseer todos los accesorios necesarios y suficientes para su correcta utilizaci&#243;n, funcionamiento y f&#225;cil transporte.<br />
+<h3 id="heading_6" >6.1  GEOM&#201;TRICOS</h3>
+<b>6.1.1 Base</b><br /><br />Dimensiones maximas de la base:<br />
+<ul><li>Ancho y altura: 332 mm (con la pesta&#241;a que tiene 11 mm alrededor), 310 mm sin pesta&#241;a, </li></ul>
+
+<ul><li>Profundidad: 120 mm.</li></ul>
+<br />Las dimensiones anteriores deben ser tales que aseguren una optima ubicaci&#243;n de las borneras, as&#237; mismo que garantice la facil conexi&#243;n y desconexion de la alimentaci&#243;n y las acometidas <br /><br />La base de la caja debe poseer en la parte inferior una perforaci&#243;n de minimo 33mm de di&#225;metro para la entrada del cable cu&#225;druplex que viene desde la red secundaria hacia las borneras y m&#237;nimo ocho (8) perforaciones de las cuales cuatro (4) deben tener minimo 13mm de di&#225;metro y cuatro (4) minimo 23mm de diametro, para la salida de las acometidas de los usuarios. <br /><br />Todos los orificios deben tener sus respectivos pasacables o tapones (prensaestopa) removibles adaptables a diferentes di&#225;metros de cable, los cuales podr&#225;n ser fabricados en <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-274" class="externalLink  glosarioLink">material</a> sint&#233;tico, PVC, pl&#225;stico o caucho resistente a la radiaci&#243;n solar. El uso del <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> prensa estopa no sera una exigencia, excepto en las ocasiones especiales donde lo requiera, como en el caso en  que se instalen directamente en la red trenzada.<br /><br />La base de la caja debe incluir una pesta&#241;a con un agujero roscado que forma parte del <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de cierre, que recibir&#225; el perno especial de la tapa. <br /><br />En la base de la caja se deben colocar los medios para soportar el terminal de tierra, la barra del neutro y el bloque aislante que contiene las borneras de fase; el bloque aislante cumple con las funciones de sujetar, separar y aislar los bornes de fase, adem&#225;s de darle la altura suficiente para que sobresalga del fondo, logrando as&#237; facilidad en la conexi&#243;n de las acometidas. <br /><br /><b>6.1.2 Puerta</b><br /><br />Dimensiones maximas de la puerta:<br />
+<ul><li>Ancho y altura: 340 mm (con el marco protector contra la lluvia de 12,5 mm &#177; 2,5mm); sin marco: 315 mm &#177; 5mm.</li></ul>
+
+<ul><li>Profundidad: 55 mm (teniendo en cuenta la pesta&#241;a protectora).</li></ul>
+<br />Las anteriores dimensiones deben corresponder a las dimensiones de la base para su perfecto acople. <br /><br />La puerta de la caja tendr&#225; grabado en alto relieve una inscripci&#243;n en letras may&#250;sculas que diga “USO EXCLUSIVO DE ENEL CODENSA”, la se&#241;al de <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-317" class="externalLink  glosarioLink">peligro</a> <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-88" class="externalLink  glosarioLink">alta tensi&#243;n</a> seg&#250;n el <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-354" class="externalLink  glosarioLink">RETIE</a> y adicionalmente la marca del fabricante, f&#225;cilmente visibles desde el exterior. La caja debe ser fabricada con un marco alrededor, de forma que permita el cierre y ajuste, impidiendo el acceso del agua al interior de la caja. La pesta&#241;a alrededor de la caja evita las intervenciones y el acceso no autorizado o fraudulento de los usuarios o extra&#241;os.<br /><br />La puerta de la caja debe ser abatible para facilitar la conexi&#243;n de las acometidas, y debe abrir como m&#237;nimo 120&#186; desde la posici&#243;n cerrada; deber&#225; estar sujeta lateralmente a la base con dos bisagras en <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-274" class="externalLink  glosarioLink">material</a> inoxidable, resistente a la <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a>, o bisagra integrada en el mismo material pl&#225;stico, cuya ubicaci&#243;n garantice una apertura f&#225;cil. En caso de que se requieran, deben incluirse limitadores de giro para prevenir el <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-153" class="externalLink  glosarioLink">da&#241;o</a> de las bisagras o traba de <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a> que impida bajar la tapa permitiendo trabajar al operario.<br /><br />La tapa de la caja debe incluir un <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de cierre mediante uno o dos pernos especiales de cabeza triangular, que consta de una pieza torneada met&#225;lica en la cual se aloja el <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a>, un buje met&#225;lico a prueba de intemperie. El perno de cabeza  triangular estar&#225; incluido y las llaves para accionarlo  ser&#225;n suministradas por el fabricante &#250;nicamente a Enel Codensa en el n&#250;mero que se solicite. Adicionalmente, &#233;ste <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> debe permitir la instalaci&#243;n de un sello de <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a>. (ver figuras 4 y 5)<br /><br /><b>6.1.3	Borneras</b><br /><br />El interior de la caja, debe contener tres bornes para cada una de las fases. Cada borne llevar&#225; un orificio de entrada para recibir conductores de cobre calibres hasta No. 2 AWG (Pi 6,543 mm) y m&#237;nimo seis (6) orificios de  salida  de acometidas   para  recibir conductores de cobre calibres No. 14  AWG (Pi 1,628 mm) a  No. 4 AWG (Pi 5,189 mm). (ver figura 2)<br /><br />La bornera debe garantizar buena conexi&#243;n y evitar los riesgos de contactos accidentales entre fases, entre &#233;stas y neutro o tierra; cada bornera deber&#225; estar aislada el&#233;ctricamente, a 600 Voltios,  una de otra por un <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-274" class="externalLink  glosarioLink">material</a> polim&#233;rico de alta resistencia mec&#225;nica y al envejecimiento clim&#225;tico y montados sobre soportes aislantes (ver figuras 1 y  2) para que sobresalgan de la base, logrando as&#237; facilidad en las conexiones de las acometidas. El bloque de conexi&#243;n o conjunto de borneras deber&#225; tener un frente muerto para evitar contactos accidentales o corto circuitos entre estos, lo cual puede garantizarse con una tapa en policarbonato transparente de f&#225;cil remoci&#243;n y fijaci&#243;n imperdible.<br /><br />El interior de la caja, debe contener tambi&#233;n una barra para el neutro; llevar&#225; un orificios de entrada para recibir conductores de cobre calibres hasta  No. 4 AWG (Pi 5,189 mm) y m&#237;nimo nueve (9) orificios de salida de acometidas para recibir conductores de cobre calibres No. 14 AWG (Pi 1,628 mm) a No. 6 AWG (Pi 4,115 mm) montados sobre un soporte aislante de m&#237;nimo dos mil&#237;metros de espesor, y con un separador aislante de m&#237;nimo 35 mm de alto en su parte superior a lo largo. En la figura 2, se observa como se evita un contacto accidental en el momento de montaje. (ver figura 2)<br />
+<h3 id="heading_7" >6.2  QU&#205;MICOS</h3>
+La caja se fabricar&#225; en <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-274" class="externalLink  glosarioLink">material</a> polim&#233;rico, policarbonato o poli&#233;ster con fibra de vidrio, el color debe ser incorporado en el momento de la fabricaci&#243;n. El <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-274" class="externalLink  glosarioLink">material</a> de las cajas debe tener como m&#237;nimo las siguientes caracter&#237;sticas:<br /><br />a.	Resistencia a la tracci&#243;n 612 kg/cm<sup>2</sup>,<br />b.	Resistencia a la flexi&#243;n de 730 kg/cm<sup>2</sup>,<br />c.	Resistencia a la rotura 856 kg/cm<sup>2</sup>.<br />d.	Dureza Brinell de R-scale 120.<br />e.	Auto extinguible (V2).<br />f.	No higrosc&#243;pico<br />g.	No degradaci&#243;n.<br /><br />Los materiales deben tener adem&#225;s las siguientes caracter&#237;sticas:<br />
+<ul><li>Alta resistencia al impacto (IK10).</li>
+<li>Auto – extinguible.</li>
+<li>No higrosc&#243;pico.</li>
+<li>No degradaci&#243;n.</li>
+<li>Resistencia a la deformaci&#243;n por temperatura.</li>
+<li>Espesor m&#237;nimo 3 mm</li></ul>
+<br />Demostrar  la ausencia de las siguientes sustancias:  Retardantes de llama bromados, el &#193;cido Perfluorooctano Sulf&#243;nico (PFOS) y sus sales, Fluoruro de Perfluorooctano Sulfonilo (PFOSF) y el Pentaclorobenceno (PeCB). Debe ser demostrado mediante ficha <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a>.<br />
+<h3 id="heading_8" >6.3	EL&#201;CTRICAS. Borneras de conexi&#243;n y barra de neutro.</h3>
+El conjunto aislante deber&#225; ser de <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-274" class="externalLink  glosarioLink">material</a> no higrosc&#243;pico, ni combustible, se podr&#225;n fabricar en policarbonato, polibutil, tereftalato (PBT) reforzado con fibra de vidrio &#243; resina ep&#243;xica. Deben garantizar un buen aislamiento a 600 V, para esto se probara a 2500V, una capacidad de corriente de m&#237;nimo 150 A, buena rigidez mec&#225;nica, tolerar los esfuerzos mec&#225;nicos, el&#233;ctricos y t&#233;rmicos generados durante su montaje y funcionamiento, sus fijaciones no deben  permitir el ingreso de agua desde el exterior de la caja.<br /><br />Los bornes para las fases y la barra para el neutro pueden ser de cobre electroplateado bronce &#243; lat&#243;n; con alta resistencia a la <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a>.<br /><br />El elemento mec&#225;nico usado para mantener la conexi&#243;n el&#233;ctrica y mec&#225;nica entre los cables y el barraje de conexi&#243;n puede ser mediante un resorte de acero inoxidable o un <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de tornillo de acero inoxidable para comprimir el cable de cobre que recibir&#225;n, sin cortarlo. Para el <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de resorte se deber&#225; garantizar una fuerza de contacto constante, cuyas pruebas mec&#225;nicas de tracci&#243;n se har&#225;n de acuerdo a lo estipulado en la norma UL 1059. <br /><br />La bornera debe tener una capacidad de corriente de m&#237;nimo 125 A y garantizar que no se presentar&#225; desconexi&#243;n accidental de las acometidas o de la alimentaci&#243;n desde la red secundaria, cada conexi&#243;n debe ser de alta confiabilidad y baja resistencia el&#233;ctrica, de f&#225;cil y r&#225;pida instalaci&#243;n.<br />
+<h3 id="heading_9" >6.4	MEC&#193;NICOS</h3>
+Las cajas de bornera para acometidas de BT, deben ser resistentes a los choques mec&#225;nicos provocados por objetos punzantes, a las llamas (autoextinci&#243;n), al impacto IK10 (20 julios), a las variaciones de temperatura, envejecimiento clim&#225;tico (rayos UV), penetraci&#243;n de la bolilla y adem&#225;s, debe tener una buena terminaci&#243;n de todos sus elementos constitutivos en la tapa y sus accesorios; deber&#225;n poseer un sistema de cierre y apertura libre de obstaculos.<br /><br />Mec&#225;nicamente debe cumplir con lo estipulado en la norma UL1059 y las pruebas de <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a> se llevar&#225;n a cabo de acuerdo con ASTM B 117.<br />
+<h2 id="heading_10" >7.	 PRUEBAS</h2>
+Las cajas para derivaci&#243;n de acometidas polim&#233;ricas deben ser sometidas a las siguientes pruebas:  <br /><div style="width:843px;"><table><tr><td colspan="1" rowspan="2" style="width:357px;height:21px;text-align:center"><b>VALIDACIONES / PRUEBAS A REALIZAR</b></td><td colspan="3" rowspan="1" style="width:486px;text-align:center"><b>TIPOS DE PRUEBAS </b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>Tipo / Homologaci&#243;n</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Rutina / Fabricaci&#243;n</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Aceptaci&#243;n / Recepci&#243;n</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">7.1.&#160;<a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-235" class="externalLink  glosarioLink">Inspecci&#243;n</a> visual, </td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center">x</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">7.2  <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-235" class="externalLink  glosarioLink">Inspecci&#243;n</a> dimensional</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center">x</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">7.3 Verificaci&#243;n del cierre y apertura de la tapa</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center">x</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">7.4. An&#225;lisis qu&#237;mico</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">7.5.&#160;Pruebas mec&#225;nicas</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:43px;">• <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de resistencia a los choques mec&#225;nicos (C&#243;digo IK)</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">X</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">• <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de grado de protecci&#243;n (C&#243;digo IP)</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">X</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">• <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de auto extinci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:43px;">• <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de resistencia a las variaciones de temperatura o resistencia en la estufa</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">• <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de resistencia a la penetraci&#243;n de una bolilla</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">• Envejecimiento clim&#225;tico</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">• <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de fijaci&#243;n de la caja al poste.</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:67px;">• <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de torsi&#243;n de apretado (debe fijarse un conductor al 130% del torque recomendado, sin sufrir deformaci&#243;n alguna).</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:43px;">• <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de fijaci&#243;n del terminal de <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-387" class="externalLink  glosarioLink">tierra</a>, barra de <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-290" class="externalLink  glosarioLink">neutro</a> y del conjunto aislante con bornes</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:61px;">• <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de fijaci&#243;n del <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-107" class="externalLink  glosarioLink">cable</a> (el deslizamiento, al torque recomendado por el fabricante debe ser superior al 5% de la resistencia del <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-107" class="externalLink  glosarioLink">cable</a> del mayor di&#225;metro).</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">7.6. Pruebas El&#233;ctricas</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:82px;">• <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-160" class="externalLink  glosarioLink">diel&#233;ctrico</a> del <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-275" class="externalLink  glosarioLink">material aislante</a> (a 2500 V, durante un minuto,) tanto para la bornera de conexi&#243;n, como para la barra de <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-290" class="externalLink  glosarioLink">neutro</a>; la corriente de fuga m&#225;xima ser&#225; de 50 miliamperios.</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:61px;">• Prueba de ciclado t&#233;rmico de la bornera de conexi&#243;n a 125 A a 500 ciclos ON/OFF de 1 hora cada uno (Instalada en la caja), de acuerdo a ANSI C. 119.4.</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:62px;">• Prueba de ciclado t&#233;rmico de la barra de <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-290" class="externalLink  glosarioLink">neutro</a> a 100 A a 500 ciclos ON/OFF, con duraci&#243;n de 1 hora cada uno (instalada en la caja).</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">• <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-152" class="externalLink  glosarioLink">cortocircuito</a> de acuerdo con UL 1059.</td><td colspan="1" rowspan="1" style="text-align:center">x</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div>
+<h3 id="heading_11" >7.1 <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-235" class="externalLink  glosarioLink">INSPECCI&#211;N</a> VISUAL</h3>
+Se verificar&#225;:<br />
+<ul><li>La marcaci&#243;n de la leyenda <b>&quot;USO EXCLUSIVO DE ENEL CODENSA &quot;</b> en la tapa.</li>
+<li>Logotipo del Fabricante.</li>
+<li>Adhesivo interno con la informaci&#243;n solicitada</li>
+<li>La buena terminaci&#243;n de todos los elementos constitutivos de la tapa y sus accesorios.</li>
+<li>La ausencia de grietas, sopladuras, poros, exfoliaduras, ampolladuras, raspaduras u otros defectos.</li></ul>
+
+<h3 id="heading_12" >7.2 VERIFICACI&#211;N DIMENSIONAL</h3>
+Se verificar&#225; con base en:<br />
+<ul><li>Esquemas indicados en las figuras anexas a la presente norma.</li>
+<li>Planos entregados por el fabricante y aprobados por Enel Codensa</li></ul>
+
+<h3 id="heading_13" >7.3 VERIFICACI&#211;N DEL CIERRE Y APERTURA DE LA TAPA</h3>
+Se verificar&#225; la correcta instalaci&#243;n de la tapa y el adecuado funcionamiento del dispositivo de cierre.<br />
+<h3 id="heading_14" >7.4	AN&#193;LISIS QU&#205;MICO</h3>
+En las cajas de derivaci&#243;n de acometidas debe hacerse los siguientes an&#225;lisis qu&#237;micos:<br />
+<ul><li>An&#225;lisis del <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-274" class="externalLink  glosarioLink">material</a> de la caja.</li>
+<li>An&#225;lisis del <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-274" class="externalLink  glosarioLink">material</a> base de la bornera.</li>
+<li>An&#225;lisis del recubrimiento de la bornera.</li>
+<li>An&#225;lisis del <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-274" class="externalLink  glosarioLink">material</a> aislante de la bornera.</li></ul>
+
+<h3 id="heading_15" >7.5	PRUEBAS MEC&#193;NICAS</h3>
+•	<b><a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de resistencia a los choques mec&#225;nicos provocados por objetos</b><br /><br />Estando el conjunto armado, se fijar&#225; siguiendo las modalidades de la norma AN 60-E-01 apartado 2.2.2. En tales condiciones se aplicar&#225;n sobre el centro de la parte inferior de la tapa de manera uniforme y en direcci&#243;n perpendicular a la misma 3 choques de 20 joules (Igual o aproximadamente 2 Kg) desde 1 metro de altura.<br /><br />•	<b><a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de grado de protecci&#243;n (C&#243;digo IP)</b><br />	<br />El &#237;ndice de hermeticidad para las cajas ser&#225; IP44, este grado de protecci&#243;n se verificar&#225; de acuerdo a la norma NTC 3279.<br /><br />•	<b><a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de autoextinci&#243;n</b><br /><br />Las cajas construidas en polimericos se deben someter al <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> descrito en la norma HN 60-E-01 apartado 6 o la norma ANSI/ASTM 635.<br /><br />El <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> no ser&#225; satisfactorio s&#237;:<br />
+<ul><li>No se consume completamente el <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-274" class="externalLink  glosarioLink">material</a>.</li>
+<li>No contin&#250;a quem&#225;ndose el <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-274" class="externalLink  glosarioLink">material</a> m&#225;s de 5 segundos despu&#233;s de retirado el alambre del dispositivo de <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a>.</li>
+<li>No presente desprendimiento de gotas inflamadas o part&#237;culas incandescentes.</li></ul>
+<br /><b>Nota:</b> Este <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> deber&#225; realizarse en 2 unidades de distintas muestras.<br /><br />•	<b><a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de resistencia a las variaciones de temperatura &#243; resistencia en la estufa</b><br /><br />Deber&#225; realizarse sobre la caja completa y armada.<br /><br />La temperatura deber&#225; ser elevada a 80 &#176;C <span class="codeInline">&#177; </span> 2&#176;C, durante el <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> el <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-274" class="externalLink  glosarioLink">material</a> no deber&#225; sufrir ninguna deformaci&#243;n que afecte el correcto funcionamiento posterior.<br /><br />•	<b><a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de resistencia a la penetraci&#243;n de una bolilla.</b><br /><br />Deber&#225; realizarse sobre el cuerpo de la caja y tapa siguiendo las modalidades indicadas en la norma Hn 60-E-01, apartado 5.1<br /><br />Durante el <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> la temperatura en la estufa ser&#225; mantenida a 80 &#176;C <span class="codeInline">&#177; </span> 2&#176;C.<br /><br />Finalizado el mismo , el di&#225;metro de la impronta producida por la bolilla no debe ser superior a 2mm.<br /><br />•	<b>Envejecimiento clim&#225;tico</b><br /><br />Para las cajas construidas en <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-274" class="externalLink  glosarioLink">material</a> polim&#233;rico, este <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> se realiza sobre 2 tapas; una que haya sido sometida al <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> de resistencia a la estufa y otra que no se haya probado.<br />Este <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> se realiza siguiendo la metodolog&#237;a se&#241;alada en la norma ASTM G26, aplicando el m&#233;todo 1 durante 600 horas.<br />Al finalizar el <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> de envejecimiento clim&#225;tico la superficie exterior no deber&#225; presentar degradaci&#243;n, grietas, oclusiones, ampolladuras u otros defectos que provoquen la rotura.<br />Al finalizar el <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> las 2 tapas ser&#225;n nuevamente sometidas al <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> de resistencia a los choques mec&#225;nicos.<br /><br />•	<a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de fijaci&#243;n del terminal de tierra, barra de neutro y del conjunto aislante con bornes.<br />•	<a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de fijaci&#243;n del cable (el deslizamiento, al torque recomendado por el fabricante debe ser superior al 5% de la resistencia del cable del mayor di&#225;metro).<br />•	<a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de fijaci&#243;n de la caja al poste.<br />•	<a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de torsi&#243;n de apretado (debe fijarse un conductor al 130% del torque recomendado, sin sufrir deformaci&#243;n alguna).<br />
+<h3 id="heading_16" >7.6	ENSAYOS EL&#201;CTRICOS</h3>
+Por dos orificios (los m&#225;s distantes) se conectan conductores y se hace circular una corriente de 100 A, se considera cumplida la prueba si la temperatura de la bornera (medida con termocuplas), no sobrepasa 30&#176;C de la temperatura ambiente en tres lecturas consecutivas cada 30 minutos y no existe diferencia de 1&#176;C<br /><br />Las pruebas que debe cumplir las borneras ser&#225;n:<br />
+<ul><li><a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-160" class="externalLink  glosarioLink">diel&#233;ctrico</a> del <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-274" class="externalLink  glosarioLink">material</a> aislante ( a 2500 V, durante un minuto,) tanto para la bornera de conexi&#243;n, como para la barra de neutro; la corriente de fuga m&#225;xima ser&#225; de 50 mA.</li>
+<li>Prueba de ciclado termico de la bornera de conexi&#243;n a 125 A a 500 ciclos ON/OFF de 1 hora cada uno (Instalada en la caja), de acuerdo a ANSI C. 119.4.</li>
+<li>Prueba de ciclado termico de la barra de neutro a 100 A a 500 ciclos ON/OFF, con duraci&#243;n de 1 hora cada uno (instalada en la caja).</li>
+<li><a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de cortocircuito de acuerdo con UL 1059. </li></ul>
+
+<h2 id="heading_17" >8. MUESTREO</h2>
+Las pruebas se llevar&#225;n a cabo tomando muestras para cada prueba de acuerdo a lo indicado en las Tablas 1 y 2, seg&#250;n la norma NTC –ISO 2859-1.<br /><br /><b>TABLA  1 PLAN DE MUESTREO PARA <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-235" class="externalLink  glosarioLink">INSPECCI&#211;N</a> VISUAL Y DIMENSIONAL (NIVEL DE <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-235" class="externalLink  glosarioLink">INSPECCI&#211;N</a> II,  NAC = 2,5%)</b><br /><b>(NORMA NTC-ISO 2859-1 TABLA 1 - TABLA 2A)</b><br /><div style="width:478px;"><table><tr><td colspan="1" rowspan="1" style="width:121px;height:10px;text-align:center"><b>TAMA&#209;O DEL <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-264" class="externalLink  glosarioLink">LOTE</a> </b></td><td colspan="1" rowspan="1" style="width:122px;text-align:center"><b>TAMA&#209;O DE LA <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-288" class="externalLink  glosarioLink">MUESTRA</a></b></td><td colspan="1" rowspan="1" style="width:120px;text-align:center"><b>NUMERO PERMITIDO DE DEFECTUOSOS</b></td><td colspan="1" rowspan="1" style="width:115px;text-align:center"><b>NUMERO DEFECTUOSOS PARA RECHAZO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">2  a           8</td><td colspan="1" rowspan="1" style="text-align:center">A  =   2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">        9  a         15</td><td colspan="1" rowspan="1" style="text-align:center">B  =   3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">      16  a         25</td><td colspan="1" rowspan="1" style="text-align:center">C  =   5</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">26  a         50</td><td colspan="1" rowspan="1" style="text-align:center">D  =   8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">      51  a         90</td><td colspan="1" rowspan="1" style="text-align:center">E  = 13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">      91  a       150</td><td colspan="1" rowspan="1" style="text-align:center">F  = 20</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">    151  a       280</td><td colspan="1" rowspan="1" style="text-align:center">G  = 32</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">    281  a       500</td><td colspan="1" rowspan="1" style="text-align:center">H  = 50</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">    501  a     1200</td><td colspan="1" rowspan="1" style="text-align:center">J  = 80</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">  1201  a     3200</td><td colspan="1" rowspan="1" style="text-align:center">K  =125</td><td colspan="1" rowspan="1" style="text-align:center">7</td><td colspan="1" rowspan="1" style="text-align:center">8</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">  3201  a   10000</td><td colspan="1" rowspan="1" style="text-align:center">L  =200</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">11</td></tr></table><br /></div><b>TABLA 2 PLAN DE MUESTREO PARA LOS ENSAYOS MEC&#193;NICOS(NIVEL DE <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-235" class="externalLink  glosarioLink">INSPECCI&#211;N</a> ESPECIAL  S-3,  NAC = 2,5%)</b><br /><b>(NORMA NTC-ISO 2859-1 TABLA 1 - TABLA 2A)</b><br /><div style="width:478px;"><table><tr><td colspan="1" rowspan="1" style="width:121px;height:10px;text-align:center"><b>TAMA&#209;O DEL <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-264" class="externalLink  glosarioLink">LOTE</a> </b></td><td colspan="1" rowspan="1" style="width:122px;text-align:center"><b>TAMA&#209;O DE LA <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-288" class="externalLink  glosarioLink">MUESTRA</a></b></td><td colspan="1" rowspan="1" style="width:120px;text-align:center"><b>NUMERO PERMITIDO DE DEFECTUOSOS</b></td><td colspan="1" rowspan="1" style="width:115px;text-align:center"><b>NUMERO DEFECTUOSOS PARA RECHAZO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">2  a           8</td><td colspan="1" rowspan="1" style="text-align:center">A  =   2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">        9  a         15</td><td colspan="1" rowspan="1" style="text-align:center">A  =   2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">      16  a         25</td><td colspan="1" rowspan="1" style="text-align:center">B  =   3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">26  a         50</td><td colspan="1" rowspan="1" style="text-align:center">B  =   3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">      51  a         90</td><td colspan="1" rowspan="1" style="text-align:center">C  =   5</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">      91  a       150</td><td colspan="1" rowspan="1" style="text-align:center">C  =   5</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">    151  a       280</td><td colspan="1" rowspan="1" style="text-align:center">D  =   8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">    281  a       500</td><td colspan="1" rowspan="1" style="text-align:center">D  =   8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">    501  a     1200</td><td colspan="1" rowspan="1" style="text-align:center">E  = 13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">  1201  a     3200</td><td colspan="1" rowspan="1" style="text-align:center">E  =13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">  3201  a   10000</td><td colspan="1" rowspan="1" style="text-align:center">F  =20</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr></table><br /></div>
+<h2 id="heading_18" >9.	MARCACI&#211;N,  EMPAQUE  Y  ROTULADO</h2>
+ <h3 id="heading_19" >9.1	MARCACI&#211;N</h3>
+Se deben marcar las piezas en alto-relieve o bajo-relieve con el nombre de Enel Codensa y el logotipo o nombre del fabricante con letras de 6 mm o m&#225;s; adicionalmente se deber&#225; indicar en la parte interna con un adhesivo, la fecha de fabricaci&#243;n, orden de compra, c&#243;digo Enel Codensa, y en caso de ser suministrado por un comercializador se debe incluir el logotipo o nombre del comercializador.<br /><br />Para las cajas en <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-274" class="externalLink  glosarioLink">material</a> polim&#233;rico debe marcarse con el C&#243;digo de Identificaci&#243;n correspondiente a la materia prima, seg&#250;n codificaci&#243;n internacional.” Sociedad de la Industria de Pl&#225;sticos (SPI)”;<br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/645/Código de Identificación.jpg" src="../../media/cache/images/650x650/wikiimages/2d373538363932353137-82703-Código&#32;de&#32;Identificación.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:650px"></div></div></div><br />*Grafico tomado de: https://www.vertederocero.com/tipos-de-plasticos-y-sus-numeros/<br /><br />*En caso de corresponder al grupo #7 “Other”, se debe indicar sus componentes.<br />
+<h3 id="heading_20" >9.2	EMPAQUE</h3>
+Toda caja debe ir completa y cerrada, debe protegerse contra ralladuras y da&#241;os dentro del transporte, para esto cada una debe embalarse en una caja de cart&#243;n grueso.<br /><br />Para el transporte debe embalarse en estibas con un numero de unidades no mayor a 100 unidades por estiba y la estiba recubierta y sellada con <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-274" class="externalLink  glosarioLink">material</a> pl&#225;stico, sobre el cual se adherir&#225; una etiqueta de por lo menos 30 X30 cm que indique que no se puede almacenar mas de dos estibas en sentido vertical.<br /><br />Los materiales usados para el empaque (Cart&#243;n, Pl&#225;stico, Icopor, etc)  deben contener como m&#237;nimo un 40% de <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-274" class="externalLink  glosarioLink">material</a> reciclado pos consumo o pos industrial, lo cual se demostrar&#225; conforme a lo dispuesto en la ficha <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a> del <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-338" class="externalLink  glosarioLink">producto</a>.   <br /><br />Adicionalmente los pl&#225;sticos usados deben ser biodegradables en un porcentaje igual o superior al 30% seg&#250;n lo indicado en las normas NTC-5991-2014, ASTM D6400-04, UNE-EN-ISO 13432:2000-11, DINV54900-2. De la misma manera el proveedor debe asegurar que los materiales pl&#225;sticos requeridos para el empaque no deben contener sustancias de inter&#233;s ambiental en su composici&#243;n como Zinc (Zn), Cobre (Cu), N&#237;quel (Ni), Cadmio (Cd), Plomo (Pb), Mercurio (Hg), Cromo (Cr), Ars&#233;nico (As) y Cobalto (Co).<br /><br />Los requisitos deber&#225;n ser demostrables con una ficha <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a> del <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-274" class="externalLink  glosarioLink">material</a> utilizado.<br /><br />
+<h3 id="heading_21" >9.3       ROTULADO</h3>
+En cada caja se colocar&#225; un r&#243;tulo con la siguiente informaci&#243;n.<br /><br />•	Especificaci&#243;n del contenido con su referencia.<br />•	Nombre y raz&#243;n social del proveedor.<br />•	Pa&#237;s de origen.<br />•	Cantidad de elementos.<br />•	Peso unitario, peso total bruto y neto.<br />•	Nombre de Enel Codensa.<br />•	N&#250;mero de contrato o pedido.<br />•	Fecha de entrega.<br />•	C&#243;digo de Enel Codensa.<br />
+<h2 id="heading_22" >10. GARANT&#205;A DE F&#193;BRICA</h2>
+Enel Codensa requiere como m&#237;nimo, un per&#237;odo de garant&#237;a de f&#225;brica de veinticuatro (24) meses, a partir de la entrega de los bienes.<br />
+<h2 id="heading_23" >11.	REQUISITOS DE LAS OFERTAS</h2>
+El Oferente deber&#225; incluir con su propuesta, la siguiente informaci&#243;n:<br />
+<ul><li>Planilla de caracter&#237;sticas t&#233;cnicas garantizadas, la cual deber&#225; ser diligenciada completamente y entregada en formato Excel.</li></ul>
+ 
+<ul><li>Cat&#225;logos originales completos y actualizados del fabricante que contengan caracter&#237;sticas t&#233;cnicas principales, asi como muestras f&#237;sicas del <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-338" class="externalLink  glosarioLink">producto</a> ofertado. </li></ul>
+
+<ul><li>Protocolos de pruebas de acuerdo con las normas indicadas en el numeral 7 de la presente especificaci&#243;n. En tales protocolos se deber&#225;n anotar las fechas de fabricaci&#243;n y pruebas del <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-189" class="externalLink  glosarioLink">equipo</a>, para permitir la verificaci&#243;n de las caracter&#237;sticas t&#233;cnicas garantizadas. </li></ul>
+
+<ul><li>Certificados del “<a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-363" class="externalLink  glosarioLink">Sistema</a> de <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-112" class="externalLink  glosarioLink">calidad</a>” de acuerdo con cualquier norma NTC-ISO serie 9000 o norma equivalente en el pa&#237;s de origen, expedida por una entidad id&#243;nea del mismo pa&#237;s de origen, adicionalmente debe anexarse, el certificado de “Conformidad de <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-338" class="externalLink  glosarioLink">producto</a>” expedido por la autoridad competente debidamente autorizada por la Superintendencia de Industria y Comercio &#243; su equivalente.</li></ul>
+
+<ul><li>Fotocopias de los certificados de laboratorios internacionales cuando las pruebas deban ser hechas fuera del pa&#237;s.</li></ul>
+
+<ul><li>Informaci&#243;n adicional que considere aporta explicaci&#243;n a su dise&#241;o (dibujos,  detalles,  caracter&#237;sticas de operaci&#243;n,  dimensiones y pesos de los materiales ofertados). </li></ul>
+<br />Enel Codensa podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones, sin expresi&#243;n de causa ni obligaci&#243;n de compensaci&#243;n, es de tener en cuenta que las pruebas de recepci&#243;n de est&#225; <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-196" class="externalLink  glosarioLink">Especificaci&#243;n T&#233;cnica</a>, no reemplazan el <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-126" class="externalLink  glosarioLink">Certificado de Conformidad</a> de <a href="et925_caja_borneras_derivacion_acometidas.html#" id="version-338" class="externalLink  glosarioLink">Producto</a>, ni viceversa.<br /><br /><b>ANEXO 1</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/724/ET925 (1).jpg" src="http://likinormas.micodensa.com/media/cache/images/900x1200/wikiimages/2d353336313433333839-329719-ET925 (1).jpg" title="FIGURA 1       ESPECIFICACIONES DE LA CAJA"  /></div><div class="texto_imagen_articulos" style="max-width:900px">FIGURA 1       ESPECIFICACIONES DE LA CAJA</div></div></div><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/724/ET925 (2).jpg" src="http://likinormas.micodensa.com/media/cache/images/900x1200/wikiimages/343635323930353438-180543-ET925 (2).jpg" title="FIGURA 2      BORNERAS "  /></div><div class="texto_imagen_articulos" style="max-width:900px">FIGURA 2      BORNERAS </div></div></div><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/724/ET925 (3).jpg" src="http://likinormas.micodensa.com/media/cache/images/900x1200/wikiimages/2d383338363731333637-591307-ET925 (3).jpg" title="FIGURA 3      ESPECIFICACIÓN DE LOS TORNILLOS"  /></div><div class="texto_imagen_articulos" style="max-width:900px">FIGURA 3      ESPECIFICACIÓN DE LOS TORNILLOS</div></div></div><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/724/ET925 (4).jpg" src="http://likinormas.micodensa.com/media/cache/images/900x1200/wikiimages/31333332343638353330-807858-ET925 (4).jpg" title="FIGURA 4                        BUJE DEL SISTEMA DE SEGURIDAD"  /></div><div class="texto_imagen_articulos" style="max-width:900px">FIGURA 4                        BUJE DEL SISTEMA DE SEGURIDAD</div></div></div><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/724/ET925 (5).jpg" src="http://likinormas.micodensa.com/media/cache/images/900x1200/wikiimages/3238353036363135-449666-ET925 (5).jpg" title="FIGURA 5                            PERNO DEL SISTEMA DE SEGURIDAD"  /></div><div class="texto_imagen_articulos" style="max-width:900px">FIGURA 5                            PERNO DEL SISTEMA DE SEGURIDAD</div></div></div><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/724/ET925.jpg" src="../../media/cache/images/900x1200/wikiimages/2d393931353233323539-597254-ET925.jpg" title="FIGURA 6	TAPON PASACABLE PLÁSTICO DE 2”"  /></div><div class="texto_imagen_articulos" style="max-width:900px">FIGURA 6	TAPON PASACABLE PLÁSTICO DE 2”</div></div></div><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/724/ET925 (7).jpg" src="http://likinormas.micodensa.com/media/cache/images/900x1200/wikiimages/31313530393030303737-152684-ET925 (7).jpg" title="FIGURA 7     LLAVE PARA PERNO DE CABEZA TRIANGULAR"  /></div><div class="texto_imagen_articulos" style="max-width:900px">FIGURA 7     LLAVE PARA PERNO DE CABEZA TRIANGULAR</div></div></div><br /><br /><b>ANEXO  2</b><br /><b>PLANILLA  DE  CARACTERISTICAS T&#201;CNICAS GARANTIZADAS</b><br /><div style="width:600px;"><table><tr><td colspan="1" rowspan="1" style="height:30px;text-align:center"><b>N&#176;</b></td><td colspan="2" rowspan="1" style="text-align:center"><b>CARACTERISTICAS</b></td><td colspan="2" rowspan="1" style="text-align:center"><b>OFRECIDA</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:26px;text-align:center">1</td><td colspan="1" rowspan="1" style="">Caracter&#237;sticas del sistema</td><td colspan="1" rowspan="1" style="">Tensi&#243;n Nominal</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:26px;text-align:center">2</td><td colspan="2" rowspan="1" style="">Tipo de instalaci&#243;n</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:28px;text-align:center">3</td><td colspan="2" rowspan="1" style="">Normas de Fabricaci&#243;n y pruebas</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="3" style="height:21px;text-align:center">4</td><td colspan="1" rowspan="3" style="text-align:center">Certificaci&#243;n de Producto (Por el ente Competente)</td><td colspan="1" rowspan="1" style="">SI/NO</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Ente certificador- aclaraci&#243;n</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">N&#176; de Certificado</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;text-align:center">5</td><td colspan="2" rowspan="1" style="">Tipo de material de la caja</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:31px;text-align:center">6</td><td colspan="2" rowspan="1" style="">Grado de hermeticidad ( IP)</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;text-align:center">7</td><td colspan="2" rowspan="1" style="">Grado de resistencia al impacto (IK)</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;text-align:center">8</td><td colspan="2" rowspan="1" style="">Color general de la caja Gris RAL 7032 (SI/NO)</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">9</td><td colspan="2" rowspan="1" style="">Sistema de sujeci&#243;n (Explicar)</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="5" rowspan="1" style="height:37px;text-align:center"><b>BASE</b></td></tr>
+<tr><td colspan="1" rowspan="3" style="height:22px;text-align:center">10</td><td colspan="1" rowspan="3" style="text-align:center">Dimensiones externas</td><td colspan="1" rowspan="1" style="">Ancho (sin pesta&#241;a)</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Largo (sin pesta&#241;a)</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Altura </td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:28px;text-align:center">11</td><td colspan="1" rowspan="2" style="text-align:center">Perforaciones de la Base</td><td colspan="1" rowspan="1" style="">N&#176; de Perforaci&#243;n</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:27px;text-align:center"> </td><td colspan="1" rowspan="1" style="">Di&#225;metros de c/u</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:28px;text-align:center">12</td><td colspan="2" rowspan="1" style="">Numero de acometidas para las que esta construida la caja</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="5" rowspan="1" style="height:36px;text-align:center"><b>BORNERAS  DE FASES</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">13</td><td colspan="2" rowspan="1" style="">Capacidad de Amperaje</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">14</td><td colspan="2" rowspan="1" style="">Tipo de Aislamiento</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">15</td><td colspan="2" rowspan="1" style="">Material de Soporte</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">16</td><td colspan="2" rowspan="1" style="">Cableado Permitido</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">17</td><td colspan="2" rowspan="1" style="">Numero de orificios y dimensi&#243;n de c/u</td><td colspan="2" rowspan="1" style="">  </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">18</td><td colspan="2" rowspan="1" style="">Adjunta planos de las borneras con dimensiones</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="5" rowspan="1" style="height:39px;text-align:center"><b>BORNERA DE NEUTRO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">19</td><td colspan="2" rowspan="1" style="">Capacidad de Amperaje</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">20</td><td colspan="2" rowspan="1" style="">Tipo de Aislamiento</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">21</td><td colspan="2" rowspan="1" style="">Material de Soporte</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">22</td><td colspan="2" rowspan="1" style="">Cableado Permitido</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">23</td><td colspan="2" rowspan="1" style="">Numero de orificios y dimensi&#243;n de c/u</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">24</td><td colspan="2" rowspan="1" style="">Adjunta planos de las borneras con dimensiones</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="5" rowspan="1" style="height:37px;text-align:center"><b>PUERTA</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">25</td><td colspan="2" rowspan="1" style="">Marcaci&#243;n requerida Enel Codensa</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">26</td><td colspan="2" rowspan="1" style="">Posee marcaci&#243;n fabricante ( SI/NO )</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">27</td><td colspan="2" rowspan="1" style="">Posee pesta&#241;a </td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">28</td><td colspan="2" rowspan="1" style="">Adjunta planos Dimensionales de la tapa ( SI / NO )</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="3" style="height:22px;text-align:center">29</td><td colspan="1" rowspan="3" style="text-align:center">Dimensiones externas</td><td colspan="1" rowspan="1" style="">Ancho (sin pesta&#241;a)</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Largo (sin pesta&#241;a)</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">Altura </td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">30</td><td colspan="2" rowspan="1" style="">Puerta abatible ( SI / NO )</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">31</td><td colspan="2" rowspan="1" style="">Posee Chapa con perno triangular seg&#250;n plano ( SI / NO )</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="5" rowspan="1" style="height:39px;text-align:center"><b>MATERIAL DE FABRICACI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="5" style="height:21px;text-align:center">32</td><td colspan="1" rowspan="5" style="text-align:center">Caja Polim&#233;rica</td><td colspan="1" rowspan="1" style="">Autoextingible ( SI / NO)</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Higrosc&#243;pica ( SI / NO )</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Degradable ( SI / NO )</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Espesor mm.</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Tipo de Pol&#237;mero</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">33</td><td colspan="2" rowspan="1" style="">Empaque: Cumple con lo solicitado en el numeral 9.2 ( Presenta ficha t&#233;cnica del material utilizado)</td><td colspan="2" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">34</td><td colspan="2" rowspan="1" style="">Garant&#237;a (meses)</td><td colspan="2" rowspan="1" style=""> </td></tr></table><br /></div><br /><br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 724, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

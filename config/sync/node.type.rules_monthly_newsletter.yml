@@ -1,0 +1,17 @@
+uuid: 31e0f25f-fd05-469c-ac6e-860936b4bd2f
+langcode: es
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'Boletín mensual'
+type: rules_monthly_newsletter
+description: 'Contenido que permite actualizar el boletín mensual por medio de un campo HTML'
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: false

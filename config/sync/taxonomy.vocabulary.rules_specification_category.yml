@@ -1,0 +1,8 @@
+uuid: 1abf3b6e-e4c9-45fd-b2fa-395e956f94f3
+langcode: es
+status: true
+dependencies: {  }
+name: 'Categorías de especificaciones'
+vid: rules_specification_category
+description: 'Categorías que se relacionan con las especificaciones técnicas locales'
+weight: -8

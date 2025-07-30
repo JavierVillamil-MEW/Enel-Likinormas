@@ -1,0 +1,26 @@
+uuid: 7cfb00a6-1ea5-47b2-83f3-9c1542a94e06
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.rules_technical_rules_comments
+    - field.field.comment.rules_technical_rules_comments.comment_content
+    - field.field.comment.rules_technical_rules_comments.comment_date
+id: comment.rules_technical_rules_comments.default
+targetEntityType: comment
+bundle: rules_technical_rules_comments
+mode: default
+content:
+  comment_content:
+    type: string_textarea
+    weight: 0
+    region: content
+    settings:
+      rows: 5
+      placeholder: 'Ingrese su comentario'
+    third_party_settings: {  }
+hidden:
+  author: true
+  comment_date: true
+  langcode: true
+  subject: true

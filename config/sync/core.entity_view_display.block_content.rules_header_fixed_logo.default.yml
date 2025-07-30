@@ -1,0 +1,32 @@
+uuid: e1b7a843-022a-46a6-a3a1-f61c54eee876
+langcode: es
+status: true
+dependencies:
+  config:
+    - block_content.type.rules_header_fixed_logo
+    - field.field.block_content.rules_header_fixed_logo.fixed_logo_image
+    - image.style.rules_web_image
+  module:
+    - svg_image
+id: block_content.rules_header_fixed_logo.default
+targetEntityType: block_content
+bundle: rules_header_fixed_logo
+mode: default
+content:
+  fixed_logo_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: rules_web_image
+      image_loading:
+        attribute: lazy
+      svg_attributes:
+        width: null
+        height: null
+      svg_render_as_image: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  langcode: true

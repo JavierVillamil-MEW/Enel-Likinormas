@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET868 PROYECTORES LED ORNAMENTALES DESDE 20 W | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/2087" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F2087.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/2087" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/2087" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '30');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET868 PROYECTORES LED ORNAMENTALES DESDE 20 W</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET868</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">09/08/2022</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/2087">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F2087&amp;nodoid=2087', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et868_proyectores_led_ornamentales_20_w.html#heading_0">1. OBJETO   </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et868_proyectores_led_ornamentales_20_w.html#heading_1">2. ALCANCE  </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et868_proyectores_led_ornamentales_20_w.html#heading_2">3. CONDICIONES DE SERVICIO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et868_proyectores_led_ornamentales_20_w.html#heading_3">4.	SISTEMA DE UNIDADES Y DEFINICIONES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et868_proyectores_led_ornamentales_20_w.html#heading_4">5.	NORMAS DE FABRICACI&#211;N Y PRUEBAS PARA PROYECTORES LED</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et868_proyectores_led_ornamentales_20_w.html#heading_5">6.	REQUERIMIENTOS T&#201;CNICOS PARTICULARES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et868_proyectores_led_ornamentales_20_w.html#heading_6">6.1 Caracter&#237;sticas Generales</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et868_proyectores_led_ornamentales_20_w.html#heading_7">6.1.1 Clasificaci&#243;n de los proyectores</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et868_proyectores_led_ornamentales_20_w.html#heading_8">6.2 Cuerpo del proyector (reflector) para uso decorativo externo</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et868_proyectores_led_ornamentales_20_w.html#heading_9">6.3 Hermeticidad y grados de impacto</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et868_proyectores_led_ornamentales_20_w.html#heading_10">6.4 Conjunto El&#233;ctrico</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et868_proyectores_led_ornamentales_20_w.html#heading_11">6.5 Conjunto &#211;ptico</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et868_proyectores_led_ornamentales_20_w.html#heading_12">7.  CRITERIOS DE ACEPTACI&#211;N O RECHAZO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et868_proyectores_led_ornamentales_20_w.html#heading_13">7.1 Muestreo</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et868_proyectores_led_ornamentales_20_w.html#heading_14">7.2 Aceptaci&#243;n o Rechazo</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et868_proyectores_led_ornamentales_20_w.html#heading_15">8. PROTOCOLOS DE PRUEBA A SUMINISTRAR POR EL FABRICANTE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et868_proyectores_led_ornamentales_20_w.html#heading_16">9.  MARCACI&#211;N Y EMPAQUE  </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et868_proyectores_led_ornamentales_20_w.html#heading_17">9.1 Marcaci&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et868_proyectores_led_ornamentales_20_w.html#heading_18">9.2 Empaque  </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et868_proyectores_led_ornamentales_20_w.html#heading_19">10. REQUISITOS DE LAS OFERTAS  </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et868_proyectores_led_ornamentales_20_w.html#heading_20">11.  GARANT&#205;A DE F&#193;BRICA  </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et868_proyectores_led_ornamentales_20_w.html#heading_21">12.  INSPECCI&#211;N DE LAS MUESTRAS    </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et868_proyectores_led_ornamentales_20_w.html#heading_22">13.  SISTEMA DE CALIDAD</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et868_proyectores_led_ornamentales_20_w.html#heading_23">14. PLANILLAS DE CARACTER&#205;STICAS T&#201;CNICAS  </a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1. OBJETO   </h2>
+Establecer las condiciones que deben satisfacer los proyectores LED ornamentales para alumbrado de uso exterior y arquitect&#243;nico, las cuales deben poseer excelentes caracter&#237;sticas t&#233;cnicas de desempe&#241;o fotom&#233;trico, durabilidad y calidad para cumplir las condiciones actuales de desempe&#241;o en los sistemas de distribuci&#243;n de energ&#237;a de B.T.<br />
+<h2 id="heading_1" >2. ALCANCE  </h2>
+La presente especificaci&#243;n se aplicar&#225; para todos los proyectores LED ornamental con sus accesorios para alumbrado de uso decorativo en fachadas, iluminaci&#243;n arquitect&#243;nica y de monumentos cumpliendo con el REGLAMENTO TECNICO DE ILUMINACION Y ALUMBRADO PUBLICO- RETILAP y Normatividad vigente.<br /><br />Los proyectores requeridos pueden ser:<br /><br />-	Proyector LED =20W - IP 66 – MONOCOLOR<br />-	Proyector LED =20W - IP 66 – RGB<br />-	Proyector LED =20W - IP 66 – RGB – DMX<br />-	Otras potencias o referencias de proyectores<br />
+<h2 id="heading_2" >3. CONDICIONES DE SERVICIO</h2>
+Los proyectores LED ornamental ser&#225;n utilizados para su instalaci&#243;n en el sistema de alumbrado exterior de las &#225;reas de operaci&#243;n de ENEL COLOMBIA, bajo las siguientes condiciones:  <br /><br /><div style="width:456px;"><table><tr><td colspan="2" rowspan="1" style="width:456px;height:23px;text-align:center"><b>CARACTER&#205;STICAS AMBIENTALES</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:23px;">a. Altura sobre el nivel del mar</td><td colspan="1" rowspan="1" style=""> De 0 a 2 900 m</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:23px;">b. Ambiente</td><td colspan="1" rowspan="1" style="">Tropical</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:23px;">c. Humedad</td><td colspan="1" rowspan="1" style="">Mayor  al  90 %</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:23px;">d. Temperatura m&#237;nima y m&#225;xima</td><td colspan="1" rowspan="1" style="">- 5 &#186;C y 35 &#186;C respectivamente.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:23px;">e.  Instalaci&#243;n</td><td colspan="1" rowspan="1" style="">Exterior</td></tr></table><br /></div><br /><div style="width:456px;"><table><tr><td colspan="2" rowspan="1" style="width:456px;height:24px;text-align:center"><b>CARACTER&#205;STICAS EL&#201;CTRICAS</b></td></tr>
+<tr><td colspan="2" rowspan="1" style="height:24px;">a. Tensi&#243;n Nominal de alimentaci&#243;n del cliente</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:24px;">- L&#237;nea - L&#237;nea</td><td colspan="1" rowspan="1" style="">208 - 380 - 480 V</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:24px;">- L&#237;nea - Neutro</td><td colspan="1" rowspan="1" style="">120 – 220 – 277 V</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:24px;">b. Frecuencia del sistema</td><td colspan="1" rowspan="1" style="">60 Hz</td></tr></table><br /></div><br />
+<h2 id="heading_3" >4.	SISTEMA DE UNIDADES Y DEFINICIONES</h2>Todos los documentos t&#233;cnicos, deben expresar las cantidades num&#233;ricas en unidades del sistema Internacional (S.I.).  Si se usan cat&#225;logos, folletos o planos, en sistemas diferentes de unidades, deben hacerse las conversiones respectivas.  <br /><br /><b>DEFINICIONES</b><br /><br /><i>LED:</i> Diodo emisor de luz (por su sigla en ingl&#233;s Light Emitting Diode). Tecnolog&#237;a que produce luz artificial por efecto de electroluminiscencia en la uni&#243;n de dos semiconductores. Produciendo una luz uniforme, confortable con excelente reproducci&#243;n del color que mejora la visibilidad. <br /> <br /><i>PROYECTOR LED:</i>  Aparato de iluminaci&#243;n que concentra la luz en un &#225;ngulo s&#243;lido limitado, con el fin de obtener un valor de intensidad luminosa elevado.<br /><br /><i>FUENTE DE ALIMENTACI&#211;N (DRIVER):</i>  Equipo electr&#243;nico que toma la energ&#237;a el&#233;ctrica de la red de distribuci&#243;n de BT y la transforma para que proporcione los par&#225;metros el&#233;ctricos ideales para el normal funcionamiento de los LED o m&#243;dulos LEDs.  <br /><br /><i>CONJUNTO &#211;PTICO:</i> Es la parte de la luminaria o proyector que emite la luz artificial y est&#225; compuesta por los LED o m&#243;dulos LED, los lentes y sistemas que los protegen para obtener la hermeticidad y grado de protecci&#243;n.  <br /><br /><i>CONJUNTO EL&#201;CTRICO:</i> Es la parte de la luminaria o proyector que contiene los equipos el&#233;ctricos/electr&#243;nicos capaces de conectar, transformar y adaptar la tensi&#243;n el&#233;ctrica de la red de alimentaci&#243;n de B.T. a los LED o m&#243;dulos LEDs que conforman el conjunto &#243;ptico.   <br />CROMATICIDAD DE UN COLOR: Longitud de onda dominante o complementaria y de los aspectos de pureza de un color tomados en conjunto.<br /><br /><i>DEPRECIACION LUMINICA:</i> Disminuci&#243;n gradual de emisi&#243;n luminosa durante el transcurso de la vida &#250;til de una fuente luminosa.<br /><br /><i>EFICACIA LUMINOSA DE UNA FUENTE:</i> Relaci&#243;n entre el flujo luminoso total emitido por una fuente luminosa (bombilla) y la potencia de la misma. La eficacia de una fuente se expresa en l&#250;menes/vatio(lm/W).<br /><br />Nota 1: El t&#233;rmino eficacia luminosa se puede aplicar a un solo componente, m&#250;ltiples componentes o componente(s) m&#225;s cualquier equipo de control el&#233;ctrico asociado. El usuario deber&#225; indicar el significado previsto. Por ejemplo: eficacia de la l&#225;mpara, eficacia de la luminaria, eficacia del sistema (indicando qu&#233; es el &quot;sistema&quot;).<br />Nota 2: Para aplicaciones LED, la fuente puede ser un encapsulado o chip LED, m&#243;dulo LED, bombilla LED, una luminaria LED, entre otras<br />[Adaptada de ANSI/IES LS-1-20 y NTC-IEC 62504]<br /><br /><i>EFICACIA LUMINOSA DE UN SISTEMA O LUMINARIA:</i> Relaci&#243;n entre el flujo luminoso total emitido por un sistema o luminaria y la potencia absorbida por el sistema o luminaria. La eficacia de un sistema o luminaria se expresa en l&#250;menes/vatio(lm/W).<br /><br /><i>FLUJO LUMINOSO:</i> Cantidad de luz emitida por una fuente luminosa en todas las direcciones por unidad de tiempo. Su unidad es el lumen (lm).<br /><br /><i>RETILAP:</i> Reglamento T&#233;cnico de Iluminaci&#243;n y Alumbrado P&#250;blico.<br /><br /><i>ONAC:</i> Organismo Nacional de Acreditaci&#243;n de Colombia.<br /><br /><i>TEMPERATURA DE COLOR:</i> Se refiere a la tonalidad de la luz que genera la fuente luminosa, se mide en grados Kelvin.<br /><br /><i>VIDA UTIL (de un m&#243;dulo LED):</i> Per&#237;odo de servicio efectivo de una fuente que trabaja bajo condiciones y ciclos de trabajo nominales hasta que su flujo luminoso sea el 70% del flujo luminoso total.<br /><br />Nota 1. Por tanto, un m&#243;dulo LED ha llegado al final de su vida &#250;til, cuando ya no proporciona el 70% del flujo luminoso inicial.<br /><br /><i>L70, B10 – VIDA UTIL (de luminarias LED):</i> Periodo de tiempo, m&#225;ximo, en el que 10% de una poblaci&#243;n en funcionamiento de luminarias LED del mismo tipo alcanza una degradaci&#243;n gradual del flujo luminoso en un 70%. Esta vida &#250;til se debe expresar en horas.<br /><br />Nota 1. Las vidas &#250;tiles L80 B10 y L90 B10 tambi&#233;n ser&#225;n aceptadas en esta especificaci&#243;n t&#233;cnica.<br />
+<h2 id="heading_4" >5.	NORMAS DE FABRICACI&#211;N Y PRUEBAS PARA PROYECTORES LED</h2>
+<div style="width:604px;"><table><tr><td colspan="2" rowspan="1" style="width:100px;height:20px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:504px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">NTC</td><td colspan="1" rowspan="1" style="text-align:right">900</td><td colspan="1" rowspan="1" style="">Reglas generales y especificaciones para el alumbrado p&#250;blico</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">NTC</td><td colspan="1" rowspan="1" style="text-align:right">1156</td><td colspan="1" rowspan="1" style="">Productos met&#225;licos y recubrimientos. Ensayos c&#225;mara salina.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">NTC</td><td colspan="1" rowspan="1" style="text-align:right">2470</td><td colspan="1" rowspan="1" style="">Dispositivos de fotocontrol intercambiables para iluminaci&#243;n p&#250;blica.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">NTC</td><td colspan="1" rowspan="1" style="text-align:right">ISO 80001</td><td colspan="1" rowspan="1" style="">Cantidades y unidades-Parte 1: general</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">NTC</td><td colspan="1" rowspan="1" style="text-align:right">1156</td><td colspan="1" rowspan="1" style="">Productos met&#225;licos y recubrimientos. Ensayos c&#225;mara salina.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">NTC</td><td colspan="1" rowspan="1" style="text-align:right">3279</td><td colspan="1" rowspan="1" style="">Grados de protecci&#243;n dado por encerramiento de equipo el&#233;ctrico [Grados IP]</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">NTC</td><td colspan="1" rowspan="1" style="text-align:right">3547</td><td colspan="1" rowspan="1" style="">Electrotecnia. Controles para sistemas de iluminaci&#243;n exterior.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:51px;">NTC</td><td colspan="1" rowspan="1" style="text-align:right">ISO 2859-1</td><td colspan="1" rowspan="1" style="">Procedimientos de muestreo para inspecci&#243;n por atributos.  Parte 1: Planes de muestreo determinados por el nivel aceptable de calidad para inspecci&#243;n lote a lote.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">NTC</td><td colspan="1" rowspan="1" style="text-align:right">2050</td><td colspan="1" rowspan="1" style="">C&#243;digo El&#233;ctrico Nacional (conexiones internas).</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">IEC</td><td colspan="1" rowspan="1" style="text-align:right">60529</td><td colspan="1" rowspan="1" style="">Degree of protection by enclosures [IP Code]</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">IEC</td><td colspan="1" rowspan="1" style="text-align:right">136</td><td colspan="1" rowspan="1" style="">Guide to the lighting of urban areas</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;">IEC</td><td colspan="1" rowspan="1" style="text-align:right">60360</td><td colspan="1" rowspan="1" style="">M&#233;todo est&#225;ndar de medici&#243;n del aumento de temperatura de la carcasa de la l&#225;mpara</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">IEC</td><td colspan="1" rowspan="1" style="text-align:right">60598-1</td><td colspan="1" rowspan="1" style="">Luminaires - Part 1: General requirements and tests</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">IEC</td><td colspan="1" rowspan="1" style="text-align:right">60598-2-3</td><td colspan="1" rowspan="1" style="">Part 2-3: Particular requirements - Luminaires for road and street lighting</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">IEC</td><td colspan="1" rowspan="1" style="text-align:right">60598-2-5</td><td colspan="1" rowspan="1" style="">Part 2-5: Particular requirements – Floodlights</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:51px;">IEC</td><td colspan="1" rowspan="1" style="text-align:right">60695-2-11:2014</td><td colspan="1" rowspan="1" style="">Prueba de peligro de incendio - Parte 2-11: M&#233;todos de prueba basados ??en hilo incandescente / caliente - M&#233;todo de prueba de inflamabilidad de hilo incandescente para productos finales (GWEPT)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;">ANSI</td><td colspan="1" rowspan="1" style="text-align:right">C136.10</td><td colspan="1" rowspan="1" style="">Locking-Type Photocontrol Devices and Mating Receptacles—Physical and Electrical Interchangeability and Testing</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;">EN</td><td colspan="1" rowspan="1" style="text-align:right">50102</td><td colspan="1" rowspan="1" style="">Grados de protecci&#243;n proporcionados por las envolventes de materiales el&#233;ctricos contra los impactos mec&#225;nicos externos (c&#243;digo IK)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">UNE</td><td colspan="1" rowspan="1" style="text-align:right">EN 61347-1     </td><td colspan="1" rowspan="1" style="">General and Safety Requirements.  (Driver)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;">UNE     </td><td colspan="1" rowspan="1" style="text-align:right">EN 61347-2-13</td><td colspan="1" rowspan="1" style="">Particular Requirements for DC or AC Supplied Electronic Control    Gear for LED Modules.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">IEC</td><td colspan="1" rowspan="1" style="text-align:right">62031</td><td colspan="1" rowspan="1" style="">LED modules for general lighting – Safety specifications</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">UNE  </td><td colspan="1" rowspan="1" style="text-align:right">EN 62348</td><td colspan="1" rowspan="1" style="">DC or AC Supplied Electronic Control    Gear for LED Modules.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">UNE</td><td colspan="1" rowspan="1" style="text-align:right">EN 55015</td><td colspan="1" rowspan="1" style="">Limits and methods of radio disturbance characteristics of electrical lighting.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">IEC</td><td colspan="1" rowspan="1" style="text-align:right">61547</td><td colspan="1" rowspan="1" style="">Equipment for general lighting purpose EMC immunity requirements</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">IEC</td><td colspan="1" rowspan="1" style="text-align:right">61000-3-2</td><td colspan="1" rowspan="1" style="">Limitation of harmonic current emission.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">IEC</td><td colspan="1" rowspan="1" style="text-align:right">61000-3-3</td><td colspan="1" rowspan="1" style="">Limitation of voltage fluctuation and flicker.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;">IEC</td><td colspan="1" rowspan="1" style="text-align:right">61000-4-5</td><td colspan="1" rowspan="1" style="">Testing and measurement techniques - Ensayos de inmunidad a las ondas de choque.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">IES </td><td colspan="1" rowspan="1" style="text-align:right">LM 80-08</td><td colspan="1" rowspan="1" style="">Aproved Method Measuring Lumen Maintenance of LED light</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">IES </td><td colspan="1" rowspan="1" style="text-align:right">TM 21-11   </td><td colspan="1" rowspan="1" style="">Projecting Long term Lumen Maintenance of LED Ligth Source</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">IES</td><td colspan="1" rowspan="1" style="text-align:right">TM-30-15</td><td colspan="1" rowspan="1" style="">A New Method for Measuring Color Rendition</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">IES </td><td colspan="1" rowspan="1" style="text-align:right">LM 79-08</td><td colspan="1" rowspan="1" style="">Electrical and Photometric Measurements of Solid-State Lighting Products</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;">UNE</td><td colspan="1" rowspan="1" style="text-align:right">EN 13032-1</td><td colspan="1" rowspan="1" style="">Luz y alumbrado. Medici&#243;n y presentaci&#243;n de datos fotom&#233;tricos de l&#225;mparas y luminarias. Parte 1: Medici&#243;n y formato de fichero</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;">UNE</td><td colspan="1" rowspan="1" style="text-align:right">EN 13032-4</td><td colspan="1" rowspan="1" style="">Luz y alumbrado. Medici&#243;n y presentaci&#243;n de datos fotom&#233;tricos de l&#225;mparas y luminarias. Parte 4: L&#225;mparas LED, m&#243;dulos y luminarias.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">DIN</td><td colspan="1" rowspan="1" style="text-align:right">5035</td><td colspan="1" rowspan="1" style="">Caracter&#237;sticas de reproducci&#243;n crom&#225;tica y tonos de luz</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;">ISO</td><td colspan="1" rowspan="1" style="text-align:right">17025</td><td colspan="1" rowspan="1" style="">Requisitos generales para la competencia de los laboratorios de ensayo y calibraci&#243;n.</td></tr></table><br /></div><br />Pueden emplearse otras normas internacionalmente reconocidas equivalentes o superiores a las aqu&#237; se&#241;aladas, siempre y cuando se ajusten a lo solicitado en la presente Especificaci&#243;n T&#233;cnica.  <br /><br />Las normas citadas en la presente especificaci&#243;n (o cualquier otra que llegare a ser aceptada por ENEL COLOMBIA se refieren a su &#250;ltima revisi&#243;n. <br /><br />
+<h2 id="heading_5" >6.	REQUERIMIENTOS T&#201;CNICOS PARTICULARES</h2>
+<h3 id="heading_6" >6.1 Caracter&#237;sticas Generales</h3>
+
+<ul><li>Poder ser utilizados en la iluminaci&#243;n para uso exterior en fachadas, iluminaci&#243;n arquitect&#243;nica, monumentos y parques incluyendo su urbanismo como &#225;rboles, senderos, monumentos y otros sitios.</li></ul>
+
+<ul><li>Deber&#225; contar con elementos de graduaci&#243;n vertical y horizontal en su fijaci&#243;n, para que permitan una orientaci&#243;n adecuada a las condiciones del espacio y a los requerimientos fotom&#233;tricos requeridos.</li></ul>
+
+<ul><li>Para la alimentaci&#243;n o acometida el proyector deber&#225; contar con el sistema de prensaestopas, adecuado para recibir cable encauchetado de tres conductores calibre 14 AWG. Cuando el equipo tenga sistema de control al&#225;mbrico con DMX u otro, el sistema de prensaestopas debe garantizar la hermeticidad.</li></ul>
+
+<ul><li>Los cables de conexi&#243;n a la fuente de alimentaci&#243;n el&#233;ctrica deber&#225;n tener los calibres y aislamientos apropiados para el tipo de carga, tensi&#243;n y temperatura, en ning&#250;n caso podr&#225;n ser de calibre inferior a 20 AWG</li></ul>
+
+<ul><li>Si el proyector utiliza herrajes para su fijaci&#243;n, &#233;stos deber&#225;n estar galvanizados por inmersi&#243;n en caliente y deber&#225;n cumplir con las especificaciones t&#233;cnicas de la norma NTC 2076, teniendo en cuenta que deben estar libres de burbujas, dep&#243;sitos de escoria, manchas negras y cualquier otro tipo de inclusiones o imperfecciones. Tambi&#233;n se pueden manejar herrajes de otros materiales como aluminio o acero inoxidable.</li></ul>
+
+<ul><li>El certificado de producto RETILAP ES OBLIGATORIO.</li></ul>
+
+<ul><li>Los flujos luminosos de los proyectores deben estar certificados por un laboratorio Internacional o Ente ONAC en Colombia bajo Norma Internacional IEC o IESNA. Preferiblemente IESNA LM79. El fabricante debe aportar el soporte para el valor que diligencie en el ANEXO 1.</li></ul>
+<br />El cuerpo de los proyectores LED ornamental debe cumplir con los siguientes aspectos: <br /><br />a)	Poseer un grado de protecci&#243;n contra el impacto y de hermeticidad de acuerdo con el numeral 6.3<br />b)	Con acabado exterior en piezas met&#225;licas en el color gris, blanco, negro, marr&#243;n o con el color que requiera el proyector para quedar mimetizado en fachadas en ladrillo, piedra u otro y que ser&#225; autorizado previamente por ENEL COLOMBIA.<br />
+<h3 id="heading_7" >6.1.1 Clasificaci&#243;n de los proyectores</h3>
+Los proyectores de acuerdo con la distribuci&#243;n del flujo luminoso acorde NEMA se clasifican como <br /><div style="width:767px;"><table><tr><td colspan="1" rowspan="1" style="width:191px;height:20px;text-align:center"><b>CLASIFICACI&#211;N NEMA TIPO</b></td><td colspan="1" rowspan="1" style="width:163px;text-align:center"><b>Categor&#237;a de proyector</b></td><td colspan="1" rowspan="1" style="width:219px;text-align:center"><b>Intervalo de apertura del haz [&#176;]</b></td><td colspan="1" rowspan="1" style="width:194px;text-align:center"><b>Distancia de proyecci&#243;n [m]</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center"><b>I</b></td><td colspan="1" rowspan="3" style="text-align:center">De haz angosto</td><td colspan="1" rowspan="1" style="text-align:center">10 - 18</td><td colspan="1" rowspan="1" style="text-align:center">73 - superior</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center"><b>II</b></td><td colspan="1" rowspan="1" style="text-align:center">&gt; 18 - 29</td><td colspan="1" rowspan="1" style="text-align:center">61 - 73</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center"><b>III</b></td><td colspan="1" rowspan="1" style="text-align:center">&gt; 29 - 46</td><td colspan="1" rowspan="1" style="text-align:center">53 - 61</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center"><b>IV</b></td><td colspan="1" rowspan="2" style="text-align:center">De haz medio</td><td colspan="1" rowspan="1" style="text-align:center">&gt; 46 - 70</td><td colspan="1" rowspan="1" style="text-align:center">44 - 53</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center"><b>V</b></td><td colspan="1" rowspan="1" style="text-align:center">&gt; 70 - 100</td><td colspan="1" rowspan="1" style="text-align:center">32 - 44</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center"><b>VI</b></td><td colspan="1" rowspan="2" style="text-align:center">De haz ancho</td><td colspan="1" rowspan="1" style="text-align:center">&gt; 100 - 130</td><td colspan="1" rowspan="1" style="text-align:center">24 - 32</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center"><b>VII</b></td><td colspan="1" rowspan="1" style="text-align:center">&gt; 130 - superior</td><td colspan="1" rowspan="1" style="text-align:center">inferior - 24</td></tr></table><br /></div>
+<ul><li>El &#225;ngulo de apertura (field angle) del haz se define como el &#225;ngulo medido desde el centro de la distribuci&#243;n, en el que la intensidad desciende al 10% de la intensidad m&#225;xima.</li></ul>
+
+<ul><li>El &#225;ngulo del haz (beam angle) se define como el &#225;ngulo mayor, medido desde el centro de la distribuci&#243;n, en el que la intensidad desciende al 50% de la intensidad m&#225;xima.</li></ul>
+<br /><br />PENDIENTE CARGAR IMAGEN<br /><br />Clasificaci&#243;n del proyector teniendo en cuenta el &#225;ngulo de apertura del haz y la clasificaci&#243;n NEMA en Horizontal (H) y Vertical (V) <br /><br /><div style="width:416px;"><table><tr><td colspan="1" rowspan="1" style="width:50px;height:21px;text-align:center"><b>ITEM</b></td><td colspan="2" rowspan="1" style="width:366px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="4" style="height:21px;text-align:center">1</td><td colspan="1" rowspan="4" style="text-align:center">Clasificaci&#243;n del proyector</td><td colspan="1" rowspan="1" style="">&#225;ngulo [&#176;] de apertura del haz en el plano H (horizontal)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">NEMA Tipo (Plano horizontal)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">&#225;ngulo [&#176;] de apertura del haz en plano V (vertical)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">NEMA Tipo (Plano vertical)</td></tr></table><br /></div><br />Los proyectores de acuerdo con su distribuci&#243;n fotom&#233;trica se clasifican de acuerdo a la CIE-43:<br />1.	Sim&#233;trica con eje de revoluci&#243;n<br />2.	Sim&#233;trica con respecto a dos planos<br />3.	Sim&#233;trica con respecto a un solo plano <br />4.	Distribuci&#243;n asim&#233;trica<br />
+<h3 id="heading_8" >6.2 Cuerpo del proyector (reflector) para uso decorativo externo</h3>
+La estructura y construcci&#243;n de los proyectores deben ser adecuadas a la aplicaci&#243;n espec&#237;fica y garantizar el correcto funcionamiento de los componentes y temperaturas de operaci&#243;n<br /><br />Los disipadores de calor deben ser pasivos. No debe tener refrigeraci&#243;n o ventilaci&#243;n adicional. <br />
+<h3 id="heading_9" >6.3 Hermeticidad y grados de impacto</h3>
+El grado de hermeticidad para proyectores monocolor y proyectores RGB se indican en la tabla a continuaci&#243;n:<br /><div style="width:576px;"><table><tr><td colspan="1" rowspan="2" style="width:192px;height:22px;text-align:center"><b>TIPO DE PROYECTOR</b></td><td colspan="2" rowspan="1" style="width:384px;text-align:center"><b>&#205;NDICES DE PROTECCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>Conjunto &#243;ptico</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Conjunto el&#233;ctrico</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:52px;">Con conjunto el&#233;ctrico y &#243;ptico incorporado en la misma carcasa </td><td colspan="1" rowspan="1" style="text-align:center">IP &#179; 66, IK &#179; 07</td><td colspan="1" rowspan="1" style="text-align:center">IP &#179; 66, IK &#179; 07</td></tr></table><br /></div>
+<h3 id="heading_10" >6.4 Conjunto El&#233;ctrico</h3>
+<ul><li>Tensi&#243;n de alimentaci&#243;n: 120V A 277V con un rango de variaci&#243;n de +5% -10% para el uso exterior. Para aplicaciones especiales conectadas a transformadores domiciliarios se acepta la tensi&#243;n de 120V A 240V.</li>
+<li>Clase de aislamiento: Clase I o II.</li>
+<li>Factor de potencia m&#237;nimo 0.9</li>
+<li>THD m&#225;ximo de corriente: 20%</li>
+<li>Todos los conductores pueden ser tipo cable. </li>
+<li>Si el driver utiliza colas, debe estar provisto de terminales tipo conductor (cable) de cobre, aislado para 300 V, 105 &#186;C, calibre 20 AWG, con longitud no menor a 10 cent&#237;metros. Lo anterior no aplica si el proyector tiene bornera.</li>
+<li>La fuente de alimentaci&#243;n del m&#243;dulo LED debe tener incorporado un sistema de protecci&#243;n contra temperatura; que cuando la temperatura de los Leds alcance niveles definidos como cr&#237;ticos, la protecci&#243;n de la fuente de alimentaci&#243;n apague el proyector.</li>
+<li>Las conexiones el&#233;ctricas en las borneras, si se presentan, y/o torniller&#237;a que se encuentre directamente en contacto con un punto vivo, deben ser del tipo no ferroso.</li>
+<li>Los extremos de los cables deben ser esta&#241;ados o incluir terminales y de suficiente capacidad para soportar las corrientes.</li>
+<li>Los drivers deben venir con protecci&#243;n contra sobre corriente incorporado. Se deber&#225;n describir las caracter&#237;sticas de esta protecci&#243;n.</li>
+<li>Los drivers deben venir con protecci&#243;n contra sobre tensiones incorporado. Se deber&#225;n describir las caracter&#237;sticas de esta protecci&#243;n.</li>
+<li>Los componentes no met&#225;licos de proyectores LED ornamental, que no mantienen en posici&#243;n partes bajo tensi&#243;n, deber&#225;n ensayarse mediante hilo incandescente a 650&#186;C de acuerdo con una norma internacional o de reconocimiento internacional, o Norma t&#233;cnica colombiana, tales como la IEC 60695-2-11:2000 “Fire Hazard testing – Part 2-11: Glowing/hot-wire based test methods-Glow-wire flammability test method for end – products” o la NTC 2230 “Luminarias Requisitos Generales y Ensayos”.</li>
+<li>Las partes no met&#225;licas de proyectores LED ornamental, que mantienen en posici&#243;n partes el&#233;ctricas bajo tensi&#243;n, susceptibles de incendio por cortocircuito o sobrecorriente, deben cumplir con la resistencia a la llama mediante ensayo de la aplicaci&#243;n de la llama c&#243;nica de acuerdo con norma de reconocimiento internacional o Norma T&#233;cnica Colombiana, tales como las normas IEC 60695, UL 94 u NTC 2230.</li>
+<li>En condiciones de operaci&#243;n normal, no deben tener partes energizadas expuestas que generen riesgo de contacto directo. </li>
+<li>Las conexiones el&#233;ctricas y elementos de conexi&#243;n deben ser del tipo no ferroso, resistentes a la corrosi&#243;n, o tener una protecci&#243;n contra la corrosi&#243;n que no afecte la conductividad el&#233;ctrica. </li>
+<li>El driver debe contar con: DPS (Dispositivo de Protecci&#243;n Contra Sobretensiones) con las siguientes caracter&#237;sticas:</li></ul>
+Rango de tensi&#243;n nominal: 100-277 VAC<br />Protecci&#243;n Tensi&#243;n de apertura: (L-N 5 kA): 1.600 VRMS<br />Protecci&#243;n Tensi&#243;n de apertura: (L-N-Tierra 5 kA): 2.500 VRMS<br />
+<h3 id="heading_11" >6.5 Conjunto &#211;ptico</h3>
+<ul><li>Los lentes para cada LED o m&#243;dulo LED deben ser fabricados en materiales de alta transmitancia luminosa y que no cambien sus caracter&#237;sticas f&#237;sicas y qu&#237;micas en el tiempo, como el polimetacrilato de metilo acr&#237;lico (PMMA), LPG poliestireno o vidrio templado de alta pureza con transmitancia superior del 90%.</li>
+<li>Para proyectores, la vida &#250;til de los LEDs debe ser L70 = a 50.000 horas, IESNA LM 80:2008.</li>
+<li>&#205;ndice de reproducci&#243;n de color = 80.</li>
+<li>MacAdam Step &lt;5 de la fuente de luz</li>
+<li>Todas las luminarias y proyectores LED ornamentales deben tener una marca con flecha indicadora sobre la carcasa; que oriente la correcta instalaci&#243;n fotom&#233;trica del equipo</li>
+<li>Eficacia m&#237;nima del proyector (ver tabla). Debe ser indicada por los fabricantes y anexar ensayo IESNA LM79. </li></ul>
+<br /><div style="width:576px;"><table><tr><td colspan="1" rowspan="1" style="width:192px;height:41px;text-align:center"><b>Rango de potencia [W]</b></td><td colspan="1" rowspan="1" style="width:192px;text-align:center"><b>Angulo de apertura (&#176;)</b></td><td colspan="1" rowspan="1" style="width:192px;text-align:center"><b>Eficacia del proyector o sistema (lm/W)</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">20 – 50</td><td colspan="1" rowspan="1" style="text-align:center">4 – 18</td><td colspan="1" rowspan="1" style="text-align:center">= 70</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">20 – 50</td><td colspan="1" rowspan="1" style="text-align:center">&gt; 18</td><td colspan="1" rowspan="1" style="text-align:center">= 80</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">20 – 50 RGB</td><td colspan="1" rowspan="1" style="text-align:center">Independiente</td><td colspan="1" rowspan="1" style="text-align:center">= 44</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">51 – 100</td><td colspan="1" rowspan="1" style="text-align:center">4 – 18</td><td colspan="1" rowspan="1" style="text-align:center">= 80</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">51 – 100</td><td colspan="1" rowspan="1" style="text-align:center">&gt; 18</td><td colspan="1" rowspan="1" style="text-align:center">= 95</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">51 – 100 RGB</td><td colspan="1" rowspan="1" style="text-align:center">Independiente</td><td colspan="1" rowspan="1" style="text-align:center">= 62</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">= 101</td><td colspan="1" rowspan="1" style="text-align:center">4 – 18</td><td colspan="1" rowspan="1" style="text-align:center">= 70</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">= 101</td><td colspan="1" rowspan="1" style="text-align:center">&gt; 18</td><td colspan="1" rowspan="1" style="text-align:center">= 100</td></tr></table><br /></div>
+<h2 id="heading_12" >7.  CRITERIOS DE ACEPTACI&#211;N O RECHAZO</h2>
+<br />Para este caso se considerar&#225; que existe un lote cuando:<br />
+<ul><li>Los materiales de producci&#243;n pertenecen a un mismo lote de materia prima.</li>
+<li>Las cajas de producci&#243;n se construyen en diferentes lotes.</li></ul>
+
+<h3 id="heading_13" >7.1 Muestreo</h3>El muestreo se realizar&#225; con base en los procedimientos y tablas estipuladas en la norma NTC-ISO 2859-1 “Procedimientos de muestreo para Inspecci&#243;n por Atributos. Parte 1: Planes de muestreo determinados por el nivel aceptable de calidad para inspecci&#243;n lote a lote” (Militar Standard 105 D &quot;Sampling procedures and tables for inspection by atributes&quot;) y se acordar&#225; por las partes, previamente a la fecha de la realizaci&#243;n de las pruebas y recepci&#243;n de los bienes. Para el desarrollo de las pruebas es indispensable que los instrumentos involucrados est&#233;n calibrados.<br />
+<h3 id="heading_14" >7.2 Aceptaci&#243;n o Rechazo</h3>
+Si el n&#250;mero de elementos defectuosos es menor o igual al correspondiente n&#250;mero de defectuosos (dado en la norma NTC-ISO 2859-1 en la tercera columna de las Tablas 1 y 2), se deber&#225; considerar que el lote cumple con los requisitos t&#233;cnicos exigidos por ENEL COLOMBIA, pero en caso contrario, el lote se rechazar&#225;.<br /><br /><div style="width:685px;"><table><tr><td colspan="1" rowspan="1" style="width:144px;height:35px;text-align:center"><b>TAMA&#209;O DEL LOTE</b></td><td colspan="1" rowspan="1" style="width:187px;text-align:center"><b>TAMA&#209;O DE LA MUESTRA</b></td><td colspan="1" rowspan="1" style="width:175px;text-align:center"><b>NUMERO PERMITIDO DE DEFECTUOSOS</b></td><td colspan="1" rowspan="1" style="width:179px;text-align:center"><b>NUMERO DEFECTUOSOS PARA RECHAZO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2 a 8</td><td colspan="1" rowspan="1" style="text-align:center">A = 2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">9 a 15</td><td colspan="1" rowspan="1" style="text-align:center">B = 3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16 a 25</td><td colspan="1" rowspan="1" style="text-align:center">C = 5</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">26 a 50</td><td colspan="1" rowspan="1" style="text-align:center">D = 8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">51 a 90</td><td colspan="1" rowspan="1" style="text-align:center">E = 13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">91 a 150</td><td colspan="1" rowspan="1" style="text-align:center">F = 20</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">151 a 280</td><td colspan="1" rowspan="1" style="text-align:center">G = 32</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">281 a 500</td><td colspan="1" rowspan="1" style="text-align:center">H = 50</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">501 a 1200</td><td colspan="1" rowspan="1" style="text-align:center">J = 80</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">1201 a 3200</td><td colspan="1" rowspan="1" style="text-align:center">K = 125</td><td colspan="1" rowspan="1" style="text-align:center">7</td><td colspan="1" rowspan="1" style="text-align:center">8</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">3201 a 10000</td><td colspan="1" rowspan="1" style="text-align:center">L = 200</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">11</td></tr></table><br /></div><b>TABLA  1 PLAN DE MUESTREO PARA INSPECCION VISUAL Y DIMENSIONAL</b><br />(NIVEL DE INSPECCION II, NAC = 2,5%) (NORMA NTC-ISO 2859-1 TABLA1 - TABLA 2A)<br /><br /><div style="width:685px;"><table><tr><td colspan="1" rowspan="1" style="width:144px;height:35px;text-align:center"><b>TAMA&#209;O DEL LOTE</b></td><td colspan="1" rowspan="1" style="width:187px;text-align:center"><b>TAMA&#209;O DE LA MUESTRA</b></td><td colspan="1" rowspan="1" style="width:175px;text-align:center"><b>NUMERO PERMITIDO DE DEFECTUOSOS</b></td><td colspan="1" rowspan="1" style="width:179px;text-align:center"><b>NUMERO DEFECTUOSOS PARA RECHAZO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2 a 8</td><td colspan="1" rowspan="1" style="text-align:center">A = 2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">9 a 15</td><td colspan="1" rowspan="1" style="text-align:center">A = 2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16 a 25</td><td colspan="1" rowspan="1" style="text-align:center">B = 3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">26 a 50</td><td colspan="1" rowspan="1" style="text-align:center">B = 3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">51 a 90</td><td colspan="1" rowspan="1" style="text-align:center">C = 5 </td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">91 a 150</td><td colspan="1" rowspan="1" style="text-align:center">C = 5 </td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">151 a 280</td><td colspan="1" rowspan="1" style="text-align:center">D = 8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">281 a 500</td><td colspan="1" rowspan="1" style="text-align:center">D = 8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">501 a 1200</td><td colspan="1" rowspan="1" style="text-align:center">E = 13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">1201 a 3200</td><td colspan="1" rowspan="1" style="text-align:center">E = 13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">3201 a 10000</td><td colspan="1" rowspan="1" style="text-align:center">F = 20</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr></table><br /></div><b>TABLA 2 PLAN DE MUESTREO PARA LOS ENSAYOS MECANICOS</b><br />(NIVEL DE INSPECCION ESPECIAL S-3, NAC = 2,5%) (NORMA NTC-ISO 2859-1 TABLA1 - TABLA 2A)<br />
+<h2 id="heading_15" >8. PROTOCOLOS DE PRUEBA A SUMINISTRAR POR EL FABRICANTE</h2>
+El fabricante deber&#225; remitir los protocolos de los ensayos realizados por un laboratorio acreditado Internacional con ensayos IESNA o IEC para la elaboraci&#243;n de ensayos el&#233;ctricos y fotom&#233;tricos o en Colombia ante la ONAC - Organismo de Certificaci&#243;n de Colombia.<br /><br /><div style="width:576px;"><table><tr><td colspan="1" rowspan="1" style="width:56px;height:41px;text-align:center"><b>ITEM</b></td><td colspan="1" rowspan="1" style="width:291px;text-align:center"><b>PROYECTORES-ENSAYOS A REALIZAR</b></td><td colspan="1" rowspan="1" style="width:229px;text-align:center"><b>NORMA</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:58px;text-align:center"><b>1</b></td><td colspan="1" rowspan="1" style="">Caracter&#237;sticas generales y pruebas: Ensayo aislamiento y Rigidez diel&#233;ctrica, protecci&#243;n UV.</td><td colspan="1" rowspan="1" style="text-align:center">IEC 60598: 2017</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;text-align:center"><b>2</b></td><td colspan="1" rowspan="1" style="">Resistencia a la Oxidaci&#243;n (ENSAYO DESTRUCTIVO)</td><td colspan="1" rowspan="1" style="text-align:center">NTC 2230:1999 numeral 4.18.1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:58px;text-align:center"><b>3</b></td><td colspan="1" rowspan="1" style="">Medici&#243;n del Mantenimiento Lum&#237;nico de las Fuentes de Luz LED-Vida &#250;til del LED y otros ensayos</td><td colspan="1" rowspan="1" style="text-align:center">IESNA LM 80-2008</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:58px;text-align:center"><b>4</b></td><td colspan="1" rowspan="1" style="">Predicci&#243;n del mantenimiento del flujo luminoso a largo plazo de fuentes de luz LED</td><td colspan="1" rowspan="1" style="text-align:center">IESNA TM-21-11</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;text-align:center"><b>5</b></td><td colspan="1" rowspan="1" style="">Medici&#243;n de Flujo Luminoso, Caracter&#237;sticas El&#233;ctricas y THD</td><td colspan="1" rowspan="1" style="text-align:center">IESNA LM-79:2008</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;text-align:center"><b>6</b></td><td colspan="1" rowspan="1" style="">Aumento de temperatura (suministrar con driver y con fuente lum&#237;nica)</td><td colspan="1" rowspan="1" style="text-align:center">IEC 60598-1:2017 numeral 12,4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;text-align:center"><b>7</b></td><td colspan="1" rowspan="1" style="">M&#243;dulos LED para Iluminaci&#243;n General - Especificaciones de Seguridad</td><td colspan="1" rowspan="1" style="text-align:center">IEC 62031</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>8</b></td><td colspan="1" rowspan="1" style="">Ensayo de vibraci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">IEC 60068-2-6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>9</b></td><td colspan="1" rowspan="1" style="">Verificaci&#243;n de Rotulado e indelebilidad</td><td colspan="1" rowspan="1" style="text-align:center">NTC 2230:1999 numeral 3,4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;text-align:center"><b>10</b></td><td colspan="1" rowspan="1" style="">Verificaci&#243;n grado de protecci&#243;n IP66 Medidas c&#225;mara de Polvo</td><td colspan="1" rowspan="1" style="text-align:center">IEC 60529:2001 +AMD2:2013 </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;text-align:center"><b>11</b></td><td colspan="1" rowspan="1" style="">Resistencia al calor y penetraci&#243;n con bolilla</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>12</b></td><td colspan="1" rowspan="1" style="">Resistencia a la llama</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>13</b></td><td colspan="1" rowspan="1" style="">Ensayo de hilo incandescente</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>14</b></td><td colspan="1" rowspan="1" style="">Ensayo de aguja</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>15</b></td><td colspan="1" rowspan="1" style="">Resistencia a la corrosi&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>16</b></td><td colspan="1" rowspan="1" style="">Angulo de apertura</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div>ENEL COLOMBIA se reserva el derecho de solicitar protocolos adicionales y la validaci&#243;n de los protocolos presentados.<br />
+<h2 id="heading_16" >9.  MARCACI&#211;N Y EMPAQUE  </h2>
+<h3 id="heading_17" >9.1 Marcaci&#243;n</h3>
+La marcaci&#243;n del proyector debe ir en una placa exterior met&#225;lica remachada (que no afecte el IP) o inyectada en el cuerpo del proyector, y deber&#225; incluir la siguiente informaci&#243;n: <br />
+<ul><li>Marca de f&#225;brica</li>
+<li>Potencia Nominal</li>
+<li>Modelo y referencia</li>
+<li>Tensiones de conexi&#243;n</li>
+<li>Factor de potencia</li>
+<li>Flujo luminoso</li>
+<li>Temperatura de color(K) (No aplica para productos LED RGB)</li>
+<li>Mes y a&#241;o de fabricaci&#243;n</li>
+<li>Clase de aislamiento el&#233;ctrico</li>
+<li>Uso: Exterior</li>
+<li>Marcaci&#243;n que indique conexi&#243;n de terminales de fase, neutro y tierra.</li>
+<li>Garant&#237;a</li>
+<li>Palabra ENEL</li>
+<li>N&#250;mero de serie</li>
+<li>Contrato</li></ul>
+Nota: Cuando la informaci&#243;n de producto no sea posible plasmarla en una marcaci&#243;n, se aceptar&#225; marcaci&#243;n de esta a trav&#233;s de c&#243;digo QR<br /><br />El Driver debe ir marcado con la siguiente informaci&#243;n:<br />
+<ul><li>Marca del fabricante</li>
+<li>Referencia</li>
+<li>Mes y a&#241;o de fabricaci&#243;n (o c&#243;digo del fabricante)</li>
+<li>Tensiones de servicio </li>
+<li>Corriente de l&#237;nea</li>
+<li>Frecuencia </li>
+<li>Factor de potencia </li>
+<li>Corriente de salida </li>
+<li>Tensi&#243;n de salida </li>
+<li>Tensi&#243;n de circuito abierto </li>
+<li>THDi </li>
+<li>Punto de medici&#243;n de temperatura</li>
+<li>Diagrama de conexiones</li>
+<li>Clase</li>
+<li>Garant&#237;a</li>
+<li>Palabra ENEL</li>
+<li>Orden de compra</li>
+<li>Interfaz de Comunicaci&#243;n</li></ul>
+<br />Cada uno de los elementos que conforman el conjunto el&#233;ctrico del proyector, deben tener grabados el nombre de ENEL y el n&#250;mero de orden de compra o contrato. La informaci&#243;n t&#233;cnica debe ir grabada en cada uno de los elementos que conforman el conjunto el&#233;ctrico.  <br /><br />En cada proyector, se debe incluir en una parte visible, el diagrama de conexiones de los componentes internos. Dicho diagrama debe conservarse en el tiempo, ser indeleble y con una dimensi&#243;n que permita su f&#225;cil observaci&#243;n y revisi&#243;n.  <br />
+<h2 id="heading_18" >9.2 Empaque  </h2>
+En el empaque:<br /><br />•	Marca de f&#225;brica<br />•	Potencia<br />•	Modelo y referencia<br />•	Tensiones de conexi&#243;n<br />•	Temperatura de color<br />•	Temperatura ambiente de operaci&#243;n<br />•	&#205;ndice de reproducci&#243;n crom&#225;tica<br />•	Flujo luminoso<br />•	Eficacia<br />•	&#205;ndice de reproducci&#243;n de color CRI<br />•	Vida &#250;til o promedio<br />•	Mes y a&#241;o de fabricaci&#243;n<br />•	Tipo de uso<br />•	Precauciones de instalaci&#243;n y mantenimiento <br />•	C&#243;digo SAP del material<br /><br />Los bienes, objeto de la presente especificaci&#243;n t&#233;cnica, deben ser empacados en forma individual de acuerdo con este numeral, adecuadamente para resistir las condiciones de humedad e impacto que pueden presentarse durante el transporte desde f&#225;brica hasta las bodegas de ENEL COLOMBIA y durante su almacenamiento. <br />
+<h3 id="heading_19" >10. REQUISITOS DE LAS OFERTAS  </h3>
+El Oferente obligatoriamente deber&#225; incluir con su propuesta, la siguiente informaci&#243;n:  <br /><br />•	Planilla de caracter&#237;sticas t&#233;cnicas garantizadas, la cual deber&#225; ser diligenciada completamente, firmada y sellada por el oferente. Se debe incluir copia en formato Excel que permita la lectura y extracci&#243;n de la informaci&#243;n tanto para la planilla de caracter&#237;sticas como para cualquier otra que se indique en los requisitos de la oferta.<br />•	El fabricante debe proveer la siguiente informaci&#243;n de acuerdo con el RETILAP - art&#237;culo 200.3.1 DOCUMENTOS FOTOM&#201;TRICOS:<br />	 - Fotometr&#237;a: Archivo fotometrico<br />	 - Matriz de intensidades.<br />	 - Diagrama Polar<br />	 - Diagrama de isoiluminancia, cuando aplique.<br />•	Cat&#225;logos originales completos y actualizados del fabricante, que correspondan a los bienes cotizados, en la planilla de caracter&#237;sticas t&#233;cnicas garantizadas.   <br />•	Protocolos de pruebas de acuerdo con las normas indicadas en la presente especificaci&#243;n. En tales protocolos se deber&#225;n anotar las fechas de fabricaci&#243;n y pruebas del equipo, para permitir la verificaci&#243;n de las caracter&#237;sticas t&#233;cnicas garantizadas.  <br />•	Muestras de cada una de las referencias ofertadas sin cargo a devoluci&#243;n, con cada una de las caracter&#237;sticas t&#233;cnicas, solicitadas y mencionadas en la presente especificaci&#243;n. Para los oferentes que cumplan t&#233;cnicamente. <br />•	Los certificados de producto de cada uno de los componentes del proyector como son Driver y DPS. <br />•	Registro fotogr&#225;fico de alta calidad de los proyectores en sus cuatro vistas exteriores e interiores superior, inferior y laterales. <br />•	Informaci&#243;n adicional que considere aporta explicaci&#243;n al producto ofertado.<br />•	ENEL COLOMBIA podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones, sin expresi&#243;n de causa ni obligaci&#243;n de compensaci&#243;n.<br />•	Todos los planos y/o dibujos indicativos del proyector entregados en la oferta deben incluir una copia en formato PDF.<br />•	Documento o ficha t&#233;cnica del producto, donde se indique la instalaci&#243;n, mantenimiento preventivo y correctivo,<br />•	Indicar medidas antivand&#225;licas: fijaci&#243;n, altura, rejillas, soldadura, etc.<br />
+<h2 id="heading_20" >11.  GARANT&#205;A DE F&#193;BRICA  </h2>
+ENEL COLOMBIA requiere como m&#237;nimo, un per&#237;odo de garant&#237;a de f&#225;brica de (60) meses, a partir de la entrega de los proyectores led ornamentales de uso exterior.<br /><br />El certificado de producto debe permanecer vigente por cinco (5) a&#241;os despu&#233;s de que se realice el cierre de contrato de suministro.<br />
+<h2 id="heading_21" >12.  INSPECCI&#211;N DE LAS MUESTRAS    </h2>
+El proveedor enviar&#225; con las muestras que se soliciten para evaluaci&#243;n el formato de protocolos de pruebas y copia de las normas en ingl&#233;s y/o espa&#241;ol utilizadas para tal fin. ENEL COLOMBIA informar&#225; por escrito su conformidad con las pruebas requeridas.  <br /><br />Igualmente, el proveedor acompa&#241;ar&#225; cada una de las entregas de los proyectores con los protocolos de pruebas y copia de las normas en ingl&#233;s y/o espa&#241;ol utilizadas para tal fin. ENEL COLOMBIA informar&#225; por escrito su conformidad con las pruebas requeridas.    <br /><br />El ingeniero responsable de ENEL COLOMBIA podr&#225; inspeccionar en las instalaciones del proveedor o fabricante y solicitar la informaci&#243;n y ensayos que a su juicio resulten necesarias para verificar el cumplimiento de los requisitos estipulados en este documento. El proveedor debe brindar plena colaboraci&#243;n al responsable en el cumplimiento de sus funciones. El costo de las pruebas que soliciten estar&#225; a cargo del proveedor. <br /><br />
+<h2 id="heading_22" >13.  SISTEMA DE CALIDAD</h2>  <br />El oferente adjuntar&#225; con su propuesta su certificado del sistema de calidad ISO 9001.<br />
+<h2 id="heading_23" >14. PLANILLAS DE CARACTER&#205;STICAS T&#201;CNICAS  </h2>
+El oferente deber&#225; presentarlas en su oferta t&#233;cnica diligenciadas en formato Excel por cada referencia<br /><br /><b>ANEXO 1. PROYECTORES LED PLANILLA DE CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS</b><br /><div style="width:800px;"><table><tr><td colspan="6" rowspan="1" style="width:800px;height:21px;text-align:center"><b>CARACTER&#205;STICAS GENERALES DE PROYECTOR USO DECORATIVO EXTERIOR</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>ITEM</b></td><td colspan="3" rowspan="1" style="text-align:center"><b>DESCRIPCI&#211;N</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>EXIGIDO </b></td><td colspan="1" rowspan="1" style="text-align:center"><b>OFERTADO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">1</td><td colspan="3" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2</td><td colspan="3" rowspan="1" style="">Pa&#237;s de origen</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">3</td><td colspan="3" rowspan="1" style="">Referencia</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">4</td><td colspan="3" rowspan="1" style="">Tensi&#243;n nominal de alimentaci&#243;n del proyector (V)</td><td colspan="1" rowspan="1" style="text-align:center">120V A 277 +5% -10% </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">5</td><td colspan="3" rowspan="1" style="">Potencia total del proyector  (W) (incluyendo las p&#233;rdidas)</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">6</td><td colspan="3" rowspan="1" style="">Factor de Potencia</td><td colspan="1" rowspan="1" style="text-align:center">0,9</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">7</td><td colspan="3" rowspan="1" style="">Frecuencia (Hz)</td><td colspan="1" rowspan="1" style="text-align:center">60 Hz</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">8</td><td colspan="3" rowspan="1" style="">THD m&#225;ximo de Corriente a tensi&#243;n nominal (%)</td><td colspan="1" rowspan="1" style="text-align:center">= 20%</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">9</td><td colspan="3" rowspan="1" style="">Clase Aislamiento del proyector  </td><td colspan="1" rowspan="1" style="text-align:center">Clase I o II</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">10</td><td colspan="3" rowspan="1" style="">Conjunto &#243;ptico y el&#233;ctrico en la misma carcasa</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="4" style="height:21px;text-align:center">11</td><td colspan="1" rowspan="4" style="">Informaci&#243;n del proyector </td><td colspan="2" rowspan="1" style="">Numero de Leds</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Flujo Luminoso total</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Distribuci&#243;n asim&#233;trica / sim&#233;trica</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Angulo de Apertura (&#176;)</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="2" style="height:21px;text-align:center">12</td><td colspan="1" rowspan="2" style="">Cuerpo del proyector </td><td colspan="2" rowspan="1" style="">Material Proyector </td><td colspan="1" rowspan="1" style="text-align:center">Aluminio-Otro especificar</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Color</td><td colspan="1" rowspan="1" style="text-align:center">Especificar </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="4" style="height:21px;text-align:center">13</td><td colspan="1" rowspan="4" style="">Grado de protecci&#243;n</td><td colspan="2" rowspan="1" style="">Compartimento el&#233;ctrico (IP) </td><td colspan="1" rowspan="1" style="text-align:center">=66 o especificar</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Compartimento &#243;ptico (IP)</td><td colspan="1" rowspan="1" style="text-align:center">=66</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:35px;">Carcasa (IK) para industria, especificar para comercial y residencial</td><td colspan="1" rowspan="1" style="text-align:center">7</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Vidrio Protector o lente (IK)</td><td colspan="1" rowspan="1" style="text-align:center">7</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="17" style="height:21px;text-align:center">14</td><td colspan="1" rowspan="17" style="">Clasificaci&#243;n del proyector </td><td colspan="1" rowspan="9" style="">Rango de Flujo Luminoso</td><td colspan="1" rowspan="1" style="">Rango de flujo Lm.</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Numero de Leds</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Flujo Luminoso total</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Corriente de los chips de Led</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">N&#250;mero de drivers</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">N&#250;mero de m&#243;dulos</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Potencia</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Clase de aislamiento</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Tensi&#243;n Fase-Neutro</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="4" style="height:33px;">CLASIFICACION NEMA</td><td colspan="1" rowspan="1" style="">Clasificaci&#243;n NEMA tipo (horizontal y vertical)</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Categor&#237;a de proyector</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:33px;">Intervalo de apertura del Haz [&#176;]</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Distancia de proyecci&#243;n [m]</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="4" style="height:33px;">Distribuci&#243;n fotom&#233;trica</td><td colspan="1" rowspan="1" style="">Sim&#233;trica con eje de revoluci&#243;n </td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:49px;">Sim&#233;trica con respecto a dos planos con flecha indicadora de correcta instalaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:65px;">Sim&#233;trica con respecto a un solo plano con flecha indicadora de correcta instalaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:49px;">Distribuci&#243;n asim&#233;trica con flecha indicadora de correcta instalaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">15</td><td colspan="1" rowspan="1" style="">Accesorios</td><td colspan="2" rowspan="1" style="">Marca o tipo de Driver</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16</td><td colspan="3" rowspan="1" style="">Vidrio Protector o Lentes en vidrio templado liso Si / No, especificar</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">17</td><td colspan="3" rowspan="1" style="">Referencia del LED o Modulo LED</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">18</td><td colspan="3" rowspan="1" style="">Referencia de la fuente de alimentaci&#243;n-Driver</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">19</td><td colspan="3" rowspan="1" style="">Peso del proyector   [kg] </td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">20</td><td colspan="3" rowspan="1" style="">Dimensiones del proyector </td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:21px;text-align:center">21</td><td colspan="1" rowspan="5" style="">Caracter&#237;sticas &#211;pticas del proyector</td><td colspan="2" rowspan="1" style="">Temperatura de color [K]</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">RGB</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="2" style="height:21px;text-align:center">Coordenada crom&#225;tica (CIE 1931)</td><td colspan="1" rowspan="1" style="text-align:center">X</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">Y</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:33px;">Eficacia m&#237;nima [lm/W]</td><td colspan="1" rowspan="1" style="text-align:center">Especificar y anexar ensayo LM79-08</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">22</td><td colspan="1" rowspan="1" style="">Fotometr&#237;a</td><td colspan="2" rowspan="1" style="">Matriz .IES (indicar nombre archivo)</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="2" style="height:21px;text-align:center">23</td><td colspan="1" rowspan="2" style="">Temperatura m&#225;xima externa de funcionamiento [&#176;C]</td><td colspan="2" rowspan="1" style="">Fuente de alimentaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Carcasa del proyector</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">24</td><td colspan="3" rowspan="1" style="">Dimensiones de la caja para transporte mm x mm x mm</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">25</td><td colspan="1" rowspan="1" style="">Tipo de Instalaci&#243;n</td><td colspan="2" rowspan="1" style="">Sobrepuesta/Empotrada/colgante</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:21px;text-align:center">26</td><td colspan="1" rowspan="5" style="">Certificaci&#243;n de producto (RETILAP)</td><td colspan="2" rowspan="1" style="">Entidad acreditadora</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Adjunta el certificado (Si/No)&#160;&#160;</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:21px;text-align:center">27</td><td colspan="1" rowspan="5" style="">Sistema de calidad ISO 9001 o ISO 9002 del Fabricante</td><td colspan="2" rowspan="1" style="">Entidad acreditadora</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:21px;text-align:center">28</td><td colspan="1" rowspan="5" style="">Sistema de calidad ISO 9001 del Proveedor</td><td colspan="2" rowspan="1" style="">Entidad acreditadora</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:33px;text-align:center">29</td><td colspan="1" rowspan="1" style="">La marcaci&#243;n debe estar en idioma espa&#241;ol</td><td colspan="2" rowspan="1" style="">La marcaci&#243;n debe ir en el cuerpo en forma indeleble y legible.</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="14" style="height:21px;text-align:center">30</td><td colspan="1" rowspan="14" style="text-align:center">Marcaci&#243;n sobre el proyector (Contestar Si/No seg&#250;n corresponda)</td><td colspan="2" rowspan="1" style="">Marca de f&#225;brica</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Potencia</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Modelo y referencia</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Tensiones de conexi&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Flujo luminoso</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Temperatura de color(&#176;K)</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Mes y a&#241;o de fabricaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Grado IP</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Grado IK</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Clase de aislamiento</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Garant&#237;a</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Palabra ENEL</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">N&#250;mero de serie</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Contrato</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="12" style="height:21px;text-align:center">31</td><td colspan="1" rowspan="12" style="text-align:center">Marcaci&#243;n en el empaque del proyector debe estar redactado en el idioma espa&#241;ol (Contestar Si/No seg&#250;n corresponda)</td><td colspan="2" rowspan="1" style="">Marca de f&#225;brica</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Potencia</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Modelo y referencia</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Tensiones de conexi&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Temperatura de color</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">&#205;ndice de reproducci&#243;n crom&#225;tica</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Flujo luminoso</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Vida &#250;til o promedio</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Mes y a&#241;o de fabricaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Tipo de uso</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Precauciones de instalaci&#243;n y mantenimiento </td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">C&#243;digo SAP del material</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">32</td><td colspan="1" rowspan="1" style="">Vida &#250;til del chip Led horas</td><td colspan="2" rowspan="1" style="">L70 = a 50.000 horas monocolor y Proyector RGB. </td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">33</td><td colspan="1" rowspan="1" style="">Garant&#237;a total del proyector </td><td colspan="2" rowspan="1" style="">Cinco (5) a&#241;os</td><td colspan="1" rowspan="1" style="text-align:center">Especificar</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">34</td><td colspan="3" rowspan="1" style="">CATALOGOS DEL PRODUCTO EN ESPA&#209;OL</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">35</td><td colspan="3" rowspan="1" style="">Ensayos IEC o IESNA anexa &#191;cu&#225;les?</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">36</td><td colspan="3" rowspan="1" style="">Entrega registro fotogr&#225;fico en las 4 vistas interior y exterior</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">37</td><td colspan="3" rowspan="1" style="">Entrega copia de todos los planos y dibujos en formato PDF </td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">38</td><td colspan="3" rowspan="1" style="">Posee Disipadores de calor pasivos</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">39</td><td colspan="3" rowspan="1" style="">Se garantiza la estabilidad del color contra rayos ultravioleta</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div> (*) Informaci&#243;n que se requiere sea diligenciada por el fabricante <br /><br /><b>ANEXO 2. FUENTE DE ALIMENTACI&#211;N O DRIVER PLANILLA DE CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS</b><br /><div style="width:800px;"><table><tr><td colspan="1" rowspan="1" style="width:60px;height:21px;text-align:center"><b>ITEM</b></td><td colspan="3" rowspan="1" style="width:576px;text-align:center"><b>DESCRIPCI&#211;N</b></td><td colspan="1" rowspan="1" style="width:189px;text-align:center"><b>EXIGIDO</b></td><td colspan="1" rowspan="1" style="width:147px;text-align:center"><b>OFERTADO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">1</td><td colspan="3" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2</td><td colspan="3" rowspan="1" style="">Pa&#237;s de origen</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">3</td><td colspan="3" rowspan="1" style="">Clase de aislamiento</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">4</td><td colspan="3" rowspan="1" style="">Adjunta certificado del fabricante de la corriente del chip (requerido)</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">5</td><td colspan="3" rowspan="1" style="">Rango de tensi&#243;n de salida [V]</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">6</td><td colspan="3" rowspan="1" style="">Rango de corriente de salida (m A)</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">7</td><td colspan="3" rowspan="1" style="">M&#225;xima potencia de Salida [W]</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">8</td><td colspan="3" rowspan="1" style="">Protecci&#243;n contra corto circuito (Si / No)</td><td colspan="1" rowspan="1" style="text-align:center">Si</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">9</td><td colspan="3" rowspan="1" style="">Protecci&#243;n contra sobre corriente (SI/NO). Describir.</td><td colspan="1" rowspan="1" style="text-align:center">Si</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">10</td><td colspan="3" rowspan="1" style="">Supresor de picos a la salida (Si / No)</td><td colspan="1" rowspan="1" style="text-align:center">Si</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">11</td><td colspan="3" rowspan="1" style="">Protecci&#243;n contra altas temperatura en el LED o modulo LED (Si / No)</td><td colspan="1" rowspan="1" style="text-align:center">Si</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">12</td><td colspan="3" rowspan="1" style="">Corriente de entrada [mA].</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">13</td><td colspan="3" rowspan="1" style="">Rango de tensi&#243;n de entrada [V]</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">14</td><td colspan="3" rowspan="1" style="">Potencia de entrada [W]</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">15</td><td colspan="3" rowspan="1" style="">Supresor de picos a la entrada (Si / No)</td><td colspan="1" rowspan="1" style="text-align:center">Si</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16</td><td colspan="3" rowspan="1" style="">THD de corriente a voltaje nominal. [%]</td><td colspan="1" rowspan="1" style="text-align:center">&lt;20%</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">17</td><td colspan="3" rowspan="1" style="">Eficiencia en operaci&#243;n nominal [%]</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">18</td><td colspan="3" rowspan="1" style="">Temperatura de operaci&#243;n &#186;C</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">19</td><td colspan="3" rowspan="1" style="">Control (DALI o DMX)</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">20</td><td colspan="3" rowspan="1" style="">Vida &#250;til [horas] </td><td colspan="1" rowspan="1" style="text-align:center">50</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">21</td><td colspan="3" rowspan="1" style="">Peso [kg]</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">22</td><td colspan="3" rowspan="1" style="">Dimensiones (Largo/alto/ancho)</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">23</td><td colspan="3" rowspan="1" style="">Protecci&#243;n contra sobre tensiones transitorias (DPS). [Si / No]</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">24</td><td colspan="3" rowspan="1" style="">La marcaci&#243;n del Driver de acuerdo con el numeral 9.1</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:21px;text-align:center">25</td><td colspan="2" rowspan="5" style="">Acreditaci&#243;n RETILAP por ente ONAC</td><td colspan="1" rowspan="1" style="">Entidad acreditadora</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:33px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:21px;text-align:center">26</td><td colspan="2" rowspan="5" style="">Sistema de calidad&lt;br /&gt;(Normas ISO 9001 del Fabricante)</td><td colspan="1" rowspan="1" style="">Entidad acreditadora</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:33px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center">SI</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">27</td><td colspan="3" rowspan="1" style="">Garant&#237;a (A&#241;os)</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style=""> </td></tr></table><br /></div> (*) Informaci&#243;n que se requiere sea diligenciada por el fabricante <br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 2087, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+uuid: 2cad0cbc-6cc2-4dac-9b6f-412a337a0d87
+langcode: en
+status: true
+dependencies: {  }
+id: rules_section
+label: 'Secciones de la pagina principal'
+icon_uuid: null
+icon_default: null
+description: 'Sección con texto, imagen y botón que se muestran en la pagina principal'
+behavior_plugins: {  }

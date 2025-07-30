@@ -1,0 +1,22 @@
+uuid: 34b7084a-1609-4900-84a0-6bc26a1fe300
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: rules_specification_categories
+label: 'Rules: Specification categories'
+type: 'canonical_entities:taxonomy_term'
+pattern: 'especificaciones/[term:name]'
+selection_criteria:
+  a78fee12-f645-4c16-8471-84eb8c80f218:
+    id: 'entity_bundle:taxonomy_term'
+    negate: false
+    uuid: a78fee12-f645-4c16-8471-84eb8c80f218
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    bundles:
+      rules_specification_category: rules_specification_category
+selection_logic: and
+weight: -5
+relationships: {  }

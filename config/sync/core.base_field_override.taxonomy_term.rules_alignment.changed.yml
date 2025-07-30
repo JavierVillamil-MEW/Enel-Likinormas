@@ -1,0 +1,18 @@
+uuid: dec8297c-a601-4d35-88d9-9012d03177fd
+langcode: es
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.rules_alignment
+id: taxonomy_term.rules_alignment.changed
+field_name: changed
+entity_type: taxonomy_term
+bundle: rules_alignment
+label: Modificado
+description: 'La fecha en que el término fue creado por última vez.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

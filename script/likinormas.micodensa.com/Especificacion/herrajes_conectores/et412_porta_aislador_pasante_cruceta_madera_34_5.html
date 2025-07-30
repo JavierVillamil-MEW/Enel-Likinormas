@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET412 Porta aislador pasante para cruceta de madera 34,5 kV | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/520" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F520.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/520" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/520" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '23');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET412 Porta aislador pasante para cruceta de madera 34,5 kV</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET412</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">02/12/2019</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/520">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F520&amp;nodoid=520', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#heading_0">1.	OBJETO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#heading_1">2.	ALCANCE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#heading_2">3.	SERVICIO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#heading_3">4.  SISTEMA DE UNIDADES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#heading_4">5.	NORMAS RELACIONADAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#heading_5">6.	REQUISITOS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#heading_6">6.1	GEOM&#201;TRICOS.</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#heading_7">6.2	QU&#205;MICOS.</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#heading_8">6.3	MEC&#193;NICOS.</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#heading_9">6.4	REQUISITOS DEL RECUBRIMIENTO</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#heading_10">6.4.1 Galvanizado por inmersi&#243;n en caliente.</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#heading_11">6.4.2	Recubrimiento &#211;rgano  Met&#225;lico</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#heading_12">6.5	 REQUISITOS DEL ACABADO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#heading_13">7.	CRITERIOS DE ACEPTACI&#211;N O RECHAZO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#heading_14">8.	PRUEBAS </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#heading_15">8.1 PRUEBAS TIPO</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#heading_16"> 8.1.1	PRUEBA DIMENSIONAL</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#heading_17">8.1.2	AN&#193;LISIS QU&#205;MICO</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#heading_18">8.1.3	PRUEBAS MEC&#193;NICAS</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#heading_19">8.1.4	PRUEBA DE RECUBRIMIENTO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#heading_20">8.2 PRUEBAS DE RECEPCI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#heading_21">9.	MARCACI&#211;N EMPAQUE Y ROTULADO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#heading_22">9.2 MARCACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#heading_23">9.2	EMPAQUE</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#heading_24">9.3	ROTULADO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#heading_25">10.	PRESENTACI&#211;N DE LAS OFERTAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#heading_26">11.	GARANT&#205;A DE F&#193;BRICA</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#heading_27">ANEXO 1. CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1.	OBJETO</h2>
+Esta especificaci&#243;n t&#233;cnica tiene por objeto establecer las caracter&#237;sticas y requisitos t&#233;cnicos que deben cumplir y los ensayos a los cuales debe ser sometido el porta aislador pasante (espigo), para cruceta de madera con secci&#243;n de 10 X 10 cm, para aisladores tipo pin en l&#237;neas a&#233;reas de distribuci&#243;n de 34,5 kV.<br />
+<h2 id="heading_1" >2.	ALCANCE</h2>
+Esta especificaci&#243;n t&#233;cnica se aplicar&#225; en todos los porta aisladores pasante para cruceta de madera con secci&#243;n de 10 X 10 cm. que adquiera ENEL CODENSA.<br />
+<h2 id="heading_2" >3.	SERVICIO</h2>
+Estos herrajes se usan para montar y/o fijar aisladores tipo pin a crucetas de madera y son de servicio continuo.<br />
+<h2 id="heading_3" >4.  SISTEMA DE UNIDADES</h2>
+En todos los documentos t&#233;cnicos se deben expresar las cantidades num&#233;ricas en unidades del sistema internacional (S.I.).  Si se usan cat&#225;logos, folletos o planos, en sistemas diferentes de unidades, deben hacerse  las conversiones respectivas.<br />
+<h2 id="heading_4" >5.	NORMAS RELACIONADAS</h2>
+<div style="width:900px;"><table><tr><td colspan="1" rowspan="1" style="width:120px;height:35px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:780px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC 2</td><td colspan="1" rowspan="1" style="">Siderurgia. Ensayo de tracci&#243;n para materiales met&#225;licos. M&#233;todo de ensayo a temperatura ambiente.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC 422</td><td colspan="1" rowspan="1" style="">Barras de acero aleadas y al carbono, laminadas en caliente y terminadas en fr&#237;o. Requisitos generales.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC 2076</td><td colspan="1" rowspan="1" style="">Recubrimiento de zinc por inmersi&#243;n en caliente para elementos en hierro y acero.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC 2608</td><td colspan="1" rowspan="1" style="">Espigos ferrosos galvanizados para aisladores tipo pin con rosca de plomo, nailon, PVC, polietileno o cualquier otro compuesto, para construcci&#243;n de l&#237;neas a&#233;reas.</td></tr></table><br /></div><br />Pueden emplearse otras normas internacionalmente reconocidas equivalentes o superiores a las aqu&#237; se&#241;aladas, siempre y cuando se ajusten a lo solicitado en la presente especificaci&#243;n t&#233;cnica.<br /><br />Las normas citadas en la presente especificaci&#243;n (o cualquier otra que llegare a ser aceptada por ENEL CODENSA) se refieren a su &#250;ltima revisi&#243;n.<br />
+<h2 id="heading_5" >6.	REQUISITOS</h2>
+Son elementos de caracter&#237;sticas geom&#233;tricas y mec&#225;nicas tales que les permiten soportar el aislador tipo pin y adaptarse a las limitaciones impuestas por las crucetas de madera.<br /><br />Los porta aislador pasante para cruceta de madera 34,5 kV deben estar formadas por un solo elemento forjado &#243; estampado, el material base deben ser de alta calidad y cumplir la norma NTC 422; el acero debe ser de bajo silicio o sea menor de 0,05% (A34 - SAE1010 &#243; SAE1020).<br /><br />Las tuercas (<a href="et463_tuerca_acero_galvanizado.html" class="externalLink">ET463<span class="externalLinkIcon"></span></a>) y arandelas (<a href="et462_arandelas_acero_galvanizado.html" class="externalLink">ET462<span class="externalLinkIcon"></span></a>) deben estar de acuerdo con las normas que disponga ENEL CODENSA para tal fin o en su defecto con las normas NTC 1645; deben tener un recubrimiento para evitar la corrosi&#243;n.<br /><br />El adaptador o aditamento debe ser fabricado en un material polim&#233;rico que cumpla con el desempe&#241;o y las propiedades mec&#225;nica y el&#233;ctricas requeridas en esta especificaci&#243;n. El polim&#233;rico permitido puede ser:
+<ul><li>Nailon: Cumpliendo la norma ASTM D4066 y ASTM D5989</li>
+<li>PVC: Debe ser duro y dise&#241;ado para ser extruido o inyectado sobre el portaislador y debe cumplir con la norma ASTM D1784</li>
+<li>Polietileno: Tipo III o IV, clase C o D de acuerdo a las normas ASTM D4976 o ASTM D1248</li></ul>
+ 
+<h3 id="heading_6" >6.1	GEOM&#201;TRICOS.</h3>
+El porta aislador pasante para cruceta de madera en el sistema de 34,5 kV deben tener la forma y dimensiones mostradas en la figura 1.<br />
+<h3 id="heading_7" >6.2	QU&#205;MICOS.</h3>
+El <a href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#" id="version-274" class="externalLink  glosarioLink">material</a> base debe cumplir con los siguientes requisitos, de la tabla 1:<br /><br /><b>TABLA  1</b><br /><div style="width:378px;"><table><tr><td colspan="3" rowspan="1" style="width:378px;height:35px;text-align:center"><b>REQUISITOS QU&#205;MICOS DE LAS PLATINAS</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:25px;text-align:center"><b>ELEMENTO</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>SAE 1010</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>SAE 1020</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">% Carbono</td><td colspan="1" rowspan="1" style="text-align:center">0,08 a 0,13</td><td colspan="1" rowspan="1" style="text-align:center">0,18 a 0,22</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">% F&#243;sforo, m&#225;x.</td><td colspan="1" rowspan="1" style="text-align:center">0,05</td><td colspan="1" rowspan="1" style="text-align:center">0,05</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">% Azufre, m&#225;x</td><td colspan="1" rowspan="1" style="text-align:center">0,05</td><td colspan="1" rowspan="1" style="text-align:center">0,05</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">% Manganeso</td><td colspan="1" rowspan="1" style="text-align:center">0,3 a 0,6</td><td colspan="1" rowspan="1" style="text-align:center">0,3 a 0,6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">% Silicio, m&#225;x</td><td colspan="1" rowspan="1" style="text-align:center">0,05</td><td colspan="1" rowspan="1" style="text-align:center">0,05</td></tr></table><br /></div><b>Nota:</b> Se pueden usar aceros equivalentes u otros aceros con la previa autorizaci&#243;n de ENEL CODENSA.<br />
+<h3 id="heading_8" >6.3	MEC&#193;NICOS.</h3>
+El <a href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#" id="version-274" class="externalLink  glosarioLink">material</a> del porta aislador debe tener los siguientes requisitos m&#237;nimos:
+<ul><li>Resistencia a la tracci&#243;n 34,7 Kg/mm<sup>2</sup> (340 MN/m<sup>2</sup>).</li>
+<li>Limite m&#237;nimo de fluencia 18,4 Kg/mm<sup>2</sup> (180 MN/m<sup>2</sup>).</li>
+<li>Elongaci&#243;n 30% en 50 mm(2pulg.).</li></ul>
+ 
+<h3 id="heading_9" >6.4	REQUISITOS DEL RECUBRIMIENTO</h3>
+El portaislador, tuerca y arandelas deben tener un recubrimiento aplicado despu&#233;s de la fabricaci&#243;n y antes de fundir o inyectar el aditamento.<br /><br />Para el recubrimiento se acepta el galvanizado por inmersi&#243;n en caliente y como alternativa el recubrimiento &#243;rgano met&#225;lico por micro capas. La determinaci&#243;n del tipo de recubrimiento lo realizar&#225; ENEL CODENSA en el proceso de licitaci&#243;n.<br />
+<h4 id="heading_10" >6.4.1 Galvanizado por inmersi&#243;n en caliente.</h4>
+El porta aislador pasante para cruceta de madera en el sistema de 34,5kV ser&#225; totalmente galvanizado por inmersi&#243;n en caliente y debe cumplir con las especificaciones t&#233;cnicas de la norma NTC 2076 y debe estar libre de burbujas, &#225;reas sin revestimiento, dep&#243;sitos de escoria, manchas negras y cualquier otro tipo de inclusiones o imperfecciones.<br /><br />La capa de material de cinc utilizado ser&#225; de calidad especial seg&#250;n norma NTC 2076 (tabla 2).<br /><br /><b>TABLA 2</b><br /><div style="width:535px;"><table><tr><td colspan="5" rowspan="1" style="width:535px;height:40px;text-align:center"><b>COMPOSICI&#211;N QU&#205;MICA DEL CINC ( % )</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center"><b>GRADO</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Plomo m&#225;x.</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Hierro m&#225;x.</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Cadmio m&#225;x.</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Cinc, m&#237;n.</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">Especial</td><td colspan="1" rowspan="1" style="text-align:center">0,03</td><td colspan="1" rowspan="1" style="text-align:center">0,02</td><td colspan="1" rowspan="1" style="text-align:center">0,02</td><td colspan="1" rowspan="1" style="text-align:center">99,90</td></tr></table><br /></div><br />El porta aislador pasante se galvaniza con clase B-2 y los elementos roscados con clase C seg&#250;n Norma NTC 2076 (tabla 3).<br /><br /><b>TABLA 3</b> <br /><div style="width:600px;"><table><tr><td colspan="5" rowspan="1" style="width:600px;height:40px;text-align:center"><b>REQUISITOS  DE  GALVANIZADO</b></td></tr>
+<tr><td colspan="1" rowspan="2" style="height:60px;text-align:center"><b>ELEMENTO</b></td><td colspan="2" rowspan="1" style="text-align:center"><b>PROMEDIO</b></td><td colspan="2" rowspan="1" style="text-align:center"><b>M&#205;NIMO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center"><b>g/m<sup>2</sup></b></td><td colspan="1" rowspan="1" style="text-align:center"><b><span class="codeInline">&#181;</span>m</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>g/m<sup>2</sup></b></td><td colspan="1" rowspan="1" style="text-align:center"><b><span class="codeInline">&#181;</span>m</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;">Porta aislador</td><td colspan="1" rowspan="1" style="text-align:center">458</td><td colspan="1" rowspan="1" style="text-align:center">65,4</td><td colspan="1" rowspan="1" style="text-align:center">381</td><td colspan="1" rowspan="1" style="text-align:center">54,4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;">Elementos Roscados</td><td colspan="1" rowspan="1" style="text-align:center">397</td><td colspan="1" rowspan="1" style="text-align:center">56,6</td><td colspan="1" rowspan="1" style="text-align:center">336</td><td colspan="1" rowspan="1" style="text-align:center">48</td></tr></table><br /></div>
+<h4 id="heading_11" >6.4.2	Recubrimiento &#211;rgano  Met&#225;lico</h4>
+El recubrimiento &#243;rgano met&#225;lico se realiza a base de cinc y aluminio, por micro capas de acuerdo con la especificaci&#243;n <a href="../otros/et470_recubrimiento_organo_metalico.html" class="externalLink">ET470<span class="externalLinkIcon"></span></a>.<br />
+<h3 id="heading_12" >6.5	 REQUISITOS DEL ACABADO</h3>
+El porta aislador debe ser de una sola pieza, libre de soldaduras, libre de deformaciones, fisura, aristas cortantes, y defectos de laminaci&#243;n. No se permiten dobleces ni rebabas en las zonas de corte, perforadas o punzadas. El recubrimiento debe estar libre de burbujas, dep&#243;sitos de escorias, manchas negras, excoriaciones y/u otro tipo de inclusiones.<br />
+<h2 id="heading_13" >7.	CRITERIOS DE ACEPTACI&#211;N O RECHAZO</h2>
+Si el n&#250;mero de elementos defectuosos es menor o igual al correspondiente n&#250;mero de defectuosos definidos a continuaci&#243;n, se deber&#225; considerar que el lote cumple con los requisitos t&#233;cnicos exigidos por ENEL CODENSA, en caso contrario, el lote se rechazar&#225;.<br /><br /><b>Inspecci&#243;n Visual y Dimensional</b> <br /><br />De acuerdo a la tabla a continuaci&#243;n.<br /><br /><div style="width:644px;"><table><tr><td colspan="4" rowspan="1" style="width:644px;height:20px;text-align:center">Tabla inspecci&#243;n visual y dimensional</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">Tama&#241;o del lote</td><td colspan="1" rowspan="1" style="text-align:center">Muestra</td><td colspan="1" rowspan="1" style="text-align:center">Aceptado</td><td colspan="1" rowspan="1" style="text-align:center">Rechazado</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">2 a 8</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">9 a 15</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">16 a 25</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">26 a 50</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">51 a 90</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">91 a 150</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">151 a 280</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">281 a 500</td><td colspan="1" rowspan="1" style="text-align:center">20</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">501 a 1200</td><td colspan="1" rowspan="1" style="text-align:center">32</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1201 a 3200</td><td colspan="1" rowspan="1" style="text-align:center">50</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">3201 a 10000</td><td colspan="1" rowspan="1" style="text-align:center">80</td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">7</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">10001 a 35000</td><td colspan="1" rowspan="1" style="text-align:center">125</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">9</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">35001 a 150000</td><td colspan="1" rowspan="1" style="text-align:center">200</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">11</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">150001 a 500000</td><td colspan="1" rowspan="1" style="text-align:center">315</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">11</td></tr></table><br /></div><b>TABLA 4. Plan de muestreo para inspecci&#243;n visual y dimensional.</b><br /><br /><b>Ensayos mec&#225;nicos</b><br /><br />De acuerdo a la tabla a continuaci&#243;n.<br /><br /><div style="width:644px;"><table><tr><td colspan="4" rowspan="1" style="width:644px;height:20px;text-align:center">Tabla inspecci&#243;n visual y dimensional</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">Tama&#241;o del lote</td><td colspan="1" rowspan="1" style="text-align:center">Muestra</td><td colspan="1" rowspan="1" style="text-align:center">Aceptado</td><td colspan="1" rowspan="1" style="text-align:center">Rechazado</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">2 a 8</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">9 a 15</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">16 a 25</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">26 a 50</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">51 a 90</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">91 a 150</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">151 a 280</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">281 a 500</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">501 a 1200</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1201 a 3200</td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">3201 a 10000</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">10001 a 35000</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">35001 a 150000</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">150001 a 500000</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr></table><br /></div><b>TABLA 5. Plan de muestreo para pruebas mec&#225;nicas.</b><br /><br />
+<h2 id="heading_14" >8.	PRUEBAS </h2>
+<h3 id="heading_15" >8.1 PRUEBAS TIPO</h3>
+Las pruebas tipo son:<br /><br /><b>Al material del portaislador:</b>
+<ol><li>Resistencia a la tracci&#243;n</li>
+<li>L&#237;mite m&#237;nimo de fluencia</li>
+<li>Elongaci&#243;n</li>
+<li>An&#225;lisis qu&#237;mico</li></ol>
+<br /><b>Al portaislador terminado:</b> 
+<ol><li>Prueba dimensional</li>
+<li>Ensayo de flexi&#243;n (Cantilever)</li>
+<li>Ensayo de torsi&#243;n</li>
+<li>Ensayo de tracci&#243;n</li>
+<li>Prueba de recubrimiento</li></ol>
+
+<h4 id="heading_16" > 8.1.1	PRUEBA DIMENSIONAL</h4>
+La verificaci&#243;n de las dimensiones se har&#225; con los instrumentos de medida que den la aproximaci&#243;n requerida (cinta m&#233;trica con divisiones de 1 mm para longitudes y calibrador para los di&#225;metros y espesores). El tama&#241;o de la <a href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#" id="version-288" class="externalLink  glosarioLink">muestra</a> deber&#225; estar de acuerdo con la tabla 4.<br />
+<h4 id="heading_17" >8.1.2	AN&#193;LISIS QU&#205;MICO</h4>
+Se efectuar&#225; el an&#225;lisis qu&#237;mico de acuerdo a lo requerido en el numeral 6.2 y las normas NTC 23 y 180 (carbono), NTC 27 (azufre), NTC 181 (f&#243;sforo), NTC 24 o 25 (manganeso), NTC 26 o 28 (silicio) o en su defecto se aceptar&#225; un certificado de <a href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> de los materiales empleados, emitido por un laboratorio reconocido y aprobado por ENEL CODENSA. El an&#225;lisis qu&#237;mico puede ser realizado en un espectr&#243;metro calibrado con los patrones correspondientes.<br /> 
+<h4 id="heading_18" >8.1.3	PRUEBAS MEC&#193;NICAS</h4>
+<b>8.1.3.1 <a href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de flexi&#243;n (Cantilever)</b><br />El porta <a href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#" id="version-78" class="externalLink  glosarioLink">aislador</a> pasante debe ser sometido a prueba de flexi&#243;n mediante cantiliver como se <a href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#" id="version-288" class="externalLink  glosarioLink">muestra</a> en la figura 2. La carga m&#225;xima para un &#225;ngulo de 10 grados de deflexi&#243;n ser&#225; de 9789 N (2200 libras).<br /><br /><b>8.1.3.2 <a href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de torsi&#243;n</b><br />Esta prueba se realiza usando un manguito de acero (protector met&#225;lico) que se rosca al adaptador o aditamento con un torque inicial de 17 Nm (150 libras-pulgada) y se gira 180 grados en sentido del torque; no debe presentar da&#241;os en la rosca del aditamento ni deslizamiento entre el adaptador o aditamento y el espigo.<br /><br /><b>8.1.3.3 <a href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de tracci&#243;n</b><br />Con el mismo montaje de la figura 2 y aplicando una carga de tracci&#243;n de 13349 N (1360 kg o 3000 libras), no debe presentar deformaci&#243;n alguna en los hilos de la rosca del adaptador o aditamento, ni desprendimiento de &#233;ste con el espigo.<br />
+<h4 id="heading_19" >8.1.4	PRUEBA DE RECUBRIMIENTO</h4>
+Para elementos galvanizados, esta prueba se har&#225; de acuerdo a la norma NTC 2076.<br /><br />Para los elementos de fijaci&#243;n, tuercas y arandelas, se har&#225;n las pruebas de acuerdo a la NTC 3241 con los siguientes requisitos establecidos en la tabla N&#186; 6.<br /><br /><b>TABLA 6. PRUEBA  DE  GALVANIZADO</b><br /><div style="width:393px;"><table><tr><td colspan="1" rowspan="1" style="width:241px;height:30px;text-align:center"><b>ELEMENTO</b></td><td colspan="1" rowspan="1" style="width:152px;text-align:center"><b>N&#218;MERO DE INMERSIONES</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Tornillos,  Parte no roscada</td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Parte roscada</td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Arandelas </td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr></table><br /></div>Si el recubrimiento es &#243;rgano met&#225;lico esta prueba debe realizarse con la especificaci&#243;n <a href="../otros/et470_recubrimiento_organo_metalico.html" class="externalLink">ET470<span class="externalLinkIcon"></span></a>.<br /><br />La prueba de espesor de recubrimiento puede hacerse con un ec&#243;metro debidamente calibrado.<br />
+<h3 id="heading_20" >8.2 PRUEBAS DE RECEPCI&#211;N</h3>
+Las pruebas de recepci&#243;n son:<br />
+<ul><li>Inspecci&#243;n visual</li>
+<li>Verificaci&#243;n dimensional</li>
+<li>Verificaci&#243;n Certificados de Calidad</li>
+<li>Verificaci&#243;n espesor del galvanizado</li>
+<li>Ensayo de tracci&#243;n</li>
+<li>Ensayo de torque</li>
+<li>Ensayo de flexi&#243;n</li></ul>
+
+<h2 id="heading_21" >9.	MARCACI&#211;N EMPAQUE Y ROTULADO</h2>
+<h3 id="heading_22" >9.2 MARCACI&#211;N</h3>
+El material debe cumplir la siguiente marcaci&#243;n en bajo o en alto relieve. No se acepta pintura ni calcoman&#237;a.<br /><br />•	Logo del fabricante<br />•	Lote<br />•	ENEL CODENSA<br />•	Mes y a&#241;o de fabricaci&#243;n<br /><br />
+<h3 id="heading_23" >9.2	EMPAQUE</h3>
+Los porta <a href="et412_porta_aislador_pasante_cruceta_madera_34_5.html#" id="version-78" class="externalLink  glosarioLink">aislador</a>es se empacar&#225;n de tal manera que no sufran durante el transporte, manipulaci&#243;n y almacenamiento. Las tuercas ir&#225;n engrasadas, con sus arandelas instaladas y a su vez instalados en los porta aisladores.<br />
+<h3 id="heading_24" >9.3	ROTULADO</h3>
+En cada caja se colocar&#225; un r&#243;tulo con la siguiente informaci&#243;n.<br />
+<ul><li>Especificaci&#243;n del contenido con su referencia.</li>
+<li>Nombre y raz&#243;n social del proveedor.</li>
+<li>Pa&#237;s de origen.</li>
+<li>Cantidad de elementos.</li>
+<li>Peso unitario, peso total bruto y neto.</li>
+<li>N&#250;mero de contrato o pedido.</li>
+<li>Fecha de entrega.</li>
+<li>C&#243;digo de Almac&#233;n.</li></ul>
+
+<h2 id="heading_25" >10.	PRESENTACI&#211;N DE LAS OFERTAS</h2> <br />El oferente obligatoriamente deber&#225; incluir con su propuesta, la siguiente informaci&#243;n:<br />
+<ul><li>Relaci&#243;n de los bienes cotizados.</li></ul>
+
+<ul><li>Informaci&#243;n del oferente.</li></ul>
+
+<ul><li>Planilla de caracter&#237;sticas t&#233;cnicas garantizadas, la cual deber&#225; ser diligenciada completamente, en formato Excel.</li></ul>
+
+<ul><li>Cat&#225;logos originales, completos y actualizados del fabricante, que correspondan a los elementos cotizados en la planilla de caracter&#237;sticas t&#233;cnicas garantizadas. </li></ul>
+
+<ul><li>Relaci&#243;n de los ensayos realizados de acuerdo con lo indicado en el numeral 8 de la presente especificaci&#243;n.</li></ul>
+
+<ul><li>El oferente adjuntar&#225; con su propuesta el certificado de conformidad de producto con noma t&#233;cnica y con RETIE, expedido por una entidad autorizada por ONAC. Adem&#225;s deber&#225; presentar el certificado de calidad del fabricante.</li></ul>
+
+<ul><li>Relaci&#243;n de clientes, como evidencia de su capacidad t&#233;cnica y experiencias relacionadas con los materiales cotizados.</li></ul>
+
+<ul><li>Carta de garant&#237;a de los bienes cotizados.</li></ul>
+
+<ul><li>En caso que se requiera se podr&#225;n exigir muestras de cada uno de los elementos ofertados sin cargo a devoluci&#243;n, con las caracter&#237;sticas t&#233;cnicas, solicitadas y mencionadas en la presente especificaci&#243;n.</li></ul>
+
+<ul><li>Se deben relacionar las excepciones de car&#225;cter exclusivamente t&#233;cnico de la oferta, respecto a los bienes solicitados. Si la oferta no presenta excepci&#243;n, se indicar&#237;a expresamente en el mismo “NO HAY EXCEPCIONES”.</li></ul>
+
+<ul><li>Informaci&#243;n adicional que considere aporta explicaci&#243;n a su dise&#241;o (dibujos, detalles, caracter&#237;sticas de operaci&#243;n, dimensiones y pesos de los materiales ofertados).</li></ul>
+<br />ENEL CODENSA podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones, sin expresi&#243;n de causa ni obligaci&#243;n de compensaci&#243;n.<br />
+<h2 id="heading_26" >11.	GARANT&#205;A DE F&#193;BRICA</h2>
+ENEL CODENSA requiere como m&#237;nimo, un per&#237;odo de garant&#237;a de f&#225;brica de cuarenta y ocho (48) meses, a partir de la entrega de los bienes.<br /><br /><b>FIGURA 1. DIMENSIONES  Y  COMPONENTES</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/520/ET-412 Fig1.jpg" src="http://likinormas.micodensa.com/media/cache/images/700x700/wikiimages/363138323335353939-229807-ET-412 Fig1.jpg" title="DIMENSIONES  Y  COMPONENTES"  /></div><div class="texto_imagen_articulos" style="max-width:700px">DIMENSIONES  Y  COMPONENTES</div></div></div><br /><div style="width:720px;"><table><tr><td colspan="12" rowspan="1" style="width:720px;height:35px;text-align:center"><b>DIMENSIONES (mm y pulgadas)</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="width:20px;height:15px;text-align:center"><b>C</b></td><td colspan="1" rowspan="1" style="width:100px;text-align:center">432 (17”)</td><td colspan="1" rowspan="1" style="width:20px;text-align:center"><b>F</b></td><td colspan="1" rowspan="1" style="width:100px;text-align:center">89 (3 &#189;”)</td><td colspan="1" rowspan="1" style="width:20px;text-align:center"><b>I</b></td><td colspan="1" rowspan="1" style="width:100px;text-align:center">1,518”</td><td colspan="1" rowspan="1" style="width:20px;text-align:center"><b>L</b></td><td colspan="1" rowspan="1" style="width:100px;text-align:center">0,109”</td><td colspan="1" rowspan="1" style="width:20px;text-align:center"><b>O</b></td><td colspan="1" rowspan="1" style="width:100px;text-align:center">2,103”</td><td colspan="1" rowspan="1" style="width:20px;text-align:center"><b>R</b></td><td colspan="1" rowspan="1" style="width:100px;text-align:center">18&#176;</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center"><b>D</b></td><td colspan="1" rowspan="1" style="text-align:center">178 (7”)</td><td colspan="1" rowspan="1" style="text-align:center"><b>G</b></td><td colspan="1" rowspan="1" style="text-align:center">4,8 (3/16”)</td><td colspan="1" rowspan="1" style="text-align:center"><b>J</b></td><td colspan="1" rowspan="1" style="text-align:center">3/4”</td><td colspan="1" rowspan="1" style="text-align:center"><b>M</b></td><td colspan="1" rowspan="1" style="text-align:center">9/64”</td><td colspan="1" rowspan="1" style="text-align:center"><b>P</b></td><td colspan="1" rowspan="1" style="text-align:center">1,385”</td><td colspan="1" rowspan="2" style="text-align:center"><b>S</b></td><td colspan="1" rowspan="2" style="text-align:center">3 1/2&quot;</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center"><b>E</b></td><td colspan="1" rowspan="1" style="text-align:center">254 (10”)</td><td colspan="1" rowspan="1" style="text-align:center"><b>H</b></td><td colspan="1" rowspan="1" style="text-align:center">1 1/8”</td><td colspan="1" rowspan="1" style="text-align:center"><b>K</b></td><td colspan="1" rowspan="1" style="text-align:center">1/64” R permisible</td><td colspan="1" rowspan="1" style="text-align:center"><b>N</b></td><td colspan="1" rowspan="1" style="text-align:center">7/64”</td><td colspan="1" rowspan="1" style="text-align:center"><b>Q</b></td><td colspan="1" rowspan="1" style="text-align:center">0.075”</td></tr></table><br /></div><b>FIGURA 2. ENSAYO  DE  TRACCI&#211;N Y FLEXI&#211;N</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/520/ET-412(2).jpg" src="../../media/cache/images/700x700/wikiimages/323538383239343638-346860-ET-412(2).jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:700px"></div></div></div><br />
+<h2 id="heading_27" >ANEXO 1. CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS</h2>
+<div style="width:850px;"><table><tr><td colspan="1" rowspan="1" style="width:30px;height:40px;text-align:center"><b>N&#176;</b></td><td colspan="3" rowspan="1" style="width:720px;text-align:center"><b>DESCRIPCI&#211;N</b></td><td colspan="1" rowspan="1" style="width:100px;text-align:center"><b>OFERTADO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">1</td><td colspan="3" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2</td><td colspan="3" rowspan="1" style="">Referencia</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">3</td><td colspan="3" rowspan="1" style="">Normas de fabricaci&#243;n y ensayos</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="2" style="height:21px;text-align:center">4</td><td colspan="1" rowspan="2" style="width:180px;">Material de fabricaci&#243;n</td><td colspan="2" rowspan="1" style="width:540px;">Espigo</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Aditamento</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="19" style="height:21px;text-align:center">5</td><td colspan="1" rowspan="19" style="">Dimensiones</td><td colspan="1" rowspan="6" style="">Espigo</td><td colspan="1" rowspan="1" style="">C</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">D</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">E</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">F</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">G</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">S</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="11" style="height:21px;">Aditamento</td><td colspan="1" rowspan="1" style="">H</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">I</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">J</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">K</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">L</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">M</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">N</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">O</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">P</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Q</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">R</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Tuerca y contra tuerca (Si/No, describir)</td><td colspan="1" rowspan="1" style="">&#160;&#160;</td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Arandela (Si/No, describir)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="6" style="height:21px;text-align:center">6</td><td colspan="1" rowspan="6" style="">Recubrimiento</td><td colspan="1" rowspan="2" style="">Galvanizado</td><td colspan="1" rowspan="1" style="">Tipo (Describir)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Espesor (min/ prom, &#181;m)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="4" style="height:21px;">&#211;rgano  Met&#225;lico</td><td colspan="1" rowspan="1" style="">Grado de corrosi&#243;n&#160; (indicar alto / medio acorde con ET470)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Espesor&#160; capa ( &#181;m)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Horas m&#237;nimas  de SST- Salt&#160; Spray Test</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Cumple con los ensayos indicados en la&#160; ET470</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">7</td><td colspan="3" rowspan="1" style="">Pruebas (Si/No, indicar cuales presentan)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">8</td><td colspan="3" rowspan="1" style="">Cumple con la marcaci&#243;n solicitada (Si/No, describir)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">9</td><td colspan="3" rowspan="1" style="">Garant&#237;a (meses)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:30px;"><b>RESULTADO DE EVALUACI&#211;N T&#201;CNICA</b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:21px;text-align:center">10</td><td colspan="1" rowspan="5" style="">Certificaci&#243;n del sistema de calidad del fabricante</td><td colspan="2" rowspan="1" style="">Entidad certificadora</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">N&#250;mero de certificado</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Vigencia</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="6" style="height:21px;text-align:center">11</td><td colspan="1" rowspan="6" style="">Certificaci&#243;n de producto con norma t&#233;cnica</td><td colspan="2" rowspan="1" style="">Entidad certificadora</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">N&#250;mero de certificado</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Vigencia</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Norma t&#233;cnica con la cual se certifica</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:21px;text-align:center">12</td><td colspan="1" rowspan="5" style="">Certificaci&#243;n de producto con RETIE</td><td colspan="2" rowspan="1" style="">Entidad certificadora</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">N&#250;mero de certificado</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Vigencia</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:30px;"><b>RESULTADO DE EVALUACI&#211;N REGULATORIA</b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">13</td><td colspan="3" rowspan="1" style="">Observaciones</td><td colspan="1" rowspan="1" style=""> </td></tr></table><br /></div>
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 520, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

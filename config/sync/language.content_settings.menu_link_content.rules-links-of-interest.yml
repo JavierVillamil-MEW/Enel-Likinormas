@@ -1,0 +1,11 @@
+uuid: f2fc45f5-56b0-4eaa-b9bb-be980b3b27be
+langcode: es
+status: true
+dependencies:
+  config:
+    - system.menu.rules-links-of-interest
+id: menu_link_content.rules-links-of-interest
+target_entity_type_id: menu_link_content
+target_bundle: rules-links-of-interest
+default_langcode: site_default
+language_alterable: false

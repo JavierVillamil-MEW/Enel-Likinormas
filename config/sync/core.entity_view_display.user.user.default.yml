@@ -1,0 +1,59 @@
+uuid: b7ea0706-c3ec-45b2-aa93-760442099039
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.user.user.company
+    - field.field.user.user.field_last_password_reset
+    - field.field.user.user.field_password_expiration
+    - field.field.user.user.field_pending_expire_sent
+    - field.field.user.user.notifications
+    - field.field.user.user.profession_or_occupation
+    - field.field.user.user.terms_and_conditions
+    - field.field.user.user.user_picture
+    - image.style.rules_profile_image
+  module:
+    - svg_image
+    - user
+_core:
+  default_config_hash: V51QPCKkgNREKtSmB9Iu2wmAMEpktVpnzklWaZV8UYo
+id: user.user.default
+targetEntityType: user
+bundle: user
+mode: default
+content:
+  company:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  profession_or_occupation:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  user_picture:
+    type: image
+    label: hidden
+    settings:
+      image_link: content
+      image_style: rules_profile_image
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_last_password_reset: true
+  field_password_expiration: true
+  field_pending_expire_sent: true
+  langcode: true
+  member_for: true
+  notifications: true
+  terms_and_conditions: true

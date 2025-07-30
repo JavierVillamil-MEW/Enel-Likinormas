@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AP800 Aceptación de materiales y equipos | Likinormas</title>
+	<meta name="description" content="Aceptación de materiales y equipos (documento preliminar).
+Da claridad sobre exigencias realizadas a los materiales de AP" />
+	<script src="../../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../../index.html"><img src="../../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1353" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../../Usuario/Registro%3FReturnUrl=%252FNorma%252FDetalles%252F1353.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/1353" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1353" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			showSubmenu('4', '101');
+		});
+	</script>
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Norma t&#233;cnica
+	</div>
+	<h1>AP800 Aceptaci&#243;n de materiales y equipos</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de la norma</div>
+					<div class="caracteristicas">AP800</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">22-07-11</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../../Home/DownloadPDF/1353">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FNorma%2FDetalles%2F1353&amp;nodoid=1353', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+        <div style="clear:left;"></div>
+		Los materiales y equipos suministrados por particulares o firmas contratistas para ser instalados en el <a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de CODENSA S.A. deben ser nuevos, cumplir con las Normas T&#233;cnicas Colombianas (NTC) o internacionales, con las especificaciones t&#233;cnicas exigidas por la empresa,  y con la Resoluci&#243;n de la CREG n&#250;mero 070 del ocho (8) de junio de 1998 donde se establece el Reglamento de Distribuci&#243;n de Energ&#237;a El&#233;ctrica, como parte del Reglamento de Operaci&#243;n del <a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-363" class="externalLink  glosarioLink">Sistema</a> Interconectado Nacional.<br /><br />Dicha resoluci&#243;n en su apartado 4.3.1	(especificaci&#243;n de equipos, redes a&#233;reas y subterr&#225;neas) indica:<br /><br />&quot;Las especificaciones de materiales y herrajes para las redes a&#233;reas y subterr&#225;neas deber&#225;n cumplir con las normas t&#233;cnicas nacionales expedidas por las autoridades competentes. Estas &#250;ltimas ser&#225;n las &#250;nicas facultadas para efectuar las homologaciones a que hubiere lugar. <br /><br />Las especificaciones de dise&#241;o de las redes deber&#225;n cumplir con las normas que hayan adoptado los OR&#39;s, siempre y cuando no contravengan lo dispuesto en este Reglamento,  sean de conocimiento p&#250;blico y su aplicaci&#243;n no sea discriminatoria.<br /><br />Las especificaciones de dise&#241;o, fabricaci&#243;n, prueba e instalaci&#243;n de equipos para los STR&#39;s  y/o SDL&#39;s, incluyendo los requisitos de <a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-112" class="externalLink  glosarioLink">calidad</a>, deber&#225;n cumplir con las partes aplicables de una cualquiera de las normas t&#233;cnicas nacionales o en su defecto de las internacionales que regulan esta materia.<br /><br />El equipo a ser instalado en el STR y/o SDL debe ser el apropiado para que opere dentro de la <a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-210" class="externalLink  glosarioLink">frecuencia</a> y el rango de <a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> establecidos para el SIN, as&#237; como para soportar las corrientes de <a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-204" class="externalLink  glosarioLink">falla</a> en el punto de conexi&#243;n.  Adicionalmente, el dispositivo de protecci&#243;n deber&#225; tener la capacidad de conducir e interrumpir la corriente de <a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-204" class="externalLink  glosarioLink">falla</a>. Los OR&#180;s est&#225;n en la obligaci&#243;n de suministrar los detalles t&#233;cnicos del  <a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-363" class="externalLink  glosarioLink">Sistema</a> al cual se har&#225; la conexi&#243;n.”<br /><br />Y el apartado 8, 8.1 y 8.2 que indica:<br /><br />&quot;El Alumbrado P&#250;blico deber&#225; cumplir con la norma NTC 900 o aquella que la reemplace o modifique, o en su defecto con una cualquiera de las siguientes normas internacionales: CIE 115, CIE 30-2 (TC-42); IES RP-8; IES LM-50.<br /><br />En t&#250;neles deber&#225; cumplir con una cualquiera de las siguientes normas: CIE-88, British Standard Code of Practice CP-1004 Part 7/71.<br /><br />Las instalaciones el&#233;ctricas y sus accesorios deben ser a prueba de agua y polvo, como m&#237;nimo una protecci&#243;n IP-655.<br /><br />Las bombillas utilizadas en Alumbrado P&#250;blico deber&#225;n reponerse cuando la emisi&#243;n del flujo luminoso haya descendido al setenta por ciento (70%) de su valor inicial.&quot;<br /> <br />Adem&#225;s de lo anterior, todos los materiales deben ser rotulados de acuerdo al RETILAP tener el nombre del fabricante o la marca de f&#225;brica, y las instrucciones m&#237;nimas que permitan su correcta utilizaci&#243;n. Siempre se deber&#225; acreditar la procedencia de los materiales a instalar.<br />
+<h2 id="heading_0" >CERTIFICACI&#211;N DE PRODUCTOS</h2>
+Los siguientes materiales deben ser certificados con el RETILAP por ser de mayor utilizaci&#243;n en el alumbrado p&#250;blico. A continuaci&#243;n se indican algunos apartes de la tabla  110.2.a Productos objeto del RETILAP:<br /><br /><table><tr><td colspan="1" rowspan="1" style="width:50px;height:14px;"><b>ITEM</b></td><td colspan="1" rowspan="1" style="width:448px;"><b>NOMBRE COMERCIAL DEL PRODUCTO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;text-align:center">1</td><td colspan="1" rowspan="1" style="">Arrancadores para l&#225;mparas de descarga de gas (fluorescente, sodio, mercurio)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;text-align:center">4</td><td colspan="1" rowspan="1" style="">Balastos electromagn&#233;ticos</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">5</td><td colspan="1" rowspan="1" style="">Balastos electr&#243;nicos</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;text-align:center">6</td><td colspan="1" rowspan="1" style="">Bases para fotocontrol</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;text-align:center">9</td><td colspan="1" rowspan="1" style="">Bombillas o l&#225;mparas de descarga en gas a alta presi&#243;n</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;text-align:center">10</td><td colspan="1" rowspan="1" style="">Bombillas o l&#225;mparas de descarga en gas a baja presi&#243;n</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;text-align:center">11</td><td colspan="1" rowspan="1" style="">Bombillas o l&#225;mparas de halogenuros met&#225;licos</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;text-align:center">12</td><td colspan="1" rowspan="1" style="">Bombillas o l&#225;mparas de mercurio a alta presi&#243;n</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;text-align:center">13</td><td colspan="1" rowspan="1" style="">Bombillas o l&#225;mparas de sodio a baja presi&#243;n</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;text-align:center">14</td><td colspan="1" rowspan="1" style="">Bombillas o l&#225;mparas de sodio a alta presi&#243;n</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;text-align:center">22</td><td colspan="1" rowspan="1" style="">Condensadores tipo seco para l&#225;mparas de descarga en gas</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;text-align:center">23</td><td colspan="1" rowspan="1" style="">Contactores para sistemas de iluminaci&#243;n exterior</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;text-align:center">25</td><td colspan="1" rowspan="1" style="">Equipos para control autom&#225;tico de iluminaci&#243;n</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;text-align:center">26</td><td colspan="1" rowspan="1" style="">Fotocontroles, fotoceldas, fotocontroles temporizados</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;text-align:center">27</td><td colspan="1" rowspan="1" style="">Fusibles y portafusibles para luminarias de AP</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:29px;text-align:center">29</td><td colspan="1" rowspan="1" style="">Luminarias para AP. Directas e indirectas o combinadas, provistas o no con difusor, rejilla o refractor</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;text-align:center">30</td><td colspan="1" rowspan="1" style="">Luminarias para t&#250;neles</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;text-align:center">31</td><td colspan="1" rowspan="1" style="">Portabombillas, portal&#225;mparas y sockets para bombillas o l&#225;mparas incandescentes o de descarga y en general de soporte y conexi&#243;n de cualquier fuente lum&#237;nica para uso de iluminaci&#243;n</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:29px;text-align:center">32</td><td colspan="1" rowspan="1" style="">Postes de madera, concreto, met&#225;licos o de otros materiales, destinados exclusivamente a iluminaci&#243;n de &#225;reas p&#250;blicas, de uso p&#250;blico o AP.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;text-align:center">33</td><td colspan="1" rowspan="1" style="">Proyectores para iluminaci&#243;n, con fuentes luminosas de m&#225;s de 20 W</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;text-align:center">36</td><td colspan="1" rowspan="1" style="">Soportes o brazos met&#225;licos para luminarias de AP</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:29px;text-align:center">37</td><td colspan="1" rowspan="1" style="">LED,OLED o LEP de potencias mayores a 10 W o arreglos de LEDs para potencias mayores a 10 W</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;text-align:center">38</td><td colspan="1" rowspan="1" style="">L&#225;mparas de <a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-231" class="externalLink  glosarioLink">inducci&#243;n</a> de potencias mayores a 10 W</td></tr></table><br /><br />NOTA: Los productos corresponden a los materiales utilizados en AP<br /><br /><br />A continuaci&#243;n se presentan algunas definiciones relacionadas con el proceso de certificaci&#243;n.<br /> <br /><b>CERTIFICACI&#211;N:</b> Procedimiento mediante el cual un organismo expide por escrito o por un sello de <a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-139" class="externalLink  glosarioLink">conformidad</a>, que un producto, un proceso o servicio cumple un reglamento t&#233;cnico o una(s) norma(s) de fabricaci&#243;n.<br /><br /><b>CERTIFICADO DE <a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-139" class="externalLink  glosarioLink">CONFORMIDAD</a>:</b> Documento emitido conforme a las reglas de un <a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de certificaci&#243;n, en el cual se puede confiar razonablemente que un producto, proceso o servicio es conforme con una norma, <a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a> u otro documento normativo espec&#237;fico.<br /><br /><b>CERTIFICACI&#211;N DE PRODUCTO:</b> Procedimiento mediante el cual una entidad independiente emite una constancia por escrito que un producto o un servicio cumple con un documento normativo espec&#237;fico:<br />-	Reglamento t&#233;cnico: <a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-354" class="externalLink  glosarioLink">RETIE</a> y RETILAP<br />-	<a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-305" class="externalLink  glosarioLink">Norma T&#233;cnica Internacional</a>: IEC<br />-	<a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-301" class="externalLink  glosarioLink">Norma T&#233;cnica</a> de pa&#237;s: NTC, ANSI/IEEE<br />-	<a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-301" class="externalLink  glosarioLink">Norma T&#233;cnica</a> de empresa: CODENSA u otra<br /><br /><b>MARCACI&#211;N DE LOS PRODUCTOS (ETIQUETADO):</b> Se debe cumplir con los requerimientos establecidos en el Reglamento T&#233;cnico de Etiquetado-RTE.<br /><br /><b>ACREDITACI&#211;N (seg&#250;n <a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-354" class="externalLink  glosarioLink">Retie</a>):</b> Procedimiento mediante el cual se reconoce la competencia <a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a> y la idoneidad de organismos de certificaci&#243;n e inspecci&#243;n, as&#237; como los laboratorios de <a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> y de <a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-280" class="externalLink  glosarioLink">metrolog&#237;a</a>.<br /><br /><b>ACREDITACI&#211;N</b> <br />La Acreditaci&#243;n es la herramienta establecida internacionalmente para generar confianza sobre la actuaci&#243;n de los Organismos de <a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-197" class="externalLink  glosarioLink">Evaluaci&#243;n de la Conformidad</a> y que est&#225; conformado por:<br />-Laboratorios de <a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a>.<br />-Laboratorios de calibraci&#243;n.<br />-Organismos de Inspecci&#243;n<br />-Organismos de certificaci&#243;n de producto.<br />-<a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-311" class="externalLink  glosarioLink">Organismo de certificaci&#243;n</a> de sistemas de gesti&#243;n<br /><br />La misi&#243;n principal de los organismos de <a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-197" class="externalLink  glosarioLink">evaluaci&#243;n de la conformidad</a> es el de demostrar al Mercado y a otras partes interesadas (Autoridades gubernamentales, empresas y consumidores en general) que los productos y servicios puestos a su disposici&#243;n son conformes con los requisitos especificados. Dichos requisitos pueden estar establecidos en normas nacionales o internacionales, establecidas por <a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-140" class="externalLink  glosarioLink">consenso</a> por organismos de normalizaci&#243;n, o en especificaciones acordadas contractualmente entre el cliente y el proveedor o en reglamentos t&#233;cnicos establecidos por organismos gubernamentales.<br />En cualquier caso el valor de las actividades de <a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-197" class="externalLink  glosarioLink">evaluaci&#243;n de la conformidad</a> depende en gran medida de la credibilidad de los Organismos que las realizan y de la confianza que el mercado y la Sociedad en general tenga en ellos.<br />Para lograr esa confianza y credibilidad se ha establecido un <a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-278" class="externalLink  glosarioLink">m&#233;todo</a> independiente, riguroso y global que garantice la competencia <a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a> de dichos organismos y su cumplimiento de requisitos establecidos en normas internacionales.<br />La Acreditaci&#243;n as&#237; apoya el intercambio de bienes y servicios al proveer sobre una base internacional reconocida los mecanismos para aceptar los resultados de <a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-197" class="externalLink  glosarioLink">evaluaci&#243;n de la conformidad</a>.<br />Lo anterior tomado de la p&#225;gina de la ONAC. <br /><br />Los reglamentos t&#233;cnicos <a href="ap800_aceptacion_materiales_equipos_documento_preliminar.html#" id="version-354" class="externalLink  glosarioLink">RETIE</a> y RETILAP  establecen los productos que deben ser certificados.<br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 1353, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

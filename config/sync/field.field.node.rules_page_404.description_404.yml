@@ -1,0 +1,19 @@
+uuid: 64920205-42af-4290-8af8-9789d73e58b9
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.node.description_404
+    - node.type.rules_page_404
+id: node.rules_page_404.description_404
+field_name: description_404
+entity_type: node
+bundle: rules_page_404
+label: 'Descripción 404'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

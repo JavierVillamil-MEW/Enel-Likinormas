@@ -1,0 +1,20 @@
+uuid: a49aa4c7-b493-43fd-85ac-e2b69529601d
+langcode: es
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.rules_alignment
+  module:
+    - path
+id: taxonomy_term.rules_alignment.path
+field_name: path
+entity_type: taxonomy_term
+bundle: rules_alignment
+label: 'Alias de URL'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

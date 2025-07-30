@@ -1,0 +1,18 @@
+.button-pink {
+  height: 4.5rem;
+  padding: 1.1rem 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $color-pink;
+  color: $color-white;
+  font-size: 1.8rem;
+  font-family: 'RoobertENEL-Regular';
+  width: 100%;
+  text-decoration: none;
+  border: 0;
+
+  &:hover {
+    background-color: $color-pink-light;
+  }
+}

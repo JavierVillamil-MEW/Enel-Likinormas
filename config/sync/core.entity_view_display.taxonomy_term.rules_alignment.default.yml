@@ -1,0 +1,31 @@
+uuid: ea31b756-9b85-4e75-a2ae-3953e580f3cd
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.taxonomy_term.rules_alignment.alignment_class
+    - taxonomy.vocabulary.rules_alignment
+  module:
+    - text
+id: taxonomy_term.rules_alignment.default
+targetEntityType: taxonomy_term
+bundle: rules_alignment
+mode: default
+content:
+  alignment_class:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  langcode: true

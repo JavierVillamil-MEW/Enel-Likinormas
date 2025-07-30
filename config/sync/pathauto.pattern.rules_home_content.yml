@@ -1,0 +1,24 @@
+uuid: af7308ce-04ee-418b-bc6d-ed1551827a32
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: rules_home_content
+label: 'Rules: Home content'
+type: 'canonical_entities:node'
+pattern: '[node:title]'
+selection_criteria:
+  23defa0b-aa6f-407f-b4fa-634b77f4b361:
+    id: 'entity_bundle:node'
+    negate: false
+    uuid: 23defa0b-aa6f-407f-b4fa-634b77f4b361
+    context_mapping:
+      node: node
+    bundles:
+      rules_home_content: rules_home_content
+      rules_monthly_newsletter: rules_monthly_newsletter
+      rules_page_404: rules_page_404
+selection_logic: and
+weight: -5
+relationships: {  }

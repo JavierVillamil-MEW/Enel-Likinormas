@@ -1,0 +1,120 @@
+uuid: 954d7af3-b0a0-4a32-be13-1c48f527bd3c
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.rules_pdf
+    - field.field.node.rules_technical_rules.effective_date
+    - field.field.node.rules_technical_rules.feeds_item
+    - field.field.node.rules_technical_rules.related_content
+    - field.field.node.rules_technical_rules.rule_category
+    - field.field.node.rules_technical_rules.rule_subcategory
+    - field.field.node.rules_technical_rules.seo
+    - field.field.node.rules_technical_rules.technical_rule_author
+    - field.field.node.rules_technical_rules.technical_rule_comment
+    - field.field.node.rules_technical_rules.technical_rule_content
+    - field.field.node.rules_technical_rules.technical_rule_description
+    - field.field.node.rules_technical_rules.technical_rule_number
+    - field.field.node.rules_technical_rules.technical_rule_title
+    - field.field.node.rules_technical_rules.validate
+    - node.type.rules_technical_rules
+  module:
+    - datetime
+    - layout_builder
+    - text
+    - user
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: node.rules_technical_rules.rules_pdf
+targetEntityType: node
+bundle: rules_technical_rules
+mode: rules_pdf
+content:
+  addtoany:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 10
+    region: content
+  effective_date:
+    type: datetime_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: rules_technical_rules_list
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  entity_print_view_pdf:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  rule_category:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  rule_subcategory:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  technical_rule_author:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  technical_rule_content:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  technical_rule_description:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  technical_rule_number:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  technical_rule_title:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_word_docx: true
+  feeds_item: true
+  langcode: true
+  related_content: true
+  seo: true
+  technical_rule_comment: true
+  validate: true

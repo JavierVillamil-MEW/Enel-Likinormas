@@ -1,0 +1,40 @@
+uuid: 47af9b07-cebe-4a88-856c-2885afd48ea1
+langcode: en
+status: false
+dependencies:
+  config:
+    - comment.type.rules_technical_rules_comments
+    - core.entity_view_mode.comment.full
+    - field.field.comment.rules_technical_rules_comments.comment_content
+    - field.field.comment.rules_technical_rules_comments.comment_date
+  module:
+    - datetime
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: comment.rules_technical_rules_comments.full
+targetEntityType: comment
+bundle: rules_technical_rules_comments
+mode: full
+content:
+  comment_content:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  comment_date:
+    type: datetime_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: rules_technical_rules_list
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  langcode: true
+  links: true

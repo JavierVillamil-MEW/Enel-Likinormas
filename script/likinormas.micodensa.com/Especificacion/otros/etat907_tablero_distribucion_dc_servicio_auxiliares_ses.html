@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET-AT907 Tablero de distribución DC para servicio auxiliares  S/Es AT/AT y AT/MT | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/2019" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F2019.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/2019" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/2019" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '54');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET-AT907 Tablero de distribuci&#243;n DC para servicio auxiliares  S/Es AT/AT y AT/MT</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET-AT907</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">15/04/2024</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/2019">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F2019&amp;nodoid=2019', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat907_tablero_distribucion_dc_servicio_auxiliares_ses.html#heading_0">1. OBJETO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat907_tablero_distribucion_dc_servicio_auxiliares_ses.html#heading_1">2. ALCANCE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat907_tablero_distribucion_dc_servicio_auxiliares_ses.html#heading_2">3. CONDICIONES DE SERVICIO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat907_tablero_distribucion_dc_servicio_auxiliares_ses.html#heading_3">3.1	CONDICIONES DE SERVICIO Y LUGAR DE INSTALACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat907_tablero_distribucion_dc_servicio_auxiliares_ses.html#heading_4">4. SISTEMAS DE UNIDADES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat907_tablero_distribucion_dc_servicio_auxiliares_ses.html#heading_5">5. NORMAS RELACIONADAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat907_tablero_distribucion_dc_servicio_auxiliares_ses.html#heading_6">6. REQUISITOS T&#201;CNICOS PARTICULARES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat907_tablero_distribucion_dc_servicio_auxiliares_ses.html#heading_7">6.1	GENERALIDADES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat907_tablero_distribucion_dc_servicio_auxiliares_ses.html#heading_8">6.2 PROCESO DE PINTURA</a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat907_tablero_distribucion_dc_servicio_auxiliares_ses.html#heading_9">6.3	 RESISTENCIA A LA CORROSI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat907_tablero_distribucion_dc_servicio_auxiliares_ses.html#heading_10">6.4 PUERTAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat907_tablero_distribucion_dc_servicio_auxiliares_ses.html#heading_11">6.5 GRADO DE PROTECCI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat907_tablero_distribucion_dc_servicio_auxiliares_ses.html#heading_12">6.6 ESTRUCTURA</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat907_tablero_distribucion_dc_servicio_auxiliares_ses.html#heading_13">7. DIMENSIONES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat907_tablero_distribucion_dc_servicio_auxiliares_ses.html#heading_14">8. MARCACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat907_tablero_distribucion_dc_servicio_auxiliares_ses.html#heading_15">9. CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat907_tablero_distribucion_dc_servicio_auxiliares_ses.html#heading_16">10. PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat907_tablero_distribucion_dc_servicio_auxiliares_ses.html#heading_17">10.1 PRUEBAS TIPO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat907_tablero_distribucion_dc_servicio_auxiliares_ses.html#heading_18">10.2 PRUEBAS DE RECEPCI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat907_tablero_distribucion_dc_servicio_auxiliares_ses.html#heading_19">11. DESPACHO Y TRANSPORTE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat907_tablero_distribucion_dc_servicio_auxiliares_ses.html#heading_20">12. REQUISITOS PARA LAS OFERTAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat907_tablero_distribucion_dc_servicio_auxiliares_ses.html#heading_21">13. INFORMACI&#211;N FINAL CERTIFICADA.</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat907_tablero_distribucion_dc_servicio_auxiliares_ses.html#heading_22">14. GARANT&#205;AS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat907_tablero_distribucion_dc_servicio_auxiliares_ses.html#heading_23">ANEXO 2. TABLERO DE DISTRIBUCI&#211;N TIPO INTERIOR</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat907_tablero_distribucion_dc_servicio_auxiliares_ses.html#heading_24">ANEXO 3. DIAGRAMA UNIFILAR</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1. OBJETO</h2>
+Establecer las especificaciones t&#233;cnicas m&#237;nimas requeridas para la adquisici&#243;n de tableros de distribuci&#243;n de los sistemas de auxiliares de DC a ser utilizados en las subestaciones AT/AT y AT/MT de Enel Colombia.<br />
+<h2 id="heading_1" >2. ALCANCE</h2>
+El tablero de distribuci&#243;n de los sistemas de auxiliares de DC, tiene una configuraci&#243;n t&#237;pica seg&#250;n se indica a continuaci&#243;n:<br /><br />-	Un (1) Interruptor totalizador para tablero.<br />-	Breakers y Mini circuit breakers (MCB) para los circuitos de distribuci&#243;n (varias capacidades) con contactos auxiliares (1NO+1NC) alambrados a borneras punto a punto Tipo Resorte, para los circuitos de distribuci&#243;n.<br />-	Gabinetes con tapas laterales desmontables<br />-	Puerta frontal con instrumentos de medida para lecturas de tensi&#243;n y de corriente<br />-	Tapa – barrera sobre conectores de: MCB, barraje y borneras<br />-	Para montaje tipo interior o exterior seg&#250;n se solicite.<br />-	Identificaci&#243;n con letreros en acr&#237;lico en bajo relieve<br />-	Barras cubiertas con aislantes termo-encogibles o pintura.<br />-	Barra de Puesta a Tierra.<br /> <br />El tablero deber&#225; cumplir con los &#237;tems que apliquen del RETIE y de la NTC 2050: C&#243;digo El&#233;ctrico Colombiano.<br /> 
+<h2 id="heading_2" >3. CONDICIONES DE SERVICIO</h2>
+<h3 id="heading_3" >3.1	CONDICIONES DE SERVICIO Y LUGAR DE INSTALACI&#211;N</h3>El tablero de distribuci&#243;n DC debe estar dise&#241;ado para uso interior dentro de las casas de control de las subestaciones. En caso que se indique que se requiere tipo exterior se deber&#225;n realizar las adecuaciones sobre el mismo para su funcionamiento &#243;ptimo en estas condiciones.<br /><br />El tablero debe ser un gabinete met&#225;lico auto soportado, con alimentaci&#243;n a 125 VDC y deber&#225; soportar las siguientes condiciones de instalaci&#243;n:<br /> <br /><div style="width:444px;"><table><tr><td colspan="2" rowspan="1" style="width:444px;height:21px;text-align:center">CARACTERISTICAS AMBIENTALES</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">a. Altura sobre el nivel del mar</td><td colspan="1" rowspan="1" style="">400 a 2900 m</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">b. Ambiente</td><td colspan="1" rowspan="1" style="">Tropical</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">c. Humedad</td><td colspan="1" rowspan="1" style="">Mayor al 90 %</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;">d. Temperatura m&#225;xima y m&#237;nima</td><td colspan="1" rowspan="1" style="">45 &#186;C y - 5 &#186;C respectivamente.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">e. Temperatura promedio</td><td colspan="1" rowspan="1" style="">14 &#186;C.</td></tr></table><br /></div><br />
+<h2 id="heading_4" >4. SISTEMAS DE UNIDADES</h2> <br />En todos los documentos t&#233;cnicos se deben expresar las cantidades num&#233;ricas en unidades del sistema Internacional. Si se usan cat&#225;logos, folletos o planos, en sistemas diferentes de unidades, deben hacerse  las conversiones respectivas.<br />
+<h2 id="heading_5" >5. NORMAS RELACIONADAS</h2>El <a href="etat907_tablero_distribucion_dc_servicio_auxiliares_ses.html#" id="version-375" class="externalLink  glosarioLink">tablero</a> deber&#225; cumplir con las normas relacionadas a continuaci&#243;n:<br /><br /><div style="width:600px;"><table><tr><td colspan="2" rowspan="1" style="width:180px;height:30px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:420px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">ASTM</td><td colspan="1" rowspan="1" style="text-align:center">B 117-97 </td><td colspan="1" rowspan="1" style="">Standard practice for operating salt spray (fog) apparatus</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">3279</td><td colspan="1" rowspan="1" style="">Grado de protecci&#243;n dado a los encerramientos. (C&#243;digo IP) IEC 529.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">ASTM</td><td colspan="1" rowspan="1" style="text-align:center">D14000</td><td colspan="1" rowspan="1" style="">Espesor m&#237;nimo de pintura</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">ASTM </td><td colspan="1" rowspan="1" style="text-align:center">D 4541</td><td colspan="1" rowspan="1" style="">Standard Test Method for Pull-Off Strength of Coatings Using Portable Adhesion Testers</td></tr></table><br /></div>
+<h2 id="heading_6" >6. REQUISITOS T&#201;CNICOS PARTICULARES</h2>
+<h3 id="heading_7" >6.1	GENERALIDADES</h3> <br />	El tablero deber&#225; ser construido en l&#225;mina de acero Cold Rolled calibre 14 MSG como m&#237;nimo. Todos los tornillos, tuercas, arandelas, arandelas tipo helicoidal, bisagras, etc, utilizados, deber&#225;n ser galvanizados o en acero inoxidable.<br />	<br />La disposici&#243;n del barraje y los breakers debe ser tipo vertical y debe contar con una protecci&#243;n en policarbonato o material similar para prevenir contacto accidental con elementos energizados mientras se efect&#250;an trabajos sobre el tablero.<br />	Todos los breaker instalados deben contar con un contacto auxiliar para se&#241;alizaci&#243;n. Seg&#250;n requerimientos particulares de cada subestaci&#243;n se puede requerir m&#225;s de un contacto por cada breaker, en ese caso, en el anexo 1 se indicar&#225; la cantidad de contactos auxiliares requeridos.<br /> 	
+<h3 id="heading_8" >6.2 PROCESO DE PINTURA</h3> <br />La l&#225;mina de acero utilizada en la construcci&#243;n del tablero debe someterse a un proceso de limpieza, desengrase y fosfatizado, el cual debe  garantizar que las superficies est&#233;n libres de grasas, &#243;xidos o cualquier elemento extra&#241;o que disminuya la adherencia (son v&#225;lidos procesos qu&#237;micos y/o mec&#225;nicos); en un tiempo no mayor a dos horas, despu&#233;s de la limpieza debe aplicarse una capa de imprimante no mayor a 20 micras y en un lapso no menor a 8 ni mayor a 16 horas (o seg&#250;n recomendaci&#243;n de fabricante de pintura) se debe aplicar una pintura ep&#243;xica, color gris, resistente a los rayos ultravioleta y la intemperie, con espesor no menor a 40 micras  (para un total de 60 micras), que deber&#225; ser horneada. El proceso debe garantizar  las caracter&#237;sticas de “tropicalizaci&#243;n”.<br /><br />El espesor de pintura debe medirse con un medidor de espesores debidamente calibrado seg&#250;n la norma ASTM D 14000 y el espesor m&#237;nimo debe estar de acuerdo con el numeral 6.3<br /><br />Para la medici&#243;n de los espesores de recubrimiento se deben tener en cuenta las siguientes definiciones:<br />a.	Lectura del espesor: Medida que muestra el medidor de espesores, al colocar una vez el censor sobre la pieza a medir.<br />b.	Medida del espesor: Promedios de 3 lecturas de espesor tomadas a una distancia aproximada de 2,5 cm.<br /><br />En pinturas horneables que garanticen la adherencia y espesores m&#237;nimos no requerir&#225;n imprimante.<br /><br />Cada capa de pintura debe garantizar una adherencia m&#237;nima de 400 PSI (libras/pulgada2) probada seg&#250;n norma NTC 3916 (ASTM D 4541 de 1995)<br /><br />
+<h3 id="heading_9" >6.3	 RESISTENCIA A LA CORROSI&#211;N</h3>El tablero debe cumplir con el ensayo de corrosi&#243;n de acuerdo con la norma ASTM B 117 (Prueba de C&#225;mara Salina) bajo las siguientes condiciones: Temperatura=35&#176; C, ph= 6,5-7,2 y concentraci&#243;n de cloruro de sodio al 5% durante 400 horas.  Tiempo al que se verificar&#225;:<br />a.	La progresi&#243;n de la corrosi&#243;n en la incisi&#243;n, debe ser inferior a 2mm.<br />b.	No deben presentar trazas de corrosi&#243;n ni burbujas.<br />c.	El recubrimiento debe permanecer adherido a la capa de pintura conservando su color.<br /><br />Las muestras deben ser nuevas y libres de grasa, aceite, polvo y otras impurezas. Para verificar la resistencia a la corrosi&#243;n a dichas muestras se les hacen dos incisiones, de 0.5mm de espesor, en forma de cruz que llegue hasta el substrato.<br /> <br />
+<h3 id="heading_10" >6.4 PUERTAS</h3> <br />Las puertas del tablero, se deber&#225;n construir en l&#225;mina  Cold Rolled. Todas las puertas deber&#225;n abrir &#250;nicamente en sentido lateral m&#237;nimo 120&#176; respecto a la secci&#243;n horizontal superior de la celda, poseer una manija que facilite su accionamiento y las bisagras deber&#225;n ser fabricadas en acero inoxidable, suficientemente fuertes para asegurar r&#237;gidamente la puerta de la estructura.<br />	<br />Los pasadores de las bisagras deber&#225;n ser de acero inoxidable. Las bisagras deben estar instaladas internamente.<br /> 
+<h3 id="heading_11" >6.5 GRADO DE PROTECCI&#211;N</h3> <br />El grado de protecci&#243;n que deber&#225; tener la envoltura exterior del tablero deber&#225; ser como m&#237;nimo un grado de protecci&#243;n IP 4X (Seg&#250;n norma IEC 60529), a menos que se indique que se requiere tipo exterior, caso en el cual, el grado IP ser&#225; IP54.<br /> 
+<h3 id="heading_12" >6.6 ESTRUCTURA</h3>La construcci&#243;n estructural del tablero ser&#225; de responsabilidad del fabricante el cual podr&#225; elegir el sistema m&#225;s conveniente, podr&#225; ser en l&#225;mina doblada o perfiles angulares, siempre y cuando de la seguridad especifica.<br /><br />La estructura, envolventes y techo debe estar construida con perfiles estructurales de l&#225;mina Cold Rolled calibre 14 (2 mm). El piso se debe construir en calibre 14 (2 mm) con l&#225;mina de aluminio para ser perforada para la correspondiente entrada/salida de cables. <br />El gabinete debe estar montado en una base sobre dos perfiles en U fabricado en Cold Rolled calibre 14 (2 mm) con una altura de 10cm.La torniller&#237;a, tuercas, arandelas de presi&#243;n y arandelas planas que fijan la estructura deber&#225;n ser galvanizadas y/o de acero inoxidable y los tornillos deber&#225;n tener una longitud tal que sobresalgan de la tuerca por lo menos 3 hilos sin exceder de 10 mm.<br /> 
+<h2 id="heading_13" >7. DIMENSIONES</h2>
+Las dimensiones aproximadas del <a href="etat907_tablero_distribucion_dc_servicio_auxiliares_ses.html#" id="version-375" class="externalLink  glosarioLink">tablero</a> son las siguientes:<br /><br /><div style="width:281px;"><table><tr><td colspan="1" rowspan="1" style="width:281px;height:30px;text-align:center"><b>TABLERO DISTRIBUCI&#211;N TIPO INTERIOR</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">Altura: 1800 mm</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">Ancho: 900 mm</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">Profundidad: 700 mm</td></tr></table><br /></div><br />El proponente, con base en su experiencia en el dise&#241;o y fabricaci&#243;n de este tipo de tableros, puede ofrecer un gabinete con dimensiones diferentes siempre y cuando cumpla con las caracter&#237;sticas del uso y servicio, dimensionado y adecuado para alojar todos los accesorios requeridos seg&#250;n el Diagrama Unifilar particular, en el que se puedan hacer la disposici&#243;n de elementos componentes y efectuar todo el alambrado interno necesario en f&#225;brica del proveedor y se dejen disponibles las distancias o espacios adecuados para que en la subestaci&#243;n se puedan ejecutar con facilidad las actividades de conexionado de los cables provenientes del exterior.<br /><br />El gabinete debe tener una resistencia calefactora para evitar condensaci&#243;n, controlada por higrostato, un tomacorriente monof&#225;sico con polo a tierra, al igual que una l&#225;mpara para iluminaci&#243;n interna, controlada por un suiche accionado con la apertura o cierre de la puerta. La iluminaci&#243;n, la calefacci&#243;n y tomacorriente deben tener su breaker de protecci&#243;n debidamente dimensionado. Adem&#225;s, debe incluir en su parte inferior una barra de tierra en cobre desnudo de dimensiones m&#237;nimas (20x5) mm para puesta a tierra del tablero y pantallas de los cables.<br /><br />
+<h2 id="heading_14" >8. MARCACI&#211;N</h2>
+El tablero deber&#225; llevar una placa de acero inoxidable, con textos en idioma espa&#241;ol, conteniendo la siguiente informaci&#243;n:<br /><br />-  Caracter&#237;sticas generales del tablero.<br />-  N&#250;mero de orden de compra <br />-  Nombre del Cliente.<br />-  N&#186; Serie del fabricante.<br /> 
+<h2 id="heading_15" >9. CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS</h2> <br />El <a href="etat907_tablero_distribucion_dc_servicio_auxiliares_ses.html#" id="version-375" class="externalLink  glosarioLink">tablero</a> debe cumplir con las caracter&#237;sticas t&#233;cnicas garantizadas indicadas en el Anexo 1 de la presente especificaci&#243;n.<br />
+<h2 id="heading_16" >10. PRUEBAS</h2><h3 id="heading_17" >10.1 PRUEBAS TIPO</h3> <br />El fabricante del tablero deber&#225; realizar las siguientes pruebas tipo:<br />	<br />•	Se efectuar&#225;n pruebas de adherencia de acuerdo con la norma NTC 3916 (ASTM D4541 de 1995). <br />•	Se efectuar&#225;n pruebas de resistencia a la corrosi&#243;n de acuerdo con la norma ASTM B117de 1997).<br />•	Se realizar&#225;n pruebas del espesor de las capas de fosfatizado y acabado final de acuerdo con lo especificado en esta norma.<br />•	Grado de protecci&#243;n IP <br /><br /><br />
+<h3 id="heading_18" >10.2 PRUEBAS DE RECEPCI&#211;N</h3>El tablero ser&#225; sometido a las siguientes pruebas:<br /><br />•	Inspecci&#243;n visual<br />•	Inspecci&#243;n dimensional<br />•	Ensamblaje de los equipos y elementos complementarios.<br />•	Medici&#243;n del espesor de pintura<br /><br />
+<h2 id="heading_19" >11. DESPACHO Y TRANSPORTE</h2> <br />Para el despacho y transporte, el proveedor se pondr&#225; en contacto con el cliente para fijar todos los detalles relativos a este efecto.<br /><br />El Tablero deber&#225; estar provisto de rellenos que aseguren igualmente una buena protecci&#243;n, debe ir instalado sobre una estiba de madera y debidamente forrado en pl&#225;stico o cart&#243;n para evitar da&#241;os durante el transporte y manipulaci&#243;n en bodegas. En caso de que el Tablero de Control y Protecci&#243;n sufra da&#241;o en las maniobras de carga y descarga en bodegas de ENEL, el proveedor se hace responsable de los da&#241;os ocasionados.<br /><br />Al momento de la entrega el tablero debe ir debidamente marcado en su empaque con el n&#250;mero de la orden de compra y la S/E destino.<br /> 
+<h2 id="heading_20" >12. REQUISITOS PARA LAS OFERTAS</h2>
+El Oferente deber&#225; incluir con su propuesta, la siguiente informaci&#243;n:<br /><br />•	Planilla de caracter&#237;sticas t&#233;cnicas garantizadas, la cual deber&#225; ser diligenciada completamente, firmada y sellada por el oferente.<br /><br />•	Cat&#225;logos originales completos y actualizados del fabricante, que correspondan a los bienes cotizados, en la planilla de caracter&#237;sticas t&#233;cnicas garantizadas. <br /><br />•	Protocolos de pruebas de acuerdo con las normas indicadas en el numeral 9 de la presente especificaci&#243;n. En tales protocolos se deber&#225;n anotar las fechas de fabricaci&#243;n y pruebas del equipo, para permitir la verificaci&#243;n de las caracter&#237;sticas t&#233;cnicas garantizadas.<br /><br />•	Informaci&#243;n adicional que considere aporta explicaci&#243;n a su dise&#241;o (dibujos,  detalles,  dimensiones y pesos de los materiales ofertados).<br /><br />•	Certificado RETIE de producto.<br /><br />•	Excepciones t&#233;cnicas.<br /> <br /><br />Enel Colombia podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones. <br /><br />
+<h2 id="heading_21" >13. INFORMACI&#211;N FINAL CERTIFICADA.</h2> <br />Con la entrega del suministro, el proveedor se compromete a entregar la siguiente informaci&#243;n de car&#225;cter definitivo:<br /><br />- 1 Copia de esquemas el&#233;ctricos.<br />- 1 Copia de disposici&#243;n del equipamiento en el gabinete y/o armario.<br />- 1 Copia del manual de instalaci&#243;n y mantenimiento.<br />
+<h2 id="heading_22" >14. GARANT&#205;AS</h2>
+El fabricante se comprometer&#225; a establecer una garant&#237;a sobre el suministro por un per&#237;odo m&#237;nimo de 2 a&#241;os a contar inmediatamente despu&#233;s de la recepci&#243;n, sobre defectos en los materiales que componen el tablero.<br /> <br /><b>ANEXO 1. TABLA DE CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS</b><br /><br /><div style="width:993px;"><table><tr><td colspan="1" rowspan="1" style="width:92px;height:31px;text-align:center"><b>ITEM</b></td><td colspan="1" rowspan="1" style="width:359px;text-align:center"><b>DESCRIPCI&#211;N</b></td><td colspan="1" rowspan="1" style="width:320px;text-align:center"><b>UNIDAD</b></td><td colspan="1" rowspan="1" style="width:222px;text-align:center"><b>TABLERO DISTRIBUCI&#211;N TIPO INTERIOR REQUERIDO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">1</td><td colspan="1" rowspan="1" style="">Normas de fabricaci&#243;n </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">IEC-60297/60529</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2</td><td colspan="1" rowspan="1" style="">Tipo de montaje de rel&#233;s, mini- interruptores, borneras, etc.</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">Sobre riel tipo omega</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">3</td><td colspan="1" rowspan="1" style="">Tipo de l&#225;mina utilizada</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">Cold Rolled</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">4</td><td colspan="1" rowspan="1" style="">Dimensiones m&#225;ximas (altura x ancho x profundidad)</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="text-align:center">1800 X 900 X 700</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">5</td><td colspan="1" rowspan="1" style="">Espesor de la l&#225;mina</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">6</td><td colspan="1" rowspan="1" style="">Calibre</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">14</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">6</td><td colspan="1" rowspan="1" style="">Proceso de tropicalizaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">SI</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">7</td><td colspan="1" rowspan="1" style="">Procesos de acabado del tablero (banderizado, pulimento, chorro de arena)</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">SI</td></tr>
+<tr><td colspan="1" rowspan="2" style="height:20px;text-align:center">8</td><td colspan="1" rowspan="2" style="">Clase de protecci&#243;n de los tableros para instalaci&#243;n interior seg&#250;n norma IEC 60529</td><td colspan="1" rowspan="2" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">IP-4X</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:46px;text-align:center">9</td><td colspan="1" rowspan="1" style="">Descripci&#243;n de los elementos que contiene cada tablero&#160;: </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">Luz interior accionada por final de carrera, resistencia de calefacci&#243;n con control por humedad (higrost&#225;to)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">10</td><td colspan="1" rowspan="1" style="">Puerta delantera con dos seguros</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">Si</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">11</td><td colspan="1" rowspan="1" style="">Paneles laterales desmontables</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">SI</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">12</td><td colspan="1" rowspan="1" style="">L&#225;mpara de iluminaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">SI</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">13</td><td colspan="1" rowspan="1" style="">Higr&#243;stato</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">SI</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">14</td><td colspan="1" rowspan="1" style="">Toma monof&#225;sica externa con polo a tierra y protector contra polvo</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">SI</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">15</td><td colspan="1" rowspan="1" style="">Interruptor final de carrera </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">SI</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:31px;text-align:center">16</td><td colspan="1" rowspan="1" style="">MCB Bipolar 125 V DC, 200 A con contacto auxiliar</td><td colspan="1" rowspan="1" style="text-align:center">un</td><td colspan="1" rowspan="1" style="text-align:center">Se especifican en el unifilar Anexo 3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:31px;text-align:center">17</td><td colspan="1" rowspan="1" style="">MCB Bipolar 125 V DC, 100 A con contacto auxiliar</td><td colspan="1" rowspan="1" style="text-align:center">un</td><td colspan="1" rowspan="1" style="text-align:center">Se especifican en el unifilar Anexo 3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:31px;text-align:center">18</td><td colspan="1" rowspan="1" style="">MCB Bipolar 125 V DC, 50 A con contacto auxiliar</td><td colspan="1" rowspan="1" style="text-align:center">un</td><td colspan="1" rowspan="1" style="text-align:center">Se especifican en el unifilar Anexo 3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:31px;text-align:center">19</td><td colspan="1" rowspan="1" style="">MCB Bipolar 125 V DC, 30 A con contacto auxiliar</td><td colspan="1" rowspan="1" style="text-align:center">un</td><td colspan="1" rowspan="1" style="text-align:center">Se especifican en el unifilar Anexo 3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:31px;text-align:center">20</td><td colspan="1" rowspan="1" style="">MCB Bipolar 125 V DC, 20 A con contacto auxiliar</td><td colspan="1" rowspan="1" style="text-align:center">un</td><td colspan="1" rowspan="1" style="text-align:center">Se especifican en el unifilar Anexo 3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:31px;text-align:center">21</td><td colspan="1" rowspan="1" style="">MCB Bipolar 125 V DC, 10 A con contacto auxiliar</td><td colspan="1" rowspan="1" style="text-align:center">un</td><td colspan="1" rowspan="1" style="text-align:center">Se especifican en el unifilar Anexo 3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:31px;text-align:center">22</td><td colspan="1" rowspan="1" style="">Bornera punto a punto para cable calibre 10 AWG (Incluye marcaci&#243;n, tapas y topes) </td><td colspan="1" rowspan="1" style="text-align:center">un</td><td colspan="1" rowspan="1" style="text-align:center">Se especifican en el unifilar Anexo 3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">21</td><td colspan="1" rowspan="1" style="">Volt&#237;metro DC </td><td colspan="1" rowspan="1" style="text-align:center">un</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">22</td><td colspan="1" rowspan="1" style="">Amper&#237;metro DC </td><td colspan="1" rowspan="1" style="text-align:center">un</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">23</td><td colspan="1" rowspan="1" style="">Selector de medida de corriente: lado bater&#237;a y lado carga</td><td colspan="1" rowspan="1" style="text-align:center">un</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">24</td><td colspan="1" rowspan="1" style="">Resistencia shunt para medida de corriente</td><td colspan="1" rowspan="1" style="text-align:center">un</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr></table><br /></div> 
+<h2 id="heading_23" >ANEXO 2. TABLERO DE DISTRIBUCI&#211;N TIPO INTERIOR</h2>
+<img src="https://i.ibb.co/HXYYr4s/fig2.jpg" /><br />
+<h2 id="heading_24" >ANEXO 3. DIAGRAMA UNIFILAR</h2>
+<img src="https://i.ibb.co/mFDpJrw/7.jpg" /><br /><br /><img src="https://i.ibb.co/s998xpD/8.jpg" /><br /><br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 2019, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

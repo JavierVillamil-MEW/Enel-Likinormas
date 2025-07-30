@@ -1,0 +1,13 @@
+uuid: 29e5e37c-f5d7-48c3-b6de-fa486a9692e9
+langcode: en
+status: true
+dependencies: {  }
+name: rules_web_image
+label: 'Rules: WEB Image'
+effects:
+  23d4d422-6a29-4415-81bf-fc974c1cfedb:
+    uuid: 23d4d422-6a29-4415-81bf-fc974c1cfedb
+    id: image_convert
+    weight: 1
+    data:
+      extension: webp

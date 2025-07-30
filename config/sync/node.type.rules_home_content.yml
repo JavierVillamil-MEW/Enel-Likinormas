@@ -1,0 +1,17 @@
+uuid: 377688f9-0b9a-402c-b5c0-1e0ee4190671
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'Página principal (Home)'
+type: rules_home_content
+description: 'Gestiona el contenido de las secciones de inicio: reglas, usuarios... etc.'
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: false

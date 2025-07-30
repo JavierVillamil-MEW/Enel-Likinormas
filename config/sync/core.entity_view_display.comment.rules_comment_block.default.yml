@@ -1,0 +1,38 @@
+uuid: 73a4648c-65fd-4767-8772-14a5dc540e11
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.rules_comment_block
+    - field.field.comment.rules_comment_block.comment_content
+    - field.field.comment.rules_comment_block.comment_date
+  module:
+    - datetime
+id: comment.rules_comment_block.default
+targetEntityType: comment
+bundle: rules_comment_block
+mode: default
+content:
+  comment_content:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  comment_date:
+    type: datetime_default
+    label: hidden
+    settings:
+      timezone_override: ''
+      format_type: rules_technical_rules_list
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  langcode: true

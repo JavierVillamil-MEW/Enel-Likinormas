@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
+  <defs>
+    <clipPath id="clip-LUPA_LIKINORMAS">
+      <rect width="128" height="128"/>
+    </clipPath>
+  </defs>
+  <g id="LUPA_LIKINORMAS" data-name="LUPA LIKINORMAS" clip-path="url(#clip-LUPA_LIKINORMAS)">
+    <rect width="128" height="128" fill="rgba(255,255,255,0)"/>
+    <path id="Unión_17" data-name="Unión 17" d="M84.791,90.744a51.471,51.471,0,1,1,6.841-7.027L128.5,120.585l-6.934,6.934ZM9.806,51.484A41.678,41.678,0,1,0,51.484,9.806,41.725,41.725,0,0,0,9.806,51.484Z" transform="translate(-0.5 0.48)" fill="#fff"/>
+  </g>
+</svg>

@@ -1,0 +1,30 @@
+uuid: 9977659f-5733-4348-81a7-88fb9f695093
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.rules_category
+id: taxonomy_term.rules_category.default
+targetEntityType: taxonomy_term
+bundle: rules_category
+mode: default
+content:
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  description: true
+  langcode: true
+  path: true
+  simple_sitemap: true
+  status: true

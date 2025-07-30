@@ -1,0 +1,20 @@
+uuid: a20f23ef-62c0-4914-8131-e2afd0faf277
+langcode: en
+status: true
+dependencies:
+  module:
+    - media
+    - text
+id: media.banner_title
+field_name: banner_title
+entity_type: media
+type: text
+settings:
+  max_length: 255
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

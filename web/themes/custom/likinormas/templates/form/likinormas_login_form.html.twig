@@ -1,0 +1,19 @@
+<div class="login-form childre-form">
+  <h2 class="form-title">Iniciar sesión</h2>
+  {% if form.boolean_setting == "1" %}
+    <button type="button" class="btn btn-facebook"><span class="icon-facebook"></span><a href="/user/login/facebook">Inicia
+        sesión con Facebook</a></button>
+    <span class="other"> O </span>
+  {% endif %}
+  {{ form.name }}
+  {{ form.pass }}
+  <a class="form-forgot-pass" href="/user/password">Olvidé mi contraseña</a>
+  {{ form.captcha }}
+  {{ form.actions }}
+  <div class="section-register-now">
+    <span>¿Aún no se ha registrado? <a href="/user/register">Regístrese ahora</a></span>
+  </div>
+</div>
+{{ form.form_build_id }}
+{{ form.form_token }}
+{{ form.form_id }}

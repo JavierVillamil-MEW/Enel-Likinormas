@@ -1,0 +1,25 @@
+uuid: 118f5c9d-5df5-4278-b676-4576e7224421
+langcode: es
+status: true
+dependencies:
+  content:
+    - 'block_content:rules_header_fixed_logo:73b0096d-0cb3-4fd4-8b9a-f3e75e9ca63c'
+  module:
+    - block_content
+  theme:
+    - likinormas
+id: logofijomenuprincipal
+theme: likinormas
+region: nav_branding
+weight: 0
+provider: null
+plugin: 'block_content:73b0096d-0cb3-4fd4-8b9a-f3e75e9ca63c'
+settings:
+  id: 'block_content:73b0096d-0cb3-4fd4-8b9a-f3e75e9ca63c'
+  label: 'Logo fijo menú principal'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

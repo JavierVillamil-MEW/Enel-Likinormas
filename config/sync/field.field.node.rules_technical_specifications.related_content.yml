@@ -1,0 +1,28 @@
+uuid: 6796948e-aa36-4d43-ae0b-1dd41dc8b887
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.related_content
+    - node.type.rules_technical_specifications
+id: node.rules_technical_specifications.related_content
+field_name: related_content
+entity_type: node
+bundle: rules_technical_specifications
+label: 'Especificaciones relacionadas'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:node'
+  handler_settings:
+    target_bundles:
+      rules_technical_specifications: rules_technical_specifications
+    sort:
+      field: _none
+      direction: ASC
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

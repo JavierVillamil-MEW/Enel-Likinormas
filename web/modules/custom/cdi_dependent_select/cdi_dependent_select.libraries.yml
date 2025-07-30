@@ -1,0 +1,7 @@
+cdi_dependent_select:
+  js:
+    assets/js/cdi-dependent-select.js: {}
+  dependencies:
+    - core/drupalSettings
+    - core/jquery
+    - core/once

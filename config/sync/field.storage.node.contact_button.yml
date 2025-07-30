@@ -1,0 +1,19 @@
+uuid: 70efe0d6-10d4-4440-aed2-d41372092cdd
+langcode: en
+status: true
+dependencies:
+  module:
+    - link
+    - node
+id: node.contact_button
+field_name: contact_button
+entity_type: node
+type: link
+settings: {  }
+module: link
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,22 @@
+uuid: 05f7633a-2179-4e00-a5cc-2b80ec6c83a9
+langcode: es
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.rules_glossary
+id: taxonomy_term.rules_glossary.status
+field_name: status
+entity_type: taxonomy_term
+bundle: rules_glossary
+label: Publicado
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Activado
+  off_label: Desactivado
+field_type: boolean

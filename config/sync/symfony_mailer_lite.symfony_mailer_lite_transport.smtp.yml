@@ -1,0 +1,18 @@
+uuid: 159397e8-923a-45da-beca-33c8d44c4030
+langcode: es
+status: true
+dependencies: {  }
+id: smtp
+label: SMTP
+plugin: smtp
+configuration:
+  user: contacto@likinormas.enelcol.com.co
+  pass: gqyljykgqbzghkmn
+  host: smtp.gmail.com
+  port: 587
+  query:
+    verify_peer: true
+    local_domain: ''
+    restart_threshold: null
+    restart_threshold_sleep: null
+    ping_threshold: null

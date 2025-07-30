@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET511 Seccionador portafusible | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/470" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F470.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/470" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/470" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '53');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET511 Seccionador portafusible</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET511</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">03/07/1998</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/470">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F470&amp;nodoid=470', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et511_seccionador_portafusible.html#heading_0">1. - GENERALIDADES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et511_seccionador_portafusible.html#heading_1">1.1 - Objeto de la especificaci&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et511_seccionador_portafusible.html#heading_2">1.2  - Condiciones Generales</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et511_seccionador_portafusible.html#heading_3">1.3 	- Uso</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et511_seccionador_portafusible.html#heading_4">2. - REQUISITOS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et511_seccionador_portafusible.html#heading_5">2.1 - Detalles Constructivos</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et511_seccionador_portafusible.html#heading_6">2.2 - Materias Primas</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et511_seccionador_portafusible.html#heading_7">2.3 - Protecci&#243;n Superficial</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et511_seccionador_portafusible.html#heading_8">2.4 - Accionamiento</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et511_seccionador_portafusible.html#heading_9">2.5 - Forma de Montaje</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et511_seccionador_portafusible.html#heading_10">3 - INSPECCION Y RECEPCION</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et511_seccionador_portafusible.html#heading_11">4 - ENSAYOS Y RECEPCION</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et511_seccionador_portafusible.html#heading_12">4.1	Ensayos Tipo</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et511_seccionador_portafusible.html#heading_13">ANEXO I</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et511_seccionador_portafusible.html#heading_14">ANEXO II</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1. - GENERALIDADES</h2>
+
+<h3 id="heading_1" >1.1 - Objeto de la especificaci&#243;n</h3>
+Establecer las condiciones, requisitos y ensayos que deben cumplir los seccionadores fusibles unipolares para <a href="et511_seccionador_portafusible.html#" id="version-270" class="externalLink  glosarioLink">maniobra</a> y protecci&#243;n de l&#237;neas a&#233;reas preensambladas para distribuci&#243;n de energ&#237;a en <a href="et511_seccionador_portafusible.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a> (160 y 400 - 500 V).<br />
+<h3 id="heading_2" >1.2  - Condiciones Generales</h3>
+<br /><b>1.2.1 - Ambientales</b><br /><br />La instalaci&#243;n es en exterior a intemperie, la zona de uso es Cundinamarca en la cual se presentan diferentes climas, algunos poco favorables para la  conservaci&#243;n de materiales met&#225;licos y aislantes el&#233;ctricos, en consecuencia el Proveedor debe descartar la utilizaci&#243;n de materiales alterables por la humedad y la radiaci&#243;n solar. <br /><br />Los materiales objeto de la presente especificaci&#243;n pueden  estar expuestos a las siguientes condiciones clim&#225;ticas:<br />-	Temperatura m&#225;xima: 45&#186;C<br />-	Temperatura m&#237;nima: -5&#186;C<br />-	Humedad relativa ambiente m&#225;xima: 100 %	<br /><br /><br /><b>1.2.2 - Tipo de Servicio</b><br /><br />El r&#233;gimen de utilizaci&#243;n del <a href="et511_seccionador_portafusible.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> ser&#225; contin&#250;o, estando sometido a maniobras de apertura y cierre bajo <a href="et511_seccionador_portafusible.html#" id="version-113" class="externalLink  glosarioLink">carga</a>, como as&#237; tambi&#233;n a exigencias t&#233;rmicas, mec&#225;nicas y a esfuerzos electrodin&#225;micos, usuales en este tipo de <a href="et511_seccionador_portafusible.html#" id="version-359" class="externalLink  glosarioLink">servicio</a>.<br />
+<h3 id="heading_3" >1.3 	- Uso</h3>
+Los seccionadores estar&#225;n conectados, en el lado de <a href="et511_seccionador_portafusible.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a> (BT),secundario, de los Transformadores de Distribuci&#243;n, definidos en la <a href="et511_seccionador_portafusible.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a> global GST001, con <a href="et511_seccionador_portafusible.html#" id="version-290" class="externalLink  glosarioLink">neutro</a> secundario conectado a <a href="et511_seccionador_portafusible.html#" id="version-387" class="externalLink  glosarioLink">tierra</a>, mediante bornes de conexiones.<br /><br />Tambi&#233;n pueden ser utilizados en redes a&#233;reas de <a href="et511_seccionador_portafusible.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a> con cables definidos en la <a href="et511_seccionador_portafusible.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a> global GSCC009.	<br /><br />
+<h2 id="heading_4" >2. - REQUISITOS</h2>
+<h3 id="heading_5" >2.1 - Detalles Constructivos</h3> <br />Los Seccionadores Portafusibles deben cumplir la norma IEC 60947-3 Low-voltage switchgear and control gear - Part 3: Switches, disconnectors, switch-disconnectors and fuse-combination units.<br /><br />Los Seccionadores Portafusibles deben tener c&#225;mara apaga arcos (chispas).<br /><br />Los fusibles NH a utilizar en los Seccionadores Portafusibles est&#225;n definidos en la <a href="et511_seccionador_portafusible.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a> global GSCL004, con base en la norma IEC 60269.<br /><br />Ambos seccionadores constar&#225;n de un alojamiento para el cartucho <a href="et511_seccionador_portafusible.html#" id="version-218" class="externalLink  glosarioLink">fusible</a> (protecci&#243;n) el que a su vez, montado sobre un brazo m&#243;vil, ser&#225; utilizado para el seccionamiento (<a href="et511_seccionador_portafusible.html#" id="version-270" class="externalLink  glosarioLink">maniobra</a>).<br /><br />Cualquiera de los dos (2) modelos  160 A o 400 A / 500 V, ser&#225; accionado mediante p&#233;rtiga de <a href="et511_seccionador_portafusible.html#" id="version-270" class="externalLink  glosarioLink">maniobra</a>.<br /><br />Estos aparatos estar&#225;n dise&#241;ados y construidos para ser utilizados con los siguientes fusibles seg&#250;n los modelos:<br />-	160 A-500 V, para fusibles tama&#241;o 00.<br />-	400 A-500 V, para fusibles tama&#241;os 1, 2.<br /><br /><br /><br />Las pinzas de contactos estar&#225;n construidas de forma tal que aseguren como m&#237;nimo, con la cuchilla del <a href="et511_seccionador_portafusible.html#" id="version-218" class="externalLink  glosarioLink">fusible</a>, cuatro contactos lineales puntuales independientes entre s&#237;.<br /><br />La presi&#243;n de las pinzas de contacto estar&#225; asegurada por un elemento el&#225;stico adicional, de manera que mejore la presi&#243;n de contacto que proporcionar&#237;a la elasticidad propia del cobre.<br /><br />Los bornes de conexi&#243;n ser&#225;n de doble entrada y dise&#241;ados para conectar cables bajo GSCC009 del rango de calibre 25 mm^2 a 150 mm^2. <br /><br />Los contactos deber&#225;n asegurar que las conexiones el&#233;ctricas no puedan estar comprometidas por los esfuerzos electrodin&#225;micos, t&#233;rmicos y mec&#225;nicos, que sobrevengan durante el <a href="et511_seccionador_portafusible.html#" id="version-359" class="externalLink  glosarioLink">servicio</a> y la instalaci&#243;n.<br /><br />Las distintas piezas componentes deber&#225;n ser, de un mismo lote, id&#233;nticas y normalizadas de manera que se garantice la intercambiabilidad de las mismas.<br /> <br />El <a href="et511_seccionador_portafusible.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de fijaci&#243;n y traba del cartucho <a href="et511_seccionador_portafusible.html#" id="version-218" class="externalLink  glosarioLink">fusible</a> al brazo del <a href="et511_seccionador_portafusible.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> ser&#225; tal que permita absorber todas las diferencias de medidas entre cartuchos fusibles de distinta procedencia, dentro de las tolerancias que fija la norma DIN 43620.<br /><br />El dise&#241;o del <a href="et511_seccionador_portafusible.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de la articulaci&#243;n del brazo del <a href="et511_seccionador_portafusible.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> ser&#225; tal que facilite, durante la operaci&#243;n de enganche con p&#233;rtiga, el guiado del brazo sobre el alojamiento del eje de dicha articulaci&#243;n.<br /><br /><br /> 			
+<h3 id="heading_6" >2.2 - Materias Primas</h3>
+Los bornes de conexi&#243;n y las pinzas de contacto ser&#225;n de cobre para uso <a href="et511_seccionador_portafusible.html#" id="version-177" class="externalLink  glosarioLink">el&#233;ctrico</a>, de alta conductividad (96,5%) y una pureza no menor del 99,9%.<br /><br />Los pasadores para la conexi&#243;n de los conductores ser&#225;n de acero.<br /><br />Los tornillos a utilizarse para el armado del <a href="et511_seccionador_portafusible.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> <a href="et511_seccionador_portafusible.html#" id="version-218" class="externalLink  glosarioLink">fusible</a>, podr&#225;n ser de bronce o lat&#243;n, de igual o mayor resistencia mec&#225;nica que los de acero.<br /><br />Las partes aislantes deber&#225;n ser de poli&#233;ster reforzado con fibras de vidrio, prensado en caliente, resistente al impacto, al envejecimiento prematuro por exposici&#243;n a la radiaci&#243;n ultravioleta, a las exigencias t&#233;rmicas propias del <a href="et511_seccionador_portafusible.html#" id="version-359" class="externalLink  glosarioLink">servicio</a> y no higrosc&#243;pico.<br /><br />Los elementos el&#225;sticos ser&#225;n de acero especial para resortes.<br /> 
+<h3 id="heading_7" >2.3 - Protecci&#243;n Superficial</h3>
+Las pinzas de contacto deber&#225;n estar plateadas con un espesor m&#237;nimo de 5 micrones y adem&#225;s deber&#225;n resistir satisfactoriamente el <a href="et511_seccionador_portafusible.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> de operaci&#243;n establecido en la presente.<br /><br />Las piezas construidas en acero deber&#225;n estar protegidas superficialmente por cincado en caliente u otro <a href="et511_seccionador_portafusible.html#" id="version-278" class="externalLink  glosarioLink">m&#233;todo</a> de protecci&#243;n y que cumpla con los requisitos de la <a href="et511_seccionador_portafusible.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a> Verificaci&#243;n de la protecci&#243;n anticorrosiva de materiales ferrosos.<br /><br />Todas las superficies de <a href="et511_seccionador_portafusible.html#" id="version-143" class="externalLink  glosarioLink">contacto el&#233;ctrico</a> fijo del <a href="et511_seccionador_portafusible.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> <a href="et511_seccionador_portafusible.html#" id="version-218" class="externalLink  glosarioLink">fusible</a>, como as&#237; tambi&#233;n la superficie de los bornes de conexi&#243;n, deber&#225;n ser plateadas con un espesor m&#237;nimo de 3 micrones.<br /><br />Tanto las superficies externas como internas del cuerpo y brazo, tendr&#225;n un acabado superficial liso, sin grietas, poros o sopladuras, as&#237; como tampoco deber&#225;n presentar rebabas, aristas cortantes, exfoliaduras, ampolladuras o exposici&#243;n superficial de fibras de vidrio.<br /><br />El cuerpo y el brazo ser&#225;n fabricados mediante moldes por contacto entre matrices y las superficies deber&#225;n ser terminadas con una capa de resina poli&#233;ster pura de 0,5 mm de espesor m&#237;nimo y uniforme. Tambi&#233;n podr&#225;n ser fabricadas por inyecci&#243;n.<br /><br />
+<h3 id="heading_8" >2.4 - Accionamiento</h3>
+Estos aparatos, en condiciones normales de instalaci&#243;n, se accionar&#225;n por medio de p&#233;rtigas en forma manual y directa, a tal fin deber&#225;n estar provistos con dos ojales, uno para realizar la operaci&#243;n de apertura y cierre y el otro para desmontar el brazo portacaucho.<br /><br />Adem&#225;s, al abrirlo, quedar&#225; impedida la ca&#237;da del brazo y del <a href="et511_seccionador_portafusible.html#" id="version-218" class="externalLink  glosarioLink">fusible</a>, mediante un adecuado dise&#241;o del <a href="et511_seccionador_portafusible.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de articulaci&#243;n del brazo y de la traba del <a href="et511_seccionador_portafusible.html#" id="version-218" class="externalLink  glosarioLink">fusible</a> respectivamente.<br /><br />
+<h3 id="heading_9" >2.5 - Forma de Montaje</h3>
+Cada unidad vendr&#225; provista con los elementos necesarios y adecuados para poder ser instalada sobre cruceta met&#225;lica definida en la ET419:<br />-	&#193;ngulo de 3” x 3” x 1/4&quot;.<br />-	Perforaciones con un di&#225;metro de 13/16&quot;.<br /><br />Nota: ET430 Herraje para soporte de <a href="et511_seccionador_portafusible.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> B.T.<br /><br /> 
+<h2 id="heading_10" >3 - INSPECCION Y RECEPCION</h2>
+Cada <a href="et511_seccionador_portafusible.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> deber&#225; llevar marcado en el exterior del cuerpo, en profundidad o relieve caracteres legibles e indelebles, las siguientes inscripciones como m&#237;nimo:<br />		- Marca o Logotipo registrado del fabricante.<br />		- <a href="et511_seccionador_portafusible.html#" id="version-238" class="externalLink  glosarioLink">Intensidad</a> <a href="et511_seccionador_portafusible.html#" id="version-298" class="externalLink  glosarioLink">nominal</a> 160 A o 400 A.<br />		- <a href="et511_seccionador_portafusible.html#" id="version-384" class="externalLink  glosarioLink">tensi&#243;n nominal</a> 500 V.<br /><br />No se admiten placas adheridas.<br /><br /> Cada <a href="et511_seccionador_portafusible.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> ser&#225; almacenado individualmente en una bolsa de polietileno, de espesor m&#237;nimo de 50 micrones y luego embalados en esqueletos de madera o cajas de cart&#243;n corrugado, suficientemente resistentes, para evitar roturas por manipuleo y/o transporte, as&#237; como para permitir el estibado en forma superpuesta de hasta diez (10) unidades.<br /><br /> Dentro de cada embalaje vendr&#225; una hoja con las indicaciones y secuencias de armado, montaje y conexionado.<br /><br />Cada esqueleto o caja, llevar&#225; grabado, adem&#225;s de lo que establezcan las disposiciones legales vigentes, las indicaciones siguientes:<br />-	Marco o logotipo registrado del fabricante.<br />-	N&#250;mero de Orden de Compra.<br />-	<a href="et511_seccionador_portafusible.html#" id="version-273" class="externalLink  glosarioLink">Masa</a> aproximada del bulto.<br />-	Indicaciones para su manipulaci&#243;n, almacenamiento y conservaci&#243;n.<br /><br />
+<h2 id="heading_11" >4 - ENSAYOS Y RECEPCION</h2>
+La recepci&#243;n del <a href="et511_seccionador_portafusible.html#" id="version-274" class="externalLink  glosarioLink">material</a> ser&#225; efectuada por representantes de ENEL.<br /><br />
+<h3 id="heading_12" >4.1	Ensayos Tipo</h3> <br />A continuaci&#243;n, listado de ensayos tipo.<br /><br />1)	<a href="et511_seccionador_portafusible.html#" id="version-235" class="externalLink  glosarioLink">Inspecci&#243;n</a> visual y control dimensional<br />2)	Sobreelevaci&#243;n de temperatura<br />3)	Duraci&#243;n mec&#225;nica<br />4)	Duraci&#243;n el&#233;ctrica<br />5)	Acondicionamiento en c&#225;mara de humedad<br />6)	Resistencia de aislamiento<br />7)	Rigidez diel&#233;ctrica<br />8)	<a href="et511_seccionador_portafusible.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de funcionamiento<br />9)	Resistencia mec&#225;nica del cuerpo del <a href="et511_seccionador_portafusible.html#" id="version-356" class="externalLink  glosarioLink">Seccionador</a><br />10)	Tracci&#243;n<br />11)	Resistencia del plateado de las pinzas<br />12)	No propagaci&#243;n de llamas (autoextinci&#243;n)<br />13)	Verificaci&#243;n de la protecci&#243;n anticorrosiva<br />14)	Envejecimiento clim&#225;tico<br />15)	Corriente de corta duraci&#243;n<br /> <br /><b>4.1.1 <a href="et511_seccionador_portafusible.html#" id="version-235" class="externalLink  glosarioLink">Inspecci&#243;n</a> visual y control dimensional</b>	<br /><br />Se verificar&#225; la correcta terminaci&#243;n, caracter&#237;sticas constructivas, provisi&#243;n de las distintas partes componentes y marcaci&#243;n del <a href="et511_seccionador_portafusible.html#" id="version-274" class="externalLink  glosarioLink">material</a>, de acuerdo a los numerales 2 y 3.<br /><br />El control dimensional se realizar&#225; con instrumentos compatibles con las dimensiones a medir y de acuerdo con las tolerancias y medidas indicadas en el plano adjunto al protocolo de ensayos de tipo, presentado con la oferta y aprobado conjuntamente con la realizaci&#243;n de los ensayos de tipo.<br /><br /><b>4.1.2 Sobreelevaci&#243;n de temperatura</b><br /><br />Seg&#250;n norma IEC 60947-3 Low-voltage switchgear and control gear - Part 3: Switches, disconnectors, switch-disconnectors and fuse-combination units. Con los siguientes incrementos m&#225;ximos de temperatura:<br />-Pinzas de contactos	Delta T = 85&#186; C<br />-Resortes de acero	Delta T = 75&#186; C<br />-<a href="et511_seccionador_portafusible.html#" id="version-274" class="externalLink  glosarioLink">Material</a> sint&#233;tico pr&#243;ximo a las pinzas de contactos	Delta T = 55&#186; C<br />-Bornes para la fijaci&#243;n de los terminales del <a href="et511_seccionador_portafusible.html#" id="version-107" class="externalLink  glosarioLink">cable</a>	Delta T = 45&#186; C<br /><br /><b>4.1.3 Duraci&#243;n mec&#225;nica</b><br /><br />Seg&#250;n norma IEC 60947-3 Low-voltage switchgear and control gear - Part 3: Switches, disconnectors, switch-disconnectors and fuse-combination units,  1000 ciclos de apertura y cierre.<br /><br /><br /><br /><br /><b>4.1.4 Duraci&#243;n el&#233;ctrica</b><br /><br />Seg&#250;n norma IEC 60947-3 Low-voltage switchgear and control gear - Part 3: Switches, disconnectors, switch-disconnectors and fuse-combination units, con <a href="et511_seccionador_portafusible.html#" id="version-0" class="externalLink  glosarioLink">tension</a> y corriente <a href="et511_seccionador_portafusible.html#" id="version-298" class="externalLink  glosarioLink">nominal</a>, a coseno fi = 0,65.<br /><br /><b>4.1.5 Acondicionamiento en c&#225;mara de humedad</b><br /><br />Los seccionadores <a href="et511_seccionador_portafusible.html#" id="version-218" class="externalLink  glosarioLink">fusible</a> ser&#225;n llevados y mantenidos durante 4 horas a la temperatura de 25&#186; C + / - 5&#186; C, seguidamente ser&#225;n sometidos a condiciones de humedad relativa seg&#250;n lo establecido en la NTC 1156 para c&#225;mara de humedad grado B durante 48 horas.<br /><br />Transcurrido dicho per&#237;odo se extraer&#225;n las muestras de la c&#225;mara y se les secar&#225;, de las eventuales gotas que se formen por condensaci&#243;n, con un trapo limpio y seco.<br /><br /><b>4.1.6 Resistencia de aislamiento</b><br /><br />Este <a href="et511_seccionador_portafusible.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> se realiza inmediatamente de retirado el <a href="et511_seccionador_portafusible.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> de la c&#225;mara de humedad.<br /> <br />La resistencia de aislaci&#243;n ser&#225; medida con un megaohmetro cuyo campo de medici&#243;n exacto no sea inferior a 10 Megaohmios y <a href="et511_seccionador_portafusible.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> 500 V, siendo los puntos de medici&#243;n:<br />a)	Entre ambos bornes de conexi&#243;n del <a href="et511_seccionador_portafusible.html#" id="version-107" class="externalLink  glosarioLink">cable</a>, con <a href="et511_seccionador_portafusible.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> abierto.<br />b)	Entre los bornes de conexi&#243;n del <a href="et511_seccionador_portafusible.html#" id="version-107" class="externalLink  glosarioLink">cable</a> y el <a href="et511_seccionador_portafusible.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de fijaci&#243;n a la cruceta, con el <a href="et511_seccionador_portafusible.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> cerrado, con el <a href="et511_seccionador_portafusible.html#" id="version-218" class="externalLink  glosarioLink">fusible</a> correspondiente.<br /><br />El <a href="et511_seccionador_portafusible.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> se considerar&#225; satisfactorio si el valor medido de resistencia de aislamiento es igual o mayor a 5 Megaohmios.<br /><br /> NOTA: Este <a href="et511_seccionador_portafusible.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> se deber&#225; repetir, en seco, antes y despu&#233;s del <a href="et511_seccionador_portafusible.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de Rigidez Diel&#233;ctrica.<br /><br /><b>4.1.7 Rigidez diel&#233;ctrica</b><br /><br />Este <a href="et511_seccionador_portafusible.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> se deber&#225; realizar a continuaci&#243;n del de Resistencia de Aislaci&#243;n, en seco.<br /><br /> El valor eficaz de la <a href="et511_seccionador_portafusible.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> de <a href="et511_seccionador_portafusible.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> ser&#225; el indicado en cada caso a <a href="et511_seccionador_portafusible.html#" id="version-210" class="externalLink  glosarioLink">frecuencia</a> de 60 Hz, valor al que se llegar&#225; regularmente en un corto lapso y ser&#225; mantenida constante durante 1 minuto.<br /><br /> Los puntos de aplicaci&#243;n de la <a href="et511_seccionador_portafusible.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> ser&#225;n:<br />a)	Con el <a href="et511_seccionador_portafusible.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> <a href="et511_seccionador_portafusible.html#" id="version-218" class="externalLink  glosarioLink">fusible</a> cerrado, con un <a href="et511_seccionador_portafusible.html#" id="version-218" class="externalLink  glosarioLink">fusible</a> tama&#241;o 00, 1, 2 y 3 seg&#250;n <a href="et511_seccionador_portafusible.html#" id="version-281" class="externalLink  glosarioLink">modelo</a>, se deber&#225; aplicar una <a href="et511_seccionador_portafusible.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> de 2500 V entre cada <a href="et511_seccionador_portafusible.html#" id="version-104" class="externalLink  glosarioLink">borne</a> de conexi&#243;n y el <a href="et511_seccionador_portafusible.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de fijaci&#243;n a la cruceta puesto a <a href="et511_seccionador_portafusible.html#" id="version-387" class="externalLink  glosarioLink">tierra</a>.<br />b)	Con el <a href="et511_seccionador_portafusible.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> <a href="et511_seccionador_portafusible.html#" id="version-218" class="externalLink  glosarioLink">fusible</a> abierto se deber&#225; aplicar una <a href="et511_seccionador_portafusible.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> de 3500 V entre un <a href="et511_seccionador_portafusible.html#" id="version-104" class="externalLink  glosarioLink">borne</a> de conexi&#243;n y el otro <a href="et511_seccionador_portafusible.html#" id="version-104" class="externalLink  glosarioLink">borne</a> de conexi&#243;n, puesto a <a href="et511_seccionador_portafusible.html#" id="version-387" class="externalLink  glosarioLink">tierra</a>.<br /><br /><b>NOTA:</b> Toda parte met&#225;lica, que durante el <a href="et511_seccionador_portafusible.html#" id="version-359" class="externalLink  glosarioLink">servicio</a> normal del <a href="et511_seccionador_portafusible.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> no pertenezca al circuito principal y quede libre de potencial, deber&#225; ser unida a tierra para cada una de las pruebas anteriores.<br /><br />El <a href="et511_seccionador_portafusible.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> se considerar&#225; satisfactorio si durante la aplicaci&#243;n de la <a href="et511_seccionador_portafusible.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> de <a href="et511_seccionador_portafusible.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> no se constata perforaci&#243;n ni contorneo y si adem&#225;s, luego de realizado este <a href="et511_seccionador_portafusible.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a>, no se observan variaciones significativas en los valores de Resistencia de Aislamiento, (punto 5.6) pero medidos en seco, que hagan presumir un deterioro de la aislaci&#243;n.<br /> <br /><b>4.1.8 Ensayo de Funcionamiento</b><br /><br />Se deber&#225; verificar el correcto funcionamiento mec&#225;nico del <a href="et511_seccionador_portafusible.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a>, teniendo en cuenta los siguientes puntos:<br />-	Enganche y extracci&#243;n mediante p&#233;rtiga, para el modelo 400 A-500 V y 160 A-500V, del brazo m&#243;vil del <a href="et511_seccionador_portafusible.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> <a href="et511_seccionador_portafusible.html#" id="version-218" class="externalLink  glosarioLink">fusible</a>.<br />-	Operaci&#243;n (apertura y cierre) del <a href="et511_seccionador_portafusible.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a>, montado en su posici&#243;n de instalaci&#243;n normal y operado a distancia.<br />-	<a href="et511_seccionador_portafusible.html#" id="version-363" class="externalLink  glosarioLink">Sistema</a> de traba <a href="et511_seccionador_portafusible.html#" id="version-218" class="externalLink  glosarioLink">fusible</a>.<br />-	<a href="et511_seccionador_portafusible.html#" id="version-363" class="externalLink  glosarioLink">Sistema</a> de fijaci&#243;n a la cruceta o herraje.<br />-	Conexi&#243;n de cables a los bornes.<br /><br />4.1.9 Resistencia Mec&#225;nica del Cuerpo del <a href="et511_seccionador_portafusible.html#" id="version-356" class="externalLink  glosarioLink">Seccionador</a>* <br /><br />Consiste en verificar la resistencia mec&#225;nica del cuerpo aislante del <a href="et511_seccionador_portafusible.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> a la torsi&#243;n de los bornes de conexi&#243;n, aplic&#225;ndoles una cupla de <a href="et511_seccionador_portafusible.html#" id="version-371" class="externalLink  glosarioLink">sobrecarga</a> (4,8 daNm, para el <a href="et511_seccionador_portafusible.html#" id="version-281" class="externalLink  glosarioLink">modelo</a> de  400 A-500 V y 3 daNm para el de 160 A-500 V).<br /><br />El resultado del <a href="et511_seccionador_portafusible.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> se considerar&#225; satisfactorio si no se producen roturas, torceduras, desalineamientos, deslizamientos ni rajaduras.<br /><br /><b>4.1.10 Tracci&#243;n</b> <br /><br />Inmediatamente despu&#233;s de realizado el <a href="et511_seccionador_portafusible.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> de Sobreelevaci&#243;n de Temperatura, con el <a href="et511_seccionador_portafusible.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> montado en la posici&#243;n normal de <a href="et511_seccionador_portafusible.html#" id="version-392" class="externalLink  glosarioLink">trabajo</a> sobre una cruceta, herraje o similar, se deber&#225; aplicar durante 10 minutos una <a href="et511_seccionador_portafusible.html#" id="version-113" class="externalLink  glosarioLink">carga</a> progresiva y vertical de 125 daN, sobre el ojal de operaci&#243;n del brazo.<br /><br />El <a href="et511_seccionador_portafusible.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> se considerar&#225; satisfactorio si no se produjeron rajaduras, roturas ni deformaciones, torceduras, u otros defectos.<br /><br />Este <a href="et511_seccionador_portafusible.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> corresponde a los dos modelos.<br /><br /><b>4.1.11 Resistencia del plateado de las pinzas, a la operaci&#243;n</b><br /><br />Se deber&#225; fijar el <a href="et511_seccionador_portafusible.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a>, mediante su <a href="et511_seccionador_portafusible.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de fijaci&#243;n, a un soporte horizontal lo suficientemente r&#237;gido, a fin de no considerar la flexi&#243;n ni torsi&#243;n del mismo.<br />Una vez instalado el <a href="et511_seccionador_portafusible.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a>, se cerrar&#225; y abrir&#225; 150 veces, empleando una p&#233;rtiga de <a href="et511_seccionador_portafusible.html#" id="version-270" class="externalLink  glosarioLink">maniobra</a>, o manualmente, seg&#250;n el <a href="et511_seccionador_portafusible.html#" id="version-281" class="externalLink  glosarioLink">modelo</a>.<br /><br />Para toda la secuencia del <a href="et511_seccionador_portafusible.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> de operaci&#243;n, podr&#225;n utilizarse diversos cartuchos, con un m&#237;nimo de 30 operaciones para cada uno.<br /><br />El <a href="et511_seccionador_portafusible.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> se considerar&#225; aprobado si estando el <a href="et511_seccionador_portafusible.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> en perfecto estado de funcionamiento, las pinzas no perdieron el plateado en las zonas que entran en contacto con las cuchillas de los fusibles.<br /><br /><b>4.1.12 No propagaci&#243;n de llamas (autoextinci&#243;n)</b><br /><br />Este <a href="et511_seccionador_portafusible.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> se efectuar&#225; sobre todas las partes que no sean met&#225;licas.<br /><br />El <a href="et511_seccionador_portafusible.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> se debe repetir en varios puntos de la <a href="et511_seccionador_portafusible.html#" id="version-288" class="externalLink  glosarioLink">muestra</a>, pero se evitar&#225;n los fondos de ranuras y orificios ciegos, las aristas, crestas o nervaduras y en general las partes retiradas o sobresalientes.<br /><br />El local estar&#225; al abrigo de corrientes de aire que pueden refrigerar la <a href="et511_seccionador_portafusible.html#" id="version-288" class="externalLink  glosarioLink">muestra</a> y con la iluminaci&#243;n atenuada para que sea visible cualquier llama.<br /><br />La pieza ensayada no debe consumirse completamente ni seguir quem&#225;ndose despu&#233;s de 5 segundos de retirado el <a href="et511_seccionador_portafusible.html#" id="version-84" class="externalLink  glosarioLink">alambre</a> incandescente o la llama.<br /><br /><b>4.1.13 Verificaci&#243;n del cincado</b><br /><br />Este <a href="et511_seccionador_portafusible.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> se realizar&#225; sobre todas las partes met&#225;licas ferrosas componentes del <a href="et511_seccionador_portafusible.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a>.<br /><br />Se emplear&#225; la metodolog&#237;a se&#241;alada en la <a href="et511_seccionador_portafusible.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a> Verificaci&#243;n de la protecci&#243;n anticorrosiva de materiales ferrosos.<br /><br />Finalizado el <a href="et511_seccionador_portafusible.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a>, las partes met&#225;licas deber&#225;n satisfacer plenamente los requerimientos indicados en dicha <a href="et511_seccionador_portafusible.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a>.<br /><br /><b>4.1.14 Envejecimiento clim&#225;tico</b><br /><br />Este <a href="et511_seccionador_portafusible.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> se realizar&#225; sobre todas las partes construidas, con <a href="et511_seccionador_portafusible.html#" id="version-274" class="externalLink  glosarioLink">material</a> sint&#233;tico.<br /><br />Se deber&#225; realizar mediante la repetici&#243;n de ciclos que contemplen la aplicaci&#243;n de radiaci&#243;n ultravioleta, con aspersi&#243;n peri&#243;dica de agua. Finalizado el <a href="et511_seccionador_portafusible.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a>, las partes expuestas no deber&#225;n presentar da&#241;os que afecten r&#225;pidamente su <a href="et511_seccionador_portafusible.html#" id="version-406" class="externalLink  glosarioLink">vida &#250;til</a>, tales como aparici&#243;n de fibras expuestas en la superficie, resquebrajamientos, exfoliaduras, etc. Solamente se admitir&#225; una tenue p&#233;rdida de color.<br /><br />El <a href="et511_seccionador_portafusible.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> se regir&#225; por la norma ASTM G155, Standard Practice for Operating Xenon Arc Lamp Apparatus for Exposure of Materials.<br /><br /><br /><b>4.1.15 Corriente de corta duraci&#243;n</b><br /><br />Se deber&#225; equipar el <a href="et511_seccionador_portafusible.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> con un puente normalizado seg&#250;n DIN 43620 en lugar del cartucho <a href="et511_seccionador_portafusible.html#" id="version-218" class="externalLink  glosarioLink">fusible</a> y en posici&#243;n cerrado se har&#225; circular una corriente de  8 kA para el <a href="et511_seccionador_portafusible.html#" id="version-281" class="externalLink  glosarioLink">modelo</a> de 400 A-500V o de 4 kA para el <a href="et511_seccionador_portafusible.html#" id="version-281" class="externalLink  glosarioLink">modelo</a> de 160 A-500 V, con un factor de potencia igual a 0,5, durante un segundo.<br /><br />El valor pico de la corriente durante el primer ciclo de aplicaci&#243;n, no deber&#225; ser inferior a 20,4 kA &#243; 6,8 kA, respectivamente.<br /><br />Luego del <a href="et511_seccionador_portafusible.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> el <a href="et511_seccionador_portafusible.html#" id="version-356" class="externalLink  glosarioLink">seccionador</a> no deber&#225; presentar signos de deterioro alguno que impidan su continuidad en <a href="et511_seccionador_portafusible.html#" id="version-359" class="externalLink  glosarioLink">servicio</a>.<br /><br /><br />
+<h2 id="heading_13" >ANEXO I</h2>
+TABLA DE CARACTERISTICAS TECNICAS GARANTIZADAS<br />Modelo - 400 A-500 V<br /><br /><div style="width:1139px;"><table><tr><td colspan="1" rowspan="1" style="width:76px;height:35px;text-align:center"><b>N&#176;</b></td><td colspan="3" rowspan="1" style="width:684px;text-align:center"><b>DENOMINACION</b></td><td colspan="1" rowspan="1" style="width:181px;text-align:center"><b>UNIDAD</b></td><td colspan="1" rowspan="1" style="width:76px;text-align:center"><b>PEDIDO</b></td><td colspan="1" rowspan="1" style="width:122px;text-align:center"><b>OFRECIDO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center">1</td><td colspan="3" rowspan="1" style="">Normas para fabricaci&#243;n y ensayos</td><td colspan="1" rowspan="1" style="text-align:center">----</td><td colspan="1" rowspan="1" style="">IEC 60947-3 </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center">2</td><td colspan="3" rowspan="1" style="">Tipo de instalaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">----</td><td colspan="1" rowspan="1" style="">Intemperie</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center">3</td><td colspan="3" rowspan="1" style="">Tipo de servicio</td><td colspan="1" rowspan="1" style="text-align:center">----</td><td colspan="1" rowspan="1" style="">Permanente</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="4" style="height:21px;text-align:center">4</td><td colspan="1" rowspan="4" style="">Tensi&#243;n</td><td colspan="2" rowspan="1" style="">Nominal de servicio</td><td colspan="1" rowspan="1" style="text-align:center">V</td><td colspan="1" rowspan="1" style="">500</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="3" style="height:21px;">De ensayo</td><td colspan="1" rowspan="1" style="">Entre bornes</td><td colspan="1" rowspan="1" style="text-align:center">V</td><td colspan="1" rowspan="1" style="">3500</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="2" style="height:20px;">Entre bornes y tierra</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="2" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">V</td><td colspan="1" rowspan="1" style="">2500</td></tr>
+<tr><td colspan="1" rowspan="5" style="height:21px;text-align:center">5</td><td colspan="1" rowspan="5" style="text-align:center">Intensidad  de corriente</td><td colspan="2" rowspan="1" style="">Nominal</td><td colspan="1" rowspan="1" style="text-align:center">A</td><td colspan="1" rowspan="1" style="">400</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">De corta duraci&#243;n valor eficaz durante 1 segundo</td><td colspan="1" rowspan="1" style="text-align:center">KA</td><td colspan="1" rowspan="1" style="">8</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;">L&#237;mite din&#225;mica-</td><td colspan="1" rowspan="3" style="text-align:center">KA</td><td colspan="1" rowspan="3" style="">30</td><td colspan="1" rowspan="3" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;">Valor de cresta-</td></tr>
+<tr><td colspan="2" rowspan="1" style="height:34px;">(135 mm distancia m&#225;xima entre ejes de seccionadores de distintas fases).</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">6</td><td colspan="3" rowspan="1" style="">Resistencia a la tracci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">daN</td><td colspan="1" rowspan="1" style="">125</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:86px;text-align:center">7</td><td colspan="3" rowspan="1" style="">Material aislante</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="">Termor&#237;gido reforzado con fibra de vidrio</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">7.1</td><td colspan="3" rowspan="1" style="">Punto Martens de distorsi&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">&#186;C</td><td colspan="1" rowspan="1" style="">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">8</td><td colspan="3" rowspan="1" style="">Punto de distorsi&#243;n del material el&#225;stico</td><td colspan="1" rowspan="1" style="text-align:center">&#186;C</td><td colspan="1" rowspan="1" style="">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">9</td><td colspan="3" rowspan="1" style="">Peso del seccionador completo sin fusible</td><td colspan="1" rowspan="1" style="text-align:center">Kg</td><td colspan="1" rowspan="1" style="">(*)</td><td colspan="1" rowspan="1" style=""> </td></tr></table><br /></div> (*) A indicar por el oferente.<br /> 
+<h2 id="heading_14" >ANEXO II</h2>
+TABLA DE CARACTERISTICAS TECNICAS GARANTIZADAS<br />Modelo - 160 A-500 V<br /> <div style="width:1139px;"><table><tr><td colspan="1" rowspan="1" style="width:76px;height:21px;text-align:center"><b>N&#176;</b></td><td colspan="3" rowspan="1" style="width:684px;text-align:center"><b>DENOMINACION</b></td><td colspan="1" rowspan="1" style="width:181px;text-align:center"><b>UNIDAD</b></td><td colspan="1" rowspan="1" style="width:76px;text-align:center"><b>PEDIDO</b></td><td colspan="1" rowspan="1" style="width:122px;text-align:center"><b>OFRECIDO</b></td></tr>
+<tr><td colspan="1" rowspan="2" style="height:20px;text-align:center">1</td><td colspan="3" rowspan="2" style="">Normas para fabricaci&#243;n y ensayos</td><td colspan="1" rowspan="2" style="text-align:center">----</td><td colspan="1" rowspan="2" style="">IEC 60947-3</td><td colspan="1" rowspan="2" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center">2</td><td colspan="3" rowspan="1" style="">Tipo de instalaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">----</td><td colspan="1" rowspan="1" style="">Intemperie</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center">3</td><td colspan="3" rowspan="1" style="">Tipo de servicio</td><td colspan="1" rowspan="1" style="text-align:center">----</td><td colspan="1" rowspan="1" style="">Permanente</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="3" style="height:21px;text-align:center">4</td><td colspan="1" rowspan="3" style="">Tensi&#243;n</td><td colspan="2" rowspan="1" style="">Nominal de servicio</td><td colspan="1" rowspan="1" style="text-align:center">V</td><td colspan="1" rowspan="1" style="">500</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="2" style="height:21px;">De ensayo</td><td colspan="1" rowspan="1" style="">Entre bornes</td><td colspan="1" rowspan="1" style="text-align:center">V</td><td colspan="1" rowspan="1" style="">3500</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Entre bornes y tierra</td><td colspan="1" rowspan="1" style="text-align:center">V</td><td colspan="1" rowspan="1" style="">2500</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:21px;text-align:center">5</td><td colspan="1" rowspan="5" style="text-align:center">Intensidad de corriente</td><td colspan="2" rowspan="1" style="">Nominal</td><td colspan="1" rowspan="1" style="text-align:center">A</td><td colspan="1" rowspan="1" style="">160</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">De corta duraci&#243;n valor eficaz durante 1 segundo</td><td colspan="1" rowspan="1" style="text-align:center">kA</td><td colspan="1" rowspan="1" style="">4</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;">L&#237;mite din&#225;mica-</td><td colspan="1" rowspan="3" style="text-align:center">kA</td><td colspan="1" rowspan="3" style="">25</td><td colspan="1" rowspan="3" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;">Valor de cresta-</td></tr>
+<tr><td colspan="2" rowspan="1" style="height:34px;">(135 mm distancia m&#225;xima entre ejes de seccionadores de distintas fases).</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">6</td><td colspan="3" rowspan="1" style="">Resistencia a la tracci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">daN</td><td colspan="1" rowspan="1" style="">125</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:86px;text-align:center">7</td><td colspan="3" rowspan="1" style="">Material aislante</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="">Termor&#237;gido reforzado con fibra de vidrio</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">7.1</td><td colspan="3" rowspan="1" style="">Punto Martens de distorsi&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">&#186;C</td><td colspan="1" rowspan="1" style="">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">8</td><td colspan="3" rowspan="1" style="">Punto de distorsi&#243;n del material el&#225;stico</td><td colspan="1" rowspan="1" style="text-align:center">&#186;C</td><td colspan="1" rowspan="1" style="">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">9</td><td colspan="3" rowspan="1" style="">Peso del seccionador completo sin fusible</td><td colspan="1" rowspan="1" style="text-align:center">Kg</td><td colspan="1" rowspan="1" style="">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /><br /></div>  (*) A indicar por el Oferente.<br /><img src="https://i.ibb.co/0sJHcSZ/fig1.jpg" /><br /><b>FIGURA 1. SECCIONADOR DE 160A</b><br /><img src="https://i.ibb.co/tQHfk11/fig2.jpg" /><br /><b>FIGURA 2. SECCIONADOR DE 400 A</b><br /><br /><br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 470, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

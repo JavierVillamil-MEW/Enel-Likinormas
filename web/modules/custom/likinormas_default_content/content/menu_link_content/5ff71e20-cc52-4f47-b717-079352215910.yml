@@ -1,0 +1,42 @@
+_meta:
+  version: '1.0'
+  entity_type: menu_link_content
+  uuid: 5ff71e20-cc52-4f47-b717-079352215910
+  bundle: account
+  default_langcode: es
+default:
+  enabled:
+    -
+      value: true
+  title:
+    -
+      value: 'Cerrar sesión'
+  menu_name:
+    -
+      value: account
+  link:
+    -
+      uri: 'internal:/user/logout'
+      title: ''
+      options: {  }
+  external:
+    -
+      value: false
+  rediscover:
+    -
+      value: true
+  weight:
+    -
+      value: 2
+  expanded:
+    -
+      value: false
+  parent:
+    -
+      value: user.page
+  revision_translation_affected:
+    -
+      value: true
+  view_mode:
+    -
+      value: default

@@ -1,0 +1,32 @@
+uuid: 5992804c-ca2d-4e7c-8c43-06064f7211c4
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.contact_webform
+    - node.type.rules_home_content
+    - webform.webform.rules_contact_webform
+  module:
+    - webform
+id: node.rules_home_content.contact_webform
+field_name: contact_webform
+entity_type: node
+bundle: rules_home_content
+label: 'Formulario de contacto'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    target_uuid: 1846fb5b-c360-42ed-a5ae-4fcb01a9164c
+    default_data: ''
+    status: open
+    open: ''
+    close: ''
+default_value_callback: ''
+settings:
+  handler: 'default:webform'
+  handler_settings:
+    target_bundles: null
+    auto_create: false
+field_type: webform

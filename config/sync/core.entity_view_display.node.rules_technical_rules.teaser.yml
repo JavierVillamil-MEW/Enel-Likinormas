@@ -1,0 +1,50 @@
+uuid: 6bb64849-a711-4c6f-b010-0555a5694cee
+langcode: en
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.rules_technical_rules.effective_date
+    - field.field.node.rules_technical_rules.feeds_item
+    - field.field.node.rules_technical_rules.related_content
+    - field.field.node.rules_technical_rules.rule_category
+    - field.field.node.rules_technical_rules.rule_subcategory
+    - field.field.node.rules_technical_rules.seo
+    - field.field.node.rules_technical_rules.technical_rule_author
+    - field.field.node.rules_technical_rules.technical_rule_comment
+    - field.field.node.rules_technical_rules.technical_rule_content
+    - field.field.node.rules_technical_rules.technical_rule_description
+    - field.field.node.rules_technical_rules.technical_rule_number
+    - field.field.node.rules_technical_rules.technical_rule_title
+    - field.field.node.rules_technical_rules.validate
+    - node.type.rules_technical_rules
+  module:
+    - user
+id: node.rules_technical_rules.teaser
+targetEntityType: node
+bundle: rules_technical_rules
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  effective_date: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  feeds_item: true
+  langcode: true
+  related_content: true
+  rule_category: true
+  rule_subcategory: true
+  seo: true
+  technical_rule_author: true
+  technical_rule_comment: true
+  technical_rule_content: true
+  technical_rule_description: true
+  technical_rule_number: true
+  technical_rule_title: true
+  validate: true

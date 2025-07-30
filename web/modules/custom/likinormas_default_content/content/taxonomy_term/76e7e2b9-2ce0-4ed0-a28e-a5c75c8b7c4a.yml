@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 76e7e2b9-2ce0-4ed0-a28e-a5c75c8b7c4a
+  bundle: rules_subcategory
+  default_langcode: en
+  depends:
+    789ca787-1452-4781-acf0-12b335337792: taxonomy_term
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'Acometidas eléctricas'
+  weight:
+    -
+      value: 0
+  parent:
+    -
+      target_id: 0
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /normas/acometidas-y-medidores/acometidas-electricas
+      langcode: en
+      pathauto: 1
+  related_category:
+    -
+      entity: 789ca787-1452-4781-acf0-12b335337792

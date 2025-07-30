@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET722 Barrajes preformados para baja tensión 600 V | Likinormas</title>
+	<meta name="description" content="barraje preformado; baja tension; redes subterraneas;cables subterraneos" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/592" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F592.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/592" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/592" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '33');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET722 Barrajes preformados para baja tensi&#243;n 600 V</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET 722</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">04/09/2014</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/592">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F592&amp;nodoid=592', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et722_barrajes_preformados_baja_tension_600_v.html#heading_0">1.	REQUISITOS GENERALES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et722_barrajes_preformados_baja_tension_600_v.html#heading_1">1.1	 Condiciones de servicio</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et722_barrajes_preformados_baja_tension_600_v.html#heading_2">1.2	 Normas de fabricaci&#243;n y pruebas</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et722_barrajes_preformados_baja_tension_600_v.html#heading_3">2.	REQUISITOS T&#201;CNICOS PARTICULARES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et722_barrajes_preformados_baja_tension_600_v.html#heading_4">3. EMPAQUE E IDENTIFICACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et722_barrajes_preformados_baja_tension_600_v.html#heading_5">4.	 INSPECCI&#211;N Y PRUEBAS DE RECEPCI&#211;N T&#201;CNICA</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et722_barrajes_preformados_baja_tension_600_v.html#heading_6">5.	REQUISITOS DE LAS OFERTAS</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1.	REQUISITOS GENERALES</h2>
+<h3 id="heading_1" >1.1	 Condiciones de servicio</h3>Los barrajes de que trata esta especificaci&#243;n ser&#225;n instalados en circuitos subterr&#225;neos de sistemas de distribuci&#243;n secundaria de CODENSA S.A. ESP, de acuerdo con las siguientes condiciones generales del <a href="et722_barrajes_preformados_baja_tension_600_v.html#" id="version-363" class="externalLink  glosarioLink">sistema</a>:<br /><br /><b>1.1.1	 Condiciones ambientales</b>
+<ul><li>Altura sobre el nivel del mar: 2640 m</li>
+<li>Humedad relativa: 90%</li>
+<li>Temperatura ambiente m&#225;xima: 27 &#176;C</li>
+<li>Temperatura ambiente m&#237;nima: -5 &#176;C</li>
+<li>Temperatura ambiente promedio: 14 &#176;C</li></ul>
+<br /><b>1.1.2	 Caracter&#237;sticas el&#233;ctricas del <a href="et722_barrajes_preformados_baja_tension_600_v.html#" id="version-363" class="externalLink  glosarioLink">sistema</a></b>
+<ul><li><a href="et722_barrajes_preformados_baja_tension_600_v.html#" id="version-384" class="externalLink  glosarioLink">Tensi&#243;n nominal</a>: 600 V</li>
+<li>Conexi&#243;n: Trif&#225;sica tetrafilar</li>
+<li>Frecuencia <a href="et722_barrajes_preformados_baja_tension_600_v.html#" id="version-298" class="externalLink  glosarioLink">nominal</a>: 60 Hz</li></ul>
+<br /><b>1.1.3	 Calibres normalizados</b>
+<ul><li>No. 10 AWG hasta No 2/0 AWG en cobre y aluminio, para barrajes de 6 salidas</li>
+<li>No. 10 AWG hasta No 350 kcmil en cobre y aluminio, para barrajes de 6 salidas</li>
+<li>No. 10 AWG hasta No 500 kcmil en cobre y aluminio, para barrajes de 6 salidas</li></ul>
+<br /><b>1.1.4	 Condiciones de utilizaci&#243;n</b><br />En c&#225;maras, ocasionalmente sumergidos en agua.<br />
+<h3 id="heading_2" >1.2	 Normas de fabricaci&#243;n y pruebas</h3>El barraje, as&#237; como sus componentes, deber&#225;n cumplir con los requerimientos de la &#250;ltima revisi&#243;n de las siguientes normas (donde sean aplicables):<br /><br /><div style="width:695px;"><table><tr><td colspan="1" rowspan="1" style="width:117px;height:40px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:578px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">ANSI C119.1</td><td colspan="1" rowspan="1" style="">Sealed Insulated Underground Connector System Rated 600 Volts.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">ASTM D149</td><td colspan="1" rowspan="1" style="">Standard Test Method for Dielectric Breakdown Voltage and Dielectric Strength of Solid Electrical Insulating Materials at Commercial Power Frequencies.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">ASTM D412</td><td colspan="1" rowspan="1" style="">Standard Test Methods for Vulcanized Rubber and Thermoplastic Rubbers and Thermoplastic Elastomers-Tension.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">ASTM D624</td><td colspan="1" rowspan="1" style="">Standard Test Method for Tear Strength of Conventional Vulcanized Rubber and Thermoplastic Elastomers.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">ASTM D1212</td><td colspan="1" rowspan="1" style="">Standard Test Methods for Measurement of Wet Film Thickness of Organic Coatings.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">ASTM G21</td><td colspan="1" rowspan="1" style="">Standard Practice for Determining Resistance of Synthetic Polymeric Materials to Fungi.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">UL 486B</td><td colspan="1" rowspan="1" style="">Wire Connectors for Use With Aluminum Conductors.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">NTC 2202</td><td colspan="1" rowspan="1" style="">Sistemas conectores sellados y aislados, para uso subterr&#225;neo hasta 600 voltios.</td></tr></table><br /></div><br />
+<h2 id="heading_3" >2.	REQUISITOS T&#201;CNICOS PARTICULARES</h2>
+El barraje consta de un elemento conductor con seis (6) puntos de conexi&#243;n, aislado en EPDM resistente a los contaminantes, hongos, rayos ultravioleta, acidos &#225;lcalis y ozono.<br /><br />El conductor deber&#225; ser de aluminio inyectado, con 99,7 % de pureza. El barraje deber&#225; tener un sello herm&#233;tico. Se instalar&#225; un barraje por <a href="et722_barrajes_preformados_baja_tension_600_v.html#" id="version-205" class="externalLink  glosarioLink">fase</a> y uno por neutro.<br /><br />El barraje deber&#225; cumplir con las caracter&#237;sticas y ensayos especificados en la norma ANSI C119.1.<br /><br />Los barrajes deber&#225;n ser livianos, aptos para uso en cables con temperatura de operaci&#243;n de –5&#176;C  90 &#186;C y temperatura de <a href="et722_barrajes_preformados_baja_tension_600_v.html#" id="version-371" class="externalLink  glosarioLink">sobrecarga</a> de <a href="et722_barrajes_preformados_baja_tension_600_v.html#" id="version-183" class="externalLink  glosarioLink">emergencia</a>, de 130 &#186;C .<br /><br />Los barrajes, sus componentes y accesorios, deber&#225;n ser aptos para utilizaci&#243;n en cables con tensiones nominales de operaci&#243;n de hasta 600 V, conductor de cobre &#243; aluminio, aislamiento en XLPE  &#243; PVC. El <a href="et722_barrajes_preformados_baja_tension_600_v.html#" id="version-184" class="externalLink  glosarioLink">empalme</a>, sus componentes y accesorios deber&#225;n ser f&#237;sica y el&#233;ctricamente compatibles con los componentes del <a href="et722_barrajes_preformados_baja_tension_600_v.html#" id="version-107" class="externalLink  glosarioLink">cable</a>.<br /><br />Los barrajes deber&#225;n ser aptos para uso en interior y en &#225;reas expuestas al medio ambiente, en zonas contaminadas.<br /><br />Los barrajes deber&#225;n suministrarse con las instrucciones y los accesorios necesarios para su conexi&#243;n, base de barraje aislada encauchetada, tales como capuchones, tornillos, arandelas, cintas, grasa de silicona, y soporte de fijaci&#243;n al muro.<br /><br />El <a href="et722_barrajes_preformados_baja_tension_600_v.html#" id="version-184" class="externalLink  glosarioLink">empalme</a> deber&#225; ser ensayado para obtener sus propiedades f&#237;sicas y el&#233;ctricas, de acuerdo con las siguientes normas:<br />Conductor:
+<ul><li>UL 486B</li></ul>
+<br />Aislamiento:<br />
+<ul><li>Propiedades f&#237;sicas: ASTM D412-75 (<a href="et722_barrajes_preformados_baja_tension_600_v.html#" id="version-377" class="externalLink  glosarioLink">Tensi&#243;n</a> y elongaci&#243;n a la rotura), ASTM D1212 (m&#243;dulo), ASTM D624 (rasgado), ASTM G21 (resistencia a los hongos).</li></ul>
+
+<ul><li>Propiedades el&#233;ctricas: ASTM D149-75 (rigidez diel&#233;ctrica).</li></ul>
+<br /><br />Se deber&#225; suministrar la informaci&#243;n de dichos ensayos, junto con sus valores t&#237;picos y sus respectivos valores garantizados.<br /><br />El aislamiento del barraje deber&#225; cumplir con las caracter&#237;sticas generales de la tabla No.1.<br /><br /><b>Tabla No.1.</b><br /><b>Caracter&#237;sticas generales del aislamiento del barraje</b><br /><div style="width:519px;"><table><tr><td colspan="1" rowspan="1" style="width:229px;height:9px;text-align:center"><b>DESCRIPCI&#211;N</b></td><td colspan="1" rowspan="1" style="width:129px;text-align:center"><b>Unidad</b></td><td colspan="1" rowspan="1" style="width:161px;text-align:center"><b>Valor</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;"><a href="et722_barrajes_preformados_baja_tension_600_v.html#" id="version-384" class="externalLink  glosarioLink">Tensi&#243;n nominal</a></td><td colspan="1" rowspan="1" style="text-align:center">V</td><td colspan="1" rowspan="1" style="text-align:center">600</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Color</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">Negro</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Espesor</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="text-align:center">3,543</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Elongaci&#243;n a la rotura</td><td colspan="1" rowspan="1" style="text-align:center">%</td><td colspan="1" rowspan="1" style="text-align:center">635</td></tr></table><br /></div><br />El soporte de fijaci&#243;n al muro debe cumplir con lo siguiente:<br />
+<ul><li>Los soportes para barrajes preformados de baja tensi&#243;n deben ser construidos en material de alta calidad.</li></ul>
+
+<ul><li>El soporte no debe interferir con la instalaci&#243;n de los capuchones.</li></ul>
+
+<ul><li>El material de fabricaci&#243;n del soporte debe ser resistente a condiciones severas de humedad y contaminaci&#243;n</li></ul>
+
+<ul><li>Las dimensiones de los soportes deben estar acordes a las dimensiones y formas de cada uno de los tipos de los barrajes</li></ul>
+
+<ul><li>Los soportes deben incluir todos los accesorios requeridos para su instalaci&#243;n y correcta fijaci&#243;n a la c&#225;mara de inspecci&#243;n.</li></ul>
+
+<ul><li>El soporte debe garantizar una rigidez mec&#225;nica, de forma tal que no presente ruptura total ni parcial al realizar halado de los cables o al apoyar peso encima de &#233;l.</li></ul>
+<br />
+<h2 id="heading_4" >3. EMPAQUE E IDENTIFICACI&#211;N</h2>
+Los barrajes deber&#225;n embalarse en cajas de cart&#243;n, completos (barraje y accesorios), con las partes componenetes acondicionadas en forma separada.<br /><br />La siguiente informaci&#243;n deber&#225; aparecer en la caja del barraje:
+<ul><li>Nombre del fabricante, tipo y n&#250;mero de designaci&#243;n</li>
+<li>Clase de aislamiento</li>
+<li>M&#225;xima <a href="et722_barrajes_preformados_baja_tension_600_v.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> de dise&#241;o a <a href="et722_barrajes_preformados_baja_tension_600_v.html#" id="version-387" class="externalLink  glosarioLink">tierra</a></li>
+<li>Calibres m&#225;ximo y m&#237;nimo del conductor del <a href="et722_barrajes_preformados_baja_tension_600_v.html#" id="version-107" class="externalLink  glosarioLink">cable</a></li></ul>
+<br />En el embalaje deber&#225; indicarse:
+<ul><li>Nombre del fabricante</li>
+<li>La palabra “BOG-CUN ”</li>
+<li>El n&#250;mero y la fecha de la orden de compra</li>
+<li><a href="et722_barrajes_preformados_baja_tension_600_v.html#" id="version-377" class="externalLink  glosarioLink">Tensi&#243;n</a> de servicio y dem&#225;s caracter&#237;sticas t&#233;cnicas</li>
+<li>C&#243;digo SAP de almac&#233;n</li></ul>
+<br />
+<h2 id="heading_5" >4.	 <a href="et722_barrajes_preformados_baja_tension_600_v.html#" id="version-235" class="externalLink  glosarioLink">INSPECCI&#211;N</a> Y PRUEBAS DE RECEPCI&#211;N <a href="et722_barrajes_preformados_baja_tension_600_v.html#" id="version-376" class="externalLink  glosarioLink">T&#201;CNICA</a></h2>
+Las pruebas y recepci&#243;n ser&#225;n efectuadas por representantes de CODENSA S.A. ESP; as&#237; mismo se realizar&#225;n en las instalaciones del proveedor quien debe asumir su costo y proporcionar el <a href="et722_barrajes_preformados_baja_tension_600_v.html#" id="version-274" class="externalLink  glosarioLink">material</a>, equipos y personal necesario para tal fin. Si los resultados de las pruebas o los equipos de prueba no son confiables, estas igualmente podr&#225;n ser realizadas o repetidas a costa del proveedor, en laboratorios oficiales o particulares reconocidos por CODENSA S.A. ESP.<br />La <a href="et722_barrajes_preformados_baja_tension_600_v.html#" id="version-185" class="externalLink  glosarioLink">Empresa</a> se reserva el derecho de realizar una <a href="et722_barrajes_preformados_baja_tension_600_v.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> durante el proceso de fabricaci&#243;n; para tal efecto el proveedor suministrar&#225; los medios necesarios para facilitar la misma.<br /><br />Los ensayos incluyen:
+<ul><li>Resistencia a los rayos UV</li>
+<li>Estabilidad el&#233;ctrica bajo ciclos t&#233;rmicos, en aire</li>
+<li>Estabilidad t&#233;rmica bajo <a href="et722_barrajes_preformados_baja_tension_600_v.html#" id="version-113" class="externalLink  glosarioLink">carga</a></li>
+<li>Resistencia diel&#233;ctrica</li>
+<li>Resistividad volum&#233;trica</li></ul>
+<br />Adicionalmente, se deber&#225;n cumplir las propiedades f&#237;sicas y el&#233;ctricas del barraje, de acuerdo con el numeral 2. (REQUISITOS T&#201;CNICOS PARTICULARES) de la presente especificaci&#243;n.<br /> <br />CODENSA S.A. ESP se reserva el derecho de solicitar al fabricante, la repetici&#243;n por un laboratorio especializado a satisfacci&#243;n de CODENSA S.A. ESP de &#233;stos ensayos. A tal fin el oferente deber&#225; cotizar por separado el costo de cada uno de &#233;stos ensayos. De ser necesario, los barrajes ser&#225;n ejecutados por el fabricante en cables que suministrar&#225; CODENSA S.A. ESP.<br /><br />El muestreo se realizar&#225; con base en los procedimientos y tablas estipuladas en la NTC-ISO 2859-1 “Procedimientos de muestreo para Inspecci&#243;n por Atributos. Parte 1: Planes de muestreo determinados por el nivel aceptable de calidad para inspecci&#243;n lote a lote”, y se acordar&#225; por las partes, previamente a la fecha de la realizaci&#243;n de los ensayos y recepci&#243;n de los bienes.<br /><br />Para el desarrollo de las pruebas es indispensable que los instrumentos involucrados est&#233;n calibrados.<br /><br />El tama&#241;o del lote ser&#225; el total que se entreguen en cada recepci&#243;n (parcial o completa) que se haga a los inspectores. <br /><br />Si el n&#250;mero de elementos defectuosos es menor o igual al correspondiente n&#250;mero de defectuosos (dado en la norma NTC-ISO 2859-1 en la tercera columna de la tablas 2), se deber&#225; considerar que el lote cumple con los requisitos t&#233;cnicos exigidos por CODENSA S.A., en caso contrario, el lote se rechazar&#225;.<br /><br /><b>TABLA 1. PLAN DE MUESTREO PARA INSPECCI&#211;N (NIVEL DE INSPECCI&#211;N II,  NAC = 2,5%) (NORMA NTC-ISO 2859-1 TABLA1 - TABLA 2A)</b><br /><div style="width:526px;"><table><tr><td colspan="1" rowspan="1" style="width:122px;height:61px;text-align:center"><b>TAMA&#209;O DEL LOTE</b></td><td colspan="1" rowspan="1" style="width:112px;text-align:center"><b>TAMA&#209;O DE LA MUESTRA</b></td><td colspan="1" rowspan="1" style="width:145px;text-align:center"><b>NUMERO PERMITIDO DE DEFECTUOSOS</b></td><td colspan="1" rowspan="1" style="width:147px;text-align:center"><b>NUMERO DEFECTUOSOS PARA RECHAZO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2  a  8</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">9  a  15</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">16  a  25</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">26  a  50</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">51  a  90</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">91  a  150</td><td colspan="1" rowspan="1" style="text-align:center">20</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">151  a  280</td><td colspan="1" rowspan="1" style="text-align:center">32</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">281  a  500</td><td colspan="1" rowspan="1" style="text-align:center">50</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">501  a  1200</td><td colspan="1" rowspan="1" style="text-align:center">80</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1201  a  3200</td><td colspan="1" rowspan="1" style="text-align:center">125</td><td colspan="1" rowspan="1" style="text-align:center">7</td><td colspan="1" rowspan="1" style="text-align:center">8</td></tr></table><br /></div><br />
+<h2 id="heading_6" >5.	REQUISITOS DE LAS OFERTAS</h2>
+El Oferente deber&#225; incluir con su propuesta, la siguiente informaci&#243;n:<br />
+<ul><li>Planilla de caracter&#237;sticas t&#233;cnicas garantizadas en formatro Excel, la cual deber&#225; ser diligenciada completamente.</li></ul>
+ 
+<ul><li>Muestra de cada una de las referencias ofertadas sin cargo a devoluci&#243;n.</li></ul>
+
+<ul><li>Certificaci&#243;n del sistema de calidad</li></ul>
+
+<ul><li>Certificados de conformidad de producto con norma t&#233;cnica y RETIE</li></ul>
+
+<ul><li>Cat&#225;logos completos y actualizados del fabricante, que correspondan a los  bienes cotizados, en la planilla de caracter&#237;sticas t&#233;cnicas garantizadas.</li></ul>
+
+<ul><li>Protocolos   de   pruebas de acuerdo con lo indicado en la presente especificaci&#243;n.</li></ul>
+
+<ul><li>Informaci&#243;n adicional que considere aporta explicaci&#243;n a su dise&#241;o (dibujos,  detalles,  caracter&#237;sticas de operaci&#243;n,  dimensiones y pesos de los materiales ofertados).</li></ul>
+<br />CODENSA S.A. ESP. podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones, sin expresi&#243;n de causa ni obligaci&#243;n de compensaci&#243;n.<br /> <br /><b>ANEXO 1. CARACTER&#205;STICAS T&#201;CNICAS</b><br /><div style="width:764px;"><table><tr><td colspan="1" rowspan="1" style="width:50px;height:20px;text-align:center"><b>N&#176;</b></td><td colspan="1" rowspan="1" style="width:210px;text-align:center"><b>DESCRIPCI&#211;N</b></td><td colspan="1" rowspan="1" style="width:110px;text-align:center"><b>UNIDAD</b></td><td colspan="1" rowspan="1" style="width:215px;text-align:center"><b>SOLICITADO</b></td><td colspan="1" rowspan="1" style="width:179px;text-align:center"><b>GARANTIZADO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1</td><td colspan="1" rowspan="1" style="">Oferente</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">2</td><td colspan="1" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">3</td><td colspan="1" rowspan="1" style="">Referencia</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">4</td><td colspan="1" rowspan="1" style="">Normas de fabricaci&#243;n y pruebas</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">NTC 2244, ANSI C119.1 y C119.4</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">5</td><td colspan="1" rowspan="1" style="">Tensi&#243;n nominal</td><td colspan="1" rowspan="1" style="text-align:center">V</td><td colspan="1" rowspan="1" style="text-align:center">600</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">6</td><td colspan="1" rowspan="1" style="">Temperatura</td><td colspan="1" rowspan="1" style="text-align:center">&#176;C</td><td colspan="1" rowspan="1" style="text-align:center">90</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">7</td><td colspan="1" rowspan="1" style="">Material aislamiento</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">Caucho –EPDM</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">8</td><td colspan="1" rowspan="1" style="">Material barraje</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">Al</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">9</td><td colspan="1" rowspan="1" style="">N&#250;mero de salidas</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">10</td><td colspan="1" rowspan="1" style="">Dimensiones: largo/ancho/alto </td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">11</td><td colspan="1" rowspan="1" style="">Conexi&#243;n al cable</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">Prisionero / Tornillo</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="3" style="height:20px;text-align:center">12</td><td colspan="1" rowspan="3" style="">Rangos de calibres</td><td colspan="1" rowspan="1" style="text-align:center">AWG y kcmil</td><td colspan="1" rowspan="1" style="text-align:center">10 - 350</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">AWG y kcmil</td><td colspan="1" rowspan="1" style="text-align:center">10 - 500</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">AWG y kcmil</td><td colspan="1" rowspan="1" style="text-align:center">10 - 2/0</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">13</td><td colspan="2" rowspan="1" style="">Material de los conductores</td><td colspan="1" rowspan="1" style="text-align:center">Al &#243;  Cu</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">14</td><td colspan="3" rowspan="1" style="">Contiene silicona para la inserci&#243;n de cables (si/no)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="4" style="height:20px;text-align:center">15</td><td colspan="1" rowspan="4" style="">Soporte de fijacion a las camaras</td><td colspan="2" rowspan="1" style="">Lo incluye (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;">Material</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;">Forma de fijaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;">Accesorios incluidos en el suministro</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">16</td><td colspan="3" rowspan="1" style="">Cumple con la marcaci&#243;n de acuerdo a la especificacion (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:30px;"><b>RESULTADO DE EVALUACI&#211;N T&#201;CNICA</b></td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:20px;text-align:center">17</td><td colspan="1" rowspan="5" style="">Certificacion del sistema de calidad (Normas ISO 9001)</td><td colspan="2" rowspan="1" style="">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o) </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;">Entidad acreditadora</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:20px;text-align:center">18</td><td colspan="1" rowspan="5" style="">Certificaci&#243;n de producto con norma t&#233;cnica</td><td colspan="2" rowspan="1" style="">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o) </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;">Norma t&#233;cnica con la cual se certifica</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:20px;text-align:center">19</td><td colspan="1" rowspan="5" style="">Certificaci&#243;n de producto con RETIE</td><td colspan="2" rowspan="1" style="">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o) </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:20px;">Entidad acreditadora</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:30px;"><b>RESULTADO DE EVALUACI&#211;N REGULATORIA</b></td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:30px;text-align:center">20</td><td colspan="3" rowspan="1" style="">Observaciones</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div><br /><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/592/0-ET-722.jpg" src="../../media/cache/images/900x1200/wikiimages/2d31363938373939323639-301599-0-ET-722.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:900px"></div></div></div><br /><br /><div style="width:380px;"><table><tr><td colspan="1" rowspan="1" style="width:100px;height:20px;text-align:center">ANSI</td><td colspan="1" rowspan="1" style="width:93px;text-align:center"> </td><td colspan="1" rowspan="1" style="width:97px;text-align:center">C119.1</td><td colspan="1" rowspan="1" style="width:90px;text-align:center">C119.1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">ICONTEC</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">2202</td><td colspan="1" rowspan="1" style="text-align:center">2202</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"><b>Mat.Prima</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Prueb.Mec</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>T&#233;rmica</b></td></tr>
+<tr><td colspan="4" rowspan="1" style="height:21px;text-align:center"><b>NORMAS</b></td></tr></table><br /></div><br /><div style="width:474px;"><table><tr><td colspan="1" rowspan="1" style="width:100px;height:20px;text-align:center"><b>COD.SAP</b></td><td colspan="1" rowspan="1" style="width:374px;text-align:center"><b>Material</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">6762357</td><td colspan="1" rowspan="1" style="">Barraje prefomado calibres 10 a 2/0 AWG, 6 salidas, 600 V.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">6762260</td><td colspan="1" rowspan="1" style="">Barraje prefomado calibres 10 a 350 kcmil, 6 salidas, 600 V.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">&#160;</td><td colspan="1" rowspan="1" style="">Barraje prefomado calibres 10 a 500 kcmil, 6 salidas, 600 V.</td></tr></table><br /></div>Notas:
+<ol><li>Los rangos de los pelda&#241;os para los conductores de cobre/Al son los mostrados en los dos tipos de barrajes.</li>
+<li>Debe contener silicona o material similar para evitar el ingreso de agua.</li></ol>
+<br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 592, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

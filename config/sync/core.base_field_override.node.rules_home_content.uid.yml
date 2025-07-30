@@ -1,0 +1,20 @@
+uuid: 530df2a8-520a-46d9-866d-2b9be68a202b
+langcode: es
+status: true
+dependencies:
+  config:
+    - node.type.rules_home_content
+id: node.rules_home_content.uid
+field_name: uid
+entity_type: node
+bundle: rules_home_content
+label: 'Escrito por'
+description: 'El nombre de usuario del autor del contenido.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: 'Drupal\node\Entity\Node::getDefaultEntityOwner'
+settings:
+  handler: default
+  handler_settings: {  }
+field_type: entity_reference

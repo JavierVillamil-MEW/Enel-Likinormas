@@ -1,0 +1,19 @@
+body.path-taxonomy.is-term-pdf {
+
+  main {
+    padding: 15rem var(--margin-width-container-secondary) 0;
+    min-height: 70svh;
+
+    .region-breadcrumb {
+      display: none;
+    }
+
+    .view-header {
+      .taxonomy-term {
+        h2 {
+          font-weight: $semibold;
+        }
+      }
+    }
+  }
+}

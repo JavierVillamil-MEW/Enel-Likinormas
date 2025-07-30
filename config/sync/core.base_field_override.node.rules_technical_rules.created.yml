@@ -1,0 +1,18 @@
+uuid: dfff37ba-13fb-4490-b14b-1e9029e69293
+langcode: es
+status: true
+dependencies:
+  config:
+    - node.type.rules_technical_rules
+id: node.rules_technical_rules.created
+field_name: created
+entity_type: node
+bundle: rules_technical_rules
+label: 'Fecha de autoría'
+description: 'La fecha en que el nodo fue creado.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: created

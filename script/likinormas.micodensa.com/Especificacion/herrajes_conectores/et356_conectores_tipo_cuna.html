@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET356 Conectores tipo cuña | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/502" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F502.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/502" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/502" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '23');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET356 Conectores tipo cu&#241;a</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET356</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">25/05/2021</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/502">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F502&amp;nodoid=502', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et356_conectores_tipo_cuna.html#heading_0">1. GENERALIDADES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et356_conectores_tipo_cuna.html#heading_1">1.1. OBJETO DE LA ESPECIFICACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et356_conectores_tipo_cuna.html#heading_2">1.2. CONDICIONES DE UTILIZACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et356_conectores_tipo_cuna.html#heading_3">1.3. CONDICIONES AMBIENTALES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et356_conectores_tipo_cuna.html#heading_4">2. SISTEMAS DE UNIDADES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et356_conectores_tipo_cuna.html#heading_5">3. NORMAS RELACIONADAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et356_conectores_tipo_cuna.html#heading_6">4. REQUISITOS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et356_conectores_tipo_cuna.html#heading_7">4.1. DISE&#209;O Y CONSTRUCCI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et356_conectores_tipo_cuna.html#heading_8">4.2. DETALLES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et356_conectores_tipo_cuna.html#heading_9">4.3. REQUISITOS ADICIONALES</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et356_conectores_tipo_cuna.html#heading_10">4.3.1 Herramienta</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et356_conectores_tipo_cuna.html#heading_11">4.3.2 Marcaci&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et356_conectores_tipo_cuna.html#heading_12">4.3.3 Acondicionamiento para la entrega</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et356_conectores_tipo_cuna.html#heading_13">5. ENSAYOS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et356_conectores_tipo_cuna.html#heading_14">6.  METODOLOG&#205;A DE LOS ENSAYOS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et356_conectores_tipo_cuna.html#heading_15">6.1. VERIFICACI&#211;N VISUAL Y DIMENSIONAL</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et356_conectores_tipo_cuna.html#heading_16">6.2. CICLADO T&#201;RMICO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et356_conectores_tipo_cuna.html#heading_17">6.3. CORROSI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et356_conectores_tipo_cuna.html#heading_18">6.4. TRACCI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et356_conectores_tipo_cuna.html#heading_19">6.5. AN&#193;LISIS QU&#205;MICO CUANTITATIVO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et356_conectores_tipo_cuna.html#heading_20">6.6. ENSAYO DE TENSI&#211;N DE PERFORACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et356_conectores_tipo_cuna.html#heading_21">6.7. ENSAYO DE ENVEJECIMIENTO CLIM&#193;TICO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et356_conectores_tipo_cuna.html#heading_22">7. GARANT&#205;A DE F&#193;BRICA</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et356_conectores_tipo_cuna.html#heading_23">8. CRITERIOS DE ACEPTACI&#211;N O RECHAZO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et356_conectores_tipo_cuna.html#heading_24">9.  INFORMACI&#211;N T&#201;CNICA A SUMINISTRAR POR EL OFERENTE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et356_conectores_tipo_cuna.html#heading_25">10. FIGURAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et356_conectores_tipo_cuna.html#heading_26">11. CUADRO DE CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et356_conectores_tipo_cuna.html#heading_27">11.1. CONECTOR TIPO CU&#209;A</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et356_conectores_tipo_cuna.html#heading_28">11.2. CARTUCHO</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1. GENERALIDADES</h2>
+<h3 id="heading_1" >1.1. OBJETO DE LA ESPECIFICACI&#211;N</h3>
+Establecer las condiciones que deben satisfacer los conectores a presi&#243;n tipo cu&#241;a, para l&#237;neas a&#233;reas de MT/BT, tanto para conexiones monomet&#225;licas como bimet&#225;licas.<br /><br />La denominaci&#243;n de los tama&#241;os, en funci&#243;n del tipo y calibre de los conductores a conectar, se indica en la figura del numeral 10.<br />
+<h3 id="heading_2" >1.2. CONDICIONES DE UTILIZACI&#211;N</h3>
+Este tipo de conector es adecuado para utilizarlo en conexiones que se encuentren sometidas a esfuerzos mec&#225;nicos o de vibraci&#243;n ya sea por efecto del viento o bien propios de la instalaci&#243;n, tales como: conexi&#243;n entre redes a&#233;reas y subterr&#225;neas y conexi&#243;n a equipos.<br /><br />Las redes a&#233;reas, sobre las que se instalar&#225;n los conectores, est&#225;n constituidas por cables o conductores que responden a los siguientes calibres:<br /><br /><div style="width:850px;"><table><tr><td colspan="1" rowspan="1" style="width:60px;height:30px;text-align:center"><b>#</b></td><td colspan="1" rowspan="1" style="width:120px;text-align:center"><b>Global</b></td><td colspan="1" rowspan="1" style="width:80px;text-align:center"><b>SAP</b></td><td colspan="1" rowspan="1" style="width:90px;text-align:center"><b>Tipo</b></td><td colspan="1" rowspan="1" style="width:250px;text-align:center"><b>Norma</b></td><td colspan="1" rowspan="1" style="width:250px;text-align:center"><b>Descripci&#243;n</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">GSC003.3</td><td colspan="1" rowspan="1" style="text-align:center">6762276</td><td colspan="1" rowspan="1" style="text-align:center">ACSR</td><td colspan="1" rowspan="1" style="text-align:center">ASTM B 232/B 232M</td><td colspan="1" rowspan="1" style="text-align:center">Raven 1/0 AWG</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">GSC003.4</td><td colspan="1" rowspan="1" style="text-align:center">6762335</td><td colspan="1" rowspan="1" style="text-align:center">ACSR</td><td colspan="1" rowspan="1" style="text-align:center">ASTM B 232/B 232M</td><td colspan="1" rowspan="1" style="text-align:center">Quail 2/0 AWG</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">GSC003.5</td><td colspan="1" rowspan="1" style="text-align:center">6762309</td><td colspan="1" rowspan="1" style="text-align:center">ACSR</td><td colspan="1" rowspan="1" style="text-align:center">ASTM B 232/B 232M</td><td colspan="1" rowspan="1" style="text-align:center">Penguin 4/0 AWG</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">4</td><td colspan="1" rowspan="1" style="text-align:center">GSC003.6</td><td colspan="1" rowspan="1" style="text-align:center">6762293</td><td colspan="1" rowspan="1" style="text-align:center">ACSR</td><td colspan="1" rowspan="1" style="text-align:center">ASTM B 232/B 232M</td><td colspan="1" rowspan="1" style="text-align:center">Partridge 266,8 kcmil</td></tr></table><br /></div><br /><div style="width:850px;"><table><tr><td colspan="1" rowspan="1" style="width:60px;height:30px;text-align:center"><b>#</b></td><td colspan="1" rowspan="1" style="width:120px;text-align:center"><b>SAP</b></td><td colspan="1" rowspan="1" style="width:300px;text-align:center"><b>Descripci&#243;n</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">6779600</td><td colspan="1" rowspan="1" style="text-align:center"> Cable semiaislado AAAC 100mm<sup>2</sup> 15 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">Cable semiaislado AAAC 100mm<sup>2</sup> 35 kV</td></tr></table><br /></div>
+<h3 id="heading_3" >1.3. CONDICIONES AMBIENTALES</h3>
+La zona de instalaci&#243;n, es generalmente de clima c&#225;lido y h&#250;medo. <br />La temperatura podr&#225; presentar cambios dentro de los l&#237;mites de -5 &#186;C a 40 &#186;C.<br />La humedad relativa ambiente podr&#225; alcanzar valores de saturaci&#243;n.<br />
+<h2 id="heading_4" >2. SISTEMAS DE UNIDADES</h2>
+En todos los documentos t&#233;cnicos se deben expresar las cantidades num&#233;ricas en unidades del <a href="et356_conectores_tipo_cuna.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> Internacional (S.I.). Si se usan cat&#225;logos, folletos o planos, en sistemas diferentes de unidades, deben hacerse las conversiones respectivas.<br />
+<h2 id="heading_5" >3. NORMAS RELACIONADAS</h2>
+<div style="width:800px;"><table><tr><td colspan="1" rowspan="1" style="width:120px;height:35px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:680px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">ASTM B 117</td><td colspan="1" rowspan="1" style="">Test Method of Salt Spray [Fog] Testing</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">ASTM G26</td><td colspan="1" rowspan="1" style="">Prueba de envejecimiento clim&#225;tico</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">NTC 2244</td><td colspan="1" rowspan="1" style=""><a href="et356_conectores_tipo_cuna.html#" id="version-182" class="externalLink  glosarioLink">Electrotecnia</a> – Conectores para uso entre conductores a&#233;reos de aluminio o aluminio-cobre </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">NCT 5991</td><td colspan="1" rowspan="1" style="">Envases y embalajes. requisitos de los envases y embalajes valorizables mediante compostaje y biodegradaci&#243;n. programa de <a href="et356_conectores_tipo_cuna.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> y criterios de evaluaci&#243;n para la aceptaci&#243;n final del envase o embalaje</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">ASTM D6400-04</td><td colspan="1" rowspan="1" style="">Standard Specification for Compostable Plastics</td></tr></table><br /></div>
+<h2 id="heading_6" >4. REQUISITOS</h2>
+
+<h3 id="heading_7" >4.1. DISE&#209;O Y CONSTRUCCI&#211;N</h3>
+El <a href="et356_conectores_tipo_cuna.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> b&#225;sico se compondr&#225; de dos piezas, una grapa el&#225;stica en forma de &quot;C&quot;, dentro de la cual se introduce una cu&#241;a, quedando entre ambas bloqueados los conductores que van a ser conectados.<br /><br />Tambi&#233;n est&#225; la opci&#243;n del conector con estribo. El estribo debe suministrarse en cobre esta&#241;ado y su ubicaci&#243;n debe ser vertical.<br /> <br />Tanto la grapa como la cu&#241;a deber&#225;n estar impregnadas, en las zonas de contacto con los conductores, con grasa conductora e inhibidora (grasa de contactos) de la <a href="et356_conectores_tipo_cuna.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a>, conteniendo &#233;sta part&#237;culas abrasivas. De esta manera la misma cumple un papel autolimpiante, garantizando que la superficie de contacto entre el conector y el conductor qued&#233; perfectamente limpia de &#243;xidos superficiales. Esta grasa deber&#225; cumplir los siguientes requisitos:<br /><br />- Neutra<br />- Punto de escurrimiento, en m&#225;s de 110&#176; C, seg&#250;n norma ASTM D566, o similar.<br />
+<h3 id="heading_8" >4.2. DETALLES</h3>
+La aleaci&#243;n y el correspondiente tratamiento t&#233;rmico aplicado a la grapa el&#225;stica, deber&#225; ser tal que asegure una presi&#243;n de contacto continua sobre los conductores, ante las variaciones de temperatura a que pudiere verse afectado.<br /><br />Las mismas no formar&#225;n cuplas electrol&#237;ticas con los conductores, de manera tal que originen <a href="et356_conectores_tipo_cuna.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a> localizada en los mismos bajo presencia de humedad, alterando de esta manera la conexi&#243;n el&#233;ctrica y resistencia mec&#225;nica de los mismos.<br /><br />El <a href="et356_conectores_tipo_cuna.html#" id="version-274" class="externalLink  glosarioLink">material</a> no presentar&#225; grietas, cavidades, sopladuras o defectos superficiales internos o cualquier otro tipo de <a href="et356_conectores_tipo_cuna.html#" id="version-204" class="externalLink  glosarioLink">falla</a> que pueda afectar su correcto funcionamiento.<br />
+<h3 id="heading_9" >4.3. REQUISITOS ADICIONALES</h3>
+<h4 id="heading_10" >4.3.1 Herramienta</h4>
+Se debe indicar la herramienta necesaria para instalar el conector y garantizar su buen funcionamiento. <br /> <br />La herramienta con base en cartucho con carga de p&#243;lvora, ser&#225; de bajo nivel de ruido y ofrecer&#225; total <a href="et356_conectores_tipo_cuna.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a> al operario que la manipula. Se usar&#225; con conectores de calibres grandes <br /><br />El cartucho ser&#225; el que proporcionar&#225; la fuerza total y &#250;nica necesaria para realizar la operaci&#243;n de conexi&#243;n y desconexi&#243;n.<br /><br />Deber&#225; contar con un <a href="et356_conectores_tipo_cuna.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de <a href="et356_conectores_tipo_cuna.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a>, de manera tal que impida su acci&#243;n en caso de que el conector no estuviera colocado o correctamente posicionado en la herramienta.<br /><br />Los cartuchos con distintas cargas se identificar&#225;n por medio de un color (de menor a mayor potencia: Rojo - Azul y Amarillo).<br /><br />Para conectores de calibres peque&#241;os se acepta el uso de alicate pico de loro.<br /><br />El oferente deber&#225; presentar, sin que esto signifique un compromiso de compra por parte de ENEL CODENSA, un detalle y cotizaci&#243;n de las herramientas necesarias para la utilizaci&#243;n del conector, con sus correspondientes cartuchos. Se tendr&#225; en consideraci&#243;n que cualquier conector, de cualquier marca y tama&#241;o, deber&#225; poder ser instalado y retirado con el empleo de la herramienta ofrecida.<br /><br />Este ser&#225; un compromiso asumido por el oferente, a tal fin se requerir&#225; el uso de una herramienta, de empleo habitual en ENEL CODENSA.<br />
+<h4 id="heading_11" >4.3.2 Marcaci&#243;n</h4>
+El conector debe cumplir la siguiente marcaci&#243;n en bajo o en alto relieve (No se acepta pintura ni calcoman&#237;a):<br />
+<ul><li>Logo del fabricante</li>
+<li>Lote</li>
+<li>Mes y a&#241;o de fabricaci&#243;n</li>
+<li>Rango de uso</li></ul>
+
+<h4 id="heading_12" >4.3.3 Acondicionamiento para la entrega</h4>
+La cu&#241;a estar&#225; identificada de forma tal que quede relacionada &#250;nicamente con su grapa correspondiente.<br /><br />Cada conector ser&#225; entregado en una bolsa sellada de polietileno, de un espesor m&#237;nimo de 50 micrones.<br /><br />Las bolsas llevar&#225;n impresa en forma indeleble la identificaci&#243;n del conector. <br /><br />Los conectores as&#237; embalados, ser&#225;n colocados en cajas de cart&#243;n corrugado resistente al manipuleo y almacenamiento, conteniendo de 50 a 100 unidades, cuyo peso total no exceder&#225; los 15 kg.<br /><br />Dichas cajas llevar&#225;n, como m&#237;nimo, la siguiente identificaci&#243;n:<br />
+<ul><li>Marca del fabricante.</li>
+<li>Modelo de conector contenido.</li>
+<li>N&#176; de Orden de Compra.</li>
+<li>Peso aproximado.</li>
+<li>ENEL CONDESA</li>
+<li>N&#250;mero de la orden de compra</li>
+<li>Indicaciones para su manipuleo, almacenamiento y conservaci&#243;n</li></ul>
+<br />Los cartuchos para el armado o desarme de los conectores ser&#225;n entregados, herm&#233;ticamente embalados y separados, en cajas de suficiente resistencia mec&#225;nica, para el manipuleo y almacenamiento.<br /><br />Los materiales usados para el empaque (Cart&#243;n, Pl&#225;stico, Icopor, etc) deben contener como m&#237;nimo un 40% de <a href="et356_conectores_tipo_cuna.html#" id="version-274" class="externalLink  glosarioLink">material</a> reciclado pos consumo o pos industrial, lo cual se demostrar&#225; conforme a lo dispuesto en la ficha <a href="et356_conectores_tipo_cuna.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a> del <a href="et356_conectores_tipo_cuna.html#" id="version-338" class="externalLink  glosarioLink">producto</a>.   <br /><br />Adicionalmente los pl&#225;sticos usados deben ser biodegradables en un porcentaje igual o superior al 30% seg&#250;n lo indicado en las normas NTC-5991-2014, ASTM D6400-04, UNE-EN-ISO 13432:2000-11, DINV54900-2. De la misma manera el proveedor debe asegurar que los materiales pl&#225;sticos requeridos para el empaque no deben contener sustancias de inter&#233;s ambiental en su composici&#243;n como Zinc (Zn), Cobre (Cu), N&#237;quel (Ni), Cadmio (Cd), Plomo (Pb), Mercurio (Hg), Cromo (Cr), Ars&#233;nico (As) y Cobalto (Co).<br /><br />Los requisitos deber&#225;n ser demostrables con una ficha <a href="et356_conectores_tipo_cuna.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a> del <a href="et356_conectores_tipo_cuna.html#" id="version-274" class="externalLink  glosarioLink">material</a> utilizado.<br />
+<h2 id="heading_13" >5. ENSAYOS</h2>
+Los conectores tipo cu&#241;a deben cumplir las siguientes pruebas:<br /><div style="width:818px;"><table><tr><td colspan="1" rowspan="1" style="width:482px;height:35px;text-align:center"><b>Pruebas</b></td><td colspan="1" rowspan="1" style="width:112px;text-align:center"><b>Tipo</b></td><td colspan="1" rowspan="1" style="width:112px;text-align:center"><b>Rutina</b></td><td colspan="1" rowspan="1" style="width:112px;text-align:center"><b>Aceptaci&#243;n</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Verificaci&#243;n visual</td><td colspan="1" rowspan="1" style="text-align:center">X</td><td colspan="1" rowspan="1" style="text-align:center">X</td><td colspan="1" rowspan="1" style="text-align:center">X</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Verificaci&#243;n dimensional</td><td colspan="1" rowspan="1" style="text-align:center">X</td><td colspan="1" rowspan="1" style="text-align:center">X</td><td colspan="1" rowspan="1" style="text-align:center">X</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Prueba de tracci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">X</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style="text-align:center">X</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;"><a href="et356_conectores_tipo_cuna.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de ciclado t&#233;rmico.</td><td colspan="1" rowspan="1" style="text-align:center">X</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">An&#225;lisis qu&#237;mico cuantitativo</td><td colspan="1" rowspan="1" style="text-align:center">X</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;"><a href="et356_conectores_tipo_cuna.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de <a href="et356_conectores_tipo_cuna.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> de perforaci&#243;n (aplica solo a coberturas aislantes)</td><td colspan="1" rowspan="1" style="text-align:center">X</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;"><a href="et356_conectores_tipo_cuna.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de envejecimiento clim&#225;tico (aplica solo a coberturas aislantes)</td><td colspan="1" rowspan="1" style="text-align:center">X</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div>Los ensayos deben realizarse con conductores de materiales y calibres iguales a las indicadas en el apartado 1.2 de esta <a href="et356_conectores_tipo_cuna.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a>. El oferente deber&#225; realizar, a su costo, el <a href="et356_conectores_tipo_cuna.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> de ciclado t&#233;rmico y <a href="et356_conectores_tipo_cuna.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a>.<br />
+<h2 id="heading_14" >6.  METODOLOG&#205;A DE LOS ENSAYOS</h2>
+<h3 id="heading_15" >6.1. VERIFICACI&#211;N VISUAL Y DIMENSIONAL</h3>
+Se verificar&#225; que no se presenten grietas, cavidades, sopladuras o defectos superficiales internos o cualquier otro tipo de <a href="et356_conectores_tipo_cuna.html#" id="version-204" class="externalLink  glosarioLink">falla</a> que pueda afectar su correcto funcionamiento.<br />
+<h3 id="heading_16" >6.2. CICLADO T&#201;RMICO</h3>
+Se realizar&#225; de acuerdo a la Norma NTC 2244 “Conectores  para uso entre conductores a&#233;reos de aluminio aluminio-cobre” o similar.<br /><br />Las caracter&#237;sticas del <a href="et356_conectores_tipo_cuna.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> corresponder&#225;n a: clase &quot;A&quot; (500 ciclos) y clase &quot;3&quot; (m&#237;nima tensi&#243;n mec&#225;nica (5% del conductor m&#225;s d&#233;bil)).<br /> 
+<h3 id="heading_17" >6.3. CORROSI&#211;N</h3>
+Seg&#250;n norma ASTM B.117, o similar. Solo aplica a conectores de cobre o con partes en cobre.<br />
+<h3 id="heading_18" >6.4. TRACCI&#211;N</h3>
+Seg&#250;n norma NTC 2244 o similar.<br />
+<h3 id="heading_19" >6.5. AN&#193;LISIS QU&#205;MICO CUANTITATIVO</h3>
+Seg&#250;n norma NTC 2244 o similar<br />
+<h3 id="heading_20" >6.6. ENSAYO DE TENSI&#211;N DE PERFORACI&#211;N</h3>
+Se realizar&#225; sobre 2 coberturas aislantes nuevas y posteriormente, se repetir&#225; luego de haberlas sometido al envejecimiento clim&#225;tico.<br />	<br />El valor eficaz de la tensi&#243;n de <a href="et356_conectores_tipo_cuna.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a>, valor &#233;ste al que se llegar&#225; con una ley de crecimiento aproximadamente lineal, ser&#225; aquel en que se produzca la perforaci&#243;n, sin presencia de contornos entre electrodos.<br />	<br />Se admitir&#225;, luego del proceso de envejecimiento clim&#225;tico una variaci&#243;n en el nivel promedio de tensi&#243;n de perforaci&#243;n alcanzado, entre las muestras nuevas y envejecidas, no mayor del 50 %.<br />
+<h3 id="heading_21" >6.7. ENSAYO DE ENVEJECIMIENTO CLIM&#193;TICO</h3>
+Este <a href="et356_conectores_tipo_cuna.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> se realizar&#225; sobre 4 coberturas aislantes, 2 que hayan sido sometidas al <a href="et356_conectores_tipo_cuna.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> de tensi&#243;n de perforaci&#243;n y 2 nuevas.<br />	<br />El <a href="et356_conectores_tipo_cuna.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> se realizar&#225; siguiendo las metodolog&#237;as se&#241;aladas en la norma ASTM G26 o similar, aplicando el m&#233;todo &quot;A&quot;, durante 600 h.<br />	<br />Al finalizar el <a href="et356_conectores_tipo_cuna.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> de envejecimiento clim&#225;tico, la superficie exterior de las coberturas no deber&#225; presentar degradaci&#243;n, grietas, oclusiones, ampolladuras u otros defectos, que provoquen la rotura o apertura de la cobertura.<br />	<br />Al finalizar el <a href="et356_conectores_tipo_cuna.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a>, las 2 correspondientes coberturas ser&#225;n nuevamente sometidas al <a href="et356_conectores_tipo_cuna.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> de tensi&#243;n de perforaci&#243;n, indicado en el punto 6.6.<br />
+<h2 id="heading_22" >7. GARANT&#205;A DE F&#193;BRICA</h2>
+Enel Codensa requiere como m&#237;nimo, un per&#237;odo de garant&#237;a de f&#225;brica de veinticuatro (24) meses, a partir de la entrega de los bienes.<br />
+<h2 id="heading_23" >8. CRITERIOS DE ACEPTACI&#211;N O RECHAZO</h2>
+El plan de muestreo se realizar&#225; de acuerdo a la tabla a continuaci&#243;n.<br /><div style="width:748px;"><table><tr><td colspan="1" rowspan="2" style="width:202px;height:21px;text-align:center"><b>Prueba de Aceptaci&#243;n</b></td><td colspan="3" rowspan="1" style="width:546px;text-align:center"><b><a href="et356_conectores_tipo_cuna.html#" id="version-264" class="externalLink  glosarioLink">Lote</a></b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>&lt;=50 unidades</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>&gt;50 y &lt;=1200 unidades</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>&gt;1200 unidades</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Verificaci&#243;n Visual-Dimensional</td><td colspan="1" rowspan="1" style="">2 muestras por referencia</td><td colspan="1" rowspan="1" style="">5 muestras por referencia</td><td colspan="1" rowspan="1" style="">10 muestras por referencia</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Prueba de Tracci&#243;n</td><td colspan="1" rowspan="1" style="">1 <a href="et356_conectores_tipo_cuna.html#" id="version-288" class="externalLink  glosarioLink">muestra</a> por referencia</td><td colspan="1" rowspan="1" style="">2 muestras por referencia</td><td colspan="1" rowspan="1" style="">3 muestras por referencia</td></tr>
+<tr><td colspan="4" rowspan="1" style="height:21px;">Nota: En caso de fallar una pieza por <a href="et356_conectores_tipo_cuna.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> visual-dimensional-prueba mec&#225;nica, se rechaza el <a href="et356_conectores_tipo_cuna.html#" id="version-264" class="externalLink  glosarioLink">lote</a>.</td></tr></table><br /></div>
+<h2 id="heading_24" >9.  INFORMACI&#211;N T&#201;CNICA A SUMINISTRAR POR EL OFERENTE</h2>
+Para su an&#225;lisis, ser&#225; imprescindible que la oferta incluya la siguiente documentaci&#243;n:<br /><br />- Cuadro de caracter&#237;sticas t&#233;cnicas garantizadas, la cual deber&#225; ser diligenciada completamente y presentada en formato Excel (numeral 11).<br /><br />- Protocolos de los ensayos tipo requeridos en esta <a href="et356_conectores_tipo_cuna.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a>, efectuados de acuerdo con lo estipulado en el numeral 5. Deber&#225; constar la metodolog&#237;a aplicada, los valores y resultados del <a href="et356_conectores_tipo_cuna.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a>, estando perfectamente identificadas las muestras sometidas a <a href="et356_conectores_tipo_cuna.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a>, los que ser&#225;n de id&#233;ntico dise&#241;o a los ofrecidos. Estas pruebas o ensayos deben ser realizados en laboratorios acreditados a nivel nacional o internacional.<br /><br />- Antecedentes de suministros efectuados en los &#250;ltimos tres a&#241;os, indicando como m&#237;nimo, modelo, cantidades y destinatario.<br /><br />- Planos, folletos y cat&#225;logos.<br /><br />- Instrucciones de montaje.<br /><br />- Descripci&#243;n detallada de la herramienta necesaria para su instalaci&#243;n, con instrucciones de operaci&#243;n y <a href="et356_conectores_tipo_cuna.html#" id="version-271" class="externalLink  glosarioLink">mantenimiento</a>. Se deber&#225; indicar qu&#233; conectores, de otra marca, acepta la propia herramienta (seg&#250;n numeral 4.3.1).<br /><br />- Certificados del <a href="et356_conectores_tipo_cuna.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de <a href="et356_conectores_tipo_cuna.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> del fabricante y de <a href="et356_conectores_tipo_cuna.html#" id="version-139" class="externalLink  glosarioLink">conformidad</a> de <a href="et356_conectores_tipo_cuna.html#" id="version-338" class="externalLink  glosarioLink">producto</a> con <a href="et356_conectores_tipo_cuna.html#" id="version-301" class="externalLink  glosarioLink">norma t&#233;cnica</a> aplicable y <a href="et356_conectores_tipo_cuna.html#" id="version-354" class="externalLink  glosarioLink">RETIE</a>. Estos certificados deben estar vigentes a la fecha y deben ser expedidos por una autoridad competente debidamente autorizada por la ONAC o su equivalente.<br /><br />De cotizarse la herramienta se deber&#225; presentar una <a href="et356_conectores_tipo_cuna.html#" id="version-288" class="externalLink  glosarioLink">muestra</a>, con los cartuchos necesarios (en sus 3 tama&#241;os) y todos sus accesorios (para operaci&#243;n normal ), a fin de poder evaluarla debidamente.<br />
+<h2 id="heading_25" >10. FIGURAS</h2>
+<div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/502/ET356.jpg" src="../../media/cache/images/800x800/wikiimages/2d31363238323634383535-405508-ET356.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:800px"></div></div></div><br />
+<h2 id="heading_26" >11. CUADRO DE CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS</h2>
+<h3 id="heading_27" >11.1. CONECTOR TIPO CU&#209;A</h3><div style="width:800px;"><table><tr><td colspan="1" rowspan="1" style="width:30px;height:35px;text-align:center"><b>N&#176;</b></td><td colspan="2" rowspan="1" style="width:620px;text-align:center"><b>DESCRIPCI&#211;N</b></td><td colspan="1" rowspan="1" style="width:150px;text-align:center"><b>OFERTADO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">1</td><td colspan="2" rowspan="1" style="">Oferente</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2</td><td colspan="2" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">3</td><td colspan="2" rowspan="1" style="">Pa&#237;s (direcci&#243;n de la f&#225;brica)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">4</td><td colspan="2" rowspan="1" style="">Referencia del fabricante</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">5</td><td colspan="2" rowspan="1" style="">Normas de fabricaci&#243;n y ensayos</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">6</td><td colspan="2" rowspan="1" style="">Conector incluye estribo (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="2" style="height:21px;text-align:center">7</td><td colspan="2" rowspan="1" style="">Calibre conductor principal</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Di&#225;metro Min - Max (mm)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="2" style="height:21px;text-align:center">8</td><td colspan="2" rowspan="1" style="">Calibre conductor de derivaci&#243;n o estribo si aplica</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:21px;">Di&#225;metro Min - Max (mm)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">9</td><td colspan="2" rowspan="1" style="">Sumatoria de di&#225;metros</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">10</td><td colspan="2" rowspan="1" style=""><a href="et356_conectores_tipo_cuna.html#" id="version-274" class="externalLink  glosarioLink">Material</a> del cuerpo</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">11</td><td colspan="2" rowspan="1" style=""><a href="et356_conectores_tipo_cuna.html#" id="version-274" class="externalLink  glosarioLink">Material</a> de la cu&#241;a</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">12</td><td colspan="2" rowspan="1" style=""><a href="et356_conectores_tipo_cuna.html#" id="version-274" class="externalLink  glosarioLink">Material</a> del estribo si aplica</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">13</td><td colspan="2" rowspan="1" style="">Incluye grasa conductora e inhibidora (Si/No, describir)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">14</td><td colspan="2" rowspan="1" style="">Herramienta necesaria para instalaci&#243;n (Describir)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">15</td><td colspan="2" rowspan="1" style="">Cumple con la marcaci&#243;n solicitada en N&#176; 4.3.2 de ET356</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16</td><td colspan="2" rowspan="1" style="">Cumple con empaque solicitada en N&#176; 4.3.3 de ET356 (Presentan ficha <a href="et356_conectores_tipo_cuna.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a> del <a href="et356_conectores_tipo_cuna.html#" id="version-274" class="externalLink  glosarioLink">material</a> utilizado)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">17</td><td colspan="2" rowspan="1" style="">Presentan protocolo de pruebas (Indicar los presentados)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">18</td><td colspan="2" rowspan="1" style="">Garant&#237;a</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:21px;"><b>RESULTADO DE EVALUACI&#211;N <a href="et356_conectores_tipo_cuna.html#" id="version-376" class="externalLink  glosarioLink">T&#201;CNICA</a></b></td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:21px;text-align:center">19</td><td colspan="1" rowspan="5" style=""><a href="et356_conectores_tipo_cuna.html#" id="version-124" class="externalLink  glosarioLink">Certificaci&#243;n</a> del <a href="et356_conectores_tipo_cuna.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de <a href="et356_conectores_tipo_cuna.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> (Norma ISO 9001) </td><td colspan="1" rowspan="1" style="">Entidad Certificadora</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">N&#250;mero de <a href="et356_conectores_tipo_cuna.html#" id="version-124" class="externalLink  glosarioLink">Certificaci&#243;n</a></td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Fecha de aprobaci&#243;n (Dia/Mes/A&#241;o) </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Adjunta el Certificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="6" style="height:21px;text-align:center">20</td><td colspan="1" rowspan="6" style=""><a href="et356_conectores_tipo_cuna.html#" id="version-124" class="externalLink  glosarioLink">Certificaci&#243;n</a> de <a href="et356_conectores_tipo_cuna.html#" id="version-338" class="externalLink  glosarioLink">producto</a> con <a href="et356_conectores_tipo_cuna.html#" id="version-301" class="externalLink  glosarioLink">norma t&#233;cnica</a></td><td colspan="1" rowspan="1" style="">Entidad Certificadora</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">N&#250;mero de <a href="et356_conectores_tipo_cuna.html#" id="version-124" class="externalLink  glosarioLink">Certificaci&#243;n</a></td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;"><a href="et356_conectores_tipo_cuna.html#" id="version-301" class="externalLink  glosarioLink">Norma t&#233;cnica</a> con la cual se certifica</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Adjunta el Certificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:21px;text-align:center">21</td><td colspan="1" rowspan="5" style=""><a href="et356_conectores_tipo_cuna.html#" id="version-124" class="externalLink  glosarioLink">Certificaci&#243;n</a> de <a href="et356_conectores_tipo_cuna.html#" id="version-338" class="externalLink  glosarioLink">producto</a> con <a href="et356_conectores_tipo_cuna.html#" id="version-354" class="externalLink  glosarioLink">RETIE</a></td><td colspan="1" rowspan="1" style="">Entidad Certificadora</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">N&#250;mero de <a href="et356_conectores_tipo_cuna.html#" id="version-124" class="externalLink  glosarioLink">Certificaci&#243;n</a></td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Adjunta el Certificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:21px;"><b>RESULTADO DE EVALUACI&#211;N REGULATORIA</b></td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">22</td><td colspan="2" rowspan="1" style="">OBSERVACIONES</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div><br />
+<h3 id="heading_28" >11.2. CARTUCHO</h3><div style="width:800px;"><table><tr><td colspan="1" rowspan="1" style="width:30px;height:35px;text-align:center"><b>N&#176;</b></td><td colspan="2" rowspan="1" style="width:620px;text-align:center"><b>DESCRIPCI&#211;N</b></td><td colspan="1" rowspan="1" style="width:150px;text-align:center"><b>OFERTADO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">1</td><td colspan="2" rowspan="1" style="">Oferente</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2</td><td colspan="2" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">3</td><td colspan="2" rowspan="1" style="">Pa&#237;s (direcci&#243;n de la f&#225;brica)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">4</td><td colspan="2" rowspan="1" style="">Referencia del fabricante</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">5</td><td colspan="2" rowspan="1" style="">Normas de fabricaci&#243;n y ensayos</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">6</td><td colspan="2" rowspan="1" style=""><a href="et356_conectores_tipo_cuna.html#" id="version-274" class="externalLink  glosarioLink">Material</a> del cuerpo exterior</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">7</td><td colspan="2" rowspan="1" style="">Color del cartucho</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">8</td><td colspan="2" rowspan="1" style="">Rango de aplicaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">9</td><td colspan="2" rowspan="1" style="">Cumple con empaque solicitada en N&#176; 4.3.3 de ET356 (Presentan ficha <a href="et356_conectores_tipo_cuna.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a> del <a href="et356_conectores_tipo_cuna.html#" id="version-274" class="externalLink  glosarioLink">material</a> utilizado)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">10</td><td colspan="2" rowspan="1" style="">Garant&#237;a</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:21px;"><b>RESULTADO DE EVALUACI&#211;N <a href="et356_conectores_tipo_cuna.html#" id="version-376" class="externalLink  glosarioLink">T&#201;CNICA</a>&#160;</b></td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="width:30px;height:21px;text-align:center">11</td><td colspan="1" rowspan="5" style="width:300px;"><a href="et356_conectores_tipo_cuna.html#" id="version-124" class="externalLink  glosarioLink">Certificaci&#243;n</a> del <a href="et356_conectores_tipo_cuna.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de <a href="et356_conectores_tipo_cuna.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> (Norma ISO 9001)</td><td colspan="1" rowspan="1" style="width:320px;">Entidad Acreditadora</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">N&#250;mero de <a href="et356_conectores_tipo_cuna.html#" id="version-75" class="externalLink  glosarioLink">acreditaci&#243;n</a></td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Fecha de aprobaci&#243;n (Dia/Mes/A&#241;o)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:21px;"><b>RESULTADO DE EVALUACI&#211;N REGULATORIA</b></td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">12</td><td colspan="2" rowspan="1" style="">OBSERVACIONES</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div>
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 502, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

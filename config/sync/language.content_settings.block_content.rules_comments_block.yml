@@ -1,0 +1,11 @@
+uuid: 1aa83e67-7e7d-4ade-a8e9-98fd757637b0
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.rules_comments_block
+id: block_content.rules_comments_block
+target_entity_type_id: block_content
+target_bundle: rules_comments_block
+default_langcode: site_default
+language_alterable: false

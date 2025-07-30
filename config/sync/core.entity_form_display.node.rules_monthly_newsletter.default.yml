@@ -1,0 +1,66 @@
+uuid: 0b920491-5e67-4c0f-87f9-82a1b52f9d06
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.field.node.rules_monthly_newsletter.html_newsletter
+    - field.field.node.rules_monthly_newsletter.seo
+    - node.type.rules_monthly_newsletter
+  module:
+    - metatag
+    - path
+    - text
+id: node.rules_monthly_newsletter.default
+targetEntityType: node
+bundle: rules_monthly_newsletter
+mode: default
+content:
+  html_newsletter:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  seo:
+    type: metatag_firehose
+    weight: 26
+    region: content
+    settings:
+      sidebar: true
+      use_details: true
+    third_party_settings: {  }
+  simple_sitemap:
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 2
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  langcode: true
+  promote: true
+  sticky: true
+  uid: true
+  url_redirects: true

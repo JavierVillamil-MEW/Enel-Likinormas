@@ -1,0 +1,22 @@
+uuid: f1ad0953-8e8b-44da-a30a-d40334bbd5d4
+langcode: es
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.rules_specification_category
+id: taxonomy_term.rules_specification_category.status
+field_name: status
+entity_type: taxonomy_term
+bundle: rules_specification_category
+label: Publicado
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Activado
+  off_label: Desactivado
+field_type: boolean

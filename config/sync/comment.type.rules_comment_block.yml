@@ -1,0 +1,8 @@
+uuid: df2ca433-76f8-4b1c-aff9-eb3205db8b9f
+langcode: en
+status: true
+dependencies: {  }
+id: rules_comment_block
+label: 'Bloque de comentarios'
+target_entity_type_id: block_content
+description: 'Bloque de comentarios mostrado en los listados de especificaciones y normas'

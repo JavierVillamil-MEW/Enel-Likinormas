@@ -1,0 +1,20 @@
+uuid: 290c5a5c-588e-499e-bde0-83e460e6a917
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.user.profession_or_occupation
+  module:
+    - user
+id: user.user.profession_or_occupation
+field_name: profession_or_occupation
+entity_type: user
+bundle: user
+label: 'Profesión u ocupación'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

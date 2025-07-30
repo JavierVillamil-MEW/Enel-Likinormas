@@ -1,0 +1,28 @@
+uuid: 14b794c8-bf67-428b-8aca-0c0e6ecfdef4
+langcode: es
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.rules_monthly_newsletter.html_newsletter
+    - field.field.node.rules_monthly_newsletter.seo
+    - node.type.rules_monthly_newsletter
+  module:
+    - user
+id: node.rules_monthly_newsletter.teaser
+targetEntityType: node
+bundle: rules_monthly_newsletter
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  html_newsletter: true
+  langcode: true
+  seo: true

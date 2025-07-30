@@ -1,0 +1,56 @@
+uuid: ab07519b-5c52-41a1-ade2-1920c32db1f0
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.rules_title_description_and_item
+    - field.field.block_content.rules_title_description_and_item.background_image
+    - field.field.block_content.rules_title_description_and_item.background_image_mobile
+    - field.field.block_content.rules_title_description_and_item.description_section
+    - field.field.block_content.rules_title_description_and_item.items
+    - field.field.block_content.rules_title_description_and_item.title_section
+    - responsive_image.styles.rules_responsive_image
+  module:
+    - entity_reference_revisions
+    - responsive_image
+    - text
+id: block_content.rules_title_description_and_item.default
+targetEntityType: block_content
+bundle: rules_title_description_and_item
+mode: default
+content:
+  background_image:
+    type: responsive_image
+    label: hidden
+    settings:
+      responsive_image_style: rules_responsive_image
+      image_link: ''
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  description_section:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  items:
+    type: entity_reference_revisions_entity_view
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  title_section:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  background_image_mobile: true
+  langcode: true

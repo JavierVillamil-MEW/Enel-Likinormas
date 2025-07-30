@@ -1,0 +1,18 @@
+uuid: 191644f7-7c35-4666-bc92-38d828f1f8e8
+langcode: es
+status: true
+dependencies:
+  config:
+    - system.menu.rules-links-of-interest
+id: menu_link_content.rules-links-of-interest.changed
+field_name: changed
+entity_type: menu_link_content
+bundle: rules-links-of-interest
+label: Modificado
+description: 'La hora en la que el enlace del menú se editó por última vez.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: changed

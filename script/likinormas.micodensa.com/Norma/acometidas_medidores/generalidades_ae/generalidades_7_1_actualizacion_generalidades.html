@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Generalidades 7.1 . Acometidas eléctricas y medidores | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../../index.html"><img src="../../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1590" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../../Usuario/Registro%3FReturnUrl=%252FNorma%252FDetalles%252F1590.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/1590" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1590" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			showSubmenu('4', '103');
+		});
+	</script>
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Norma t&#233;cnica
+	</div>
+	<h1>Generalidades 7.1 . Acometidas el&#233;ctricas y medidores</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de la norma</div>
+					<div class="caracteristicas">Generalidades 7.1</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">27/04/2023</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../../Home/DownloadPDF/1590">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FNorma%2FDetalles%2F1590&amp;nodoid=1590', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+    <div class="modulo">
+        <div class="titu_modulo">
+            Relacionados
+        </div>
+            <div class="modulo_contenido" style="">
+                <div class="subtitulos_internos">
+                    <a href="../acometidas_electricas/ae200_diagrama_unifilar_acometidas_tableros.html">AE200 Diagrama unifilar para acometidas y tableros</a>
+                </div>
+                    <div class="relacionadotipo">Norma t&#233;cnica</div>
+            </div>
+    </div>
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="generalidades_7_1_actualizacion_generalidades.html#heading_0">7.1	GENERALIDADES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="generalidades_7_1_actualizacion_generalidades.html#heading_1">7.1.1	OBJETIVO GENERAL</a></li>
+                    <li class="indexitem"><a class="head_h3" href="generalidades_7_1_actualizacion_generalidades.html#heading_2">7.1.2	REVISI&#211;N Y APROBACI&#211;N DE LAS NORMAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="generalidades_7_1_actualizacion_generalidades.html#heading_3">7.1.3	DEFINICIONES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="generalidades_7_1_actualizacion_generalidades.html#heading_4">7.1.4 ABREVIATURAS, ACR&#211;NIMOS Y SIGLAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="generalidades_7_1_actualizacion_generalidades.html#heading_5">7.1.5	TENSIONES DE SUMINISTRO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="generalidades_7_1_actualizacion_generalidades.html#heading_6">7.1.6	REGULACI&#211;N DE TENSI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h3" href="generalidades_7_1_actualizacion_generalidades.html#heading_7">7.1.7	L&#205;MITES DE CARGA</a></li>
+                    <li class="indexitem"><a class="head_h3" href="generalidades_7_1_actualizacion_generalidades.html#heading_8">7.1.8	TIPOS DE TARIFAS DE ENERG&#205;A</a></li>
+                    <li class="indexitem"><a class="head_h3" href="generalidades_7_1_actualizacion_generalidades.html#heading_9">7.1.9  SUSPENSION Y RECONEXI&#211;N DEL SERVICIO DE ENERGIA </a></li>
+                    <li class="indexitem"><a class="head_h3" href="generalidades_7_1_actualizacion_generalidades.html#heading_10">7.1.10	PROHIBICI&#211;N DE ACCESO A CAJAS, ARMARIOS Y CELDAS DE MEDIDORES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="generalidades_7_1_actualizacion_generalidades.html#heading_11">7.1.11	ACEPTACION DE MATERIALES Y EQUIPOS</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >7.1	GENERALIDADES</h2>
+Estas normas se aplican en el <a href="generalidades_7_1_actualizacion_generalidades.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> a&#233;reo y subterr&#225;neo de Media y <a href="generalidades_7_1_actualizacion_generalidades.html#" id="version-98" class="externalLink  glosarioLink">Baja Tensi&#243;n</a> del &#225;rea de influencia de Enel Colombia y de los municipios asociados.<br />
+<h3 id="heading_1" >7.1.1	OBJETIVO GENERAL</h3>
+Establecer las condiciones sobre instalaciones de acometidas el&#233;ctricas a&#233;reas y subterr&#225;neas derivadas de la red secundaria a&#233;rea o subterr&#225;nea, y desde transformadores en centros de transformaci&#243;n de distribuci&#243;n.<br /><br />Las acometidas de 11,4 kV, 13,2 kV y 34,5 kV que se alimentar&#225;n de la red primaria a&#233;rea o subterr&#225;nea, se especifican en las Normas de Construcci&#243;n de Redes de Distribuci&#243;n de Enel Colombia.<br /><br />En lo referente a la instalaci&#243;n de medidores, se aplicar&#225;n a las formas de medici&#243;n, a los medidores y al equipo auxiliar de medici&#243;n.<br /><br />Las normas deber&#225;n ser cumplidas por ingenieros electricistas, t&#233;cnicos electricistas, revisores de instalaciones, y por los t&#233;cnicos instaladores de equipos de medici&#243;n autorizados por la Empresa, quienes tambi&#233;n deben cumplir las disposiciones del Contrato de condiciones Uniformes, RETIE y el Reglamento de Conexi&#243;n de Enel Colombia como Operador de Red.<br /><br />La aplicaci&#243;n de estas normas ser&#225; obligatoria en el Distrito Capital y en &#225;reas atendidas por Enel Colombia.<br />
+<h3 id="heading_2" >7.1.2	REVISI&#211;N Y APROBACI&#211;N DE LAS NORMAS</h3>
+El proceso de elaboraci&#243;n y actualizaci&#243;n de las presentes normas de Enel Colombia es realizado a trav&#233;s de reuniones coordinadas por los ingenieros de las &#225;reas operativas y t&#233;cnicas de la compa&#241;&#237;a. <br />
+<h3 id="heading_3" >7.1.3	DEFINICIONES</h3>
+•	<b>Acometida</b>: Derivaci&#243;n de la red local del servicio respectivo, que llega hasta el registro de corte del inmueble. En edificios de propiedad horizontal o condominios, la acometida llega hasta el registro de corte general. En aquellos casos en que el dispositivo de corte est&#233; aguas arriba del medidor, para los efectos del RETIE, se entender&#225; la acometida como el conjunto de conductores y accesorios entre el punto de conexi&#243;n el&#233;ctrico al sistema de uso general (STN, STR o SDL) y los bornes de salida del equipo de medici&#243;n. <br /><br />•	<b>Acometida parcial</b>: Es la instalaci&#243;n derivada desde un tablero general de acometidas hasta un armario o caja de medidores. Tambi&#233;n se le llama as&#237; a la conexi&#243;n entre el armario o caja de medidores hasta el tablero de distribuci&#243;n del usuario.  Siempre va en ducto y su calibre m&#237;nimo es &#216; 3/4”. Ver norma <a href="../acometidas_electricas/ae200_diagrama_unifilar_acometidas_tableros.html" class="externalLink">AE200<span class="externalLinkIcon"></span></a>.<br /><br />•	<b>Acometida subterr&#225;nea</b>: Ductos subterr&#225;neos, cajas de inspecci&#243;n, tuber&#237;as, conductores y accesorios, que conectan un centro de distribuci&#243;n o una red de distribuci&#243;n subterr&#225;nea con el punto de entrega de la energ&#237;a el&#233;ctrica al usuario.<br /><br />•	<b>Acometida subterr&#225;nea desde l&#237;nea a&#233;rea</b>: 	Est&#225; compuesta por capacete y tuber&#237;a, fijada al poste y contin&#250;a en forma subterr&#225;nea hasta la caja de inspecci&#243;n y de all&#237; hasta la caja del medidor, en ducto de acuerdo al calibre del conductor.<br /><br />•	<b>Activo de conexi&#243;n</b>: Son aquellos activos que son utilizados exclusivamente por un usuario final para conectarse a los niveles de tensi&#243;n 3 ,2 o 1 de un Sistema de Distribuci&#243;n Local.<br /><br />•	<b>Activos del Nivel de Tensi&#243;n 1</b>: Son los conformados por las redes de transporte que operan a tensiones menores de 1 kV y los transformadores con voltaje secundario menor a 1 kV que las alimentan, incluyendo las protecciones y equipos de maniobra asociados, sin incluir los que hacen parte de instalaciones internas. Estos son considerados activos de uso.<br /><br />•	<b>Armario para medidores</b>: M&#243;dulo autosoportado provisto de puerta en el cual se pueden instalar cinco o m&#225;s medidores.<br /><br />•	<b>&#193;rea de mm<sup>2</sup></b>: Designaci&#243;n IEC de los conductores por su secci&#243;n transversal expresada en mm<sup>2</sup>. Est&#225;n normalizados desde el 0,5 hasta el 2000 mm<sup>2</sup>. <br /><br />•	<b>Autogenerador</b>: Persona que produce energ&#237;a el&#233;ctrica exclusivamente para atender sus propias necesidades. Por lo tanto, no usa la red p&#250;blica para fines distintos al de obtener respaldo del SIN y puede o no, ser el propietario del sistema de generaci&#243;n.<br /><br />•	<b>Bus de barras</b>: De acuerdo con la NEMA (National Electrical Manufacturers Association), es un sistema de distribuci&#243;n el&#233;ctrica mediante elementos prefabricados compuestos por ramales (bus) de barras recubiertos de una carcasa protectora, incluyendo tramos rectos, &#225;ngulos, dispositivos y accesorios. Seg&#250;n el NEC (Art 364-2 BARRAS COLECTORAS (BUSWAYS)) es una estructura cubierta o envoltura met&#225;lica puesta a tierra conteniendo conductores aislados o desnudos instalados en f&#225;brica que usualmente son barras, varillas o tubos de cobre o aluminio.<br /><br />•	<b>Cable</b>: Conjunto de alambres sin aislamiento entre s&#237; y entorchado por medio de capas conc&#233;ntricas.<br /><br />•	<b>Cable multiconductor</b>: Es un cable conformado por conductores aislados unos de otros, de colores diferentes y adem&#225;s cuentan con una chaqueta protectora que los cubre.<br /><br />•	<b>Cable trenzado</b>: Son cables para redes de MT y BT, compuestos de varios conductores aislados en XLPE y dispuesto en forma trenzada.  En redes a&#233;reas de BT exteriores, generalmente se utilizan tres conductores de fase en aluminio (ASC) y un conductor neutro de soporte de aleaci&#243;n de aluminio (tipo AL2).<br /><br />•	<b>Caja de derivaci&#243;n de bus de barras</b>: Elemento utilizado para hacer derivaciones del bus de barras a cajas o armarios de medidores, incluyen interruptores de protecci&#243;n.<br /><br />•	<b>Caja de inspecci&#243;n</b>: Caja para unir tramos de canalizaci&#243;n, usada en el tendido y derivaci&#243;n de los conductores de las redes e instalaciones subterr&#225;neas.<br /><br />•	<b>Caja para medidores</b>: Gabinete provisto de una tapa o puerta, dise&#241;ado para instalarse  empotrado &#243; semiempotrado donde se instalan hasta 4 medidores.<br />	<br />•	<b>Canalizaci&#243;n</b>: Adecuaci&#243;n del terreno donde se instalan los ductos para las redes subterr&#225;neas.<br />	<br />•	<b>Capacete</b>: Boquilla que se enrosca a un tubo en la parte superior, permitiendo el paso de conductores, e, impidiendo el ingreso de agua.  <br /><br />•	<b>Capacidad de carga</b>: Corriente que puede soportar un conductor o aparato de maniobra sin sufrir sobrecarga t&#233;rmica, o din&#225;mica.<br /><br />•	<b>Capacidad de corriente</b>: Corriente m&#225;xima que puede transportar continuamente un conductor en las condiciones de uso, sin superar la temperatura nominal de servicio.<br /><br />•	<b>Capacidad nominal</b>: El conjunto de caracter&#237;sticas el&#233;ctricas y mec&#225;nicas asignadas a un equipo el&#233;ctrico por el dise&#241;ador, para definir su funcionamiento bajo unas condiciones espec&#237;ficas.<br /><br />•	<b>Carga</b>: La potencia el&#233;ctrica requerida para el funcionamiento de uno o varios equipos el&#233;ctricos o la potencia que transporta un circuito.<br /><br />•	<b>Carga instalada</b>: Es el total de la carga correspondiente a una instalaci&#243;n o sistema el&#233;ctrico. Es la suma de todas las potencias de los equipos y aparatos el&#233;ctricos conectados a la instalaci&#243;n.<br />	<br />•	<b>Centros de transformaci&#243;n</b>: Conjunto de elementos que sirven para la distribuci&#243;n de energ&#237;a mediante la transformaci&#243;n de tensi&#243;n.<br /><br />•	<b>Circuito</b>: Lazo cerrado formado por un conjunto de elementos, dispositivos y equipos el&#233;ctricos, alimentados por la misma fuente de energ&#237;a y con protecci&#243;n contra sobretensiones y sobrecorrientes. No se toman los cableados internos de equipos como circuitos.<br /><br />•	<b>Circuito principal</b>: Es el que normalmente est&#225; en capacidad de alimentar la totalidad de la carga contratada.<br /><br />•	<b>Circuito de suplencia</b>: Es el circuito que alimenta total o parcialmente una carga, s&#243;lo  cuando el circuito principal se encuentra fuera de servicio. Tiene por objeto optimizar la continuidad y la confiabilidad en el suministro de servicio. <br /><br />•	<b>Circuito ramal</b>: En el sistema de instalaciones interiores, es una parte que se extiende m&#225;s all&#225; del &#250;ltimo dispositivo de protecci&#243;n de sobrecorriente situado en el tablero de distribuci&#243;n del usuario.<br />	<br />•	<b>C&#243;digo de redes</b>: Conjunto de reglas, normas, est&#225;ndares y procedimientos t&#233;cnicos expedidos por la CREG a los cuales deben someterse las empresas de servicios p&#250;blicos del sector el&#233;ctrico y otras personas que usan el Sistema de Transmisi&#243;n Nacional, de acuerdo a lo establecido en la Ley 143 de 1994.<br /><br />•	<b>Comercializador</b>: Persona cuya actividad principal es la comercializaci&#243;n de energ&#237;a el&#233;ctrica.<br /><br />•	<b>Comercializaci&#243;n de Energ&#237;a El&#233;ctrica</b>: Actividad consistente en la compra y venta de energ&#237;a el&#233;ctrica en el mercado mayorista y su venta con destino a otras operaciones en dicho mercado o a los usuarios finales.<br />	<br />•	<b>Conductor</b>: Es el nombre dado a aquellos materiales a trav&#233;s de los cuales se transporta la energ&#237;a el&#233;ctrica.<br /><br />•	<b>Conductor con neutro conc&#233;ntrico</b>: Es un cable conformado por conductores de fase aislados, rodeados conc&#233;ntricamente por un conjunto de hilos de cobre desnudo, dispuestos en forma tubular y sobre &#233;l, una chaqueta protectora resistente a la intemperie.<br /><br />•	<b>Conductor de fase</b>: Es aqu&#233;l que presenta una diferencia de potencial con respecto al neutro. Que est&#225; energizado.<br /><br />•	<b>Conductor monopolar</b>: Es el que est&#225; formado por uno o varios alambres, es independiente de otros conductores, puede ser 	desnudo o aislado y se utiliza para conectar una sola fase o neutro.<br /><br />•	<b>Conductor energizado</b>: Todo aquel que no est&#225; conectado a tierra.<br /><br />•	<b>Contrato de servicios p&#250;blicos</b>: De conformidad con el art&#237;culo 128 de la Ley 142 de 1994, es un contrato uniforme consensual, en virtud del cual una empresa de servicios p&#250;blicos los presta a un usuario a cambio de un precio en dinero, de acuerdo a estipulaciones que han sido difundidas por el organismo regulador.<br /><br />•	<b>Corriente el&#233;ctrica</b>: Es el movimiento de cargas el&#233;ctricas entre dos puntos que no se hallan al mismo potencial, por tener uno de ellos un exceso de electrones con respecto al otro. Es un transporte de energ&#237;a.<br /><br />•	<b>Corriente nominal</b>: Valor de corriente para el cual esta dise&#241;ado un equipo el&#233;ctrico, para funcionar en condiciones normales de operaci&#243;n. <br /><br />•	<b>Corrosi&#243;n</b>: Ataque a una materia y destrucci&#243;n progresiva de la misma, mediante una acci&#243;n qu&#237;mica, electroqu&#237;mica o bacteriana. <br /><br />•	<b>Cortocircuito</b>: Fen&#243;meno el&#233;ctrico ocasionado por una uni&#243;n accidental o intencional de muy baja resistencia entre dos o m&#225;s puntos de diferente potencial de un mismo circuito.<br />	<br />•	<b>CREG</b>: Comisi&#243;n de Regulaci&#243;n de Energ&#237;a y Gas.<br />	<br />•	<b>Cuenta</b>: Codificaci&#243;n o n&#250;mero que una empresa adopta como identificaci&#243;n de los predios a los cuales presta servicio de energ&#237;a, seg&#250;n la ubicaci&#243;n geogr&#225;fica.<br />	<br />•	<b>Demanda</b>: Es la carga promedio solicitada a la fuente de suministro en el punto de recepci&#243;n durante un intervalo de tiempo.<br />	<br />•	<b>Demanda m&#225;xima</b>: Es la potencia el&#233;ctrica m&#225;xima que se presenta en un sistema o instalaci&#243;n durante un per&#237;odo de tiempo espec&#237;fico, expresada en kilovatios [kW].<br /><br />•	<b>Dispositivo de Protecci&#243;n contra sobretensiones transitorias - DPS</b>: Dispositivo dise&#241;ado para limitar las sobretensiones transitorias y conducir las corrientes de impulso. Contiene al menos un elemento no lineal. <br /><br />•	<b>Empalme</b>: Conexi&#243;n el&#233;ctrica destinada a unir dos partes de conductores, para garantizar continuidad el&#233;ctrica y mec&#225;nica.<br /><br />•	<b>Empresa</b>: Unidad econ&#243;mica que se representa como un sistema integral con recursos humanos, de informaci&#243;n, financieros y t&#233;cnicos que produce bienes o servicios y genera utilidad. Para los efectos de esta norma, se refiere a Enel Colombia.<br />	<br />•	<b>Energ&#237;a activa</b>: Energ&#237;a el&#233;ctrica capaz de transformarse en otras formas de energ&#237;a.<br />	<br />•	<b>Energ&#237;a reactiva inductiva</b>: Es la energ&#237;a utilizada para magnetizar los transformadores motores y otros aparatos que tienen bobinas.  No se puede transformar en energ&#237;a &#250;til.<br />	<br />•	<b>Equipo de medida</b>: En relaci&#243;n con un punto de conexi&#243;n lo conforma todos los transformadores de medida, medidores, caja de borneras y el cableado necesario  para ese punto de conexi&#243;n.<br /><br />•	<b>Especificaci&#243;n t&#233;cnica</b>: Documento que establece caracter&#237;sticas t&#233;cnicas m&#237;nimas de un producto o servicio.<br />	<br />•	<b>Factor de demanda</b>: Es la relaci&#243;n entre la demanda m&#225;xima y la carga conectada.  Indica la simultaneidad en el uso de la carga total conectada por cada consumidor.<br /><br />•	<b>Factor de diversidad</b>: Es la relaci&#243;n entre las sumas de las demandas m&#225;ximas de los consumidores individuales a la demanda m&#225;xima simult&#225;nea de todo el grupo durante el per&#237;odo de tiempo particular.<br /><br />•	<b>Factor del medidor</b>: es el n&#250;mero que resulta de multiplicar las relaciones de transformaci&#243;n de los transformadores de corriente y de potencial. Este n&#250;mero debe multiplicar las diferencias de lectura que registran los medidores para obtener el consumo real  de un periodo determinado.<br /><br />•	<b>Factor de potencia</b>: Relaci&#243;n entre potencia activa y potencia aparente, del mismo sistema el&#233;ctrico o parte de &#233;l.  <br /><br />•	<b>Frontera comercial</b>: Se define como frontera comercial entre el OR o el comercializador y el usuario, los puntos de conexi&#243;n del equipo de medida, a partir del cual &#233;ste &#250;ltimo se responsabiliza por los consumos y riesgos operativos inherentes a su red interna.<br /><br />•	<b>Fusible</b>: Aparato cuya funci&#243;n es abrir, por la fusi&#243;n de uno o varios de sus componentes, el circuito en el cual est&#225; insertado.<br /><br />•	<b>Instalaci&#243;n el&#233;ctrica</b>: Conjunto de aparatos el&#233;ctricos y de circuitos asociados, previstos para un fin particular: generaci&#243;n, transmisi&#243;n, transformaci&#243;n, rectificaci&#243;n, conversi&#243;n, distribuci&#243;n o utilizaci&#243;n de la energ&#237;a el&#233;ctrica.<br /><br />•	<b>Interruptor</b>: Aparato destinado a establecer la apertura o el cierre de un circuito.<br />	<br />•	<b>Interruptor autom&#225;tico</b>: Dispositivo dise&#241;ado para que abra el circuito autom&#225;ticamente cuando se produzca una sobrecorriente predeterminada.<br /><br />•	<b>Interruptor autom&#225;tico ajustable</b>: Calificativo que indica que el interruptor autom&#225;tico se puede ajustar para que se dispare a distintas corrientes, tiempos o ambos, dentro de un margen predeterminado.<br /><br />•	<b>Interruptor de uso general</b>: Dispositivo para abrir y cerrar o para conmutar la conexi&#243;n de un circuito, dise&#241;ado para ser operado manualmente. Su capacidad se establece en amperios y es capaz de interrumpir su corriente nominal a su tensi&#243;n nominal. Cumple funciones de control y no de protecci&#243;n.<br />	<br />•	<b>Interruptor general (totalizador)</b>: Dispositivo de corte general autom&#225;tico que protege toda la instalaci&#243;n y que sirve de respaldo a los dem&#225;s interruptores autom&#225;ticos.<br />	<br />•	<b>Medidor</b>: Equipo compuesto de elementos electromec&#225;nicos o electr&#243;nicos que se utilizan para medir el consumo de energ&#237;a, activa y/o reactiva y en algunos casos demanda m&#225;xima; la medida es realizada en funci&#243;n del tiempo y puede o no incluir dispositivos de transformaci&#243;n de datos.<br /><br />•	<b>Neutro</b>: Conductor activo conectado intencionalmente a una puesta a tierra, bien sea solidamente o a trav&#233;s de una impedancia limitadora.<br /><br />•	<b>Nivel de tensi&#243;n</b>: Rango de tensi&#243;n desde el cual se presta el servicio seg&#250;n la siguiente clasificaci&#243;n:<br /><br />-	Nivel 1: Tensi&#243;n nominal menor a 1 kV, servicio monof&#225;sico o trif&#225;sico.<br />-	Nivel 2: Tensi&#243;n nominal  mayor igual a 1 kV y menor de 30 kV.<br />-	Nivel 3: Tensi&#243;n nominal mayor igual a 30 kV y menor de 57,5 kV.<br />-	Nivel 4: Tensi&#243;n nominal  mayor igual a 57,5 kV y menor de 220 kV.<br /><br /><br />•	<b>Nominal</b>: Calificativo de servicio normal de una magnitud que figura en las especificaciones de un sistema, m&#225;quina o de un aparato.<br /><br />•	<b>Norma</b>: Documento aprobado por una instituci&#243;n reconocida, que prev&#233;, para un uso com&#250;n y repetido, reglas, directrices o caracter&#237;sticas para los productos o los procesos y m&#233;todos de producci&#243;n conexos, servicios o procesos, cuya observancia no es obligatoria.<br /><br />•	<b>Norma T&#233;cnica Colombiana (NTC)</b>: Norma t&#233;cnica aprobada o adoptada como tal, por el organismo nacional de normalizaci&#243;n.<br /><br />•	<b>Operador de Red de STR&#180;s y/o SDL&#180;s (OR)</b>: Persona encargada de la planeaci&#243;n de la expansi&#243;n, las inversiones, la operaci&#243;n y el mantenimiento de todo o parte de un STR o SDL, incluidas sus conexiones al STN. Los activos pueden ser de su propiedad o de terceros. Para todos los prop&#243;sitos son las empresas que tienen cargos por uso de los STR o SDL aprobados por la CREG. El OR siempre debe ser una empresa de Servicios P&#250;blicos Domiciliarios. La unidad m&#237;nima de un SDL para que un OR solicite cargos por uso corresponde a un municipio.<br /><br />•	<b>Pararrayos</b>: Elemento met&#225;lico resistente a la corrosi&#243;n, cuya funci&#243;n es interceptar los rayos que podr&#237;an impactar directamente sobre la instalaci&#243;n a proteger. T&#233;cnicamente se denomina terminal de captaci&#243;n.  <br />	<br />•	<b>Placa de caracter&#237;stica</b>: La fijada sobre una m&#225;quina, medidor o aparato en el cual se especifican los valores nominales en el servicio normal (tipo, tensi&#243;n, potencia, corriente etc.).<br /><br />•	<b>Potencia activa</b>: Potencia consumida por las bombillas, aparatos, artefactos y motores que se encuentran en el predio del usuario. Se mide en kilovatios [kW]<br /><br />•	<b>Potencia aparente</b>: Potencia resultante de la suma geom&#233;trica de la potencia activa y la potencia reactiva, medida en kVA.<br /><br />•	<b>Potencia reactiva</b>: Potencia absorbida por cargas reactivas que se encuentran en las industrias, transformadores,	redes o por motores, medida en kVAR.<br /><br />•	<b>Provisional obra</b>: Se entender&#225; como instalaci&#243;n provisional de obra aquella que se hace para suministrar el servicio de energ&#237;a a un proyecto en construcci&#243;n. Esta instalaci&#243;n deber&#225; cumplir con lo especificado en la secci&#243;n 305 del C&#243;digo el&#233;ctrico Colombiano (NTC2050).<br /><br />•	<b>Puesta a tierra</b>: Grupo de elementos conectores equipotenciales, en contacto el&#233;ctrico con el suelo o una masa met&#225;lica de referencia com&#250;n, que distribuye las corrientes el&#233;ctricas de falla en el suelo o en la masa. Comprende electrodos, conexiones y cables enterrados.<br />	<br />•	<b>Punto de conexi&#243;n</b>: Es el punto de conexi&#243;n el&#233;ctrico en el cual el equipo de un usuario esta conectado a un Sistema de Transmisi&#243;n Regional y/o Sistema de Distribuci&#243;n Local para el prop&#243;sito de transferir energ&#237;a el&#233;ctrica entre las partes.<br />	<br />•	<b>Punto de medici&#243;n de energ&#237;a</b>: Es el punto de conexi&#243;n el&#233;ctrico de donde se toman las se&#241;ales de tensi&#243;n y corriente a trav&#233;s de transformadores de medida o en forma directa <br />	<br />•	<b>Red interna</b>: Es el conjunto de redes, tuber&#237;as necesarias y equipos que integran el sistema de suministro de servicio p&#250;blico al inmueble a partir del medidor o en el caso de los clientes sin medidor, a partir del registro de corte del inmueble. Para edificios de propiedad horizontal o condominios, es aquel sistema de suministro del servicio al inmueble que comienza en el registro de corte general, cuando lo hubiere.<br />	<br />•	<b>Red de uso general</b>: Redes p&#250;blicas que no forman parte de acometidas o de instalaciones internas.<br /><br />•	<b>Red P&#250;blica</b>: Aquella que utiliza dos o m&#225;s personas naturales o jur&#237;dicas independientemente de la propiedad de la red.<br /><br />•	<b>Redes de distribuci&#243;n</b>: Conjunto de elementos utilizados para la transformaci&#243;n y el transporte de energ&#237;a el&#233;ctrica hasta el punto de entrega del usuario.<br /><br />•	<b>RETIE</b>: Reglamento T&#233;cnico de Instalaciones El&#233;ctricas. Requisitos obligatorios para garantizar la seguridad en las instalaciones el&#233;ctricas en Colombia <br />	<br />•	<b>Seccionador</b>: Dispositivo destinado a hacer un corte visible en un circuito el&#233;ctrico y est&#225; dise&#241;ado para que se manipule despu&#233;s del circuito se ha abierto por otros medios.<br />	<br />•	<b>Seccionador bajo carga</b>: Aparato de maniobra que se puede accionar bajo la corriente de carga.<br /><br />•	<b>Servicio p&#250;blico domiciliario de energ&#237;a el&#233;ctrica</b>: Es el transporte de energ&#237;a el&#233;ctrica desde las redes regionales de transmisi&#243;n hasta el domicilio del usuario final, incluida su conexi&#243;n y medici&#243;n.<br />	<br />•	<b>Servicio monof&#225;sico</b>: Es aqu&#233;l que se obtiene con una acometida de dos conductores conectados una a la fase y el otro al neutro.<br /><br />•	<b>Servicio trif&#225;sico</b>: Se obtiene con una acometida de tres o cuatro conductores 	(para baja tensi&#243;n: tres fases distintas y un neutro; para media tensi&#243;n: tres fases diferentes).<br /><br />•	<b>Sistema de Distribuci&#243;n Local (SDL)</b>: Sistema de transporte de energ&#237;a el&#233;ctrica compuesto por el conjunto de l&#237;neas y subestaciones, con sus equipos asociados, que operan a los niveles de tensi&#243;n 3, 2 y 1 dedicados a las prestaci&#243;n del servicio en un mercado de comercializaci&#243;n.<br /><br />•	<b>Sistema radial</b>: En este sistema los alimentadores se llevan desde la fuente hasta la acometida del &#250;ltimo usuario.<br />	<br />•	<b>Sobrecarga</b>: Funcionamiento de un elemento excediendo su capacidad nominal.<br /><br />•	<b>Sobretensi&#243;n</b>: Tensi&#243;n anormal existente entre dos puntos de una instalaci&#243;n el&#233;ctrica, superior a la tensi&#243;n m&#225;xima de operaci&#243;n normal de un dispositivo, equipo o sistema.<br />	<br />•	<b>Suscriptor</b>: Es toda persona natural o jur&#237;dica que suscribe un contrato de servicio con la Empresa.<br /><br />•	<b>Tablero de distribuci&#243;n del usuario</b>: Panel dise&#241;ado para ser colocado en una caja met&#225;lica, accesible desde el frente y que contiene dispositivos 	de conexi&#243;n y protecci&#243;n. Est&#225; generalmente conectado a una acometida o circuito principal; puede contener barrajes e interruptores autom&#225;ticos.  De aqu&#237; se distribuyen los circuitos ramales.<br /><br />•	<b>Tablero General de Acometidas</b>: Es el tablero que contiene equipos de protecci&#243;n y barrajes donde se recibe la acometida general y del cual se derivan las acometidas parciales. Es un M&#243;dulo met&#225;lico provisto de puerta, dise&#241;ado autosoportado o empotrado en la pared, donde se instalan los elementos de protecci&#243;n de acometidas.<br /><br />•	<b>Tarifa</b>: Conjunto de precios especificados y aprobados por las autoridades competentes, para el cobro del servicio de energ&#237;a prestado por la Empresa.<br /><br />•	<b>Tensi&#243;n de servicio</b>: Valor de tensi&#243;n, bajo condiciones normales, en un instante dado y en un nodo del sistema. Puede ser estimado, esperado o medido.<br /><br />•	<b>Tensi&#243;n nominal</b>: Valor convencional de la tensi&#243;n con el cual se designa un sistema, instalaci&#243;n o equipo y para el que ha sido previsto su funcionamiento y aislamiento. Para el caso de sistemas trif&#225;sicos, se considera como tal la tensi&#243;n entre fases.<br />	<br />•	<b>Unidades Inmobiliarias Cerradas</b>: de acuerdo con la Ley 675 de 2001, son conjuntos de edificios, casas y dem&#225;s construcciones integradas arquitect&#243;nica y funcionalmente, que comparten elementos estructurales y constructivos, &#225;reas comunes de circulaci&#243;n, recreaci&#243;n, reuni&#243;n, instalaciones t&#233;cnicas, zonas verdes y de disfrute visual; cuyos propietarios participan proporcionalmente en el pago de las expensas comunales, tales como los servicios p&#250;blicos comunitarios, vigilancia, mantenimiento y mejoras. El acceso a tales conjuntos inmobiliarios se encuentra restringido por un cerramiento y controles de ingreso.<br />  <br />•	<b>Usuario</b>: Persona natural o jur&#237;dica que se beneficia del servicio p&#250;blico bien como propietario del inmueble en donde &#233;ste se presta o como receptor  directo del servicio. Se llama tambi&#233;n consumidor. <br /><br />•	<b>Usuario no cliente</b>: Usuario del servicio de energ&#237;a que ha conectado las instalaciones del inmueble a las redes de la empresa, sin autorizaci&#243;n y por lo tanto no ha sido reportado como cliente suscriptor de la Empresa.<br /><br />•	<b>Usuario no regulado</b>: Persona natural o jur&#237;dica con demanda m&#225;xima definida por la Comisi&#243;n de Regulaci&#243;n de Energ&#237;a y Gas por instalaci&#243;n legalizada, cuyas compras de electricidad se realizan a precios acordados libremente.<br />	<br />•	<b>Usuario regulado</b>: persona natural o jur&#237;dica cuyas compras de electricidad est&#225;n sujetas a tarifas establecidas con la Comisi&#243;n de Regulaci&#243;n de Energ&#237;a y Gas.<br />	<br />•	<b>Varilla de puesta a tierra</b>: Electrodo que sirve como terminal de tierra, tal como una varilla de cobre o acero con recubrimiento  electrol&#237;tico de cobre (copperweld).<br /><br />
+<h3 id="heading_4" >7.1.4 ABREVIATURAS, ACR&#211;NIMOS Y SIGLAS</h3>
+<table><tr><td colspan="1" rowspan="1" style="width:80px;height:16px;">AAC</td><td colspan="1" rowspan="1" style="width:544px;">All aluminum conductor</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;">AAAC</td><td colspan="1" rowspan="1" style="">All aluminum alloy conductor</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;">ACSR</td><td colspan="1" rowspan="1" style="">Aluminum Conductor Steel Reinforced</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;">ASTM</td><td colspan="1" rowspan="1" style="">American Society for Testing and Materials</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;">AWG</td><td colspan="1" rowspan="1" style="">American Wire Gauge</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;">CREG</td><td colspan="1" rowspan="1" style="">Comisi&#243;n de Regulaci&#243;n de Energ&#237;a y Gas</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;">IEEE</td><td colspan="1" rowspan="1" style="">Institute of Electrical and Electronics Engineers</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;">NTC</td><td colspan="1" rowspan="1" style="">Norma T&#233;cnica Colombiana</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;">PVC</td><td colspan="1" rowspan="1" style="">Cloruro de polivinilo</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;">SSPD</td><td colspan="1" rowspan="1" style="">Superintendencia de Servicios P&#250;blicos Domiciliarios</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;">TW</td><td colspan="1" rowspan="1" style="">Thermoplastic Wet (Termopl&#225;stico resistente a la humedad)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;">THW</td><td colspan="1" rowspan="1" style="">Thermoplastic Heat Wet (Termopl&#225;stico resistente al calor (75&#176;C) y a la humedad)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;">THWN</td><td colspan="1" rowspan="1" style="">Thermoplastic Heat Wet Nylon (Termopl&#225;stico resistente al calor (90&#176;C) y a la humedad)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;">XLPE</td><td colspan="1" rowspan="1" style="">Cross Linked Polyethilene Extrude ( Polietileno extruido de cadena cruzada)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:16px;">kcmil</td><td colspan="1" rowspan="1" style="">Kilo circular mil</td></tr></table><br />
+<h3 id="heading_5" >7.1.5	TENSIONES DE SUMINISTRO</h3>
+ <b>7.1.5.1	Desde las redes de distribuci&#243;n secundaria</b><br />
+<ul><li><a href="generalidades_7_1_actualizacion_generalidades.html#" id="version-284" class="externalLink  glosarioLink">Monof&#225;sico</a> bifilar a 120 V (<span class="codeInline">+</span> 5%,  - 10%), mediante acometida de dos conductores conectados a fase y neutro. En algunas &#225;reas del centro de la ciudad se presta el servicio a 150 V (<span class="codeInline">+</span> 5%, - 10%).</li></ul>
+	
+<ul><li><a href="generalidades_7_1_actualizacion_generalidades.html#" id="version-284" class="externalLink  glosarioLink">Monof&#225;sico</a> trifilar a 120/240 V (+ 5%, - 10%)  mediante acometida de dos conductores conectadas a fases y uno al neutro.</li></ul>
+	
+<ul><li>Bif&#225;sico trifilar a 208/120 V (+ 5%, -10%) mediante acometida de dos conductores conectadas a dos fases y uno al neutro de un sistema trif&#225;sico tetrafilar.</li></ul>
+	
+<ul><li>Trif&#225;sicos tetrafilar a 208/120 V (<span class="codeInline">+</span> 5%, - 10%), mediante acometida de cuatro conductores conectados a las tres fases y el neutro. En algunas &#225;reas del centro de la ciudad se presta el servicio a 260/150V (<span class="codeInline">+</span>5%, - 10%).</li></ul>
+<br /> <b>7.1.5.1.1	Desde transformadores de distribuci&#243;n de uso dedicado, de propiedad  del cliente</b><br />
+<ul><li><a href="generalidades_7_1_actualizacion_generalidades.html#" id="version-284" class="externalLink  glosarioLink">Monof&#225;sico</a> Trifilar 120/240 V  (+ 5, - 10%)</li></ul>
+	
+<ul><li>Trif&#225;sico tetrafilar 208/120 V (+ 5, - 10%)</li></ul>
+	
+<ul><li>Trif&#225;sico tetrafilar 380/220 V (+ 5, - 10%)</li></ul>
+
+<ul><li>Trif&#225;sico tetrafilar 440/254 V (+ 5, - 10%)</li></ul>
+
+<ul><li>Trif&#225;sico tetrafilar 480/277 V (+ 5, - 10%)</li></ul>
+<br />El cliente deber&#225; presentar el protocolo de pruebas, la carta de garant&#237;a y la factura de compra, como requisitos de instalaci&#243;n. Adem&#225;s deber&#225;n poseer el certificado de conformidad contra norma t&#233;cnica y contra RETIE emitido por un ente avalado por la ONAC – Organizaci&#243;n Nacional de Acreditaci&#243;n de Colombia. <br />	<br />Para tensiones diferentes a las normalizadas se requiere la aceptaci&#243;n de los protocolos de prueba de los transformadores de distribuci&#243;n de uso dedicado previa notificaci&#243;n a la Empresa sobre la tensi&#243;n a utilizar y el suministro del equipo de medida certificado y calibrado, en caso de que &#233;sta no disponga de &#233;l.<br /><br /><b>7.1.5.2  Desde redes de uso general de <a href="generalidades_7_1_actualizacion_generalidades.html#" id="version-277" class="externalLink  glosarioLink">media tensi&#243;n</a> o l&#237;neas de <a href="generalidades_7_1_actualizacion_generalidades.html#" id="version-88" class="externalLink  glosarioLink">alta tensi&#243;n</a></b><br />
+<ul><li>Trif&#225;sico trifilar 11, 4 kV (+ 5 %, - 10%)  desde l&#237;neas primarias de distribuci&#243;n en el Distrito Capital y municipios de la sabana.</li></ul>
+ 
+<ul><li>Trif&#225;sico trifilar 13,2 kV (+ 5%, - 10%) desde redes primarias de distribuci&#243;n en algunas zonas fuera del Distrito Capital, atendidas por Enel Colombia.</li></ul>
+	
+<ul><li><a href="generalidades_7_1_actualizacion_generalidades.html#" id="version-284" class="externalLink  glosarioLink">Monof&#225;sico</a> bifilar 13,2 kV, o 11,4 kV  (+ 5%, - 10%). No se permiten l&#237;neas a 7,6 kV o 6,58 kV de un solo hilo.</li></ul>
+	
+<ul><li>Trif&#225;sico trifilar a 34,5 kV (+ 5%, -10%) desde circuitos industriales o l&#237;neas de distribuci&#243;n fuera del Distrito Capital.</li></ul>
+	
+<ul><li>Trif&#225;sico trifilar a 115 kV (+ 5%, -10%) desde l&#237;neas de transmisi&#243;n.</li></ul>
+
+<h3 id="heading_6" >7.1.6	REGULACI&#211;N DE <a href="generalidades_7_1_actualizacion_generalidades.html#" id="version-377" class="externalLink  glosarioLink">TENSI&#211;N</a></h3>
+Los l&#237;mites de regulaci&#243;n de <a href="generalidades_7_1_actualizacion_generalidades.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> en los circuitos urbanos de Enel Colombia son:<br />
+<ul><li>Para circuitos primarios (13.2 kV o 11,4 kV): 2 % </li>
+<li>Transformador de distribuci&#243;n (con el transformador a un 140% de su capacidad <a href="generalidades_7_1_actualizacion_generalidades.html#" id="version-298" class="externalLink  glosarioLink">nominal</a>): 4 %</li>
+<li>Circuitos secundarios o acometidas desde bornes del transformador: 3 %</li>
+<li>Acometida hasta el medidor: 1 %</li></ul>
+<br />Para el &#225;rea rural los l&#237;mites de regulaci&#243;n son:<br />
+<ul><li>Para circuitos primarios (13,2 kV o 11,4 kV): 5 % a partir de la <a href="generalidades_7_1_actualizacion_generalidades.html#" id="version-373" class="externalLink  glosarioLink">subestaci&#243;n</a> de subtransmisi&#243;n</li>
+<li>Para circuitos de <a href="generalidades_7_1_actualizacion_generalidades.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a>: 7% a partir del transformador de distribuci&#243;n hasta el punto de medici&#243;n.</li></ul>
+
+<h3 id="heading_7" >7.1.7	L&#205;MITES DE CARGA</h3>
+La Empresa suministrar&#225; la energ&#237;a el&#233;ctrica atendiendo los siguientes criterios respecto a l&#237;mites de carga instalada que deber&#225; ser contratada en las mismas magnitudes as&#237;:<br /><br />- Se conceder&#225;n servicios de la red secundaria a&#233;rea o desde el barraje de un armario de medidores existente para cargas instaladas iguales o menores a 35 kW as&#237;:<br />
+<ul><li><a href="generalidades_7_1_actualizacion_generalidades.html#" id="version-284" class="externalLink  glosarioLink">Monof&#225;sico</a> bifilar a 120 Voltios, para cargas con valores enteros desde 1 hasta 8 kW.</li></ul>
+
+<ul><li><a href="generalidades_7_1_actualizacion_generalidades.html#" id="version-284" class="externalLink  glosarioLink">Monof&#225;sico</a> trifilar a 120/240 Voltios para cargas con valores enteros desde 1 hasta 25 kW en zonas donde se tengan transformadores de distribuci&#243;n monof&#225;sica.</li></ul>
+
+<ul><li>Bif&#225;sico trifiliar a 120/208 Voltios, para cargas con valores enteros desde 1 hasta 20 kW en zonas urbanas.</li></ul>
+
+<ul><li>Trif&#225;sico tetrafilar a 120/208 Voltios, para cargas con valores enteros desde 9 hasta 35 kW en zonas urbanas y veredales.</li></ul>
+<br />La carga solicitada debe corresponder a la potencia m&#225;xima requerida por el usuario que podr&#225; ser resultado de las cargas de dise&#241;o o demanda, resultado de estudios del usuario o entregados por Enel Colombia.<br /><br />- Para cargas, contratadas con valores enteros alimentadas a 120/208 Voltios mayores a 35 kW y menores a 216 kW, Enel Colombia suministrar&#225; el servicio desde un transformador existente o instalando un transformador nuevo, de acuerdo con criterios t&#233;cnico-econ&#243;micos verificados en el dise&#241;o de la acometida.<br />  <br />- En redes subterr&#225;neas de <a href="generalidades_7_1_actualizacion_generalidades.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a> alimentadas por transformadores de distribuci&#243;n de Enel Colombia, se podr&#225;n alimentar cargas menores de 35 kW mediante barrajes preformados de B.T., alojados en cajas de inspecci&#243;n, siempre y cuando en el transformador exista capacidad disponible o posibilidad de ampliarla. Se debe presentar un proyecto de redes de B.T.<br /><br />Como alternativa a la acometida subterr&#225;nea en baja tensi&#243;n desde bornes del transformador, en urbanizaciones de estratos definidos como 1, 2 y 3 y en predios que no est&#233;n sobre avenidas y v&#237;as arterias, se permite suministrar el servicio mediante acometida subterr&#225;nea alimentada de la red a&#233;rea. Esto siempre y cuando exista la posibilidad de redise&#241;ar el circuito de baja tensi&#243;n a&#233;reo que pasa frente al inmueble y que junto con la condici&#243;n de capacidad de  transformaci&#243;n  disponible o posibilidad de  ampliarla, se  cumpla  con  la regulaci&#243;n de tensi&#243;n.  El  tramo de red a&#233;reo debe ser en calibre menor o igual a 4/0 AWG (95 mm<sup>2</sup>) en conductores aislados en XLPE de aluminio para las fases y 1/0 AWG (50 mm<sup>2</sup>) AAAC para el neutro. Se debe presentar un proyecto de redes de B.T.<br /><br />Para las construcciones nuevas con transformador dedicado y armario de medidores, se podr&#225; contemplar en el dise&#241;o la alimentaci&#243;n desde dicho armario para cargas menores de 300 kW pertenecientes a la edificaci&#243;n. <br /><br />Para las acometidas subterr&#225;neas en v&#237;as p&#250;blicas desde bornes del transformador con cargas entre 150 kW y 225 kW se permiten conductores por fase en calibre hasta 500 kcmil (250 mm<sup>2</sup>).<br /><br />En caso de no cumplirse alguno de las condiciones anteriores, Enel Colombia suministrar&#225; el servicio en <a href="generalidades_7_1_actualizacion_generalidades.html#" id="version-0" class="externalLink  glosarioLink">media tensi&#243;n.</a><br /><br />En redes urbanas se prestar&#225; el servicio desde nuevos transformadores de distribuci&#243;n o subestaciones, cuando:<br />
+<ul><li>La carga autorizada en el inmueble sea superior o igual a 216 kW.</li>
+<li>La carga autorizada sea inferior a 216 kW y no sea posible t&#233;cnicamente darle servicio desde la red secundaria, por condiciones t&#233;cnicas o por disposiciones de ordenamiento urbano.</li></ul>
+<br />En redes veredales se prestar&#225; el servicio a trav&#233;s de transformadores dedicados, cuando:<br />
+<ul><li>Se tiene un solo usuario.</li>
+<li>No existe capacidad disponible o posibilidad de ampliarla con transformadores de Enel Colombia para atender la carga solicitada.</li></ul>
+	<br />Cuando existe una sola cuenta, con transformador o subestaci&#243;n de uso dedicado, la carga m&#225;xima autorizada podr&#225; ser mayor que la capacidad nominal del transformador, de acuerdo con las sobrecargas permitidas por la norma GTC 50 “ELECTROTECNIA. TRANSFORMADORES DE DISTRIBUCION SUMERGIDOS EN LIQUIDO REFRIGERANTE CON 65&#176;C DE CALENTAMIENTO EN LOS DEVANADOS. GUIA DE CARGABILIDAD”. <br /><br />Se debe dar cumplimiento a la Resoluci&#243;n 011 del 2013 de la Secretar&#237;a Distrital de Planeaci&#243;n en lo relacionado a la construcci&#243;n de nuevas redes.<br /><br />Todas las acometidas de media tensi&#243;n deben ser subterr&#225;neas, con excepci&#243;n de las acometidas temporales de provisional obra y acometidas a fincas en zonas rurales.<br /><br />Para la tensi&#243;n de alimentaci&#243;n de la carga desde las redes de <a href="generalidades_7_1_actualizacion_generalidades.html#" id="version-277" class="externalLink  glosarioLink">media tensi&#243;n</a>, se tiene:<br />	
+<ul><li>Para cargas industriales o residenciales suburbanas comprendidas desde 3.6 MW  y hasta 13.5 MW demandados, de acuerdo con los resultados del estudio de factibilidad, se suministrar&#225; el servicio a 34500 voltios siempre y cuando haya disponibilidad de esta tensi&#243;n.</li></ul>
+
+<ul><li>Para cargas superiores a 13.5 MW demandados, Enel Colombia decidir&#225; el nivel de tensi&#243;n de acuerdo con los resultados del estudio de factibilidad y equipos para la alimentaci&#243;n del servicio (Estudio t&#233;cnico para la puesta en servicio).</li></ul>
+
+<ul><li>Enel Colombia estudiar&#225; y resolver&#225; los casos excepcionales que por fuerza mayor o por incapacidad de las redes existentes deban apartarse de esta disposici&#243;n.</li></ul>
+<br /><br />El Operador de Red podr&#225; especificar un nivel de <a href="generalidades_7_1_actualizacion_generalidades.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> de conexi&#243;n diferente al solicitado por el Cliente por razones t&#233;cnicas debidamente sustentadas (art&#237;culo 4.4.1 Resoluci&#243;n CREG 070/96).<br /><br /><i><b>Nota:</b></i><br /><i>La carga indicada corresponde a demandada y el factor de potencia considerado es 0.9.</i><br /><br /><br /><i><b>Cargas que requieren Estudios de Conexi&#243;n Particularmente Complejos</b></i><br /><br />Toda solicitud de factibilidad de servicio para demanda m&#225;xima mayor de 500 kW, requerida por los usuarios, se enmarcar&#225; dentro de los Estudios de Conexi&#243;n Particularmente Complejos (Resoluci&#243;n CREG 225/97) y para determinar su factibilidad de servicio y punto de conexi&#243;n se requerir&#225; de un an&#225;lisis de las condiciones t&#233;cnicas y operativas, adem&#225;s de la capacidad disponible de las redes existentes. En este estudio se determinar&#225;n las condiciones para la conexi&#243;n de la nueva carga a los circuitos existentes, la necesidad de ejecutar reformas en la red existente de media tensi&#243;n para autorizar la conexi&#243;n o el requerimiento de construcci&#243;n de nuevos alimentadores. <br /><br />En urbanizaciones que requieran la construcci&#243;n de circuito nuevo de Media Tensi&#243;n y que su entrada en servicio se efect&#250;e por etapas; la Empresa podr&#225; alimentar provisionalmente las primeras etapas, si existe capacidad disponible en las redes de distribuci&#243;n existentes.<br /><br />La Empresa como Operador de Red, es responsable de la planeaci&#243;n de la expansi&#243;n y de las inversiones, operaci&#243;n y mantenimiento del Sistema de Distribuci&#243;n Local; por tal raz&#243;n, dentro de su Plan de Expansi&#243;n debe considerar todas aquellas inversiones en infraestructura el&#233;ctrica que tengan el Car&#225;cter de Uso General, que permitan atender las solicitudes de servicio de energ&#237;a efectuadas por terceros y que sean viables en el contexto de su plan financiero de la Empresa.<br /><br />Adicionalmente, cuando se requiera la construcci&#243;n de un proyecto de expansi&#243;n del sistema de distribuci&#243;n, para la conexi&#243;n de nuevos usuarios y la Empresa realizado el estudio financiero, con base en el proyecto aprobado de redes el&#233;ctricas, no resulte viable dentro del contexto de su plan financiero, &#233;ste deber&#225; ser construido por el interesado y la Empresa remunerar&#225; los activos de conexi&#243;n de uso general.<br /><br />La capacidad disponible de un circuito de <a href="generalidades_7_1_actualizacion_generalidades.html#" id="version-277" class="externalLink  glosarioLink">media tensi&#243;n</a> se determinar&#225; por la corriente de demanda m&#225;xima registrada en el circuito. El l&#237;mite de la demanda m&#225;xima para un circuito urbano de media tensi&#243;n (Nivel 2) es de 200 amperios y de 100 amperios de la zona veredal.<br /><br />Los circuitos ramales primarios bifilares de las redes veredales, se les autorizar&#225; una carga m&#225;xima de 50 kVA, para cargas superiores el circuito debe ser trif&#225;sico.<br /><br />Toda extensi&#243;n y reforma que sea necesario ejecutar para acondicionar la red de distribuci&#243;n a los requerimientos de un servicio, ser&#225;n construidas por la empresa o por el cliente de conformidad con lo estipulado en la Resoluci&#243;n 070 de 1998 de la CREG; por consiguiente Enel Colombia no podr&#225; restringir o negar el servicio para otros predios que resulten beneficiados con las obras ejecutadas, siempre y cuando no sufra perjuicios el primer usuario. La empresa garantizar&#225; el libre acceso a la red de distribuci&#243;n.<br /><br />Para medir en nivel I un Cliente con carga mayor de 55 kW, o para medir un Cliente en un nivel superior al nivel I, se requiere que los transformadores de medida cumplan con las condiciones t&#233;cnicas del punto de medici&#243;n: Los Transformadores de corriente deben soportar la corriente de cortocircuito del punto de instalaci&#243;n (para facilitar la consecuci&#243;n de los t.c. se ha adoptado 10 kA para nivel I y 8 kA para nivel II), la corriente de carga promedio debe estar entre 80% - 120% de la corriente primaria del t.c. y la cargabilidad del circuito secundario debe estar entre 25% - 100% de los VA del t.c., el error m&#225;ximo permitido es del 0,2% entre el 20% - 120% de la corriente nominal del t.c..<br />
+<h3 id="heading_8" >7.1.8	TIPOS DE TARIFAS DE ENERG&#205;A</h3>
+De acuerdo con el r&#233;gimen tarifario aprobado por el Organismo Competente, estas tarifas se clasifican en residenciales, y no residenciales.<br /><br /><b>7.1.8.1	Tarifas residenciales</b><br /><br />En tarifas residenciales el cargo es por consumo, y dependen del estrato socioecon&#243;mico en el cual est&#225; clasificado el inmueble.  Estas tarifas no dependen del horario del consumo.<br /><br /><b>7.1.8.2	Tarifas no residenciales</b><br /><br />Seg&#250;n la Resoluci&#243;n CREG 079/97 (Articulo 3, Par&#225;grafos 1 y 2), el comercializador fija unas opciones tarifarias seg&#250;n el nivel de tensi&#243;n. El usuario podr&#225; escoger entre las diferentes opciones que le presente la empresa. Estas opciones deben presentar diferencia en el costo de la energ&#237;a entregada en periodos de m&#225;xima demanda.<br /><br />Dependiendo de la actividad econ&#243;mica, las principales tarifas no residenciales, son:<br />
+<ul><li><b>Tarifa comercial</b></li></ul>
+<br />Esta tarifa es sencilla y no depende del nivel de tensi&#243;n de la alimentaci&#243;n.<br />
+<ul><li><b>Tarifa industrial</b></li></ul>
+<br />La tarifa industrial depende de la carga contratada, del horario de utilizaci&#243;n del servicio y del nivel de <a href="generalidades_7_1_actualizacion_generalidades.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> de la alimentaci&#243;n.<br />
+<ul><li><b>Tarifa Oficial</b></li></ul>
+<br />Tarifa que se aplica a entes gubernamentales, es tarifa sencilla y depende del nivel de <a href="generalidades_7_1_actualizacion_generalidades.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> de la alimentaci&#243;n.<br />
+<h3 id="heading_9" >7.1.9  SUSPENSION Y RECONEXI&#211;N DEL SERVICIO DE ENERGIA </h3>
+<b>PROCEDIMIENTO PARA SUSPENSION</b><br /><br />a)	<b>Para un usuario con acometida a&#233;rea independiente</b>, la suspensi&#243;n del servicio se har&#225; directamente desde el poste. (Incluye los inmuebles bifamiliares con acometidas que comparten el neutro, en este caso se suspender&#225; la fase que corresponda). En las cajas de medidores con ventana de inspecci&#243;n para el interruptor de la acometida se debe abrir la caja del medidor, retirar la salida del interruptor y colocar un sello adhesivo, luego se debe cerrar nuevamente la caja del medidor y colocar sello adhesivo en la ventana y sello ancla y/o sello adhesivo en la chapa de <a href="generalidades_7_1_actualizacion_generalidades.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a>.<br /><br />b)	<b>Para los clientes con acometida subterr&#225;nea independiente:</b> Se debe realizar en lo posible, y si existen, desde los Barrajes  Premoldeados de BT. <br /><br />c)	<b>Para armarios de medidores (incluyendo la suspensi&#243;n en las cajas desde dos hasta cuatro medidores)</b> la suspensi&#243;n se har&#225; en el compartimiento de propiedad del usuario, donde se instalan los interruptores autom&#225;ticos con los bloqueadores mec&#225;nicos. Los interruptores deber&#225;n estar fijos por medio de una base, montados uno a continuaci&#243;n del otro. <br /><br />El compartimiento deber&#225; tener una tapa que lo cubra completamente, dejando solamente la salida de apoyo y accionamiento de los autom&#225;ticos (SISTEMA ANTIBLOQUEO); esta tapa debe ser en l&#225;mina de calibre No. 16 BWG como m&#237;nimo, para garantizar la rigidez de la misma.<br /><br />La tapa deber&#225; tener un sistema de bloqueo para los interruptores autom&#225;ticos, y cuando por cantidad y tama&#241;o de los interruptores se requiera colocar dos filas, cada una deber&#225; tener su propio sistema de bloqueo.  El n&#250;mero de dispositivos de bloqueo ser&#225; del 60% del total de cada hilera de interruptores autom&#225;ticos.<br /><br />La tapa donde ser&#225;n soportados los bloqueadores deber&#225; fijarse r&#237;gidamente al armario en sus cuatro extremos y en la parte superior o inferior de cada autom&#225;tico debe llevar una placa de acr&#237;lico y/o metal grabado identificando el servicio respectivo en bajorrelieve y fijada a la tapa por medio de dos tornillos y/o remaches en sus extremos, resaltando las letras con una pintura diferente a la base de la placa.<br /><br />El bloqueador consistir&#225; en una varilla de acero de &#188; de pulgada de di&#225;metro, y unas placas en l&#225;mina de calibre No. 16 BWG como m&#237;nimo, en forma de U y del tama&#241;o del ancho de la palanca de accionamiento del autom&#225;tico, las cuales se hacen desplazar sobre la varilla hasta el interruptor de la cuenta que se quiere suspender con el fin de impedir la operaci&#243;n normal del autom&#225;tico de la posici&#243;n &quot;OFF” a &quot;ON”, despu&#233;s de colocar el bloqueador y el sello en el pin portasello del respectivo interruptor.  Ver Norma <a href="ap100_bloqueo_mecanico_interruptor_automatico.html" class="externalLink">AE100<span class="externalLinkIcon"></span></a>.<br /><br />Frente a cada interruptor autom&#225;tico del usuario deber&#225; existir un tornillo grafilado, que se incrustar&#225; en el orificio del extremo de la placa del bloqueador, con el fin de poder colocar el sello de suspensi&#243;n de la energ&#237;a.<br /><br />Se acepta otro sistema similar, que garantice la rigidez y seguridad del sellado con la previa aceptaci&#243;n de Enel Colombia.<br /><br />d)	<b>Para usuarios industriales y comerciales con equipos de medida en <a href="generalidades_7_1_actualizacion_generalidades.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a>,</b> la suspensi&#243;n se har&#225; desde los bornes de salida del lado secundario del transformador de corriente, cuando este es tipo barra y se colocaran sellos al compartimiento de los t.c. o desde bornes del transformador de distribuci&#243;n, cuando el transformador de corriente sea tipo ventana.  Para este caso se debe realizar desde el totalizador del predio; ya que se indica que el transformador no es de uso dedicado; para realizar la suspensi&#243;n de las salidas –BT- del transformador, por seguridad se debe des-energizar el mismo, y se afectaran temporalmente otras cuentas.    <br /> <br />e)	<b>Cuando el transformador es de uso dedicado o se tiene <a href="generalidades_7_1_actualizacion_generalidades.html#" id="version-189" class="externalLink  glosarioLink">equipo</a> de medida en MT,</b> la suspensi&#243;n se har&#225; retirando los portafusibles de los transformadores instalados en poste o en las subestaciones de local. En las subestaciones capsuladas y de pedestal, se retirar&#225;n los fusibles de MT (tipo HH y de bayoneta). En caso de que no haya ingreso al predio se pueden retirar las grapas de operar en caliente. <br />
+<h3 id="heading_10" >7.1.10	PROHIBICI&#211;N DE ACCESO A CAJAS, ARMARIOS Y CELDAS DE MEDIDORES</h3>
+Se instalar&#225; en la parte interna una calcoman&#237;a de 10 x 10 cm de fondo amarillo y letras negras, en parte visible de las cajas, armarios y celdas para medidores con el siguiente texto:<br /><br /><b>IMPORTANTE</b><br /><br /><b>Se&#241;or usuario:</b><br /><b>El acceso y la manipulaci&#243;n de los aparatos y elementos el&#233;ctricos contenidos en esta caja, armario o celda, son prohibidos.  Cualquier operaci&#243;n y/o arreglo, debe hacerlo personal autorizado de Enel Colombia.  Por lo tanto no rompa ni permita la rotura de los sellos por personal particular.</b><br /><b>El incumplimiento a lo anterior ocasiona sanciones pecuniarias y suspensiones del servicio, de acuerdo con los decretos del Ministerio de Minas y Energ&#237;a, y las resoluciones de CREG vigentes.</b><br />
+<h3 id="heading_11" >7.1.11	ACEPTACION DE MATERIALES Y EQUIPOS</h3>
+Los materiales y equipos suministrados por los particulares o firmas contratistas para ser instalados en el sistema de Enel Colombia, deber&#225;n ser nuevos y cumplir con las normas NTC o internacionales, con las especificaciones t&#233;cnicas exigidas por Enel Colombia y con lo indicado en estas normas.<br /><br />Todos los materiales deber&#225;n tener el nombre del fabricante o la marca de f&#225;brica y las instrucciones m&#237;nimas que permitan su correcta utilizaci&#243;n.<br /><br />&#218;nicamente se admitir&#225;n los materiales o equipos que posean certificaci&#243;n de producto, contra RETIE (si lo requiere) y contra norma t&#233;cnica, por ello se recomienda a los ingenieros o firmas constructoras que soliciten informaci&#243;n a los entes avalados por la ONAC Organismo Nacional de <a href="generalidades_7_1_actualizacion_generalidades.html#" id="version-75" class="externalLink  glosarioLink">Acreditaci&#243;n</a> de Colombia.<br /><br />Tambi&#233;n la Superintendencia de Servicios  P&#250;blicos Domiciliarios mediante circular externa 000005 del 5 de septiembre del 2001, reafirma que las empresas de servicios p&#250;blicos domiciliarios de energ&#237;a el&#233;ctrica deber&#225;n exigir a fabricantes y proveedores de productos el&#233;ctricos que se instalen en sus plantas, l&#237;neas, redes, subestaciones y equipos de medida realizados por las empresas o aprobados por los mismas, acrediten <a href="generalidades_7_1_actualizacion_generalidades.html#" id="version-124" class="externalLink  glosarioLink">certificaci&#243;n</a> de su sistema de calidad. 
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 1590, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

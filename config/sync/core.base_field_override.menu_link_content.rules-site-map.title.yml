@@ -1,0 +1,18 @@
+uuid: 841410c1-5464-4c8d-9194-8b6d3faa7aed
+langcode: es
+status: true
+dependencies:
+  config:
+    - system.menu.rules-site-map
+id: menu_link_content.rules-site-map.title
+field_name: title
+entity_type: menu_link_content
+bundle: rules-site-map
+label: 'Título del enlace del menú.'
+description: 'El texto que se usará en el menú para este enlace.'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,30 @@
+_core:
+  default_config_hash: FHNbqwJesB9Q7Y92XdHOxRODYD8eatKrqdwNA4O78lw
+langcode: es
+likinormas_pdf_using_mpdf:
+  pdf_filename: '[node:title]'
+  pdf_save_option: '0'
+  pdf_set_title: ''
+  pdf_set_author: ''
+  pdf_set_subject: ''
+  pdf_set_creator: ''
+  margin_top: '35'
+  margin_right: '15'
+  margin_bottom: '30'
+  margin_left: '15'
+  margin_header: '9'
+  margin_footer: '9'
+  pdf_font_size: '12'
+  pdf_default_font: dejavusanscondensed
+  pdf_page_size: A4
+  dpi: '96'
+  img_dpi: '96'
+  orientation: P
+  watermark_option: '0'
+  watermark_opacity: '0.1'
+  pdf_watermark_text: ''
+  watermark_image: {  }
+  pdf_header: '<div><img src="/sites/default/files/2023-09/ENEL_LOGO.png" width="55px" height="55px" ></div>'
+  pdf_footer: "<div><p align=\"left\" style=\"font-size: 10px\">\r\n-Estos documentos tienen derechos de autor. PROHIBIDA SU REPRODUCCIÓN TOTAL O PARCIAL SIN LA AUTORIZACIÓN EXPRESA DE ENEL. Artículo 29 del Decreto 460 de 1995.\r\n</p><div align=\"right\" style=\"font-size: 12px\">Página {PAGENO} de {nbpg}</div></div>"
+  pdf_css_file: styles/custom.css
+  pdf_password: ''

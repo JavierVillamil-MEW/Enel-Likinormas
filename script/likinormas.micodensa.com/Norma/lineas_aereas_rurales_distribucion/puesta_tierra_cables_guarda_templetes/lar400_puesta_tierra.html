@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>LAR400 Puesta a tierra | Likinormas</title>
+	<meta name="description" content="redes aéreas rurales; redes aereas; red de BT; puesta a tierra" />
+	<script src="../../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../../index.html"><img src="../../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1003" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../../Usuario/Registro%3FReturnUrl=%252FNorma%252FDetalles%252F1003.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/1003" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1003" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			showSubmenu('4', '94');
+		});
+	</script>
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Norma t&#233;cnica
+	</div>
+	<h1>LAR400 Puesta a tierra</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de la norma</div>
+					<div class="caracteristicas">LAR 400</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">03/04/2017</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../../Home/DownloadPDF/1003">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FNorma%2FDetalles%2F1003&amp;nodoid=1003', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+        <div style="clear:left;"></div>
+		El <a href="lar400_puesta_tierra.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de puesta a <a href="lar400_puesta_tierra.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> tiene por finalidad proteger la vida de las personas, evitar da&#241;os en los equipos por sobretensiones y mejorar la efectividad de las protecciones el&#233;ctricas, al proporcionar una adecuada conducci&#243;n de la corriente de <a href="lar400_puesta_tierra.html#" id="version-204" class="externalLink  glosarioLink">falla</a> a <a href="lar400_puesta_tierra.html#" id="version-387" class="externalLink  glosarioLink">tierra</a>. <br /><br />De acuerdo a lo anterior, en una <a href="lar400_puesta_tierra.html#" id="version-237" class="externalLink  glosarioLink">instalaci&#243;n</a> de una <a href="lar400_puesta_tierra.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a> es importante el valor de la resistencia que se tenga con respecto a <a href="lar400_puesta_tierra.html#" id="version-387" class="externalLink  glosarioLink">tierra</a>; independiente del n&#250;mero de electrodos y elementos que haya necesidad de utilizar para lograr &#233;ste prop&#243;sito.  Por ello, siempre que se instala un <a href="lar400_puesta_tierra.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de <a href="lar400_puesta_tierra.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a>, se debe medir el valor de la resistencia a <a href="lar400_puesta_tierra.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> y confrontarlo con los l&#237;mites establecidos, para garantizar una buena <a href="lar400_puesta_tierra.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a> del <a href="lar400_puesta_tierra.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> el&#233;ctrico.<br /><br />En las redes de distribuci&#243;n, el <a href="lar400_puesta_tierra.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de <a href="lar400_puesta_tierra.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> se compone de las puestas a <a href="lar400_puesta_tierra.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> instaladas en los <a href="lar400_puesta_tierra.html#" id="version-314" class="externalLink  glosarioLink">pararrayos</a>, transformadores, condensadores, reguladores, equipos de <a href="lar400_puesta_tierra.html#" id="version-270" class="externalLink  glosarioLink">maniobra</a>, neutros y elementos met&#225;licos, cuyos electrodos de <a href="lar400_puesta_tierra.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a> est&#225;n generalmente constituidos por varillas enterradas.<br /><br />Con la interconexi&#243;n de las puestas a <a href="lar400_puesta_tierra.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> (a trav&#233;s del neutro) se logra disminuir el valor de la resistencia entre neutro y <a href="lar400_puesta_tierra.html#" id="version-387" class="externalLink  glosarioLink">tierra</a>, que asegura la operaci&#243;n correcta de las protecciones y limita la <a href="lar400_puesta_tierra.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> a <a href="lar400_puesta_tierra.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> que puede aparecer entre las fases no falladas cuando ocurre una <a href="lar400_puesta_tierra.html#" id="version-204" class="externalLink  glosarioLink">falla</a> a <a href="lar400_puesta_tierra.html#" id="version-387" class="externalLink  glosarioLink">tierra</a>.<br /><br />El <a href="lar400_puesta_tierra.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de distribuci&#243;n en M.T., es s&#243;lidamente puesto a <a href="lar400_puesta_tierra.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> en las subestaciones y en B.T. es efectivamente puesto a <a href="lar400_puesta_tierra.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> a lo largo de su recorrido.<br /><br />Se utiliza como electrodo para <a href="lar400_puesta_tierra.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a> una varilla cobrizada de 5/8&quot; x 2,44m, con su respectivo conector y como medio de conexi&#243;n hasta <a href="lar400_puesta_tierra.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> se utiliza <a href="lar400_puesta_tierra.html#" id="version-84" class="externalLink  glosarioLink">alambre</a> de cobre o cobrizado (copperweld)  No 4 AWG .<br /><br />La ventaja de utilizar las varillas como electrodos de <a href="lar400_puesta_tierra.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> es su facilidad de <a href="lar400_puesta_tierra.html#" id="version-237" class="externalLink  glosarioLink">instalaci&#243;n</a>, no necesitan excavaci&#243;n y son econ&#243;micas con respecto a otras soluciones.<br /><br /><b><a href="lar400_puesta_tierra.html#" id="version-237" class="externalLink  glosarioLink">Instalaci&#243;n</a> de puestas a <a href="lar400_puesta_tierra.html#" id="version-387" class="externalLink  glosarioLink">tierra</a></b><br /><br />Para la <a href="lar400_puesta_tierra.html#" id="version-237" class="externalLink  glosarioLink">instalaci&#243;n</a> de las puestas a <a href="lar400_puesta_tierra.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> de los circuitos de distribuci&#243;n en M.T., B.T. y equipos conectados del <a href="lar400_puesta_tierra.html#" id="version-363" class="externalLink  glosarioLink">sistema</a>, se deben tener en cuenta los siguientes casos:<br /> <br />1.	DPS-Dispositivo de Protecci&#243;n contra Sobretensi&#243;n Transitorias (antes llamados pararrayos), los puntos de tierra de cada uno de ellos, se deben conectar entre s&#237; mediante alambre de cobre o cobrizado (copperweld) No.4 AWG, y se lleva a tierra evitando dobleces agudos en el alambre, hasta la varilla previamente enterrada utilizando para la uni&#243;n a la varilla un conector apropiado.<br /><br />2.	En los transformadores de distribuci&#243;n se deben conectar entre s&#237; el neutro y la carcasa, mediante <a href="lar400_puesta_tierra.html#" id="version-84" class="externalLink  glosarioLink">alambre</a> de cobre o cobrizado ( copperweld) No 4 AWG y desde all&#237; hasta la varilla de <a href="lar400_puesta_tierra.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a>.  Se realiza una sola bajante para <a href="lar400_puesta_tierra.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a> de los <a href="lar400_puesta_tierra.html#" id="version-314" class="externalLink  glosarioLink">pararrayos</a> y del transformador.<br /><br />3.	El neutro de la red de B.T. se debe poner a<a href="lar400_puesta_tierra.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> cada cinco postes, igualmente los puntos finales de los neutros del circuito. <br /><br />4.	Los circuitos de M.T. que lleven neutro o <a href="lar400_puesta_tierra.html#" id="version-107" class="externalLink  glosarioLink">cable</a> de guarda deben ser aterrizados en todos los postes.<br /><br />5.	En las transiciones de los cables subterr&#225;neos de M.T. , los alambres de la pantalla met&#225;lica del blindaje del conductor en los terminales deben conectarse a <a href="lar400_puesta_tierra.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> a trav&#233;s de la <a href="lar400_puesta_tierra.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a> de los <a href="lar400_puesta_tierra.html#" id="version-314" class="externalLink  glosarioLink">pararrayos</a>. La pantalla del terminal del <a href="lar400_puesta_tierra.html#" id="version-107" class="externalLink  glosarioLink">cable</a> de M.T solo debe aterrizarse en uno de los extremos del <a href="lar400_puesta_tierra.html#" id="version-107" class="externalLink  glosarioLink">cable</a>, con el fin de evitar circulaci&#243;n de corriente a trav&#233;s de la pantalla.<br /><br />6.	Para disminuir el vandalismo se usan postes de concreto con la puesta a tierra inmersa en el concreto. Se deben empalmar los cables en las cajas de paso (referencia 5800) dispuesta con los conectores adecuados, a fin de prolongar el conductor al neutro y a la varilla de puesta a tierra. Ver norma LA 408.<br /><br />7.	Como alternativa para el conductor del electrodo de puesta a tierra se usa el fleje de acero conectado al neutro o punto de tierra de equipos y en el otro extremo a la varilla de tierra. <br /><br /><br /><b>Medida de resistencia de <a href="lar400_puesta_tierra.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a></b><br /><br />La resistencia de cualquier <a href="lar400_puesta_tierra.html#" id="version-180" class="externalLink  glosarioLink">electrodo de puesta a tierra</a> debe ser menor de 25 Ohmio (Norma ICONTEC 2050 Secci&#243;n 250-84).  La resistencia de las puestas a <a href="lar400_puesta_tierra.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> de subestaciones de M.T., debe ser menor de 10 Ohmio.<br /> <br />La medida de la resistencia de <a href="lar400_puesta_tierra.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a> debe efectuarse con un medidor de tierras (telurometro), utilizando preferiblemente el <a href="lar400_puesta_tierra.html#" id="version-278" class="externalLink  glosarioLink">m&#233;todo</a> de los tres puntos o &quot;Ca&#237;da de <a href="lar400_puesta_tierra.html#" id="version-377" class="externalLink  glosarioLink">Tensi&#243;n</a>&quot;, que se describe a continuaci&#243;n con la ayuda de la figura 1 y el formato presentado en la Norma <a href="lar400_puesta_tierra.html" class="externalLink">LAR 400<span class="externalLinkIcon"></span></a>, p&#225;gina 6.<br /> <br />Los bornes de los extremos marcados como J<sub>c</sub> y J<sub>xc</sub> son los terminales de corriente y los bornes centrales marcados como J<sub>t</sub> y J<sub>xt</sub> son los terminales de <a href="lar400_puesta_tierra.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a>. Para medir la resistencia de tierra se utilizan dos varillas como electrodos auxiliares, que se entierran en el terreno, alineados con el punto de <a href="lar400_puesta_tierra.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a> a medir.<br /><br />Primero se unen los bornes J<sub>xc</sub> y J<sub>xt</sub> y se conectan a la varilla de <a href="lar400_puesta_tierra.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> (o malla de <a href="lar400_puesta_tierra.html#" id="version-387" class="externalLink  glosarioLink">tierra</a>) cuya resistencia se requiere medir.  La varilla m&#225;s lejana conectada al <a href="lar400_puesta_tierra.html#" id="version-104" class="externalLink  glosarioLink">borne</a> J<sub>c,,, act&#250;a como electrodo de corriente, la otra varilla conectada al <a href="lar400_puesta_tierra.html#" id="version-104" class="externalLink  glosarioLink">borne</a> J</sub>t,, (localizada entre la varilla de corriente y la <a href="lar400_puesta_tierra.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a> a medir) act&#250;a como electrodo de <a href="lar400_puesta_tierra.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a>.<br /><br />De acuerdo a la figura.1 de la norma <a href="lar400_puesta_tierra.html" class="externalLink">LAR 400<span class="externalLinkIcon"></span></a> p&#225;gina 6 de 6, midiendo desde la varilla de puesta <a href="lar400_puesta_tierra.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> (o malla de <a href="lar400_puesta_tierra.html#" id="version-387" class="externalLink  glosarioLink">tierra</a>), D<sub>1</sub>  es la distancia hasta la varilla de corriente y D<sub>2</sub> es la distancia hasta la varilla de <a href="lar400_puesta_tierra.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a>.<br /><br />Al circular la corriente generada por el Medidor de tierras (telurometro), se producen gradientes de potencial alrededor de los electrodos, pero existen zonas entre ellos donde el potencial es constante.  Se ha determinado que a una distancia del 62% de D,,1,,, no se producen perturbaciones y all&#237; debe instalarse el electrodo de <a href="lar400_puesta_tierra.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a>.<br /><br />Se realizan tres mediciones con las siguientes distancias:<br /><br />1- 	D<sub>1</sub> =  25 m            D<sub>2</sub> = 15 m<br />2- 		D<sub>1</sub> =  30 m	            D<sub>2</sub> = 18 m<br />3- 	D<sub>1</sub> =  36 m            D<sub>2</sub> =  22 m<br /><br />Si los valores no difieren en &#177; 5 % del valor promedio (Obtenido de la suma de las tres mediciones y dividiendo por 3) debe considerarse que este valor promedio es el valor verdadero.<br /><br />Si el <a href="lar400_puesta_tierra.html#" id="version-195" class="externalLink  glosarioLink">error</a> es mayor, existe superposici&#243;n de los gradientes de <a href="lar400_puesta_tierra.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> y debe aumentarse D<sub>1</sub> y D<sub>2</sub> manteniendo su relaci&#243;n D<sub>2</sub>=0,6<sub>2</sub>D<sub>1</sub> y repitiendo el procedimiento hasta cumplir la condici&#243;n que el <a href="lar400_puesta_tierra.html#" id="version-195" class="externalLink  glosarioLink">error</a> sea &lt;5%.<br /><br />Todas las medidas deben realizarse sin <a href="lar400_puesta_tierra.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a>, ni circulaci&#243;n de corriente, es decir, la varilla de <a href="lar400_puesta_tierra.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> debe estar desconectada de bajantes de <a href="lar400_puesta_tierra.html#" id="version-314" class="externalLink  glosarioLink">pararrayos</a>, neutros, tierras de equipos en funcionamiento.  Igual sucede si se miden mallas de <a href="lar400_puesta_tierra.html#" id="version-387" class="externalLink  glosarioLink">tierra</a>.<br /> <br />De acuerdo con el RETIE en algunas instalaciones se deben cumplir los siguientes valores:<br /><br />Para subestaciones de media tensi&#243;n la resistencia debe ser  = 10 ohm.  <br />La resistencia para estructuras con cable de guarda =20 ohm.<br />Punto neutro de acometida en baja tensi&#243;n = 25 ohm.<br />La resistencia de cualquier electrodo de puesta a tierra debe ser = 25 ohm. (Norma ICONTEC 2050 Secci&#243;n 250-84) y RETIE.<br /><br /><br /><b>Medida de resistividad del terreno</b><br /><br />Es de gran importancia conocer las caracter&#237;sticas del terreno donde se va a instalar una varilla de <a href="lar400_puesta_tierra.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> o electrodo de <a href="lar400_puesta_tierra.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> para predecir el n&#250;mero de varillas que se deben instalar o la configuraci&#243;n de los electrodos.  La resistividad varia con el tipo de suelo, la temperatura, la humedad, la homogeneidad y acidez del terreno.<br /><br />El <a href="lar400_puesta_tierra.html#" id="version-278" class="externalLink  glosarioLink">m&#233;todo</a> m&#225;s empleado para medir la resistividad del terreno (Ohmio*m) es el de los cuatro puntos (o <a href="lar400_puesta_tierra.html#" id="version-278" class="externalLink  glosarioLink">m&#233;todo</a> de Wenner). Se instalan cuatro varillas alineadas e igualmente espaciadas a una distancia D. Los bornes de los extremos del aparato marcados como J<sub>c</sub> y J<sub>xc</sub> son los terminales de corriente y los bornes centrales bornes J<sub>t</sub> y J<sub>xt</sub> son los terminales de <a href="lar400_puesta_tierra.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a>, que se instalan a las varillas como se <a href="lar400_puesta_tierra.html#" id="version-288" class="externalLink  glosarioLink">muestra</a> en la fig.2 de la norma <a href="lar400_puesta_tierra.html" class="externalLink">LAR 400<span class="externalLinkIcon"></span></a>, p&#225;gina 6.<br /><br />Para obtener el valor de la resistividad se deben realizar varias medidas con diferentes distancias D. Se sugiere hacer medidas con D=1 m , D=2 m , D=5 m , D=10 m , D=20 m y D=30 m .<br /><br />Las varillas de prueba deben ser enterradas a una profundidad no mayor de 10% de la distancia entre varillas y firmemente enterradas. Una vez realizadas todas las conexiones, se lee la resistencia en el aparato y la resistividad se calcula mediante la expresi&#243;n <span class="codeInline">p</span>=2(3.14)DR.<br /><br />Los resultados deben consignarse en una tabla como se <a href="lar400_puesta_tierra.html#" id="version-288" class="externalLink  glosarioLink">muestra</a> en la norma <a href="lar400_puesta_tierra.html" class="externalLink">LAR 400<span class="externalLinkIcon"></span></a>, p&#225;gina 6 con las observaciones y condiciones del medio ambiente.  Adem&#225;s se debe realizar una curva de resistividad contra distancia para determinar el valor promedio y descartar valores por errores de mediciones.<br /><br /><b>Mejoramiento de la resistencia de <a href="lar400_puesta_tierra.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a></b><br /><br />El mejoramiento de las mallas o puestas a tierra se efect&#250;a de 2 formas:<br /><br />1.	Colocando mas electrodos y/o sistemas de puesta a tierra Carson.<br />2.	Realizando tratamiento al suelo.<br /><br /> <br />1.	 Colocar o reforzar con m&#225;s electrodos.<br />En la mayor&#237;a de los casos se utiliza como <a href="lar400_puesta_tierra.html#" id="version-180" class="externalLink  glosarioLink">electrodo de puesta a tierra</a> una varilla, pero cuando el valor medido de resistencia es alto, se pueden colocar de dos a tres varillas unidas entre s&#237; y separadas a una distancia de al menos dos longitudes de la varilla.  En casos especiales para lograr bajar la resistencia se pueden utilizar varillas m&#225;s largas ( seccionadas y unidas entre s&#237; ) tratando de conseguir a mayor profundidad, menor resistividad o alcanzar el nivel fre&#225;tico del terreno.<br /><br />2.	 Realizar tratamiento del suelo.<br />El tratamiento del suelo se efect&#250;a realizando una excavaci&#243;n para instalar la varilla y rellenando el hueco con <a href="lar400_puesta_tierra.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> negra, carb&#243;n, sales y compuestos con menor resistividad (concreto, bentonita o gel). El tratamiento del suelo se basa en el uso de materiales de relleno con menor resistividad, tales como <a href="lar400_puesta_tierra.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> negra (50 Ohmio* m), concreto (40 Ohmio* m), bentonita (2,5 Ohmio* m) y gel (&lt;1 Ohmio* m).<br /><br />3.	 Sistema de Puesta a Tierra Carson.<br />Para los sitios que define la norma LAR 450, como Alto y Muy Alto nivel cer&#225;unico, se debe contemplar la opci&#243;n de utilizar el Sistema de Puesta a Tierra Carson. El SPT Carson, utiliza dos (2) varillas de cobre de di&#225;metro 15 mm (5/8 “) y longitud 2,4 m, conductor desnudo de cobre de calibre 3,8 mm2 (4 AWG) y longitud 2,4 m; el conductor conecta las puntas de las dos varillas. Tiene dos bajantes, una bajante de los DPS en Media Tensi&#243;n y la otra bajante de Baja Tensi&#243;n, neutro y puesta a tierra del Transformador, las bajantes pueden ser en fleje de acero, ancho 22,22 mm y espesor 1,2 mm (ET 492); las bajantes no requieren estar cubiertas, no afectan al SPT las abrazaderas y dem&#225;s elementos de fijaci&#243;n que puedan interconectar las bajantes. La configuraci&#243;n del SPT Carson, se muestra en el diagrama a continuaci&#243;n.<br /><br /><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/norma/1003/figura 1.jpg" src="http://likinormas.micodensa.com/media/cache/images/900x700/wikiimages/2d31333632393234343639-134504-figura 1.jpg" title="Figura 1. SPT Carson"  /></div><div class="texto_imagen_articulos" style="max-width:900px">Figura 1. SPT Carson</div></div></div><br /><br /><br />4.	Compensaci&#243;n de tierra mediante <a href="lar400_puesta_tierra.html#" id="version-237" class="externalLink  glosarioLink">instalaci&#243;n</a> de contrapesos.<br />Cuando la <a href="lar400_puesta_tierra.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a> est&#225; localizada en terrenos de alta resistividad, es posible mejorar el valor de la resistencia de <a href="lar400_puesta_tierra.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a>, mediante la <a href="lar400_puesta_tierra.html#" id="version-237" class="externalLink  glosarioLink">instalaci&#243;n</a> de contra pesos, para lo cual se mide la resistencia de <a href="lar400_puesta_tierra.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a> en por lo menos tres direcciones, buscando las partes m&#225;s h&#250;medas y se procede a lo largo de una zanja con una profundidad de 0,5 m , a enterrar un conductor como contrapeso en la direcci&#243;n que indique la menor resistencia.<br /><br />5.	Traslado de la red a terrenos con menor resistividad.<br />Generalmente en los sitios en que se presentan da&#241;os en transformadores en forma reiterada y no ha sido posible por los anteriores m&#233;todos bajar la resistencia de <a href="lar400_puesta_tierra.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a> a valores aceptables, se recomienda reubicar el transformador a terrenos con menor resistividad.<br /><br />La selecci&#243;n de una de las alternativas depender&#225; de la resistividad del terreno y del valor que se quiere alcanzar, ya que el tratamiento del terreno (a excepci&#243;n del concreto, la bentonita y el gel) se deteriora con el transcurso del tiempo, si no se toman las precauciones para que permanezca dicho tratamiento.<br /><br /><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/norma/1003/Dibujo LAR 400 FIG  2 y 3.JPG" src="http://likinormas.micodensa.com/media/cache/images/500x355/wikiimages/2d31343133393535303533-15585-Dibujo LAR 400 FIG  2 y 3.JPG" title=""  /></div><div class="texto_imagen_articulos" style="max-width:500px"></div></div></div><br /><br /><br />DEPENDENCIA:<span class="codeInline">_____________________________________________</span>  FECHA:<span class="codeInline">_____________________</span><br /><br /><b>MEDIDA DE LA RESISTENCIA DE PUESTA A <a href="lar400_puesta_tierra.html#" id="version-387" class="externalLink  glosarioLink">TIERRA</a>:<a href="lar400_puesta_tierra.html#" id="version-278" class="externalLink  glosarioLink">M&#201;TODO</a> DE LA CAIDA DE <a href="lar400_puesta_tierra.html#" id="version-377" class="externalLink  glosarioLink">TENSI&#211;N</a></b><br /><br />Lugar de medici&#243;n: <span class="codeInline">_____________________</span> Punto significativo: <span class="codeInline">_________________________</span><br />Direcci&#243;n: <span class="codeInline">____________________________________________________</span><br />Estado superficial del terreno      H&#250;medo              Seco  <br /><a href="lar400_puesta_tierra.html#" id="version-189" class="externalLink  glosarioLink">Equipo</a> utilizado: <span class="codeInline">_______________________________________________</span><br /><br /><b>RESULTADO DE LAS MEDICIONES</b><br /><div style="width:681px;"><table><tr><td colspan="1" rowspan="1" style="width:84px;height:10px;text-align:center"><b>D<sub>1</sub>(m)</b></td><td colspan="1" rowspan="1" style="width:84px;text-align:center"><b>D<sub>2</sub>(m)</b></td><td colspan="1" rowspan="1" style="width:67px;text-align:center"><b>R(Ohmio)</b></td><td colspan="1" rowspan="1" style="width:73px;text-align:center"><b>D<sub>1</sub></b><b>(m)</b></td><td colspan="1" rowspan="1" style="width:64px;text-align:center"><b>D<sub>2</sub></b><b>(m)</b></td><td colspan="1" rowspan="1" style="width:76px;text-align:center"><b>R(Ohmio)</b></td><td colspan="1" rowspan="1" style="width:233px;text-align:center"><b>OBSERVACIONES</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">25</td><td colspan="1" rowspan="1" style="text-align:center">15</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">36</td><td colspan="1" rowspan="1" style="text-align:center">22</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">30</td><td colspan="1" rowspan="1" style="text-align:center">18</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">42</td><td colspan="1" rowspan="1" style="text-align:center">25</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">36</td><td colspan="1" rowspan="1" style="text-align:center">22</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">50</td><td colspan="1" rowspan="1" style="text-align:center">30</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;text-align:center"><b>PROMEDIO</b></td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div><i>*SEGUNDA MEDICI&#211;N, SI LA PRIMERA DIFIERE EL 5%&gt; DEL PROMEDIO.</i><br /><br /><b>MEDIDA DE RESISTIVIDAD DEL TERRENO:<a href="lar400_puesta_tierra.html#" id="version-278" class="externalLink  glosarioLink">M&#201;TODO</a> DE LOS 4 PUNTOS</b><br />Lugar de medici&#243;n: <span class="codeInline">__________________________________</span> Punto significativo: <span class="codeInline">__________________________</span><br />Direcci&#243;n: <span class="codeInline">____________________________________________________</span><br />Estado superficial del terreno      H&#250;medo              Seco  <br /><a href="lar400_puesta_tierra.html#" id="version-189" class="externalLink  glosarioLink">Equipo</a> utilizado: <span class="codeInline">_______________________________________________</span><br /><div style="width:460px;"><table><tr><td colspan="1" rowspan="1" style="width:84px;height:10px;text-align:center"><b>D(m)</b></td><td colspan="1" rowspan="1" style="width:85px;text-align:center"><b>R(Ohmio)</b></td><td colspan="1" rowspan="1" style="width:76px;text-align:center"><b><span class="codeInline">p</span>=2(3.14)DR (Ohmio</b> * <b>m)</b></td><td colspan="1" rowspan="1" style="width:215px;text-align:center"><b>OBSERVACIONES</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">20</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">36</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div>
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 1003, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

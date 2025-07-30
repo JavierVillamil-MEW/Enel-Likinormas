@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET241 Tapas  y  marcos  para  cajas de  inspección  tipo  vehicular | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/1738" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F1738.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/1738" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/1738" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '27');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET241 Tapas  y  marcos  para  cajas de  inspecci&#243;n  tipo  vehicular</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET 241</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">19/04/2021</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/1738">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F1738&amp;nodoid=1738', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et241_tapas_marcos.html#heading_0">1. OBJETO </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et241_tapas_marcos.html#heading_1">2. ALCANCE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et241_tapas_marcos.html#heading_2">3. CONDICIONES DE SERVICIO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et241_tapas_marcos.html#heading_3">3.1	Condiciones Ambientales</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et241_tapas_marcos.html#heading_4">3.2	Condiciones El&#233;ctricas</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et241_tapas_marcos.html#heading_5">3.3	Condiciones de Servicio y Lugar de Instalaci&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et241_tapas_marcos.html#heading_6">4. SISTEMAS DE UNIDADES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et241_tapas_marcos.html#heading_7">5. NORMAS Y ESPECIFICACIONES T&#201;CNICAS.</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et241_tapas_marcos.html#heading_8">6.	DEFINICIONES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et241_tapas_marcos.html#heading_9">7. REQUERIMIENTOS T&#201;CNICOS PARTICULARES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et241_tapas_marcos.html#heading_10">7.1  Par&#225;metros Geom&#233;tricos</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et241_tapas_marcos.html#heading_11">7.2  Resistencia a la Compresi&#243;n del Concreto</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et241_tapas_marcos.html#heading_12">7.3  Acero de Refuerzo Principal</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et241_tapas_marcos.html#heading_13">8.  FABRICACI&#211;N DE LAS TAPAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et241_tapas_marcos.html#heading_14">8.1  Vaciado del Concreto</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et241_tapas_marcos.html#heading_15">8.2 Soldaduras</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et241_tapas_marcos.html#heading_16">8.3 Caracter&#237;sticas qu&#237;micas</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et241_tapas_marcos.html#heading_17">8.4  Sistemas de seguridad</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et241_tapas_marcos.html#heading_18">9. ENSAYOS DE LABORATORIO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et241_tapas_marcos.html#heading_19">9.1  Ensayos de Laboratorio</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et241_tapas_marcos.html#heading_20">9.2. Prueba Dimensional</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et241_tapas_marcos.html#heading_21">9.3  Obligaci&#243;n de Ejecuci&#243;n de los Ensayos y Pruebas</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et241_tapas_marcos.html#heading_22">10. SUMINISTRO Y RECEPCI&#211;N TAPAS Y MARCOS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et241_tapas_marcos.html#heading_23">10.1  Tolerancias Aceptadas</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et241_tapas_marcos.html#heading_24">10.2  Marcaci&#243;n  </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et241_tapas_marcos.html#heading_25">10.3  Recepci&#243;n de marcos y tapas</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et241_tapas_marcos.html#heading_26">11. REQUISITOS DE LAS OFERTAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et241_tapas_marcos.html#heading_27">12.  GARANT&#205;A DE FABRICA</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et241_tapas_marcos.html#heading_28">13. INSPECCI&#211;N EN FABRICA </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et241_tapas_marcos.html#heading_29">14. CERTIFICADOS DE CONFORMIDAD</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et241_tapas_marcos.html#heading_30">15. PRESENTACI&#211;N DE LAS OFERTAS</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1. OBJETO </h2>
+Establecer las caracter&#237;sticas, requisitos y ensayos t&#233;cnicos que deben cumplir las tapas y marcos para cajas de <a href="et241_tapas_marcos.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> en v&#237;as vehiculares en el <a href="et241_tapas_marcos.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> subterr&#225;neo de distribuci&#243;n y alumbrado p&#250;blico, con <a href="et241_tapas_marcos.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de <a href="et241_tapas_marcos.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a>.<br />
+<h2 id="heading_1" >2. ALCANCE</h2>
+Esta especificaci&#243;n <a href="et241_tapas_marcos.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a> se aplicar&#225; en todas las tapas y marcos para cajas de <a href="et241_tapas_marcos.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> en v&#237;as vehiculares el <a href="et241_tapas_marcos.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> subterr&#225;neo de distribuci&#243;n y alumbrado p&#250;blico que adquiera CODENSA S.A. ESP con <a href="et241_tapas_marcos.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de <a href="et241_tapas_marcos.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a>.<br />
+<h2 id="heading_2" >3. CONDICIONES DE SERVICIO</h2>
+<h3 id="heading_3" >3.1	Condiciones Ambientales</h3>
+Las tapas y marcos para cajas de <a href="et241_tapas_marcos.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> en el <a href="et241_tapas_marcos.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de distribuci&#243;n y alumbrado p&#250;blico ser&#225;n empleados a la intemperie bajo las siguientes condiciones:<br /><div style="width:656px;"><table><tr><td colspan="2" rowspan="1" style="width:656px;height:9px;text-align:center"><b>CARACTER&#205;STICAS AMBIENTALES</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">a. Altura sobre el nivel del mar</td><td colspan="1" rowspan="1" style="">600 a 2 900 m</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">b. Ambiente</td><td colspan="1" rowspan="1" style="">Tropical</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">c. Humedad</td><td colspan="1" rowspan="1" style="">Mayor al  90 %</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">d. Temperatura m&#225;xima y m&#237;nima</td><td colspan="1" rowspan="1" style="">45 &#186;C y - 5 &#186;C respectivamente.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">e.  Poluci&#243;n</td><td colspan="1" rowspan="1" style="">Alta con productos de la combusti&#243;n y altamente contaminada por otros agentes.</td></tr></table><br /></div><h3 id="heading_4" >3.2	Condiciones El&#233;ctricas</h3><div style="width:665px;"><table><tr><td colspan="1" rowspan="1" style="width:335px;height:9px;">Tensi&#243;n Nominal del <a href="et241_tapas_marcos.html#" id="version-363" class="externalLink  glosarioLink">sistema</a></td><td colspan="1" rowspan="1" style="width:330px;text-align:center">34500 V – 11400 V – 480/277V – 208/120 V</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Frecuencia del <a href="et241_tapas_marcos.html#" id="version-363" class="externalLink  glosarioLink">sistema</a></td><td colspan="1" rowspan="1" style="text-align:center">60 Hz</td></tr></table><br /></div><h3 id="heading_5" >3.3	Condiciones de Servicio y Lugar de Instalaci&#243;n</h3>
+Las tapas y marcos para cajas de <a href="et241_tapas_marcos.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> en v&#237;as vehiculares en redes subterr&#225;neas ser&#225;n instalados, en cualquier zona del &#225;rea de cobertura de CODENSA S.A.<br /><br />Los suelos donde son instalados podr&#225;n ser terrenos de relleno, arenosos, rocosos, arcillosos semiduros, con una capa de profundidad variable de humus, abarcando qu&#237;micamente suelos desde &#225;cidos a alcalinos y desde oxidantes a reductores con gran variedad en la cantidad y tipo de sales solubles.<br />
+<h2 id="heading_6" >4. SISTEMAS DE UNIDADES</h2>
+En todos los documentos t&#233;cnicos se deben expresar las cantidades num&#233;ricas en unidades del <a href="et241_tapas_marcos.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> Internacional.  Si se usan cat&#225;logos, folletos o planos, en sistemas diferentes de unidades, deben hacerse  las conversiones respectivas.<br /><br />
+<h2 id="heading_7" >5. NORMAS Y ESPECIFICACIONES T&#201;CNICAS.</h2>
+Las tapas deber&#225;n cumplir con la &#250;ltima revisi&#243;n de las siguientes normas:<br /><div style="width:689px;"><table><tr><td colspan="1" rowspan="1" style="width:142px;height:21px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:547px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC 1</td><td colspan="1" rowspan="1" style="">Ensayo de doblamiento para productos met&#225;licos</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center">NTC 2</td><td colspan="1" rowspan="1" style="">Siderurgia. Ensayo de tracci&#243;n para materiales met&#225;licos. M&#233;todo de ensayo a temperatura ambiente.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC 121</td><td colspan="1" rowspan="1" style="">Especificaci&#243;n de desempe&#241;o para cemento hidr&#225;ulico</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC 174</td><td colspan="1" rowspan="1" style="">Concretos. Especificaciones de los agregados para concreto</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center">NTC 673</td><td colspan="1" rowspan="1" style="">Concretos. Ensayo de resistencia a la compresi&#243;n de espec&#237;menes cil&#237;ndricos de concreto.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC 1299</td><td colspan="1" rowspan="1" style="">Concretos. Aditivos qu&#237;micos para concreto.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC 1362</td><td colspan="1" rowspan="1" style="">Cemento portland blanco.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC 2289</td><td colspan="1" rowspan="1" style="">Barras corrugadas y lisas de acero de baja aleaci&#243;n, para refuerzo de concreto</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center">NTC-ISO 2859-1</td><td colspan="1" rowspan="1" style="">Procedimientos de muestreo para inspecci&#243;n por atributos. Parte 1: planes de muestreo determinados por el nivel aceptable de calidad -NAC- para inspecci&#243;n lote a lote.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC 4040</td><td colspan="1" rowspan="1" style="">Soldadura. Procedimiento de soldadura para el acero de refuerzo.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NSR-10</td><td colspan="1" rowspan="1" style="">C&#243;digo Colombiano de Construcciones Sismo Resistentes. </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center">A.W.S D 12.1</td><td colspan="1" rowspan="1" style="">(A.C.I 318) - Pr&#225;cticas recomendables para soldar acero de refuerzo, insertos met&#225;licos y conexiones, en construcciones de concreto reforzado.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center">ASTM A615/A615M</td><td colspan="1" rowspan="1" style="">Especificaci&#243;n Normalizada para Barras de Acero al Carbono Lisas y Corrugadas para Refuerzo de Concreto</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">ANSI/ASME B1.1</td><td colspan="1" rowspan="1" style="">Unified Inch Screw Threads</td></tr></table><br /></div><br />Pueden emplearse otras normas internacionalmente reconocidas equivalentes o superiores a las aqu&#237; se&#241;aladas, siempre y cuando se ajusten a lo solicitado en la presente Especificaci&#243;n <a href="et241_tapas_marcos.html#" id="version-376" class="externalLink  glosarioLink">T&#233;cnica</a>.<br />
+<h2 id="heading_8" >6.	DEFINICIONES</h2>
+Se establecen las siguientes definiciones para efectos de esta especificaci&#243;n <a href="et241_tapas_marcos.html#" id="version-376" class="externalLink  glosarioLink">T&#233;cnica</a>:<br /><br />-	<b>ADITIVO</b><br /><a href="et241_tapas_marcos.html#" id="version-274" class="externalLink  glosarioLink">Material</a> diferente del cemento, agregados o agua que se a&#241;ade al concreto, antes o durante la mezcla, para modificar una o varias de sus propiedades sin perjudicar su durabilidad, ni su capacidad para resistir esfuerzos. (NSR-10)<br /><br />-	<b>AGREGADOS</b><br />Conjunto de part&#237;culas inertes, naturales o artificiales, tales como areana, grava, triturado, etc., que al mezclarse con el <a href="et241_tapas_marcos.html#" id="version-274" class="externalLink  glosarioLink">material</a> cementante hidr&#225;ulico y el agua, producen el concreto. (NSR-10)<br /><br />-	<b>CONCRETO</b><br />Mezcla homog&#233;nea de <a href="et241_tapas_marcos.html#" id="version-274" class="externalLink  glosarioLink">material</a> cementante, agregados inertes y agua, con o sin aditivos. (NSR-10)<br /><br />-	<b>CONCRETO REFORZADO</b><br /><a href="et241_tapas_marcos.html#" id="version-274" class="externalLink  glosarioLink">Material</a> constituido por concreto que tiene un refuerzo consistente en barras de acero corrugado, estribos transversales o mallas electro soldadas, colocadas principalmente en las zonas de tracci&#243;n, en cuant&#237;as superiores a las m&#237;nimas especificadas en los Cap&#237;tulos C.1 a C.21, (NSR-10)  bajo la hip&#243;tesis de compatibilidad de deformaciones entre los materiales. (NSR-10)<br /><br />-	<b>CURADO DEL CONCRETO</b><br />Tratamiento que se le da al concreto, una vez vaciado, para impedir la r&#225;pida evaporaci&#243;n del agua de amasado, suavizando la retracci&#243;n y evitando el agrietamiento de la superficie.<br /><br />-	<b>REFUERZO</b><br />Acero en una de las tres formas siguientes, colocado para absorber esfuerzos de tracci&#243;n, compresi&#243;n, de corte o de torsi&#243;n en conjunto con el concreto:<br />(a)	Grupo de barras corrugado que cumple las normas NTC 2289 (ASTM A706) o ASTM A615/A615M.<br />(b)	Mallas electrosoldadas.<br />(c)	Alambres o cables de alta resistencia destinados principalmente al concreto preesforzado. (NSR-10)<br /><br />-	<b><a href="et241_tapas_marcos.html#" id="version-363" class="externalLink  glosarioLink">SISTEMA</a>  DE  <a href="et241_tapas_marcos.html#" id="version-357" class="externalLink  glosarioLink">SEGURIDAD</a></b><br /><a href="et241_tapas_marcos.html#" id="version-363" class="externalLink  glosarioLink">Sistema</a> instalado en la tapa que evita que la tapa sea retirada por personas no autorizadas por CODENSA S.A. ESP<br /><br />-	<b>VARILLA CORRUGADA</b><br />Varilla de acero con el n&#250;cleo de secci&#243;n circular, en cuya superficie lleva unos resaltes, que tienen por objeto aumentar la adherencia entre el concreto y el acero.<br /><br />-	<b>VIBRADO</b><br /><a href="et241_tapas_marcos.html#" id="version-363" class="externalLink  glosarioLink">Sistema</a> de compactaci&#243;n del concreto mediante aparatos vibratorios de alta frecuencia que tiene por objeto disminuir la porosidad del concreto, distribuir uniformemente los &#225;ridos y obligar a que la mezcla cubra toda la superficie interior de la formaleta.<br />
+<h2 id="heading_9" >7. REQUERIMIENTOS T&#201;CNICOS PARTICULARES</h2>
+Las tapas y marcos para cajas de <a href="et241_tapas_marcos.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> en v&#237;as vehiculares en el <a href="et241_tapas_marcos.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de distribuci&#243;n y alumbrado p&#250;blico estar&#225; construido con materiales con la mejor <a href="et241_tapas_marcos.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> para ese fin, debi&#233;ndose descartar el empleo de materiales alterables por la humedad, radiaci&#243;n solar y otras condiciones ambientales desfavorables.<br /><br />Se construir&#225;n en forma fundida y soldada y varilla de acero SAE 1010, SAE 1020, A36, A37 &#243; similar debidamente autorizada por CODENSA S.A.<br /><br />Las tapas y marcos debe ser autosoportable, r&#237;gidos y no debe presentar desajustes durante su transporte e instalaci&#243;n. <br />
+<h3 id="heading_10" >7.1  Par&#225;metros Geom&#233;tricos</h3>
+Las tapas y marcos para el <a href="et241_tapas_marcos.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de distribuci&#243;n y alumbrado p&#250;blico ser&#225;n de la forma y dimensiones que se muestran en las figuras 2, 3, 5 y 6.<br /><br /><b>7.1.1 Marco</b><br /><br />Las dimensiones del marco para la tapa de di&#225;metro de 63 cm est&#225;n en la figura 2 y para la tapa de di&#225;metro de 67 cm est&#225;n la figura 5.<br /><br />El <a href="et241_tapas_marcos.html#" id="version-274" class="externalLink  glosarioLink">material</a> utilizado en el marco ser&#225; fundici&#243;n de hierro nodular o Fundici&#243;n de hierro gris.<br /><br />La superficie horizontal de contacto con la tapa deber&#225; ser maquinada en torno no presentando una variaci&#243;n en su horizontalidad superior a 0,05 mm.<br /><br />El marco ser&#225; de una sola pieza de fundici&#243;n.<br /><br />Tendr&#225; un letrero que incluya la identificaci&#243;n del fabricante (nombre o logotipo).<br /><br /><b>7.1.2 Tapa</b><br /><br />Las dimensiones de la tapa de di&#225;metro de 63 cm est&#225;n en la figura 3 y las de di&#225;metro de 67 cm est&#225;n en la figura 6. <br /><br />El material utilizado en la tapa ser&#225; fundici&#243;n de hierro nodular o fundici&#243;n de hierro gris, refuerzos de varilla corrugada de acero &#189;” y el concreto debe ser m&#237;nimo de  4000 PSI (280 Kg/cm<sup>2</sup>).<br /><br />La superficie horizontal de contacto con el marco deber&#225; ser maquinada en torno no presentando una variaci&#243;n en su horizontalidad superior a 0,05 mm<br /><br />La fundici&#243;n de la tapa ser&#225; de una sola pieza de fundici&#243;n.<br /><br />En el aro fundido tendr&#225; un letrero que diga “Propiedad de CODENSA – PELIGRO ALTA TENSI&#211;N – identificaci&#243;n del fabricante (nombre o logotipo)”.<br /><br />Todas las soldaduras de la tapa deben efectuarse con soldaduras AWS 6010 y/o AWS 7018 hasta lograr una penetraci&#243;n total, de acuerdo a NTC 4040 y siguiendo las siguientes recomendaciones:
+<ul><li>En todas las uniones de la varilla con la fundici&#243;n y con las mismas varillas deben estar soldadas con un &#225;rea de por lo menos el di&#225;metro de la varilla;</li>
+<li>Todos los cruces de varillas deben ir soldados;</li>
+<li>Todas las soldaduras deben estar libres de defectos tales como escoria atrapada, poros etc. </li>
+<li>Toda la escoria de soldadura debe ser retirada antes de fundir el concreto.</li></ul>
+<br />Todas las tapas deben tener una placa de identificaci&#243;n seg&#250;n figura 4.<br />
+<h3 id="heading_11" >7.2  Resistencia a la Compresi&#243;n del Concreto</h3>
+La resistencia m&#237;nima a la compresi&#243;n para el concreto, debe ser de 280 kg/cm<sup>2</sup>   (4000 psi). Esta resistencia se debe verificar mediante ensayos de laboratorio de los cilindros tomados de varias bachadas, de acuerdo con la norma NTC 673.<br /><br />En cuanto a la <a href="et241_tapas_marcos.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> del concreto, se deben seguir los procedimientos establecidos en el cap&#237;tulo C del Reglamento Colombiano de Construcci&#243;n Sismo Resistente (Decreto 926 de 2010).<br /><br />Con la debida anticipaci&#243;n, el fabricante debe presentar a consideraci&#243;n de CODENSA S.A. ESP, el dise&#241;o de la mezcla que va a utilizar. CODENSA S.A. ESP podr&#225; exigir ensayos de prueba de la mezcla utilizada.<br /><br />Para concretos que utilicen aditivos plastificantes, las mezclas se deber&#225;n dise&#241;ar utilizando el aditivo y de acuerdo con los ensayos de laboratorio que se deben realizar.<br /><br />Las pruebas de asentamiento se realizar&#225;n cuando CODENSA S.A. ESP as&#237; lo exija. Los asentamientos resultantes deben coincidir con los especificados en el dise&#241;o de la mezcla.<br /><br />Se realizar&#225;n ensayos de cilindros, con edades de 7, 14 y 28 d&#237;as, calculando por proyecci&#243;n para las 2 primeras, la resistencia que tendr&#225; el concreto a los 28 d&#237;as.<br /><br />La resistencia promedio de los ensayos de los cilindros debe ser superior o por lo menos igual a la especificada en el dise&#241;o m&#225;s 85kg/cm<sup>2</sup>.<br /><br />El costo de todos los ensayos de laboratorio, ordenados por CODENSA S.A. ESP, para el control de <a href="et241_tapas_marcos.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> del concreto, correr&#225; por cuenta del fabricante.<br />
+<h3 id="heading_12" >7.3  Acero de Refuerzo Principal</h3>
+El acero de refuerzo utilizado en la fabricaci&#243;n de las tapas, debe cumplir con las normas NTC 2289 &#243; ASTM A615/A615M.<br /><br />Las varillas de acero estructural deben tener esfuerzo nominal de fluencia m&#237;nimo de 60000 psi.<br /><br />Bajo responsabilidad del fabricante se aceptar&#225; el torsionamiento del acero.<br /> 
+<h2 id="heading_13" >8.  FABRICACI&#211;N DE LAS TAPAS</h2>
+Se pueden fabricar con el uso de uno de los sistemas existentes, siempre y cuando se cumpla con las especificaciones que se establecen en esta norma.<br /><br />En ning&#250;n caso se aceptar&#225;n las tapas amasadas y compactadas a mano.<br />
+<h3 id="heading_14" >8.1  Vaciado del Concreto</h3>
+Al vaciar el concreto, se debe hacer lo m&#225;s cerca a &#233;sta, con el fin de evitar la disgregaci&#243;n de los materiales. <br /><br />El concreto se debe vaciar inmediatamente despu&#233;s de su amasado.<br />
+<h3 id="heading_15" >8.2 Soldaduras</h3>
+El proveedor debe confirmar el tipo de material portante que usara en las soldaduras.<br /><br />En las uniones soldadas deben realizarse pases de soldadura E-6010 con suficiente amperaje para obtener m&#225;xima penetraci&#243;n entre las piezas; tambi&#233;n deben realizarse pases sucesivos de soldadura E-7018 para alcanzar una altura m&#237;nima de refuerzo de 1/8”.<br /><br />Todas las soldaduras deben ser libres de defectos tales como escorias, inclusiones, poros, etc., y de la misma forma deben cumplir la norma NTC 4040.<br />
+<h3 id="heading_16" >8.3 Caracter&#237;sticas qu&#237;micas</h3>Las platinas y partes met&#225;licas deben cumplir con las siguientes caracter&#237;sticas:<br /><br /><div style="width:408px;"><table><tr><td colspan="3" rowspan="1" style="width:408px;height:10px;text-align:center"><b>CARACTER&#205;STICAS QU&#205;MICAS  DE FUNDICIONES</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"><b>ELEMENTO</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>ACERO</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>FUNDICI&#211;N NODULAR</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">% Carbono</td><td colspan="1" rowspan="1" style="text-align:center">0,08 a 0,22</td><td colspan="1" rowspan="1" style="text-align:center">3,2  a  4,1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">% F&#243;sforo, m&#225;x.</td><td colspan="1" rowspan="1" style="text-align:center">0,05</td><td colspan="1" rowspan="1" style="text-align:center">0,1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">% Azufre, m&#225;x.</td><td colspan="1" rowspan="1" style="text-align:center">0,05</td><td colspan="1" rowspan="1" style="text-align:center">0,03</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">% Manganeso</td><td colspan="1" rowspan="1" style="text-align:center">0,3 a 0,6</td><td colspan="1" rowspan="1" style="text-align:center">0,8</td></tr>
+<tr><td colspan="3" rowspan="1" style="height:10px;"><b>Nota</b>: Se pueden usar equivalentes con la previa autorizaci&#243;n de CODENSA S.A. ESP</td></tr></table><br /></div><h3 id="heading_17" >8.4  Sistemas de seguridad</h3>
+<b>8.4.1 Sistema de Seguridad por cadena</b><br /><br />Las tapas deben tener  un <a href="et241_tapas_marcos.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de <a href="et241_tapas_marcos.html#" id="version-357" class="externalLink  glosarioLink">Seguridad</a> con el fin de evitar que esta sea retirada  de su sitio consistente en una cadena soldada a la tapa y que se ancla a la estructura de concreto de la c&#225;mara como se indica en las figuras 1 y 3.<br /><br /><b>8.4.2 Sistemas Adicional de Seguridad</b><br /><br />Las tapas, seg&#250;n requerimiento de Codensa, pueden ser solicitadas con un <a href="et241_tapas_marcos.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> adicional de <a href="et241_tapas_marcos.html#" id="version-357" class="externalLink  glosarioLink">Seguridad</a> que debe cumplir con los siguientes requisitos.<br />
+<ul><li>El <a href="et241_tapas_marcos.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> adicional debe estar dise&#241;ado y construidos con elementos que no deterioren en condiciones ambientales de uso; por lo tanto no podr&#225; tener elementos roscados galvanizados ya que las roscas internas no tienen galvanizado y se deterioran f&#225;cilmente con las condiciones de uso.</li></ul>
+
+<ul><li>El <a href="et241_tapas_marcos.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> adicional debe tener un <a href="et241_tapas_marcos.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> tal que no pueda ser abierta con sistemas sencillos como alambres o varillas, rectas o dobladas.</li></ul>
+
+<ul><li>El <a href="et241_tapas_marcos.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> adicional debe permitir su operaci&#243;n a pesar de tenga condiciones muy adversa de agua o barro.</li></ul>
+
+<ul><li>El <a href="et241_tapas_marcos.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> adicional debe ser construido con elementos o recubrimientos que permitan la durabilidad a pesar de las condiciones adversas.</li></ul>
+
+<ul><li>Por existir muchas posibilidades de sistemas adicionales  de <a href="et241_tapas_marcos.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a>, CODENSA S.A. ESP no especifica un <a href="et241_tapas_marcos.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> &#250;nico, pero los oferentes deben presentar dentro de las ofertas t&#233;cnicas los dise&#241;os completos y ofrecer todas las pruebas necesarias que demuestren su buena operaci&#243;n. CODENSA S.A. ESP; por tratarse de un <a href="et241_tapas_marcos.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de <a href="et241_tapas_marcos.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a> podr&#225; aprobar un <a href="et241_tapas_marcos.html#" id="version-363" class="externalLink  glosarioLink">sistema</a>, sin dar explicaciones o cualidades t&#233;cnicas del mismo, en principio confidencialidad con el oferente y de los sistemas de <a href="et241_tapas_marcos.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a> de CODENSA S.A. ESP.</li></ul>
+
+<h2 id="heading_18" >9. ENSAYOS DE LABORATORIO</h2>
+<h3 id="heading_19" >9.1  Ensayos de Laboratorio</h3>
+El registro completo de los ensayos de los materiales y del concreto, debe estar disponible para el comprador, durante el tiempo que dure la fabricaci&#243;n y por los dos a&#241;os siguientes a su terminaci&#243;n.<br /><br /><b>9.1.1 Ensayos de Materiales del Concreto</b><br /><br />Todos los ensayos de los materiales y del concreto en s&#237;, se deben realizar de acuerdo con la norma ICONTEC correspondiente.<br /><br />El cemento debe cumplir con las normas normas NTC 121 y 1362.<br /><br />El cemento analizado debe corresponder a aquel sobre el cual se base la dosificaci&#243;n del concreto, que se va a utilizar en la fabricaci&#243;n de la tapa.<br /><br />Los agregados para el concreto deben cumplir con la norma NTC 174.<br /><br />El agregado grueso o grava, tendr&#225; un tama&#241;o m&#225;ximo de 19 mm y m&#237;nimo de 10 mm.<br /><br />El agregado fino o arena se debe lavar, y quedar libre de sustancias qu&#237;micas, org&#225;nicas o de cualquier naturaleza, que puedan perjudicar las caracter&#237;sticas f&#237;sicas de la mezcla.<br /><br />El agua utilizada en la mezcla del concreto, debe estar limpia y libre de cantidades perjudiciales de aceites, &#225;cidos, &#225;lcalis, sales, materias org&#225;nicas u otras sustancias perjudiciales para el concreto o el acero de refuerzo y ajustarse a lo especificado en el cap&#237;tulo C del Reglamento Colombiano de Construcci&#243;n Sismo Resistentes.<br /><br />Para el ensayo de la resistencia del concreto a la compresi&#243;n, el fabricante o proveedor debe preparar cuatro cilindros diarios, de acuerdo con la norma NTC 673 (ASTM C39). De estos cilindros diarios, se enviar&#225;n dos al laboratorio y se ensayar&#225;n a edades de 7 y 14 d&#237;as. En caso que la resistencia de los 7 y 14 d&#237;as, proyectada a los 28 d&#237;as sea menor que f&#39;cmin + 85 kg/cm&#178;, se deber&#225;n ensayar los otros dos cilindros a los 28 d&#237;as. Se halla la resistencia promedio de los cuatro cilindros y se verifica si cumple el requisito anterior. Si no cumple, se rechazar&#225; la producci&#243;n del d&#237;a en que fueron tomadas las cuatro muestras. Los resultados de los ensayos de estos cilindros se deber&#225;n suministrar al comprador para su conocimiento y control, y deben realizarse por un laboratorio aprobado por el comprador. <br /><br /><b>Nota.</b>   Para verificar si los materiales utilizados en la elaboraci&#243;n de la mezcla del concreto son de la <a href="et241_tapas_marcos.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> especificada, se deben realizar los ensayos de laboratorio correspondientes sobre muestras representativas de tales materiales.<br /><br /><b>9.1.2 Varillas de Refuerzo.</b><br /><br />El fabricante deber&#225; realizar los an&#225;lisis de laboratorio de las probetas seleccionadas del <a href="et241_tapas_marcos.html#" id="version-264" class="externalLink  glosarioLink">lote</a> de acero que se va a utilizar en el armado de los refuerzos de las tapas.<br /><br />En los ensayos de laboratorio de estas probetas, se deben suministrar los siguientes resultados:<br /><br />- Carga m&#225;xima a la tracci&#243;n.<br />- L&#237;mite de fluencia al 0,2%.<br />- Porcentaje de alargamiento en probeta de 200 mm (8&quot;).<br /><br />Las varillas de refuerzo, deben cumplir con la norma ASTM A615/A615M.<br /><br /><b>9.1.3 Fundici&#243;n de marcos y tapas.</b><br /><br />Al <a href="et241_tapas_marcos.html#" id="version-274" class="externalLink  glosarioLink">material</a> <a href="et241_tapas_marcos.html#" id="version-338" class="externalLink  glosarioLink">producto</a> de la fundici&#243;n de marcos y tapas se les efectuara un  examen metalografico y qu&#237;mico por espectrometr&#237;a para comprobar el cumplimiento de los requisitos del numeral 8.3<br />
+<h3 id="heading_20" >9.2. Prueba Dimensional</h3>
+La verificaci&#243;n de las dimensiones se har&#225; con los instrumentos de medida que den la aproximaci&#243;n requerida (cinta met&#225;lica con divisiones de 1 mm para longitudes y calibrador para los di&#225;metros y espesores).  El tama&#241;o de la muestra deber&#225; estar de acuerdo NTC 2859-1.<br />
+<h3 id="heading_21" >9.3  Obligaci&#243;n de Ejecuci&#243;n de los Ensayos y Pruebas</h3>
+Es obligaci&#243;n del fabricante realizar las siguientes pruebas de tapas, marcos y ensayos de materiales:<br /><br />1.	Dise&#241;o de la mezcla incluyendo el an&#225;lisis fisicoqu&#237;mico del agua.<br />2.	<a href="et241_tapas_marcos.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de tracci&#243;n del acero.<br />3.	<a href="et241_tapas_marcos.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de resistencia a la compresi&#243;n de los cilindros de concreto.<br />4.	<a href="et241_tapas_marcos.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> metalografico de la fundici&#243;n<br />5.	<a href="et241_tapas_marcos.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a>de composici&#243;n qu&#237;mica de la fundici&#243;n<br />6.	<a href="et241_tapas_marcos.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de pruebas dimensional<br />7.	<a href="et241_tapas_marcos.html#" id="version-235" class="externalLink  glosarioLink">Inspecci&#243;n</a> visual<br /><br />Las pruebas correspondientes a los puntos 1, 2, 3, 4 y 5 se deber&#225;n realizar por un laboratorio especializado y aceptado previamente por CODENSA S.A. ESP.<br />
+<h2 id="heading_22" >10. SUMINISTRO Y RECEPCI&#211;N TAPAS Y MARCOS</h2>
+<h3 id="heading_23" >10.1  Tolerancias Aceptadas</h3>
+Longitud, ancho y alto de la tapa, y el marco. <br /><br />Se acepta una tolerancia en la longitud, ancho y alto de la tapa y el marco seg&#250;n lo especificado en los gr&#225;ficos; de no encontrarse especificada se tomara de &#177; 3 mil&#237;metros.<br />
+<h3 id="heading_24" >10.2  Marcaci&#243;n  </h3>
+Se deben marcar las tapas y los marcos seg&#250;n lo indicado en las figuras y en el numeral 7.1.<br />
+<h3 id="heading_25" >10.3  Recepci&#243;n de marcos y tapas</h3>
+El proveedor debe realizar la solicitud de inspecci&#243;n con una anticipaci&#243;n m&#237;nima de 15 d&#237;as calendario. La fecha que se indica como fecha de inicio, ser&#225; la fecha en la cual se estima que el concreto cumple con los requisitos mec&#225;nicos indicados.<br /><br />En la semana anterior a la visita deben presentar el cuadro de control de producci&#243;n y los soportes de los ensayos de compresi&#243;n que demuestren el cumplimiento de los requisitos mec&#225;nicos del concreto. El proveedor deber&#225; disponer de un control de producci&#243;n que le permita a la Compa&#241;&#237;a verificar que previo a la fecha de inicio de la inspecci&#243;n, el concreto ha llegado al 90% de la capacidad m&#237;nima de rotura (compresi&#243;n).<br /><br />El tiempo normal de fraguado del concreto es 28 d&#237;as. Si el proveedor utiliza aditivos acelerantes para el fraguado del concreto, el proveedor deber&#225; presentar la curva del ensayo de rotura del concreto donde indique el tiempo en que se alcanza el 90% de la capacidad m&#237;nima de rotura.<br /><br />En la inspecci&#243;n se realizar&#225;:<br />-	Prueba destructiva a una (1) tapa por referencia, a fin de validar el cumplimiento de las caracter&#237;sticas t&#233;cnicas de las varillas, concreto, soldadura, entre otras.<br />-	Inspecci&#243;n visual, prueba dimensional y revisi&#243;n de protocolos de pruebas.<br /><br />Para llevar a cabo las labores de inspecci&#243;n y recepci&#243;n de tapas y marcos, se establece el siguiente plan de muestreo, en el que se determina, de acuerdo con el tama&#241;o del lote, el n&#250;mero de unidades a los cuales se les debe practicar la inspecci&#243;n visual para la aceptaci&#243;n o rechazo del mismo:<br /><br /><b><a href="et241_tapas_marcos.html#" id="version-0" class="externalLink  glosarioLink">INSPECC&#211;N VISUAL Y DIMENSIONAL</a></b><br /><br /><b>Nivel de <a href="et241_tapas_marcos.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> general II, NCA = 4%</b><br /><div style="width:544px;"><table><tr><td colspan="1" rowspan="1" style="width:170px;height:9px;text-align:center"><b>Tama&#241;o del <a href="et241_tapas_marcos.html#" id="version-264" class="externalLink  glosarioLink">lote</a></b></td><td colspan="1" rowspan="1" style="width:128px;text-align:center"><b>Tama&#241;o de <a href="et241_tapas_marcos.html#" id="version-288" class="externalLink  glosarioLink">muestra</a></b></td><td colspan="1" rowspan="1" style="width:151px;text-align:center"><b>Aceptaci&#243;n</b></td><td colspan="1" rowspan="1" style="width:95px;text-align:center"><b>Rechazos</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">2 - 25</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">26 - 90</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">91 -150</td><td colspan="1" rowspan="1" style="text-align:center">20</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">151-280</td><td colspan="1" rowspan="1" style="text-align:center">32</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">281-500</td><td colspan="1" rowspan="1" style="text-align:center">50</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">501-1200</td><td colspan="1" rowspan="1" style="text-align:center">80</td><td colspan="1" rowspan="1" style="text-align:center">7</td><td colspan="1" rowspan="1" style="text-align:center">8</td></tr></table><br /></div><b>Nota. 	Si el tama&#241;o de la <a href="et241_tapas_marcos.html#" id="version-288" class="externalLink  glosarioLink">muestra</a> es mayor o igual al <a href="et241_tapas_marcos.html#" id="version-264" class="externalLink  glosarioLink">lote</a>, se har&#225;  <a href="et241_tapas_marcos.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> 100%</b><br /><br />Prueba de compresi&#243;n: se realizara una sola vez en la primera recepci&#243;n acorde con la norma ANSI/SCTE 77 TIER 22 y/o similar previa aprobaci&#243;n por la Compa&#241;&#237;a.<br /><br />Para la prueba de compresi&#243;n se solicita el siguiente nivel de inspecci&#243;n:<br /><br /><div style="width:628px;"><table><tr><td colspan="1" rowspan="2" style="width:142px;height:21px;">Tama&#241;o de Muestra</td><td colspan="2" rowspan="1" style="width:486px;text-align:center">% AQL</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">Aceptaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">Rechazo</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr></table><br /></div><br /><br /><br /><b>10.3.1 Motivos de rechazo.</b> <br />Se rechazar&#225;n los tapas y marcos por las siguientes causas:<br /><br /><br /> -	La resistencia a la compresi&#243;n del concreto no cumple con los requisitos m&#237;nimos especificados.<br /><br /> -	Tapas con resanes, cuando la profundidad de estos haya tenga mas 5 mm.<br /><br /> -	Los resanes superficiales hechos con mortero sin el aditivo apropiado para adherencia a concreto viejo o en forma inadecuada.<br /><br /> -	Varillas a la vista de la estructura met&#225;lica. <br /><br /> -	Grietas transversales o longitudinales.<br /><br /> -	El incumplimiento de las tolerancias especificadas, se consideran como defectos cr&#237;ticos.<br /><br /> - 	No cumplir con los requisitos qu&#237;micos &#243; metalogr&#225;ficos de la fundici&#243;n.<br /><br /> - 	No tener la cadena de <a href="et241_tapas_marcos.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a>.<br /><br /> -	No colocaci&#243;n de la leyenda mencionada en el numeral 10.2<br /><br /> -	Incumplimiento de cualquier requisito establecido en la especificaci&#243;n t&#233;cnica.<br /><br />
+<h2 id="heading_26" >11. REQUISITOS DE LAS OFERTAS</h2>
+El Oferente obligatoriamente deber&#225; incluir con su propuesta, la siguiente informaci&#243;n:<br />
+<ul><li>Relaci&#243;n de los bienes cotizados</li></ul>
+
+<ul><li>Informaci&#243;n del oferente</li></ul>
+
+<ul><li>Planilla de caracter&#237;sticas t&#233;cnicas garantizadas, la cual deber&#225; ser diligenciada completamente en formato Excel.</li></ul>
+ 
+<ul><li>Relaci&#243;n de las excepciones de car&#225;cter exclusivamente t&#233;cnico de la oferta, respecto a los bienes ofertados. Si la oferta no presenta excepci&#243;n, se indicar&#237;a.</li></ul>
+
+<ul><li>Cat&#225;logos originales completos y actualizados del fabricante, que correspondan a lo cotizado en la planilla de caracter&#237;sticas t&#233;cnicas garantizadas. </li></ul>
+
+<ul><li>Protocolos de pruebas de acuerdo con las normas indicadas en esta especificaci&#243;n. En tales protocolos se deber&#225;n anotar las fechas de fabricaci&#243;n y pruebas del equipo, para permitir la verificaci&#243;n de las caracter&#237;sticas t&#233;cnicas garantizadas.</li></ul>
+
+<ul><li>Certificaci&#243;n del sistema de calidad del fabricante y certificado de producto con norma t&#233;cnica.</li></ul>
+
+<ul><li>Carta de garant&#237;a de los bienes cotizados.</li></ul>
+
+<ul><li>Relaci&#243;n de clientes y evidencia de su capacidad t&#233;cnica y experiencias relacionadas con los materiales y/o equipos cotizados.</li></ul>
+
+<ul><li>Informaci&#243;n adicional que considere aporta explicaci&#243;n a su dise&#241;o (dibujos, detalles, caracter&#237;sticas de operaci&#243;n, dimensiones y pesos de los materiales ofertados). </li></ul>
+ <br /><br />CODENSA S.A. podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones, sin expresi&#243;n de causa ni obligaci&#243;n de compensaci&#243;n.<br />
+<h2 id="heading_27" >12.  GARANT&#205;A DE FABRICA</h2>
+CODENSA S.A. E.S.P requiere como m&#237;nimo, un per&#237;odo de garant&#237;a de f&#225;brica de veinticuatro (48) meses, a partir de la entrega de los bienes.<br />
+<h2 id="heading_28" >13. INSPECCI&#211;N EN FABRICA </h2>
+El suministrador enviar&#225; con no menos de quince (15) d&#237;as calendario de anticipaci&#243;n, a la fecha programada para la realizaci&#243;n de las pruebas en f&#225;brica. <br /><br />El proveedor debe brindar plena colaboraci&#243;n a la persona asignada por Codensa en el cumplimiento de sus funciones.<br /><br />El valor de las pruebas y ensayos debe incluirse en los precios cotizados en la propuesta.  CODENSA se reserva el derecho de descartar las propuestas que no ofrezcan pruebas, o si las ofrecidas son consideradas insuficientes para garantizar la calidad de los dispositivos.<br />
+<h2 id="heading_29" >14. CERTIFICADOS DE CONFORMIDAD</h2>
+El oferente adjuntar&#225; con su propuesta el certificado de <a href="et241_tapas_marcos.html#" id="version-139" class="externalLink  glosarioLink">conformidad</a> de <a href="et241_tapas_marcos.html#" id="version-338" class="externalLink  glosarioLink">producto</a> con norma t&#233;cnica, expedido por una entidad autorizada por la Superintendencia de Industria y Comercio.<br />
+<h2 id="heading_30" >15. PRESENTACI&#211;N DE LAS OFERTAS</h2>
+El oferente deber&#225; presentar su oferta t&#233;cnica (en medio impreso) en el siguiente orden:
+<ul><li>ANEXO 1: relaci&#243;n de los bienes cotizados.</li>
+<li>ANEXO 2: informaci&#243;n del oferente.</li>
+<li>ANEXO 3: planillas de caracter&#237;sticas t&#233;cnicas garantizadas.</li>
+<li>EXCEPCIONES T&#201;CNICAS: apartado en el cual se deben relacionar las excepciones de car&#225;cter exclusivamente t&#233;cnico de la oferta, respecto a los bienes solicitados. Si la oferta no *presenta excepci&#243;n, se indicar&#237;a expresamente en el mismo “NO HAY EXCEPCIONES”</li>
+<li>PROTOCOLO DE PRUEBAS: relaci&#243;n de los ensayos realizados, de acuerdo con lo indicado en el apartado 8 de la presente especificaci&#243;n.</li>
+<li>CERTIFICACIONES: <a href="et241_tapas_marcos.html#" id="version-124" class="externalLink  glosarioLink">Certificaci&#243;n</a> del <a href="et241_tapas_marcos.html#" id="version-338" class="externalLink  glosarioLink">producto</a>.</li>
+<li>EVIDENCIA <a href="et241_tapas_marcos.html#" id="version-376" class="externalLink  glosarioLink">T&#201;CNICA</a>: relaci&#243;n de clientes, evidencia de su capacidad t&#233;cnica y experiencias relacionadas con los materiales y/o equipos cotizados.</li>
+<li>GARANT&#205;A: carta de garant&#237;a de los bienes cotizados.</li>
+<li>INFORMACI&#211;N ADICIONAL: informaci&#243;n adicional que se considere aporta explicaci&#243;n al dise&#241;o del dispositivo, as&#237; como las instrucciones de instalaci&#243;n, operaci&#243;n.</li></ul>
+<br />Adicionalmente, el fabricante debe incluir la anterior informaci&#243;n en formato magn&#233;tico en un CD o Disquete.<br /><br />CODENSA S.A. podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones, sin expresi&#243;n de causa ni obligaci&#243;n de compensaci&#243;n.<br /><br /><br /><b>ANEXO 1. TABLA DE CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS DE LAS TAPAS</b><br /><div style="width:743px;"><table><tr><td colspan="1" rowspan="1" style="width:142px;height:21px;text-align:center"><b>N&#176;</b></td><td colspan="2" rowspan="1" style="width:486px;text-align:center"><b>CARACTER&#205;STICAS</b></td><td colspan="1" rowspan="1" style="width:115px;text-align:center"><b>OFERTADO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">1</td><td colspan="2" rowspan="1" style="">Normas de Fabricaci&#243;n y pruebas</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="2" style="height:21px;text-align:center">2</td><td colspan="1" rowspan="2" style="">Dimensiones</td><td colspan="1" rowspan="1" style="">Di&#225;metro externo (mm)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Alto (mm)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">3</td><td colspan="2" rowspan="1" style="">Dimensiones de la cadena</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="6" style="height:21px;text-align:center">4</td><td colspan="1" rowspan="6" style="">Materia Prima</td><td colspan="1" rowspan="1" style="">Tipo de fundici&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:52px;">La fundici&#243;n cumple con las caracter&#237;sticas qu&#237;micas del numeral 8.3 (Si / No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Tipo y material de la varilla</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Dimensiones de la varilla</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;">Numero de varillas de refuerzo incluidas</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Material de la cadena</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">5</td><td colspan="2" rowspan="1" style="">Resistencia del concreto  (kg/cm&#178; - psi)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">6</td><td colspan="2" rowspan="1" style="">Posee marcaci&#243;n ( si / no, describir)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;text-align:center">7</td><td colspan="2" rowspan="1" style="">el valor de pruebas de recepci&#243;n requeridas en el presente documento se encuentra incluido en la oferta  (Si / No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:21px;"><b>RESULTADO DE EVALUACI&#211;N T&#201;CNICA</b></td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:21px;text-align:center">8</td><td colspan="1" rowspan="5" style="">Certificaci&#243;n del sistema de calidad del fabricante</td><td colspan="1" rowspan="1" style="">Ente acreditador</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Fecha de expedici&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="6" style="height:21px;text-align:center">9</td><td colspan="1" rowspan="6" style="">Certificaci&#243;n de producto con norma t&#233;cnica</td><td colspan="1" rowspan="1" style="">Entidad acreditadora</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;">Norma t&#233;cnica con la cual se certifica</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:21px;"><b>RESULTADO DE EVALUACI&#211;N REGULATORIA</b></td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">10</td><td colspan="2" rowspan="1" style="">Observaciones</td><td colspan="1" rowspan="1" style=""> </td></tr></table><br /></div><br /><b>ANEXO 2</b><br /><b>FIGURA 1  -  Marco  Met&#225;lico  para Tapas Tipo V&#237;as Vehiculares, <a href="et241_tapas_marcos.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de <a href="et241_tapas_marcos.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a> por anclaje con cadena</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/1738/figura 1.jpg" src="http://likinormas.micodensa.com/media/cache/images/900x1500/wikiimages/333230373831343037-88705-figura 1.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:900px"></div></div></div><br /><br /><br /><b>FIGURA 2 - Marco para tapa de inspecci&#243;n de 63 cm para v&#237;as vehiculares</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/1738/figura 2.jpg" src="http://likinormas.micodensa.com/media/cache/images/900x1500/wikiimages/31313830363739323633-237914-figura 2.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:900px"></div></div></div><br /><br /><b>Notas:</b><br />-	Dimensiones en mm, excepto donde se indique algo diferente.<br /><br /><b>FIGURA 3 - Tapa  de inspecci&#243;n de 63 cm para v&#237;as vehiculares</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/1738/figura 3.jpg" src="http://likinormas.micodensa.com/media/cache/images/900x1500/wikiimages/31303436373839323135-242277-figura 3.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:900px"></div></div></div><br /><br />Notas<br />- La varillas de &#216; 1/2&#39;&#39; van soldadas entre s&#237; y a la fundici&#243;n.<br />- Marcaci&#243;n en alto relieve: &quot;PROPIEDAD DE CONDENSA. PELIGRO ALTA TENSI&#211;N&quot;, y la identificaci&#243;n del fabricante.<br />- La fundici&#243;n ser&#225; de hierro gris o nodular, las superficies en contacto con el concreto ser&#225;n rugosas.<br />- El concreto ser&#225; 4000 PSI, relaci&#243;n 1:2:2 de cemento, arena y grava.<br />- Dimensiones en mm, excepto donde se indique algo diferente.<br /><br /><br /><b>FIGURA  4  - Placa de identificaci&#243;n de las tapas (<a href="../../Norma/cables_subterraneos/camaras_ducterias/cs2781_placa_identificacion_tapas.html" class="externalLink">CS 278-1<span class="externalLinkIcon"></span></a>)</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/1738/figura 4.jpg" src="http://likinormas.micodensa.com/media/cache/images/900x1500/wikiimages/2d31313532303039313231-120434-figura 4.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:900px"></div></div></div><br /><br /><br /><b>Notas</b><br />-	Dimensiones en mm, excepto donde se indique algo diferente.<br /><br /><span class="codeInline">*</span> Para las compras efectuadas directamente por CODENSA.<br /><br /><br /><b>FIGURA 5  -  Marco para tapa de inspecci&#243;n de 67 cm</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/1738/figura 5.jpg" src="http://likinormas.micodensa.com/media/cache/images/900x1500/wikiimages/31333134353639333131-264335-figura 5.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:900px"></div></div></div><br /><br /><b>Nota</b><br />-	Dimensiones en mm.<br /><br /><b>FIGURA 6  -  Tapa de inspecci&#243;n de 67 cm</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/1738/figura 6.jpg" src="http://likinormas.micodensa.com/media/cache/images/900x1500/wikiimages/2d383834323239303235-214201-figura 6.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:900px"></div></div></div><br /><br /><b>Nota</b><br />-	Dimensiones en mm, excepto donde se indique algo diferente.
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 1738, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

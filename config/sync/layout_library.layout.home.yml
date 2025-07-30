@@ -1,0 +1,9 @@
+uuid: a8cb6d4a-fc66-454a-aa4e-7746b890e9a8
+langcode: es
+status: true
+dependencies: {  }
+id: home
+label: Home
+targetEntityType: node
+targetBundle: page
+layout: {  }

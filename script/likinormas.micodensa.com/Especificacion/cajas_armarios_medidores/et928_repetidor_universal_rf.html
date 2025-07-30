@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET928 Repetidor universal RF | Likinormas</title>
+	<meta name="description" content="equipo de medida, repetidor" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/1960" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F1960.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/1960" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/1960" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '32');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET928 Repetidor universal RF</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET928</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">28/08/2018</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/1960">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F1960&amp;nodoid=1960', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et928_repetidor_universal_rf.html#heading_0">1.	OBJETIVO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et928_repetidor_universal_rf.html#heading_1">2.	ALCANCE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et928_repetidor_universal_rf.html#heading_2">3.	CONDICIONES DE SERVICIO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et928_repetidor_universal_rf.html#heading_3">4.	SISTEMAS DE UNIDADES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et928_repetidor_universal_rf.html#heading_4">5.	NORMAS DE FABRICACI&#211;N Y PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et928_repetidor_universal_rf.html#heading_5">6.	REQUERIMIENTOS T&#201;CNICOS PARTICULARES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et928_repetidor_universal_rf.html#heading_6">6.1	Caracter&#237;sticas Generales</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et928_repetidor_universal_rf.html#heading_7">6.2	Modem</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et928_repetidor_universal_rf.html#heading_8">6.3	 Display</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et928_repetidor_universal_rf.html#heading_9">6.4	 Descripci&#243;n de la funcionalidad</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et928_repetidor_universal_rf.html#heading_10">7.	MARCACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et928_repetidor_universal_rf.html#heading_11">8.	CRITERIOS DE ACEPTACI&#211;N O RECHAZO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et928_repetidor_universal_rf.html#heading_12">8.1	 Muestreo</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et928_repetidor_universal_rf.html#heading_13">8.2	 Aceptaci&#243;n o Rechazo</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et928_repetidor_universal_rf.html#heading_14">9.	PRUEBAS </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et928_repetidor_universal_rf.html#heading_15">9.1 Inspecci&#243;n visual dimensional</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et928_repetidor_universal_rf.html#heading_16">9.2 Inspecci&#243;n funcional</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et928_repetidor_universal_rf.html#heading_17">9.3  Grado de protecci&#243;n (C&#243;digo IP)</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et928_repetidor_universal_rf.html#heading_18">9.4 Autonom&#237;a de la bater&#237;a</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et928_repetidor_universal_rf.html#heading_19">10.	 EMPAQUE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et928_repetidor_universal_rf.html#heading_20">11.	GARANT&#205;A DE F&#193;BRICA</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et928_repetidor_universal_rf.html#heading_21">12.	INSPECCI&#211;N EN F&#193;BRICA</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et928_repetidor_universal_rf.html#heading_22">13.	PRESENTACI&#211;N DE LAS OFERTA</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et928_repetidor_universal_rf.html#heading_23">ANEXO 1. CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1.	OBJETIVO</h2>
+Establecer las condiciones que deben satisfacer los repetidores universales con comunicaci&#243;n RF entre el repetidor y el medidor de energ&#237;a, las cuales deben poseer excelentes caracter&#237;sticas t&#233;cnicas de desempe&#241;o, durabilidad y calidad para cumplir las condiciones actuales de operaci&#243;n en los sistemas de medici&#243;n de energ&#237;a.<br /><br />
+<h2 id="heading_1" >2.	ALCANCE</h2>
+La presente especificaci&#243;n se aplicar&#225; a todos los repetidores universales con comunicaci&#243;n RF que adquiera CODENSA S.A. ESP, a trav&#233;s de los cuales se accede a la informaci&#243;n del medidor de energ&#237;a de forma remota.<br /><br />
+<h2 id="heading_2" >3.	CONDICIONES DE SERVICIO</h2>
+Los repetidores universales RF ser&#225;n utilizados en los sistemas de medici&#243;n de energ&#237;a del &#225;rea de concesi&#243;n de CODENSA S.A. E.S.P, bajo las siguientes condiciones:<br /><div style="width:616px;"><table><tr><td colspan="2" rowspan="1" style="width:616px;height:40px;text-align:center"><b>CARACTER&#205;STICAS AMBIENTALES</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Altura sobre el nivel del mar</td><td colspan="1" rowspan="1" style="">2700</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Ambiente</td><td colspan="1" rowspan="1" style="">Tropical</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Humedad</td><td colspan="1" rowspan="1" style="">Mayor al 90%</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Temperatura m&#225;xima y m&#237;nima</td><td colspan="1" rowspan="1" style="">45&#176;C y -5 &#176;C</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Instalaci&#243;n</td><td colspan="1" rowspan="1" style="">Dentro de celda </td></tr></table><br /></div><div style="width:616px;"><table><tr><td colspan="2" rowspan="1" style="width:616px;height:40px;text-align:center"><b>CARACTER&#205;STICAS EL&#201;CTRICAS</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Tensi&#243;n Nominal del sistema</td><td colspan="1" rowspan="1" style="">120/208 V – 277/480 V</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Tensi&#243;n m&#225;xima</td><td colspan="1" rowspan="1" style="">600&#160;&#160;&#160;&#160;&#160;&#160; &#160;</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Disposici&#243;n del sistema</td><td colspan="1" rowspan="1" style="">Bifilar (Fase + Neutro)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Frecuencia del sistema </td><td colspan="1" rowspan="1" style="">60 Hz</td></tr></table><br /></div><h2 id="heading_3" >4.	SISTEMAS DE UNIDADES</h2>
+En todos los documentos t&#233;cnicos se deben expresar las cantidades num&#233;ricas en unidades del sistema Internacional (S.I.). Si se usan cat&#225;logos, folletos o planos, en sistemas diferentes de unidades, deben hacerse las conversiones respectivas.<br />
+<h2 id="heading_4" >5.	NORMAS DE FABRICACI&#211;N Y PRUEBAS</h2><div style="width:845px;"><table><tr><td colspan="1" rowspan="1" style="width:100px;height:40px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:745px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">NTC-ISO 2859-1</td><td colspan="1" rowspan="1" style="">Procedimientos de muestreo para inspecci&#243;n por atributos. Parte 1: planes de muestreo determinados por el nivel aceptable de calidad -NAC- para inspecci&#243;n lote a lote.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">NTC-IEC 60529</td><td colspan="1" rowspan="1" style="">Grados de protecci&#243;n dados por encerramientos de equipo el&#233;ctrico (C&#243;digo IP)</td></tr></table><br /></div>Pueden emplearse otras normas internacionalmente reconocidas equivalentes o superiores a las aqu&#237; se&#241;aladas, siempre y cuando se ajusten a lo solicitado en la presente especificaci&#243;n t&#233;cnica.<br /><br />Las normas citadas en la presente especificaci&#243;n (o cualquier otra que llegare a ser aceptada por CODENSA S.A.) se refieren a su &#250;ltima revisi&#243;n.<br />
+<h2 id="heading_5" >6.	REQUERIMIENTOS T&#201;CNICOS PARTICULARES</h2>
+<h3 id="heading_6" >6.1	Caracter&#237;sticas Generales</h3>
+Los repetidores universales con comunicaci&#243;n RF entre medidor y repetidor requeridos por CODENSA S.A. deben cumplir con las siguientes condiciones:
+<ul><li>Los repetidores ser&#225;n dise&#241;ados y fabricados de acuerdo con los &#250;ltimos desarrollos en el campo de aplicaci&#243;n correspondiente y deber&#225;n responder a los requerimientos de esta especificaci&#243;n.</li>
+<li>Todos los materiales, componentes de los repetidores deben ser nuevos y de la mejor calidad, para asegurar que el equipo completo cumpla con los requisitos de funcionamiento continuo durante todo el per&#237;odo de vida. </li>
+<li>Las cajas utilizadas deben ser autosoportables, compactas, livianas y con una estructura completamente r&#237;gida e indeformable, sin aristas, bordes ni esquinas vivas, agudas o cortantes.</li>
+<li>Tener un &#237;ndice de hermeticidad IP51 de acuerdo a la norma NTC-IEC 60529.</li></ul>
+
+<h3 id="heading_7" >6.2	Modem</h3>
+A continuaci&#243;n se indican las caracter&#237;sticas del Modem:
+<ul><li>Tensi&#243;n de alimentaci&#243;n: 120 – 277 V</li>
+<li>Material de la caja: Policarbonato o aluminio</li>
+<li>Dimensiones: Alto:70 mm, ancho: 60 mm y profundidad: 35 mm</li>
+<li>Comunicaci&#243;n con medidores: M&#237;nimo con las siguientes marcas de medidores: Elster, Landis, Itron, Hexing, Wasion, Microstar</li>
+<li>Puertos de comunicaci&#243;n en medidores:  RS232, RS 485 &#243; Irda</li>
+<li>Frecuencia de transmisi&#243;n: 915MHz / 868 Mhz / 433 MHz </li>
+<li>Consumo m&#225;ximo: 1 W</li>
+<li>Alcance m&#237;nima de la comunicaci&#243;n: 50 m, sin l&#237;nea de vista</li>
+<li>Peso m&#225;ximo: 200 g</li>
+<li>Cable de comunicaci&#243;n: Universal para los diferentes puertos de comunicaci&#243;n que posean los medidores</li></ul>
+
+<h3 id="heading_8" >6.3	 Display</h3>
+A continuaci&#243;n se indican las caracter&#237;sticas del Display:
+<ul><li>Tensi&#243;n de alimentaci&#243;n: 120 – 277 V</li>
+<li>Material de la caja:	Policarbonato o aluminio</li>
+<li>Dimensiones: Alto:150 mm, ancho: 120 mm y profundidad: 50 mm</li>
+<li>Tipo de display: LCD Cristal l&#237;quido m&#237;nimo de dos l&#237;neas</li>
+<li>Tama&#241;o m&#237;nimo de los d&#237;gitos: 7 mm</li>
+<li>Consumo m&#225;ximo:	1 W</li>
+<li>Informaci&#243;n a visualizar: Serie de medidor, kWh, kVArh</li>
+<li>Cantidad de d&#237;gitos  (energ&#237;a): 5 enteros y 2 decimales</li>
+<li>Bater&#237;a respaldo: Respaldo m&#237;nimo de 8 horas, incluida dentro del display</li>
+<li>Peso m&#225;ximo: 400 g</li>
+<li>Cable de alimentaci&#243;n: 50 cm de longitud, debe estar conectado al interior del display, no debe poseer bornera</li></ul>
+
+<h3 id="heading_9" >6.4	 Descripci&#243;n de la funcionalidad</h3>
+Se requiere que el repetidor permita tener las siguientes alternativas:
+<ul><li><b><u>Comunicaci&#243;n con el medidor a trav&#233;s de repetidor:</u></b></li></ul>
+Acceso a la informaci&#243;n del medidor de energ&#237;a (Serie del medidor, <a href="et928_repetidor_universal_rf.html#" id="version-186" class="externalLink  glosarioLink">energ&#237;a activa</a> y energ&#237;a reactiva), a trav&#233;s del repetidor distante del medidor.<br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/1960/Imagen 1.jpg" src="http://likinormas.micodensa.com/media/cache/images/900x900/wikiimages/2d31353231333433303530-61523-Imagen 1.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:900px"></div></div></div>
+<ul><li><b><u>Comunicaci&#243;n con el medidor a trav&#233;s del repetidor y terminal:</u></b></li></ul>
+Acceso a la informaci&#243;n del medidor de energ&#237;a (Serie del medidor, energ&#237;a activa y <a href="et928_repetidor_universal_rf.html#" id="version-187" class="externalLink  glosarioLink">energ&#237;a reactiva</a>), a trav&#233;s del repetidor y terminal, distantes del medidor.<br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/1960/Imagen 2.jpg" src="http://likinormas.micodensa.com/media/cache/images/750x750/wikiimages/2d31363535323333303938-191172-Imagen 2.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:750px"></div></div></div>
+<ul><li><b>+Comunicaci&#243;n con el medidor a trav&#233;s de repetidor, terminal y Centro de Gesti&#243;n:</b></li></ul>
+Acceso a la informaci&#243;n del medidor de energ&#237;a (Serie del medidor, energ&#237;a activa y energ&#237;a reactiva), a trav&#233;s del repetidor, terminal y desde Centro de Gesti&#243;n.<br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/1960/Imagen 3.jpg" src="http://likinormas.micodensa.com/media/cache/images/900x900/wikiimages/2d31373839313233313436-260144-Imagen 3.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:900px"></div></div></div><br />
+<h2 id="heading_10" >7.	MARCACI&#211;N</h2>
+Tanto el Modem como el display tendr&#225;n la siguiente marcaci&#243;n:
+<ul><li>Tensi&#243;n de alimentaci&#243;n (VAC)</li>
+<li>Grado de protecci&#243;n (IP)</li>
+<li>Logo del fabricante</li>
+<li>A&#241;o de fabricaci&#243;n</li>
+<li>Serie</li>
+<li>Logo de Codensa  (BOG – CUN)</li></ul>
+
+<h2 id="heading_11" >8.	CRITERIOS DE ACEPTACI&#211;N O RECHAZO</h2>
+<h3 id="heading_12" >8.1	 Muestreo</h3>
+El muestreo se realizar&#225; con base en los procedimientos y tablas estipuladas en la norma NTC-ISO 2859-1 y se acordar&#225; por las partes, previamente a la fecha de la realizaci&#243;n de las pruebas y recepci&#243;n de los bienes.<br /><br />Para el desarrollo de las pruebas es indispensable que los instrumentos involucrados est&#233;n calibrados.<br />
+<h3 id="heading_13" >8.2	 Aceptaci&#243;n o Rechazo</h3>
+Si el n&#250;mero de elementos defectuosos es menor o igual al correspondiente n&#250;mero de defectuosos (dado en la norma NTC-ISO 2859-1 en la tercera columna de las tablas 1 y 2), se deber&#225; considerar que el lote cumple con los requisitos t&#233;cnicos exigidos por CODENSA, en caso contrario, el lote se rechazar&#225;.<br /><br />CODENSA se reserva el derecho de descartar las propuestas que no ofrezcan pruebas o si las ofrecidas son consideradas insuficientes para garantizar la calidad de las cajas.<br /><br />Para efectuar cualquier despacho, es requisito indispensable una autorizaci&#243;n escrita de CODENSA S.A., la cual ser&#225; expedida con base en los resultados de las pruebas realizadas en f&#225;brica y/o la aprobaci&#243;n del protocolo de pruebas realizadas por el fabricante a los bienes solicitados.<br /><br /><b>TABLA 1.PLAN DE MUESTREO PARA INSPECCI&#211;N VISUAL Y DIMENSIONAL (NIVEL DE INSPECCI&#211;N II, NAC = 2,5%) (NORMA NTC-ISO 2859-1 TABLA1 - TABLA 2A)</b><br /><div style="width:620px;"><table><tr><td colspan="1" rowspan="1" style="width:140px;height:60px;text-align:center"><b>TAMA&#209;O DEL LOTE</b></td><td colspan="1" rowspan="1" style="width:140px;text-align:center"><b>TAMA&#209;O DE LA MUESTRA</b></td><td colspan="1" rowspan="1" style="width:160px;text-align:center"><b>NUMERO PERMITIDO DE DEFECTUOSOS</b></td><td colspan="1" rowspan="1" style="width:180px;text-align:center"><b>NUMERO DEFECTUOSOS PARA RECHAZO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">2  a   8</td><td colspan="1" rowspan="1" style="text-align:center">A = 2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">9  a  15</td><td colspan="1" rowspan="1" style="text-align:center">B = 3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">16  a  25</td><td colspan="1" rowspan="1" style="text-align:center">C  =  5</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">26  a  50</td><td colspan="1" rowspan="1" style="text-align:center">D =  8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">51  a  90</td><td colspan="1" rowspan="1" style="text-align:center">E  = 13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">91  a 150</td><td colspan="1" rowspan="1" style="text-align:center">F = 20</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">151 a 280</td><td colspan="1" rowspan="1" style="text-align:center">G = 32</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">281 a  500</td><td colspan="1" rowspan="1" style="text-align:center">H = 50</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">501 a 1200</td><td colspan="1" rowspan="1" style="text-align:center">J = 80</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">1201 a 3200</td><td colspan="1" rowspan="1" style="text-align:center">K = 125</td><td colspan="1" rowspan="1" style="text-align:center">7</td><td colspan="1" rowspan="1" style="text-align:center">8</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">3201 a 10000</td><td colspan="1" rowspan="1" style="text-align:center">L = 200</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">11</td></tr></table><br /></div><b>TABLA 2. PLAN DE MUESTREO PARA LOS ENSAYOS MEC&#193;NICOS (NIVEL DE INSPECCI&#211;N ESPECIAL S-3, NAC = 2,5%) (NORMA NTC-ISO 2859-1 TABLA1 - TABLA 2A)</b><br /><div style="width:620px;"><table><tr><td colspan="1" rowspan="1" style="width:140px;height:60px;text-align:center"><b>TAMA&#209;O DEL LOTE</b></td><td colspan="1" rowspan="1" style="width:140px;text-align:center"><b>TAMA&#209;O DE LA MUESTRA</b></td><td colspan="1" rowspan="1" style="width:160px;text-align:center"><b>NUMERO PERMITIDO DE DEFECTUOSOS</b></td><td colspan="1" rowspan="1" style="width:180px;text-align:center"><b>NUMERO DEFECTUOSOS PARA RECHAZO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">2 a  8</td><td colspan="1" rowspan="1" style="text-align:center">A = 2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">9 a 15</td><td colspan="1" rowspan="1" style="text-align:center">A = 2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">16 a 25</td><td colspan="1" rowspan="1" style="text-align:center">B = 3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">26 a 50</td><td colspan="1" rowspan="1" style="text-align:center">B = 3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">51 a 90</td><td colspan="1" rowspan="1" style="text-align:center">C = 5</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">91 a 150</td><td colspan="1" rowspan="1" style="text-align:center">C = 5</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">151 a 280</td><td colspan="1" rowspan="1" style="text-align:center">D = 8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">281 a 500</td><td colspan="1" rowspan="1" style="text-align:center">D = 8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">501 a 1200</td><td colspan="1" rowspan="1" style="text-align:center">E = 13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">1201 a 3200</td><td colspan="1" rowspan="1" style="text-align:center">E = 13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">3201 a 10000</td><td colspan="1" rowspan="1" style="text-align:center">F = 20</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr></table><br /></div>
+<h2 id="heading_14" >9.	PRUEBAS </h2>
+Las pruebas requeridas son:
+<ul><li>Inspecci&#243;n visual dimensional.</li>
+<li>Inspecci&#243;n funcional.</li>
+<li>Ensayo de grado de protecci&#243;n (c&#243;digo IP).</li>
+<li>Validaci&#243;n de la autonom&#237;a de la bater&#237;a.</li></ul>
+
+<h3 id="heading_15" >9.1 Inspecci&#243;n visual dimensional</h3>
+La verificaci&#243;n de las dimensiones se har&#225; con los instrumentos de medida que den la aproximaci&#243;n requerida (cinta met&#225;lica con divisiones de 1 mm para longitudes, calibrador para los di&#225;metros y espesores). El tama&#241;o de la muestra deber&#225; estar de acuerdo con la tabla 1.<br /><br />Se verificar&#225;:
+<ul><li>Dimensiones indicadas en la presente especificaci&#243;n.</li>
+<li>Planos entregados por el fabricante y aprobados por CODENSA S.A. E.S.P.</li>
+<li>Las marcaciones descritas en el numeral 7.</li>
+<li>La buena terminaci&#243;n de todos los elementos.</li>
+<li>La ausencia de grietas, sopladuras, poros, exfoliaduras, ampolladuras, raspaduras u otros defectos.</li></ul>
+La tolerancia permitida es de &#177;5 mm.<br />
+<h3 id="heading_16" >9.2 Inspecci&#243;n funcional</h3>
+En esta inspecci&#243;n se debe validar lo siguiente:
+<ul><li>Funcionamiento con tensiones entre 120 y 277 V fase- neutro.</li>
+<li>Comunicaci&#243;n con los diferentes tipos de medidores indicados en esta especificaci&#243;n.</li>
+<li>Despliegue de la informaci&#243;n indicada en esta especificaci&#243;n.</li>
+<li>Comunicaci&#243;n m&#237;nimo a 50m entre medidor y display, sin l&#237;nea de vista.</li>
+<li>Autonom&#237;a de la bater&#237;a.</li></ul>
+
+<h3 id="heading_17" >9.3  Grado de protecci&#243;n (C&#243;digo IP)</h3>
+El &#237;ndice de hermeticidad solicitado es de IP 51, este grado de protecci&#243;n se verificar&#225; de acuerdo a la norma NTC-IEC 60529.<br />
+<h3 id="heading_18" >9.4 Autonom&#237;a de la bater&#237;a</h3>
+Se debe validar que la bater&#237;a tenga autonom&#237;a de 8 horas y en el display se visualice la informaci&#243;n indicada en esta especificaci&#243;n<br /> 
+<h2 id="heading_19" >10.	 EMPAQUE</h2>
+Los repetidores universales deben protegerse contra ralladuras y da&#241;os durante el transporte, para esto cada uno debe embalarse en una caja de cart&#243;n grueso, en cuyo exterior debe indicarse en forma impresa el “nombre del fabricante”, propiedad de “CODENSA S.A.- E.S.P.”, descripci&#243;n del producto “Repetidor Universal RF”, n&#250;mero de contrato y c&#243;digo de inventario CODENSA S.A.- E.S.P.<br /><br />Para el transporte debe embalarse en estibas con un n&#250;mero de unidades no mayor a 90 unidades por estiba y la estiba recubierta y sellada con material pl&#225;stico, sobre el cual se adherir&#225; una etiqueta de por lo menos 30 x 30 cm que indique que no se puede almacenar m&#225;s de dos estibas en sentido vertical.<br />
+<h2 id="heading_20" >11.	GARANT&#205;A DE F&#193;BRICA</h2>
+CODENSA S.A. E.S.P requiere como m&#237;nimo, un per&#237;odo de garant&#237;a de f&#225;brica de cinco (5) a&#241;os, a partir de la entrega de los bienes.<br />
+<h2 id="heading_21" >12.	<a href="et928_repetidor_universal_rf.html#" id="version-235" class="externalLink  glosarioLink">INSPECCI&#211;N</a> EN F&#193;BRICA</h2>
+El proveedor realizara la solicitud con la suficiente anticipaci&#243;n, con el fin de que Codensa SA ESP realice la programaci&#243;n de recepci&#243;n en f&#225;brica.<br /><br />El valor de las pruebas y ensayos debe incluirse en los precios cotizados en la propuesta. CODENSA se reserva el derecho de descartar las propuestas que no ofrezcan pruebas, o si las ofrecidas son consideradas insuficientes para garantizar la calidad de las cajas.<br /><br />Las pruebas de recepci&#243;n son:
+<ul><li>Inspecci&#243;n visual dimensional.</li>
+<li>Inspecci&#243;n funcional.</li>
+<li>Validaci&#243;n de la autonom&#237;a de la bater&#237;a.</li></ul>
+
+<h2 id="heading_22" >13.	PRESENTACI&#211;N DE LAS OFERTA</h2>
+El oferente deber&#225; presentar su oferta t&#233;cnica con la siguiente informaci&#243;n:<br />
+<ul><li>Relaci&#243;n de los bienes cotizados.</li>
+<li>Planillas de caracter&#237;sticas t&#233;cnicas garantizadas, la cual deber&#225; ser diligenciada completamente, firmada y sellada por el oferente.</li>
+<li>Se deben relacionar las excepciones de car&#225;cter exclusivamente t&#233;cnico de la oferta, respecto a los bienes solicitados. Si la oferta no presenta excepci&#243;n, se indicar&#237;a expresamente en el mismo “NO HAY EXCEPCIONES”</li>
+<li>Protocolo de pruebas: relaci&#243;n de los ensayos realizados a los repetidores universales RF y a sus accesorios de acuerdo con lo indicado en el numeral 9 de la presente especificaci&#243;n.</li>
+<li><a href="et928_repetidor_universal_rf.html#" id="version-124" class="externalLink  glosarioLink">Certificaci&#243;n</a> del sistema de calidad del fabricante.</li>
+<li>Relaci&#243;n  de clientes,  evidencia  de  su  capacidad t&#233;cnica  y  experiencias relacionadas con los materiales y/o equipos cotizados.</li>
+<li>Carta de garant&#237;a de los bienes cotizados.</li>
+<li>Cat&#225;logos originales completos y actualizados del fabricante, que correspondan a los bienes cotizados.</li>
+<li>Informaci&#243;n adicional que se considere aporta explicaci&#243;n al dise&#241;o del repetidor Universal RF (dibujos, detalles, dimensiones y pesos de los materiales ofertados), as&#237; como las instrucciones de instalaci&#243;n, caracter&#237;sticas de operaci&#243;n y mantenimiento.</li></ul>
+<br />En caso que se requiera se podr&#225;n exigir muestras de cada una de las referencias ofertadas sin cargo a devoluci&#243;n, con cada una de las caracter&#237;sticas t&#233;cnicas solicitadas y mencionadas en la presente especificaci&#243;n.<br />
+<h2 id="heading_23" >ANEXO 1. CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS</h2><div style="width:955px;"><table><tr><td colspan="1" rowspan="1" style="width:55px;height:33px;text-align:center"><b>N&#176;</b></td><td colspan="1" rowspan="1" style="width:280px;text-align:center"><b>DESCRIPCION</b></td><td colspan="1" rowspan="1" style="width:500px;text-align:center"><b>REQUERIDO</b></td><td colspan="1" rowspan="1" style="width:120px;text-align:center"><b>OFERTADO</b></td></tr>
+<tr><td colspan="1" rowspan="2" style="height:15px;text-align:center">1</td><td colspan="1" rowspan="2" style="">Proponente</td><td colspan="1" rowspan="1" style="">Pa&#237;s de fabricaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;">Fabricante</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">2</td><td colspan="1" rowspan="1" style="">Normas</td><td colspan="1" rowspan="1" style="">Fabricaci&#243;n y pruebas</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">3</td><td colspan="1" rowspan="1" style="">Temperatura de operaci&#243;n</td><td colspan="1" rowspan="1" style="">45 &#176;C y -5 &#176;C</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">4</td><td colspan="1" rowspan="1" style="">Frecuencia nominal</td><td colspan="1" rowspan="1" style="">60 Hz</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center"><b>5</b></td><td colspan="3" rowspan="1" style=""><b>Caracter&#237;sticas b&#225;sicas </b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center"><b>5.1</b></td><td colspan="3" rowspan="1" style=""><b>Modem</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">5.1.1</td><td colspan="1" rowspan="1" style="">Grado de protecci&#243;n</td><td colspan="1" rowspan="1" style="">IP 51</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">5.1.2</td><td colspan="1" rowspan="1" style="">Tensi&#243;n de alimentaci&#243;n </td><td colspan="1" rowspan="1" style="">120 – 277 VAC</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">5.1.3</td><td colspan="1" rowspan="1" style="">Material de la caja</td><td colspan="1" rowspan="1" style="">Policarbonato o Aluminio</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">5.1.4</td><td colspan="1" rowspan="1" style="">Comunicaci&#243;n con medidores</td><td colspan="1" rowspan="1" style="">M&#237;nimo con medidores: Elster, Landis, Itron, Hexing, Wasion y Microstar</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">5.1.5</td><td colspan="1" rowspan="1" style="">Puertos de comunicaci&#243;n en medidores</td><td colspan="1" rowspan="1" style="">Conexi&#243;n a RS232, RS 485 o Irda</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">5.1.6</td><td colspan="1" rowspan="1" style="">Frecuencia de transmisi&#243;n</td><td colspan="1" rowspan="1" style="">915MHz / 868 Mhz / 433 MHz</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">5.1.7</td><td colspan="1" rowspan="1" style="">Consumo m&#225;ximo</td><td colspan="1" rowspan="1" style="">1 W</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">5.1.8</td><td colspan="1" rowspan="1" style="">Distancia m&#237;nima de comunicaci&#243;n</td><td colspan="1" rowspan="1" style="">50 m, sin l&#237;nea de vista</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">5.1.9</td><td colspan="1" rowspan="1" style="">Peso m&#225;ximo</td><td colspan="1" rowspan="1" style="">200 g</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">5.1.10</td><td colspan="1" rowspan="1" style="">Cable de comunicaci&#243;n</td><td colspan="1" rowspan="1" style="">Universal para los diferentes puertos de comunicaci&#243;n que posean los medidores</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">5.1.11</td><td colspan="1" rowspan="1" style="">Alto</td><td colspan="1" rowspan="1" style="">70 mm</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">5.1.12</td><td colspan="1" rowspan="1" style="">Ancho</td><td colspan="1" rowspan="1" style="">60 mm</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">5.1.13</td><td colspan="1" rowspan="1" style="">Profundidad</td><td colspan="1" rowspan="1" style="">35 mm</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center"><b>5.2</b></td><td colspan="3" rowspan="1" style=""><b>Display</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">5.2.1</td><td colspan="1" rowspan="1" style="">Grado de protecci&#243;n</td><td colspan="1" rowspan="1" style="">IP 51</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">5.2.2</td><td colspan="1" rowspan="1" style="">Tensi&#243;n de alimentaci&#243;n </td><td colspan="1" rowspan="1" style="">120 – 277 VAC</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">5.2.3</td><td colspan="1" rowspan="1" style="">Material de la caja</td><td colspan="1" rowspan="1" style="">Policarbonato o Aluminio</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">5.2.4</td><td colspan="1" rowspan="1" style="">Consumo m&#225;ximo</td><td colspan="1" rowspan="1" style="">1 W</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">5.2.5</td><td colspan="1" rowspan="1" style="">Peso m&#225;ximo</td><td colspan="1" rowspan="1" style="">400 g</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">5.2.6</td><td colspan="1" rowspan="1" style="">Tipo de display</td><td colspan="1" rowspan="1" style="">LCD Cristal l&#237;quido m&#237;nimo de dos l&#237;neas</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">5.2.7</td><td colspan="1" rowspan="1" style="">Tama&#241;o m&#237;nimo de los d&#237;gitos</td><td colspan="1" rowspan="1" style=""> 7 mm</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">5.2.8</td><td colspan="1" rowspan="1" style="">Informaci&#243;n a visualizar </td><td colspan="1" rowspan="1" style="">Serie del medidor, kWh y kVArh</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">5.2.9</td><td colspan="1" rowspan="1" style="">Cantidad de d&#237;gitos (Energ&#237;a)</td><td colspan="1" rowspan="1" style="">5 enteros, 2 decimales </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">5.2.10</td><td colspan="1" rowspan="1" style="">Bater&#237;a de respaldo</td><td colspan="1" rowspan="1" style="">Respaldo m&#237;nimo de 8 horas, incluida dentro de la caja del display</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">5.2.11</td><td colspan="1" rowspan="1" style="">Cable de alimentaci&#243;n</td><td colspan="1" rowspan="1" style="">50 cm de longitud, debe estar conectado al interior del display, no debe poseer bornera  </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">5.2.12</td><td colspan="1" rowspan="1" style="">Alto</td><td colspan="1" rowspan="1" style="">150 mm</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">5.2.13</td><td colspan="1" rowspan="1" style="">Ancho</td><td colspan="1" rowspan="1" style="">120 mm</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">5.2.14</td><td colspan="1" rowspan="1" style="">Profundidad</td><td colspan="1" rowspan="1" style="">50 mm</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center"><b>6</b></td><td colspan="3" rowspan="1" style=""><b>Funcionalidades</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">6.1</td><td colspan="1" rowspan="1" style="">Comunicaci&#243;n con medidor a trav&#233;s del repetidor</td><td colspan="1" rowspan="1" style="">Acceso a la informaci&#243;n del medidor de energ&#237;a, a trav&#233;s del repetidor distante del medidor.</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">6.2</td><td colspan="1" rowspan="1" style="">Comunicaci&#243;n con medidor a trav&#233;s del repetidor y terminal</td><td colspan="1" rowspan="1" style="">Acceso a la informaci&#243;n del medidor de energ&#237;a, a trav&#233;s del repetidor y terminal, distantes del medidor.</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">6.3</td><td colspan="1" rowspan="1" style="">Comunicaci&#243;n con el medidor a trav&#233;s de repetidor, terminal y Centro de Gesti&#243;n</td><td colspan="1" rowspan="1" style="">Acceso a la informaci&#243;n del medidor de energ&#237;a, a trav&#233;s del repetidor, terminal y desde Centro de Gesti&#243;n.</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">7</td><td colspan="1" rowspan="1" style="">Ensayos/pruebas</td><td colspan="1" rowspan="1" style="">Est&#225;n incluidas en el precio de la caja (Si/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">8</td><td colspan="2" rowspan="1" style="">Certificaci&#243;n del sistema de calidad del fabricante</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:15px;text-align:center">9</td><td colspan="1" rowspan="1" style="">Garant&#237;a</td><td colspan="1" rowspan="1" style="">M&#237;nimo 5 a&#241;os </td><td colspan="1" rowspan="1" style=""> </td></tr></table><br /></div>
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 1960, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

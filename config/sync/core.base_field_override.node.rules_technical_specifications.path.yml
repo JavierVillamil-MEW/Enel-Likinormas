@@ -1,0 +1,20 @@
+uuid: cf55feb7-1f5f-4228-be29-867f062b97ca
+langcode: es
+status: true
+dependencies:
+  config:
+    - node.type.rules_technical_specifications
+  module:
+    - path
+id: node.rules_technical_specifications.path
+field_name: path
+entity_type: node
+bundle: rules_technical_specifications
+label: 'Alias de URL'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

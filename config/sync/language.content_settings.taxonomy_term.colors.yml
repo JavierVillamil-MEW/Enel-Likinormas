@@ -1,0 +1,11 @@
+uuid: a5ebef7c-bba3-4909-bb72-ca885b3695f9
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.colors
+id: taxonomy_term.colors
+target_entity_type_id: taxonomy_term
+target_bundle: colors
+default_langcode: site_default
+language_alterable: false

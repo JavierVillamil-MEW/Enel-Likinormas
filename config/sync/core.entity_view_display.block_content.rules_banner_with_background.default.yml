@@ -1,0 +1,61 @@
+uuid: ac9c03a1-ae58-4534-8c56-0ad886e5a4eb
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.rules_banner_with_background
+    - field.field.block_content.rules_banner_with_background.background_color
+    - field.field.block_content.rules_banner_with_background.banner_icon
+    - field.field.block_content.rules_banner_with_background.filter_description
+    - field.field.block_content.rules_banner_with_background.filter_title
+    - image.style.rules_web_image
+  module:
+    - svg_image
+    - text
+id: block_content.rules_banner_with_background.default
+targetEntityType: block_content
+bundle: rules_banner_with_background
+mode: default
+content:
+  background_color:
+    type: entity_reference_label
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  banner_icon:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: rules_web_image
+      image_loading:
+        attribute: lazy
+      svg_attributes:
+        width: null
+        height: null
+      svg_render_as_image: true
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  filter_description:
+    type: basic_string
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  filter_title:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  langcode: true

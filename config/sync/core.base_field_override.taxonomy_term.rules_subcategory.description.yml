@@ -1,0 +1,20 @@
+uuid: fa82a0f2-e7db-4eb4-925c-23c130ca28be
+langcode: es
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.rules_subcategory
+  module:
+    - text
+id: taxonomy_term.rules_subcategory.description
+field_name: description
+entity_type: taxonomy_term
+bundle: rules_subcategory
+label: Descripción
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

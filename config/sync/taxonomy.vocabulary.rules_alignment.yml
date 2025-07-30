@@ -1,0 +1,8 @@
+uuid: c293618b-0dcb-460a-af00-96ff5ad79f1f
+langcode: es
+status: true
+dependencies: {  }
+name: Orientación
+vid: rules_alignment
+description: 'Orientación de las secciones'
+weight: -5

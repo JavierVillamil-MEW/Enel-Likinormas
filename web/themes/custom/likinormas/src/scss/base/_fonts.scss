@@ -1,0 +1,131 @@
+@font-face {
+  font-family: 'RoobertENEL-Black';
+  src: url('../assets/fonts/RoobertENEL-Black/RoobertENEL-Black.eot');
+  src: url('../assets/fonts/RoobertENEL-Black/RoobertENEL-Black.eot?#iefix') format('embedded-opentype'),
+    url('../assets/fonts/RoobertENEL-Black/RoobertENEL-Black.woff2') format('woff2'),
+    url('../assets/fonts/RoobertENEL-Black/RoobertENEL-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'RoobertENEL-Light';
+  src: url('../assets/fonts/RoobertENEL-Light/RoobertENEL-Light.eot');
+  src: url('../assets/fonts/RoobertENEL-Light/RoobertENEL-Light.eot?#iefix') format('embedded-opentype'),
+    url('../assets/fonts/RoobertENEL-Light/RoobertENEL-Light.woff2') format('woff2'),
+    url('../assets/fonts/RoobertENEL-Light/RoobertENEL-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'RoobertENEL-LightItalic';
+  src: url('../assets/fonts/RoobertENEL-LightItalic/RoobertENEL-LightItalic.eot');
+  src: url('../assets/fonts/RoobertENEL-LightItalic/RoobertENEL-LightItalic.eot?#iefix') format('embedded-opentype'),
+    url('../assets/fonts/RoobertENEL-LightItalic/RoobertENEL-LightItalic.woff2') format('woff2'),
+    url('../assets/fonts/RoobertENEL-LightItalic/RoobertENEL-LightItalic.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'RoobertENEL-Bold';
+  src: url('../assets/fonts/RoobertENEL-Bold/RoobertENEL-Bold.eot');
+  src: url('../assets/fonts/RoobertENEL-Bold/RoobertENEL-Bold.eot?#iefix') format('embedded-opentype'),
+    url('../assets/fonts/RoobertENEL-Bold/RoobertENEL-Bold.woff2') format('woff2'),
+    url('../assets/fonts/RoobertENEL-Bold/RoobertENEL-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+@font-face {
+  font-family: 'RoobertENEL-Regular';
+  src: url('../assets/fonts/RoobertENEL-Regular/RoobertENEL-Regular.eot');
+  src: url('../assets/fonts/RoobertENEL-Regular/RoobertENEL-Regular.eot?#iefix') format('embedded-opentype'),
+    url('../assets/fonts/RoobertENEL-Regular/RoobertENEL-Regular.woff2') format('woff2'),
+    url('../assets/fonts/RoobertENEL-Regular/RoobertENEL-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'icomoon';
+  src: url('../assets/fonts/icomoon/icomoon.eot?fkox4d');
+  src: url('../assets/fonts/icomoon/icomoon.eot?fkox4d#iefix') format('embedded-opentype'),
+    url('../assets/fonts/icomoon/icomoon.ttf?fkox4d') format('truetype'),
+    url('../assets/fonts/icomoon/icomoon.woff?fkox4d') format('woff'),
+    url('../assets/fonts/icomoon/icomoon.svg?fkox4d#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-icon-close-menu-mobile:before {
+  content: "\e90a";
+}
+
+.icon-icon-arrow:before {
+  content: "\e900";
+}
+
+.icon-icon-contact:before {
+  content: "\e901";
+}
+
+.icon-icon-especificaciones:before {
+  content: "\e902";
+}
+
+.icon-icon-home:before {
+  content: "\e903";
+}
+
+.icon-icon-logout:before {
+  content: "\e904";
+}
+
+.icon-icon-menu-mobile:before {
+  content: "\e905";
+}
+
+.icon-icon-more-settings:before {
+  content: "\e906";
+}
+
+.icon-icon-normas-tec:before {
+  content: "\e907";
+}
+
+.icon-icon-other-normas:before {
+  content: "\e908";
+}
+
+.icon-icon-see-profile:before {
+  content: "\e909";
+}
+
+.icon-facebook:before {
+  content: "\ea90";
+}

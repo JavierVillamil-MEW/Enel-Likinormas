@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET916 Celdas de medida en MT | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/698" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F698.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/698" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/698" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '32');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET916 Celdas de medida en MT</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET 916</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">28/01/2014</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/698">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F698&amp;nodoid=698', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et916_celdas_medida_mt.html#heading_0">1.	OBJETO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et916_celdas_medida_mt.html#heading_1">2.	 ALCANCE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et916_celdas_medida_mt.html#heading_2">3.	CONDICIONES DE SERVICIO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et916_celdas_medida_mt.html#heading_3">3.1.	CONDICIONES AMBIENTALES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et916_celdas_medida_mt.html#heading_4">3.2.	CONDICIONES EL&#201;CTRICAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et916_celdas_medida_mt.html#heading_5">3.3.	CONDICIONES DE SERVICIO Y LUGAR DE INSTALACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et916_celdas_medida_mt.html#heading_6">4.	SISTEMAS DE UNIDADES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et916_celdas_medida_mt.html#heading_7">5.	NORMAS RELACIONADAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et916_celdas_medida_mt.html#heading_8">6.	REQUISITOS T&#201;CNICOS PARTICULARES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et916_celdas_medida_mt.html#heading_9">6.1.	MATERIALES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et916_celdas_medida_mt.html#heading_10">6.2.	 PROCESO DE PINTURA</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et916_celdas_medida_mt.html#heading_11">6.3.	 RESISTENCIA A LA CORROSI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et916_celdas_medida_mt.html#heading_12">6.4.	PUERTAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et916_celdas_medida_mt.html#heading_13">6.5.	GRADO DE PROTECCI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et916_celdas_medida_mt.html#heading_14">6.6.	ESTRUCTURA</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et916_celdas_medida_mt.html#heading_15">6.7.	LAMINAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et916_celdas_medida_mt.html#heading_16">6.8.	SISTEMA DE ANCLAJE</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et916_celdas_medida_mt.html#heading_17">6.9.	COMPARTIMIENTOS DE LA CELDA</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et916_celdas_medida_mt.html#heading_18">7.	PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et916_celdas_medida_mt.html#heading_19">7.1.	PRUEBAS TIPO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et916_celdas_medida_mt.html#heading_20">7.2.	PRUEBAS DE RECEPCI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et916_celdas_medida_mt.html#heading_21">8.	REQUISITOS PARA LAS OFERTAS</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1.	OBJETO</h2>
+Esta <a href="et916_celdas_medida_mt.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a> establece las caracter&#237;sticas y requisitos t&#233;cnicos que deben cumplir y los ensayos a los cuales deben ser sometidas las celdas de medida para 11.4kV, 13.2kV y 34,5kV.<br />
+<h2 id="heading_1" >2.	 ALCANCE</h2>
+Esta especificaci&#243;n aplica para todas las celdas de este tipo que sean instaladas en el <a href="et916_celdas_medida_mt.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de distribuci&#243;n de CODENSA S.A. ESP. <br />
+<h2 id="heading_2" >3.	CONDICIONES DE SERVICIO</h2>
+<h3 id="heading_3" >3.1.	CONDICIONES AMBIENTALES</h3>
+Las celdas podr&#225;n ser utilizadas a la intemperie o en espacios interiores bajo las siguientes condiciones:<br /><div style="width:402px;"><table><tr><td colspan="2" rowspan="1" style="width:402px;height:10px;text-align:center"><b>CARACTER&#205;STICAS AMBIENTALES</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">a. Altura sobre el nivel del mar</td><td colspan="1" rowspan="1" style="">600 a 2 900 m</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">b. Ambiente</td><td colspan="1" rowspan="1" style="">Tropical</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">c. Humedad</td><td colspan="1" rowspan="1" style="">Mayor al  90 %</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">d. Temperatura m&#225;xima y m&#237;nima</td><td colspan="1" rowspan="1" style="">45 &#186;C y - 5 &#186;C respectivamente.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">e. Temperatura promedio</td><td colspan="1" rowspan="1" style="">14 &#186;C.</td></tr></table><br /></div><h3 id="heading_4" >3.2.	CONDICIONES EL&#201;CTRICAS</h3><div style="width:394px;"><table><tr><td colspan="1" rowspan="1" style="width:201px;height:10px;"><a href="et916_celdas_medida_mt.html#" id="version-384" class="externalLink  glosarioLink">Tensi&#243;n Nominal</a> del <a href="et916_celdas_medida_mt.html#" id="version-363" class="externalLink  glosarioLink">sistema</a></td><td colspan="1" rowspan="1" style="width:193px;">11 400 V, 13 200 V, 34 500 V</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Frecuencia del <a href="et916_celdas_medida_mt.html#" id="version-363" class="externalLink  glosarioLink">sistema</a></td><td colspan="1" rowspan="1" style="">60 Hz</td></tr></table><br /></div><h3 id="heading_5" >3.3.	CONDICIONES DE SERVICIO Y LUGAR DE INSTALACI&#211;N</h3>
+Los transformadores de medida en 11.4kV, 13.2kV y  34,5kV y el medidor de BT, se alojar&#225;n en una celda met&#225;lica autosoportada, con alimentaci&#243;n trif&#225;sica desde las redes de distribuci&#243;n subterr&#225;nea de 11400V, 13200V y 34500V con los siguientes objetivos:<br /><br />•	Alojar y facilitar la instalaci&#243;n del medidor electr&#243;nico de forma que el acceso a las conexiones sea exclusivo para el personal autorizado por CODENSA.<br /><br />•	Minimizar el acceso no autorizado o fraudulento de los usuarios o extra&#241;os.<br /><br />•	Facilitar la lectura del medidor, las revisiones y dem&#225;s trabajos que sobre la instalaci&#243;n generen las solicitudes del cliente o las operaciones comerciales entre el cliente y CODENSA.<br /><br />•	Facilitar los procesos de corte y reconexi&#243;n del servicio a los usuarios ocasionales morosos. <br />
+<h2 id="heading_6" >4.	SISTEMAS DE UNIDADES</h2>
+En todos los documentos t&#233;cnicos se deben expresar las cantidades num&#233;ricas en unidades del <a href="et916_celdas_medida_mt.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> Internacional. Si se usan cat&#225;logos, folletos o planos, en sistemas diferentes de unidades, deben hacerse  las conversiones respectivas.<br />
+<h2 id="heading_7" >5.	NORMAS RELACIONADAS</h2>
+Las celdas deber&#225;n cumplir con las normas relacionadas a continuaci&#243;n:<br /><div style="width:581px;"><table><tr><td colspan="2" rowspan="1" style="width:152px;height:10px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:429px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">ASTM</td><td colspan="1" rowspan="1" style="text-align:center">B 117-97 </td><td colspan="1" rowspan="1" style="">Standard practice for operating salt spray (fog) apparatus</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">3279</td><td colspan="1" rowspan="1" style="">Grado de protecci&#243;n dado a los encerramientos. (C&#243;digo IP).</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">ASTM</td><td colspan="1" rowspan="1" style="text-align:center">D14000</td><td colspan="1" rowspan="1" style="">Espesor m&#237;nimo de pintura</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">ASTM </td><td colspan="1" rowspan="1" style="text-align:center">D 4541</td><td colspan="1" rowspan="1" style=""> Standard Test Method for Pull-Off Strength of Coatings Using Portable Adhesion Testers</td></tr></table><br /></div><h2 id="heading_8" >6.	REQUISITOS T&#201;CNICOS PARTICULARES</h2>
+<h3 id="heading_9" >6.1.	MATERIALES</h3>	Las celdas  de medida deber&#225;n ser construidas en l&#225;mina de acero Cold Rolled calibre  16 BWG (1,588 mm ).<br />	<br />	Todos los tornillos, tuercas, arandelas, guasas, bisagras, etc, utilizados, deber&#225;n ser galvanizados, iridizados o cromados.<br />	
+<h3 id="heading_10" >6.2.	 PROCESO DE PINTURA</h3>
+La l&#225;mina de acero utilizada en la construcci&#243;n de las celdas (al igual que las celdas en proceso) debe someterse a un proceso de limpieza, desengrase y fosfatizado, el cual debe  garantizar que las superficies est&#233;n libres de grasas, &#243;xidos o cualquier elemento extra&#241;o disminuyan la adherencia (son v&#225;lidos procesos qu&#237;micos y/o mec&#225;nicos); en un tiempo no mayor a dos horas, despu&#233;s de la limpieza debe aplicarse una capa de impr&#237;mante no mayor a 20 micras y en un lapso no menor a 8 ni mayor a 16 horas (o seg&#250;n recomendaci&#243;n de fabricante de pintura) se debe aplicar una pintura ep&#243;xica, con espesor no menor a 40 micras  (para un total de 60 micras), que deber&#225; ser horneada. La pintura ep&#243;xica debe ser color gris RAL serie 70, similar al RAL 7032, resistente a los rayos ultravioleta y la intemperie. El proceso debe garantizar  las caracter&#237;sticas de “tropicalizaci&#243;n”.<br /> <br />El espesor de pintura debe medirse con un medidor de espesores debidamente calibrado seg&#250;n la norma ASTM D 14000 y el espesor m&#237;nimo debe estar de acuerdo con el numeral 6.3<br /><br />Para la medici&#243;n de los espesores de recubrimiento se deben tener en cuenta las siguientes definiciones:<br /><br />a.	Lectura del espesor: Medida que muestra el medidor de espesores, al colocar una vez el censor sobre la pieza a medir.<br />b.	Medida del espesor: Promedios de 3 lecturas de espesor tomadas a una distancia aproximada de 2,5 cm.<br /><br />En pinturas horneables que garanticen la adherencia y espesores m&#237;nimos no requerir&#225;n impr&#237;mante.<br /><br />Cada capa de pintura debe garantizar una adherencia m&#237;nima de 400 PSI (libras/pulgada<sup>2</sup>) probada seg&#250;n norma NTC 3916 (ASTM D 4541 de 1995).<br />
+<h3 id="heading_11" >6.3.	 RESISTENCIA A LA <a href="et916_celdas_medida_mt.html#" id="version-151" class="externalLink  glosarioLink">CORROSI&#211;N</a></h3>
+Las muestras deben ser nuevas y libres de grasa, aceite, polvo y otras impurezas.  Para verificar la resistencia a la <a href="et916_celdas_medida_mt.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a> a dichas muestras se les hacen dos incisiones, de 0.5mm de espesor, en forma de cruz que llegue hasta el substrato.<br /><br />El <a href="et916_celdas_medida_mt.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> de <a href="et916_celdas_medida_mt.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a> se realizar&#225; de acuerdo con la norma ASTM B 117 (Prueba de C&#225;mara Salina) bajo las siguientes condiciones: Temperatura= 35&#176;C, ph= 6,5-7,2 y concentraci&#243;n de cloruro de sodio al 5% durante 400 horas.  Tiempo al que se verificar&#225;:<br /><br />a.	La progresi&#243;n de la <a href="et916_celdas_medida_mt.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a> en la incisi&#243;n, debe ser inferior a 2mm.<br />b.	No deben presentar trazas de <a href="et916_celdas_medida_mt.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a> ni burbujas.<br />c.	El recubrimiento debe permanecer adherido a la capa de pintura conservando su color.<br />
+<h3 id="heading_12" >6.4.	PUERTAS</h3>
+Las puertas para todas las celdas de medida en MT, se deber&#225;n construir en l&#225;mina  Cold Rolled. Todas las puertas deber&#225;n abrir &#250;nicamente en sentido lateral m&#237;nimo 120&#176; respecto a la secci&#243;n horizontal superior de la celda, poseer una manija que facilite su accionamiento y las bisagras deber&#225;n ser galvanizadas, iridizadas, cromadas, niqueladas o ser fabricadas en acero inoxidable, bronce o aluminio suficientemente fuertes para asegurar r&#237;gidamente la puerta de la estructura e instaladas sin que pierdan el recubrimiento protector.<br />	<br />Los pasadores de las bisagras deber&#225;n ser de acero inoxidable, bronce, lat&#243;n o aluminio. Las bisagras deben estar instaladas internamente.<br />
+<h3 id="heading_13" >6.5.	GRADO DE PROTECCI&#211;N</h3>
+El grado de protecci&#243;n que deber&#225; tener la envoltura exterior de las celdas deber&#225; ser como m&#237;nimo IP4X (protegido contra cuerpos s&#243;lidos superiores a 1 mm) seg&#250;n Norma IEC 60529. Cuando las celdas de medida de MT est&#233;n a la intemperie se deber&#225; dar un grado de protecci&#243;n IP 53 (protegido contra polvo y agua de lluvia hasta 60&#176; de la vertical).<br />
+<h3 id="heading_14" >6.6.	ESTRUCTURA</h3>La construcci&#243;n estructural de las celdas ser&#225; de responsabilidad del fabricante el cual podr&#225; elegir el <a href="et916_celdas_medida_mt.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> m&#225;s conveniente, podr&#225; ser en l&#225;mina doblada o perfiles angulares, siempre y cuando de la <a href="et916_celdas_medida_mt.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a> especifica.<br /><br />Si las celdas son fabricadas en estructura de &#225;ngulo de acero &#233;ste ser&#225; de 1 &#189;” x 1 &#189;” x 3/16” como m&#237;nimo, recubiertas con l&#225;mina calibre BWG 16 ( 1,588 mm) como m&#237;nimo o fabricadas en su totalidad en l&#225;mina calibre BWG 16 (1,588 mm) como m&#237;nimo con sus respectivos dobleces para garantizar una estructura s&#243;lida.<br />Las celdas deber&#225;n estar dotadas de un soporte m&#243;vil en &#225;ngulos que permitan la instalaci&#243;n de los transformadores de medida.<br />
+<h3 id="heading_15" >6.7.	LAMINAS</h3>
+Las l&#225;minas laterales, del fondo y superior, deber&#225;n ser en l&#225;mina de acero tipo Cold Rolled de calibre BWG 16 (1,588 mm) como m&#237;nimo.<br /><br />Las l&#225;minas laterales, del fondo y superior si son removibles, deber&#225;n ser fijadas de tal forma que no se puedan soltar exteriormente, sino &#250;nicamente interiormente.<br /><br />La torniller&#237;a, tuercas, arandelas de presi&#243;n y arandelas planas que fijan la estructura deber&#225;n ser galvanizadas iridizadas o cromadas y los tornillos deber&#225;n tener una longitud tal que sobresalgan de la tuerca por lo menos 3 hilos sin exceder de 10 mm.  <br />
+<h3 id="heading_16" >6.8.	<a href="et916_celdas_medida_mt.html#" id="version-363" class="externalLink  glosarioLink">SISTEMA</a> DE ANCLAJE</h3>
+La celda deber&#225; quedar anclado al piso. El <a href="et916_celdas_medida_mt.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de anclaje no deber&#225; estar en un lugar fijo de la base del <a href="et916_celdas_medida_mt.html#" id="version-375" class="externalLink  glosarioLink">tablero</a>, sino que pueda ser desplazado sobre su base para adaptarlo a la parte civil de la obra sin necesidad de hacerle modificaci&#243;n alguna.<br />
+<h3 id="heading_17" >6.9.	COMPARTIMIENTOS DE LA CELDA</h3>
+La celda de <a href="et916_celdas_medida_mt.html#" id="version-277" class="externalLink  glosarioLink">media tensi&#243;n</a> se compone de un espacio independiente para el medidor y otro para instalar los transformadores de medida.<br /> <br /><b>6.9.1.	Compartimiento para el Medidor</b><br /><br />Es exclusivo para uso del personal de CODENSA   o  el debidamente autorizado. Es un espacio de 600 x 1100 x 300 mm con puerta y transparencia en policarbonato de 3 mm para la f&#225;cil revisi&#243;n, lectura y verificaci&#243;n  de fraudes. Las dimensiones del policarbonato son de 400 x 300 mm. Ver figura 4.<br /><br />La caja tendr&#225; una perforaci&#243;n para el paso de un ducto PVC 1”.<br /><br />Se instala el medidor electr&#243;nico sobre una bandeja la cual ser&#225; removible y sujeta con tornillos. Ver figura 3.<br /> <br />La bandeja para el soporte del medidor ser&#225; en l&#225;mina calibre BWG 18 (1,214 mm), deber&#225; entregarse con todas las perforaciones necesarias que permitan el montaje de las borneras de prueba y el medidor.<br /><br />La puerta tendr&#225; dos bisagras, manija, bujes de <a href="et916_celdas_medida_mt.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a>, con perforaciones para colocaci&#243;n de sellos de <a href="et916_celdas_medida_mt.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a> de CODENSA y perno triangular. Esta puerta deber&#225; tener una ventana con policarbonato transparente de 3 mm de espesor, instalados y fijados mediante doblez de la l&#225;mina, soporte met&#225;lico o polipropileno de tal forma que no sea posible retirarlos por el frente. Adem&#225;s tendr&#225;  un empaque de caucho (en Z) y sello con silicona para evitar el ingreso de polvo y agua. Los extremos de la ventana pueden ser redondeadas o en cortes a 90&#176;.<br /><br />Sobre &#233;sta puerta se colocar&#225; remachada una placa de acero inoxidable, aluminio, pl&#225;stico o acr&#237;lico, con la siguiente inscripci&#243;n de letras indelebles:<br /><div style="width:226px;"><table><tr><td colspan="1" rowspan="1" style="width:226px;height:35px;text-align:center">MEDIDOR USO EXCLUSIVO CODENSA</td></tr></table><br /></div>El tama&#241;o de las letras ser&#225; m&#237;nimo de 10 mm de altura.<br /><br />Se instalar&#225; un <a href="et916_celdas_medida_mt.html#" id="version-107" class="externalLink  glosarioLink">cable</a> de <a href="et916_celdas_medida_mt.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> aislado No. 12 AWG entre la puerta y la celda.<br /> <br /><b>6.9.2.	Compartimiento para los Transformadores de Medida</b><br /><br />Es exclusivo para uso del personal de CODENSA o el debidamente autorizado. Es un espacio con puerta y transparencia en acr&#237;lico de 3 mm para la f&#225;cil revisi&#243;n, lectura y verificaci&#243;n de fraudes. Las dimensiones del acr&#237;lico son de 400 x 200 mm. Ver figura 4.<br /><br />La puerta tendr&#225; tres bisagras, manija, bujes de <a href="et916_celdas_medida_mt.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a> con perforaciones para la colocaci&#243;n de sellos de <a href="et916_celdas_medida_mt.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a>  de CODENSA y perno triangular. &#201;sta puerta deber&#225; tener  una ventana con policarbonato transparente de 3 mm de espesor, instalados y fijados mediante doblez de la l&#225;mina, soporte met&#225;lico o polipropileno de tal forma que no sea posible retirarlos por el frente. Adem&#225;s tendr&#225; un empaque de caucho (en Z) y sello con silicona para evitar el ingreso de polvo y agua. Los extremos de la ventana pueden ser redondeados o en cortes a 90 grados.<br /><br />Se instalar&#225;n los transformadores de corriente y potencial de MT sobre &#225;ngulos met&#225;licos ajustables.<br /><br />Se instalar&#225; un <a href="et916_celdas_medida_mt.html#" id="version-107" class="externalLink  glosarioLink">cable</a> de <a href="et916_celdas_medida_mt.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> flexible aislado calibre No. 2 AWG entre la puerta y la celda.<br /><br />Se instalar&#225; una barra de <a href="et916_celdas_medida_mt.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> de 20 x 3 mm a lo largo de la celda que permita la conexi&#243;n de los cables de las pantallas met&#225;licas de los cables de MT, el conductor del electrodo de <a href="et916_celdas_medida_mt.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a> y la uni&#243;n con las celdas contiguas de MT.<br /><br />Se instalar&#225; en la puerta lado derecho una tapa con acceso a una <a href="et916_celdas_medida_mt.html#" id="version-103" class="externalLink  glosarioLink">bombilla</a> incandescente para iluminar el interior de la celda con su apagador y una rejilla de cerramiento, a fin de realizar el cambio de la <a href="et916_celdas_medida_mt.html#" id="version-103" class="externalLink  glosarioLink">bombilla</a> sin necesidad de abrir la puerta de la celda.<br /><br />La alimentaci&#243;n al bombillo ser&#225; desde el circuito del local de la <a href="et916_celdas_medida_mt.html#" id="version-373" class="externalLink  glosarioLink">subestaci&#243;n</a>, desde el transformador o de un circuito del cliente, instalado en un tubo PVC  de &#189;“. <br /><br />Sobre &#233;sta puerta se colocar&#225; remachada seg&#250;n la <a href="et916_celdas_medida_mt.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> una placa de acero inoxidable, aluminio, pl&#225;stico o acr&#237;lico, con la siguiente inscripci&#243;n de letras indelebles:<br /><div style="width:226px;"><table><tr><td colspan="1" rowspan="1" style="width:226px;height:35px;text-align:center">CELDA DE MEDIDA *** USO EXCLUSIVO CODENSA</td></tr></table><br /></div>El tama&#241;o de las letras ser&#225; m&#237;nimo de 10 mm de altura. Los asteriscos se cambiaran por el nivel de la <a href="et916_celdas_medida_mt.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> de la red (11.4kV, 13.2kV o 34.5kV)<br /><br />Adem&#225;s se instalar&#225;n sobre la puerta se&#241;ales preventivas con el <a href="et916_celdas_medida_mt.html#" id="version-362" class="externalLink  glosarioLink">s&#237;mbolo</a> del rayo y la leyenda de “<a href="et916_celdas_medida_mt.html#" id="version-317" class="externalLink  glosarioLink">Peligro</a> <a href="et916_celdas_medida_mt.html#" id="version-88" class="externalLink  glosarioLink">Alta Tensi&#243;n</a>”. Ver figura 5.<br /><br />Igualmente se remachar&#225; sobre &#233;sta puerta una placa del fabricante con  caracter&#237;sticas similares a la anterior y  la siguiente informaci&#243;n (el tama&#241;o de las letras ser&#225; de 3 mm como m&#237;nimo):<br />
+<ul><li>Nombre del fabricante</li>
+<li>N&#250;mero de serie y fecha de fabricaci&#243;n </li>
+<li>Direcci&#243;n de la f&#225;brica y tel&#233;fono</li>
+<li>Relaci&#243;n de los CT&#180;s</li>
+<li>Numero de fases</li>
+<li>Numero de hilos</li>
+<li>Nivel de tensi&#243;n kV</li>
+<li><a href="et916_celdas_medida_mt.html#" id="version-124" class="externalLink  glosarioLink">Certificaci&#243;n</a> del <a href="et916_celdas_medida_mt.html#" id="version-338" class="externalLink  glosarioLink">producto</a> con <a href="et916_celdas_medida_mt.html#" id="version-301" class="externalLink  glosarioLink">norma t&#233;cnica</a> y <a href="et916_celdas_medida_mt.html#" id="version-354" class="externalLink  glosarioLink">RETIE</a>: N&#176; de certificado y vencimiento</li>
+<li>Adicionalmente si la compra es de CODENSA, se incluir&#225; la palabra BOG-CUN y la orden de compra.</li></ul>
+
+<h2 id="heading_18" >7.	PRUEBAS</h2>
+<h3 id="heading_19" >7.1.	PRUEBAS TIPO</h3>
+El fabricante de las celdas deber&#225; realizar las siguientes pruebas tipo:<br />
+<ul><li>Se efectuar&#225;n pruebas de adherencia de acuerdo con la norma NTC 3916 (ASTM D4541 de 1995). </li>
+<li>Se efectuar&#225;n pruebas de resistencia a la <a href="et916_celdas_medida_mt.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a> de acuerdo con la norma ASTM B117de 1997).</li>
+<li>Se realizar&#225;n pruebas del espesor de las capas de fosfatizado y acabado final de acuerdo con lo especificado en esta norma.</li>
+<li>Grado de protecci&#243;n IP.</li>
+<li><a href="et916_celdas_medida_mt.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de resistencia a la <a href="et916_celdas_medida_mt.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a></li></ul>
+
+<h3 id="heading_20" >7.2.	PRUEBAS DE RECEPCI&#211;N</h3>
+Cada una de las celdas ser&#225; sometida a las siguientes pruebas:<br />
+<ul><li><a href="et916_celdas_medida_mt.html#" id="version-235" class="externalLink  glosarioLink">Inspecci&#243;n</a> visual</li>
+<li><a href="et916_celdas_medida_mt.html#" id="version-235" class="externalLink  glosarioLink">Inspecci&#243;n</a> dimensional</li>
+<li>Ensamblaje de los equipos y elementos complementarios.</li>
+<li>Medici&#243;n del espesor de pintura</li></ul>
+
+<h3 id="heading_21" >8.	REQUISITOS PARA LAS OFERTAS</h3>
+El Oferente deber&#225; incluir con su propuesta, la siguiente informaci&#243;n:<br />
+<ul><li>Planilla de caracter&#237;sticas t&#233;cnicas garantizadas, la cual deber&#225; ser diligenciada completamente, firmada y sellada por el oferente.</li></ul>
+ 
+<ul><li>Cat&#225;logos originales completos y actualizados del fabricante, que correspondan a los bienes cotizados, en la planilla de caracter&#237;sticas t&#233;cnicas garantizadas. </li></ul>
+
+<ul><li>Protocolos de pruebas de acuerdo con las normas indicadas en el numeral 5 de la presente especificaci&#243;n. En tales protocolos se deber&#225;n anotar las fechas de fabricaci&#243;n y pruebas del <a href="et916_celdas_medida_mt.html#" id="version-189" class="externalLink  glosarioLink">equipo</a>, para permitir la verificaci&#243;n de las caracter&#237;sticas t&#233;cnicas garantizadas.</li></ul>
+
+<ul><li>Certificaciones de <a href="et916_celdas_medida_mt.html#" id="version-338" class="externalLink  glosarioLink">producto</a> con <a href="et916_celdas_medida_mt.html#" id="version-301" class="externalLink  glosarioLink">norma t&#233;cnica</a> y <a href="et916_celdas_medida_mt.html#" id="version-354" class="externalLink  glosarioLink">RETIE</a>.</li></ul>
+
+<ul><li>Informaci&#243;n adicional que considere aporta explicaci&#243;n a su dise&#241;o (dibujos,  detalles,  caracter&#237;sticas de operaci&#243;n,  dimensiones y pesos de los materiales ofertados). </li></ul>
+<br />CODENSA S.A. podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones, sin expresi&#243;n de causa ni obligaci&#243;n de compensaci&#243;n.<br /><br /><b>FIGURA 1.CELDA DE MEDIDA EN 11,4kV Y 13,2kV</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../archivo/699.html"><img src="../../media/content/mediafile/699/AE&#32;325.jpg" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br /><b>FIGURA 2. CELDA DE MEDIDA EN 34,5kV CON MEDICI&#211;N EN DOS ELEMENTOS.</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../archivo/700.html"><img src="../../media/content/mediafile/700/ET&#32;916-2.jpg" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br /><b>FIGURA 3. BANDEJA PARA SOPORTE DE MEDIDOR ELECTR&#211;NICO 350X500X40 mm.</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../archivo/693.html"><img src="../../media/content/mediafile/693/ET&#32;916-3.jpg" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br /><b>FIGURA 4. CIERRE Y AJUSTE DE VENTANA PARA <a href="et916_celdas_medida_mt.html#" id="version-235" class="externalLink  glosarioLink">INSPECCI&#211;N</a> COMPARTIMIENTO PARA MEDIDOR Y TRANSFORMADORES DE MEDIDA</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/698/ET 916-4.jpg" src="http://likinormas.micodensa.com/media/cache/images/650x650/wikiimages/353636363531303830-186883-ET 916-4.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:650px"></div></div></div><br /><br /><b>FIGURA 5. SE&#209;AL PREVENTIVA A UBICAR SOBRE PUERTAS</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../archivo/673_673.html"><img src="../../media/content/mediafile/673/AE&#32;330__&#32;ET&#32;908.jpg" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br /><b>FIGURA 6. CELDA DE MEDIDA EN 34,5kV CON MEDICI&#211;N EN TRES ELEMENTOS</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../archivo/701.html"><img src="../../media/content/mediafile/701/AE&#32;327.jpg" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br /><b>FIGURA 7. CELDA DE MEDIDA EN 11,4kV y 13,2kV TIPO INTEMPERIE</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../archivo/702.html"><img src="../../media/content/mediafile/702/0-AE&#32;328.jpg" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br /><b>FIGURA 8. CELDA DE MEDIDA 34,5kV TIPO INTEMPERIE</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../archivo/703_703.html"><img src="../../media/content/mediafile/703/AE&#32;329-.jpg" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br /><b>FIGURA 9A. BUJE DE <a href="et916_celdas_medida_mt.html#" id="version-357" class="externalLink  glosarioLink">SEGURIDAD</a></b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../archivo/696_696.html"><img src="../../media/content/mediafile/696/ET&#32;916-9A-.jpg" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/698/Dibujo ET 916 Fig 9 B.JPG" src="http://likinormas.micodensa.com/media/cache/images/500x355/wikiimages/31373137373236343339-40368-Dibujo ET 916 Fig 9 B.JPG" title="FIGURA 9B. BUJE DE SEGURIDAD"  /></div><div class="texto_imagen_articulos" style="max-width:500px">FIGURA 9B. BUJE DE SEGURIDAD</div></div></div><br /><b>FIGURA 10. TORNILLO DE CABEZA TRIANGULAR</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><a href="../../archivo/697_697.html"><img src="../../media/content/mediafile/697/0-ET&#32;916-10.jpg" title=""  /></a></div><div class="texto_imagen_articulos" style="max-width:nonepx"></div></div><div style="width:100%;overflow:hidden"></div></div><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/698/Dibujo ET 916 Fig 11.JPG" src="http://likinormas.micodensa.com/media/cache/images/500x355/wikiimages/2d31313533353031323537-20924-Dibujo ET 916 Fig 11.JPG" title="FIGURA 11. LLAVE PARA PERNO DE CABEZA TRIANGULAR"  /></div><div class="texto_imagen_articulos" style="max-width:500px">FIGURA 11. LLAVE PARA PERNO DE CABEZA TRIANGULAR</div></div></div><br /><br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 698, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

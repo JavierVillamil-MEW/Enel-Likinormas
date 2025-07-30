@@ -1,0 +1,16 @@
+# Enable Rewrite Engine
+RewriteEngine on
+
+# Redirect to HTTPS if not already on HTTPS
+RewriteCond %{HTTPS} !=on
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE]
+
+# Conditions for domain forwarding
+RewriteCond %{HTTP_HOST} ^likinormas.enelcol.com.co$ [NC,OR]
+RewriteCond %{HTTP_HOST} ^www.likinormas.enelcol.com.co$ [NC]
+
+# Avoid redirecting if the request is already in the /web directory
+RewriteCond %{REQUEST_URI} !^/web/
+
+# Rewrite rule to add /web to the URL
+RewriteRule ^(.*)$ /web/$1 [L]

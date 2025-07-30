@@ -1,0 +1,27 @@
+uuid: 44090b69-6cec-4d70-ad72-4c4b58450b39
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.menu_link_content.footer.link_title
+    - system.menu.footer
+id: menu_link_content.footer.default
+targetEntityType: menu_link_content
+bundle: footer
+mode: default
+content:
+  children:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  link_title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  langcode: true

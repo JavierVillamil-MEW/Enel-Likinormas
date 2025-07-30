@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET468 Vigueta de anclaje | Likinormas</title>
+	<meta name="description" content="herraje; redes aéreas" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/567" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F567.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/567" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/567" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '23');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET468 Vigueta de anclaje</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET 468</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">14/12/2009</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/567">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F567&amp;nodoid=567', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et468_vigueta_anclaje.html#heading_0">1. OBJETO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et468_vigueta_anclaje.html#heading_1">2. ALCANCE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et468_vigueta_anclaje.html#heading_2">3. CONDICIONES DE SERVICIO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et468_vigueta_anclaje.html#heading_3">3.1	CONDICIONES AMBIENTALES.</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et468_vigueta_anclaje.html#heading_4">3.2	CONDICIONES EL&#201;CTRICAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et468_vigueta_anclaje.html#heading_5">3.3	CONDICIONES DE SERVICIO Y LUGAR DE INSTALACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et468_vigueta_anclaje.html#heading_6">4. SISTEMAS DE UNIDADES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et468_vigueta_anclaje.html#heading_7">5. NORMAS Y ESPECIFICACIONES T&#201;CNICAS.</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et468_vigueta_anclaje.html#heading_8">6. DEFINICIONES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et468_vigueta_anclaje.html#heading_9">7. REQUERIMIENTOS T&#201;CNICOS PARTICULARES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et468_vigueta_anclaje.html#heading_10">7.1	PAR&#193;METROS GEOM&#201;TRICOS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et468_vigueta_anclaje.html#heading_11">7.2	RESISTENCIA A LA COMPRESI&#211;N DEL CONCRETO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et468_vigueta_anclaje.html#heading_12">7.3	ACERO DE REFUERZO PRINCIPAL</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et468_vigueta_anclaje.html#heading_13">8. FABRICACI&#211;N DE LAS VIGUETAS DE ANCLAJE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et468_vigueta_anclaje.html#heading_14">9. ENSAYOS Y PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et468_vigueta_anclaje.html#heading_15">9.1	ENSAYOS DE LABORATORIO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et468_vigueta_anclaje.html#heading_16">9.2	PRUEBA DIMENSIONAL</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et468_vigueta_anclaje.html#heading_17">9.3	OBLIGACI&#211;N DE EJECUCI&#211;N DE LOS ENSAYOS Y PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et468_vigueta_anclaje.html#heading_18">10. SUMINISTRO Y RECEPCI&#211;N DE VIGUETAS DE ANCLAJE</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et468_vigueta_anclaje.html#heading_19">10.1	TOLERANCIAS ACEPTADAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et468_vigueta_anclaje.html#heading_20">10.2	MARCAS  </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et468_vigueta_anclaje.html#heading_21">10.3	RECEPCI&#211;N DE VIGUETAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et468_vigueta_anclaje.html#heading_22">11. REQUISITOS DE LAS OFERTAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et468_vigueta_anclaje.html#heading_23">12. GARANT&#205;A DE F&#193;BRICA</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et468_vigueta_anclaje.html#heading_24">13. INSPECCI&#211;N EN F&#193;BRICA </a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1. OBJETO</h2>
+Establecer las caracter&#237;sticas, requisitos y ensayos t&#233;cnicos que deben cumplir las viguetas de anclaje para templetes en el <a href="et468_vigueta_anclaje.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> a&#233;reo de distribuci&#243;n en MT y BT.<br />
+<h2 id="heading_1" >2. ALCANCE</h2>
+Esta <a href="et468_vigueta_anclaje.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a> se aplicar&#225; en todas las viguetas de anclaje para templetes que adquiera CODENSA S.A. ESP.<br />
+<h2 id="heading_2" >3. CONDICIONES DE SERVICIO</h2>
+<h3 id="heading_3" >3.1	CONDICIONES AMBIENTALES.</h3>
+Las  viguetas de anclaje para templetes en el <a href="et468_vigueta_anclaje.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> de distribuci&#243;n de MT y BT ser&#225;n empleados bajo tierra con las siguientes condiciones:<br /><div style="width:468px;"><table><tr><td colspan="2" rowspan="1" style="width:468px;height:10px;text-align:center"><b>CARACTER&#205;STICAS AMBIENTALES</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">a. Altura sobre el nivel del mar</td><td colspan="1" rowspan="1" style="">600 a 2 900 m</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">b. Ambiente</td><td colspan="1" rowspan="1" style="">Tropical</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">c. Humedad</td><td colspan="1" rowspan="1" style="">Mayor al  90 %</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">d. Temperatura m&#225;xima y m&#237;nima</td><td colspan="1" rowspan="1" style="">45 &#186;C y - 5 &#186;C respectivamente.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">e. Temperatura promedio</td><td colspan="1" rowspan="1" style="">14 &#186;C.</td></tr></table><br /></div><h3 id="heading_4" >3.2	CONDICIONES EL&#201;CTRICAS</h3><div style="width:474px;"><table><tr><td colspan="1" rowspan="1" style="width:212px;height:10px;text-align:center"><a href="et468_vigueta_anclaje.html#" id="version-384" class="externalLink  glosarioLink">Tensi&#243;n Nominal</a> del <a href="et468_vigueta_anclaje.html#" id="version-363" class="externalLink  glosarioLink">sistema</a></td><td colspan="1" rowspan="1" style="width:262px;text-align:center">34500 V – 13200 V – 11400 V – 208/120 V</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">Frecuencia del <a href="et468_vigueta_anclaje.html#" id="version-363" class="externalLink  glosarioLink">sistema</a></td><td colspan="1" rowspan="1" style="text-align:center">60 Hz</td></tr></table><br /></div><h3 id="heading_5" >3.3	CONDICIONES DE SERVICIO Y LUGAR DE INSTALACI&#211;N</h3>
+Las viguetas de anclaje para templetes ser&#225;n instaladas, en cualquier zona del &#225;rea de cobertura de CODENSA S.A. ESP<br /><br />Los suelos donde son instalados podr&#225;n ser terrenos de relleno, arenosos, rocosos, arcillosos semiduros, con una capa de profundidad variable de humus, abarcando qu&#237;micamente suelos desde &#225;cidos a alcalinos y desde oxidantes a reductores con gran variedad en la cantidad y tipo de sales solubles.<br />
+<h2 id="heading_6" >4. SISTEMAS DE UNIDADES</h2>
+En todos los documentos t&#233;cnicos se deben expresar las cantidades num&#233;ricas en unidades del <a href="et468_vigueta_anclaje.html#" id="version-363" class="externalLink  glosarioLink">sistema</a>Internacional.  Si se usan cat&#225;logos, folletos o planos, en sistemas diferentes de unidades, deben hacerse  las conversiones respectivas.<br />
+<h2 id="heading_7" >5. NORMAS Y ESPECIFICACIONES T&#201;CNICAS.</h2>
+Las viguetas de anclaje deber&#225;n cumplir con las siguientes normas:<br /><div style="width:529px;"><table><tr><td colspan="2" rowspan="1" style="width:212px;height:10px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:317px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style=""><a href="et468_vigueta_anclaje.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de doblamiento para productos met&#225;licos</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style=""><a href="et468_vigueta_anclaje.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de tracci&#243;n para productos de acero.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">23</td><td colspan="1" rowspan="1" style="">Determinaci&#243;n gravim&#233;trica de carbono por combusti&#243;n directa en aceros al carbono.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">24</td><td colspan="1" rowspan="1" style="">Determinaci&#243;n del manganeso en aceros al carbono.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">25</td><td colspan="1" rowspan="1" style="">Determinaci&#243;n del manganeso en aceros al carbono.  M&#233;todo del Bismutato</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">26</td><td colspan="1" rowspan="1" style="">Determinaci&#243;n del silicio en aceros al carb&#243;n.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">27</td><td colspan="1" rowspan="1" style="">Determinaci&#243;n de azufre en aceros al carbono. M&#233;todo de evoluci&#243;n.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">28</td><td colspan="1" rowspan="1" style="">Determinaci&#243;n del silicio en aceros al carbono. M&#233;todo del &#225;cido sulf&#250;rico.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">30</td><td colspan="1" rowspan="1" style="">Cemento Portland. Clasificaci&#243;n.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">116</td><td colspan="1" rowspan="1" style="">Alambre duro de acero para refuerzo de concreto.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">121</td><td colspan="1" rowspan="1" style="">Cemento P&#243;rtland. Especificaciones f&#237;sicas y mec&#225;nicas</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">159</td><td colspan="1" rowspan="1" style="">Alambres de acero sin recubrimiento liberados de esfuerzo para concreto pretensado.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">161</td><td colspan="1" rowspan="1" style="">Barras lisas de acero al carbono para hormig&#243;n armado.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">174</td><td colspan="1" rowspan="1" style="">Especificaciones de los agregados para concreto</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">180</td><td colspan="1" rowspan="1" style="">M&#233;todo gasom&#233;trico para determinaci&#243;n de carbono por combusti&#243;n directa en hierros y aceros al Carbono.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">181</td><td colspan="1" rowspan="1" style="">Aceros al carbono y fundiciones de hierro, m&#233;todo alcalim&#233;trico para determinaci&#243;n de fosforo</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">248</td><td colspan="1" rowspan="1" style="">Barras y rollos corrugados de acero al carbono para hormig&#243;n armado.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">321</td><td colspan="1" rowspan="1" style="">Cemento P&#243;rtland. Especificaciones qu&#237;micas.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">673</td><td colspan="1" rowspan="1" style=""><a href="et468_vigueta_anclaje.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de resistencia a la compresi&#243;n, de cilindros normales de hormig&#243;n.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">1097</td><td colspan="1" rowspan="1" style="">Control estad&#237;stico  de  <a href="et468_vigueta_anclaje.html#" id="version-112" class="externalLink  glosarioLink">calidad</a>.  <a href="et468_vigueta_anclaje.html#" id="version-235" class="externalLink  glosarioLink">Inspecci&#243;n</a> por atributos. Planes de <a href="et468_vigueta_anclaje.html#" id="version-288" class="externalLink  glosarioLink">muestra</a> &#250;nica, doble y m&#250;ltiple con rechazo.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">1299</td><td colspan="1" rowspan="1" style="">Aditivos qu&#237;micos para hormig&#243;n.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">2010</td><td colspan="1" rowspan="1" style="">Torones de acero de siete alambres sin recubrimiento para concreto pretensado.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">2859-1</td><td colspan="1" rowspan="1" style="">Muestreo para <a href="et468_vigueta_anclaje.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a></td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;text-align:center">SNR-98</td><td colspan="1" rowspan="1" style="">C&#243;digo Colombiano de Construcciones Sismo Resistentes. Decreto 33 de 1998.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">A.W.S</td><td colspan="1" rowspan="1" style="text-align:center">D 12.1</td><td colspan="1" rowspan="1" style="">(A.C.I 318) - Pr&#225;cticas recomendables para soldar acero de refuerzo, insertos met&#225;licos y conexiones, en construcciones de concreto reforzado.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">ASTM/SAE</td><td colspan="1" rowspan="1" style="text-align:center">1010</td><td colspan="1" rowspan="1" style="">Tipos de acero al carb&#243;n</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">ANSI/ASME</td><td colspan="1" rowspan="1" style="text-align:center">B1.1 –1982</td><td colspan="1" rowspan="1" style="">Unified Inch Screw Threads</td></tr></table><br /></div>Pueden emplearse otras normas internacionalmente reconocidas equivalentes o superiores a las aqu&#237; se&#241;aladas, siempre y cuando se ajusten a lo solicitado en la presente <a href="et468_vigueta_anclaje.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a>.<br />Las normas citadas en la presente especificaci&#243;n (o cualquier otra que llegare a ser aceptada por CODENSA S.A. ESP) se refieren a su &#250;ltima revisi&#243;n.<br />
+<h2 id="heading_8" >6. DEFINICIONES</h2>
+Se establecen las siguientes definiciones:<br /><br />-	<b>ADITIVO</b><br /><a href="et468_vigueta_anclaje.html#" id="version-274" class="externalLink  glosarioLink">Material</a> diferente del cemento, agregados o agua que se a&#241;ade al concreto, antes o durante la mezcla, para modificar una o varias de sus propiedades sin perjudicar su durabilidad, ni su capacidad para resistir esfuerzos. (NRS-98 – C.2.1)<br /><br />-	<b>AGREGADOS</b><br />Conjunto de part&#237;culas inertes, naturales o artificiales, tales como arena, grava, triturado, etc., que al mezclarse con el <a href="et468_vigueta_anclaje.html#" id="version-274" class="externalLink  glosarioLink">material</a> cementante hidr&#225;ulico y el agua, producen el concreto. (NRS-98 – C.2.1)<br /><br />-	<b>CONCRETO</b><br />Mezcla homog&#233;nea de <a href="et468_vigueta_anclaje.html#" id="version-274" class="externalLink  glosarioLink">material</a> cementante, agregados inertes y agua, con o sin aditivos. (NRS-98 – C.2.1)<br /><br />-	<b>CONCRETO REFORZADO</b><br /><a href="et468_vigueta_anclaje.html#" id="version-274" class="externalLink  glosarioLink">Material</a> constituido por concreto que tiene un refuerzo consistente en barras de acero corrugado, estribos transversales o mallas electro soldadas, colocadas principalmente en las zonas de tracci&#243;n, en cuant&#237;as superiores a las m&#237;nimas especificadas en los Cap&#237;tulos C.1 a C.21, (NRS-98) bajo la hip&#243;tesis de compatibilidad de deformaciones entre los materiales. (NRS-98 – C.2.1)<br /><br />-	<b>CURADO DEL CONCRETO</b><br />Tratamiento que se le da al concreto, una vez vaciado, para impedir la r&#225;pida evaporaci&#243;n del agua de amasado, suavizando la retracci&#243;n y evitando el agrietamiento de la superficie.<br /><br />-	<b>REFUERZO</b><br />Acero en una de las dos formas siguientes, colocado para absorber esfuerzos de tracci&#243;n, compresi&#243;n, de corte o de torsi&#243;n en conjunto con el concreto:<br />(a)	Grupo de barras corrugado que cumple las normas NTC 2289 (ASTM A706) &#243; NTC 248 (ASTM A615), o barras lisas que cumplen la norma NTC 161 (ASTM A615), de forma recta, dobladas, con o sin ganchos, o en forma de estribos.<br />(b)	Alambres o cables de alta resistencia destinados principalmente al concreto preesforzado. (NRS-98 – C.2.1)<br /><br />-	<b>VARILLA CORRUGADA</b><br />Varilla de acero con el n&#250;cleo de secci&#243;n circular, en cuya superficie lleva unos resaltes, que tienen por objeto aumentar la adherencia entre el concreto y el acero.<br /><br />-	<b>VARILLA LISA</b><br />Varilla de acero de secci&#243;n transversal circular, sin resaltes o nervaduras.<br /><br />-	<b>VARILLA TORSIONADA</b><br />Varilla lisa o corrugada que el fabricante somete a un proceso de torsi&#243;n y alargamiento, con el fin de mejorar sus condiciones f&#237;sicas y mec&#225;nicas.<br /><br />-	<b>VIBRADO</b><br /><a href="et468_vigueta_anclaje.html#" id="version-363" class="externalLink  glosarioLink">Sistema</a> de compactaci&#243;n del concreto mediante aparatos vibratorios de alta frecuencia que tiene por objeto disminuir la porosidad del concreto, distribuir uniformemente los &#225;ridos y obligar a que la mezcla cubra toda la superficie interior de la formaleta.<br />
+<h2 id="heading_9" >7. REQUERIMIENTOS T&#201;CNICOS PARTICULARES</h2>
+Las viguetas de anclaje para templetes ser&#225;n construidas con materiales de la mejor <a href="et468_vigueta_anclaje.html#" id="version-112" class="externalLink  glosarioLink">calidad</a>, debi&#233;ndose descartar el empleo de materiales alterables por la humedad, radiaci&#243;n solar y otras condiciones ambientales desfavorables.<br /><br />La estructura de refuerzo principal ser&#225; en varilla acero &#243; <a href="et468_vigueta_anclaje.html#" id="version-107" class="externalLink  glosarioLink">cable</a> pretensado  8mm (5/16”) y los flejes en alambre de 4,2mm (8 BWG) de di&#225;metro, ambos en <a href="et468_vigueta_anclaje.html#" id="version-274" class="externalLink  glosarioLink">material</a> SAE 1010, SAE 1020, A36, A37 &#243; similar debidamente autorizados por CODENSA S.A. ESP; deber&#225;n ir distribuidos y asegurados uniformemente mediante amarres con alambre o puntos de soldadura alternados (Ver figura No.1).<br /><br />Las viguetas de anclaje para templetes ser&#225;n r&#237;gidas y no debe presentar desajustes durante su transporte e instalaci&#243;n. <br />
+<h3 id="heading_10" >7.1	PAR&#193;METROS GEOM&#201;TRICOS</h3>
+Las viguetas de anclaje para templetes tendr&#225;n una secci&#243;n rectangular de 150x150mm, una longitud  de 600mm y un agujero central de 13/16”.<br />
+<h3 id="heading_11" >7.2	RESISTENCIA A LA COMPRESI&#211;N DEL CONCRETO</h3>
+La resistencia m&#237;nima a la compresi&#243;n para el concreto, debe ser de 210kg/cm&#178;   (3000psi). Esta resistencia se debe verificar mediante ensayos de laboratorio de los cilindros tomados de varias bachadas, de acuerdo con la norma ICONTEC 673.<br /><br />En cuanto a la <a href="et468_vigueta_anclaje.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> del concreto, se deben seguir los procedimientos establecidos en el cap&#237;tulo C.4 del C&#243;digo Colombiano de Construcciones Sismo Resistentes. Decreto 33 de 1998.<br /><br />Con la debida anticipaci&#243;n, el fabricante debe presentar a consideraci&#243;n de CODENSA S.A. ESP, el dise&#241;o de la mezcla que va a utilizar. CODENSA S.A. ESP podr&#225; exigir ensayos de prueba de la mezcla utilizada.<br /><br />Para concretos que utilicen aditivos plastificantes, las mezclas se deber&#225;n dise&#241;ar utilizando el aditivo y de acuerdo con los ensayos de laboratorio que se deben realizar.<br /><br />Las pruebas de asentamiento se realizar&#225;n cuando CODENSA S.A. ESP as&#237; lo exija. Los asentamientos resultantes deben coincidir con los especificados en el dise&#241;o de la mezcla.<br /><br />Se realizar&#225;n ensayos de cilindros con edades de 7, 14 y 28 d&#237;as, calculando por proyecci&#243;n para las 2 primeras, la resistencia que tendr&#225; el concreto a los 28 d&#237;as. La resistencia promedio de los ensayos de los cilindros debe ser superior o por lo menos igual a la especificada en el dise&#241;o.<br /><br />El costo de todos los ensayos de laboratorio, ordenados por CODENSA S.A. ESP, para el control de <a href="et468_vigueta_anclaje.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> del concreto, correr&#225; por cuenta del fabricante.<br />
+<h3 id="heading_12" >7.3	ACERO DE REFUERZO PRINCIPAL</h3>
+El acero de refuerzo utilizado en la fabricaci&#243;n de las viguetas de anclaje para templetes debe cumplir con las normas ICONTEC 116, 161 &#243; 248.<br /><br />Las varillas de acero estructural &#243; el <a href="et468_vigueta_anclaje.html#" id="version-107" class="externalLink  glosarioLink">cable</a> pretensado, deben tener esfuerzo <a href="et468_vigueta_anclaje.html#" id="version-298" class="externalLink  glosarioLink">nominal</a> de fluencia m&#237;nimo de 4218 kg/cm&#178; (60000psi).<br /><br />Bajo responsabilidad del fabricante se aceptar&#225; el torsionamiento del acero.<br />
+<h2 id="heading_13" >8. FABRICACI&#211;N DE LAS VIGUETAS DE ANCLAJE</h2>
+El concreto se debe vaciar inmediatamente despu&#233;s de su amasado. <br /><br />En las uniones soldadas deben realizarse pases de soldadura E-6010 con suficiente amperaje para obtener m&#225;xima penetraci&#243;n entre las piezas; tambi&#233;n deben realizarse pases sucesivos de soldadura E-7018 para alcanzar una altura m&#237;nima de refuerzo de 1/8”.<br />Todas las soldaduras deben ser libres de defectos tales como escoria atrapada, inclusiones, poros, etc.; toda la escoria de soldadura debe ser retirada antes de fundir el concreto cumpliendo con el  c&#243;digo ASME capitulo IX.<br />
+<h2 id="heading_14" >9. ENSAYOS Y PRUEBAS</h2>
+<h3 id="heading_15" >9.1	ENSAYOS DE LABORATORIO</h3>
+El registro completo de los ensayos de los materiales y del concreto debe estar disponible para CODENSA S.A. ESP, durante el tiempo que dure la fabricaci&#243;n y por los dos a&#241;os siguientes a su terminaci&#243;n.<br /><br /><b>9.1.1 Ensayos de Materiales del Concreto.</b><br /><br />Todos los ensayos de los materiales y del concreto, se deben realizar de acuerdo con la norma ICONTEC correspondiente.<br /><br />El cemento debe cumplir con las normas ICONTEC 121 y 321 y el <a href="et468_vigueta_anclaje.html#" id="version-274" class="externalLink  glosarioLink">material</a> a analizar debe corresponder a aquel sobre el cual se basa la dosificaci&#243;n del concreto, que se va a utilizar en la fabricaci&#243;n.<br /><br />Los agregados para el concreto deben cumplir con la norma ICONTEC 174. El agregado grueso o grava, tendr&#225; un tama&#241;o m&#225;ximo de 19mm y m&#237;nimo de 10mm. El agregado fino o arena se debe lavar, y quedar libre de sustancias qu&#237;micas, org&#225;nicas o de cualquier naturaleza, que puedan perjudicar las caracter&#237;sticas f&#237;sicas de la mezcla.<br /><br />El agua utilizada en la mezcla del concreto, debe estar limpia y libre de cantidades perjudiciales de aceites, &#225;cidos, &#225;lcalis, sales, materias org&#225;nicas u otras sustancias perjudiciales para el concreto o el acero de refuerzo y ajustarse a lo especificado en el cap&#237;tulo C.3.4 del C&#243;digo Colombiano de Construcciones Sismo Resistentes. Decreto 33 de 1998.<br /><br />Para el <a href="et468_vigueta_anclaje.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> de la resistencia del concreto a la compresi&#243;n, el fabricante o proveedor debe preparar dos cilindros diarios, de acuerdo con la norma ICONTEC 673 (ASTM C39) <i>“<a href="et468_vigueta_anclaje.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de resistencia a la compresi&#243;n de cilindros normales de hormig&#243;n”</i>. De estos cilindros diarios, se enviar&#225;n dos al laboratorio y se ensayar&#225;n a edades de 7 y 14 d&#237;as. Si no cumple, se rechazar&#225; la producci&#243;n del d&#237;a en que fueron tomadas las cuatro muestras. Los resultados de los ensayos de estos cilindros se deber&#225;n suministrar al comprador para su conocimiento y control, y deben realizarse por un laboratorio aprobado por el comprador. <br /><br /><i>Nota</i>.    Para verificar si los materiales utilizados en la elaboraci&#243;n de la mezcla del concreto son de la <a href="et468_vigueta_anclaje.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> especificada, se deben realizar los ensayos de laboratorio correspondientes sobre muestras representativas de tales materiales.<br /><br /><b>9.1.2 Varillas de Refuerzo.</b><br /><br />El fabricante deber&#225; realizar los an&#225;lisis de laboratorio de las probetas seleccionadas del <a href="et468_vigueta_anclaje.html#" id="version-264" class="externalLink  glosarioLink">lote</a> de acero que se va a utilizar en el armado de las viguetas de anclaje para templetes.<br /><br />En los ensayos de laboratorio de estas probetas, se deben suministrar los siguientes resultados:<br />-   Carga m&#225;xima a la tracci&#243;n.<br />-   L&#237;mite de fluencia al 0,2%.<br />-   Porcentaje de alargamiento en probeta de 200mm (8&quot;).<br /><br />Las varillas de refuerzo, ya sean corrugadas o lisas, deben cumplir con las normas ICONTEC 116, 161 &#243; 248.<br /><br />El refuerzo para concreto pretensionado, debe cumplir adem&#225;s con la norma ICONTEC 2010 &#243; 159.<br />
+<h3 id="heading_16" >9.2	PRUEBA DIMENSIONAL</h3>
+La verificaci&#243;n de las dimensiones se har&#225; con los instrumentos de medida que den la aproximaci&#243;n requerida (cinta met&#225;lica con divisiones de 1mm para longitudes y calibrador para los di&#225;metros y espesores). El tama&#241;o de la <a href="et468_vigueta_anclaje.html#" id="version-288" class="externalLink  glosarioLink">muestra</a> deber&#225; estar de acuerdo NTC 2857-1.<br />
+<h3 id="heading_17" >9.3	OBLIGACI&#211;N DE EJECUCI&#211;N DE LOS ENSAYOS Y PRUEBAS</h3>
+Es obligaci&#243;n del fabricante realizar las siguientes pruebas a las viguetas:<br />1.	Dise&#241;o de la mezcla incluyendo el an&#225;lisis fisicoqu&#237;mico del agua.<br />2.	<a href="et468_vigueta_anclaje.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de tracci&#243;n del acero.<br />3.	<a href="et468_vigueta_anclaje.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de resistencia a la compresi&#243;n de los cilindros de concreto.<br />4.	<a href="et468_vigueta_anclaje.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de pruebas dimensional<br />5.	<a href="et468_vigueta_anclaje.html#" id="version-235" class="externalLink  glosarioLink">Inspecci&#243;n</a> visual<br /><br />Las pruebas correspondientes a los puntos 1, 2 y 3, se deber&#225;n realizar por un laboratorio especializado y aceptado previamente por CODENSA S.A. ESP.<br />
+<h2 id="heading_18" >10. SUMINISTRO Y RECEPCI&#211;N DE VIGUETAS DE ANCLAJE</h2>
+<h3 id="heading_19" >10.1	TOLERANCIAS ACEPTADAS</h3>
+Se acepta una tolerancia en la longitud, ancho y alto de la vigueta de &#177; 3mm.<br />
+<h3 id="heading_20" >10.2	MARCAS  </h3>
+Todas las viguetas de anclaje para templetes deben llevar en forma clara una leyenda en bajo relieve en el concreto con la siguiente informaci&#243;n:<br /><br />- Palabra BOG- CUN (En bajo relieve)<br />- Nombre o raz&#243;n social del fabricante.<br />- Orden de Compra  &#243; pedido abierto <br />
+<h3 id="heading_21" >10.3	RECEPCI&#211;N DE VIGUETAS</h3>
+La recepci&#243;n de viguetas  deber&#225; hacerla el gestor t&#233;cnico o un representante de CODENSA S.A. ESP., quien inspeccionar&#225;n los lotes en forma detallada, para determinar si cumplen las especificaciones establecidas.<br /><br />Para llevar a cabo las labores de <a href="et468_vigueta_anclaje.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> y recepci&#243;n de viguetas, se establece el siguiente plan de muestreo, en el que se determina, de acuerdo con el tama&#241;o del <a href="et468_vigueta_anclaje.html#" id="version-264" class="externalLink  glosarioLink">lote</a>, el n&#250;mero de unidades a los cuales se les debe practicar la <a href="et468_vigueta_anclaje.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> visual para la aceptaci&#243;n o rechazo del mismo:<br /><br /><b><a href="et468_vigueta_anclaje.html#" id="version-235" class="externalLink  glosarioLink">INSPECCI&#211;N</a> VISUAL Y DIMENSIONAL</b><br /><b>Nivel de <a href="et468_vigueta_anclaje.html#" id="version-235" class="externalLink  glosarioLink">Inspecci&#243;n</a> general II, NCA = 4%</b><br /><div style="width:398px;"><table><tr><td colspan="1" rowspan="1" style="width:106px;height:10px;text-align:center"><b>Tama&#241;o del <a href="et468_vigueta_anclaje.html#" id="version-264" class="externalLink  glosarioLink">lote</a></b></td><td colspan="1" rowspan="1" style="width:103px;text-align:center"><b>Tama&#241;o de <a href="et468_vigueta_anclaje.html#" id="version-288" class="externalLink  glosarioLink">muestra</a></b></td><td colspan="1" rowspan="1" style="width:97px;text-align:center"><b>Aceptaci&#243;n</b></td><td colspan="1" rowspan="1" style="width:92px;text-align:center"><b>Rechazos</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">2-25</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">26-90</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">91 -150</td><td colspan="1" rowspan="1" style="text-align:center">20</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">151-280</td><td colspan="1" rowspan="1" style="text-align:center">32</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">281-500</td><td colspan="1" rowspan="1" style="text-align:center">50</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">501-1200</td><td colspan="1" rowspan="1" style="text-align:center">80</td><td colspan="1" rowspan="1" style="text-align:center">7</td><td colspan="1" rowspan="1" style="text-align:center">8</td></tr></table><br /></div><i>Nota</i>. 	Si el tama&#241;o de la <a href="et468_vigueta_anclaje.html#" id="version-288" class="externalLink  glosarioLink">muestra</a> es mayor o igual al <a href="et468_vigueta_anclaje.html#" id="version-264" class="externalLink  glosarioLink">lote</a>, se har&#225;  <a href="et468_vigueta_anclaje.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> 100%<br /><br /><i>10.3.1</i> Motivos de rechazo. <br /><br />Se rechazar&#225;n las viguetas de anclaje para templetes por las siguientes causas:<br /><br /><i>10.3.1.1</i> Defectos cr&#237;ticos.<br /><br /> - La resistencia a la compresi&#243;n del concreto no cumple con los requisitos m&#237;nimos especificados.<br /><br /> - Viguetas con resanes, cuando la profundidad de estos haya llegado hasta los refuerzos.<br /><br /> - Estructura met&#225;lica a la vista. <br /><br /> - Grietas transversales o longitudinales.<br /><br /> - El incumplimiento de las tolerancias especificadas, se consideran como defectos cr&#237;ticos.<br /><br /><i>10.3.1.2</i> Defectos mayores.<br /><br />-	No colocaci&#243;n de la marcaci&#243;n indicada en el numeral 10.2.<br /><br />
+<h2 id="heading_22" >11. REQUISITOS DE LAS OFERTAS</h2>
+El Oferente deber&#225; incluir con su propuesta, la siguiente informaci&#243;n:<br />
+<ul><li>Relaci&#243;n de los bienes cotizados.</li></ul>
+
+<ul><li>Informaci&#243;n del oferente.</li></ul>
+
+<ul><li>Planilla de caracter&#237;sticas t&#233;cnicas garantizadas, la cual deber&#225; ser diligenciada completamente, firmada y sellada por el oferente.</li></ul>
+
+<ul><li>Apartado en el cual se deben relacionar las excepciones de car&#225;cter exclusivamente t&#233;cnico de la oferta, respecto a los bienes solicitados. Si la oferta no presenta excepci&#243;n, se indicar&#237;a expresamente en el mismo “NO HAY EXCEPCIONES”</li></ul>
+ 
+<ul><li>Cat&#225;logos originales completos y actualizados del fabricante, que correspondan al <a href="et468_vigueta_anclaje.html#" id="version-274" class="externalLink  glosarioLink">material</a> cotizado en la planilla de caracter&#237;sticas t&#233;cnicas garantizadas. </li></ul>
+
+<ul><li>Protocolos de pruebas de acuerdo con las normas indicadas en la presente especificaci&#243;n. En tales protocolos se deber&#225;n anotar las fechas de fabricaci&#243;n y pruebas del <a href="et468_vigueta_anclaje.html#" id="version-274" class="externalLink  glosarioLink">material</a>, para permitir la verificaci&#243;n de las caracter&#237;sticas t&#233;cnicas garantizadas.</li></ul>
+
+<ul><li><a href="et468_vigueta_anclaje.html#" id="version-124" class="externalLink  glosarioLink">Certificaci&#243;n</a> de <a href="et468_vigueta_anclaje.html#" id="version-139" class="externalLink  glosarioLink">conformidad</a> de <a href="et468_vigueta_anclaje.html#" id="version-338" class="externalLink  glosarioLink">producto</a> contra <a href="et468_vigueta_anclaje.html#" id="version-301" class="externalLink  glosarioLink">norma t&#233;cnica</a> expedido por una entidad autorizada por la Superintendencia de Industria y Comercio.</li></ul>
+
+<ul><li>Relaci&#243;n de clientes, evidencia de su capacidad <a href="et468_vigueta_anclaje.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a> y experiencias relacionadas con los materiales y/o equipos cotizados.</li></ul>
+
+<ul><li>Carta de garant&#237;a de los bienes cotizados. </li></ul>
+
+<ul><li>Normas t&#233;cnicas aplicables a los bienes cotizados.</li></ul>
+
+<ul><li>Informaci&#243;n adicional que considere aporta explicaci&#243;n a su dise&#241;o (dibujos,  detalles,  caracter&#237;sticas de operaci&#243;n,  dimensiones y pesos de los materiales ofertados). </li></ul>
+<br />Adicionalmente, el fabricante debe incluir la anterior informaci&#243;n en formato magn&#233;tico en un CD o Disquete.<br /><br />CODENSA S.A. ESP podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones, sin expresi&#243;n de causa ni obligaci&#243;n de compensaci&#243;n.<br />
+<h2 id="heading_23" >12. GARANT&#205;A DE F&#193;BRICA</h2>
+CODENSA S.A. ESP. requiere como m&#237;nimo, un per&#237;odo de garant&#237;a de f&#225;brica de veinticuatro (48) meses, a partir de la entrega de los bienes.<br />
+<h2 id="heading_24" >13. <a href="et468_vigueta_anclaje.html#" id="version-235" class="externalLink  glosarioLink">INSPECCI&#211;N</a> EN F&#193;BRICA </h2>
+El proveedor enviar&#225; con no menos de quince (15) d&#237;as calendario de anticipaci&#243;n, a la fecha programada para la realizaci&#243;n de las pruebas en f&#225;brica, el formato de protocolos de pruebas <br /><br />El proveedor debe brindar plena colaboraci&#243;n al representante de CODENSA S.A. ESP en el cumplimiento de sus funciones.<br /><br />El valor de las pruebas y ensayos debe incluirse en los precios cotizados en la propuesta.  CODENSA S.A. ESP se reserva el derecho de descartar las propuestas que no ofrezcan pruebas, o si las ofrecidas son consideradas insuficientes para garantizar la <a href="et468_vigueta_anclaje.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> de los dispositivos.<br /><br /><b>ANEXO 1. TABLA DE CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS</b><br /><div style="width:600px;"><table><tr><td colspan="3" rowspan="1" style="width:381px;height:10px;text-align:center"><b>CARACTER&#205;STICAS</b></td><td colspan="1" rowspan="1" style="width:106px;text-align:center"><b>SOLICITADO</b></td><td colspan="1" rowspan="1" style="width:113px;text-align:center"><b>OFERTADO</b></td></tr>
+<tr><td colspan="3" rowspan="1" style="height:10px;">Fabricante </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:10px;">Proveedor</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:10px;">Normas t&#233;cnicas de dise&#241;o, fabricaci&#243;n y pruebas</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="3" style="height:10px;">Dimensiones externas</td><td colspan="2" rowspan="1" style="">Ancho (mm)</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Largo (mm)</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Alto (mm)</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="10" style="height:10px;">Materias primas </td><td colspan="1" rowspan="4" style="">Concreto</td><td colspan="1" rowspan="1" style="">Resistencia minima concreto f&#39;c (kg/cm&#178;)</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Carga minima de rotura (kg)</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Volumen (m&#179;)</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;"><a href="et468_vigueta_anclaje.html#" id="version-363" class="externalLink  glosarioLink">Sistema</a> de construcci&#243;n  (Vibrado o centrifugado)</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="3" style="height:10px;">Refuerzo Principal</td><td colspan="1" rowspan="1" style="">Di&#225;metro </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Tipo de acero </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Limite fluencia m&#237;nimo fy (kg/cm&#178;)</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="3" style="height:10px;">Flejes</td><td colspan="1" rowspan="1" style="">Di&#225;metro </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Tipo de acero </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Limite fluencia m&#237;nimo fy (kg/cm&#178;)</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;">Marcaci&#243;n </td><td colspan="2" rowspan="1" style="">Describir</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:10px;">Presentan protocolo de pruebas (Si/No, indicar las pruebas) </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="6" style="height:10px;"><a href="et468_vigueta_anclaje.html#" id="version-124" class="externalLink  glosarioLink">Certificaci&#243;n</a> de <a href="et468_vigueta_anclaje.html#" id="version-139" class="externalLink  glosarioLink">conformidad</a> del <a href="et468_vigueta_anclaje.html#" id="version-338" class="externalLink  glosarioLink">producto</a> contra <a href="et468_vigueta_anclaje.html#" id="version-301" class="externalLink  glosarioLink">norma t&#233;cnica</a></td><td colspan="2" rowspan="1" style="">Entidad acreditadora</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">N&#250;mero de <a href="et468_vigueta_anclaje.html#" id="version-75" class="externalLink  glosarioLink">acreditaci&#243;n</a></td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;"><a href="et468_vigueta_anclaje.html#" id="version-301" class="externalLink  glosarioLink">norma t&#233;cnica</a> con la cual se certifica</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Fecha de aprobaci&#243;n (d&#237;a/mes/a&#241;o) </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Vigencia</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:10px;">Adjunta el certificado (Si/No) </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style=""> </td></tr></table><br /></div><br />FIRMA DEL OFERENTE <span class="codeInline">________________________</span><br /><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/567/ET468.jpg" src="../../media/cache/images/750x750/wikiimages/31383037303833393632-679458-ET468.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:750px"></div></div></div><br /><br /><div style="width:194px;"><table><tr><td colspan="1" rowspan="1" style="width:96px;height:10px;text-align:center"><b>S&#205;MBOLO</b></td><td colspan="1" rowspan="1" style="width:98px;text-align:center"><b>C&#211;DIGO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center"><b>V1</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>6762461</b></td></tr></table><br /></div><b>Nota:</b><br /><b>Dimensiones en mil&#237;metros y pulgadas</b>
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 567, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

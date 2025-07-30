@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: file
+  uuid: 6050ddab-77e6-4b73-a19b-b2b046c7bf16
+  default_langcode: es
+default:
+  uid:
+    -
+      target_id: 1
+  filename:
+    -
+      value: city_backgound.jpg
+  uri:
+    -
+      value: 'public://2023-06/city_backgound.jpg'
+  filemime:
+    -
+      value: image/jpeg
+  filesize:
+    -
+      value: 386436
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1686257452

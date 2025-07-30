@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET850 Codificación y rotulación de luminarias de alumbrado público | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/638" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F638.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/638" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/638" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '30');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET850 Codificaci&#243;n y rotulaci&#243;n de luminarias de alumbrado p&#250;blico</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET 850</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">13-01-2023</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/638">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F638&amp;nodoid=638', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#heading_0">1. OBJETO </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#heading_1">2. ALCANCE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#heading_2">3. CONDICIONES DE SERVICIO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#heading_3">4. SISTEMA DE UNIDADES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#heading_4">5. NORMAS RELACIONADAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#heading_5">6. REQUERIMIENTOS T&#201;CNICOS PARTICULARES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#heading_6">6.1 Codificaci&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#heading_7">6.2 Instalaci&#243;n </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#heading_8">7. CRITERIOS DE ACEPTACION O RECHAZO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#heading_9">7.1. MUESTREO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#heading_10">7.2. ACEPTACI&#211;N O RECHAZO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#heading_11">8. PRUEBAS Y RECEPCI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#heading_12">8.1  PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#heading_13">8.2  CONTROL DE RECEPCI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#heading_14">9. EMPAQUE Y ROTULADO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#heading_15">10. PRESENTACI&#211;N DE LAS OFERTAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#heading_16">ANEXO 1. CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1. OBJETO </h2>
+Establecer las condiciones que deben satisfacer los r&#243;tulos para la marcaci&#243;n de los puntos luminosos de la red de Alumbrado P&#250;blico.<br />
+<h2 id="heading_1" >2. ALCANCE</h2>
+La presente especificaci&#243;n aplica para la fabricaci&#243;n e instalaci&#243;n de los r&#243;tulos que ser&#225;n utilizados para la marcaci&#243;n de los puntos luminosos del sistema de alumbrado p&#250;blico que se incorporen al mismo por todos los procesos que intervengan el sistema, con el fin de actualizar la Base de Datos que posee ENEL COLOMBIA S.A.  ESP para dicho fin SID<i>AP y/o SDE</i>AP, la cual debe ser considerada por empleados, personal autorizado por ENEL COLOMBIA S.A.  ESP y particulares que realicen actividades de modificaci&#243;n en la configuraci&#243;n y caracter&#237;sticas de los elementos como postes (concreto, met&#225;lico e hist&#243;ricos), luminarias en v&#237;as principales y secundarias, plazoletas, alamedas, parques, ciclo-rutas, senderos peatonales, rondas de r&#237;os y quebradas, luminarias adosadas tipo aplique horizontales y verticales, luminarias para pasos elevados y luminarias embebidas en el suelo incluidos en las redes de Alumbrado P&#250;blico. <br /><br />La marcaci&#243;n, afecta a los elementos incluidos en las redes de Alumbrado P&#250;blico, desde la salida de los centros de distribuci&#243;n. <br /><br />La responsabilidad de la rotulaci&#243;n en sitio es del personal que interviene o interact&#250;a con la red, tanto de ENEL COLOMBIA S.A. ESP como personal particular autorizado.<br /><br />La unidad de gesti&#243;n y <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-271" class="externalLink  glosarioLink">mantenimiento</a> de la Base de Datos de Explotaci&#243;n, (Departamento Telecontrol, Grupo <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-271" class="externalLink  glosarioLink">Mantenimiento</a> y Gesti&#243;n de Datos) ser&#225;n los responsable de coordinar y velar por el cumplimiento de la Norma de Codificaci&#243;n. <br /><br />La marcaci&#243;n con r&#243;tulos de las luminarias que en la actualidad hacen parte del inventario de infraestructura del alumbrado p&#250;blico correspondi&#243; a la ejecuci&#243;n del Proyecto “Levantamiento de las variables de las caracter&#237;sticas de la infraestructura de Alumbrado P&#250;blico” realizado por el &#193;rea de Alumbrado P&#250;blico y posteriormente corresponde a las modificaciones realizadas por el &#193;rea  Gestora: Divisi&#243;n de Ingenier&#237;a y Operaciones, que est&#225;n relacionadas con las actividades de Expansi&#243;n, <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-271" class="externalLink  glosarioLink">Mantenimiento</a> y Proyectos de Alumbrado P&#250;blico.<br />
+<h2 id="heading_2" >3. CONDICIONES DE <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-359" class="externalLink  glosarioLink">SERVICIO</a></h2>
+Los elementos ser&#225;n utilizados en las siguientes condiciones:<br /><br /><div style="width:468px;"><table><tr><td colspan="2" rowspan="1" style="width:468px;height:35px;text-align:center"><b>CARACTER&#205;STICAS  AMBIENTALES</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">a.  Altura sobre el nivel del mar</td><td colspan="1" rowspan="1" style="">Desde 600 a los 2 900 m.s.n.m.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">b.  Ambiente</td><td colspan="1" rowspan="1" style="">Tropical</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">c.  Humedad relativa</td><td colspan="1" rowspan="1" style="">Desde 20 % al 100 %</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">d. Temperatura</td><td colspan="1" rowspan="1" style="">-5 &#176;C a 45 &#176;C</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">e. Temperatura promedio </td><td colspan="1" rowspan="1" style="">14 &#176;C</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">f.  Poluci&#243;n</td><td colspan="1" rowspan="1" style="">Mediana.</td></tr></table><br /></div>
+<h2 id="heading_3" >4. <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-363" class="externalLink  glosarioLink">SISTEMA</a> DE UNIDADES</h2>
+En todos los documentos t&#233;cnicos se deben expresar las cantidades num&#233;ricas en unidades del <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> Internacional (S.I.).  Si se usan cat&#225;logos, folletos o planos, en sistemas diferentes de unidades, deben hacerse  las conversiones respectivas.<br />
+<h2 id="heading_4" >5. NORMAS RELACIONADAS</h2>
+<div style="width:584px;"><table><tr><td colspan="2" rowspan="1" style="width:138px;height:40px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:446px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">4739</td><td colspan="1" rowspan="1" style="">L&#193;MINAS RETRORREFLECTIVAS PARA CONTROL DE TR&#193;NSITO.</td></tr></table><br /></div>
+<h2 id="heading_5" >6. REQUERIMIENTOS T&#201;CNICOS PARTICULARES</h2>
+<h3 id="heading_6" >6.1 Codificaci&#243;n</h3>
+Las luminarias que se encuentren instaladas en postes o adosadas a paredes o techos, podr&#225;n identificarse mediante los siguientes tipos de r&#243;tulos:  <br /><br /><b><u>6.1.1 Tipo A:</u></b><br />Identificado con un c&#243;digo num&#233;rico de seis (6) d&#237;gitos, compuesto por un n&#250;mero consecutivo &#250;nico entre 000001 al 999999.<br /><br /><b>Caracter&#237;sticas del r&#243;tulo</b><br />Todos las luminarias ser&#225;n identificadas en terreno con el siguiente r&#243;tulo.<br /><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/638/et 850.jpg" src="http://likinormas.micodensa.com/media/cache/images/500x355/wikiimages/323839303832383434-12461-et 850.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:500px"></div></div></div><br />                               Figura 1. Rotulo tipo A<br /><br /><br />Tama&#241;o: 145mm de largo x 45mm de ancho<br /><br /><a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-274" class="externalLink  glosarioLink">Material</a>: L&#225;mina retrorreflectiva Tipo XI, con respaldo clase 1 de acuerdo a NTC 4739, de color blanco o amarillo o el que la Compa&#241;&#237;a solicite previo acuerdo con el Oferente.<br /><br />Logo: Logo CODENSA, de 40mm, de largo x 6mm, de altura. Seg&#250;n caligraf&#237;a y dise&#241;o de imagen corporativa estampado de color negro cuando la l&#225;mina sea de color blanco, amarillo o cualquier otro color, ubicado en la esquina superior izquierda del rotulo de identificaci&#243;n.<br /><br />Impresi&#243;n: Serigraf&#237;a. Otros procesos como el uso de l&#225;minas de cubrimiento u otros mecanismos de impresi&#243;n ser&#225;n aceptados si se el fabricante de las l&#225;minas retrorreflectivas avala su compatibilidad.<br /><br />Numeraci&#243;n: 6 d&#237;gitos de 25mm, de altura cada uno, estampados de color negro, ubicados en la parte inferior central del rotulo, en caligraf&#237;a Arial Black<br /><br /><a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-406" class="externalLink  glosarioLink">Vida &#250;til</a> del r&#243;tulo: M&#237;nimo de doce (12) a&#241;os.<br /><br />En caso de luminarias embebidas en el piso,  instalar r&#243;tulo met&#225;lico. <br /><br /><b><u>6.1.2 Tipo B:</u></b><br />Un c&#243;digo num&#233;rico de siete (7) d&#237;gitos, compuesto por un n&#250;mero consecutivo &#250;nico entre 2000000 al 4000000<br /><br /><b>Caracter&#237;sticas del r&#243;tulo</b><br />Todos las luminarias ser&#225;n identificadas en terreno con el siguiente r&#243;tulo:<br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/638/et 850-2.jpg" src="http://likinormas.micodensa.com/media/cache/images/500x355/wikiimages/2d31333831373333313838-14165-et 850-2.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:500px"></div></div></div><br />                              Figura 2. Rotulo tipo B.<br /><br /><br />Tama&#241;o: 145mm de largo x 45mm de ancho<br /><br /><a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-274" class="externalLink  glosarioLink">Material</a>: L&#225;mina retrorreflectiva Tipo XI, con respaldo clase 1 de acuerdo a NTC 4739, de color blanco o amarillo; seg&#250;n corresponda<br /><br />Logo: Logo CODENSA, de 40mm, de largo x 6mm, de altura. Seg&#250;n caligraf&#237;a y dise&#241;o de imagen corporativa  estampado de color negro cuando la l&#225;mina sea de color blanco, amarillo o cualquier otro color, ubicado en la esquina superior izquierda del rotulo de identificaci&#243;n.<br /><br />Impresi&#243;n: Serigraf&#237;a. Otros procesos como el uso de l&#225;minas de cubrimiento u otros mecanismos de impresi&#243;n ser&#225;n aceptados si se el fabricante de las l&#225;minas retrorreflectivas avala su compatibilidad.<br /><br />Numeraci&#243;n: 7 d&#237;gitos de 25 mm, de altura cada uno, estampados de color negro, ubicados en la parte inferior central del rotulo, en caligraf&#237;a Arial Black.<br /><br /><a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-406" class="externalLink  glosarioLink">Vida &#250;til</a> del r&#243;tulo: M&#237;nimo de doce (12) a&#241;os.<br /><br />En caso de luminarias embebidas en el piso,  instalar r&#243;tulo met&#225;lico. <br /><br /><b><u>6.1.3 Tipo C:</u></b><br />No deber&#225; estar codificado. <br /><br /><b>Caracter&#237;sticas del r&#243;tulo</b><br />Todos las luminarias que cuenten con balasto electr&#243;nico ser&#225;n identificadas en terreno con el siguiente r&#243;tulo:<br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/638/Figura 3.jpg" src="http://likinormas.micodensa.com/media/cache/images/500x355/wikiimages/2d31383933383639363232-3328-Figura 3.jpg" title=""  /></div><div class="texto_imagen_articulos" style="max-width:500px"></div></div></div><br />Figura 3. Rotulo tipo C<br /><br />Tama&#241;o: 45mm de largo x 45mm de ancho.<br /><br /><a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-274" class="externalLink  glosarioLink">Material</a>: L&#225;mina retrorreflectiva Tipo XI, con respaldo clase 1  de acuerdo a NTC 4739,  color amarillo.<br /><br />Logo: Sin logo<br /><a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-406" class="externalLink  glosarioLink">Vida &#250;til</a> del r&#243;tulo: M&#237;nimo de doce (12) a&#241;os.<br /><br /><b><u>6.1.4 Tipo D:</u></b><br /><br />Son r&#243;tulos especiales para la marcaci&#243;n de Fotometr&#237;as y Potencias en luminarias<br /><br />Tama&#241;o: De acuerdo con la figura 4, 4A, 4B,y 4C  <br /><br />Material: L&#225;mina retrorreflectiva Tipo XI, con respaldo clase 1 de acuerdo a NTC 4739, de color  amarillo; seg&#250;n corresponda<br /><br />Impresi&#243;n: Serigraf&#237;a. Otros procesos como el uso de l&#225;minas de cubrimiento u otros mecanismos de impresi&#243;n ser&#225;n aceptados si se el fabricante de las l&#225;minas retrorreflectivas avala su compatibilidad.<br /><br />Numeraci&#243;n: Estampados de color negro, ubicados en la parte inferior central del del rotulo, en caligraf&#237;a Arial Black.<br /><br />Vida &#250;til del r&#243;tulo: M&#237;nimo de doce (12) a&#241;os.<br /><br /><div style="width:568px;"><table><tr><td colspan="1" rowspan="1" style="width:251px;height:34px;text-align:center"><b>Rotulaci&#243;n (Fotometr&#237;a/Potencia)</b></td><td colspan="1" rowspan="1" style="width:88px;text-align:center"><b>Color </b></td><td colspan="1" rowspan="1" style="width:229px;text-align:center"><b>Dimensiones R&#243;tulo</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:33px;">RA02</td><td colspan="1" rowspan="1" style="text-align:center">Amarillo</td><td colspan="1" rowspan="1" style="">9 cm Largo X 4,5 cm Alto</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:33px;">RA02-RA04</td><td colspan="1" rowspan="1" style="text-align:center">Amarillo</td><td colspan="1" rowspan="1" style="">14,5 cm Largo X 4,5 cm Alto</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:33px;">40 W</td><td colspan="1" rowspan="1" style="text-align:center">Amarillo</td><td colspan="1" rowspan="1" style="">4,5 cm Largo X 4,5 cm Alto</td></tr></table><br /></div><br /><div style="width:568px;"><table><tr><td colspan="1" rowspan="1" style="width:110px;height:25px;text-align:center"><b>C&#243;digo SAP</b></td><td colspan="1" rowspan="1" style="width:418px;text-align:center"><b>Descripci&#243;n</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:25px;">1000004950</td><td colspan="1" rowspan="1" style="">ROTULO ADHESIBLE REFLECTIVO POSTE METAL</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:25px;">1000001992</td><td colspan="1" rowspan="1" style="">ROTULO 6 DIGITOS ALUMBRADO PUBLICO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:25px;">1000001993</td><td colspan="1" rowspan="1" style="">ROTULO 7 DIGITOS ALUMBRADO PUBLICO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:25px;">1000008636</td><td colspan="1" rowspan="1" style="">ROTULO CORTO FOTOMETRIA LED AP</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:25px;">1000008637</td><td colspan="1" rowspan="1" style="">ROTULO POTENCIA 40W ALUMBRADO PUBLICO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:25px;">1000008644</td><td colspan="1" rowspan="1" style="">ROTULO LARGO FOTOMETRIA LED AP</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:25px;">1000007566</td><td colspan="1" rowspan="1" style="">ROTULO STICKER 0.4X0.4 AMARILLO SIN SERI</td></tr></table><br /></div><br /><img src="https://i.ibb.co/dsNTxtF/ET850-Figura4.png" /><br /><b>Figura 4.</b> Valido para cualquier fotometr&#237;a.<br /><br /><img src="https://i.ibb.co/K534C7V/ET850-Figura4-A.png" /><br /><b>Figura 4A.</b> Valido para cualquier fotometr&#237;a.<br /><br /><img src="https://i.ibb.co/L0HBdYH/ET850-Figura4-B.png" /><br /><b>Figura 4B.</b> Valido para cualquier fotometr&#237;a.<br /><br /><img src="https://i.ibb.co/4mvXwmK/ET850-Figura4-C.png" /><br /><b>Figura 4C.</b> Valido para cualquier potencia.<br /><br />
+<h3 id="heading_7" >6.2 Instalaci&#243;n </h3>
+Seg&#250;n el tipo y ubicaci&#243;n de la <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-269" class="externalLink  glosarioLink">luminaria</a>, se determina el lugar de instalaci&#243;n del r&#243;tulo. Debido al deterioro ocasionado en los r&#243;tulos instalados  en el costado de la <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-269" class="externalLink  glosarioLink">luminaria</a>, estos deben instalarse en la parte inferior de la misma sin afectar su conjunto &#243;ptico y evitando <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-153" class="externalLink  glosarioLink">da&#241;o</a> del r&#243;tulo.<br /><br />Una vez alcanzada la <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-269" class="externalLink  glosarioLink">luminaria</a> se debe tener en cuenta para la instalaci&#243;n del r&#243;tulo:<br /><br />a.	La instalaci&#243;n se debe realizar por debajo del conjunto <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-177" class="externalLink  glosarioLink">el&#233;ctrico</a>, su superficie debe ser lisa, libre de uniones y obst&#225;culos como ganchos o tornillos.<br /><br /><b>Nota:</b> No se deben instalar r&#243;tulos en: El refractor y el reflector que conforman el conjunto &#243;ptico de las luminarias.<br /><br />El r&#243;tulo deber&#225; ser visible desde un observador ubicado en el suelo.<br /><br />b.	Limpiar la superficie de la <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-269" class="externalLink  glosarioLink">luminaria</a>:  Se debe limpiar perfectamente la superficie de la <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-269" class="externalLink  glosarioLink">luminaria</a> de sedimentos de humo, grasas y poluci&#243;n ambiental, utilizando para ello materiales y utensilios adecuados como solventes (alcohol isoprop&#237;lico IPA), cepillos, estopa.  <br /><br />c.	Secar la superficie de la <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-269" class="externalLink  glosarioLink">luminaria</a>:  Una vez removidos los sedimentos, se debe proceder a secar la superficie, utilizando para ello estopa limpia y esperar un tiempo prudencial para proceder a la instalaci&#243;n.<br /><br />d.	Instalar el r&#243;tulo:  Se debe desprender el r&#243;tulo del papel de soporte teniendo cuidado de no tocar el <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-274" class="externalLink  glosarioLink">material</a> adhesivo ni de deteriorar el r&#243;tulo. El <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-0" class="externalLink  glosarioLink">personal</a> que instalar&#225; el r&#243;tulo debe tener las manos lo m&#225;s limpias posibles al momento de instalar el r&#243;tulo.<br /><br />Se procede a la instalaci&#243;n del r&#243;tulo desde uno de sus extremos, previendo que haya suficiente espacio en la superficie de la <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-269" class="externalLink  glosarioLink">luminaria</a>, y evitando cualquier tipo de irregularidad.  Una vez adherido el r&#243;tulo, se debe asegurar que extienda uniformemente y no presente bolsas de aire.<br /><br /><b>Nota:</b> El r&#243;tulo no permite pegar y despegar, dado que el <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-274" class="externalLink  glosarioLink">material</a> es destructible.<br /><br />e.	Una vez presionado el r&#243;tulo para su adherencia final se da por terminado el proceso de instalaci&#243;n.<br /><br /><b>Ejemplos de Instalaci&#243;n</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/638/Dibujo ET 850 FIGURA 2.JPG" src="http://likinormas.micodensa.com/media/cache/images/500x355/wikiimages/2d363432343433323639-15681-Dibujo ET 850 FIGURA 2.JPG" title="Ejemplo 1: Marcación de luminarias (Vista lateral)"  /></div><div class="texto_imagen_articulos" style="max-width:500px">Ejemplo 1: Marcación de luminarias (Vista lateral)</div></div></div><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/638/Sin título.jpg" src="../../media/cache/images/500x355/wikiimages/2d31323834313830353535-24727-Sin&#32;título.jpg" title="Ejemplo 2: Marcación en luminarias adosadas a la pared"  /></div><div class="texto_imagen_articulos" style="max-width:500px">Ejemplo 2: Marcación en luminarias adosadas a la pared</div></div></div><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/638/Dibujo ET 850 FIGURA 5.JPG" src="http://likinormas.micodensa.com/media/cache/images/500x355/wikiimages/2d363432343433343430-11190-Dibujo ET 850 FIGURA 5.JPG" title="Ejemplo 3: Marcación en luminarias en poste histórico (vista lateral)"  /></div><div class="texto_imagen_articulos" style="max-width:500px">Ejemplo 3: Marcación en luminarias en poste histórico (vista lateral)</div></div></div><br /><br />
+<h2 id="heading_8" >7. CRITERIOS DE ACEPTACION O RECHAZO</h2>
+Se considerar&#225; que existe un <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-264" class="externalLink  glosarioLink">lote</a> cuando los r&#243;tulos cumplen satisfactoriamente con los requisitos y pertenecen a un mismo <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-264" class="externalLink  glosarioLink">lote</a> de producci&#243;n de materia prima y un mismo <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-264" class="externalLink  glosarioLink">lote</a> de producci&#243;n, de no ser as&#237; deber&#225; tomarse como lotes por los diferentes aspectos de materia prima y de producci&#243;n.<br />
+<h3 id="heading_9" >7.1. MUESTREO</h3>A menos que se especifique otra condici&#243;n, el muestreo se llevar&#225; a cabo tomando muestras para cada prueba de acuerdo a lo indicado en las tablas 1 y 2, seg&#250;n la norma NTC –ISO 2859-1.<br />
+<h3 id="heading_10" >7.2. ACEPTACI&#211;N O RECHAZO</h3>Si el n&#250;mero de elementos defectuosos es menor o igual al correspondiente n&#250;mero de defectuosos dado en la tercera columna de las tablas 1 y 2, se deber&#225; considerar que el <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-264" class="externalLink  glosarioLink">lote</a> cumple con los requisitos en caso contrario el <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-264" class="externalLink  glosarioLink">lote</a> se rechazar&#225;.<br /><br /><b>TABLA 1. PLAN DE MUESTREO PARA INSPECCION VISUAL Y DIMENSIONAL</b><br /><b>(NIVEL DE INSPECCION II,  NAC = 2,5%) (NORMA NTC-ISO 2859-1 TABLA1 - TABLA 2A)</b><br /><br /><div style="width:521px;"><table><tr><td colspan="1" rowspan="1" style="width:132px;height:59px;text-align:center"><b>TAMA&#209;O DEL <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-264" class="externalLink  glosarioLink">LOTE</a></b></td><td colspan="1" rowspan="1" style="width:134px;text-align:center"><b>TAMA&#209;O DE LA <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-288" class="externalLink  glosarioLink">MUESTRA</a></b></td><td colspan="1" rowspan="1" style="width:131px;text-align:center"><b>NUMERO PERMITIDO DE DEFECTUOSOS</b></td><td colspan="1" rowspan="1" style="width:124px;text-align:center"><b>NUMERO DEFECTUOSOS PARA RECHAZO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">2  a           8</td><td colspan="1" rowspan="1" style="text-align:center">A  =   2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">9  a         15</td><td colspan="1" rowspan="1" style="text-align:center">B  =   3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">16  a         25</td><td colspan="1" rowspan="1" style="text-align:center">C  =   5</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">26  a         50</td><td colspan="1" rowspan="1" style="text-align:center">D  =   8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">51  a         90</td><td colspan="1" rowspan="1" style="text-align:center">E  = 13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">91  a       150</td><td colspan="1" rowspan="1" style="text-align:center">F  = 20</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">151  a       280</td><td colspan="1" rowspan="1" style="text-align:center">G  = 32</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">281  a       500</td><td colspan="1" rowspan="1" style="text-align:center">H  = 50</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">501  a     1200</td><td colspan="1" rowspan="1" style="text-align:center">J  = 80</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1201  a     3200</td><td colspan="1" rowspan="1" style="text-align:center">K  =125</td><td colspan="1" rowspan="1" style="text-align:center">7</td><td colspan="1" rowspan="1" style="text-align:center">8</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">3201  a   10000</td><td colspan="1" rowspan="1" style="text-align:center">L  =200</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">11</td></tr></table><br /></div><br /><b>TABLA 2. PLAN DE MUESTREO PARA LOS ENSAYOS MECANICOS</b><br /><b>(NIVEL DE INSPECCION ESPECIAL  S-3,  NAC = 2,5%) (NORMA NTC-ISO 2859-1 TABLA1 - TABLA 2A)</b><br /><div style="width:537px;"><table><tr><td colspan="1" rowspan="1" style="width:148px;height:59px;text-align:center"><b>TAMA&#209;O DEL <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-264" class="externalLink  glosarioLink">LOTE</a></b></td><td colspan="1" rowspan="1" style="width:134px;text-align:center"><b>TAMA&#209;O DE LA <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-288" class="externalLink  glosarioLink">MUESTRA</a></b></td><td colspan="1" rowspan="1" style="width:131px;text-align:center"><b>NUMERO PERMITIDO DE DEFECTUOSOS</b></td><td colspan="1" rowspan="1" style="width:124px;text-align:center"><b>NUMERO DEFECTUOSOS PARA RECHAZO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2  a           8</td><td colspan="1" rowspan="1" style="text-align:center">A  =   2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">9  a         15</td><td colspan="1" rowspan="1" style="text-align:center">A  =   2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">16  a         25</td><td colspan="1" rowspan="1" style="text-align:center">B  =   3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">26  a         50</td><td colspan="1" rowspan="1" style="text-align:center">B  =   3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">51  a         90</td><td colspan="1" rowspan="1" style="text-align:center">C  =   5</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">91  a       150</td><td colspan="1" rowspan="1" style="text-align:center">C  =   5</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">151  a       280</td><td colspan="1" rowspan="1" style="text-align:center">D  =   8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">281  a       500</td><td colspan="1" rowspan="1" style="text-align:center">D  =   8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">501  a     1200</td><td colspan="1" rowspan="1" style="text-align:center">E  = 13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">  1201  a     3200</td><td colspan="1" rowspan="1" style="text-align:center">E  =13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">  3201  a   10000</td><td colspan="1" rowspan="1" style="text-align:center">F  =20</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr></table><br /></div><br />
+<h2 id="heading_11" >8. PRUEBAS Y RECEPCI&#211;N</h2>
+La recepci&#243;n del material ser&#225; efectuada por representantes de ENEL COLOMBIA S.A., a tal fin, &#233;sta o sus representantes ser&#225;n avisados por lo menos con 15 d&#237;as de anticipaci&#243;n a fin de asistir a las pruebas.<br /><br />La ausencia de los representantes de ENEL COLOMBIA S.A en el momento de ejecutar los ensayos y pruebas seg&#250;n lo programado, aun cuando hayan sido debidamente avisados, no eximir&#225; al proveedor de efectuarlos, previa conformidad de ENEL COLOMBIA S.A. y deber&#225; comunicar inmediatamente a &#233;sta el resultado de los mismos.<br /><br />Los ensayos ser&#225;n efectuados en laboratorios particulares u oficiales reconocidos por ENEL COLOMBIA S.A<br /><br />Los ensayos y todas las piezas utilizadas en los mismos ser&#225;n por cuenta y cargo del proveedor. <br /><br />Los gastos de los representantes de ENEL COLOMBIA S.A no estar&#225;n incluidos en el precio si los ensayos tipo se realizan en la ciudad de Bogot&#225;.<br /><br />La recepci&#243;n del <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-274" class="externalLink  glosarioLink">material</a> quedar&#225; subordinada a:<br />- Resultado satisfactorio de los pruebas de Norma.<br />- Resultado satisfactorio del control de recepci&#243;n.<br />
+<h3 id="heading_12" >8.1  PRUEBAS</h3>El fabricante deber&#225; presentar protocolos de las pruebas efectuadas de acuerdo a NTC 4739, como m&#237;nimo la prueba de “Medici&#243;n de coeficiente de retroreflexi&#243;n”.<br />
+<h3 id="heading_13" >8.2  CONTROL DE RECEPCI&#211;N</h3>
+De cada remesa se tomar&#225; una <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-288" class="externalLink  glosarioLink">muestra</a> al azar, seg&#250;n lo indicado en el numeral 7.<br /><br />Sobre la cantidad que resulte, se deber&#225;n realizar las siguientes verificaciones:<br />- <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-235" class="externalLink  glosarioLink">Inspecci&#243;n</a> visual.<br />- Verificaci&#243;n dimensional.<br /><br />De la remesa se confirmar&#225; el empaque y rotulado.<br /><br />Para la recepci&#243;n ser&#225; obligatorio la entrega del certificado de <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> de las l&#225;minas retrorreflectivas expedido por el fabricante del <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-338" class="externalLink  glosarioLink">producto</a> en donde se se&#241;ale especificaciones del <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-274" class="externalLink  glosarioLink">material</a> relacionando su tipo (tipo XI), cantidad, color, garant&#237;a del <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-338" class="externalLink  glosarioLink">producto</a>, n&#250;mero y fecha de la factura. <br />
+<h2 id="heading_14" >9. EMPAQUE Y ROTULADO</h2>
+Los r&#243;tulos deben ser entregados en un empaque que garantice no se afecten sus caracter&#237;sticas en el transporte y almacenamiento, como caja de cart&#243;n corrugado o la definida por el fabricante.<br /><br />En cada caja se colocar&#225; un r&#243;tulo con la siguiente informaci&#243;n:<br />-	Raz&#243;n social del proveedor.<br />-	Fabricante.<br />-	Referencia o <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-281" class="externalLink  glosarioLink">modelo</a> del fabricante.<br />-	Cantidad de elementos<br />-	Peso total<br />-	Palabra BOG-CUN<br />-	N&#176; de Orden de compra<br />-	Fecha de entrega.<br />-	C&#243;digo de Almac&#233;n (SAP).<br /><br />
+<h2 id="heading_15" >10. PRESENTACI&#211;N DE LAS OFERTAS</h2>
+Para su an&#225;lisis, ser&#225; imprescindible que la oferta incluya la siguiente documentaci&#243;n:<br /><br />•  Protocolos de las pruebas requeridas en esta <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a>. Deber&#225; constar la metodolog&#237;a aplicada, los valores y resultados de las pruebas.<br /><br />•  Descripci&#243;n completa, planos, folletos y cat&#225;logos.<br /><br />•  Instrucciones de instalaci&#243;n.<br /><br />•  El proponente debe diligenciar la tabla de caracter&#237;sticas t&#233;cnicas garantizadas del Anexo 1 y adjuntar los certificados a que haya lugar.<br /><br />
+<h2 id="heading_16" >ANEXO 1. CARACTER&#205;STICAS <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-0" class="externalLink  glosarioLink">T&#201;CNICAS</a> GARANTIZADAS</h2>
+<div style="width:716px;"><table><tr><td colspan="1" rowspan="1" style="width:38px;height:41px;text-align:center"><b>N&#176;</b></td><td colspan="2" rowspan="1" style="width:554px;text-align:center"><b>DESCRIPCI&#211;N</b></td><td colspan="1" rowspan="1" style="width:84px;text-align:center"><b>GARANTIZADO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">1</td><td colspan="2" rowspan="1" style="">Oferente</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">2</td><td colspan="2" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">3</td><td colspan="2" rowspan="1" style="">Pa&#237;s de origen del <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-338" class="externalLink  glosarioLink">Producto</a></td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">4</td><td colspan="2" rowspan="1" style="">Referencia o <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-281" class="externalLink  glosarioLink">modelo</a></td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">5</td><td colspan="2" rowspan="1" style="">Normas de fabricaci&#243;n y pruebas</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">6</td><td colspan="2" rowspan="1" style="">Caracter&#237;sticas del r&#243;tulo</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">6.1</td><td colspan="2" rowspan="1" style="">Tipo (A, B, C o D)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">6.2</td><td colspan="2" rowspan="1" style="">N&#250;mero de d&#237;gitos 6 o 7 o Figura 4/4A/4B/4C (Indicar) </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">6.3</td><td colspan="2" rowspan="1" style="">Dimensiones del R&#243;tulo</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">6.4</td><td colspan="2" rowspan="1" style=""><a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-274" class="externalLink  glosarioLink">Material</a></td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">6.5</td><td colspan="2" rowspan="1" style="">Cumplimiento de caracter&#237;sticas del Logo Enel Colombia (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">7</td><td colspan="2" rowspan="1" style="">Tipo de impresi&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">8</td><td colspan="2" rowspan="1" style="">Vida &#250;til (a&#241;os)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:30px;"><b>RESULTADO DE EVALUACI&#211;N <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-376" class="externalLink  glosarioLink">T&#201;CNICA</a>&#160;</b></td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:22px;text-align:center">9</td><td colspan="1" rowspan="5" style="width:277px;"><a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-363" class="externalLink  glosarioLink">Sistema</a> de Gesti&#243;n de la <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-112" class="externalLink  glosarioLink">Calidad</a> (ISO 9001) del Fabricante</td><td colspan="1" rowspan="1" style="width:277px;">Entidad certificadora</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">N&#250;mero de certificado</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o) </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="6" style="height:22px;text-align:center">10</td><td colspan="1" rowspan="6" style=""><a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-124" class="externalLink  glosarioLink">Certificaci&#243;n</a> de <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-338" class="externalLink  glosarioLink">producto</a> con <a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-301" class="externalLink  glosarioLink">norma t&#233;cnica</a></td><td colspan="1" rowspan="1" style="">Entidad certificadora</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">N&#250;mero de certificado</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o) </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;"><a href="et850_codificacion_rotulacion_luminarias_alumbrado_publico.html#" id="version-301" class="externalLink  glosarioLink">Norma t&#233;cnica</a> con la cual se certifica</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:30px;"><b>RESULTADO DE EVALUACI&#211;N REGULATORIA</b></td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center">11</td><td colspan="2" rowspan="1" style="">Observaciones</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div>
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 638, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

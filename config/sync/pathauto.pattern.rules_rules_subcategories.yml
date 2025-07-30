@@ -1,0 +1,22 @@
+uuid: 9ff516aa-6100-4b9c-8227-44a3df9d2eac
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: rules_rules_subcategories
+label: 'Rules: rules subcategories'
+type: 'canonical_entities:taxonomy_term'
+pattern: 'normas/[term:related_category]/[term:name]'
+selection_criteria:
+  cc084b5e-1d55-4d0e-a9f8-ba0911d10007:
+    id: 'entity_bundle:taxonomy_term'
+    negate: false
+    uuid: cc084b5e-1d55-4d0e-a9f8-ba0911d10007
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    bundles:
+      rules_subcategory: rules_subcategory
+selection_logic: and
+weight: -5
+relationships: {  }

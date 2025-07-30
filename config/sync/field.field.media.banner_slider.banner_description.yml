@@ -1,0 +1,19 @@
+uuid: bfc8c82c-4129-40d1-b8e6-9da177b4278c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.banner_description
+    - media.type.banner_slider
+id: media.banner_slider.banner_description
+field_name: banner_description
+entity_type: media
+bundle: banner_slider
+label: 'Descripción del banner'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

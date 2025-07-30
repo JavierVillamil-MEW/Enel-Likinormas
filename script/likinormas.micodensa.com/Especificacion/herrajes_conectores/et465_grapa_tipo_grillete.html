@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET465 Grapa tipo grillete | Likinormas</title>
+	<meta name="description" content="herraje; redes aereas" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/554" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F554.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/554" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/554" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '23');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET465 Grapa tipo grillete</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET465</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">11/12/2019</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/554">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F554&amp;nodoid=554', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et465_grapa_tipo_grillete.html#heading_0">1.	OBJETO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et465_grapa_tipo_grillete.html#heading_1">2.	ALCANCE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et465_grapa_tipo_grillete.html#heading_2">3.	SERVICIO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et465_grapa_tipo_grillete.html#heading_3">4.	  SISTEMA DE UNIDADES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et465_grapa_tipo_grillete.html#heading_4">5.	  NORMAS DE FABRICACI&#211;N Y PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et465_grapa_tipo_grillete.html#heading_5">6. REQUISITOS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et465_grapa_tipo_grillete.html#heading_6">6.1	GEOM&#201;TRICOS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et465_grapa_tipo_grillete.html#heading_7">6.2	QU&#205;MICOS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et465_grapa_tipo_grillete.html#heading_8">6.3	MEC&#193;NICOS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et465_grapa_tipo_grillete.html#heading_9">6.4	REQUISITOS DEL RECUBRIMIENTO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et465_grapa_tipo_grillete.html#heading_10">6.5	REQUISITOS DEL ACABADO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et465_grapa_tipo_grillete.html#heading_11">7.	CRITERIOS DE ACEPTACI&#211;N O RECHAZO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et465_grapa_tipo_grillete.html#heading_12">8.	PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et465_grapa_tipo_grillete.html#heading_13">8.1 PRUEBAS TIPO</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et465_grapa_tipo_grillete.html#heading_14"> 8.1.1 Prueba dimensional</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et465_grapa_tipo_grillete.html#heading_15"> 8.1.2 An&#225;lisis qu&#237;mico</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et465_grapa_tipo_grillete.html#heading_16"> 8.1.3  Prueba mec&#225;nica: ensayos de tracci&#243;n y dureza</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et465_grapa_tipo_grillete.html#heading_17"> 8.1.4 Prueba del Galvanizado</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et465_grapa_tipo_grillete.html#heading_18">8.2 PRUEBAS DE RECEPCI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et465_grapa_tipo_grillete.html#heading_19">9.	EMPAQUE, ROTULADO Y MARCACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et465_grapa_tipo_grillete.html#heading_20">9.1	EMPAQUE</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et465_grapa_tipo_grillete.html#heading_21">9.2	ROTULADO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et465_grapa_tipo_grillete.html#heading_22">9.3	MARCACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et465_grapa_tipo_grillete.html#heading_23">10. REQUISITOS DE LAS OFERTAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et465_grapa_tipo_grillete.html#heading_24">11. GARANT&#205;A DE F&#193;BRICA</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1.	OBJETO</h2>
+Esta <a href="et465_grapa_tipo_grillete.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a> tiene por objeto establecer las caracter&#237;sticas y requisitos t&#233;cnicos que deben cumplir y los ensayos a los cuales deben ser sometidos las grapas tipo grillete que solicitar&#225; ENEL CODENSA, para el <a href="et465_grapa_tipo_grillete.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> <a href="et465_grapa_tipo_grillete.html#" id="version-177" class="externalLink  glosarioLink">el&#233;ctrico</a> de distribuci&#243;n.<br />
+<h2 id="heading_1" >2.	ALCANCE</h2>
+Esta <a href="et465_grapa_tipo_grillete.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a> se aplicar&#225; en todas las grapas tipo grillete que adquiera ENEL CODENSA.<br />
+<h2 id="heading_2" >3.	SERVICIO</h2>
+Estos herrajes se usan para fijar cables de acero y son de servicio continuo.<br />	
+<h2 id="heading_3" >4.	  SISTEMA DE UNIDADES</h2>
+En todos los documentos t&#233;cnicos se deben expresar las cantidades num&#233;ricas en unidades del sistema Internacional (S.I.).  Si se usan cat&#225;logos, folletos o planos, en sistemas diferentes de unidades, deben hacerse  las conversiones respectivas.<br />
+<h2 id="heading_4" >5.	  NORMAS DE FABRICACI&#211;N Y PRUEBAS</h2>
+<div style="width:850px;"><table><tr><td colspan="1" rowspan="1" style="width:150px;height:40px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:700px;"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC 2076</td><td colspan="1" rowspan="1" style="">Recubrimiento de zinc por inmersi&#243;n en caliente para elementos en hierro y acero.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC 2995</td><td colspan="1" rowspan="1" style="">ELECTROTECNIA. HERRAJES Y ACCESORIOS PARA REDES Y L&#205;NEAS A&#201;REAS DE DISTRIBUCI&#211;N DE ENERG&#205;A EL&#201;CTRICA. ESLABONES Y ADAPTADORES</td></tr></table><br /></div><br />Pueden emplearse otras normas internacionalmente reconocidas equivalentes o superiores a las aqu&#237; se&#241;aladas, siempre y cuando se ajusten a lo solicitado en la presente especificaci&#243;n t&#233;cnica.<br /><br />Las normas citadas en la presente especificaci&#243;n (o cualquier otra que llegare a ser aceptada por ENEL CODENSA) se refieren a su &#250;ltima revisi&#243;n.<br />
+<h2 id="heading_5" >6. REQUISITOS</h2>
+Son elementos de caracter&#237;sticas geom&#233;tricas y mec&#225;nicas tales que les permiten adaptarse a las limitaciones impuestas por otros elementos.<br /><br />Las grapas tipo grillete deber&#225;n estar formadas por dos elementos uno en varilla y otro en fundici&#243;n de acero en forma semicircunferencial con prolongaciones roscadas de la varilla, la varilla y la fundici&#243;n deben ser de alta <a href="et465_grapa_tipo_grillete.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> y cumplir la norma NEMA PH5 o ASTM   A339-55 Fundiciones; si la grapas tipo grillete es doblada en fr&#237;o, el acero debe ser de bajo silicio o sea menor de 0,05% (A34 - SAE1010 &#243; SAE1020) o en su defecto, deber&#225; ser doblada en caliente.<br /><br />Las roscas de la varilla, tuercas y arandelas deber&#225;n estar de acuerdo con las normas que disponga ENEL CODENSA para tal fin o en su defecto con las normas NTC 1645 y ANSI/ASME B1.1; tanto en los requisitos geom&#233;tricos, qu&#237;micos y mec&#225;nicos.<br /> 
+<h3 id="heading_6" >6.1	GEOM&#201;TRICOS</h3>
+La varilla y la fundici&#243;n tendr&#225;n la forma y dimensiones que se muestran en la figura 1.<br /><br /><b>TABLA 1. DIMENSIONES  DE  LAS  ROSCAS</b><br /><div style="width:596px;"><table><tr><td colspan="10" rowspan="1" style="width:596px;height:30px;text-align:center"><b>ROSCA EXTERNA</b></td></tr>
+<tr><td colspan="1" rowspan="2" style="width:68px;height:9px;text-align:center"><b>DIAMETRO NOMINAL</b></td><td colspan="1" rowspan="2" style="width:56px;text-align:center"><b>SERIE</b></td><td colspan="1" rowspan="2" style="width:54px;text-align:center"><b>CLASE  DE  AJUSTE</b></td><td colspan="1" rowspan="2" style="width:52px;text-align:center"><b><a href="et465_grapa_tipo_grillete.html#" id="version-195" class="externalLink  glosarioLink">ERROR</a> ADMISIBLE</b></td><td colspan="2" rowspan="1" style="width:106px;text-align:center"><b>DIAMETRO MAYOR</b></td><td colspan="3" rowspan="1" style="width:195px;text-align:center"><b>DIAMETRO MEDIO -PITCH</b></td><td colspan="1" rowspan="1" style="width:65px;text-align:center"><b>DIAMETRO MENOR</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center"><b>MAX</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>MIN</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>MAX</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>MIN</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>TOLERANCIA</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>MAX</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">5/16”- 18</td><td colspan="1" rowspan="1" style="text-align:center">UNC</td><td colspan="1" rowspan="1" style="text-align:center">2A</td><td colspan="1" rowspan="1" style="text-align:center">0,0012</td><td colspan="1" rowspan="1" style="text-align:center">0,3113</td><td colspan="1" rowspan="1" style="text-align:center">0,3026</td><td colspan="1" rowspan="1" style="text-align:center">0,2752</td><td colspan="1" rowspan="1" style="text-align:center">0,2712</td><td colspan="1" rowspan="1" style="text-align:center">0,004</td><td colspan="1" rowspan="1" style="text-align:center">0,2512</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">3/8” - 16</td><td colspan="1" rowspan="1" style="text-align:center">UNC</td><td colspan="1" rowspan="1" style="text-align:center">2A</td><td colspan="1" rowspan="1" style="text-align:center">0,0013</td><td colspan="1" rowspan="1" style="text-align:center">0,3737</td><td colspan="1" rowspan="1" style="text-align:center">0,3643</td><td colspan="1" rowspan="1" style="text-align:center">0,3331</td><td colspan="1" rowspan="1" style="text-align:center">0,3287</td><td colspan="1" rowspan="1" style="text-align:center">0,0044</td><td colspan="1" rowspan="1" style="text-align:center">0,306</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">7/16&quot; - 14</td><td colspan="1" rowspan="1" style="text-align:center">UNC</td><td colspan="1" rowspan="1" style="text-align:center">2A</td><td colspan="1" rowspan="1" style="text-align:center">0,0014</td><td colspan="1" rowspan="1" style="text-align:center">0,4361</td><td colspan="1" rowspan="1" style="text-align:center">0,4258</td><td colspan="1" rowspan="1" style="text-align:center">0,3897</td><td colspan="1" rowspan="1" style="text-align:center">0,385</td><td colspan="1" rowspan="1" style="text-align:center">0,0047</td><td colspan="1" rowspan="1" style="text-align:center">0,3588</td></tr>
+<tr><td colspan="10" rowspan="1" style="height:30px;text-align:center"><b>ROSCA  DE  LA TUERCA</b></td></tr>
+<tr><td colspan="1" rowspan="2" style="height:9px;text-align:center"><b>DIAMETRO NOMINAL</b></td><td colspan="1" rowspan="2" style="text-align:center"><b>SERIE</b></td><td colspan="1" rowspan="2" style="text-align:center"><b>CLASE DE AJUSTE</b></td><td colspan="1" rowspan="2" style="text-align:center"><b><a href="et465_grapa_tipo_grillete.html#" id="version-195" class="externalLink  glosarioLink">ERROR</a> ADMISIBLE</b></td><td colspan="2" rowspan="1" style="text-align:center"><b>DIAMETRO MENOR</b></td><td colspan="3" rowspan="1" style="text-align:center"><b>DIAMETRO MEDIO -PITCH</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>DIAMETRO MENOR</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center"><b>MIN</b></td><td colspan="1" rowspan="1" style="height:10px;text-align:center"><b>MAX</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>MIN</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>MAX</b></td><td colspan="1" rowspan="1" style="height:10px;text-align:center"><b>TOLERANCIA</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>MIN</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">5/16” – 18</td><td colspan="1" rowspan="1" style="text-align:center">UNC</td><td colspan="1" rowspan="1" style="text-align:center">2B</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">0,252</td><td colspan="1" rowspan="1" style="text-align:center">0,265</td><td colspan="1" rowspan="1" style="text-align:center">0,2764</td><td colspan="1" rowspan="1" style="text-align:center">0,2817</td><td colspan="1" rowspan="1" style="text-align:center">0,0053</td><td colspan="1" rowspan="1" style="text-align:center">0,3125</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">3/8” – 16</td><td colspan="1" rowspan="1" style="text-align:center">UNC</td><td colspan="1" rowspan="1" style="text-align:center">2B</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">0,307</td><td colspan="1" rowspan="1" style="text-align:center">0,321</td><td colspan="1" rowspan="1" style="text-align:center">0,3344</td><td colspan="1" rowspan="1" style="text-align:center">0,3401</td><td colspan="1" rowspan="1" style="text-align:center">0,0057</td><td colspan="1" rowspan="1" style="text-align:center">0,375</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">7/16&quot; – 14</td><td colspan="1" rowspan="1" style="text-align:center">UNC</td><td colspan="1" rowspan="1" style="text-align:center">2B</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">0,36</td><td colspan="1" rowspan="1" style="text-align:center">0,376</td><td colspan="1" rowspan="1" style="text-align:center">0,3911</td><td colspan="1" rowspan="1" style="text-align:center">0,3972</td><td colspan="1" rowspan="1" style="text-align:center">0,0061</td><td colspan="1" rowspan="1" style="text-align:center">0,4375</td></tr></table><br /></div>Las medidas de las tablas son en pulgadas. <br /><br />Las roscas ser&#225;n roscas unificas seg&#250;n normas ANSI/ASME B1.1. El perfil de rosca ser&#225; seg&#250;n la misma norma, con &#225;ngulo de 60 grados.<br /><br />Las tuercas ser&#225;n galvanizadas en caliente y las roscas pueden ser repasadas en la rosca en dimensiones est&#225;ndar. La rosca interna no queda necesariamente galvanizada. Las tuercas dar&#225;n un ajuste clase 2B y entrar&#225;n libremente (manualmente) en el tornillo.<br />
+<h3 id="heading_7" >6.2	QU&#205;MICOS</h3>
+Las varillas y las platinas deben cumplir con los siguientes requisitos, de la tabla 2:<br /><br /><b>TABLA  2.</b><br /><div style="width:628px;"><table><tr><td colspan="4" rowspan="1" style="width:628px;height:30px;text-align:center"><b>REQUISITOS QUIMICOS</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:25px;text-align:center"><b>ELEMENTO</b></td><td colspan="1" rowspan="1" style=""><b>ARANDELAS DE PRESI&#211;N</b></td><td colspan="1" rowspan="1" style=""><b>FUNDICI&#211;N NODULAR</b></td><td colspan="1" rowspan="1" style=""><b>TUERCAS Y VARILLA</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">% Carbono, m&#225;x.</td><td colspan="1" rowspan="1" style="text-align:center">0,55</td><td colspan="1" rowspan="1" style="text-align:center">3,2 a 4,1</td><td colspan="1" rowspan="1" style="text-align:center">0,28</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">% F&#243;sforo, m&#225;x.</td><td colspan="1" rowspan="1" style="text-align:center">0,048</td><td colspan="1" rowspan="1" style="text-align:center">0,1</td><td colspan="1" rowspan="1" style="text-align:center">0,048</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">% Azufre, m&#225;x</td><td colspan="1" rowspan="1" style="text-align:center">0,058</td><td colspan="1" rowspan="1" style="text-align:center">0,03</td><td colspan="1" rowspan="1" style="text-align:center">0,058</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">% Manganeso m&#237;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">0,8</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">% Silicio,</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">1,8 a 2,8</td><td colspan="1" rowspan="1" style="text-align:center">-</td></tr></table><br /></div><i><b>Nota:</b> Se pueden usar aceros equivalentes u otros aceros con la previa autorizaci&#243;n de ENEL CODENSA</i><br /><br />La capa de <a href="et465_grapa_tipo_grillete.html#" id="version-274" class="externalLink  glosarioLink">material</a> de cinc utilizado ser&#225; de <a href="et465_grapa_tipo_grillete.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> especial seg&#250;n norma NTC 2076 (tabla 3.<br /><br /><b>TABLA  3.</b><br /><div style="width:420px;"><table><tr><td colspan="5" rowspan="1" style="width:420px;height:35px;text-align:center"><b>COMPOSICI&#211;N QUIMICA DEL CINC ( % )</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:25px;text-align:center"><b>GRADO</b></td><td colspan="1" rowspan="1" style=""><b>Plomo m&#225;x</b></td><td colspan="1" rowspan="1" style=""><b>Hierro m&#225;x</b></td><td colspan="1" rowspan="1" style=""><b>Cadmio m&#225;x</b></td><td colspan="1" rowspan="1" style=""><b>Cinc, m&#237;n</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Especial</td><td colspan="1" rowspan="1" style="text-align:center">0,03</td><td colspan="1" rowspan="1" style="text-align:center">0,02</td><td colspan="1" rowspan="1" style="text-align:center">0,02</td><td colspan="1" rowspan="1" style="text-align:center">99,9</td></tr></table><br /></div>
+<h3 id="heading_8" >6.3	MEC&#193;NICOS</h3>
+Las varillas, fundici&#243;n, arandelas y tuercas utilizadas para la fabricaci&#243;n de las grapas tipo grillete deben tener los siguientes requisitos m&#237;nimos:<br />
+<ul><li>Las varillas deber&#225;n soportar una carga de prueba durante un minuto de 55000 lbs/pulg<sup>2</sup> (38,6 kg/mm<sup>2</sup> ) sin sufrir ning&#250;n deterioro y resistencia m&#237;nima a la tracci&#243;n de 74000 lbs/pulg<sup>2</sup> (52 kg/mm<sup>2</sup> ) y una dureza Rockwell B m&#237;nima de 80 y m&#225;xima de 100.</li></ul>
+
+<ul><li>Las tuercas de deber&#225;n soportar la carga de prueba por un minuto de 90000 lbs/pulg<sup>2</sup> (63,27 kg/mm<sup>2</sup> ) y una dureza Rockwell C m&#225;xima de 32.</li></ul>
+
+<ul><li>Las arandelas de presi&#243;n tendr&#225;n una dureza Rockwell C m&#225;xima de 51 y m&#237;nima de 45.</li></ul>
+
+<ul><li>Si el proceso es fundici&#243;n de acero la resistencia a la tracci&#243;n m&#237;nima debe ser de 4780 Kgf/cm<sup>2</sup> , &#233;l limite de fluencia m&#237;nimo ser&#225; de 2650 Kgf/cm<sup>2</sup> y el porcentaje de alargamiento en 50 mm ser&#225; m&#237;nimo de 20%.</li></ul>
+
+<ul><li>Doblado en caliente: La temperatura m&#225;xima permitida es de 650 grados cent&#237;grados. El fabricante debe garantizar &#233;sta temperatura sobre la platina y sobre la varilla; se recomienda el uso de tiza t&#233;rmicas de 620 grados y de 650 grados cent&#237;grados. </li></ul>
+
+<h3 id="heading_9" >6.4	REQUISITOS DEL RECUBRIMIENTO</h3>
+Las grapas ser&#225;n totalmente galvanizadas por inmersi&#243;n en caliente y deber&#225;n cumplir con las especificaciones t&#233;cnicas de la norma NTC 2076 y deben estar libres de burbujas, &#225;reas sin revestimiento, dep&#243;sitos de escoria, manchas negras y cualquier otro tipo de inclusiones o imperfecciones.<br /><br />Las varillas, fundici&#243;n, arandelas y tuercas se galvanizan con clase B-2 y los elementos roscados con clase C seg&#250;n Norma NTC 2076 (tabla 4).<br /><br /><b>TABLA  4.</b><br /><div style="width:480px;"><table><tr><td colspan="5" rowspan="1" style="width:480px;height:35px;text-align:center"><b>REQUISITOS  DE  GALVANIZADO</b></td></tr>
+<tr><td colspan="1" rowspan="2" style="width:180px;height:60px;text-align:center"><b>ELEMENTO</b></td><td colspan="2" rowspan="1" style="width:150px;text-align:center"><b>PROMEDIO</b></td><td colspan="2" rowspan="1" style="width:150px;text-align:center"><b>MINIMO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:25px;text-align:center"><b>g/m<sup>2</sup></b></td><td colspan="1" rowspan="1" style="text-align:center"><b><span class="codeInline">&#181;</span>m</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>g/m<sup>2</sup></b></td><td colspan="1" rowspan="1" style="text-align:center"><b><span class="codeInline">&#181;</span>m</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Elementos Roscados</td><td colspan="1" rowspan="1" style="text-align:center">397</td><td colspan="1" rowspan="1" style="text-align:center">56,6</td><td colspan="1" rowspan="1" style="text-align:center">336</td><td colspan="1" rowspan="1" style="text-align:center">48</td></tr></table><br /></div><h3 id="heading_10" >6.5	REQUISITOS DEL ACABADO</h3>
+Los elementos deben ser de una sola pieza, libres de deformaciones, fisura, aristas cortantes, y defectos de laminaci&#243;n. No se permiten dobleces ni rebabas en las zonas de corte, perforadas o punzadas. El galvanizado debe estar libre de burbujas, dep&#243;sitos de escorias, manchas negras, excoriaciones y/u otro tipo de inclusiones.<br />
+<h2 id="heading_11" >7.	CRITERIOS DE ACEPTACI&#211;N O RECHAZO</h2>
+Si el n&#250;mero de elementos defectuosos es menor o igual al correspondiente n&#250;mero de defectuosos definidos a continuaci&#243;n, se deber&#225; considerar que el lote cumple con los requisitos t&#233;cnicos exigidos por ENEL CODENSA, en caso contrario, el lote se rechazar&#225;.<br /><br /><b>Inspecci&#243;n Visual y Dimensional</b> <br /><br />De acuerdo a la tabla a continuaci&#243;n.<br /><br /><div style="width:644px;"><table><tr><td colspan="4" rowspan="1" style="width:644px;height:20px;text-align:center">Tabla inspecci&#243;n visual y dimensional</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">Tama&#241;o del lote</td><td colspan="1" rowspan="1" style="text-align:center">Muestra</td><td colspan="1" rowspan="1" style="text-align:center">Aceptado</td><td colspan="1" rowspan="1" style="text-align:center">Rechazado</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">2 a 8</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">9 a 15</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">16 a 25</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">26 a 50</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">51 a 90</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">91 a 150</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">151 a 280</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">281 a 500</td><td colspan="1" rowspan="1" style="text-align:center">20</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">501 a 1200</td><td colspan="1" rowspan="1" style="text-align:center">32</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1201 a 3200</td><td colspan="1" rowspan="1" style="text-align:center">50</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">3201 a 10000</td><td colspan="1" rowspan="1" style="text-align:center">80</td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">7</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">10001 a 35000</td><td colspan="1" rowspan="1" style="text-align:center">125</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">9</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">35001 a 150000</td><td colspan="1" rowspan="1" style="text-align:center">200</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">11</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">150001 a 500000</td><td colspan="1" rowspan="1" style="text-align:center">315</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">11</td></tr></table><br /></div><b>TABLA 5. Plan de muestreo para inspecci&#243;n visual y dimensional.</b><br /><br /><b>Ensayos mec&#225;nicos</b><br /><br />De acuerdo a la tabla a continuaci&#243;n.<br /><br /><div style="width:644px;"><table><tr><td colspan="4" rowspan="1" style="width:644px;height:20px;text-align:center">Tabla inspecci&#243;n visual y dimensional</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">Tama&#241;o del lote</td><td colspan="1" rowspan="1" style="text-align:center">Muestra</td><td colspan="1" rowspan="1" style="text-align:center">Aceptado</td><td colspan="1" rowspan="1" style="text-align:center">Rechazado</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">2 a 8</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">9 a 15</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">16 a 25</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">26 a 50</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">51 a 90</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">91 a 150</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">151 a 280</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">281 a 500</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">501 a 1200</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1201 a 3200</td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">3201 a 10000</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">10001 a 35000</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">35001 a 150000</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">150001 a 500000</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr></table><br /></div><b>TABLA 6. Plan de muestreo para pruebas mec&#225;nicas.</b><br />
+<h2 id="heading_12" >8.	PRUEBAS</h2>
+<h3 id="heading_13" >8.1 PRUEBAS TIPO</h3>
+<h4 id="heading_14" > 8.1.1 Prueba dimensional</h4>La verificaci&#243;n de las dimensiones se har&#225; con los instrumentos de medida que den la aproximaci&#243;n requerida, entre otros calibrador pie de rey, micr&#243;metros de interiores y exteriores, calibrador de peines de roscas, etc. El plan de muestreo es deber&#225; estar de acuerdo con la tabla 5.<br />
+<h4 id="heading_15" > 8.1.2 An&#225;lisis qu&#237;mico</h4>Se efectuar&#225; el an&#225;lisis qu&#237;mico de acuerdo a lo requerido en el numeral 4.2 y las normas NTC 23 y 180 (carbono), NTC 27 (azufre), NTC 181 (f&#243;sforo), NTC 24 o 25 (manganeso), NTC 26 o 28 (silicio) o en su defecto se aceptar&#225; un certificado de <a href="et465_grapa_tipo_grillete.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> de los materiales empleados, emitido por un laboratorio reconocido y aprobado por ENEL CODENSA.  El an&#225;lisis qu&#237;mico puede ser realizado en un espect&#243;metro calibrado con los patrones correspondientes.<br />
+<h4 id="heading_16" > 8.1.3  Prueba mec&#225;nica: ensayos de tracci&#243;n y dureza</h4>La grapa tipo grillete se corta en su longitud recta y se somete a la prueba de tracci&#243;n con las tuercas deben poder soportar una carga m&#237;nima as&#237;; las secciones de abrazadera una carga de prueba durante un minuto de 55000 lbs/pulg<sup>2</sup> (38,6 kg/mm<sup>2</sup> ) sin sufrir ning&#250;n deterioro y resistencia m&#237;nima a la tracci&#243;n de 74000 lbs/pulg<sup>2</sup> (52 kg/mm<sup>2</sup>) y una dureza Rockwell B m&#237;nima de 80 y m&#225;xima de 100; las tuercas deber&#225;n soportar la carga de prueba por un minuto de 90000 lbs/pulg<sup>2</sup> (63,27 kg/mm<sup>2</sup> ) y una dureza Rockwell C m&#225;xima de 32, las arandelas de presi&#243;n tendr&#225;n una dureza Rockwell C m&#225;xima de 51 y m&#237;nima de 45.<br />
+<h4 id="heading_17" > 8.1.4 Prueba del Galvanizado</h4>Esta prueba se har&#225; de acuerdo a la norma NTC 2076.<br />Para los elementos de fijaci&#243;n para la U, tuercas, arandelas se har&#225;n las pruebas de acuerdo a la NTC 3241 con los siguientes requisitos establecidos en la tabla N&#186; 7.<br /><br /><b>TABLA 7. PRUEBA  DE  GALVANIZADO</b><br /><div style="width:348px;"><table><tr><td colspan="1" rowspan="1" style="width:198px;height:9px;text-align:center"><b>ELEMENTO</b></td><td colspan="1" rowspan="1" style="width:150px;text-align:center"><b>NUMERO DE INMERSIONES</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Fundici&#243;n </td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Parte  U</td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Parte roscada (tuerca)</td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;">Arandelas </td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr></table><br /></div><i><b>Nota:</b> Tambi&#233;n se aceptar&#225; la prueba por elc&#243;metro debidamente calibrado</i><br />
+<h3 id="heading_18" >8.2 PRUEBAS DE RECEPCI&#211;N</h3>
+Las pruebas de recepci&#243;n son:<br />
+<ul><li>Inspecci&#243;n visual</li>
+<li>Verificaci&#243;n dimensional</li>
+<li>Verificaci&#243;n certificados de calidad</li>
+<li>Verificaci&#243;n espesor de galvanizado</li>
+<li>Ensayo de tracci&#243;n</li></ul>
+
+<h2 id="heading_19" >9.	EMPAQUE, ROTULADO Y MARCACI&#211;N</h2>
+<h3 id="heading_20" >9.1	EMPAQUE</h3>
+Las grapas tipo grillete se empacar&#225;n de tal manera que no sufran durante el transporte, manipuleo y almacenamiento; Las abrazaderas ir&#225;n engrasadas, con sus tuercas y arandelas instaladas.<br /> 
+<h3 id="heading_21" >9.2	ROTULADO</h3>
+En cada empaque se colocar&#225; un r&#243;tulo con la siguiente informaci&#243;n.
+<ul><li>Especificaci&#243;n del contenido con su referencia.</li>
+<li>Nombre y raz&#243;n social del proveedor.</li>
+<li>Pa&#237;s de origen.</li>
+<li>Cantidad de elementos.</li>
+<li>Peso unitario, peso total bruto y neto.</li>
+<li>N&#250;mero de contrato o pedido.</li>
+<li>Fecha de entrega.</li>
+<li>C&#243;digo de Almac&#233;n.</li>
+<li>ENEL CODENSA</li></ul>
+
+<h3 id="heading_22" >9.3	MARCACI&#211;N</h3>
+El material debe cumplir la siguiente marcaci&#243;n en bajo o en alto relieve. No se acepta pintura ni calcoman&#237;a.<br /><br />•	Logo del fabricante<br />•	Lote<br />•	ENEL CODENSA<br />•	Mes y a&#241;o de fabricaci&#243;n<br />•	Rango de uso<br />
+<h2 id="heading_23" >10. REQUISITOS DE LAS OFERTAS</h2>
+El oferente obligatoriamente deber&#225; incluir con su propuesta, la siguiente informaci&#243;n:<br />
+<ul><li>Relaci&#243;n de los bienes cotizados.</li></ul>
+
+<ul><li>Informaci&#243;n del oferente.</li></ul>
+
+<ul><li>Planilla de caracter&#237;sticas t&#233;cnicas garantizadas, la cual deber&#225; ser diligenciada completamente en formato Excel.</li></ul>
+
+<ul><li>Cat&#225;logos originales, completos y actualizados del fabricante, que correspondan a los elementos cotizados en la planilla de caracter&#237;sticas t&#233;cnicas garantizadas.</li></ul>
+
+<ul><li>Relaci&#243;n de los ensayos realizados de acuerdo con lo indicado en el apartado 8 de la presente especificaci&#243;n.</li></ul>
+
+<ul><li>El oferente adjuntar&#225; con su propuesta el certificado de conformidad de producto con noma t&#233;cnica y con RETIE, expedido por una entidad autorizada por la ONAC. Adem&#225;s deber&#225; presentar el certificado de calidad del fabricante.</li></ul>
+
+<ul><li>Relaci&#243;n de clientes, evidencia de su capacidad t&#233;cnica y experiencias relacionadas con los materiales y/o equipos cotizados.</li></ul>
+
+<ul><li>Carta de garant&#237;a de los bienes cotizados.</li></ul>
+
+<ul><li>En caso que se requiera se podr&#225;n exigir muestras de cada uno de los tipos ofertados sin cargo a devoluci&#243;n, con cada una de las caracter&#237;sticas t&#233;cnicas, solicitadas y mencionadas en la presente especificaci&#243;n.</li></ul>
+
+<ul><li>Se deben relacionar las excepciones de car&#225;cter exclusivamente t&#233;cnico de la oferta, respecto a los bienes solicitados. Si la oferta no presenta excepci&#243;n, se indicar&#237;a expresamente en el mismo “NO HAY EXCEPCIONES”</li></ul>
+
+<ul><li>Informaci&#243;n adicional que considere aporta explicaci&#243;n a su dise&#241;o (dibujos, detalles, caracter&#237;sticas de operaci&#243;n, dimensiones y pesos de los materiales ofertados).</li></ul>
+<br />ENEL CODENSA podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones, sin expresi&#243;n de causa ni obligaci&#243;n de compensaci&#243;n.<br />
+<h2 id="heading_24" >11. GARANT&#205;A DE F&#193;BRICA</h2>
+ENEL CODENSA requiere como m&#237;nimo, un per&#237;odo de garant&#237;a de f&#225;brica de cuarenta y ocho (48) meses, a partir de la entrega de los bienes.<br /><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/554/ET465 fig 1.jpg" src="http://likinormas.micodensa.com/media/cache/images/850x850/wikiimages/31313535303930343030-514357-ET465 fig 1.jpg" title="FIGURA 1"  /></div><div class="texto_imagen_articulos" style="max-width:850px">FIGURA 1</div></div></div><br /><b>ANEXO 1. CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS</b><br /><div style="width:800px;"><table><tr><td colspan="1" rowspan="1" style="width:30px;height:39px;text-align:center"><b>N&#176;</b></td><td colspan="2" rowspan="1" style="width:680px;text-align:center"><b>CARACTER&#205;STICA</b></td><td colspan="1" rowspan="1" style="width:90px;text-align:center"><b>OFERTADO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1</td><td colspan="2" rowspan="1" style="">Oferente</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">2</td><td colspan="2" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">3</td><td colspan="2" rowspan="1" style="">Referencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">4</td><td colspan="2" rowspan="1" style="">Normas de fabricaci&#243;n y pruebas</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">5</td><td colspan="2" rowspan="1" style="">Di&#225;metro del cable de acero a sujetar</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="2" style="height:20px;text-align:center">6</td><td colspan="1" rowspan="2" style="">Material </td><td colspan="1" rowspan="1" style="">Grapa</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Perno en U</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">7</td><td colspan="2" rowspan="1" style="">Proceso de fabricaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="7" style="height:20px;text-align:center">8</td><td colspan="1" rowspan="7" style="">Dimensiones (mm)</td><td colspan="1" rowspan="1" style="">A</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">B</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">C</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">D</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">E</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">F</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">G</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="4" style="height:20px;text-align:center">9</td><td colspan="1" rowspan="4" style="">Accesorios incluidos (Si/No, cantidad)</td><td colspan="1" rowspan="1" style="">Cuerpo de la grapa</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Perno en U</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Arandelas</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Tuercas</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="2" style="height:20px;text-align:center">10</td><td colspan="1" rowspan="2" style="">Resistencia m&#237;nima a la tracci&#243;n</td><td colspan="1" rowspan="1" style="">Cuerpo de la grapa</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Perno en U</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">11</td><td colspan="2" rowspan="1" style="">Galvanizado garantizado (g/m&#178;)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">12</td><td colspan="2" rowspan="1" style="">Marcaci&#243;n entregada (Describir)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:20px;"><b>RESULTADO DE EVALUACI&#211;N T&#201;CNICA</b></td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:20px;text-align:center">13</td><td colspan="1" rowspan="5" style="">Certificado del sistema de calidad del fabricante</td><td colspan="1" rowspan="1" style="">Entidad acreditadora</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o) </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="6" style="height:20px;text-align:center">14</td><td colspan="1" rowspan="6" style="">Certificaci&#243;n de producto con norma t&#233;cnica</td><td colspan="1" rowspan="1" style="">Entidad acreditadora</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Norma t&#233;cnica con la cual se certifica</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:20px;text-align:center">15</td><td colspan="1" rowspan="5" style="">Certificaci&#243;n de producto con RETIE</td><td colspan="1" rowspan="1" style="">Entidad acreditadora</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Vigencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:20px;"><b>RESULTADO DE EVALUACI&#211;N REGULATORIA</b></td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">16</td><td colspan="3" rowspan="1" style="">Observaciones</td></tr></table><br /></div>
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 554, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Índice. Líneas aéreas urbanas | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../../index.html"><img src="../../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1846" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../../Usuario/Registro%3FReturnUrl=%252FNorma%252FDetalles%252F1846.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/1846" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1846" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			showSubmenu('4', '118');
+		});
+	</script>
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Norma t&#233;cnica
+	</div>
+	<h1>&#205;ndice. L&#237;neas a&#233;reas urbanas</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de la norma</div>
+					<div class="caracteristicas">&#205;ndice</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">01/03/2019</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../../Home/DownloadPDF/1846">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FNorma%2FDetalles%2F1846&amp;nodoid=1846', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+        <div style="clear:left;"></div>
+		<div style="width:800px;"><table><tr><td colspan="2" rowspan="1" style="width:800px;height:42px;text-align:center"><b>L&#205;NEAS A&#201;REAS URBANAS DE DISTRIBUCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="width:160px;height:35px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:640px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../generalidades/lageneralidades_1_1_normas_construcccion_redes_aereas_urbanas.html" class="externalLink">GENERALIDADES 1.1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">NORMAS DE CONSTRUCCI&#211;N REDES A&#201;REAS URBANAS DE DISTRIBUCI&#211;N</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../../acometidas_medidores/lineas_aereas_urbanas_distribucion/la001_marcacion_circuitos_m_t.html" class="externalLink">LA001<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">MARCACI&#211;N DE CIRCUITOS DE M.T.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../../acometidas_medidores/lineas_aereas_urbanas_distribucion/la002_marcacion_apoyos_aereos.html" class="externalLink">LA002<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">MARCACI&#211;N APOYOS A&#201;REOS</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../la005_distancias_construccion_circuitos_34_5_13.html" class="externalLink">LA005<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">DISTANCIAS DE CONSTRUCCI&#211;N PARA CIRCUITOS DE 34,5 - 13,2 Y 11,4 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../la006_distancias_construccion_circuitos_13_2_11.html" class="externalLink">LA006<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">DISTANCIAS DE CONSTRUCCI&#211;N PARA CIRCUITOS DE 13,2 - 11,4 kV Y B.T.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;"><a href="../la007_distancias_minimas_verticales_horizontales_redes_34.html" class="externalLink">LA007<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">DISTANCIAS M&#205;NIMAS VERTICALES Y HORIZONTALES EN REDES DE 34,5 -13,2 - 11,4 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../la008_distancias_minimas_cruce_vias.html" class="externalLink">LA008<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">DISTANCIAS M&#205;NIMAS EN CRUCE DE V&#205;AS</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../la0081_servidumbres_lineas_transmision.html" class="externalLink">LA008-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">SERVIDUMBRES PARA L&#205;NEAS DE TRANSMISI&#211;N</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../la0082_niveles_tension_distribucion.html" class="externalLink">LA008-2<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">NIVELES DE TENSI&#211;N PARA DISTRIBUCI&#211;N</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../la009_cimentacion_postes.html" class="externalLink">LA009<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIMENTACI&#211;N DE POSTES</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../generalidades/la0101_utilizacion_postes_templetes_redes_aereas_aisladas.html" class="externalLink">LA010-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">UTILIZACI&#211;N POSTES Y TEMPLETES PARA RED A&#201;REA AISLADA DE MEDIA TENSI&#211;N</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../generalidades_lineas_aereas_urbanas/la0102.html" class="externalLink">LA010-2<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">UTILIZACI&#211;N DE POSTES PARA RED COMPACTA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../generalidades_lineas_aereas_urbanas/la01021_utilizacion_postes_templetes_red_aerea_semiaislada.html" class="externalLink">LA010-2-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">UTILIZACI&#211;N POSTES Y TEMPLETES PARED A&#201;REA SEMIAISLADA DE MEDIA TENSI&#211;N ESTRUCTURAS EN BANDERA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../generalidades_lineas_aereas_urbanas/la0103_utilizacion_postes_templetes_red_aerea_desnuda_urbana.html" class="externalLink">LA010-3<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">UTILIZACI&#211;N POSTES Y TEMPLETES PARA RED A&#201;REA DESNUDA URBANA DE MEDIA TENSI&#211;N</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../generalidades_lineas_aereas_urbanas/la01031_utilizacion_postes_templetes_red_aerea_rural_desnuda_2110.html" class="externalLink">LA010-3-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">UTILIZACI&#211;N POSTES Y TEMPLETES PARA RED A&#201;REA RURAL DESNUDA DE MEDIA TENSI&#211;N</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../generalidades/la011_utilizacion_conectores_lineas_aereas_11_4.html" class="externalLink">LA011<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">UTILIZACI&#211;N DE CONECTORES EN L&#205;NEAS A&#201;REAS DE 11,4 - 13,2 Y 34,5kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../generalidades/la015_distribucion_cables_energia_television_cable.html" class="externalLink">LA015<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">DISTRIBUCI&#211;N DE CABLES DE ENERG&#205;A, TELEVISI&#211;N POR CABLE, VALOR AGREGADO TELEM&#193;TICOS Y COMUNICACIONES</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../../lineas_aereas_rurales_distribucion/generalidades_lar/la016_curvas_utilizacion_red_aislada_media_tension.html" class="externalLink">LA016<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CURVAS DE UTILIZACI&#211;N RED A&#201;REA AISLADA DE MEDIA TENSI&#211;N</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../../lineas_aereas_rurales_distribucion/generalidades_lar/la018_instalacion_cable_aereo_aislado_cuadruplex_f_15kv.html" class="externalLink">LA018<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">METODOLOG&#205;A PARA EL TENDIDO DEL CABLE DE RED A&#201;REA AISLADA DE MEDIA TENSI&#211;N</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la019_circuito_red_desnuda_mt_instalacion.html" class="externalLink">LA019<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Circuito Con Red Desnuda De MT: Instalaci&#243;n De Separadores En Vano</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_34_5kv/la101_estructuras_basicas_horizontales_verticales_circuitos_dobles_34_5.html" class="externalLink">LA101<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ESTRUCTURAS B&#193;SICAS HORIZONTALES , VERTICALES, CIRCUITOS DOBLES 34,5 kV Y 11,4 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="http://likinormas.micodensa.com/Norma/lineas_aereas_urbanas_distribucion/lineas_aereas_34_5kv/la102_circuito_urbano_34_5_kv_construccion_semibandera" class="externalLink">LA102<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO URBANO 34,5 kV - CONSTRUCCI&#211;N SEMIBANDERA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="http://likinormas.micodensa.com/Norma/lineas_aereas_urbanas_distribucion/lineas_aereas_34_5kv/la103_circuito_urbano_34_5_kv_construccion_semibandera_angulo" class="externalLink">LA103<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO URBANO 34,5 kV - CONSTRUCCI&#211;N SEMIBANDERA EN &#193;NGULO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_34_5kv/la104_circuito_urbano_34_5_kv_construccion_bandera.html" class="externalLink">LA104<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO URBANO 34,5 kV - CONSTRUCCI&#211;N EN BANDERA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_34_5kv/la105_circuito_urbano_34_5_kv_construccion_bandera_angulo.html" class="externalLink">LA105<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO URBANO 34,5 kV - CONSTRUCCI&#211;N EN BANDERA EN &#193;NGULO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_34_5kv/la106_circuito_urbano_34_5_kv_cambio_angulo.html" class="externalLink">LA106<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO URBANO 34,5 kV - CAMBIO DE &#193;NGULO A 90 &#186; CON RETENCI&#211;N HORIZONTAL</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_34_5kv/la109_circuito_urbano_34_5_kv_derivacion_90º.html" class="externalLink">LA109<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO URBANO 34,5 kV - DERIVACI&#211;N A 90 &#186; CON RETENCI&#211;N HORIZONTAL</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_34_5kv/la111_final_circuito_urbano_34_5_kv.html" class="externalLink">LA111<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">FINAL DE CIRCUITO URBANO 34,5  kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_34_5kv/la112_circuito_urbano_34_5_kv_retencion_doble_bandera.html" class="externalLink">LA112<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO URBANO 34,5 kV - RETENCI&#211;N DOBLE EN BANDERA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_34_5kv/la113_circuito_urbano_34_5_kv_retencion_doble.html" class="externalLink">LA113<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO URBANO 34,5 kV - RETENCI&#211;N DOBLE</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_34_5kv/la117_circuito_urbano_34_5_kv_derivacion_corta_cable.html" class="externalLink">LA117<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO URBANO 34,5 kV - CON DERIVACI&#211;N CORTA. CABLE TRIPLEX LONGITUD MENOR DE 100 m</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_34_5kv/la118_circuito_urbano_34_5_kv_retencion_derivacion_larga.html" class="externalLink">LA118<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO URBANO 34,5 kV - RETENCI&#211;N CON DERIVACI&#211;N LARGA EN CABLE TRIPLEX LONGITUD MAYOR DE 100 m</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_34_5kv/la119_circuito_urbano_34_5_kv_entrada_salida_subterranea.html" class="externalLink">LA119<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO URBANO 34,5 kV - ENTRADA Y SALIDA SUBTERR&#193;NEA PARA UNA SUBESTACI&#211;N DE INSTALACI&#210;N INTERIOR</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_34_5kv/la120_circuito_urbano_34_5_kv_cruce_subterraneo_vias.html" class="externalLink">LA120<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO URBANO 34,5 kV - CRUCE SUBTERR&#193;NEO DE V&#204;AS</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_34_5kv/la121_circuito_urbano_34_5_kv_salida_subestacion_o.html" class="externalLink">LA121<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO URBANO 34,5 kV - SALIDA DE SUBESTACI&#211;N O SUBTERRANIZACI&#211;N DEL CIRCUITO PRINCIPAL</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="http://likinormas.micodensa.com/Norma/lineas_aereas_urbanas_distribucion/lineas_aereas_34_5kv/la152_circuito_urbano_34_5_kv_circuito_primario_sencillo" class="externalLink">LA152<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO URBANO 34,5 kV - CON CIRCUITO PRIMARIO SENCILLO PARA &#193;NGULOS  HASTA 10 &#186;</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="http://likinormas.micodensa.com/Norma/lineas_aereas_urbanas_distribucion/lineas_aereas_34_5kv/la153_circuito_urbano_34_5_kv_circuito_11" class="externalLink">LA153<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO URBANO 34,5 kV - CON CIRCUITO DE 11,4  kV EN &#193;NGULO DE 21 &#186; A 30 &#186;</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_34_5kv/la157_circuito_urbano_34_5_kv_circuito_primario.html" class="externalLink">LA157<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO URBANO 34,5 kV - CON CIRCUITO PRIMARIO 11,4  kV EN CAMBIO DE &#193;NGULO A 90 &#186;</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_34_5kv/la158_circuito_urbano_34_5_kv_bandera_circuito.html" class="externalLink">LA158<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO URBANO 34,5 kV - EN BANDERA CON CIRCUITO PRIMARIO EN BANDERA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_34_5kv/la159_circuito_urbano_34_5_kv_bandera_circuito.html" class="externalLink">LA159<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO URBANO 34,5 kV - EN BANDERA CON CIRCUITO DE 11,4 &#243; 13,2  kV EN BANDERA PARA &#193;NGULOS ENTRE  6 &#186; Y 20 &#186;</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_34_5kv/la163_retencion_doble_circuito_urbano_34_5_kv_circuito.html" class="externalLink">LA163<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RETENCI&#211;N DOBLE CIRCUITO URBANO 34,5 kV CON CIRCUITO PRIMARIO SENCILLO 11,4  kV EN CONSTRUCCI&#211;N TANGENCIAL</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="http://likinormas.micodensa.com/Norma/lineas_aereas_urbanas_distribucion/lineas_aereas_34_5kv/la164_construccion_semibandera_circuito_34_5_kv_circuito" class="externalLink">LA164<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CONSTRUCCI&#211;N SEMIBANDERA CIRCUITO 34,5  kV CON CIRCUITO PRIMARIO 11,4 kV EN RETENCI&#211;N DOBLE</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;"><a href="../lineas_aereas_34_5kv/la165_circuito_urbano_34_5_kv_cambio_angulo.html" class="externalLink">LA165<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO URBANO 34,5  kV - CAMBIO DE &#193;NGULO A 90 &#186; CON RETENCI&#211;N HORIZONTAL Y CIRCUITO TANGENCIAL SENCILLO DE 11,4  kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_34_5kv/la171_montaje_seccionadores_horizontales_monopolares_600_circuitos.html" class="externalLink">LA171<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">MONTAJE DE SECCIONADORES HORIZONTALES MONOPOLARES 600 A EN CIRCUITOS DE 34,5 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_34_5kv/la172_montaje_seccionadores_verticales_monopolares_600_circuitos.html" class="externalLink">LA172<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">MONTAJE DE SECCIONADORES VERTICALES MONOPOLARES 600 A EN  CIRCUITOS DE 34,5 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la201_estructuras_basicas_horizontales_verticales_11_4_kv.html" class="externalLink">LA201<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ESTRUCTURAS B&#193;SICAS HORIZONTALES Y VERTICALES DE 11,4  kV Y 13,2 kV CIRCUITOS TRIF&#193;SICOS</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la202_circuito_primario_sencillo_construccion_tangencial.html" class="externalLink">LA202<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO PRIMARIO SENCILLO - CONSTRUCCI&#211;N TANGENCIAL</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la203_circuito_primario_sencillo_construccion_tangencial_angulo.html" class="externalLink">LA203<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO PRIMARIO SENCILLO - CONSTRUCCI&#211;N TANGENCIAL EN &#193;NGULO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la204_circuito_primario_sencillo_construccion_tipo_bandera_cruceta.html" class="externalLink">LA204<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO PRIMARIO SENCILLO - CONSTRUCCI&#211;N TIPO BANDERA CON CRUCETA DE 2,5 m</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la2042_montaje_antena_radioelectrica_red_media_tension.html" class="externalLink">LA204-2<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">MONTAJE DE ANTENA RADIOEL&#201;CTRICA EN RED MEDIA TENSI&#211;N DESNUDA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la205_circuito_primario_sencillo_construccion_tipo_bandera_angulo.html" class="externalLink">LA205<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO PRIMARIO SENCILLO - CONSTRUCCI&#211;N TIPO BANDERA EN &#193;NGULO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la206_circuito_primario_sencillo_cambio_angulo_90º.html" class="externalLink">LA206<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO PRIMARIO SENCILLO - CAMBIO DE &#193;NGULO A 90 &#186; CON RETENCI&#211;N HORIZONTAL</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la207_circuito_primario_sencillo_doble_derivacion_90º.html" class="externalLink">LA207<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO PRIMARIO SENCILLO - CON DOBLE DERIVACI&#211;N A 90 &#186;</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la208_cruce_circuitos_primarios_sencillos_diferentes.html" class="externalLink">LA208<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CRUCE DE  CIRCUITOS PRIMARIOS SENCILLOS DIFERENTES</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la209_circuito_primario_sencillo_derivacion_90º_retencion_inferior.html" class="externalLink">LA209<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO PRIMARIO SENCILLO - DERIVACI&#211;N A 90 &#186; CON RETENCI&#211;N INFERIOR</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la210_circuito_primario_sencillo_derivacion_90º_retencion_superior.html" class="externalLink">LA210<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO PRIMARIO SENCILLO - CON DERIVACI&#211;N A 90 &#186;  CON RETENCI&#211;N SUPERIOR EXISTENTE</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la211_final_circuito_primario_sencillo.html" class="externalLink">LA211<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">FINAL DE CIRCUITO PRIMARIO SENCILLO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la212_final_circuito_primario_sencillo_construccion_tipo_bandera.html" class="externalLink">LA212<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">FINAL DE CIRCUITO PRIMARIO SENCILLO - CONSTRUCCI&#211;N TIPO BANDERA (CRUCETA 2,5m)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la213_retencion_doble_simetrica_circuito_primario_sencillo.html" class="externalLink">LA213<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RETENCI&#211;N DOBLE SIM&#201;TRICA DE CIRCUITO PRIMARIO SENCILLO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la218_circuito_primario_sencillo_terminal_derivacion_cable_triplex.html" class="externalLink">LA218<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO PRIMARIO SENCILLO - TERMINAL CON DERIVACI&#211;N LARGA DE CABLE TRIPLEX  (MAYOR DE 100 m )</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la219_circuito_primario_sencillo_entrada_salida_subterranea.html" class="externalLink">LA219<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO PRIMARIO SENCILLO  - ENTRADA Y SALIDA SUBTERR&#193;NEA PARA UNA SUBESTACI&#211;N</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la220_circuito_primario_sencillo_cruce_subterraneo_vias.html" class="externalLink">LA220<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO PRIMARIO SENCILLO - CRUCE SUBTERR&#193;NEO DE V&#205;AS</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la221_circuito_primario_sencillo_salida_subestacion_o_subterranizacion.html" class="externalLink">LA221<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO PRIMARIO SENCILLO - SALIDA DE SUBESTACI&#211;N O SUBTERRANIZACI&#211;N DEL CIRCUITO PRINCIPAL</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la222_retencion_doble_circuito_primario_sencillo_construccion_tipo_bandera.html" class="externalLink">LA222<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RETENCI&#211;N DOBLE CIRCUITO PRIMARIO SENCILLO CONSTRUCCI&#211;N TIPO BANDERA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la223_montaje_seccionadores_monopolares_400_15.html" class="externalLink">LA223<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">MONTAJE DE SECCIONADORES MONOPOLARES DE 400 A  - 15 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la225_instalacion_indicadores_falla_lineas_aereas.html" class="externalLink">LA225<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">INSTALACI&#211;N DE INDICADORES DE FALLA EN L&#205;NEAS A&#201;REAS</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la226_ubicacion_indicadores_falla_red.html" class="externalLink">LA226<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">UBICACI&#211;N DE LOS INDICADORES DE FALLA EN LA RED A&#201;REA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la227_montaje_condensadores_red_11_4.html" class="externalLink">LA227<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">MONTAJE DE CONDENSADORES EN LA RED DE 11,4 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la228_circuito_primario_sencillo_construccion_tangencial_derivacion_subterranea.html" class="externalLink">LA228<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO PRIMARIO SENCILLO - CONSTRUCCI&#211;N TANGENCIAL CON DERIVACI&#211;N SUBTERR&#193;NEA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la229_circuito_primario_sencillo_construccion_tipo_bandera_triangular_extremo.html" class="externalLink">LA229<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO PRIMARIO SENCILLO - CONSTRUCCI&#211;N TIPO BANDERA TRIANGULAR EN EXTREMO DE CRUCETA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la230_circuito_primario_sencillo_onstruccion_tipo_bandera_angulo.html" class="externalLink">LA230<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO PRIMARIO SENCILLO - CONSTRUCCI&#211;N TIPO BANDERA EN &#193;NGULO CON CRUCETA DE 2,5 m</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la231_circuito_primario_sencillo_construccion_bandera_doble_cruceta.html" class="externalLink">LA231<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO PRIMARIO SENCILLO - CONSTRUCCI&#211;N EN BANDERA – DOBLE CRUCETA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la232_circuito_primario_sencillo_derivacion_trifasica_proteccion.html" class="externalLink">LA232<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">DERIVACI&#211;N TRIF&#193;SICA CON PROTECCI&#211;N CIRCUITO PRIMARIO SENCILLO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la233_amarres_primarios.html" class="externalLink">LA233<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">AMARRES PRIMARIOS</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la240_circuito_primario_sencillo_instalacion_medidor_bicuerpo.html" class="externalLink">LA240<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO PRIMARIO SENCILLO – INSTALACION DE MEDIDOR BICUERPO EN CRUCETA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la245_circuito_primario_sencillo_construccion_bandera_instalacion.html" class="externalLink">LA245<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO PRIMARIO SENCILLO. CONSTRUCCI&#211;N EN BANDERA. INSTALACION  EQUIPO DE MEDIDA COMPACTO / COMBINADO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la246_circuito_primario_sencillo_construccion_tangencial_instalacion_equipo.html" class="externalLink">LA246<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO PRIMARIO SENCILLO. CONSTRUCCI&#211;N TANGENCIAL. INSTALACION EQUIPO DE MEDIDA COMPACTO / COMBINADO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la250_circuito_primario_doble_contruccion_tangencial.html" class="externalLink">LA250<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO PRIMARIO DOBLE CONSTRUCCI&#211;N TANGENCIAL</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la251_circuito_primario_doble_construccion_tangencial_angulo.html" class="externalLink">LA251<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO PRIMARIO DOBLE CONSTRUCCI&#211;N TANGENCIAL EN ANGULO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la252_circuito_primario_doble_construcciones_tangencialy_terminal.html" class="externalLink">LA252<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO PRIMARIO DOBLE CONSTRUCCIONES TANGENCIAL Y TERMINAL</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la253_circuito_primario_doble_derivacion_90.html" class="externalLink">LA253<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO PRIMARIO DOBLE Y DERIVACI&#211;N A 90&#176;</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_11_4_13_2_kv/la257_circuito_primario_doble_salida_subestacion.html" class="externalLink">LA257<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO PRIMARIO DOBLE CON UNA SALIDA DE SUBESTACI&#211;N</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_baja_tension/lageneralidades_1_3_1_circuitos_secundarios_aereos_b_t.html" class="externalLink">GENERALIDADES 1.3.1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITOS SECUNDARIOS A&#201;REOS DE B.T</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_baja_tension/la305_amarres_secundarios_b_t.html" class="externalLink">LA305<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">AMARRES SECUNDARIOS DE B.T</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_baja_tension/la319_estructuras_basicas_circuitos_secundarios_conductor_trenzado.html" class="externalLink">LA319<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ESTRUCTURAS B&#193;SICAS CIRCUITOS SECUNDARIOS EN CONDUCTOR TRENZADO B.T.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_baja_tension/la320_circuito_secundario_sencillo_conductor_trenzado_construccion_linea.html" class="externalLink">LA320<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO SECUNDARIO SENCILLO EN CONDUCTOR TRENZADO CONSTRUCCI&#211;N EN L&#205;NEA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_baja_tension/la3201_circuito_secundario_sencillo_conductor_trenzado_construccion_linea.html" class="externalLink">LA320-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO SECUNDARIO SENCILLO EN CONDUCTOR TRENZADO. CONSTRUCCI&#211;N EN L&#205;NEA CON EXTENSI&#210;N</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_baja_tension/la321_final_circuito_secundario_sencillo_conductor_trenzado.html" class="externalLink">LA321<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">FINAL DE CIRCUITO SECUNDARIO SENCILLO EN CONDUCTOR TRENZADO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_baja_tension/la3211_final_circuito_secundario_sencillo_conductor_trenzado.html" class="externalLink">LA321-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">FINAL DE CIRCUITO SECUNDARIO SENCILLO EN CONDUCTOR TRENZADO CON AMARRE PREFORMADO - ALTERNATIVA.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_baja_tension/la322_circuito_secundario_sencillo_derivacion_conductor_trenzado.html" class="externalLink">LA322<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">IRCUITO SECUNDARIO SENCILLO CON DERIVACI&#211;N EN CONDUCTOR TRENZADO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_baja_tension/la323_circuito_secundario_doble_conductor_trenzado_construccion_linea.html" class="externalLink">LA323<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO SECUNDARIO DOBLE EN CONDUCTOR  TRENZADO. CONSTRUCCI&#211;N EN L&#205;NEA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_baja_tension/la324_circuito_secundario_sencillo_conductor_trenzado_construccion_angular.html" class="externalLink">LA324<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO SECUNDARIO SENCILLO EN CONDUCTOR  TRENZADO. CONSTRUCCI&#211;N ANGULAR</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;"><a href="../lineas_aereas_baja_tension/3242_circuito_secundario_sencillo_conductor_trenzado_construccion.html" class="externalLink">LA324-2<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO SECUNDARIO SENCILLO EN CONDUCTOR TRENZADO CONSTRUCCI&#211;N ANGULAR CON AMARRE PREFORMADO - ALTERNATIVAS</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_baja_tension/la325_circuito_secundario_doble_conductor_trenzadoconstruccion_angular.html" class="externalLink">LA325<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO SECUNDARIO DOBLE EN CONDUCTOR TRENZADO. CONSTRUCCI&#211;N ANGULAR A 90 &#186; CON DERIVACI&#211;N</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_baja_tension/la326_salidas_subterraneas_b_t_red_aerea.html" class="externalLink">LA326<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">SALIDAS SUBTERR&#193;NEAS DE B.T. A RED A&#201;REA EN CONDUCTOR TRENZADO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_baja_tension/la3261_salidas_subterraneas_b_t_red_aerea.html" class="externalLink">LA326-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">SALIDAS SUBTERRANEAS DE B.T. A RED A&#201;REA EN CONDUCTOR TRENZADO CON AMARRE PREFORMADO - ALTERNATIVA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_baja_tension/la327_circuito_secundario_retencion_doble_conductor_trenzado.html" class="externalLink">LA327<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO SECUNDARIO EN RETENCI&#211;N. RED TRENZADA DE B.T.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_baja_tension/3271_circuito_secundario_retencion_doble_conductor_trenzado.html" class="externalLink">LA327-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO SECUNDARIO EN RETENCI&#211;N DOBLE CON CONDUCTOR TRENZADO DE B.T. CON AMARRE PREFORMADO - ALTERNATIVA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_baja_tension/la329_circuito_secundario_sencillo_conductor_trenzado_p.html" class="externalLink">LA329<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO SECUNDARIO SENCILLO EN CONDUCTOR TRENZADO CON A.P.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_baja_tension/la330_circuito_secundario_sencillo_alumbrado_publico_cualquier.html" class="externalLink">LA330<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO SECUNDARIO SENCILLO Y ALUMBRADO PUBLICO, PARA CUALQUIER CONFIGURACI&#211;N DE CIRCUITO PRIMARIO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_baja_tension/la335_montaje_seccionador_portafusible_160_lineas.html" class="externalLink">LA335<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">MONTAJE DE SECCIONADOR PORTAFUSIBLE 160 A PARA L&#205;NEAS DE B.T.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_baja_tension/la336_montaje_seccionador_portafusible_600_linea.html" class="externalLink">LA336<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">MONTAJE DE SECCIONADOR PORTAFUSIBLE 600 A PARA L&#205;NEAS DE B.T.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_baja_tension/la339_estructuras_basicas_redes_trenzadas_muros.html" class="externalLink">LA339<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ESTRUCTURAS B&#193;SICAS REDES TRENZADAS SOBRE MUROS</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;"><a href="../lineas_aereas_baja_tension/la340_circuito_secundario_sencillo_conductor_trenzado_muros_construccion.html" class="externalLink">LA340<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO SECUNDARIO SENCILLO EN CONDUCTOR TRENZADO SOBRE MUROS CONSTRUCCI&#211;N EN L&#205;NEA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../la341_circuito_secundario_sencillo_conductor_trenzado_muros.html" class="externalLink">LA341<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">FINAL CIRCITO SENCILLO EN CONDUCTOR TRENZADO SOBRE MUROS RETENCI&#211;N LATERAL</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_baja_tension/la342_circuito_secundario_sencillo_conductor_trenzado_muros_retencion.html" class="externalLink">LA342<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO SECUNDARIO SENCILLO EN CONDUCTOR TRENZADO SOBRE MUROS RETENCI&#211;N FRONTAL</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_baja_tension/la343_circuito_secundario_sencillo_conductor_trenzado_muros.html" class="externalLink">LA343<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO SECUNDARIO SENCILLO EN CONDUCTOR TRENZADO SOBRE MUROS CON DERIVACI&#211;N</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_baja_tension/la344_circuito_secundario_sencillo_conductor_trenzado_muros_retencion.html" class="externalLink">LA344<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO SECUNDARIO SENCILLO EN CONDUCTOR TRENZADO SOBRE MUROS RETENCI&#211;N DOBLE</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_baja_tension/la345_circuito_secundario_sencillo_conductor_trenzado_muros_cambio.html" class="externalLink">LA345<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO SECUNDARIO SENCILLO EN CONDUCTOR TRENZADO SOBRE MUROS CAMBIO DE ANGULO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_baja_tension/la346_circuito_secundario_sencillo_conductor_trenzado_muros.html" class="externalLink">LA346<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO SECUNDARIO SENCILLO EN CONDUCTOR TRENZADO  SOBRE MUROS DERIVACI&#211;N A LUMINARIA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_baja_tension/la347_circuito_secundario_sencillo_conductor_trenzado_muros_construccion.html" class="externalLink">LA347<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO SECUNDARIO SENCILLO EN CONDUCTOR TRENZADO SOBRE MUROS CONSTRUCCI&#211;N EN L&#205;NEA CON CAJA DE BARRAJES</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_baja_tension/la348_circuito_secundario_sencillo_conductor_trenzado_muros_derivacion.html" class="externalLink">LA348<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO SECUNDARIO SENCILLO EN CONDUCTOR TRENZADO SOBRE MUROS DERIVACI&#211;N SUBTERR&#193;NEA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../lineas_aereas_baja_tension/la350_circuito_primario_sencillo_conductor_trenzado_muros_afloramiento.html" class="externalLink">LA350<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO PRIMARIO SENCILLO EN CONDUCTOR TRENZADO SOBRE MUROS AFLORAMIENTO CON INSTALACI&#211;N  DE SECCIONADOR</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../puesta_tierra/la400_puestas_tierra.html" class="externalLink">LA400<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">PUESTAS A TIERRA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../puesta_tierra/la401_accesorios_puesta_tierra_instalacion_poste_concreto.html" class="externalLink">LA401<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ACCESORIOS PARA PUESTA A TIERRA, INSTALACI&#211;N POSTE DE CONCRETO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../puesta_tierra/la402_accesorios_puesta_tierra_instalacion_exterior_poste.html" class="externalLink">LA402<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ACCESORIOS PARA PUESTA A TIERRA, INSTALACI&#211;N EXTERIOR AL POSTE</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../puesta_tierra/la408_accesorios_puesta_tierra_inmersa_instalacion_poste.html" class="externalLink">LA408<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ACCESORIOS PARA PUESTA A TIERRA INMERSA INSTALACI&#211;N POSTE DE CONCRETO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../templetes_retenidas/la410_templetes_retenidas_terminales.html" class="externalLink">LA410<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">TEMPLETES Y RETENIDAS  TERMINALES</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../templetes_retenidas/la411_retenida_terminal_o_angulo_poste_varilla.html" class="externalLink">LA411<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RETENIDA TERMINAL O EN &#193;NGULO POSTE A VARILLA DE ANCLAJE</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../templetes_retenidas/la413_retenida_terminal_poste_poste_varilla_anclaje.html" class="externalLink">LA413<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RETENIDA TERMINAL POSTE A POSTE CON VARILLA DE ANCLAJE</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../templetes_retenidas/la415_retenida_terminal_bandera_poste_poste_varilla.html" class="externalLink">LA415<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RETENIDA TERMINAL BANDERA POSTE A POSTE CON VARILLA DE ANCLAJE</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../templetes_retenidas/la419_retenida_terminal_o_angulo_poste_varilla.html" class="externalLink">LA419<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RETENIDA TERMINAL O EN &#193;NGULO POSTE A VARILLA DE ANCLAJE (ALTERNATIVAS)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_compacta/la450_generalidades_red_compacta.html" class="externalLink">LA450<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">GENERALIDADES RED COMPACTA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_compacta/la461_red_compacta_11_4_kv_circuito_tangencial_angulos.html" class="externalLink">LA461<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED COMPACTA 11,4 kV CIRCUITO TANGENCIAL CON &#193;NGULOS HASTA DE 6&#176;</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_compacta/la462_circuito_red_compacta_mt_34_5.html" class="externalLink">LA462<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">CIRCUITO CON RED COMPACTA DE MT Y 34,5 kV INSTALACI&#211;N DE SEPARADORES EN VANO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_compacta/463_red_compacta_34_5_kv_circuito_tangencial.html" class="externalLink">LA463<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED COMPACTA PARA 34,5 kV - CIRCUITO TANGENCIAL CON BRAZO ANTIBALANCEO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_compacta/la465_red_compacta_11_4_kv_final_circuito.html" class="externalLink">LA465<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED COMPACTA 11.4 KV FINAL DEL CIRCUITO TRIANGULAR</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_compacta/la466_red_compacta_angulos_61_90.html" class="externalLink">LA466<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED COMPACTA PARA &#193;NGULOS DE 61&#176; A 90&#176; CON DOBLE AISLADOR, 11,4  kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_compacta/la467_red_compacta_angulos_61_90.html" class="externalLink">LA467<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED COMPACTA PARA &#193;NGULOS DE 61 &#176; A 90 &#176; CON DOBLE AISLADOR, 34,5 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_compacta/la468_red_compacta_11_4_kv_estructura_angulo.html" class="externalLink">LA468<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED COMPACTA 11.4 kV ESTRUCTURA EN &#193;NGULO PARA DOS CIRCUITOS</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_compacta/la469_red_compacta_11_4_kv_construccion_tangencial_tres.html" class="externalLink">LA469<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED COMPACTA - CONSTRUCCI&#211;N TANGENCIAL DE DOS CTOS. 11,4 kV CON BRAZO ANTIBALANCEO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_compacta/la477_red_compacta_11_4_kv_tangencial_retencion.html" class="externalLink">LA477<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED COMPACTA 11.4 KV TANGENCIAL CON RETENCI&#211;N INFERIOR</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_compacta/red_compacta_11_4_kv_retencion_doble_triangular.html" class="externalLink">LA478<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED COMPACTA 11.4 KV RETENCI&#211;N DOBLE TRIANGULAR</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_compacta/la480_red_compacta_34_5_kv_final_circuito.html" class="externalLink">LA480<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED COMPACTA 34.5 KV FINAL DEL CIRCUITO TRIANGULAR</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_compacta/la481_red_compacta_34_5_kv_retencion_doble_triangular.html" class="externalLink">LA481<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED COMPACTA 34.5 KV RETENCI&#211;N DOBLE TRIANGULAR</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_compacta/la483_red_compacta_34_5_kv_tangencial_retencion_inferior.html" class="externalLink">LA483<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED COMPACTA 34.5 KV TANGENCIAL CON RETENCI&#211;N INFERIOR</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../equipos_redes_aereas/la501_linea_34_5_kv_montaje_reconectador.html" class="externalLink">LA501<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">L&#205;NEA 34.5 kV – MONTAJE DE RECONECTADOR</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;"><a href="../equipos_redes_aereas/la503_linea_13_2_11_4_kv_montaje_reconectador.html" class="externalLink">LA503<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">L&#205;NEA 13.2 – 11.4 kV -  MONTAJE DE RECONECTADOR CON TRANSFORMADOR DE POTENCIAL</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../equipos_redes_aereas/la510_linea_13_2_11_4_kv_montaje.html" class="externalLink">LA510<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">L&#205;NEA 13.2 – 11.4 KV MONTAJE DE RECONECTADOR NOJA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../equipos_redes_aereas/la515a_red_11_4_kv_o_13_2_kv_montaje.html" class="externalLink">LA515-A<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED 11,4 KV O 13,2 KV MONTAJE DE SECCIONALIZADOR (SZ) CENTRAL. CON SPT EN DOBLE FLEJE</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../equipos_redes_aereas/la515b_red_11_4_kv_o_13_2_kv_montaje.html" class="externalLink">LA515-B<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED 11,4 KV O 13,2 KV MONTAJE DE SECCIONALIZADOR (SZ) BANDERA. CON SPT EN DOBLE FLEJE</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../equipos_redes_aereas/la5151_red_11_4_kv_o_13_2_kv_montaje.html" class="externalLink">LA515-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">L&#205;NEA 13,2 - 11.4 kV MONTAJE TELECONTROLADO - AFLORAMIENTO AL LADO FUENTE</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../equipos_redes_aereas/la5152_linea_13_211_4_kv_montaje_seccionador_bajo.html" class="externalLink">LA515-2<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">L&#205;NEA 13.2 - 11.4 kV MONTAJE DE SECCIONADOR BAJO CARGA TELECONTROLADO - AFLORAMIENTO AL LADO DE LA CARGA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../equipos_redes_aereas/la5153_linea_13_211_4_kv_montaje_seccionador_bajo.html" class="externalLink">LA515-3<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">L&#205;NEA 13.2 - 11.4 kV MONTAJE DE SECCIONADOR BAJO CARGA TELECONTROLADO - AFLORAMIENTOS FUENTE Y CARGA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../equipos_redes_aereas/la5154_linea_13_2_11_4_kv_montaje.html" class="externalLink">LA515-4<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">L&#205;NEA 13.2 - 11.4 kV MONTAJE DE SECCIONADOR BAJO CARGA TELECONTROLADO - AFLORAMIENTO CON BARRAJE Y DERIVACI&#211;N</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la650_red_aislada_generalidades.html" class="externalLink">LA650<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - GENERALIDADES</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la651_red_aislada_estructuras_basicas_11_4_o_13.html" class="externalLink">LA651<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">ESTRUCTURAS B&#193;SICAS 11,4 kV O 13,2 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la653_red_aislada_suspension_11_4_kv_o_13.html" class="externalLink">LA653<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - SUSPENSI&#211;N 11,4  kV O 13,2 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../equipos_redes_aereas/la654_red_aislada_retencion_11_4_o_13_2.html" class="externalLink">LA654<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - RETENCI&#211;N 11,4  kV O 13,2 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la6522_montaje_antena_radioelectrica_red_media_tension_aislada.html" class="externalLink">LA654-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - MONTAJE DE ANTENA RADIOEL&#201;CTRICA EN RED MEDIA TENSI&#211;N AISLADA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../equipos_redes_aereas/la655_red_aislada_transicion_cable_aislado_desnudo.html" class="externalLink">LA655<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - TRANSICI&#211;N DE RED AISLADA A RED DESNUDA 11,4  kV O 13,2 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la656_red_aislada_transicion_cable_aislado_semi.html" class="externalLink">LA656<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - TRANSICI&#211;N DE RED AISLADA A RED COMPACTA 11,4  kV O 13,2 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la657_red_aislada_transicion_cable_aislado_subterraneo_11.html" class="externalLink">LA657<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - TRANSICI&#211;N DE RED AISLADA A RED SUBTERR&#193;NEA 11,4  kV O 13,2 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la658_red_aislada_transicion_cable_aislado_11_4.html" class="externalLink">LA658<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - TRANSICI&#211;N ENTRE RED AISLADA 11,4  kV O 13,2 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la659_red_aislada_derivacion_cable_desnudo_11_4.html" class="externalLink">LA659<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA –  DERIVACI&#211;N A RED DESNUDA 11,4  kV O 13,2 Kv</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la6591_red_aislada_derivacion_red_aislada_red.html" class="externalLink">LA659-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA –  DERIVACI&#211;N A RED DESNUDA 11,4  kV O 13,2 Kv, CON SECCIONAMIENTO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la660_red_aislada_derivacion_cable_semi_aislado_11.html" class="externalLink">LA660<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - DERIVACI&#211;N A RED COMPACTA 11,4  kV O 13,2 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la6601_red_aislada_derivacion_red_compacta_11_4.html" class="externalLink">LA660-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - DERIVACI&#211;N A RED COMPACTA 11,4  kV O 13,2 kV, CON SECCIONAMIENTO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la661_red_aislada_derivacion_subterraneo_11_4_o.html" class="externalLink">LA661<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">LA661 Red Aislada - Derivaci&#243;n de red aislada a red subterr&#225;nea 11,4 kV o 13,2 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la662_red_aislada_derivacion_cable_aislado_11_4.html" class="externalLink">LA662<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - DERIVACI&#211;N A RED AISLADA 11,4  kV O 13,2 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la6621_red_aislada_derivacion_red_aislada_11.html" class="externalLink">LA662-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - DERIVACI&#211;N A RED AISLADA 11,4  kV O 13,2 kV, CON SECCIONAMIENTO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la663_red_aislada_derivacion_transformador_11_4_o.html" class="externalLink">LA663<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - DERIVACI&#211;N A TRANSFORMADOR 11,4  kV O 13,2 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la664_red_aislada_instalacion_seccionalizador_11_4.html" class="externalLink">LA664<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - INSTALACI&#211;N DE SECCIONALIZADOR A 11,4 kV O 13,2 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la6641_red_aislada_instalacion_reconectador_rc_11.html" class="externalLink">LA664-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - INSTALACI&#211;N DE RECONECTADOR (RC) A 11,4 kV O 13,2 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la665_red_aislada_doble_circuito_11_4_o_13.html" class="externalLink">LA665<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - DOS CIRCUITO 11,4 kV O 13,2 kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_cable_cuadruplex/la671_estructura_paso_cable_cuadruplex_15_kv.html" class="externalLink">LA671<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - ESTRUCTURAS B&#193;SICAS 34,5 KV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la672_red_aislada_final_circuito_34_5kv_1836.html" class="externalLink">LA672<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - FINAL DE CIRCUITO 34,5kV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la673_red_aislada_suspension_34_5kv.html" class="externalLink">LA673<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - SUSPENSION 34,5 KV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la674_red_aislada_retencion_34_5kv.html" class="externalLink">LA674<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - RETENCI&#211;N 34,5 KV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la675_red_aislada_transicion_cable_aislado_desnudo_1886.html" class="externalLink">LA675<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - TRANSICI&#211;N DE RED AISLADA A RED DESNUDA 34,5 KV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la676_red_aislada_transicion_red.html" class="externalLink">LA676<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - TRANSICI&#211;N DE RED AISLADA A RED COMPACTA 34,5 KV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la677_red_aislada_transicion_red_aislada.html" class="externalLink">LA677<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - TRANSICI&#211;N RED AISLADA A RED SUBTERR&#193;NEA 34,5 KV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la678_red_aislada_transicion_red.html" class="externalLink">LA678<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - TRANSICI&#211;N ENTRE RED AISLADA 34,5 KV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la679_red_aislada_derivacion_red.html" class="externalLink">LA679<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - DERIVACI&#211;N A RED DESNUDA 34,5 KV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la6791_red_aislada_derivacion_red_desnuda_34_5.html" class="externalLink">LA679-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - DERIVACI&#211;N A RED DESNUDA 34,5 KV, CON SECCIONAMIENTO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la680_red_aislada_derivacion_red.html" class="externalLink">LA680<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - DERIVACI&#211;N A RED COMPACTA 34,5 KV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la6801_red_aislada_derivacion_red_compacta_34_5.html" class="externalLink">LA680-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - DERIVACI&#211;N A RED COMPACTA 34,5 KV, CON SECCIONAMIENTO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la681_red_aislada_derivacion_red.html" class="externalLink">LA681<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - DERIVACI&#211;N A RED SUBTERR&#193;NEA 34,5 KV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la682_red_aislada_derivacion_red.html" class="externalLink">LA682<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - DERIVACI&#211;N A RED AISLADA 34,5 KV</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la6821_red_aislada_derivacion_red_aislada_34_5.html" class="externalLink">LA682-1<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - DERIVACI&#211;N A RED AISLADA 34,5 KV, CON SECCIONAMIENTO</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;"><a href="../red_aislada_aerea_media_tension/la683_red_aislada_derivacion_transformador.html" class="externalLink">LA683<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">RED AISLADA - DERIVACI&#211;N A TRANSFORMADOR 34,5 KV</td></tr></table><br /></div>
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 1846, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

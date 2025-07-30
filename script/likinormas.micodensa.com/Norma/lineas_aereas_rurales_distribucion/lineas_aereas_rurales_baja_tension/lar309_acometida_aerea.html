@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>LAR309 Acometida aérea   | Likinormas</title>
+	<meta name="description" content="redes aéreas rurales; redes aereas; red de BT; acometida
+" />
+	<script src="../../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../../index.html"><img src="../../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1000" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../../Usuario/Registro%3FReturnUrl=%252FNorma%252FDetalles%252F1000.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/1000" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1000" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			showSubmenu('4', '66');
+		});
+	</script>
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Norma t&#233;cnica
+	</div>
+	<h1>LAR309 Acometida a&#233;rea  </h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de la norma</div>
+					<div class="caracteristicas">LAR 309 </div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">02/11/2004</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../../Home/DownloadPDF/1000">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FNorma%2FDetalles%2F1000&amp;nodoid=1000', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+    <div class="modulo">
+        <div class="titu_modulo">
+            Relacionados
+        </div>
+            <div class="modulo_contenido" style="">
+                <div class="subtitulos_internos">
+                    <a href="../../../Especificacion/cajas_inspeccion_ductos_accesorios/et610_ductos_lisos_pvc_redes_subterreas_baja.html">ET610 Ductos lisos de pvc para redes subterr&#233;as de baja tensi&#243;n</a>
+                </div>
+                    <div class="relacionadotipo">Especificaci&#243;n t&#233;cnica</div>
+            </div>
+            <div class="modulo_contenido" style="">
+                <div class="subtitulos_internos">
+                    <a href="../../../Especificacion/materiales_puesta_tierra/et490_varilla_puesta_tierra.html">ET490 Varilla de puesta a tierra</a>
+                </div>
+                    <div class="relacionadotipo">Especificaci&#243;n t&#233;cnica</div>
+            </div>
+            <div class="modulo_contenido" style="">
+                <div class="subtitulos_internos">
+                    <a href="../../../Especificacion/herrajes_conectores/et468_vigueta_anclaje.html">ET468 Vigueta de anclaje</a>
+                </div>
+                    <div class="relacionadotipo">Especificaci&#243;n t&#233;cnica</div>
+            </div>
+            <div class="modulo_contenido" style="display:none">
+                <div class="subtitulos_internos">
+                    <a href="../../../Especificacion/herrajes_conectores/et450_cinta_hebilla_acero_inoxidable.html">ET450 Cinta y hebilla de acero inoxidable </a>
+                </div>
+                    <div class="relacionadotipo">Especificaci&#243;n t&#233;cnica</div>
+            </div>
+            <div class="modulo_contenido" style="display:none">
+                <div class="subtitulos_internos">
+                    <a href="../../../Especificacion/cables/et121_conductores_cobre_duro_desnudos.html">ET121 Conductores de cobre duro y blando desnudos </a>
+                </div>
+                    <div class="relacionadotipo">Especificaci&#243;n t&#233;cnica</div>
+            </div>
+            <div class="modulo_contenido" style="display:none">
+                <div class="subtitulos_internos">
+                    <a href="../../../Especificacion/herrajes_conectores/et417_percha_porta_aisladores_redes_b_t.html">ET417 Percha porta aisladores para redes de B.T. abiertas</a>
+                </div>
+                    <div class="relacionadotipo">Especificaci&#243;n t&#233;cnica</div>
+            </div>
+            <div class="modulo_contenido" style="display:none">
+                <div class="subtitulos_internos">
+                    <a href="../../../Especificacion/herrajes_conectores/et356_conectores_tipo_cuna.html">ET356 Conectores tipo cu&#241;a</a>
+                </div>
+                    <div class="relacionadotipo">Especificaci&#243;n t&#233;cnica</div>
+            </div>
+            <div class="modulo_contenido" style="display:none">
+                <div class="subtitulos_internos">
+                    <a href="../../../Especificacion/herrajes_conectores/et457_tornillo_acero.html">ET457 Tornillo de acero</a>
+                </div>
+                    <div class="relacionadotipo">Especificaci&#243;n t&#233;cnica</div>
+            </div>
+            <div class="modulo_contenido" style="display:none">
+                <div class="subtitulos_internos">
+                    <a href="../../../Especificacion/cajas_inspeccion_ductos_accesorios/et601_ductos_metalicos_galvanizados_redes_media_baja.html">ET601 Ductos met&#225;licos galvanizados para redes de media y baja tensi&#243;n</a>
+                </div>
+                    <div class="relacionadotipo">Especificaci&#243;n t&#233;cnica</div>
+            </div>
+            <div class="modulo_contenido" style="display:none">
+                <div class="subtitulos_internos">
+                    <a href="../../../Especificacion/cajas_inspeccion_ductos_accesorios/et605_capacetes.html">ET605 Capacetes</a>
+                </div>
+                    <div class="relacionadotipo">Especificaci&#243;n t&#233;cnica</div>
+            </div>
+            <a class="modulo_vermas" id="modulo_vermas" href="javascript:void(0)">Ver más</a>
+    </div>
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+        <div style="clear:left;"></div>
+		<div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/norma/1000/Dibujo LAR 309 Fig 1.JPG" src="http://likinormas.micodensa.com/media/cache/images/8000x8000/wikiimages/31353238313232343033-46073-Dibujo LAR 309 Fig 1.JPG" title=""  /></div><div class="texto_imagen_articulos" style="max-width:8000px"></div></div></div><br /><b>LISTA DE MATERIALES</b><div style="width:611px;"><table><tr><td colspan="1" rowspan="1" style="width:49px;height:10px;text-align:center"><b>S&#205;MB.</b></td><td colspan="1" rowspan="1" style="width:47px;text-align:center"><b>CANT.</b></td><td colspan="1" rowspan="1" style="width:63px;text-align:center"><b>C&#211;DIGO SAP</b></td><td colspan="1" rowspan="1" style="width:66px;text-align:center"><b>ESP. T&#201;CNICA</b></td><td colspan="1" rowspan="1" style="width:386px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">a<sub>3</sub></td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">6762120</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="">Aislador tipo carrete ANSI 53-3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">e<sub>1</sub></td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="">Estribo para <a href="lar309_acometida_aerea.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a> ( 5 )</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">EB<sub>0</sub></td><td colspan="1" rowspan="1" style="text-align:center">1,5</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/cajas_inspeccion_ductos_accesorios/et610_ductos_lisos_pvc_redes_subterreas_baja.html" class="externalLink">ET-610<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Metros de tuberia  PVC tipo liviano de 1/2&quot;</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">f<sub>3</sub></td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center"></td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/materiales_puesta_tierra/et490_varilla_puesta_tierra.html" class="externalLink">ET-490<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Conector para varilla a <a href="lar309_acometida_aerea.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> 5/8&quot;</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">g<sub>12</sub></td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="">Grapa para sujetar <a href="lar309_acometida_aerea.html#" id="version-72" class="externalLink  glosarioLink">acometida</a></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">h<sub>1</sub></td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">6762323</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et468_vigueta_anclaje.html" class="externalLink">ET-468<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Tensor de acometidas</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">j<sub>3</sub></td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">6762433</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et450_cinta_hebilla_acero_inoxidable.html" class="externalLink">ET-450<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Metros de cinta de acero inoxidable de 5/8”x 0,03”</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">j`<sub>3</sub></td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">6764362</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et450_cinta_hebilla_acero_inoxidable.html" class="externalLink">ET-450<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Hebilla de acero inoxidable de 5/8”</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">k<sub>20</sub></td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">6762401</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et420_soporte_anclaje_acometida.html" class="externalLink">ET420<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Soporte para anclaje de <a href="lar309_acometida_aerea.html#" id="version-72" class="externalLink  glosarioLink">acometida</a></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">o<sub>53</sub></td><td colspan="1" rowspan="1" style="text-align:center">12</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="">Metros de <a href="lar309_acometida_aerea.html#" id="version-107" class="externalLink  glosarioLink">cable</a> de cobre aislado con neutro conc&#233;ntrico 600 V 2 x 8 AWG</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">o<sub>35</sub></td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/cables/et121_conductores_cobre_duro_desnudos.html" class="externalLink">ET-121<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Metros de <a href="lar309_acometida_aerea.html#" id="version-84" class="externalLink  glosarioLink">alambre</a> de cobre calibre 8 AWG</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">r<sub>5</sub></td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">6762220</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et417_percha_porta_aisladores_redes_b_t.html" class="externalLink">ET-417<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Percha porta aislador de un puesto</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">s<sub>110</sub></td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et356_conectores_tipo_cuna.html" class="externalLink">ET-356<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Conector tipo cu&#241;a para acometidas de B.T. 4-8 AWG (Nota 5)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">t<sub>11</sub></td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">6762251</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/herrajes_conectores/et457_tornillo_acero.html" class="externalLink">ET-457<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Tornillo de acero galvanizado  5/8” x 8”</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">f<sub>2</sub></td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">6762280</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/materiales_puesta_tierra/et490_varilla_puesta_tierra.html" class="externalLink">ET-490<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Varilla de <a href="lar309_acometida_aerea.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a> 5/8&quot; x 2,44 m</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">x<sub>9</sub></td><td colspan="1" rowspan="1" style="text-align:center">1,5</td><td colspan="1" rowspan="1" style="text-align:center">6762233</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/cajas_inspeccion_ductos_accesorios/et601_ductos_metalicos_galvanizados_redes_media_baja.html" class="externalLink">ET-601<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Metros de tubo met&#225;lico galvanizado tipo IMC o Rigid (m&#237;nimo &#190; &quot;)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">x<sub>11</sub></td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">6762482</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style="">Boquilla galvanizada (di&#225;metro de acuerdo al tubo) </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">x<sub>21</sub></td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">6762484</td><td colspan="1" rowspan="1" style="text-align:center"><a href="../../../Especificacion/cajas_inspeccion_ductos_accesorios/et605_capacetes.html" class="externalLink">ET-605<span class="externalLinkIcon"></span></a></td><td colspan="1" rowspan="1" style="">Capacete galvanizado (di&#225;metro de acuerdo al tubo) </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:10px;text-align:center">y<sub>60</sub></td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="">Boquilla en PVC de 1/2&quot;</td></tr></table><br /></div><b>NOTAS:</b><br /><br />1- Altura m&#237;nima de la <a href="lar309_acometida_aerea.html#" id="version-72" class="externalLink  glosarioLink">acometida</a> sobre nivel de piso:
+<ul><li>En puntos de retenci&#243;n o hasta la parte inferior  de la curva de goteo: 3000 mm</li>
+<li>En v&#237;as residenciales y comerciales sin tr&#225;fico de veh&#237;culos de carga: 3600 mm</li>
+<li>En v&#237;as con tr&#225;fico pesado: 5500 mm</li></ul>
+<br />2-	 Para la ubicaci&#243;n de las cajas de medidores, se tomar&#225; como altura de referencia entre 1,5 y 1,7 m para el visor del medidor mas alto.<br />Si la parte inferior de la caja queda ubicada a una altura menor a 80 cm, se podr&#225; adicionar una reja met&#225;lica frontal para protecci&#243;n contra impacto.	<br /><br />3-	 La caja de medidor con puerta plana monof&#225;sica es para empotrar y la caja   de medidor con tapa removible monof&#225;sica se instalar&#225; sobrepuesta en poste o parcialmente empotrada.<br /><br />4-	 Las cajas deben instalarse empotradas; en caso que se autorice su <a href="lar309_acometida_aerea.html#" id="version-237" class="externalLink  glosarioLink">instalaci&#243;n</a> sobrepuesta deber&#225; tener protecci&#243;n contra lluvia.<br /><br />5-	 El calibre de la <a href="lar309_acometida_aerea.html#" id="version-72" class="externalLink  glosarioLink">acometida</a> depende de la carga. <br /><br />6- En caso de que la conexi&#243;n a <a href="lar309_acometida_aerea.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> no sea empotrada, debe ir en ducto galvanizado.<br /><br />7- En los casos que el poste de derivaci&#243;n de <a href="lar309_acometida_aerea.html#" id="version-72" class="externalLink  glosarioLink">acometida</a> no lo tengan, se adicionar&#225; un estribo (e<sub>2</sub>) y un conector (s<sub>110</sub>).<br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 1000, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

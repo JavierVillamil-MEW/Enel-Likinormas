@@ -1,0 +1,11 @@
+uuid: 0a2ef929-8ba9-4a18-88ff-42fbc85bfe08
+langcode: es
+status: true
+dependencies:
+  config:
+    - simple_sitemap.type.rules_site_map
+id: mapa-del-sitio-de-likinormas
+label: 'Mapa del sitio likinormas'
+description: ''
+type: rules_site_map
+weight: 0

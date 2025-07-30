@@ -1,0 +1,3855 @@
+numero,nombre,fecha,contenido,categoria
+ET1001,ET1001 Equipo móvil de pruebas y localización de fallas de cables MT,27/05/2021,"<div class=""contenido"">
+
+
+<div class=""internas"">
+
+
+<div class=""caja_texto wikiformat"">
+
+<div style=""clear:left;"">
+</div>
+<h2 id=""heading_0"">
+        1. ALCANCE
+       </h2>
+       Establecer las características técnicas que deben cumplir un
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/156/definition"" id=""version-189"">
+        equipo
+       </a>
+       móvil integrado de pruebas y localización de fallas de cables de
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/242/definition"" id=""version-277"">
+        media tensión
+       </a>
+       hasta 35 kV antes de su puesta en
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/320/definition"" id=""version-359"">
+        servicio
+       </a>
+       o ya instalados en la infraestructura eléctrica de la zona de influencia de Enel_ Enel Colombia.
+       <br/>
+<h2 id=""heading_1"">
+        2. DEFINICIONES Y ACRÓNIMOS
+       </h2>
+       Las definiciones están en el glosario unificado de términos que se encuentra en la intranet de la organización y puede ser consultado en la ruta:
+       <br/>
+<a class=""externalLink"" href=""http://oneconnection.enel.com/sitios/colombia/doc/sistemanormativo/glosario/default.aspx"">
+        http://oneconnection.enel.com/sitios/colombia/doc/sistemanormativo/glosario/default.aspx
+        <span class=""externalLinkIcon"">
+</span>
+</a>
+<br/>
+<ul>
+<li>
+         Área solicitante
+        </li>
+<li>
+         Contratación
+        </li>
+<li>
+         Homologación
+        </li>
+<li>
+         Oferta
+        </li>
+</ul>
+<div style=""width:691px;"">
+<table>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""width:210px;height:21px;"">
+<b>
+            Acrónimo y palabras clave
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""width:481px;"">
+<b>
+            Descripción
+           </b>
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Responsable
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/280/definition"" id=""version-319"">
+            Persona
+           </a>
+           (s) designada(s) de NDS para realizar la evaluación
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/337/definition"" id=""version-376"">
+            técnica
+           </a>
+           .
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Solicitante
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/280/definition"" id=""version-319"">
+            Persona
+           </a>
+           de GP que efectúo la solicitud
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           FOhm
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Resistencia de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/303/definition"" id=""version-342"">
+            puesta a tierra
+           </a>
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           FU
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/341/definition"" id=""version-380"">
+            tensión de paso
+           </a>
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           VLF
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Prueba de muy baja
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/177/definition"" id=""version-210"">
+            frecuencia
+           </a>
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           DC
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Corriente Directa
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           DAC
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Corrientes Alterna Amortiguada.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           TFT
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Pantalla de cristal líquido que usa tecnología de transistor de película delgada
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           IP54
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Protegido contra el ingreso limitado de polvo y salpicaduras de agua
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           IP65
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Protección total contra el polvo y chorros de agua de baja potencia
+          </td>
+</tr>
+</table>
+<br/>
+</div>
+<h2 id=""heading_2"">
+        3. REQUERIMIENTOS GENERALES
+       </h2>
+<h3 id=""heading_3"">
+        3.1.
+        <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/156/definition"" id=""version-189"">
+         Equipo
+        </a>
+        de Pre-localización de fallas en cables:
+       </h3>
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+        Sistema
+       </a>
+       multifuncional de
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/200/definition"" id=""version-235"">
+        inspección
+       </a>
+       y localización previa de averías en cables de redes de media y
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/65/definition"" id=""version-98"">
+        baja tensión
+       </a>
+       . Todas las funciones del
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+        sistema
+       </a>
+       deben poder controlarse a través de una interfaz con un sólo selector, la cual debe integrar las siguientes funciones:
+       <br/>
+<ul>
+<li>
+         Medición de Resistencia de Aislamiento cumpliendo IEEE 400 - 2012 Guide for Field Testing and Evaluation of the Insulation of Shielded Power Cable Systems Rated 5 kV and Abovey capacitancia del conductor.
+        </li>
+<li>
+         Reflectometría convencional
+        </li>
+<li>
+         Localización de fallas de alta resistencia con los métodos Medición de reflexión de arco convencional y con fuente de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/338/definition"" id=""version-377"">
+          tensión
+         </a>
+         auxiliar,
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/243/definition"" id=""version-278"">
+          método
+         </a>
+         de corriente de impulso, decaimiento de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/338/definition"" id=""version-377"">
+          tensión
+         </a>
+         convencional y con fuente de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/338/definition"" id=""version-377"">
+          tensión
+         </a>
+         adicional.
+        </li>
+<li>
+         Modo Impulsador para localización puntual de fallas
+        </li>
+<li>
+         Prueba de Chaqueta en DC
+        </li>
+<li>
+         Base de datos integrada y software de emisión de reportes con histórico.
+        </li>
+</ul>
+<br/>
+       Funciones Principales:
+       <ul>
+<li>
+         Filtro activo inductivo integrado para el
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/243/definition"" id=""version-278"">
+          método
+         </a>
+         de reflexión de arco o ARM (Arc Reflection Method).
+        </li>
+<li>
+         Cómodo manejo y control mediante un solo botón y pantalla táctil.
+        </li>
+<li>
+         Software de fácil manejo para un control sencillo, intuitivo y seguro.
+        </li>
+<li>
+         Gran energía de choque para la localización exacta acústica hasta 2000 Joule.
+        </li>
+<li>
+         Niveles de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/338/definition"" id=""version-377"">
+          tensión
+         </a>
+         de choque para cables de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/242/definition"" id=""version-277"">
+          media tensión
+         </a>
+         de 0 … 16/32 kV
+        </li>
+<li>
+         Niveles de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/338/definition"" id=""version-377"">
+          tensión
+         </a>
+         de choque más bajos para tensiones menores 0 …4 / 8 kV
+        </li>
+<li>
+         Adecuado para el
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/353/definition"" id=""version-392"">
+          trabajo
+         </a>
+         en campo.
+        </li>
+</ul>
+       Amplio circuito de
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/318/definition"" id=""version-357"">
+        seguridad
+       </a>
+       para el seguimiento, entre otros, de la
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/303/definition"" id=""version-342"">
+        puesta a tierra
+       </a>
+       (FOhm), la
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/341/definition"" id=""version-380"">
+        tensión de paso
+       </a>
+       (FU), las puertas traseras del vehículo donde se encuentre instalado, desconexión de
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/150/definition"" id=""version-183"">
+        emergencia
+       </a>
+       interna y externa, así como por sobrecalentamiento.
+       <br/>
+<br/>
+       Debe incluir los siguientes modos de funcionamiento a través de un solo botón:
+       <ul>
+<li>
+         Resistencia del aislamiento hasta 5000 V.
+        </li>
+<li>
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/155/definition"" id=""version-188"">
+          Ensayo
+         </a>
+         de Corriente Continua hasta 40 kV con medición de la corriente de fuga y desconexión automática en caso de aparición de una descarga por avería y las pruebas VLF antes descritas.
+        </li>
+<li>
+         Detección de la aparición de un arco con función en rampa, desconexión automática en caso de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/125/definition"" id=""version-158"">
+          descarga disruptiva
+         </a>
+         e indicación de la
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/338/definition"" id=""version-377"">
+          tensión
+         </a>
+         de descarga.
+        </li>
+<li>
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/243/definition"" id=""version-278"">
+          Método
+         </a>
+         de pre-localización por Medición de reflexión de arco convencional y con fuente de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/338/definition"" id=""version-377"">
+          tensión
+         </a>
+         auxiliar,
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/243/definition"" id=""version-278"">
+          método
+         </a>
+         de corriente de impulso, decaimiento de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/338/definition"" id=""version-377"">
+          tensión
+         </a>
+         convencional y con fuente de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/338/definition"" id=""version-377"">
+          tensión
+         </a>
+         adicional.
+        </li>
+<li>
+         Localización exacta acústica
+        </li>
+</ul>
+<h4 id=""heading_4"">
+        3.1.1. Datos Técnicos
+        <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/156/definition"" id=""version-189"">
+         Equipo
+        </a>
+        de Pre-localización de fallas en cables:
+       </h4>
+<div style=""width:691px;"">
+<table>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""width:210px;height:39px;"">
+           Pantalla
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""width:481px;"">
+           Táctil de 21.5"" hasta 19”, 1.920 x 1.080 (16:9), Full HD para guía al
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/364/definition"" id=""version-403"">
+            usuario
+           </a>
+           , información de estado, ingreso de datos y resultado de ensayos; botón único de operación.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:41px;"">
+           Voltaje de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/155/definition"" id=""version-188"">
+            Ensayo
+           </a>
+           de Aislamiento
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           1000 V  a 5000 V en pasos de 100 V.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Rangos de Resistencia
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           1 kOhm, 5 MOhmios, 100 MOhmios
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Ensayos en DC
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           0...40 kV DC
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Corriente de Fuga
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           0 ... 1/10/100 mA auto rango
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Reconocimiento de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/171/definition"" id=""version-204"">
+            Falla
+           </a>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           0 ... 40 kV;
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Conversión de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/171/definition"" id=""version-204"">
+            Falla
+           </a>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           0 ... 8 kV ; 750 mA / 0 ... 20 kV ; 100 mA
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Opciones de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/333/definition"" id=""version-372"">
+            Sobretensión
+           </a>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           0...16 kV / 32 kV
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:41px;"">
+           Opcionalmente rangos inferiores de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/333/definition"" id=""version-372"">
+            sobretensión
+           </a>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           0 ... 4 kV o 0... 8 kV
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Energía de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/333/definition"" id=""version-372"">
+            Sobretensión
+           </a>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Max. 2000 J en cada rango.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Tasa de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/333/definition"" id=""version-372"">
+            Sobretensión
+           </a>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           0...20 pulsos por minuto y un solo pulso
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:41px;"">
+           Localización de Fallas en la Chaqueta
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           0 ... 5000/10000 V con 750 mA máx.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:41px;"">
+           Tasa de  Pulso Voltaje de Paso
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Continuo, 1:3 1:4; 1:6 (seg)
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:61px;"">
+           Reflectómetría
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Trifásica o monofásica con determinación de longitud del
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/74/definition"" id=""version-107"">
+            cable
+           </a>
+           , distancia de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/171/definition"" id=""version-204"">
+            falla
+           </a>
+           , amplificación, rango de medición desde 20 m ... 1.280 km (para v/2 = 80 m/µs); resolución 0.1 m
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""3"" style=""height:21px;"">
+           Prelocalización de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/171/definition"" id=""version-204"">
+            Falla
+           </a>
+           AT:
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           ARM Multishot,
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Corriente de Impulso ICE
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Atenuación de Voltaje DECAY
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:41px;"">
+           Temperatura de Operación
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           -10 ... + 55 °C
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Alimentación
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           60 Hz 110 V opcional
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Potencia de Entrada
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Menor a 3 kVA max.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/308/definition"" id=""version-347"">
+            Receptor
+           </a>
+           de GPS
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Integrado
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Peso
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Máximo 120 kg
+          </td>
+</tr>
+</table>
+<br/>
+</div>
+<h3 id=""heading_5"">
+        3.2.
+        <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+         Sistema
+        </a>
+        de Pruebas VLF (Very Low Frequency) hasta 35 kV:
+       </h3>
+<b>
+        Características Principales:
+       </b>
+<ul>
+<li>
+         Pruebas de aislamiento y pruebas de Cubierta con manejo integrado desde una unidad de control centralizada con un solo botón.
+        </li>
+<li>
+         Debe permitir realizar pruebas VLF de alta potencia en 0.1 Hz (con 1 µF @ 44 kVrms). Las Pruebas de cables permitidas deben cumplir con la norma IEEE400.2-2013   Guide for Field Testing of Shielded Power Cable Systems Using Very Low Frequency (VLF)(less than 1 Hz) e  IEC60229.( Tests on extruded oversheaths with a special protective function)
+        </li>
+<li>
+         Deberá contar con alta capacidad de prueba de hasta 10 µF con voltajes y frecuencias reducidas
+        </li>
+<li>
+         Ciclo de prueba continua (prueba sin interrupciones operacionales)
+        </li>
+<li>
+         Prueba de CA / CC conforme a DIN VDE, EN, IEEE
+        </li>
+<li>
+         Medición de la corriente de fuga en DC y VLF rectangular.
+        </li>
+<li>
+         Máxima
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/318/definition"" id=""version-357"">
+          seguridad
+         </a>
+         para el
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/364/definition"" id=""version-403"">
+          usuario
+         </a>
+         mediante la descarga automática del objeto de prueba y monitoreo de bucle de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/348/definition"" id=""version-387"">
+          tierra
+         </a>
+         .
+        </li>
+<li>
+         Detección de fallas y reconocimiento de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/80/definition"" id=""version-113"">
+          carga
+         </a>
+         (R, C)
+        </li>
+<li>
+         Pruebas de la chaqueta y
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/171/definition"" id=""version-204"">
+          falla
+         </a>
+         de la chaqueta de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/74/definition"" id=""version-107"">
+          cable
+         </a>
+         IEC 60229.
+        </li>
+<li>
+         Opción para medición de descargas parciales con Onda Seno, Coseno Rectangular y DAC.
+        </li>
+<li>
+         Ajuste de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/177/definition"" id=""version-210"">
+          frecuencia
+         </a>
+         manual y automático.
+        </li>
+<li>
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/177/definition"" id=""version-210"">
+          Frecuencia
+         </a>
+         Rango de 0.01 a 1 Hz.
+        </li>
+<li>
+         Precisión en la salida de voltaje +/-1%.
+        </li>
+<li>
+         Resolución 0.1 kV.
+        </li>
+<li>
+         Corriente de salida rango de medición 0…40 mA.
+        </li>
+<li>
+         Precisión +/- 1%.
+        </li>
+<li>
+         Resolución 10 µA.
+        </li>
+<li>
+         Detección de averías con desconexión automática de la
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/338/definition"" id=""version-377"">
+          tensión
+         </a>
+         de prueba y la descarga del objeto de prueba si la corriente de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/80/definition"" id=""version-113"">
+          carga
+         </a>
+         es demasiado alta.
+        </li>
+<li>
+         Mayor
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/318/definition"" id=""version-357"">
+          seguridad
+         </a>
+         al
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/364/definition"" id=""version-403"">
+          usuario
+         </a>
+         a través de la descarga automática del objeto de prueba y monitoreo del bucle de la
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/348/definition"" id=""version-387"">
+          tierra
+         </a>
+         .
+        </li>
+<li>
+         Interface
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/302/definition"" id=""version-341"">
+          puerto
+         </a>
+         USB para acceso a actualizaciones de software y firmware
+        </li>
+<li>
+         Software de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/364/definition"" id=""version-403"">
+          usuario
+         </a>
+         intuitivo con memoria interna con capacidad hasta 1000 mediciones
+        </li>
+</ul>
+<br/>
+<h4 id=""heading_6"">
+        3.2.1. Características específicas requeridas a cumplir
+        <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+         sistema
+        </a>
+        Pruebas VLF:
+       </h4>
+<div style=""width:770px;"">
+<table>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""width:290px;height:20px;"">
+<b>
+            Voltaje de Salida
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""width:480px;"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           • VLF Sinusoidal/Cosenoidal
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           0 … 62 kVpico/ 0 … 44 kVrms
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           • VLF rectangular
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           0 … 62 kV
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           • DC±
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           0 … 62 kV
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/177/definition"" id=""version-210"">
+            Frecuencia
+           </a>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           0.01 … 0.1 Hz con ajuste automático de la mejor
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/177/definition"" id=""version-210"">
+            frecuencia
+           </a>
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           Capacidad de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/80/definition"" id=""version-113"">
+            Carga
+           </a>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Al menos 1µF @ 62 kVpico y 0.1 Hz.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           • VLF Seno/Coseno
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Capacitancia máxima 10µF (a voltajes y frecuencias reducidas)
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           Medición de Corriente de Fuga
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           En modos DC y VLF rectangular
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           Prueba de Cubierta según IEC 60229
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           0 … 20 kV DC
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           Localización de Fallas de Cubierta
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           0 … 20 kV DC, Tasa de pulsos de  1:3, 1:4
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           Quemador
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Al menos 1 minuto luego que la
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/171/definition"" id=""version-204"">
+            falla
+           </a>
+           es detectada.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:38px;"">
+           Evaluación de los datos
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Evaluación automática de la medición de tangente delta basado en el tipo de aislamiento y el estándar seleccionado.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           Memoria Interna
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Con capacidad mínima de 1000 mediciones
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           No. de componentes
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           VLF con Tangente Delta integrado en una sola unidad
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           Peso
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Menor o igual a 60 kg
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           Pantalla
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           5,7” a color legible a la luz del sol.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           Ciclo de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/353/definition"" id=""version-392"">
+            trabajo
+           </a>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           continuo
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           Temperatura de Operación
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           -20 … +55 °C
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           Temperatura de Almacenaje
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           -20 … +70 °C
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""2"" style=""height:38px;"">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/318/definition"" id=""version-357"">
+            Seguridad
+           </a>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           1) Detección de voltaje de ruptura y descarga del objeto bajo prueba para máxima
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/318/definition"" id=""version-357"">
+            seguridad
+           </a>
+           .
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           2) Posibilidad para conectar un
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+            Sistema
+           </a>
+           de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/318/definition"" id=""version-357"">
+            seguridad
+           </a>
+           externo.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""2"" style=""height:57px;"">
+           Software
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           1) Debe incluir una función de ayuda, selección de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/172/definition"" id=""version-205"">
+            fase
+           </a>
+           , selección rápida del modo de prueba y un historial integrado de todas las mediciones.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:38px;"">
+           2) El software debe almacenar automáticamente todas las mediciones realizadas.
+          </td>
+</tr>
+</table>
+<br/>
+</div>
+<br/>
+<h3 id=""heading_7"">
+        3.3. Equipamientos Complementarios.
+       </h3>
+<h4 id=""heading_8"">
+        3.3.1.
+        <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/308/definition"" id=""version-347"">
+         Receptor
+        </a>
+        Universal de Audiofrecuencia y Acústico Electromagnético para trazado y localización puntual de fallas.
+       </h4>
+       La unidad móvil debe incluir una unidad completa que permita realizar el trazado de la ruta de cables energizados/des-energizados, medición de profundidad, ubicación GPS, con un transmisor de potencia hasta 12 Watts, así como un
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/308/definition"" id=""version-347"">
+        receptor
+       </a>
+       de ondas de choque portátil para la localización acústica y electromagnética exacta de averías en el aislamiento interno de cables eléctricos subterráneos.
+       <br/>
+<br/>
+       Debe poder combinar diversos métodos para amortiguar el ruido de forma eficaz lo cual permita una acústica perfecta que sólo escuche el ruido que indica las averías, sin afectación por tráfico vehicular, pisadas ni conversaciones.
+       <br/>
+<br/>
+<b>
+        El
+        <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/156/definition"" id=""version-189"">
+         equipo
+        </a>
+        debe permitir:
+       </b>
+<ul>
+<li>
+         Máxima insensibilidad a interferencias acústicas.
+        </li>
+<li>
+         Función silenciadora automática al detectar proximidad.
+        </li>
+<li>
+         Pantalla de color apta para la luz solar.
+        </li>
+<li>
+         Manejo muy sencillo con ajuste automático de todas las magnitudes.
+        </li>
+<li>
+         Establecimiento del recorrido con indicación de derecha/izquierda.
+        </li>
+<li>
+         Limitación del volumen a 84 dB (A)
+        </li>
+<li>
+         Medición de la distancia en milisegundos o en metros/pies.
+        </li>
+<li>
+         “Brújula” para indicar la dirección de la
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/171/definition"" id=""version-204"">
+          falla
+         </a>
+         .
+        </li>
+<li>
+         Asa ajustable de forma ergonómica y extraíble.
+        </li>
+<li>
+         Elevada estabilidad del sensor hasta 45°.
+        </li>
+</ul>
+<br/>
+<b>
+        Datos Técnicos mínimos:
+       </b>
+<br/>
+<br/>
+<b>
+        Receptor:
+       </b>
+<ul>
+<li>
+<b>
+          Pantalla:
+         </b>
+         Pantalla TFT de color de 320 x 240 píxeles
+        </li>
+<li>
+<b>
+          Seguridad:
+         </b>
+         Limitación acústica a 84 dB (A)
+        </li>
+<li>
+<b>
+          Amplificación:
+         </b>
+         &gt; 120 dB
+        </li>
+<li>
+<b>
+          Alimentación de Corriente:
+         </b>
+         6  baterías alcalinas LR6
+        </li>
+<li>
+<b>
+          Duración en funcionamiento:
+         </b>
+         &gt; 10 horas
+        </li>
+<li>
+<b>
+          Dimensiones (H x A x P):
+         </b>
+         65 mm x 225 mm x 100 mm
+        </li>
+<li>
+<b>
+          Peso:
+         </b>
+         0,9 kg (incluidas baterías)
+        </li>
+</ul>
+<br/>
+<b>
+        Sensor:
+       </b>
+<ul>
+<li>
+<b>
+          Dimensiones:
+         </b>
+         230 mm de diámetro (lengüeta exterior)
+        </li>
+<li>
+<b>
+          Altura:
+         </b>
+         140 mm
+        </li>
+<li>
+<b>
+          Longitud de la barra portadora:
+         </b>
+         Ajustable entre 480 ... 750 mm
+        </li>
+<li>
+<b>
+          Peso:
+         </b>
+         2,2 kg (incluida barra portadora)
+        </li>
+<li>
+<b>
+          Gama dinámica:
+         </b>
+         Canal acústico &gt;110 dB; Canal electromagnético &gt;110 dB
+        </li>
+<li>
+<b>
+          Rango de frecuencias:
+         </b>
+         100 ...1500 Hz
+        </li>
+<li>
+<b>
+          Niveles de filtrado:
+         </b>
+         100 ...1500 Hz
+        </li>
+<li>
+<b>
+          Pasa-bajo:
+         </b>
+         100 ...400 Hz
+        </li>
+<li>
+<b>
+          Pasa-banda:
+         </b>
+         150 ...600 Hz
+        </li>
+<li>
+<b>
+          Pasa-alto:
+         </b>
+         200 ...1500 Hz
+        </li>
+<li>
+<b>
+          Clase de protección:
+         </b>
+         IP65
+        </li>
+</ul>
+<h4 id=""heading_9"">
+        3.3.2.
+        <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/156/definition"" id=""version-189"">
+         Equipo
+        </a>
+        para identificar conductores.
+       </h4>
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/156/definition"" id=""version-189"">
+        Equipo
+       </a>
+       portátil para identificar cables debe asegurar una identificación precisa del
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/74/definition"" id=""version-107"">
+        cable
+       </a>
+       a cortar debido a que es una tarea de absoluta relevación para la
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/318/definition"" id=""version-357"">
+        seguridad
+       </a>
+       del
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""et1001_equipo_movil_pruebas_localizacion_fallas.html#"" id=""version-0"">
+        personal
+       </a>
+       y activos.
+       <br/>
+<br/>
+       El
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+        sistema
+       </a>
+       debe estar formado por un
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/189/definition"" id=""version-223"">
+        generador
+       </a>
+       de pulsos de corriente y un
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/308/definition"" id=""version-347"">
+        receptor
+       </a>
+       . Este
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/308/definition"" id=""version-347"">
+        receptor
+       </a>
+       debe contar con una pinza flexible de al menos 230 mm para captar la señal de enviada por el
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/189/definition"" id=""version-223"">
+        generador
+       </a>
+       identificación.
+       <br/>
+<br/>
+       El
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/189/definition"" id=""version-223"">
+        generador
+       </a>
+       de pulsos debe producir pulsos triangulares con una
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/203/definition"" id=""version-238"">
+        intensidad
+       </a>
+       de pico de 100 A que se transmiten al
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/74/definition"" id=""version-107"">
+        cable
+       </a>
+       para su consiguiente identificación. La corriente de estos pulsos generará un campo electromagnético con polaridad definida en torno al
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/74/definition"" id=""version-107"">
+        cable
+       </a>
+       , para que pueda ser detectada con la pinza flexible del
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/308/definition"" id=""version-347"">
+        receptor
+       </a>
+       , con sincronización automática e indicación de la
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/203/definition"" id=""version-238"">
+        intensidad
+       </a>
+       de la señal mediante leds.
+       <br/>
+<br/>
+       El
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/156/definition"" id=""version-189"">
+        equipo
+       </a>
+       debe contar con un software especial que controle y verifique al menos los parámetros del pulso registrado siguientes:
+       <ul>
+<li>
+         Forma del pulso
+        </li>
+<li>
+         Polaridad
+        </li>
+<li>
+         Amplitud
+        </li>
+<li>
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/177/definition"" id=""version-210"">
+          Frecuencia
+         </a>
+         (intervalo 2 s)
+        </li>
+</ul>
+       La pinza de recepción debe contar con una dirección definida, que junto con los parámetros de control del
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/308/definition"" id=""version-347"">
+        receptor
+       </a>
+       garanticen una identificación segura y libre de errores.
+       <br/>
+<br/>
+       Características de Funcionamiento:
+       <br/>
+<br/>
+       El
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/156/definition"" id=""version-189"">
+        equipo
+       </a>
+       de identificador de cables debe tener las siguientes características:
+       <ul>
+<li>
+         Ajuste de amplitud y sensibilidad.
+        </li>
+<li>
+         Fácil conexión.
+        </li>
+<li>
+         Indicador en LED verde y rojo.
+        </li>
+<li>
+         Operación por medio de baterías.
+        </li>
+<li>
+         Indicación de conexión errónea o circuito abierto.
+        </li>
+<li>
+         Potencia suficiente para identificar cables de al menos 1 kilómetros de largo.
+        </li>
+</ul>
+<br/>
+<div style=""width:709px;"">
+<table>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""width:285px;height:21px;"">
+<b>
+            CARACTERÍSTICAS TÉCNICAS
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""width:424px;"">
+</td>
+</tr>
+<tr>
+<td colspan=""2"" rowspan=""1"" style=""height:21px;"">
+<b>
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/189/definition"" id=""version-223"">
+             GENERADOR
+            </a>
+</b>
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Fuente de Alimentación
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           100 – 240VAC /60Hz
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Acumulador
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           Batería Sellada integrada 12VCD ion liquido
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Tiempo de funcionamiento con batería
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           &gt; 3.8 horas
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Tiempo de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/80/definition"" id=""version-113"">
+            carga
+           </a>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           &lt; 6.2 horas
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/338/definition"" id=""version-377"">
+            Tensión
+           </a>
+           del pulso
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           55 VCD
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Corriente máxima del pulso
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           100A
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Ancho de pulso
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           72ms
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Peso
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           &lt; 1.8kg
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Dimensiones
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           &lt;202x122x82
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Protección
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           IP54
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Temperatura de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/320/definition"" id=""version-359"">
+            servicio
+           </a>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           -10ºC / +60ºC
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+</td>
+</tr>
+<tr>
+<td colspan=""2"" rowspan=""1"" style=""height:21px;"">
+<b>
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/308/definition"" id=""version-347"">
+             Receptor
+            </a>
+</b>
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Alimentación
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           2 pilas de 1.5V AA
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Tiempo de funcionamiento
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           &gt;50 horas
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Sensor
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           Pinza de corriente flexible de 230mm
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Ajuste de la sensibilidad
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           De 10 niveles: 3 – 24dB
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Peso
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           &lt;0.5kg
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Protección
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           IP54
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Dimensiones
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           &lt;152x67x37mm
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Temperatura de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/320/definition"" id=""version-359"">
+            servicio
+           </a>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           -10ºC / +60ºC
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           ISO
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""text-align:center"">
+           9001:2008
+          </td>
+</tr>
+</table>
+<br/>
+</div>
+<h4 id=""heading_10"">
+        3.3.3. Otros Requisitos:
+       </h4>
+<ul>
+<li>
+         Todos los equipos deben ser suministrados con todos los accesorios necesarios, para la operación de los mismos y la realización correcta de las pruebas. (ej: cables, conectores, caja de transporte, estuche, adaptadores, calibradores, cargadores de baterías, baterías, interfaces, accesorios para pruebas, protectores, memorias y
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/156/definition"" id=""version-189"">
+          equipo
+         </a>
+         para generar reportes impresos y cualquier otro elemento para la buena operación del
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/156/definition"" id=""version-189"">
+          equipo
+         </a>
+         ).
+        </li>
+<li>
+         Se deben entregar todos los catálogos y guía de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/364/definition"" id=""version-403"">
+          usuario
+         </a>
+         en idioma español.
+        </li>
+<li>
+         Deben entregar manuales de operación y
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/236/definition"" id=""version-271"">
+          mantenimiento
+         </a>
+         , con guías de solución y problemas.
+        </li>
+<li>
+         Deben suministrar, listas de partes con número de catálogo y descripción.
+        </li>
+<li>
+         Deben aportar certificados de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/78/definition"" id=""version-111"">
+          calibración
+         </a>
+         de los equipos.
+        </li>
+</ul>
+<h3 id=""heading_11"">
+        3.4 Características generales del vehículo
+       </h3>
+       Es indispensable que la marca del vehículo ofrecido tenga como mínimo de una marca reconocida en el mercado y que se comercialice en el país, para ello debe aportar junto con la oferta
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/91/definition"" id=""version-124"">
+        Certificación
+       </a>
+       original del Fabricante en donde se demuestre este apartado, en nuestro país (Colombia).
+       <br/>
+       Es
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/312/definition"" id=""version-351"">
+        requisito
+       </a>
+       indispensable que la marca ofertada del vehículo tenga un representante autorizado por el fabricante en nuestro país, y que hayan brindado el
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/320/definition"" id=""version-359"">
+        servicio
+       </a>
+       de
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/236/definition"" id=""version-271"">
+        mantenimiento
+       </a>
+       del vehículo cotizado.
+       <br/>
+<br/>
+<div style=""width:750px;"">
+<table>
+<tr>
+<td colspan=""3"" rowspan=""1"" style=""width:725px;height:20px;text-align:center"">
+<b>
+            Características generales del vehículo
+           </b>
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""width:25px;height:22px;text-align:center"">
+<b>
+            1
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""width:200px;"">
+           Tipo
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""width:500px;"">
+           Van (panel de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/80/definition"" id=""version-113"">
+            carga
+           </a>
+           )
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:22px;text-align:center"">
+<b>
+            2
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Cantidad
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           1 unidad
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:77px;text-align:center"">
+<b>
+            3
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           No. Puertas
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Mínimo cuatro, dos de acceso a la cabina, una de acceso lateral (lado derecho corrediza con ventanas) y una en la parte trasera para tener libre acceso de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/80/definition"" id=""version-113"">
+            carga
+           </a>
+           en toda su área trasera.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:58px;text-align:center"">
+<b>
+            4
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           No. de Puestos y acondicionamiento de cabina.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Mínimo 2, Los asientos deben ser ergonómicos, tipo butaca ajustable.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:39px;text-align:center"">
+<b>
+            5
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Acondicionamiento interno del Vehículo
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Debe venir con todos los forros internos de fábrica tanto cielo raso, laterales y piso.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""5"" style=""height:38px;text-align:center"">
+<b>
+            6
+           </b>
+</td>
+<td colspan=""1"" rowspan=""5"" style="""">
+           Dimensiones
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Las dimensiones de largo, ancho y alto tanto exterior como interior deberán se propuestas por el proveedor
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           Externas:
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           1-    Largo total máximo:  5,3 m.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           2-    Ancho Total máximo): 2 m.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Alto total máximo 2 m
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""2"" style=""height:20px;text-align:center"">
+<b>
+            7
+           </b>
+</td>
+<td colspan=""1"" rowspan=""2"" style="""">
+           Capacidad de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/80/definition"" id=""version-113"">
+            carga
+           </a>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Peso bruto admisible: 3000 kg.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/80/definition"" id=""version-113"">
+            Carga
+           </a>
+           útil: no menor a 1150 kg.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:61px;text-align:center"">
+<b>
+            8
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Motor (No. de Cilindros)
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Mínimo cuatro cilindros en línea con una capacidad de al menos 1900 centímetros cúbicos. 16 válvulas. Turbo Diesel.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:41px;text-align:center"">
+<b>
+            9
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Potencia de Motor
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           140 HP/rpm (se admite una variación de hasta un ±5%)
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:22px;text-align:center"">
+<b>
+            10
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Torque
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           340 / 1.750 Nm/rpm
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:81px;text-align:center"">
+<b>
+            11
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+            Sistema
+           </a>
+           de Alimentación
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Debe ser de normativa y construido para trabajar bajo especificaciones y calidades de combustible distribuidas en Colombia y como mínimo debe cumplir con las normas de emisión del vehículo: EURO V.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:22px;text-align:center"">
+<b>
+            12
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Combustible
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Diesel.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:22px;text-align:center"">
+<b>
+            13
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+            Sistema
+           </a>
+           de Transmisión
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Manual, 6 velocidades en avance y una en reversa.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:58px;text-align:center"">
+<b>
+            14
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+            Sistema
+           </a>
+           de Dirección
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Asistido electrónicamente, servo asistida hidráulicamente o asistida eléctricamente o similar. Volante ajuste en altura e inclinación.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:58px;text-align:center"">
+<b>
+            15
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+            Sistema
+           </a>
+           de Frenos
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           De disco en los dos ejes, tipo de freno delantero: Discos Ventilados.  Tipos de Frenos Traseros: Discos.
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+            Sistema
+           </a>
+           de Frenos ABS y
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+            sistema
+           </a>
+           de frenos AFU.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:22px;text-align:center"">
+<b>
+            16
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Luces Principales
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:22px;text-align:center"">
+<b>
+            17
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Color
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Blanco
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:22px;text-align:center"">
+<b>
+            18
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Tipo de pintura
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Original de fábrica
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:22px;text-align:center"">
+<b>
+            19
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Tracción
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Trasera 4 x 2.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:134px;text-align:center"">
+<b>
+            20
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+            Sistema
+           </a>
+           de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/318/definition"" id=""version-357"">
+            seguridad
+           </a>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Con Air bag para el conductor y el acompañante, además, todos los requerimientos según Ley de Tránsito vigente en Colombia para este tipo de vehículo como: calcomanías de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/318/definition"" id=""version-357"">
+            seguridad
+           </a>
+           , triángulos, apoya cabezas en todos los asientos, cinturones de seguridad de tres puntos de inercia ajustables y dos puntos según posición dentro del vehículo como está normado
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""2"" style=""height:38px;text-align:center"">
+<b>
+            21
+           </b>
+</td>
+<td colspan=""1"" rowspan=""2"" style="""">
+           Otros aditamentos estándar
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Aditamentos exigidos por la Ley de Tránsito vigente en Colombia: triángulos, chaleco,
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/169/definition"" id=""version-202"">
+            extintor
+           </a>
+           entre otros.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:39px;"">
+           Además, deberá aportar un juego de alfombras independientes para cada pasajero.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:39px;text-align:center"">
+<b>
+            22
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+            Sistema
+           </a>
+           aire acondicionado del vehículo.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Aire Acondicionado climatizado capaz de ambientar la cabina de los pasajeros.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:39px;text-align:center"">
+<b>
+            23
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+            Sistema
+           </a>
+           de parqueo seguro.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Deberá traer un
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+            sistema
+           </a>
+           de aviso para parquear, dar avisos en forma luminosa y sonora.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+<b>
+            24
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+            Sistema
+           </a>
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/144/definition"" id=""version-177"">
+            eléctrico
+           </a>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           12 voltios.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:171px;"">
+<b>
+            25
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Capacidad de ascenso teórica
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Mínimo de 25° ó aproximadamente 46% de pendiente, calculado bajo el peso bruto vehicular máximo indicado por el fabricante. Para tal propósito se deberá aportar como información de respaldo lo siguiente: curva de potencia y torque vs rpm para el motor, desmultiplicaciones de la caja para todas las velocidades (1, 2, 3, 4, 5, 6 y reversa), desmultiplicaciones del diferencial, radio dinámico de las ruedas a la presión recomendada por el fabricante para el peso del vehículo en esa condición.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;text-align:center"">
+<b>
+            26
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Distancia libre al suelo
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           0,2 m mínimo con una tolerancia de un ±5%.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:39px;text-align:center"">
+<b>
+            27
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Matrícula
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           El vehículo debe ser matriculado en la ciudad de Bogota D.C con placa amarilla de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/320/definition"" id=""version-359"">
+            servicio
+           </a>
+           particular
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:58px;text-align:center"">
+<b>
+            28
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/319/definition"" id=""version-358"">
+            Señalización
+           </a>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           EL vehículo deberá contar con la
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/319/definition"" id=""version-358"">
+            señalización
+           </a>
+           aplicable según exigencias vigentes de la secretaria de movilidad o ente de transito correspondiente
+          </td>
+</tr>
+</table>
+<br/>
+</div>
+<h4 id=""heading_12"">
+        3.4.1.
+        <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/318/definition"" id=""version-357"">
+         Seguridad
+        </a>
+</h4>
+       Módulo de
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/318/definition"" id=""version-357"">
+        seguridad
+       </a>
+       :
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+        Sistema
+       </a>
+       de monitoreo antes, durante la operación del
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+        sistema
+       </a>
+       que deshabilita la salida de
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/338/definition"" id=""version-377"">
+        tensión
+       </a>
+       y ejecución de las pruebas al detectar situaciones de riesgo.  Esto garantiza la
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/318/definition"" id=""version-357"">
+        seguridad
+       </a>
+       tanto del personal como los equipos.  El oferente deberá presentar un listado de todas las seguridades incluidas
+       <br/>
+<br/>
+<br/>
+       Características específicas
+       <br/>
+<br/>
+       El módulo de
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/318/definition"" id=""version-357"">
+        seguridad
+       </a>
+       debe incluir al menos las siguientes características:
+       <ul>
+<li>
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/303/definition"" id=""version-342"">
+          Puesta a tierra
+         </a>
+         del
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+          Sistema
+         </a>
+         : Todas las partes metálicas del
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/156/definition"" id=""version-189"">
+          equipo
+         </a>
+         como las del vehículo deben estar puestas a
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/348/definition"" id=""version-387"">
+          tierra
+         </a>
+         por medio de un
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/74/definition"" id=""version-107"">
+          cable
+         </a>
+         de protección y con la respectiva indicación de su estado y que no permita operación del
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/156/definition"" id=""version-189"">
+          equipo
+         </a>
+         cuando la resistencia de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/303/definition"" id=""version-342"">
+          puesta a tierra
+         </a>
+         entre la pantalla del
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/74/definition"" id=""version-107"">
+          cable
+         </a>
+         a evaluar y la conexión a
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/348/definition"" id=""version-387"">
+          tierra
+         </a>
+         exceda los 6 ohmios.
+        </li>
+<li>
+         Tensiones de paso: Se deberá incluir los accesorios necesarios para la
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/303/definition"" id=""version-342"">
+          puesta a tierra
+         </a>
+         local por ejemplo: la varilla, conductores, conectores para la conexión a
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/348/definition"" id=""version-387"">
+          tierra
+         </a>
+         y evitar tensiones de paso peligrosas en el terreno.  El
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+          sistema
+         </a>
+         se deberá desconectar ante la presencia de tensiones mayores de 25 V.
+        </li>
+<li>
+         Enclavamiento de puertas traseras del compartimiento de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/55/definition"" id=""version-88"">
+          alta tensión
+         </a>
+         del vehículo: Se deben incluir sensores que verifiquen que las puertas donde se encuentran los equipos de alto voltaje se mantengan cerradas antes y durante la realización de las pruebas y que desconectan las salidas de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/338/definition"" id=""version-377"">
+          tensión
+         </a>
+         en caso de apertura de las mismas.
+        </li>
+<li>
+         Descarga automática del
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/74/definition"" id=""version-107"">
+          cable
+         </a>
+         probado: El
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+          sistema
+         </a>
+         deberá descargar automáticamente al
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/74/definition"" id=""version-107"">
+          cable
+         </a>
+         probado. Las mismas deben contar con resistencia interna para una descarga suave, aislados adecuadamente para
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/318/definition"" id=""version-357"">
+          seguridad
+         </a>
+         del operador e indicación de voltaje residual.
+        </li>
+<li>
+         Transformador de aislamiento: Se incluirá un transformador de protección de 5 KVA que aísla la fuente de alimentación y previene voltajes procedentes del
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/255/definition"" id=""version-290"">
+          neutro
+         </a>
+         del
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+          sistema
+         </a>
+         .
+        </li>
+<li>
+         Extinguidor de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/179/definition"" id=""version-213"">
+          fuego
+         </a>
+         : En CO2 con tanque de 2 Kg como mínimo.
+        </li>
+<li>
+         Fuente Principal y condición del estatus de los sistemas conectados, para su monitoreo y operación.  Esta pantalla mostrará información sobre alarmas del
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+          sistema
+         </a>
+         de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/318/definition"" id=""version-357"">
+          seguridad
+         </a>
+         instalado, monitoreo del lazo de resistencia del voltaje de paso para la protección y operación aterrizada, protección de eventos transitorios y monitoreo del estado de las puertas traseras en el compartimiento de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/55/definition"" id=""version-88"">
+          alta tensión
+         </a>
+         . Mediante este
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+          sistema
+         </a>
+         , todas las funciones de los dispositivos conectados (On/Off, y HVOn/Off) pueden ser activadas y controlados de manera remota.
+        </li>
+<li>
+         Unidad de conexión de Alimentación eléctrica, y espacios disponibles para la conexión de equipos o aparatos eléctricos adicionales a 110V @ 60 Hz.
+        </li>
+<li>
+         Unidad de conexión de Alimentación
+        </li>
+<li>
+         Carrete de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/74/definition"" id=""version-107"">
+          cable
+         </a>
+         de alimentación: 50mts 2x4 mm2 con tambor manual.
+        </li>
+<li>
+         Carrete de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/74/definition"" id=""version-107"">
+          cable
+         </a>
+         de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/348/definition"" id=""version-387"">
+          tierra
+         </a>
+         : 50mts 16 mm2 con tambor manual.
+        </li>
+<li>
+         Carrete de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/74/definition"" id=""version-107"">
+          Cable
+         </a>
+         de conexión de alto voltaje libre de descargas parciales operado manualmente con longitud de 1 x 50mts.
+        </li>
+<li>
+         Iluminación interior del área de operación.
+        </li>
+<li>
+         Salida de cables en la puerta trasera tipo ventana abatible.
+        </li>
+<li>
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+          Sistema
+         </a>
+         de aire acondicionado para la cabina del operador.
+        </li>
+<li>
+         La instalación de los equipos debe cumplir con los siguientes aspectos:
+        </li>
+</ul>
+<h4 id=""heading_13"">
+        3.4.2. Instalación de Mueblería Interna y acabados.
+       </h4>
+       Se debe cumplir con los siguientes detalles:
+       <ul>
+<li>
+         Suelo antideslizante muy resistente a golpes.
+        </li>
+<li>
+         Recubrimiento especial con
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/239/definition"" id=""version-274"">
+          material
+         </a>
+         plástico para las paredes internas del furgón y la cabina (
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/239/definition"" id=""version-274"">
+          material
+         </a>
+         de fácil lavado). Aislamiento de las paredes y techo.
+        </li>
+<li>
+         Escritorio para el módulo de control.
+        </li>
+<li>
+         Cajonera, con cerradura de apertura fácil y con llave para
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/318/definition"" id=""version-357"">
+          seguridad
+         </a>
+         , para evitar que se abran durante el traslado en los trabajos.
+        </li>
+<li>
+         Mueble para la colocación de instrumentos portátiles.
+        </li>
+<li>
+         División interna, para separar el área de control y la
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/55/definition"" id=""version-88"">
+          alta tensión
+         </a>
+         .
+        </li>
+<li>
+         Montaje de una iluminación fluorescente 12 V. adecuada al área de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/353/definition"" id=""version-392"">
+          trabajo
+         </a>
+         .
+        </li>
+<li>
+         Tomas de corriente a 120 V en el área del operador de control.
+        </li>
+<li>
+         Salida de cables con tapa abatible y guía de cables.
+        </li>
+<li>
+         Forrado del interior y aislación térmica.
+        </li>
+<li>
+         Estructuras de fijación para la instalación de los sistemas de prueba, diagnóstico y localización.
+        </li>
+<li>
+         Silla giratoria para el operador con avistamientos para fijarla al escritorio durante el traslado al sitio de prueba.
+        </li>
+<li>
+         Escritorio instalado en el vehículo con gavetas con cerradura.
+        </li>
+<li>
+         Soporte y estructura para almacenaje de Instrumentos.
+        </li>
+<li>
+         Se deben suministrar e instalar todos los herrajes necesarios para la correcta sujeción de los equipos para
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/353/definition"" id=""version-392"">
+          trabajo
+         </a>
+         y transporte.
+        </li>
+</ul>
+<br/>
+       Los equipos y accesorios deben fijarse al vehículo, esto con el fin de proteger los mismos y los ocupantes durante los viajes para realizar pruebas. Es
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/312/definition"" id=""version-351"">
+        requisito
+       </a>
+       tomar en cuenta la repartición del peso de los equipos instalados para el balance del vehículo, un estudio del aprovechamiento del espacio, diferenciar la zona de
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/353/definition"" id=""version-392"">
+        trabajo
+       </a>
+       del operario con la zona de
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/55/definition"" id=""version-88"">
+        alta tensión
+       </a>
+       , realizar una instalación práctica sin descuidar la estética.
+       <br/>
+<br/>
+       Los sistemas a instalar en el vehículo a suministrar deberán tomar en cuenta la apertura de las puertas laterales y traseras.
+       <br/>
+<h2 id=""heading_14"">
+        4. NORMAS DE FABRICACIÓN Y PRUEBAS
+       </h2>
+       Los procedimientos de fabricación de los equipos de prueba, diagnóstico, localización de
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/171/definition"" id=""version-204"">
+        falla
+       </a>
+       y de
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/318/definition"" id=""version-357"">
+        seguridad
+       </a>
+       de operación deberán cumplir con los requerimientos establecidos en normas internacionales que apliquen: VDE, IEC, ISO, IEEE o cualquier otra norma internacional de rango similar.
+       <ul>
+<li>
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/155/definition"" id=""version-188"">
+          Ensayo
+         </a>
+         de las cubiertas de los cables según IEC60502/IEC 60229
+        </li>
+<li>
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/155/definition"" id=""version-188"">
+          Ensayo
+         </a>
+         de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/338/definition"" id=""version-377"">
+          tensión
+         </a>
+         de materiales de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/320/definition"" id=""version-359"">
+          servicio
+         </a>
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/144/definition"" id=""version-177"">
+          eléctrico
+         </a>
+         según la norma IEEE 433.
+        </li>
+<li>
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/155/definition"" id=""version-188"">
+          Ensayo
+         </a>
+         de cables según: DIN VDE 0276-620/621 (CENELEC HD 620/621), IEEE 400-2012, IEEE 400.2-2013, IEC 60060-3
+        </li>
+</ul>
+<br/>
+<div style=""width:701px;"">
+<table>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""width:165px;height:22px;text-align:center"">
+<b>
+            NORMA
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""width:536px;text-align:center"">
+<b>
+            DESCRIPCIÓN
+           </b>
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:39px;"">
+           IEEE 400.2-2013
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Guide for Field Testing of Shielded Power Cable Systems Using Very Low Frequency (VLF)(less than 1 Hz
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:20px;"">
+           IEC60502:2020 SER
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           SeriesPower cables with extruded insulation and their accessories for rated voltages from 1 kV (Um = 1,2 kV) up to 30 kV (Um = 36 kV) - ALL PARTS
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:39px;"">
+           IEEE 433: 2009
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Recommended Practice for Insulation Testing of AC Electric Machinery with High Voltage at Very Low Frequency
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:39px;"">
+           IEEE 400.4-2015
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Guide for Field Testing of Shielded Power Cable Systems Rated 5 kV and Above with Damped Alternating Current (DAC) Voltage
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:40px;"">
+           IEC60229:2007
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Electric cables - Tests on extruded oversheaths with a special protective function
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:39px;"">
+           IEC 60060-3:2006
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           High-voltage test techniques - Part 3: Definitions and requirements for on-site testing
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:38px;"">
+           DIN VDE 0276-620:2018-04
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Distribution cables with extruded insulation for rated voltages from 3,6/6 (7,2) kV up to and including 20,8/36 (42) kV
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:38px;"">
+           IEEE 400 - 2012
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Guide for Field Testing and Evaluation of the Insulation of Shielded Power Cable Systems Rated 5 kV and Abovey capacitancia del conductor.
+          </td>
+</tr>
+</table>
+<br/>
+</div>
+<h2 id=""heading_15"">
+        5. GARANTÍA Y
+        <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/367/definition"" id=""version-406"">
+         VIDA ÚTIL
+        </a>
+</h2>
+<br/>
+       La garantía mínima debe ser de 3 años. Ante un proceso de garantía el proveedor debe asumir todos los costos asociados a ésta. Al ser devuelto algún
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/156/definition"" id=""version-189"">
+        equipo
+       </a>
+       por garantía, el proveedor lo debe reemplazar a más tardar en 30 días calendario.
+       <br/>
+<br/>
+       La garantía del
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/156/definition"" id=""version-189"">
+        equipo
+       </a>
+       incluye la
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/78/definition"" id=""version-111"">
+        calibración
+       </a>
+       ,
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/236/definition"" id=""version-271"">
+        mantenimiento
+       </a>
+       y actualización de software y hardware.
+       <br/>
+<br/>
+       Los equipos devueltos por garantía los debe recoger el proveedor y entregar su reemplazo en las bodegas de Enel Colombia en la Ciudad de Bogotá. Enel Colombia indicará al proveedor la ubicación de la bodega cuando se genere la primera devolución.
+       <br/>
+<br/>
+       Si un
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/156/definition"" id=""version-189"">
+        equipo
+       </a>
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/171/definition"" id=""version-204"">
+        falla
+       </a>
+       tres veces en un mismo año calendario, el proveedor debe cambiar el
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/156/definition"" id=""version-189"">
+        equipo
+       </a>
+       por uno nuevo, similar o de mayores características, en plazo máximo de 30 días calendario. La
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/367/definition"" id=""version-406"">
+        vida útil
+       </a>
+       debe ser como mínimo de 10 años.
+       <br/>
+<h2 id=""heading_16"">
+        6. RESPUESTOS
+       </h2>
+       El proveedor debe garantizar el suministro de accesorios por garantía o para cuando estén fuera de garantía o su
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/120/definition"" id=""version-153"">
+        daño
+       </a>
+       no sea atribuible a la
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/79/definition"" id=""version-112"">
+        calidad
+       </a>
+       de estos.
+       <br/>
+<h2 id=""heading_17"">
+        7. REQUISITOS DE LAS OFERTAS
+       </h2>
+       La oferta
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/337/definition"" id=""version-376"">
+        técnica
+       </a>
+       deberá entregarse en medio magnético. El oferente deberá incluir con su propuesta la siguiente información:
+       <ul>
+<li>
+         Relación de los bienes cotizados.
+        </li>
+<li>
+         Información del oferente, relación de clientes, evidencia de su capacidad
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/337/definition"" id=""version-376"">
+          técnica
+         </a>
+         y experiencias relacionadas con los materiales y/o equipos cotizados. Dentro de la experiencia deberá demostrar que ha suministrado soluciones similares de equipos de pruebas de cables de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/242/definition"" id=""version-277"">
+          media tensión
+         </a>
+         .
+        </li>
+<li>
+         Solo se aceptarán ofertas de proveedores que hayan desarrollado este tipo de soluciones con equipos de pruebas de cables de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/242/definition"" id=""version-277"">
+          media tensión
+         </a>
+         ( 10 a 35 KV). No se recibirán ofertas de proveedores que solo demuestren experiencias con equipos de pruebas de cables de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/65/definition"" id=""version-98"">
+          baja tensión
+         </a>
+         y/o de telecomunicaciones.
+        </li>
+<li>
+         Listado de normas técnicas aplicables a los bienes cotizados.
+        </li>
+<li>
+         Planilla de características técnicas garantizadas indicada en el Anexo 1, la cual deberá ser diligenciada completamente por el oferente. Esta planilla debe entregarse en formato Excel y por ningún motivo debe ser modificada, ya que puede ser causal de rechazo para la oferta.
+        </li>
+<li>
+         Catálogos originales, completos y actualizados, que contengan características técnicas principales correspondientes a los bienes cotizados en la planilla de características técnicas garantizadas.
+        </li>
+<li>
+         Protocolos de pruebas de acuerdo con las normas indicadas en esta especificación. En tales protocolos se deberán anotar las fechas de fabricación y de realización de las pruebas, para permitir la verificación de las características técnicas garantizadas.
+        </li>
+<li>
+         El oferente adjuntará con su propuesta el certificado del
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+          sistema
+         </a>
+         de
+         <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/79/definition"" id=""version-112"">
+          calidad
+         </a>
+         (ISO 9001).
+        </li>
+<li>
+         Los oferentes deberán ofrecer una garantía absoluta de sus productos de por lo menos dos (3) años.
+        </li>
+<li>
+         Información adicional que considere aporta explicación a su diseño (dibujos, detalles, características de operación, dimensiones y pesos de los equipos ofertados).
+        </li>
+<li>
+         Relación de las excepciones de carácter exclusivamente técnico de la oferta, respecto a los bienes solicitados. Si la oferta no presenta excepción, esto se indicaría expresamente.
+        </li>
+<li>
+         Enel-Codensa. Podrá descartar ofertas que no cumplan con las anteriores disposiciones, sin expresión de causa ni obligación de compensación.
+        </li>
+</ul>
+<br/>
+<h2 id=""heading_18"">
+        8. GARANTÍA DE FÁBRICA
+       </h2>
+       Enel-Codensa requiere como mínimo, un período de garantía de fábrica de treinta y seis (36) meses, a partir de la entrega de los bienes. Adicionalmente deberá incluir al menos un
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/236/definition"" id=""version-271"">
+        mantenimiento
+       </a>
+       preventivo durante el periodo de garantía
+       <br/>
+<h2 id=""heading_19"">
+        9.
+        <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/200/definition"" id=""version-235"">
+         INSPECCIÓN
+        </a>
+        EN FÁBRICA
+       </h2>
+       El valor de las pruebas y ensayos debe incluirse en los precios cotizados en la propuesta. ENEL-Enel Colombia. Se reserva el derecho de descartar las propuestas que no ofrezcan pruebas, o si las ofrecidas son consideradas insuficientes para garantizar la
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/79/definition"" id=""version-112"">
+        calidad
+       </a>
+       de los dispositivos.
+       <br/>
+<br/>
+       El proveedor deberá suministrar los protocolos de pruebas de rutina que realizan durante el proceso de fabricación de cada uno de los equipos a entregar de acuerdo a normas de referencia o similares que apliquen
+       <br/>
+<br/>
+       Dentro de los requisitos de entrega el proveedor debe indicar como realiza la marcación de cada uno de los equipos para su fácil identificación en el proceso de recepción.
+       <br/>
+<br/>
+<b>
+        Anexo 1.
+       </b>
+<br/>
+<b>
+        CARACTERISTICAS TECNICAS GARANTIZADAS
+       </b>
+<br/>
+<div style=""width:667px;"">
+<table>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""width:230px;height:21px;text-align:center"">
+<b>
+            ITEM
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""width:272px;text-align:center"">
+<b>
+            Requerido
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""width:165px;text-align:center"">
+<b>
+            Ofertado
+           </b>
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:25px;"">
+<b>
+            1.
+            <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/156/definition"" id=""version-189"">
+             Equipo
+            </a>
+            de Pre-localización
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:35px;"">
+           Pantalla
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Táctil de 21.5"" hasta 19”, 1.920 x 1.080 (16:9), Full HD
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:25px;"">
+           Voltaje de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/155/definition"" id=""version-188"">
+            Ensayo
+           </a>
+           de Aislamiento
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           1000 V  a 5000 V en pasos de 100 V.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:25px;"">
+           Rangos  de Resistencia
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           1 kOhm, 5 MOhmios, 100 MOhmios
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:25px;"">
+           Ensayos en DC
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           0...40 kV DC
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:25px;"">
+           Corriente de Fuga
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           0 ... 1/10/100 mA auto rango
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:25px;"">
+           Reconocimiento de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/171/definition"" id=""version-204"">
+            Falla
+           </a>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           0 ... 40 kV;
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:25px;"">
+           Conversión de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/171/definition"" id=""version-204"">
+            Falla
+           </a>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           0 ... 8 kV ; 750 mA / 0 ... 20 kV ; 100 mA
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:25px;"">
+           Opciones de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/333/definition"" id=""version-372"">
+            Sobretensión
+           </a>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           0...16 kV / 32 kV
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:35px;"">
+           Opcionalmente rangos inferiores de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/333/definition"" id=""version-372"">
+            sobretensión
+           </a>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           0 ... 4 kV o 0... 8 kV
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:25px;"">
+           Energía de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/333/definition"" id=""version-372"">
+            Sobretensión
+           </a>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Max. 2000 J en cada rango.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:25px;"">
+           Tasa de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/333/definition"" id=""version-372"">
+            Sobretensión
+           </a>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           0...20 pulsos por minuto y un solo pulso
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:35px;"">
+           Localización de Fallas en la Chaqueta
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           0 ... 5000/10000 V con 750 mA máx.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:25px;"">
+           Tasa de  Pulso Voltaje de Paso
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Continuo, 1:3 1:4; 1:6 (seg)
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:86px;"">
+           Reflectómetría
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Trifásica o monofasica con determinación de longitud del
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/74/definition"" id=""version-107"">
+            cable
+           </a>
+           , distancia de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/171/definition"" id=""version-204"">
+            falla
+           </a>
+           , amplificación, rango de medición desde 20 m ... 1.280 km (para v/2 = 80 m/µs); resolución 0.1 m
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""3"" style=""height:25px;"">
+           Prelocalización de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/171/definition"" id=""version-204"">
+            Falla
+           </a>
+           AT:
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           ARM Multishot,
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:25px;"">
+           Corriente de Impulso ICE
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:25px;"">
+           Atenuación de Voltaje DECAY
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:25px;"">
+           Temperatura de Operación
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           -10 ... + 55 °C
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:25px;"">
+           Alimentación
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           60 Hz 110 V opcional
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:25px;"">
+           Potencia de Entrada
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Menor a 3 kVA max.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:25px;"">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/308/definition"" id=""version-347"">
+            Receptor
+           </a>
+           de GPS
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Integrado
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:25px;"">
+           Peso
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           máx. 120 kg
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+</table>
+<br/>
+</div>
+<br/>
+<div style=""width:667px;"">
+<table>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""width:230px;height:25px;"">
+<b>
+            2.
+            <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+             Sistema
+            </a>
+            Pruebas VLF
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""width:272px;"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""width:165px;"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:25px;"">
+           Voltaje de Salida
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:25px;"">
+           - VLF Sinusoidal/Cosenoidal
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           0 … 62 kVpico/ 0 … 44 kVrms
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:25px;"">
+           -  VLF rectangular
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           0 … 62 kV
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:25px;"">
+           DC±
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           0 … 62 kV
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:35px;"">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/177/definition"" id=""version-210"">
+            Frecuencia
+           </a>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           0.01 … 0.1 Hz con ajuste automático de la mejor
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/177/definition"" id=""version-210"">
+            frecuencia
+           </a>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:25px;"">
+           Capacidad de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/80/definition"" id=""version-113"">
+            Carga
+           </a>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Al menos 1µF @ 62 kVpico y 0.1 Hz.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:35px;"">
+           VLF Seno/Coseno
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Capacitancia máxima 10µF (a voltajes y frecuencias reducidas)
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:25px;"">
+           Medición de Corriente de Fuga
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           En modos DC y VLF rectangular
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:35px;"">
+           Prueba de Cubierta según IEC 60229
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           0 … 20 kV DC
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:35px;"">
+           Localización de Fallas de Cubierta
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           0 … 20 kV DC, Tasa de pulsos de  1:3, 1:4
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:35px;"">
+           Quemador
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Al menos 1 minuto luego que la
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/171/definition"" id=""version-204"">
+            falla
+           </a>
+           es detectada.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:52px;"">
+           Evaluación de los datos
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Evaluación automática de la medición de tangente delta basado en el tipo de aislamiento y el estándar seleccionado.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:35px;"">
+           Memoria Interna
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Con capacidad mínima de 1000 mediciones
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:35px;"">
+           No. de componentes
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           VLF con Tangente Delta integrado en una sola unidad
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:25px;"">
+           Peso
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Menor o igual a 60 kg
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:25px;"">
+           Pantalla
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           5,7” a color legible a la luz del sol.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:25px;"">
+           Temperatura de Operación
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           -20 … +55 °C
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:25px;"">
+           Temperatura de Almacenaje
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           -20 … +70 °C
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+</table>
+<br/>
+</div>
+<br/>
+<div style=""width:667px;"">
+<table>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""width:230px;height:21px;"">
+<b>
+            3. Vehículo
+           </b>
+</td>
+<td colspan=""1"" rowspan=""1"" style=""width:272px;"">
+</td>
+<td colspan=""1"" rowspan=""1"" style=""width:165px;"">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Tipo
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Van (panel de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/80/definition"" id=""version-113"">
+            carga
+           </a>
+           )
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:69px;"">
+           No. Puertas
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Mínimo cuatro, dos de acceso a la cabina, una de acceso lateral (lado derecho corrediza con ventanas) y una en la parte trasera
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:35px;"">
+           No. de Puestos y acondicionamiento de cabina.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Mínimo 2, ergonómico y ajustables.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:35px;"">
+           Acondicionamiento interno del Vehículo
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Forros internos de fábrica tanto cielo raso, laterales y piso.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""5"" style=""height:52px;"">
+           Dimensiones
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Las dimensiones de largo, ancho y alto tanto exterior como interior deberán se propuestas por el proveedor
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Externas:
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Largo total máximo:  5,3 m.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Ancho Total máximo: 2 m.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Alto total máximo 2 m
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""2"" style=""height:21px;"">
+           Capacidad de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/80/definition"" id=""version-113"">
+            carga
+           </a>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Peso bruto : 3000 kg.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/80/definition"" id=""version-113"">
+            Carga
+           </a>
+           útil: mayor a 1200  kg.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:52px;"">
+           Motor (No. de Cilindros)
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Mínimo cuatro cilindros en línea con una capacidad de al menos 1900 centímetros cúbicos. 16 válvulas. Turbo Diesel
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Potencia de Motor
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           140 HP/rpm  ±5%
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Torque
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           340 / 1.750 Nm/rpm
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:86px;"">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+            Sistema
+           </a>
+           de Alimentación
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Debe ser de normativa y construido para trabajar bajo especificaciones y calidades de combustible distribuidas en Colombia y como mínimo debe cumplir con las normas de emisión del vehículo: EURO V.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Combustible
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Diesel.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:35px;"">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+            Sistema
+           </a>
+           de Transmisión
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Manual, 6 velocidades en avance y una en reversa.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:69px;"">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+            Sistema
+           </a>
+           de Dirección
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Asistido electrónicamente, servo asistida hidráulicamente o asistida eléctricamente o similar. Volante ajuste en altura e inclinación.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:35px;"">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+            Sistema
+           </a>
+           de Frenos
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+            Sistema
+           </a>
+           de Frenos ABS y
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+            sistema
+           </a>
+           de frenos AFU
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Luces Principales
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Color
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Blanco
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Tipo de pintura
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Original de fábrica
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Tracción
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Trasera 4 x 2.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""3"" style=""height:21px;"">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+            Sistema
+           </a>
+           de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/318/definition"" id=""version-357"">
+            seguridad
+           </a>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Air bag para el conductor y el acompañante,
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+           Apoya cabezas en todos los asientos
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:52px;"">
+           Cinturones de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/318/definition"" id=""version-357"">
+            seguridad
+           </a>
+           de tres puntos de inercia ajustables y dos puntos según posición dentro del vehículo
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""2"" style=""height:52px;"">
+           Otros aditamentos estándar
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Aditamentos exigidos por la Ley de Tránsito vigente en Colombia: triángulos, chaleco,
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/169/definition"" id=""version-202"">
+            extintor
+           </a>
+           entre otros.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:52px;"">
+           Además, deberá aportar un juego de alfombras independientes para cada pasajero.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:35px;"">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+            Sistema
+           </a>
+           aire acondicionado del vehículo.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Aire Acondicionado climatizado para a cabina de  pasajeros.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:35px;"">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+            Sistema
+           </a>
+           de parqueo seguro.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+            Sistema
+           </a>
+           de aviso para parquear en forma luminosa y sonora.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:21px;"">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+            Sistema
+           </a>
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/144/definition"" id=""version-177"">
+            eléctrico
+           </a>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           12 voltios.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:69px;"">
+           Capacidad de ascenso teórica
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Mínimo de 25° ó aproximadamente 46% de pendiente, calculado bajo el peso bruto vehicular máximo indicado por el fabricante.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:35px;"">
+           Distancia libre al suelo
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           0,2 m mínimo con una tolerancia de un ±5%.
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:52px;"">
+           Matrícula
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           El vehículo debe ser matriculado en la ciudad de Bogota D.C con placa amarilla de
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/320/definition"" id=""version-359"">
+            servicio
+           </a>
+           particular
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:69px;"">
+<a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/319/definition"" id=""version-358"">
+            Señalización
+           </a>
+</td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           EL vehículo deberá contar con la
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/319/definition"" id=""version-358"">
+            señalización
+           </a>
+           aplicable según exigencias vigentes de la secretaria de movilidad o ente de transito correspondiente
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+</td>
+</tr>
+</table>
+<br/>
+</div>
+</div>
+<div class=""streamgrouped"" id=""streamgrouped"">
+
+</div>
+</div>
+
+</div>",OTROS
+ET 954,ET954 Adhesivo para fijación de la placa de marcación de apoyos subterráneos,30/08/2005,"<div class=""contenido"">
+
+
+<div class=""internas"">
+
+
+<div class=""caja_texto wikiformat"">
+
+<div style=""clear:left;"">
+</div>
+<h2 id=""heading_0"">
+        1.	OBJETO
+       </h2>
+       Establecer las especificaciones técnicas que debe cumplir el adhesivo utilizado en la marcación de los apoyos subterráneos del
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/324/definition"" id=""version-363"">
+        Sistema
+       </a>
+       de Distribución de Enel Colombia S.A. ESP.
+       <br/>
+<h2 id=""heading_1"">
+        2.	DEFINICIONES
+       </h2>
+<b>
+        Apoyos:
+       </b>
+       Infraestructura civil utilizada para la instalación de equipos y tendido de las redes de MT, BT, AP y telemáticos (redes incidentales), tales como postes y cámaras de inspección.
+       <br/>
+<br/>
+<b>
+        Código de Apoyo:
+       </b>
+       Es un código numérico que consta de 8 dígitos (7+ uno de verificación) que identifica los apoyos aéreos de MT, BT y AP, mediante marcación en pintura color bermellón (naranja).
+       <br/>
+<br/>
+<b>
+        Dígito de verificación:
+       </b>
+       Dígito que se obtiene mediante la aplicación de un algoritmo a los 7 dígitos que componen el número de identificación de los apoyos y que sirve para verificar cuando informan el código de terreno si corresponde con uno válido. Se genera usando el mismo algoritmo que aplica la Gerencia Comercial para el digito de verificación del número de cliente.
+       <br/>
+<br/>
+<b>
+        Placa de identificación:
+       </b>
+       Placa  marcada con el nombre de Enel Colombia S.A ESP y Logo mucho más que energía, donde se encuentra contenido el  código del apoyo, se utiliza en los apoyos subterráneos.
+       <br/>
+<br/>
+<b>
+        Punto Significativo:
+       </b>
+       Código compuesto de 7 números que identifica a los apoyos pertenecientes a Enel Colombia S.A. ESP en donde se encuentran instalados equipos o donde existen cambios de direcciones en las redes de MT. En terreno están marcados estos números con pintura roja.
+       <br/>
+<h2 id=""heading_2"">
+        3.	UTILIZACIÓN
+       </h2>
+       La utilización de este adhesivo se debe realizar en la cantidad necesaria, no se debe presentar desperdicio de
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/239/definition"" id=""version-274"">
+        material
+       </a>
+       y su postura debe ser realizada de tal forma que no se salga el pegante por debajo de la placa de identificación.
+       <br/>
+<h3 id=""heading_3"">
+        3.1.	Preparación de la superficie
+       </h3>
+       Concreto, piedra, ladrillo, gres: La superficie debe estar sana limpia, libre de partes sueltas,
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/112/definition"" id=""version-145"">
+        contaminación
+       </a>
+       de aceites, polvo, residuos de curadores, lechadas cementosas u otras materias extrañas.
+       <br/>
+<br/>
+       La superficie debe estar seca y libre de empozamientos. La edad de los elementos de concreto o mortero debe ser de 28 días como mínimo.
+       <br/>
+<h3 id=""heading_4"">
+        3.2.	Método de limpieza
+       </h3>
+       La superficie debe estar seca y no deberá estar empañada por condensación.
+       <br/>
+<h3 id=""heading_5"">
+        3.3.	Aplicación
+       </h3>
+       La aplicación se hace directamente sobre la placa de identificación con la mano enguantada. Antes de realizar la pega se utiliza el preparador de superficie y enseguida se presiona hasta obtener una pega perfecta. El
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/299/definition"" id=""version-338"">
+        producto
+       </a>
+       endurecido se debe retirar únicamente por medios mecánicos.
+       <br/>
+<h3 id=""heading_6"">
+        3.4.	Medidas a tomar en caso de vertido accidental
+       </h3>
+       Precauciones individuales
+       <ul>
+<li>
+         Procurar ventilación suficiente.
+        </li>
+<li>
+         Llevar ropa de protección personal.
+        </li>
+<li>
+         En caso de exposición a vapores/polvo/aerosol, usar protección respiratoria.
+        </li>
+</ul>
+       Medidas de protección del medio ambiente:
+       <ul>
+<li>
+         En caso de penetración en cursos de agua, el suelo o los desagües, avisar a las autoridades competentes.
+        </li>
+</ul>
+       Métodos de limpieza
+       <ul>
+<li>
+         Recoger con materiales absorbentes adecuados.
+        </li>
+<li>
+         Eliminar los residuos con una pequeña cantidad de alcohol o solvente
+        </li>
+</ul>
+<h3 id=""heading_7"">
+        3.5.	Protección personal
+       </h3>
+<ul>
+<li>
+         Medidas generales de protección e higiene
+        </li>
+<li>
+         No respirar los vapores.
+        </li>
+<li>
+         Evitar el contacto con los ojos y la piel. Utilizar tapabocas.
+        </li>
+<li>
+         Prever una ventilación suficiente o escape de gases en el área de trabajo
+        </li>
+<li>
+         No fumar, ni comer o beber durante el trabajo.
+        </li>
+<li>
+         Lavarse las manos antes de los descansos y después del trabajo.
+        </li>
+<li>
+         Protección preventiva de la piel con pomada protectora.
+        </li>
+<li>
+         Quitarse inmediatamente la ropa manchada o empapada.
+        </li>
+</ul>
+<h2 id=""heading_8"">
+        4.	CARACTERÍSTICAS PARTICULARES
+       </h2>
+       El adhesivo utilizado deberá cumplir con las siguientes características:
+       <br/>
+<div style=""width:527px;"">
+<table>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""width:210px;height:9px;"">
+           Descripción:
+          </td>
+<td colspan=""1"" rowspan=""1"" style=""width:317px;"">
+           Pegante para superficies absorbentes secas.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:9px;"">
+           Usos:
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Para efectuar pegas entre los más diversos materiales de construcción como: concreto, ladrillo, gres, cerámica, acero, aluminio, madera, vidrio, etc.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""3"" style=""height:9px;"">
+           Características generales:
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Alto poder de adhesión
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:9px;"">
+           No
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/198/definition"" id=""version-233"">
+            inflamable
+           </a>
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:9px;"">
+           Estabilidad volumétrica
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:9px;"">
+           Resistencia al cizallamiento:
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Mayor a 100 Kg/cm
+           <sup>
+            2
+           </sup>
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:9px;"">
+           Resistencia a la tracción:
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Mayor a 170 Kg/cm
+           <sup>
+            2
+           </sup>
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:9px;"">
+           Densidad:
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Aprox. 1,70 kg/I a 20ºC
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""4"" style=""height:9px;"">
+           Resistencia:
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Resistente a la
+           <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/118/definition"" id=""version-151"">
+            corrosión
+           </a>
+</td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:9px;"">
+           Resistente al agua y humedad.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:9px;"">
+           Resistente al trafico, rayos UV,
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:9px;"">
+           Resistente a la agresión química
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:9px;"">
+           Tiempo de cura:
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Menor a 10 minutos
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:9px;"">
+           Aplicación:
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           Se debe garantizar que la forma de aplicación sea fácil y adecuada para fijar placas metálicas.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""2"" style=""height:9px;"">
+           Almacenamiento y transporte:
+          </td>
+<td colspan=""1"" rowspan=""1"" style="""">
+           El tiempo de almacenamiento debe ser de un (1) año en su envase original, bien cerrado en lugar fresco y bajo techo. Mantener alejado de alimentos, bebidas y comida para animales.
+          </td>
+</tr>
+<tr>
+<td colspan=""1"" rowspan=""1"" style=""height:9px;"">
+           Se debe transportar con las precauciones normales para productos químicos. Proteger de temperaturas elevadas y de los rayos solares directos.
+          </td>
+</tr>
+</table>
+<br/>
+</div>
+<h2 id=""heading_9"">
+        5.	PRUEBAS
+       </h2>
+       El fabricante debe suministrar protocolos de prueba realizados en un laboratorio reconocido, donde se puedan verificar las características exigidas en el numeral 4 de la presente especificación.
+       <br/>
+<h2 id=""heading_10"">
+        6.	GARANTÍA DE FABRICA
+       </h2>
+       Enel Colombia S.A. E.S.P requiere como mínimo, un período de garantía de fábrica de doce (12) meses, a partir de la entrega.
+       <br/>
+<h2 id=""heading_11"">
+        7.	PRESENTACIÓN DE LAS OFERTAS
+       </h2>
+       El oferente deberá presentar su oferta
+       <a class=""externalLink glosarioLink use-ajax"" data-dialog-type=""modal"" href=""/taxonomy/term/337/definition"" id=""version-376"">
+        técnica
+       </a>
+       (en medio impreso) en el siguiente orden:
+       <br/>
+<br/>
+       -
+       <b>
+        ANEXO 1:
+       </b>
+       relación de los bienes cotizados.
+       <br/>
+<br/>
+       -
+       <b>
+        ANEXO 2:
+       </b>
+       información del oferente.
+       <br/>
+<br/>
+       -
+       <b>
+        ANEXO 3:
+       </b>
+       Información de características técnicas garantizadas
+       <br/>
+<br/>
+       -
+       <b>
+        EXCEPCIONES TÉCNICAS:
+       </b>
+       apartado en el cual se deben relacionar las excepciones de carácter exclusivamente técnico de la oferta, respecto a los bienes solicitados. Si la oferta no presenta excepción, se indicaría expresamente en el mismo “NO HAY EXCEPCIONES”
+       <br/>
+<br/>
+       -
+       <b>
+        PROTOCOLO  DE PRUEBAS:
+       </b>
+       relación de los ensayos realizados al adhesivo de acuerdo con lo indicado en el apartado 5 de la presente especificación.
+       <br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+</div>
+<div class=""streamgrouped"" id=""streamgrouped"">
+
+</div>
+</div>
+
+</div>",OTROS

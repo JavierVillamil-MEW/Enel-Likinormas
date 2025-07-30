@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Generalidades 7.4.7 Servicio de Calidad Extra  | Likinormas</title>
+	<meta name="description" content="Servicio de suplencia.
+Esta norma indica los criterios sobre la prestación de este servicio, forma de medición y procedimientos de conexión
+" />
+	<script src="../../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../../index.html"><img src="../../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1632" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../../Usuario/Registro%3FReturnUrl=%252FNorma%252FDetalles%252F1632.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/1632" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1632" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			showSubmenu('4', '106');
+		});
+	</script>
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Norma t&#233;cnica
+	</div>
+	<h1>Generalidades 7.4.7 Servicio de Calidad Extra </h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de la norma</div>
+					<div class="caracteristicas">Generalidades 7.4.7</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">02/08/2018</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../../Home/DownloadPDF/1632">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FNorma%2FDetalles%2F1632&amp;nodoid=1632', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h3" href="generalidades_7_4_7_servicio_suplencia.html#heading_0">7.4.7.1. MEDICI&#211;N DEL CONSUMO DEL CLIENTE</a></li>
+                    <li class="indexitem"><a class="head_h3" href="generalidades_7_4_7_servicio_suplencia.html#heading_1">7.4.7.2. PROCEDIMIENTO PARA LA CONEXI&#211;N DEL SERVICIO DE CALIDAD EXTRA</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		CODENSA podr&#225; autorizar el servicio de Calidad Extra a los clientes que as&#237; lo soliciten, previo el cumplimiento de los requisitos exigidos.<br /><br />Este servicio se presta con circuitos de un mismo <a href="generalidades_7_4_7_servicio_suplencia.html#" id="version-292" class="externalLink  glosarioLink">nivel de tensi&#243;n</a>. La <a href="generalidades_7_4_7_servicio_suplencia.html#" id="version-113" class="externalLink  glosarioLink">carga</a> servida por el segundo circuito ser&#225; en todo caso no mayor a la del circuito principal.<br /><br />En el circuito principal el cliente tendr&#225; contratado el total de la <a href="generalidades_7_4_7_servicio_suplencia.html#" id="version-113" class="externalLink  glosarioLink">carga</a> autorizada; en el segundo circuito tendr&#225; la <a href="generalidades_7_4_7_servicio_suplencia.html#" id="version-113" class="externalLink  glosarioLink">carga</a> autorizada por CODENSA para tal fin, la cual generar&#225; un cobro anual por prestaci&#243;n del servicio de calidad extra asociado con la <a href="generalidades_7_4_7_servicio_suplencia.html#" id="version-162" class="externalLink  glosarioLink">disponibilidad</a> del segundo circuito y las adecuaciones que el sistema de distribuci&#243;n de CODENSA requiera seg&#250;n corresponda. Este cobro anual es independiente de los consumos registrados por el Cliente en el per&#237;odo de facturaci&#243;n correspondiente y su forma de pago puede ser acordada entre el cliente y CODENSA. Lo anterior de acuerdo con la regulaci&#243;n vigente.<br /><br />Los dos circuitos deben estar enclavados mediante seccionadores de transferencia, transferencia autom&#225;tica, seccionadores d&#250;plex o seccionadores de maniobras y los respectivos controles de demanda, para que solamente puedan servirse de uno de ellos, de acuerdo con la <a href="generalidades_7_4_7_servicio_suplencia.html#" id="version-113" class="externalLink  glosarioLink">carga</a> autorizada solicitada en cada uno.<br />
+<h3 id="heading_0" >7.4.7.1. MEDICI&#211;N DEL CONSUMO DEL CLIENTE</h3>
+La medici&#243;n se hace despu&#233;s de los equipos de transferencia, con un &#250;nico <a href="generalidades_7_4_7_servicio_suplencia.html#" id="version-189" class="externalLink  glosarioLink">equipo</a> de medida instalado para el Cliente.<br />
+<h3 id="heading_1" >7.4.7.2. PROCEDIMIENTO PARA LA CONEXI&#211;N DEL SERVICIO DE CALIDAD EXTRA</h3>
+De acuerdo con la regulaci&#243;n vigente cuando un Cliente requiera mayor confiabilidad, <a href="generalidades_7_4_7_servicio_suplencia.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> y continuidad del servicio, debe acordar con el distribuidor local la prestaci&#243;n de servicios de Calidad Extra asociado con la conexi&#243;n de un segundo circuito en el mismo nivel de tensi&#243;n u otros medios y asumir los costos adicionales correspondientes. A continuaci&#243;n, se presenta el procedimiento general para el otorgamiento y conexi&#243;n del servicio de Calidad Extra en el <a href="generalidades_7_4_7_servicio_suplencia.html#" id="version-363" class="externalLink  glosarioLink">Sistema</a> de Distribuci&#243;n Local de CODENSA.<br /><br /><b>7.4.7.2.1 Solicitud de factibilidad del servicio de Calidad Extra</b><br /><br />En la solicitud efectuada por el Cliente se debe adjuntar la siguiente informaci&#243;n:<br />
+<ul><li><a href="generalidades_7_4_7_servicio_suplencia.html#" id="version-113" class="externalLink  glosarioLink">Carga</a> instalada conectada a la alimentaci&#243;n principal.</li>
+<li><a href="generalidades_7_4_7_servicio_suplencia.html#" id="version-113" class="externalLink  glosarioLink">Carga</a> autorizada para la alimentaci&#243;n principal (si la hay).</li>
+<li><a href="generalidades_7_4_7_servicio_suplencia.html#" id="version-113" class="externalLink  glosarioLink">Carga</a> solicitada para atender con el segundo alimentador.</li>
+<li>Tipo de servicio solicitado seg&#250;n sector socioecon&#243;mico: Residencial, comercial, industrial y oficial.</li></ul>
+<br /><b>7.4.7.2.2 Estudio y an&#225;lisis de la viabilidad t&#233;cnica para la conexi&#243;n del servicio de Calidad Extra</b><br /><br />Cuando se requiera efectuar expansi&#243;n y/o reconfiguraci&#243;n de redes en el <a href="generalidades_7_4_7_servicio_suplencia.html#" id="version-363" class="externalLink  glosarioLink">Sistema</a> de Distribuci&#243;n Local para la conexi&#243;n y habilitaci&#243;n del servicio de Calidad Extra, se deber&#225; efectuar un Estudio de Factibilidad.<br /><br />En el an&#225;lisis para la conexi&#243;n del segundo circuito se deben establecer los siguientes aspectos:<br />
+<ul><li>Punto de derivaci&#243;n del segundo circuito hasta la subestaci&#243;n del Cliente.</li>
+<li>Condiciones de Servicio (<a href="generalidades_7_4_7_servicio_suplencia.html#" id="version-292" class="externalLink  glosarioLink">nivel de Tensi&#243;n</a>, <a href="generalidades_7_4_7_servicio_suplencia.html#" id="version-162" class="externalLink  glosarioLink">Disponibilidad</a> de potencia, etc.)</li>
+<li>Activos de conexi&#243;n requeridos para el segundo circuito y/o trabajos de refuerzo a realizar sobre la infraestructura existente.</li>
+<li>Presupuesto para la habilitaci&#243;n del servicio de Calidad Extra. Este presupuesto ser&#225; realizado por CODENSA y debe contemplar aquellas obras de infraestructura el&#233;ctrica que implique expansi&#243;n, refuerzo y reconfiguraci&#243;n de cargas del <a href="generalidades_7_4_7_servicio_suplencia.html#" id="version-363" class="externalLink  glosarioLink">Sistema</a> de Distribuci&#243;n Local de CODENSA.</li></ul>
+<br /><b>7.4.7.2.3 Elaboraci&#243;n del contrato de Calidad Extra</b><br /><br />En el Contrato de Calidad Extra suscrito entre CODENSA y el Cliente se deben contemplar los siguientes aspectos, entre otros:<br />
+<ul><li>Objeto del Contrato.</li>
+<li>Considerandos del Contrato.</li>
+<li>Punto o sitio de Conexi&#243;n del segundo circuito, Activos de Conexi&#243;n de Suplencia y Limites de la Propiedad.</li>
+<li>Dise&#241;o el&#233;ctrico de la conexi&#243;n.</li>
+<li>Construcci&#243;n, pruebas y puesta en servicio de la conexi&#243;n del segundo circuito.</li>
+<li>Reposici&#243;n y <a href="generalidades_7_4_7_servicio_suplencia.html#" id="version-271" class="externalLink  glosarioLink">Mantenimiento</a> de los Activos de Conexi&#243;n, incluidos los asociados con el segundo circuito.</li>
+<li><a href="generalidades_7_4_7_servicio_suplencia.html#" id="version-162" class="externalLink  glosarioLink">Disponibilidad</a> de Potencia.</li>
+<li>Costo por el servicio de Calidad Extra.</li>
+<li>Duraci&#243;n del Contrato.</li>
+<li>Responsabilidades de las partes.</li></ul>
+<br /><b>7.4.7.2.4 Ejecuci&#243;n y puesta en servicio del segundo circuito</b><br /><br />Seg&#250;n las condiciones de servicio otorgadas en el estudio de viabilidad <a href="generalidades_7_4_7_servicio_suplencia.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a> y el dise&#241;o de la conexi&#243;n del segundo circuito, se presentan las siguientes alternativas de trabajos a realizar por parte de CODENSA en la habilitaci&#243;n del servicio de Calidad Extra:<br /><br /><b><u>A. Conexi&#243;n del segundo circuito que no implica expansi&#243;n, ni refuerzos de la red y/o reconfiguraci&#243;n de cargas</u></b><br />CODENSA como <a href="generalidades_7_4_7_servicio_suplencia.html#" id="version-309" class="externalLink  glosarioLink">Operador de Red</a> efectuar&#225; la Conexi&#243;n del segundo circuito al <a href="generalidades_7_4_7_servicio_suplencia.html#" id="version-363" class="externalLink  glosarioLink">Sistema</a> de Distribuci&#243;n Local, siempre y cuando los Activos de Conexi&#243;n del Cliente (<a href="generalidades_7_4_7_servicio_suplencia.html#" id="version-373" class="externalLink  glosarioLink">subestaci&#243;n</a> el&#233;ctrica y equipos asociados) cumplan con las condiciones t&#233;cnicas que aseguren que las mismas no afecten la <a href="generalidades_7_4_7_servicio_suplencia.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a> del STR y/o SDL, ni de otros clientes.<br /><br />Los costos asociados con la conexi&#243;n ser&#225;n asumidos por el cliente por una sola vez. De otra parte el cliente deber&#225; pagar el Cargo por Disponibilidad de red, el cual ser&#225; facturado anualmente y por el tiempo que se pacte en el Contrato de Calidad Extra. El valor de este cargo depender&#225; de la <a href="generalidades_7_4_7_servicio_suplencia.html#" id="version-113" class="externalLink  glosarioLink">carga</a> solicitada por el cliente a conectar en el segundo circuito y el porcentaje de infraestructura propia de CODENSA requerida para atender dicha <a href="generalidades_7_4_7_servicio_suplencia.html#" id="version-113" class="externalLink  glosarioLink">carga</a>.<br /><br /><b><u>B. Conexi&#243;n del segundo circuito que implica expansi&#243;n de infraestructura</u></b><br />Para este caso se contempla como expansi&#243;n de infraestructura, la construcci&#243;n de tramos de Red desde un circuito existente hasta las instalaciones del Cliente. Por lo tanto, CODENSA como <a href="generalidades_7_4_7_servicio_suplencia.html#" id="version-309" class="externalLink  glosarioLink">Operador de Red</a> construir&#225; la infraestructura el&#233;ctrica requerida para la Conexi&#243;n del segundo circuito, con cargo al Cliente, conforme lo establecido en el Contrato de Calidad Extra. As&#237; mismo el cliente debe adecuar sus instalaciones el&#233;ctricas internas para la conexi&#243;n del segundo circuito, de forma que se asegure que las mismas no afecten la <a href="generalidades_7_4_7_servicio_suplencia.html#" id="version-357" class="externalLink  glosarioLink">seguridad</a> del STR y/o SDL, ni de otros clientes.<br /><br />De igual manera, todos los costos asociados con la construcci&#243;n del segundo circuito por parte de CODENSA, ser&#225;n asumidos por el Cliente y pagados por una sola vez para la vigencia inicial del contrato. Adicionalmente, el Cliente se deber&#225; comprometer a cancelar anualmente el Cargo por Disponibilidad de red.<br /><br /><b><u>C. Conexi&#243;n del segundo circuito que implica refuerzos de la infraestructura y/o reconfiguraci&#243;n de cargas</u></b><br />Los trabajos de refuerzo sobre la red existente y la reconfiguraci&#243;n de cargas que sean necesarios para la conexi&#243;n del segundo circuito del cliente, ser&#225;n realizados por CODENSA y sus costos asociados ser&#225;n asumidos en su totalidad por el Cliente.<br /><br />Al igual que en los numerales anteriores, el Cliente se compromete a cancelar anualmente el Cargo por Disponibilidad de red.<br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 1632, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

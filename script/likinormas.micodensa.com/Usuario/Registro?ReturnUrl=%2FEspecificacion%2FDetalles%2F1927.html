@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+	 <title>Registro | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../index.html"><img src="../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="contenedorinterno">
+				<div class="lateral">
+					<div id="menu-principal">
+						<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+						</ul>
+					</div>
+				</div>
+				<div class="contenido">
+					<div class="search_box">
+						<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							    <input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							    <a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                    <img class="ico_search" src="../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                                </a>
+</form>							<a class="search_link" href="../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+						</div>
+					</div>
+					
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#Captcha').val('');
+    });
+
+    function changeValidationCode() {
+        renderAction('captchaimage', '/Usuario/GenerateCaptcha', {}, true, function () { });
+    }
+
+</script>
+
+<div class="formulario">
+
+    <div class="titulo"><h1>Registro en LikiNormas</h1></div>
+    <div class="form_explain">
+    Sea parte de la red Likinormas.<br /><br />
+    Opine y participe en los foros. Reciba información relevante y notificación de novedades e interactúe con otros profesionales afines a sus intereses. Fácil, rápido y seguro.
+    </div>
+
+<form action="https://likinormas.micodensa.com/Usuario/Registro" enctype="multipart/form-data" id="formregistro" method="post"><input id="FacebookUid" name="FacebookUid" type="hidden" value="" /><input id="ReturnUrl" name="ReturnUrl" type="hidden" value="/Especificacion/Detalles/1927" />
+<div class="formsub">
+    <label>Correo electrónico</label>
+<input autocomplete="off" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="Email" maxlength="255" name="Email" type="text" value="" /><span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span></div>
+<div class="formsub">
+    <label>Nombres y apellidos</label>
+    <input autocomplete="off" data-val="true" data-val-length="The field Name must be a string with a maximum length of 45." data-val-length-max="45" data-val-required="The Name field is required." id="Name" maxlength="45" name="Name" type="text" value="" />
+    <span class="field-validation-valid" data-valmsg-for="Name" data-valmsg-replace="true"></span>
+</div>
+<div class="formsub">
+            <label>Foto de usuario</label>
+            <input type="file" name="UserPicture" />
+<span class="field-validation-valid" data-valmsg-for="UserPicture" data-valmsg-replace="true"></span></div>
+    <div class="formsub">
+        <label>Contraseña de acceso</label>
+        <input data-val="true" data-val-length="The field Password must be a string with a maximum length of 45." data-val-length-max="45" data-val-required="La contrase&amp;#241;a es requerida" id="Password" maxlength="30" name="Password" type="password" />
+        <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+    </div>
+          
+<div class="formsub">
+    <label>Profesión / Ocupación</label>
+    <input autocomplete="off" data-val="true" data-val-length="The field Profesion must be a string with a maximum length of 100." data-val-length-max="100" id="Profesion" maxlength="100" name="Profesion" type="text" value="" />
+    <span class="field-validation-valid" data-valmsg-for="Profesion" data-valmsg-replace="true"></span>
+</div>
+<div class="formsub">
+    <label>Empresa / Organización</label>
+    <input autocomplete="off" data-val="true" data-val-length="The field Empresa must be a string with a maximum length of 100." data-val-length-max="100" data-val-required="La empresa es requerida" id="Empresa" maxlength="100" name="Empresa" type="text" value="" />
+    <span class="field-validation-valid" data-valmsg-for="Empresa" data-valmsg-replace="true"></span>
+</div>
+
+    <div class="formsub">
+        <label class="captcha">Captcha de validación</label>
+        <span class="captchabox">
+            <span id="captchaimage" class="captchaimage"><input type="hidden" name="captchaguid" id="captchaguid" value="676dae082b254b60bff4a976318c079e" />
+<img src="http://likinormas.micodensa.com/captcha.ashx?guid=676dae082b254b60bff4a976318c079e" alt="" width="150" height="50" /></span>
+            <input autocomplete="off" class="captchatext" id="Captcha" maxlength="6" name="Captcha" type="text" value="" />
+            <span class="captchainfo">Ingrese el texto que se muestra en la imagen, <a href="javascript:void(0)" onclick="javascript:changeValidationCode()">cámbielo</a> en caso de no ser legible</span>
+        </span>
+        <span class="field-validation-valid" data-valmsg-for="Captcha" data-valmsg-replace="true"></span>
+    </div>
+<div class="formsub">
+    <span class="info"><input type="checkbox" value="true" name="AcceptReceiveNotifications"  />
+    Deseo recibir notificaciones (actualizaciones de normas / especificaciones, casos prácticos, invitaciones y temas de interés general)</span>
+</div>
+    <div class="formsub">
+        <span class="info"><input type="checkbox" value="true" name="AcceptTerms"  />
+        He leído los <a target="_blank" href="https://likinormas.micodensa.com/home/Terminos">términos y condiciones</a> del sitio y estoy de acuerdo</span>
+        <span class="field-validation-valid" data-valmsg-for="AcceptTerms" data-valmsg-replace="true"></span>
+    </div>
+        <div class="formsub">
+            <div class="boton" onclick="javascript:$('#formregistro').submit()">Crear mi cuenta LikiNormas Codensa</div>
+        </div>
+</form></div>
+
+
+
+					<div class="footer">
+						<div class="line-deco-footer">
+						</div>
+						<div class="box-text-footer">
+							<div class="line-footer">
+							</div>
+							<div class="textofooter">
+								<strong>CODENSA S.A. ESP</strong><br />
+								Cra 13 A No. 93 - 66<br />
+								Teléfono: 6016060</div>
+							<div class="terminos">
+								<strong>Términos y condiciones</strong><br />
+								2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+     var _gaq = _gaq || [];
+     _gaq.push(['_setAccount', 'UA-18088061-16']);
+     _gaq.push(['_trackPageview']);
+
+     (function () {
+         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+     })();
+ 
+</script>
+
+</body>
+</html>

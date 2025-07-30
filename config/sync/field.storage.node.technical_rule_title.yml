@@ -1,0 +1,20 @@
+uuid: 7e31f634-674a-4e8c-9446-4571170d8694
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - text
+id: node.technical_rule_title
+field_name: technical_rule_title
+entity_type: node
+type: text
+settings:
+  max_length: 255
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

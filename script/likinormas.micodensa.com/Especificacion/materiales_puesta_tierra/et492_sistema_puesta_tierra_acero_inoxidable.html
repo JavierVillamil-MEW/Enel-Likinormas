@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET492 Sistema puesta a tierra en acero inoxidable | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/560" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F560.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/560" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/560" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '31');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET492 Sistema puesta a tierra en acero inoxidable</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET 492</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">30/04/2024</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/560">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F560&amp;nodoid=560', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_0">1.	OBJETO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_1">2.	ALCANCE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_2">3.	SISTEMA DE UNIDADES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_3">4.	NORMAS DE FABRICACI&#211;N Y PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_4">5.	CONDICIONES DE SERVICIO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_5">6.	ACCESORIOS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_6">6.1	Accesorios para instalaci&#243;n de la puesta a tierra de transformador</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_7">6.1.1	Accesorios para instalaci&#243;n de la puesta a tierra de transformador con DPS en cruceta</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_8">6.1.2 Accesorios para instalaci&#243;n de la puesta a tierra de transformador con DPS en soporte de transformador bif&#225;sico  &lt;= 15 KVA</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_9">6.1.3  Accesorios para instalaci&#243;n de la puesta a tierra de transformador con DPS en soporte de transformador trifasico &gt; 15 KVA </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_10">6.2 Accesorios para instalaci&#243;n de la puesta a tierra en red de baja tensi&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_11">6.3 Accesorios para instalaci&#243;n de la puesta a tierra en conductor mensajero de Red Compacta</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_12">6.4 Accesorios para instalaci&#243;n de la puesta a tierra de Seccionador bajo carga Telecontrolado (LA515)</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_13">6.5 Accesorios para instalaci&#243;n de la puesta a tierra de poste met&#225;lico (ET208, ET204, ET207, ET211, ET212, ET214, ET220, ET221 y ET222)</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_14">6.6 Accesorios para instalaci&#243;n de la puesta a tierra de red aislada (familia de normas LA650)</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_15">6.7 Accesorios para instalaci&#243;n de la puesta a tierra de Reconectador LA510</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_16">6.8 Puesta a Tierra para  afloramiento acorde con LA228</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_17">7.	REQUISITOS T&#201;CNICOS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_18">7.1	GEOMETRICOS.</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_19">7.2	 QUIMICOS.</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_20">7.3	 MEC&#193;NICOS.</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_21">7.4	 EL&#201;CTRICOS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_22">7.5	 REQUISITOS DEL ACABADO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_23">8.	CRITERIOS DE ACEPTACION O RECHAZO</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_24">8.1	 Muestreo</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_25">8.2	 Aceptaci&#243;n o Rechazo</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_26">9.	PRUEBAS E INFORME </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_27">9.1	 ENSAYOS DE RECEPCI&#211;N </a></li>
+                    <li class="indexitem"><a class="head_h4" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_28">9.1.1	Verificaci&#243;n visual y dimensional</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_29">9.1.2	Ensayo de doblamiento</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_30">9.1.3	Ensayo de Tracci&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_31">9.2	ENSAYOS TIPO </a></li>
+                    <li class="indexitem"><a class="head_h4" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_32">9.2.1	An&#225;lisis Qu&#237;mico</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_33">9.2.2	Ensayo de corriente</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_34">9.2.3	Prueba de estabilidad t&#233;rmica</a></li>
+                    <li class="indexitem"><a class="head_h4" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_35">9.2.4	Prueba de impulso</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_36">9.3	 Informe de Pruebas</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_37">9.4	 Empaque</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_38">9.5	 Rotulado</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_39">10.	PLANILLA DE CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_40">10.1 Puesta a tierra transformador con DPS en cruceta en poste acorde con numeral 6.1.1</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_41">10.2 Puesta a tierra transformador en poste  con DPS en soporte de transformador bif&#225;sico  &lt;= 15 KVA. Acorde con numeral 6.1.2</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_42">10.3 Puesta a tierra transformador en poste  con DPS en soporte de transformador trifasico &gt; 15 KVA Acorde con numeral 6.1.3</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_43">10.4 Puesta a tierra baja tensi&#243;n acorde con 6.2</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_44">10.5 Puesta a tierra red compacta acorde con 6.3</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_45">10.6 Puesta a tierra Seccionador bajo carga telecontrolado acorde con 6.4</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_46">10.7 Puesta a tierra poste met&#225;lico acorde con 6.5</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_47">10.8. Puesta a Tierra de Red MT A&#233;rea Aislada. Acorde con 6.6</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_48">10.9. Puesta a Tierra de Reconectador  acorde con numeral 6.7.</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_49">10.10. Puesta a Tierra para  afloramiento acorde con LA228</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et492_sistema_puesta_tierra_acero_inoxidable.html#heading_50">ANEXO 1. LISTADO DE C&#211;DIGOS DE MATERIAL.</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1.	OBJETO</h2>
+Esta especificaci&#243;n t&#233;cnica tiene por objeto establecer las caracter&#237;sticas y requisitos t&#233;cnicos que deben cumplir los sistemas de puesta a tierra en acero inoxidable adquiridos por ENEL, para el sistema el&#233;ctrico de distribuci&#243;n.<br />
+<h2 id="heading_1" >2.	ALCANCE</h2>
+Esta especificaci&#243;n t&#233;cnica se aplicar&#225; en todos los sistemas de puesta a tierra en acero inoxidable que adquiera ENEL.  Est&#225;n constituidos por flejes, conectores y varilla en acero inoxidable, son aplicables en el sistema el&#233;ctrico de distribuci&#243;n.<br />
+<h2 id="heading_2" >3.	SISTEMA DE UNIDADES</h2>
+En todos los documentos t&#233;cnicos se deben expresar las cantidades num&#233;ricas en unidades del sistema Internacional (S.I.).  Si se usan cat&#225;logos, folletos o planos, en sistemas diferentes de unidades, deben hacerse las conversiones respectivas.<br />
+<h2 id="heading_3" >4.	NORMAS DE FABRICACI&#211;N Y PRUEBAS</h2>
+En caso de discrepancia entre las Normas y este documento, prevalecer&#225; lo aqu&#237; establecido.  Las normas aplicables son las siguientes:<br /> <br /><div style="width:757px;"><table><tr><td colspan="2" rowspan="1" style="width:178px;height:21px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:579px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="">Ensayo de doblamiento para productos met&#225;licos.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="">Ensayo de tracci&#243;n para productos de acero.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">23</td><td colspan="1" rowspan="1" style="">Determinaci&#243;n gravim&#233;trica de carbono por combusti&#243;n directa, en aceros al carbono.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">24</td><td colspan="1" rowspan="1" style="">Determinaci&#243;n del manganeso en aceros al carbono.  M&#233;todo del persulfato.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">25</td><td colspan="1" rowspan="1" style="">Determinaci&#243;n del manganeso en aceros al carbono.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">26</td><td colspan="1" rowspan="1" style="">Determinaci&#243;n del silicio en aceros al carb&#243;n.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">27</td><td colspan="1" rowspan="1" style="">Determinaci&#243;n de azufre en aceros al carbono.  M&#233;todo de evoluci&#243;n.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">28</td><td colspan="1" rowspan="1" style="">Determinaci&#243;n del silicio en aceros al carbono.  M&#233;todo del &#225;cido sulf&#250;rico.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">180</td><td colspan="1" rowspan="1" style="">M&#233;todo gasom&#233;trico para determinaci&#243;n de carbono por combusti&#243;n directa en hierros y aceros al carbono.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">181</td><td colspan="1" rowspan="1" style="">Aceros al carbono y fundiciones de hierro.  M&#233;todo alcalim&#233;trico para determinaci&#243;n de f&#243;sforo.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">402</td><td colspan="1" rowspan="1" style="">Segunda revisi&#243;n. Metalurgia.  Perfiles de acero laminados en caliente.  Angulos de alas iguales y &#225;ngulos de alas desiguales. Tolerancias en dimensiones y en masa.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">422</td><td colspan="1" rowspan="1" style="">Perfiles livianos y barras de acero al carbono acabadas en fr&#237;o.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">858</td><td colspan="1" rowspan="1" style="">Pernos y Tuercas</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">1920</td><td colspan="1" rowspan="1" style="">Metalurgia.  Acero estructural.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">1985</td><td colspan="1" rowspan="1" style="">Sider&#250;rgica. Acero de calidad estructural, de alta resistencia y baja aleaci&#243;n, al columbo vanadio.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">2206</td><td colspan="1" rowspan="1" style="">Equipo de conexi&#243;n y puesta a tierra.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">3496</td><td colspan="1" rowspan="1" style="">Electrotenia. Herrajes y accesorios para redes y l&#237;neas a&#233;reas de Distribuci&#243;n de Energ&#237;a el&#233;ctrica. Cintas y Hebillas de acero Inoxidable.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;text-align:center">NTC ISO</td><td colspan="1" rowspan="1" style="text-align:center">2859</td><td colspan="1" rowspan="1" style="">Control estad&#237;stico de calidad, inspecci&#243;n por atributo, planeo de muestra &#250;nica, doble y m&#250;ltiple.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">UL</td><td colspan="1" rowspan="1" style="text-align:center">467</td><td colspan="1" rowspan="1" style="">Grounding and Bounding Equipment</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">UL</td><td colspan="1" rowspan="1" style="text-align:center">486-A</td><td colspan="1" rowspan="1" style="">Wire connectors and soldering lugs for use with copper conductors</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">ASTM</td><td colspan="1" rowspan="1" style="text-align:center">B117</td><td colspan="1" rowspan="1" style="">Test Method of Salt Spray [Fog] Testing</td></tr></table><br /></div> 
+<h2 id="heading_4" >5.	CONDICIONES DE SERVICIO</h2>
+Estos elementos se usan para instalaci&#243;n de las puestas a tierra del sistema de Distribuci&#243;n de ENEL y son de servicio continuo.<br /><br />Los conectores ser&#225;n instalados junto con las varillas de puesta a tierra y enterradas permanentemente en cualquier zona del &#225;rea de concesi&#243;n de ENEL, el Fleje ser&#225; adosado y fijado al poste mediante elementos suministrados en el kit.<br /><br />Los suelos donde son instalados podr&#225;n ser terrenos de relleno, arenosos, rocosos, arcillosos semiduros, con una capa de profundidad variable de humus, abarcando qu&#237;micamente suelos desde &#225;cidos a alcalinos y desde oxidantes a reductores con gran variedad en la cantidad y tipo de sales solubles.<br /><br />Las varillas y conectores ser&#225;n aptos para suelos &#225;cidos, con alta resistividad y para suelos alcalinos, de baja resistividad y poca dificultad en el enterramiento <br /><br />
+<h2 id="heading_5" >6.	ACCESORIOS</h2> <br />El conductor principal, puente de descargadores y transformador ser&#225; en fleje de acero inoxidable con las siguientes caracter&#237;sticas:<br /> <br /><div style="width:1066px;"><table><tr><td colspan="1" rowspan="2" style="width:283px;height:20px;text-align:center"><b>Nivel de Tensi&#243;n</b></td><td colspan="1" rowspan="2" style="width:82px;text-align:center"><b>Longitud (m)</b></td><td colspan="1" rowspan="1" style="width:579px;text-align:center"><b>Ancho</b></td><td colspan="1" rowspan="1" style="width:122px;text-align:center"><b>Espesor</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center"><b>(mm)</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>(mm)</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;">Media Tensi&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">11</td><td colspan="1" rowspan="1" style="text-align:center">&gt; 22,22</td><td colspan="1" rowspan="1" style="text-align:center">1,2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:36px;">Media Tensi&#243;n Red Compacta (LA450)</td><td colspan="1" rowspan="1" style="text-align:center">14</td><td colspan="1" rowspan="1" style="text-align:center">&gt; 22,22</td><td colspan="1" rowspan="1" style="text-align:center">1,2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:58px;">Baja Tensi&#243;n y AP</td><td colspan="1" rowspan="1" style="text-align:center">9,5</td><td colspan="1" rowspan="1" style="text-align:center">&gt; 22,22</td><td colspan="1" rowspan="1" style="text-align:center">1,2</td></tr></table><br /></div> <br />Se pueden tener otras longitudes de acuerdo con los requerimientos del sistema.<br /><br />El sistema de puesta a tierra para baja tensi&#243;n debe incluir los dispositivos que permitan conectarlo al conector perforaci&#243;n (acoplador de fleje a cable).<br /><br />El conector del electrodo no debe ser afectado por electr&#243;lisis y/o corrosi&#243;n galv&#225;nica cuando se instale bajo las condiciones reales de servicio y est&#233; expuesto a la humedad. Debe tener rigidez y resistencia mec&#225;nica adecuadas para permitir su instalaci&#243;n en el terreno sin rotura o deformaciones que afecten su servicio.<br /><br />El conector del electrodo debe garantizar una conexi&#243;n el&#233;ctrica y mec&#225;nica entre la varilla de puesta a tierra y el fleje. La uni&#243;n mec&#225;nica debe ser r&#237;gida.<br /><br />El conector del electrodo sirve de uni&#243;n el&#233;ctrica a tierra, mediante un fleje de acero inoxidable y una varilla de puesta a tierra de acero inoxidable<br /><br />Las puestas a tierra de acero inoxidable deber&#225;n estar formadas por elementos que deben ser de alta calidad y cumplir la norma AISI tipo 304.<br /><br />Las abrazaderas deber&#225;n cumplir con NTC 3496<br /><br />El sistema de puesta a tierra debe poseer certificaci&#243;n de cumplimiento RETIE.<br /><br />El sistema de puesta a tierra estar&#225; conformado por los siguientes elementos:<br />
+<h3 id="heading_6" >6.1	Accesorios para instalaci&#243;n de la puesta a tierra de transformador</h3>
+<h4 id="heading_7" >6.1.1	Accesorios para instalaci&#243;n de la puesta a tierra de transformador con DPS en cruceta</h4>
+Fleje puente de los descargadores<br />•	Longitud del fleje de 2,0 m con 3 conectores de apriete a fleje para los  DPS, con tornillos y arandelas<br /><br />Fleje  principal <br />•	Longitud de 11 m  y un conector  fleje a fleje para conectar con el tramo puente de descargadores.<br /><br />Fleje tanque de 1 m<br />•	Longitud del fleje de 1,0 m con perforaci&#243;n de di&#225;metro de 13 mm ubicada a 50 mm de un extremo para sujeci&#243;n de la tierra  del tanque del transformador y con un conector  fleje a fleje al otro extremo para la conexi&#243;n al principal. <br /><br />Fleje neutro del transformador  de 1,5 m<br />•	Longitud del fleje de 1,5 m con perforaci&#243;n de di&#225;metro de 13 mm ubicada a 50 mm de un extremo para sujeci&#243;n de la tierra  del neutro del transformador y con un conector de fleje a fleje al otro extremo para la conexi&#243;n al principal. <br /><br />•	Seis (6) Hebillas.<br /><br />•	Conector fleje a varilla.<br /><br />•	Electrodo tipo varilla de 15 mm X 2,4 m.<br /><br />•	Abrazaderas de 3/8“X 1,5 m, seis (6) tramos. Se instalar&#225; una a partir de 50 cm  del piso y cada 1,5 m a partir de esta  en los otros tramos.<br />
+<h4 id="heading_8" >6.1.2 Accesorios para instalaci&#243;n de la puesta a tierra de transformador con DPS en soporte de transformador bif&#225;sico  &lt;= 15 KVA</h4>
+Fleje puente de los descargadores<br />•	Longitud del fleje de 50 cm con 3 conectores de apriete a fleje para los  DPS, con tornillos y arandelas.<br /><br />Fleje principal <br />•	Longitud de 11 m  y un conector fleje a fleje para conectar con el tramo puente de descargadores.<br /><br />Fleje uni&#243;n entre fleje principal y fleje descargadores<br />Longitud del fleje de 1,0 m y con  2 conectores fleje a fleje  para conectar un tramo con el fleje principal y en otro tramo el fleje puente de descargador <br /><br />Fleje tanque de 1 m<br />Longitud del fleje de 1,0 m con perforaci&#243;n de di&#225;metro de 13 mm ubicada a 50 mm de un extremo para sujeci&#243;n de la tierra  del tanque del transformador y con un conector  fleje a fleje al otro extremo para la conexi&#243;n al principal. <br /> <br />Fleje neutro del transformador  de 1,5 m<br /> Longitud del fleje de 1,5 m con perforaci&#243;n de di&#225;metro de 13 mm ubicada a 50 mm de un extremo para sujeci&#243;n de la tierra  del neutro del transformador y con un conector  fleje a fleje al otro extremo para la conexi&#243;n al principal<br /><br />Conector fleje a varilla.<br /><br />Electrodo tipo varilla de 15 mm X 2,4 m.<br /><br />•	Abrazaderas de 3/8“X 1,5 m, seis (6) tramos. Se instalar&#225; una a partir de 50 cm  del piso y cada 1,5 m a partir de esta  en los otros tramos.<br /><br />Seis (6) Hebillas.<br />
+<h4 id="heading_9" >6.1.3  Accesorios para instalaci&#243;n de la puesta a tierra de transformador con DPS en soporte de transformador trifasico &gt; 15 KVA </h4>
+Fleje puente de los descargadores<br />•	Longitud del fleje de 90 cm con 3 conectores de apriete a fleje para los  DPS, con tornillos y arandelas.<br /><br />Fleje principal <br />•	Longitud de 11 m  y un conector fleje a fleje para conectar con el tramo puente de descargadores.<br />.<br /><br />Fleje uni&#243;n entre fleje principal y fleje descargadores<br />Longitud del fleje de 1,0 m y con  2 conectores fleje a fleje para conectar un tramo con el fleje principal y en otro tramo el fleje puente de descargador <br /><br />Fleje tanque de 1 m<br />Longitud del fleje de 1,0 m con perforaci&#243;n de di&#225;metro de 13 mm ubicada a 50 mm de un extremo para sujeci&#243;n de la tierra  del tanque del transformador y con un conector fleje a fleje al otro extremo para la conexi&#243;n al principal. <br /> <br />Fleje neutro del transformador  de 1,5 m<br /> Longitud del fleje de 1.5 m con perforaci&#243;n de di&#225;metro de 13 mm ubicada a 50 mm de un extremo para sujeci&#243;n de la tierra  del neutro del transformador y con un conector  fleje a fleje al otro extremo para la conexi&#243;n al principal<br /><br />Conector fleje a varilla.<br /><br />Electrodo tipo varilla de 15 mm X 2,4 m.<br /><br />Abrazaderas de 3/8“X 1,5 m, seis (6) tramos. Se instalar&#225; una a partir de 50 cm  del piso y cada 1,5 m a partir de esta  en los otros tramos.<br /><br />Seis (6) Hebillas.<br /> 
+<h3 id="heading_10" >6.2 Accesorios para instalaci&#243;n de la puesta a tierra en red de baja tensi&#243;n</h3>
+•	Conductor fleje principal de 9,5 m. <br /><br />•	Acople  de un extremo del fleje principal con cable No 4 de 25 cm de largo Cu esta&#241;ado calibre 4 AWG para conectar al neutro de la red de BT<br /><br />•	Conector fleje a varilla.<br /><br />•	Electrodo tipo varilla de 15 mm X 2,4 m.<br /><br />•	Abrazaderas de 3/8” X 1,5 m, seis (6) tramos. Se instalar&#225; una a partir de 2 m del piso y cada 1,5 m en los otros tramos.<br /><br /> 
+<h3 id="heading_11" >6.3 Accesorios para instalaci&#243;n de la puesta a tierra en conductor mensajero de Red Compacta</h3>
+•	Conductor principal longitud de 14 m.<br /><br />•	Acople  de un extremo del fleje principal con cable No 4 de 25 cm de largo Cu esta&#241;ado calibre 4 AWG para conectar al mensajero de red Compacta<br /><br />•	Conector fleje a varilla.<br /><br />•	Electrodo tipo varilla de 15 mm X 2,4 m.<br /><br />•	Abrazaderas de 3/8“X 1,5 m, seis (6) tramos. Se instalar&#225; una a partir de 50 cm  del piso y cada 1,5 m a partir de esta  en los otros tramos.<br /><br />
+<h3 id="heading_12" >6.4 Accesorios para instalaci&#243;n de la puesta a tierra de Seccionador bajo carga Telecontrolado (LA515)</h3> <br /><div style="width:701px;"><table><tr><td colspan="1" rowspan="1" style="width:579px;height:21px;text-align:center"><b>Descripci&#243;n</b></td><td colspan="1" rowspan="1" style="width:122px;text-align:center"><b>Cantidad</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Interconectores de los DPS, compuesto por:</td><td colspan="1" rowspan="8" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;">&#183;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; Fleje de 2 m x 1,5 mm, con una perforaci&#243;n ojo de &#189; “ubicada a 2 cm de un extremo.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:36px;">&#183;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; Fleje de 3 m  x 1,5 mm, con una perforaci&#243;n ojo de &#189; “ubicada a 2 cm de un extremo.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:58px;">&#183;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; Ocho (8) Conectores de apriete fleje a fleje.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">&#183;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; Seis (6) acoples a DPS. Cada acople esta compuesto:</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">o&#160;&#160;&#160; Fleje de 10 cm x 1,5 mm, perforaci&#243;n ojo de &#189; “.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">o&#160;&#160;&#160; Cable 4 AWG cobre esta&#241;ado, largo 35 cm.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">o&#160;&#160;&#160; Terminal compresi&#243;n tipo pala, cobre esta&#241;ado, perforaci&#243;n 1/2 “, barril para cable 4 AWG.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Fleje de 14 m x 1,5 mm, perforaci&#243;n al inicio de &#189; “, el otro extremo con preforma varilla.</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;">Fleje de 14 m con cubierta x 1,5 mm, perforaci&#243;n al inicio 1/2 ”, el otro extremo con preforma varilla, la longitud de la cubierta desde el punto de conexi&#243;n de la varilla hasta el otro extremo.</td><td colspan="1" rowspan="5" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">La cubierta debe:</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">&#183;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; Tolerar las condiciones tipo exterior, soportar los rayos UV.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">&#183;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; Tener un espesor m&#237;nimo de 1,6 mm.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">&#183;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; Puede ser en XLPE o PVC.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Conector de apriete fleje a fleje.</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Acople fleje a terminal &#189;“, compuesto por:</td><td colspan="1" rowspan="4" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">&#183;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; Fleje de 20 cm x 1,5 mm.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">&#183;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; Cable 4 AWG cobre esta&#241;ado, largo 1 m.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">&#183;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; Terminal compresi&#243;n tipo pala, cobre esta&#241;ado, perforaci&#243;n 1/2 “, barril para cable 4 AWG.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">Acople fleje a terminal &#188;“, compuesto por:</td><td colspan="1" rowspan="4" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">&#183;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; Fleje de 20 cm x 1,5 mm.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">&#183;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; Cable 4 AWG cobre esta&#241;ado, largo 1,2 m.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">&#183;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; Terminal compresi&#243;n tipo pala, cobre esta&#241;ado, perforaci&#243;n 1/4 “, barril para cable 4 AWG.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Conector doble fleje a varilla</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Varilla largo 2,4 m, di&#225;metro 15 mm.</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;">Abrazadera sin cubierta, 3/8” x 1,5 m, con sus respectivas hebillas. Se instalar&#225; una (1) a partir de 2 m del piso y cada 1,5 m en los otros tramos.</td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr></table><br /></div> <br />Los siguientes puntos deben ser conectados al sistema de puesta a tierra, teniendo en cuenta que esas conexiones no requieren ser en acero inoxidable y no se encuentran incluidas en este kit: <br />•	El positivo de las bater&#237;as de la UP (Unidad Perif&#233;rica), conectado a un punto de tierra del gabinete de la UP.<br />•	La tarjeta RGDAT, conectada a un punto de tierra del gabinete de la UP.<br />•	Punto en la caja de conexiones al punto externo de tierra del Transformador de Potencial (TP). <br /><br />En el caso de utilizarse en poste con tierra embebida, no se requiere el fleje principal para DPS.<br /><br />Con el fin de mitigar el efecto de par galv&#225;nico se recomienda utilizar para las conexiones anteriores, cable y terminales de cobre esta&#241;ado.<br /><br />Los flejes para poner a tierra los DPS se instalan en la parte superior de la respectiva cruceta.<br /> <br /><img src="https://i.ibb.co/0hC1tqh/image001.jpg" /><br /><b>Figura No. 1.1 Esquema uso de KIT para LA515</b> <br /> <br /><img src="https://i.ibb.co/ZfR3k8w/image002.jpg" /><br /><b>Figura No. 1.2 Esquema uso de KIT para LA515</b><br />
+<h3 id="heading_13" >6.5 Accesorios para instalaci&#243;n de la puesta a tierra de poste met&#225;lico (ET208, ET204, ET207, ET211, ET212, ET214, ET220, ET221 y ET222)</h3>
+•	 Acople fleje a terminal 1/2”:<br /><br />•	Fleje de 20 cm x 1,2 mm, preforma varilla.<br />•	Terminal compresi&#243;n tipo pala, cobre esta&#241;ado, perforaci&#243;n de 1/2“, barril para cable 4 AWG.<br />•	Cable 4 AWG cobre esta&#241;ado, largo 3 m.<br />•	Conector fleje a varilla.<br />•	Varilla largo 2,4 m, di&#225;metro 15 mm.<br /><br />
+<h3 id="heading_14" >6.6 Accesorios para instalaci&#243;n de la puesta a tierra de red aislada (familia de normas LA650)</h3>
+Materiales generales.<br /><br />•	Fleje para DPS’s, compuesto por: Fleje de 2,20 m con una perforaci&#243;n de di&#225;metro de 10 mm ubicada a 10 cm en un extremo para sujeci&#243;n al tornillo del  DPS  y con 2 conectores de apriete a fleje para los otros dos DPS.<br />•	Un (1) fleje principal de 12 m x 1,2 mm.<br />•	Un (1) conector doble fleje a varilla.<br />•	Una (1) varilla largo 2,4 m, di&#225;metro 15 mm.<br />•	Abrazaderas de 3/8“X 1,5 m, seis (6) tramos. Se instalar&#225; una a partir de 50 cm  del piso y cada 1,5 m a partir de esta  en los otros tramos.<br /><br />Materiales particulares.<br /><br />Puesta a tierra del apantallamiento de cable aislado en hilos de cobre: <br /><br />•	Conector para cables, uno calibre 4 AWG y otro para los hilos de cobre que equivale a un conductor de 25 mm2.<br />•	Acople fleje a terminal premoldeado:<br /><br />1.	Cable 4 AWG cobre esta&#241;ado, largo 1 m.<br />2.	Fleje de 20 cm x 1,2 mm.<br />•	Conector de apriete fleje a fleje.<br /> 
+<h3 id="heading_15" >6.7 Accesorios para instalaci&#243;n de la puesta a tierra de Reconectador LA510</h3>
+Fleje aislado principal a DPS <br />o	Longitud de fleje de 11 m  aislado. El conector fleje a fleje ya viene con el fleje puente DPS<br /><br />Fleje puente de los descargadores DPS<br />o	Longitud del fleje de 1m cm con  3 conectores de apriete a fleje, para poder conectar el conductor de puente a los 3 soportes del DPS ubicados en el tanque del DPS<br />o	  conector  fleje a fleje para conectar con el tramo puente de descargadores  con fleje principal aislado<br />Fleje uni&#243;n entre fleje principal y fleje  puente DPS<br />o	Longitud del fleje de 1,0 m y con  2 conectores fleje a fleje para conectar un tramo con el fleje principal y en otro tramo el fleje puente de descargador <br /><br />Fleje desnudo  principal a RC <br />o	Longitud de fleje de 11 m <br /><br />Fleje puente de conexi&#243;n a  RC <br />o	Longitud del fleje de 1m cm con perforaci&#243;n de di&#225;metro de 13 mm ubicada a 50 mm de un extremo para sujeci&#243;n de la tierra del tanque del RC  y con un conector  fleje a fleje al otro extremo para la conexi&#243;n al fleje principal desnudo<br /><br />Fleje  puente  de conexi&#243;n a PT<br />o	Longitud del fleje de 1m cm con perforaci&#243;n de di&#225;metro de 13 mm ubicada a 50 mm de un extremo para sujeci&#243;n de la tierra del tanque del PT  y con un conector  fleje a fleje al otro extremo para la conexi&#243;n al fleje principal desnudo<br /><br />Fleje puente de conexi&#243;n a  tablero de control<br />o	Longitud del fleje de 1m con perforaci&#243;n de di&#225;metro de 13 mm ubicada a 50 mm de un extremo para sujeci&#243;n de la tierra del tanque del RC  y con un conector  fleje a fleje al otro extremo para la conexi&#243;n al principal. <br /><br />Conector doble fleje a varilla.<br /><br />Electrodo tipo varilla de 15 mm X 2,4 m.<br /><br />•	Abrazaderas de 3/8“X 1,5 m, seis (6) tramos. Se instalar&#225; una a partir de 50 cm  del piso y cada 1,5 m a partir de esta  en los otros tramos.<br /><br />Seis (6) Hebillas.<br /><br />
+<h3 id="heading_16" >6.8 Puesta a Tierra para  afloramiento acorde con LA228</h3>
+Ver tabla 10.10.  <br />
+<h2 id="heading_17" >7.	REQUISITOS T&#201;CNICOS</h2>
+<h3 id="heading_18" >7.1	GEOMETRICOS.</h3>
+Las puesta a tierra debe ser de forma rectangular como se muestra en la figuras. <br />Deben suministrase en kits de instalaci&#243;n de acuerdo con lo indicado en esta especificaci&#243;n.<br /> 
+<h2 id="heading_19" >7.2	 QUIMICOS.</h2>
+Los sistemas de puesta a tierra deben ser de acero inoxidable y cumplir con los siguientes requisitos, de la tabla 1:<br /> <br /><div style="width:465px;"><table><tr><td colspan="1" rowspan="1" style="width:284px;height:21px;"><b>ELEMENTO</b></td><td colspan="1" rowspan="1" style="width:181px;text-align:center"><b>AISI 304</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;">% Carbono, m&#225;x.</td><td colspan="1" rowspan="1" style="text-align:center">0,08</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:33px;">% Manganeso</td><td colspan="1" rowspan="1" style="text-align:center">2,00 max.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:31px;">% F&#243;sforo, m&#225;x.</td><td colspan="1" rowspan="1" style="text-align:center">0,045</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;">% Azufre, m&#225;x</td><td colspan="1" rowspan="1" style="text-align:center">0,03</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;">% Cromo,</td><td colspan="1" rowspan="1" style="text-align:center">18-20</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;">% N&#237;quel</td><td colspan="1" rowspan="1" style="text-align:center">8-10,5</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:41px;">% Nitr&#243;geno, m&#225;x.</td><td colspan="1" rowspan="1" style="text-align:center">-</td></tr></table><br /></div><b>TABLA 1</b><br /> 
+<h3 id="heading_20" >7.3	 MEC&#193;NICOS.</h3>
+El material de la hebilla y de la cinta deben tener los siguientes requisitos m&#237;nimos:<br /><br />Acero inoxidable 304:<br />•	Resistencia a la tracci&#243;n	 	52,5 Kg/mm2 (515 MPa).<br />•	L&#237;mite m&#237;nimo de fluencia	 20,9 Kg/mm2 (205Mpa).<br />•	Elongaci&#243;n			40 % en 50,8 mm.<br /> 
+<h3 id="heading_21" >7.4	 EL&#201;CTRICOS</h3>
+Los conectores deben cumplir con las caracter&#237;sticas indicadas en la planilla de datos t&#233;cnicos garantizados.<br /><br />Los conectores deben cumplir con las siguientes normas:<br /><br /><div style="width:577px;"><table><tr><td colspan="1" rowspan="1" style="width:114px;height:21px;text-align:center"><b>NORMAS</b></td><td colspan="1" rowspan="1" style="width:463px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;">UL 486-A</td><td colspan="1" rowspan="1" style="">Wire connectors and soldering lugs for use with copper conductors</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:33px;">UL 467</td><td colspan="1" rowspan="1" style="">Grounding and Bounding Equipment</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:31px;">ASTM B 117</td><td colspan="1" rowspan="1" style="">Test Method of Salt Spray [Fog] Testing</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;">NTC 2206</td><td colspan="1" rowspan="1" style="">Equipos de Conexi&#243;n y Puesta a Tierra</td></tr></table><br /></div> 
+<h3 id="heading_22" >7.5	 REQUISITOS DEL ACABADO</h3>
+Los perfiles del fleje deben ser de una sola pieza, libres de soldaduras, libres de deformaciones, fisuras, aristas cortantes, y defectos de laminaci&#243;n. No se permiten dobleces ni rebabas en las zonas de corte, perforadas o punzadas.<br />
+<h2 id="heading_23" >8.	CRITERIOS DE ACEPTACION O RECHAZO</h2>
+Para este caso se considerar&#225; que existe un lote cuando, los materiales de la hebilla, la cinta o varilla pertenecen a un mismo lote de materia prima y un mismo lote de producci&#243;n, de no ser as&#237; deber&#225; tomarse como lotes distintos, por los diferentes aspectos de materia prima y de producci&#243;n.<br /> 
+<h3 id="heading_24" >8.1	 Muestreo</h3>
+A menos que se especifique otra condici&#243;n, el muestreo se llevar&#225; a cabo tomando muestras para cada prueba de acuerdo a lo indicado en las tablas 2 y 3, seg&#250;n la norma NTC –ISO 2859-1.<br /> 
+<h3 id="heading_25" >8.2	 Aceptaci&#243;n o Rechazo</h3>
+Si el n&#250;mero de elementos defectuosos es menor o igual al correspondiente n&#250;mero de defectuosos definidos a continuaci&#243;n, se deber&#225; considerar que el lote cumple con los requisitos relacionados en el numeral 5 de esta especificaci&#243;n; en caso contrario el lote se rechazar&#225;.<br />El muestreo se realizar&#225; acorde a la NTC-ISO 2859-1 utilizando un nivel de inspecci&#243;n I y un nivel de aceptaci&#243;n de 2,5%:<br /> <br /><div style="width:828px;"><table><tr><td colspan="4" rowspan="1" style="width:828px;height:21px;text-align:center"><b>Tabla inspecci&#243;n visual-dimensional</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center"><b>Tama&#241;o del lote</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Muestra</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Aceptado</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Rechazado</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:33px;text-align:center">2 a 8</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:31px;text-align:center">9 a 15</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;text-align:center">16 a 25</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">26 a 50</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">51 a 90</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:41px;text-align:center">91 a 150</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;text-align:center">151 a 280</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:37px;text-align:center">281 a 500</td><td colspan="1" rowspan="1" style="text-align:center">20</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">501 a 1200</td><td colspan="1" rowspan="1" style="text-align:center">32</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">1201 a 3200</td><td colspan="1" rowspan="1" style="text-align:center">50</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">3201 a 10000</td><td colspan="1" rowspan="1" style="text-align:center">80</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">10001 a 35000</td><td colspan="1" rowspan="1" style="text-align:center">125</td><td colspan="1" rowspan="1" style="text-align:center">7</td><td colspan="1" rowspan="1" style="text-align:center">8</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">35001 a 150000</td><td colspan="1" rowspan="1" style="text-align:center">200</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">11</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;text-align:center">150001 a 500000</td><td colspan="1" rowspan="1" style="text-align:center">315</td><td colspan="1" rowspan="1" style="text-align:center">14</td><td colspan="1" rowspan="1" style="text-align:center">15</td></tr></table><br /></div> <b>Tabla 2. Plan de muestreo para inspecci&#243;n visual y dimensional.</b><br /> <br />El muestreo se realizar&#225; acorde a la NTC-ISO 2859-1 utilizando un nivel de inspecci&#243;n S2 y un nivel de aceptaci&#243;n de 2,5%:<br /> <br /><div style="width:828px;"><table><tr><td colspan="4" rowspan="1" style="width:828px;height:21px;text-align:center"><b>Tabla inspecci&#243;n ensayos mec&#225;nicos</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center"><b>Tama&#241;o del lote</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Muestra</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Aceptado</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Rechazado</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:33px;text-align:center">2 a 8</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:31px;text-align:center">9 a 15</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;text-align:center">16 a 25</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">26 a 50</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">51 a 90</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:41px;text-align:center">91 a 150</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;text-align:center">151 a 280</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:37px;text-align:center">281 a 500</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">501 a 1200</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">1201 a 3200</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">3201 a 10000</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">10001 a 35000</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">35001 a 150000</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;text-align:center">150001 a 500000</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr></table><br /></div><ul><li>Tabla 3. Plan de muestreo para pruebas mec&#225;nicas*</li></ul>
+ 
+<h2 id="heading_26" >9.	PRUEBAS E INFORME </h2> 
+<h3 id="heading_27" >9.1	 ENSAYOS DE RECEPCI&#211;N </h3>
+<h4 id="heading_28" >9.1.1	Verificaci&#243;n visual y dimensional</h4>
+La verificaci&#243;n de las dimensiones se har&#225; con los instrumentos de medida que den la aproximaci&#243;n requerida (cinta met&#225;lica con divisiones de 1 mm para longitudes y micr&#243;metro para los di&#225;metros y espesores). El tama&#241;o de la muestra deber&#225; estar de acuerdo con la tabla 2.<br /><br />
+<h4 id="heading_29" >9.1.2	Ensayo de doblamiento</h4>
+La prueba de doblamiento de la cinta se efect&#250;a sobre un segmento de 152,4 mm (6“) de longitud e id&#233;ntica secci&#243;n transversal a la del producto, doblando a presi&#243;n 180 &#176; alrededor de un mandril de di&#225;metro igual a dos veces el espesor de la cinta sin que se presenten agrietamientos o da&#241;os en el material.<br />La prueba de doblamiento en las hebillas consiste en plegar 180 &#176; (a golpes) las aletas de cierre de estas sobre una calzada de espesor igual a tres veces el espesor de la cinta correspondiente de id&#233;ntico ancho al de esta y de suficiente longitud, sin que se presenten agrietamientos o da&#241;os en el material.<br /> 
+<h4 id="heading_30" >9.1.3	Ensayo de Tracci&#243;n</h4>
+El conector de puesta a tierra debe ser sometido durante 5 minutos a una tracci&#243;n de 150 libras (667 N) aplicada entre el conector, la varilla y el conductor de puesta a tierra, sin presentar deslizamiento entre las partes.<br />
+<h3 id="heading_31" >9.2	ENSAYOS TIPO </h3>
+<h4 id="heading_32" >9.2.1	An&#225;lisis Qu&#237;mico</h4>
+Se efectuar&#225; el an&#225;lisis qu&#237;mico con base en las normas NTC 23 y 180 (carbono), NTC 27 (azufre), NTC 181 (f&#243;sforo), NTC 24 o 25 (manganeso), NTC 26 o 28 (silicio) o en su defecto se aceptar&#225; un certificado de calidad de los materiales empleados, emitido por un laboratorio reconocido y aprobado por ENEL S.A. ESP.  El an&#225;lisis qu&#237;mico puede ser realizado en un espectr&#243;metro calibrado con los patrones correspondientes<br />
+<h4 id="heading_33" >9.2.2	Ensayo de corriente</h4>
+Un conector de puesta a tierra, debe estar en la capacidad de portar la corriente especificada en la tabla 4 (valores tomados de la tabla 13.1 de la norma UL 467) para el tiempo especificado. <br />
+<h4 id="heading_34" >9.2.3	Prueba de estabilidad t&#233;rmica</h4>
+La muestra debe ser sometida a un valor de corriente especificado seg&#250;n el calibre del cable, hasta tanto se logre la estabilidad t&#233;rmica, el incremento de temperatura no debe superar 50&#176;C. (tabla 11,1 norma UL 486 A)<br /><br />Una vez realizada la prueba el conector no debe presentar agrietamiento, rotura o fundici&#243;n. <br /><br /><div style="width:646px;"><table><tr><td colspan="2" rowspan="1" style="width:414px;height:40px;text-align:center"><b>Calibre del conductor para puesta  a tierra y conexi&#243;n del equipo</b></td><td colspan="1" rowspan="2" style="width:89px;text-align:center"><b>Tiempo, segundos</b></td><td colspan="1" rowspan="2" style="width:143px;text-align:center"><b>Corriente de ensayo, amperios</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center"><b>AWG</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>(mm2)</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:33px;text-align:center">4</td><td colspan="1" rowspan="1" style="text-align:center">25</td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">2 450</td></tr></table><br /></div><b>TABLA 4. CORRIENTES DE ENSAYO DE CORTA DURACI&#211;N</b><br /> 
+<h4 id="heading_35" >9.2.4	Prueba de impulso</h4>
+Los flejes deben ser conectados a un generador de impulsos y una corriente de 20 kA, con una onda 8/20 ?s.<br /><br />No debe existir arqueo entre el conector y los elementos conductivos. Despu&#233;s de la aplicaci&#243;n de la prueba de corriente, la resistencia de la conexi&#243;n no debe variar en m&#225;s de 5 m?, por sobre la medida previa a la prueba, adicionalmente los requerimientos de la prueba de halado deben ser cumplidas (ver numeral 3.5).<br />
+<h3 id="heading_36" >9.3	 Informe de Pruebas</h3>
+El informe del proveedor que presentar&#225; a ENEL debe seguir las instrucciones y diligenciar los formatos contenidos en el Manual de Inspecci&#243;n, adicionando, si fuera el caso, sus observaciones y comentarios. La totalidad de las pruebas denominadas como pruebas de recepci&#243;n deben ejecutarse con la presencia de un funcionario de ENEL.<br />•	Dimensiones de las muestras.<br />•	Resultados del an&#225;lisis qu&#237;mico o certificado de la calidad del acero.<br />•	Resultados de la prueba de tracci&#243;n.<br />•	Resultado pruebas el&#233;ctricas<br />•	Empaque y rotulado<br /> 
+<h3 id="heading_37" >9.4	 Empaque</h3>
+Los Kits se deben empacar en cajas de cart&#243;n de tal manera que no sufran durante el transporte, manipulaci&#243;n y almacenamiento.<br /> 
+<h3 id="heading_38" >9.5	 Rotulado</h3>
+En cada Kit se debe colocar un r&#243;tulo con la siguiente informaci&#243;n:<br />•	Especificaci&#243;n del contenido con su referencia.<br />•	Nombre y raz&#243;n social del proveedor.<br />•	Pa&#237;s de origen.<br />•	Cantidad de elementos.<br />•	Peso unitario, peso total bruto y neto.<br />•	Nombre ENEL.<br />•	N&#250;mero de contrato o pedido.<br />•	Fecha de entrega.<br />•	C&#243;digo de Almac&#233;n.<br /><br />Marcaci&#243;n en varilla:  <br /> <br />La varillas deben ir marcada en alto relieve o en bajo relieve y debe tener indicado la siguiente informaci&#243;n:<br />•	Nombre o logotipo  del  fabricante<br />•	Dimensiones largo y di&#225;metro de la varilla<br />•	ENEL <br /><br />Marcaci&#243;n del fleje:<br /> <br />El fleje debe ir marcado en alto relieve o en bajo relieve y debe tener indicado la siguiente informaci&#243;n:<br />•	Nombre o logotipo  del  fabricante<br />•	Dimensi&#243;n Nominal de la cinta<br />•	Tipo de acero<br />•	ENEL<br /><br />La marcaci&#243;n deber&#225; ser realizada en forma secuencial cada 2 m.<br /> <br />Marcaci&#243;n en conector:  <br /> <br />Los conectores deben ir marcados en alto relieve o en bajo relieve y deben tener indicado la siguiente informaci&#243;n:<br />•	Nombre o logotipo  del  fabricante<br />•	Dimensiones di&#225;metro de la varilla<br />•	ENEL<br /> <br />Respecto a las figuras de los conectores pueden presentarse otras opciones para revisi&#243;n<br />y aprobaci&#243;n de ENEL Colombia.<br /> <br /><b>Figura 2: Dimensiones varilla, conectores y acoples fleje a terminal.</b><br /> <br /><img src="https://i.ibb.co/8jbX0dx/1.jpg" /><br /><b>Figura 2.1. Conector fleje a varilla, opci&#243;n 1.</b><br /> <br /><img src="https://i.ibb.co/HKpsytH/image005.jpg" /> <br /><b>Figura 3. Conector doble fleje a varilla</b><br /> <br /><img src="https://i.ibb.co/TL0b07r/image006.jpg" /><br /><b>Figura 4.1. Conector apriete fleje a fleje, opci&#243;n 1</b><br /> <br /><img src="https://i.ibb.co/8969wPs/image007.png" /><br /><b>Figura 4.2. Conector apriete fleje a fleje, opci&#243;n 2</b><br /> <br /><img src="https://i.ibb.co/sQssZBM/13mili.jpg" /><br /><b>Figura 5. Conector de apriete fleje</b><br /> <br /><img src="https://i.ibb.co/PZ4GkBD/image009.jpg" /><br /><b>Figura 6. Acople fleje a terminal &#188;“.</b><br /> <br /><img src="https://i.ibb.co/xzhdTmz/image010.jpg" /><br /><b>Figura 7. Acople fleje a terminal &#189;“.</b><br /> <br /><img src="https://i.ibb.co/g3Rvqp6/image011.jpg" /><br /><b>Figura 8: Instalaci&#243;n de conductor en red de baja tensi&#243;n.</b><br />
+<h2 id="heading_39" >10.	PLANILLA DE CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS </h2>
+<h3 id="heading_40" >10.1 Puesta a tierra transformador con DPS en cruceta en poste acorde con numeral 6.1.1</h3> <br /><div style="width:809px;"><table><tr><td colspan="1" rowspan="1" style="width:76px;height:40px;text-align:center"><b>ITEM</b></td><td colspan="1" rowspan="1" style="width:287px;text-align:center"><b>DESCRIPCI&#211;N</b></td><td colspan="1" rowspan="1" style="width:104px;text-align:center"><b>UNIDAD</b></td><td colspan="1" rowspan="1" style="width:207px;text-align:center"><b>SOLICITADO</b></td><td colspan="1" rowspan="1" style="width:135px;text-align:center"><b>OFERTADO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center">1</td><td colspan="1" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:33px;text-align:center">2</td><td colspan="1" rowspan="1" style="">pa&#237;s</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:31px;text-align:center">3</td><td colspan="1" rowspan="1" style="">Normas</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">NTC 3496</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;text-align:center">4</td><td colspan="1" rowspan="1" style="">Espesor fleje</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="text-align:center">1,2</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">5</td><td colspan="1" rowspan="1" style="">Ancho</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="text-align:center">&gt;= 22,2</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">6</td><td colspan="1" rowspan="1" style="">Fleje puente descargadores, 3 conectores  de apriete a fleje y tornillos y arandelas</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:41px;text-align:center">7</td><td colspan="1" rowspan="1" style="">Fleje  principal y 1 conector fleje a fleje </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;text-align:center">8</td><td colspan="1" rowspan="1" style="">Fleje tanque de 1 m y 1 conector fleje a fleje</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:37px;text-align:center">9</td><td colspan="1" rowspan="1" style="">Fleje neutro del transformador  de 1.5 m y 1 conector fleje a fleje</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">10</td><td colspan="1" rowspan="1" style="">Conector fleje a varilla.</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">11</td><td colspan="1" rowspan="1" style="">Abrazaderas de 3/8“x 1,5 m, seis (6) tramos</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">12</td><td colspan="1" rowspan="1" style="">Seis (6) Hebillas.</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">13</td><td colspan="1" rowspan="1" style="">Acero Inoxidable tipo</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">304</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div>  
+<h3 id="heading_41" >10.2 Puesta a tierra transformador en poste  con DPS en soporte de transformador bif&#225;sico  &lt;= 15 KVA. Acorde con numeral 6.1.2</h3> <br /><div style="width:809px;"><table><tr><td colspan="1" rowspan="1" style="width:76px;height:38px;text-align:center"><b>ITEM</b></td><td colspan="1" rowspan="1" style="width:287px;text-align:center"><b>DESCRIPCI&#211;N</b></td><td colspan="1" rowspan="1" style="width:104px;text-align:center"><b>UNIDAD</b></td><td colspan="1" rowspan="1" style="width:207px;text-align:center"><b>SOLICITADO</b></td><td colspan="1" rowspan="1" style="width:135px;text-align:center"><b>OFERTADO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;text-align:center">1</td><td colspan="1" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">2</td><td colspan="1" rowspan="1" style="">pa&#237;s</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">3</td><td colspan="1" rowspan="1" style="">Normas</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">NTC 3496</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">4</td><td colspan="1" rowspan="1" style="">Espesor fleje</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="text-align:center">1,2</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:57px;text-align:center">5</td><td colspan="1" rowspan="1" style="">Ancho</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="text-align:center">&gt;= 22,2</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;text-align:center">6</td><td colspan="1" rowspan="1" style="">Fleje puente descargadores 50 cm y 3 conectores  de apriete a fleje y tornillos y arandelas</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:51px;text-align:center">7</td><td colspan="1" rowspan="1" style="">Fleje  principal 11m y 1 conector fleje a fleje </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:51px;text-align:center">8</td><td colspan="1" rowspan="1" style="">Fleje uni&#243;n entre fleje principal y fleje descargadores 1m y 2 conectores fleje a fleje</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:36px;text-align:center">9</td><td colspan="1" rowspan="1" style="">Fleje tanque de 1 m y 1 conector fleje a fleje </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:48px;text-align:center">10</td><td colspan="1" rowspan="1" style="">Fleje neutro del transformador  de 1.5 m y 1 conector fleje a fleje</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:45px;text-align:center">11</td><td colspan="1" rowspan="1" style="">Conector fleje a varilla.</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:51px;text-align:center">12</td><td colspan="1" rowspan="1" style="">Abrazaderas de 3/8“x 1,5 m, seis (6) tramos</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:51px;text-align:center">13</td><td colspan="1" rowspan="1" style="">Seis (6) Hebillas.</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:66px;text-align:center">14</td><td colspan="1" rowspan="1" style="">Acero Inoxidable tipo</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">304</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div><br /> 
+<h3 id="heading_42" >10.3 Puesta a tierra transformador en poste  con DPS en soporte de transformador trifasico &gt; 15 KVA Acorde con numeral 6.1.3</h3> <br /><div style="width:809px;"><table><tr><td colspan="1" rowspan="1" style="width:76px;height:35px;text-align:center"><b>ITEM</b></td><td colspan="1" rowspan="1" style="width:287px;text-align:center"><b>DESCRIPCI&#211;N</b></td><td colspan="1" rowspan="1" style="width:104px;text-align:center"><b>UNIDAD</b></td><td colspan="1" rowspan="1" style="width:207px;text-align:center"><b>SOLICITADO</b></td><td colspan="1" rowspan="1" style="width:135px;text-align:center"><b>OFERTADO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:33px;text-align:center">1</td><td colspan="1" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:31px;text-align:center">2</td><td colspan="1" rowspan="1" style="">pa&#237;s</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;text-align:center">3</td><td colspan="1" rowspan="1" style="">Normas</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">NTC 3496</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">4</td><td colspan="1" rowspan="1" style="">Espesor fleje</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="text-align:center">1,2</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">5</td><td colspan="1" rowspan="1" style="">Ancho</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="text-align:center">&gt;= 22,2</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:41px;text-align:center">6</td><td colspan="1" rowspan="1" style="">Fleje puente descargadores 90 cm y 3 conectores  de apriete a fleje y tornillos y arandelas</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;text-align:center">7</td><td colspan="1" rowspan="1" style="">Fleje  principal 11m y 1 conector fleje a fleje </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:37px;text-align:center">8</td><td colspan="1" rowspan="1" style="">Fleje uni&#243;n entre fleje principal y fleje descargadores 1m y 2 conectores fleje a fleje</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">9</td><td colspan="1" rowspan="1" style="">Fleje tanque de 1 m y 1 conector fleje a fleje </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">10</td><td colspan="1" rowspan="1" style="">Fleje neutro del transformador  de 1.5 m y 1 conector fleje a fleje</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">11</td><td colspan="1" rowspan="1" style="">Conector fleje a varilla.</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">12</td><td colspan="1" rowspan="1" style="">Abrazaderas de 3/8“x 1,5 m, seis (6) tramos</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">13</td><td colspan="1" rowspan="1" style="">Seis (6) Hebillas.</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;text-align:center">14</td><td colspan="1" rowspan="1" style="">Acero Inoxidable tipo</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">304</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div><br /> 
+<h3 id="heading_43" >10.4 Puesta a tierra baja tensi&#243;n acorde con 6.2</h3> <br /><div style="width:809px;"><table><tr><td colspan="1" rowspan="1" style="width:76px;height:33px;text-align:center"><b>ITEM</b></td><td colspan="1" rowspan="1" style="width:287px;text-align:center"><b>DESCRIPCI&#211;N</b></td><td colspan="1" rowspan="1" style="width:104px;text-align:center"><b>UNIDAD</b></td><td colspan="1" rowspan="1" style="width:207px;text-align:center"><b>SOLICITADO</b></td><td colspan="1" rowspan="1" style="width:135px;text-align:center"><b>OFERTADO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:31px;text-align:center">1</td><td colspan="1" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;text-align:center">2</td><td colspan="1" rowspan="1" style="">Pa&#237;s</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">3</td><td colspan="1" rowspan="1" style="">Normas</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">NTC 3496</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">4</td><td colspan="1" rowspan="1" style="">Espesor fleje</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="text-align:center">1,2</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:41px;text-align:center">5</td><td colspan="1" rowspan="1" style="">Ancho</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="text-align:center">&gt;= 22,2</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;text-align:center">6</td><td colspan="1" rowspan="1" style="">Longitud fleje principal</td><td colspan="1" rowspan="1" style="text-align:center">m</td><td colspan="1" rowspan="1" style="text-align:center">9,5</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:37px;text-align:center">7</td><td colspan="1" rowspan="1" style="">Acero Inoxidable tipo</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">304</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">8</td><td colspan="1" rowspan="1" style="">Acople  de un extremo del fleje principal con cable No 4 de 25 cm de largo Cu esta&#241;ado calibre 4 AWG para conectar al neutro de la red de BT</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">Si/No</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">9</td><td colspan="1" rowspan="1" style="">6 Abrazaderas de 3/8” X 1,5 m, 6 tramos</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">Si/No</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">10</td><td colspan="1" rowspan="1" style="">6 hebillas para cinta 3/8”</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">Si/No</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">11</td><td colspan="1" rowspan="1" style="">Electrodo tipo varilla de 15 mm X 2,4 m</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">Si/No</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div> <br />NOTA: Se podr&#225;n solicitar accesorios independientes al KIT, con base en las caracter&#237;sticas indicadas en esta especificaci&#243;n <br /> 
+<h3 id="heading_44" >10.5 Puesta a tierra red compacta acorde con 6.3</h3> <br /><div style="width:809px;"><table><tr><td colspan="1" rowspan="1" style="width:76px;height:31px;text-align:center"><b>ITEM</b></td><td colspan="1" rowspan="1" style="width:287px;text-align:center"><b>DESCRIPCI&#211;N</b></td><td colspan="1" rowspan="1" style="width:104px;text-align:center"><b>UNIDAD</b></td><td colspan="1" rowspan="1" style="width:207px;text-align:center"><b>SOLICITADO</b></td><td colspan="1" rowspan="1" style="width:135px;text-align:center"><b>OFERTADO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;text-align:center">1</td><td colspan="1" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">2</td><td colspan="1" rowspan="1" style="">Pa&#237;s</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">3</td><td colspan="1" rowspan="1" style="">Normas</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">NTC 3496</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:41px;text-align:center">4</td><td colspan="1" rowspan="1" style="">Espesor fleje</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="text-align:center">1,2</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;text-align:center">5</td><td colspan="1" rowspan="1" style="">Ancho</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="text-align:center">&gt;= 22,2</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:37px;text-align:center">6</td><td colspan="1" rowspan="1" style="">Longitud fleje principal</td><td colspan="1" rowspan="1" style="text-align:center">m</td><td colspan="1" rowspan="1" style="text-align:center">14</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">7</td><td colspan="1" rowspan="1" style="">Acero Inoxidable tipo</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">304</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">8</td><td colspan="1" rowspan="1" style="">Acople  de un extremo del fleje principal con cable No 4 de 25 cm de largo Cu esta&#241;ado calibre 4 AWG para conectar al mensajero de red Compacta </td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">Si/No</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">9</td><td colspan="1" rowspan="1" style="">6 Abrazaderas de 3/8” X 1,5 m, 6 tramos</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">Si/No</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">10</td><td colspan="1" rowspan="1" style="">6 hebillas para cinta 3/8”</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">Si/No</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">11</td><td colspan="1" rowspan="1" style="">Electrodo tipo varilla de 15 mm X 2,4 m</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">Si/No</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;text-align:center">12</td><td colspan="1" rowspan="1" style="">6 tramos Abrazaderas de 3/8” X 1,5 m,</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">Si/No</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div>  <br />(*) A indicar por el oferente	<br />                                                            <br />NOTA: Se podr&#225;n solicitar accesorios independientes al KIT, con base en las caracter&#237;sticas indicadas en esta especificaci&#243;n <br /> 
+<h3 id="heading_45" >10.6 Puesta a tierra Seccionador bajo carga telecontrolado acorde con 6.4</h3> <br /><div style="width:809px;"><table><tr><td colspan="1" rowspan="1" style="width:76px;height:40px;text-align:center"><b>ITEM</b></td><td colspan="1" rowspan="1" style="width:287px;text-align:center"><b>DESCRIPCI&#211;N</b></td><td colspan="1" rowspan="1" style="width:104px;text-align:center"><b>CANT.</b></td><td colspan="1" rowspan="1" style="width:207px;text-align:center"><b>SOLICITADO</b></td><td colspan="1" rowspan="1" style="width:135px;text-align:center"><b>OFERTADO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center">1</td><td colspan="1" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:33px;text-align:center">2</td><td colspan="1" rowspan="1" style="">Pa&#237;s de origen</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:31px;text-align:center">3</td><td colspan="1" rowspan="1" style="">Normas</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">NTC 3496</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;text-align:center">4</td><td colspan="1" rowspan="1" style="">Material fleje, conectores y varilla</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">Acero Inoxidable tipo 304</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="8" style="height:38px;text-align:center">5</td><td colspan="1" rowspan="1" style="">Interconectores de los DPS, compuesto por:</td><td colspan="1" rowspan="8" style="text-align:center">1</td><td colspan="1" rowspan="8" style="text-align:center">Si/No</td><td colspan="1" rowspan="8" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;">&#183;&#160;&#160; Fleje 2m x 1,2 mm, una perforaci&#243;n ojo de &#189; ubicada a 2 cm de un extremo, largo 2 m.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:41px;">&#183;&#160;&#160; Fleje 3m x 1,2 mm, una perforaci&#243;n ojo de &#189; ubicada a 2 cm de un extremo, largo 3 m.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;">&#183;&#160;&#160; Ocho (8) Conectores apriete fleje a fleje.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:37px;">&#183;&#160;&#160; Seis (6) acoples a DPS. Cada acople est&#225; compuesto:</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;">o&#160;&#160;&#160; Fleje de 10 cm x 1,2 mm, perforaci&#243;n ojo de &#189; “.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;">o&#160;&#160;&#160; Cable 4 AWG cobre esta&#241;ado, largo 35 cm.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;">o&#160;&#160;&#160; Terminal compresi&#243;n tipo pala, cobre esta&#241;ado, perforaci&#243;n 1/2 “, barril para cable 4 AWG.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">6</td><td colspan="1" rowspan="1" style="">Fleje de 14 m x 1,2 mm, perforaci&#243;n al inicio de &#189; “, el otro extremo con preforma varilla.</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">Si/No</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">7</td><td colspan="1" rowspan="1" style="">Fleje con cubierta de 14 m x 1,2 mm, un extremo con preforma varilla, la longitud de la cubierta desde el punto de conexi&#243;n de la varilla hasta el otro extremo. </td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">Si/No</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;text-align:center">8</td><td colspan="1" rowspan="1" style="">Conector apriete fleje a fleje</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">Si/No</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="4" style="height:38px;text-align:center">9</td><td colspan="1" rowspan="1" style="">Acople fleje a terminal &#189;“, compuesto por:</td><td colspan="1" rowspan="4" style="text-align:center">2</td><td colspan="1" rowspan="4" style="text-align:center">Si/No</td><td colspan="1" rowspan="4" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;">&#183;&#160;&#160; Terminal compresi&#243;n tipo pala, cobre esta&#241;ado, perforaci&#243;n 1/2 “, barril para cable 4 AWG.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;">&#183;&#160;&#160; Cable 4 AWG cobre esta&#241;ado, largo 1 m. </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:57px;">&#183;&#160;&#160; Fleje 20 cmx 1,2 mm</td></tr>
+<tr><td colspan="1" rowspan="4" style="height:44px;text-align:center">10</td><td colspan="1" rowspan="1" style="">Acople fleje a terminal &#188;“, compuesto por:</td><td colspan="1" rowspan="4" style="text-align:center">1</td><td colspan="1" rowspan="4" style="text-align:center">Si/No</td><td colspan="1" rowspan="4" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:51px;">&#183;&#160;&#160; Terminal compresi&#243;n tipo pala, cobre esta&#241;ado, perforaci&#243;n 1/4 “, barril para cable 4 AWG.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:51px;">&#183;&#160;&#160; Cable 4 AWG cobre esta&#241;ado, largo 1,2 m</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:36px;">&#183;&#160;&#160; Fleje 20 cm x 1,2 mm largo 20 cm</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:48px;text-align:center">11</td><td colspan="1" rowspan="1" style="">Conector doble fleje a varilla</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">Si/No</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:45px;text-align:center">12</td><td colspan="1" rowspan="1" style="">Varilla largo 2,4 m, di&#225;metro 15 mm</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">Si/No</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:51px;text-align:center">13</td><td colspan="1" rowspan="1" style="">Abrazadera sin cubierta, 3/8” x 1,50 cm</td><td colspan="1" rowspan="1" style="text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div> <br />NOTA: Se podr&#225;n solicitar accesorios  independientes al KIT, con base en las caracter&#237;sticas indicadas en esta especificaci&#243;n  <br /> 
+<h3 id="heading_46" >10.7 Puesta a tierra poste met&#225;lico acorde con 6.5</h3> <br /><div style="width:809px;"><table><tr><td colspan="1" rowspan="1" style="width:76px;height:40px;text-align:center"><b>ITEM</b></td><td colspan="1" rowspan="1" style="width:261px;text-align:center"><b>DESCRIPCI&#211;N</b></td><td colspan="1" rowspan="1" style="width:140px;text-align:center"><b>SOLICITADO</b></td><td colspan="1" rowspan="1" style="width:125px;text-align:center"><b>OFERTADO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center">1</td><td colspan="1" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:33px;text-align:center">2</td><td colspan="1" rowspan="1" style="">Pa&#237;s de origen</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:31px;text-align:center">3</td><td colspan="1" rowspan="1" style="">Normas</td><td colspan="1" rowspan="1" style="text-align:center">NTC 3496</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;text-align:center">4</td><td colspan="1" rowspan="1" style="">Material Fleje, Conector y Varilla</td><td colspan="1" rowspan="1" style="text-align:center">Acero Inoxidable tipo 304</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="4" style="height:38px;text-align:center">5</td><td colspan="1" rowspan="1" style="">Acople fleje a terminal 1/2”:</td><td colspan="1" rowspan="4" style="text-align:center">Si/No</td><td colspan="1" rowspan="4" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;">&#183;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; Terminal compresi&#243;n tipo pala, cobre esta&#241;ado 1/2“, cable 4 AWG.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:41px;">&#183;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; Cable 4 AWG cobre esta&#241;ado, 3 m.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;">&#183;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; Fleje 20 cmx 1,2 mm, preforma varilla.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:37px;text-align:center">6</td><td colspan="1" rowspan="1" style="">Conector fleje a varilla</td><td colspan="1" rowspan="1" style="text-align:center">Si/No</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">7</td><td colspan="1" rowspan="1" style="">Varilla largo 2,4 m, di&#225;metro 15 mm</td><td colspan="1" rowspan="1" style="text-align:center">Si/No</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div>  <br />NOTA: Se podr&#225;n solicitar accesorios independientes al KIT, con base en las caracter&#237;sticas indicadas en esta especificaci&#243;n <br />
+<h3 id="heading_47" >10.8. Puesta a Tierra de Red MT A&#233;rea Aislada. Acorde con 6.6</h3> <br /><div style="width:993px;"><table><tr><td colspan="1" rowspan="1" style="width:92px;height:35px;text-align:center"> &#237;tem</td><td colspan="1" rowspan="1" style="width:359px;text-align:center"><b>Descripci&#243;n</b></td><td colspan="1" rowspan="1" style="width:320px;text-align:center"><b>Solicitado</b></td><td colspan="1" rowspan="1" style="width:222px;text-align:center"><b>Ofertado</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">1</td><td colspan="1" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2</td><td colspan="1" rowspan="1" style="">Pa&#237;s de origen</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">3</td><td colspan="1" rowspan="1" style="">Normas</td><td colspan="1" rowspan="1" style="text-align:center">NTC 3496</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">4</td><td colspan="1" rowspan="1" style="">Material Fleje, Conector y Varilla</td><td colspan="1" rowspan="1" style="text-align:center">Acero Inoxidable tipo 304</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="3" style="height:21px;text-align:center">5</td><td colspan="1" rowspan="1" style="">Fleje para DPS’s, compuesto por:</td><td colspan="1" rowspan="3" style="text-align:center">Si/No</td><td colspan="1" rowspan="3" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:58px;">- Fleje de 2,20 m con una perforaci&#243;n de di&#225;metro de 10 mm ubicada a 10 cm en un extremo para sujeci&#243;n al tornillo del DPS</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:39px;">- 2 conectores de apriete a fleje para los otros dos DPS.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">6</td><td colspan="1" rowspan="1" style="">Conector fleje a varilla</td><td colspan="1" rowspan="1" style="text-align:center">Si/No</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">7</td><td colspan="1" rowspan="1" style="">Varilla largo 2,4 m, di&#225;metro 15 mm</td><td colspan="1" rowspan="1" style="text-align:center">Si/No</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">8</td><td colspan="1" rowspan="1" style="">Abrazaderas de 3/8“ X 1,5 m</td><td colspan="1" rowspan="1" style="text-align:center">Si/No</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">9</td><td colspan="1" rowspan="1" style="">Seis (6) Hebillas</td><td colspan="1" rowspan="1" style="text-align:center">Si/No</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="6" style="height:39px;text-align:center">10</td><td colspan="1" rowspan="1" style="">Tres (3) Puestas a tierra del apantallamiento de cable aislado en hilos de cobre:</td><td colspan="1" rowspan="6" style="text-align:center">Si/No</td><td colspan="1" rowspan="6" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:58px;">Tres (3) Conectores para cables, uno calibre 4 AWG y otro para los hilos de cobre que equivale a un conductor de 25 mm2.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">Tres (3) Acoples fleje a terminal premoldeado:</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">1. Cable 4 AWG cobre esta&#241;ado, largo 1 m.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">2. Fleje de 20 cm x 1,2 mm.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;">• Conector de apriete fleje a fleje.</td></tr></table><br /></div><br /> 
+<h3 id="heading_48" >10.9. Puesta a Tierra de Reconectador  acorde con numeral 6.7.</h3> <br /><div style="width:735px;"><table><tr><td colspan="1" rowspan="1" style="width:50px;height:40px;text-align:center"><b>ITEM</b></td><td colspan="1" rowspan="1" style="width:289px;text-align:center"><b>DESCRIPCI&#211;N</b></td><td colspan="1" rowspan="1" style="width:175px;text-align:center"><b>UNIDAD</b></td><td colspan="1" rowspan="1" style="width:117px;text-align:center"><b>SOLICITADO</b></td><td colspan="1" rowspan="1" style="width:104px;text-align:center"><b>OFERTADO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:35px;text-align:center">1</td><td colspan="1" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:33px;text-align:center">2</td><td colspan="1" rowspan="1" style="">pa&#237;s</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">(*)</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:31px;text-align:center">3</td><td colspan="1" rowspan="1" style="">Normas</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">NTC 3496</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;text-align:center">4</td><td colspan="1" rowspan="1" style="">Espesor fleje</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="text-align:center">1,2</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">5</td><td colspan="1" rowspan="1" style="">Ancho</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="text-align:center">&gt;= 22,2</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">6</td><td colspan="1" rowspan="1" style="">Fleje aislado principal a DPS 11m y conector  fleje a fleje</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:41px;text-align:center">7</td><td colspan="1" rowspan="1" style="">Fleje puente de los descargadores DPS y 3 conectores de apriete a fleje</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;text-align:center">8</td><td colspan="1" rowspan="1" style="">Fleje uni&#243;n entre fleje principal y fleje  puente DPS de 1,0 m y con  2 conectores fleje a fleje</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:37px;text-align:center">9</td><td colspan="1" rowspan="1" style="">Fleje desnudo  principal a RC Longitud de fleje de 11 m </td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">10</td><td colspan="1" rowspan="1" style="">Fleje puente de conexi&#243;n a  RC  1m  y un conector  fleje a fleje</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">11</td><td colspan="1" rowspan="1" style="">Fleje  puente  de conexi&#243;n a PT 1m y un conector  fleje a fleje</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">12</td><td colspan="1" rowspan="1" style="">Fleje puente de conexi&#243;n a  tablero de control 1m y un conector  fleje a fleje</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">13</td><td colspan="1" rowspan="1" style="">Conector fleje a varilla.</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">14</td><td colspan="1" rowspan="1" style="">Abrazaderas de 3/8“x 1,5 m, seis (6) tramos</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;text-align:center">15</td><td colspan="1" rowspan="1" style="">Seis (6) Hebillas.</td><td colspan="1" rowspan="1" style=""> </td><td colspan="1" rowspan="1" style="text-align:center">si</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">16</td><td colspan="1" rowspan="1" style="">Acero Inoxidable tipo</td><td colspan="1" rowspan="1" style="text-align:center">---</td><td colspan="1" rowspan="1" style="text-align:center">304</td><td colspan="1" rowspan="1" style="text-align:center"> </td></tr></table><br /></div>  
+<h3 id="heading_49" >10.10. Puesta a Tierra para  afloramiento acorde con LA228</h3> <br /><div style="width:631px;"><table><tr><td colspan="1" rowspan="1" style="width:50px;height:38px;text-align:center"><b>&#237;tem</b></td><td colspan="1" rowspan="1" style="width:289px;text-align:center"><b>Descripci&#243;n</b></td><td colspan="1" rowspan="1" style="width:175px;text-align:center"><b>Solicitado</b></td><td colspan="1" rowspan="1" style="width:117px;text-align:center"><b>Ofertado</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">1</td><td colspan="1" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:57px;text-align:center">2</td><td colspan="1" rowspan="1" style="">Pa&#237;s de origen</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;text-align:center">3</td><td colspan="1" rowspan="1" style="">Normas</td><td colspan="1" rowspan="1" style="text-align:center">NTC 3496</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:51px;text-align:center">4</td><td colspan="1" rowspan="1" style="">Material Fleje, Conector y Varilla</td><td colspan="1" rowspan="1" style="text-align:center">Acero Inoxidable tipo 304</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="4" style="height:51px;text-align:center">5</td><td colspan="1" rowspan="1" style="">Puente para DPS, compuesto por:</td><td colspan="1" rowspan="4" style="text-align:center">Si/No</td><td colspan="1" rowspan="4" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:36px;">- Fleje de 1 m x 1,2 mm</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:48px;">- Tres (3) conectores de apriete a fleje</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:45px;">- Tres (3) Tornillos M12, tuercas y arandelas.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:51px;text-align:center">6</td><td colspan="1" rowspan="1" style="">Un (1) Conector fleje a fleje, para el Puente para DPS a Fleje Principal</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:51px;text-align:center">7</td><td colspan="1" rowspan="1" style="">Fleje Principal 11 m</td><td colspan="1" rowspan="1" style="text-align:center">Si/No</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="6" style="height:66px;text-align:center">8</td><td colspan="1" rowspan="1" style="">Tres (3) Acoples de apantallamiento.</td><td colspan="1" rowspan="6" style="text-align:center">Si/No</td><td colspan="1" rowspan="6" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;"> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:43px;">Cada uno compuesto por:</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:34px;">- Conector, un extremo para cable calibre 4 AWG de cobre esta&#241;ado y el otro extremo para los hilos de cobre del apantallamiento que equivalen a un conductor de 25 mm^2.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:40px;">- Cable 4 AWG cobre esta&#241;ado, largo 0,5 m.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:49px;">- Fleje de 20 cm x 1,2 mm.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">9</td><td colspan="1" rowspan="1" style="">Tres (3) Conectores fleje a fleje, para los Acoples de apantallamiento a fleje Principal</td><td colspan="1" rowspan="1" style="text-align:center">Si/No</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:57px;text-align:center">10</td><td colspan="1" rowspan="1" style="">Conector fleje a varilla</td><td colspan="1" rowspan="1" style="text-align:center">Si/No</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">11</td><td colspan="1" rowspan="1" style="">Varilla largo 2,4 m, di&#225;metro 15 mm</td><td colspan="1" rowspan="1" style="text-align:center">Si/No</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center">12</td><td colspan="1" rowspan="1" style="">Seis (6) Abrazaderas en cinta de acero (ET450) 3/8 “ x 1,5 m</td><td colspan="1" rowspan="1" style="text-align:center">Si/No</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:49px;text-align:center">13</td><td colspan="1" rowspan="1" style="">Seis (6) Hebillas 3/8 “ (ET450)</td><td colspan="1" rowspan="1" style="text-align:center">Si/No</td><td colspan="1" rowspan="1" style=""> </td></tr></table><br /></div> 
+<h2 id="heading_50" >ANEXO 1. LISTADO DE C&#211;DIGOS DE MATERIAL.</h2> <br /><div style="width:600px;"><table><tr><td colspan="2" rowspan="1" style="width:232px;height:38px;text-align:center"><b>Listado de c&#243;digos</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:38px;text-align:center"><b>C&#243;digo</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Descripci&#243;n</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:47px;text-align:center"><b>201075</b></td><td colspan="1" rowspan="1" style="text-align:center">Kit de puesta a tierra BT, acero inox.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:44px;text-align:center"><b>201147</b></td><td colspan="1" rowspan="1" style="text-align:center">SPT Secccionador Bajo Carga Telecontrol MT</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:51px;text-align:center"><b>201150</b></td><td colspan="1" rowspan="1" style="text-align:center">ET492 SPT ACERO 6.3 RED COMPACTA</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:51px;text-align:center"><b>200291</b></td><td colspan="1" rowspan="1" style="text-align:center">Sistema de puesta a tierra para afloramiento LA228-ET492 </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:36px;text-align:center"><b>200290</b></td><td colspan="1" rowspan="1" style="text-align:center">Sistema de puesta a tierra de Reconectador ET492 </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:48px;text-align:center"><b>200289</b></td><td colspan="1" rowspan="1" style="text-align:center">Sistema de puesta a tierra de transformador con DPS en soporte de transformador trif&#225;sico &gt; 15 KVA ET492 </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:45px;text-align:center"><b>200288</b></td><td colspan="1" rowspan="1" style="text-align:center">Sistema de puesta a tierra de transformador con DPS en soporte de transformador bif&#225;sico &lt;= 15 KVA ET492 </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:51px;text-align:center"><b>200287</b></td><td colspan="1" rowspan="1" style="text-align:center">Sistema de puesta a tierra de transformador con DPS en cruceta ET492 </td></tr></table><br /></div><br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 560, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET203 Postes de concreto para instalación de caja de medidores  | Likinormas</title>
+	<meta name="description" content="poste  de  concreto; redes aereas
+" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/451" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F451.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/451" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/451" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '24');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET203 Postes de concreto para instalaci&#243;n de caja de medidores </h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET 203</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">02/06/1998</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/451">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F451&amp;nodoid=451', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et203_postes_concreto_instalacion_caja_medidores.html#heading_0">1.	- OBJETO DE LA ESPECIFICACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et203_postes_concreto_instalacion_caja_medidores.html#heading_1">2.	 - CONDICIONES DE UTILIZACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et203_postes_concreto_instalacion_caja_medidores.html#heading_2">2.1 - Lugar de instalaci&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et203_postes_concreto_instalacion_caja_medidores.html#heading_3">2.2 - Condiciones clim&#225;ticas</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et203_postes_concreto_instalacion_caja_medidores.html#heading_4">3.	 Detalles Constructivos</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et203_postes_concreto_instalacion_caja_medidores.html#heading_5">3.1 Dimensiones</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et203_postes_concreto_instalacion_caja_medidores.html#heading_6">3.2 Fabricaci&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et203_postes_concreto_instalacion_caja_medidores.html#heading_7">3.3 Montaje</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et203_postes_concreto_instalacion_caja_medidores.html#heading_8">3.4 Identificaci&#243;n</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et203_postes_concreto_instalacion_caja_medidores.html#heading_9">3.5 Deformaciones:</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et203_postes_concreto_instalacion_caja_medidores.html#heading_10">4. INSPECCI&#211;N VISUAL Y DIMENSIONAL</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et203_postes_concreto_instalacion_caja_medidores.html#heading_11">4.1 PRUEBA DE CARGA DE FLEXI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et203_postes_concreto_instalacion_caja_medidores.html#heading_12"> 4.2 PRUEBA DE CARGA DE ROTURA</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et203_postes_concreto_instalacion_caja_medidores.html#heading_13">4.3 Pruebas y Ensayos:</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<br />
+<h2 id="heading_0" >1.	- OBJETO DE LA ESPECIFICACI&#211;N</h2>
+Esta especificaci&#243;n t&#233;cnica establece las condiciones que deben satisfacer los postes de concreto para instalaci&#243;n de caja para medidores.<br />
+<h2 id="heading_1" >2.	 - CONDICIONES DE UTILIZACI&#211;N</h2>
+<h3 id="heading_2" >2.1 - Lugar de instalaci&#243;n</h3>
+<br />Los postes de concreto para instalar cajas para medidores ser&#225;n ubicados en lugares donde no sea posible su instalaci&#243;n en la fachada de las viviendas.<br />
+<h3 id="heading_3" >2.2 - Condiciones clim&#225;ticas</h3>
+Ser&#225;n empleados a la intemperie, siendo &#233;sta generalmente de clima c&#225;lido y h&#250;medo.<br />Los par&#225;metros de operaci&#243;n son los siguientes:<br /><br />- Altura sobre el nivel del mar: 2640 m<br />- Humedad relativa: 90%<br />- Temperatura ambiente m&#225;xima: 27 &#176;C<br />- Temperatura ambiente m&#237;nima: -5 &#176;C<br />- Temperatura ambiente promedio: 14 &#176;C<br />
+<h2 id="heading_4" >3.	 Detalles Constructivos</h2>
+<h3 id="heading_5" >3.1 Dimensiones</h3>
+Los postes deben ser de secci&#243;n rectangular, con las siguientes medidas:<br /><br />Longitud total: 4500 mm<br />Ancho frontal: 150 mm<br />Lateral : 130 mm<br />La tensi&#243;n de ruptura es de 250 Kgf.<br /><br />El poste tiene una secci&#243;n rectangular hueca de 70x50 mm, a lo largo del poste con el fin de instalar los conductores de <a href="et203_postes_concreto_instalacion_caja_medidores.html#" id="version-72" class="externalLink  glosarioLink">acometida</a> al cliente.<br /><br />El hueco que permite el acceso al interior del poste deber&#225; tener en su parte inferior una pendiente que no permite el f&#225;cil ingreso de la lluvia.<br /><br />En su cima tendr&#225; perforaciones de 20mm para instalar pernos de retenci&#243;n de acometidas y en su parte inferior para <a href="et203_postes_concreto_instalacion_caja_medidores.html#" id="version-342" class="externalLink  glosarioLink">puesta a tierra</a>.<br />
+<h3 id="heading_6" >3.2 Fabricaci&#243;n</h3>
+Los postes deben fabricarse, con concreto y refuerzo met&#225;lico utilizando &#250;nicamente formaletas met&#225;licas, que aseguren uniformidad en su forma y exactitud en sus dimensiones. En general, los agregados y las armaduras deben cumplir la Norma ICONTEC correspondientes.<br /><br />El armado de la canasta del refuerzo principal, deben ir aseguradas mediante amarres con <a href="et203_postes_concreto_instalacion_caja_medidores.html#" id="version-84" class="externalLink  glosarioLink">alambre</a> o puntos de soldadura alternados, entre los ret&#237;culos de armado. La canasta debe llevar 4 varillas de refuerzo a todo lo largo del poste en forma sim&#233;trica, varillas transversales distribuidas equilibradamente que completen el refuerzo.<br /><br />Las varillas longitudinales deben ser barras corrugadas de acero al carbono para hormig&#243;n armado y/o cables de acero para concreto pretenzado.<br /><br />La <a href="et203_postes_concreto_instalacion_caja_medidores.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> del concreto utilizado debe ser tal que la resistencia a la compresi&#243;n a los 28 d&#237;as de curado no sea menor de 210 Kgf/cm<sup>2</sup> (3000 psi) y para pretensado 5000 psi; debe cumplir con la Ley 400/97 y el Decreto 33/98, Reglamento de Construcciones Sismo-resistentes NSR-98. El proceso de fabricaci&#243;n puede ser mediante <a href="et203_postes_concreto_instalacion_caja_medidores.html#" id="version-278" class="externalLink  glosarioLink">m&#233;todo</a> de vibrado el cual debe hacerse simult&#225;neamente con el vaciado en forma sucesiva o por medio del centrifugado. El fabricante debe acreditar a trav&#233;s de laboratorio id&#243;neo y responsable las caracter&#237;sticas f&#237;sicas y estructurales de la mezcla o dosificaci&#243;n del concreto utilizado.<br /><br />El curado del poste puede efectuarse por cualquier <a href="et203_postes_concreto_instalacion_caja_medidores.html#" id="version-278" class="externalLink  glosarioLink">m&#233;todo</a> que garantice y conserve las propiedades qu&#237;micas, mec&#225;nicas y de acabado (superficie lisa sin hormigueros, ni desprendimientos de concreto). No se aceptan postes amasados y compactados a mano.<br /><br />El agregado aplicado debe ser limpio, r&#237;gido, durable y no contener suciedad, lodos, sustancias org&#225;nicas o cualquier elemento que sea da&#241;ino para el concreto; el agregado grueso o gravilla su tama&#241;o debe estar en un rango entre 13 y 19 mm.<br /><br />Se aceptan aditivos aplicables que permitan mejorar la durabilidad y otras propiedades del concreto, sin disminuir su capacidad para resistir refuerzos. No se aceptan aditivos que contengan cloruros.<br />
+<h3 id="heading_7" >3.3 Montaje</h3>
+La caja del medidor, se instalara de tal forma que cubra la abertura de llegada y salida de la <a href="et203_postes_concreto_instalacion_caja_medidores.html#" id="version-72" class="externalLink  glosarioLink">acometida</a> y se fijar&#225; al poste mediante una platina de 180 x 40 x 2 mm. Con cinta met&#225;lica inoxidable.<br />
+<h3 id="heading_8" >3.4 Identificaci&#243;n</h3>
+Todos los postes deben llevar en forma legible y visible una vez hincados, las siguientes informaciones:<br /><br />Marca de f&#225;brica<br />Clase de designaci&#243;n: Peso y longitud del poste, tensi&#243;n de rotura.<br />Fecha de fabricaci&#243;n<br />Codensa SA ESP<br />C&#243;digo SAP 1005450<br /><br />Es importante se&#241;alizar hasta la longitud donde ir&#225; hincado el poste y el centro de gravedad.<br />
+<h3 id="heading_9" >3.5 Deformaciones:</h3>
+El poste bajo una acci&#243;n de carga aplicada a 20 cm de la cima, con una intensidad igual al 40% de la carga de rotura (250 kgf), no debe producir una flecha superior al 3% de la longitud libre del poste.<br /><br />Defectos: Se rechazar&#225;n los postes por las siguientes causas:<br /><br />Defectos Cr&#237;ticos.<br /><br />- La resistencia a la compresi&#243;n del concreto no cumple con las especificaciones m&#237;nimas.<br />- Postes con resanes, cuando la profundidad de &#233;stos haya llegado hasta el refuerzo principal<br /><br />- Los resanes superficiales hechos con mortero sin el aditivo apropiado para adherencia a concreto viejo o en forma inadecuada.<br /><br />- Estructura met&#225;lica a la vista, ya sean varillas, alambres o cables.<br /><br />- Recubrimiento menor de 20 mm, desde el eje de la varilla de refuerzo principal a la superficie exterior del poste<br /><br />- Grietas transversales o longitudinales<br /><br />- Ranuras longitudinales muy amplias y profundas por mal cierre de la formaleta.<br /><br />- Destrucci&#243;n parcial o total de las secciones de cima o base.<br /><br />Defectos Mayores.<br /><br />- Perforaciones con el eje desviado respecto a su posici&#243;n te&#243;rica o de di&#225;metro inferior al especificado.<br /><br />- Superficie del poste con rugosidades pronunciadas, burbujas en cantidad exagerada o manchas por utilizaci&#243;n inadecuada de sellantes.<br /><br />Defectos Menores<br /><br />- Falta de la informaci&#243;n de la marca de f&#225;brica, fecha de fabricaci&#243;n, etc.<br /><br />- Falta de la se&#241;al del nivel de enterramiento y del centro de gravedad.<br /><br />Plan de Muestreo: Durante el proceso de recepci&#243;n se establece el siguiente plan de muestreo, en el que se determina el tama&#241;o del <a href="et203_postes_concreto_instalacion_caja_medidores.html#" id="version-264" class="externalLink  glosarioLink">lote</a>, la cantidad de postes a los cuales se les debe practicar la <a href="et203_postes_concreto_instalacion_caja_medidores.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> visual o rechazo del mismo.<br />
+<h2 id="heading_10" >4. <a href="et203_postes_concreto_instalacion_caja_medidores.html#" id="version-235" class="externalLink  glosarioLink">INSPECCI&#211;N</a> VISUAL Y DIMENSIONAL</h2><div style="width:333px;"><table><tr><td colspan="1" rowspan="1" style="width:111px;height:9px;text-align:center"><b>Tama&#241;o del <a href="et203_postes_concreto_instalacion_caja_medidores.html#" id="version-264" class="externalLink  glosarioLink">lote</a></b></td><td colspan="1" rowspan="1" style="width:100px;text-align:center"><b>Tama&#241;o de la muestra</b></td><td colspan="1" rowspan="1" style="width:122px;text-align:center"><b>N&#250;mero permitido de defectuosos</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">10 - 25</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">0</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">26  - 50</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">51 - 90</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">91 - 150</td><td colspan="1" rowspan="1" style="text-align:center">20</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">151 - 280 </td><td colspan="1" rowspan="1" style="text-align:center">32</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">281 - 500</td><td colspan="1" rowspan="1" style="text-align:center">50</td><td colspan="1" rowspan="1" style="text-align:center">5</td></tr></table><br /></div><h3 id="heading_11" >4.1 PRUEBA DE CARGA DE FLEXI&#211;N</h3><div style="width:333px;"><table><tr><td colspan="1" rowspan="1" style="width:111px;height:9px;text-align:center"><b>Tama&#241;o del <a href="et203_postes_concreto_instalacion_caja_medidores.html#" id="version-264" class="externalLink  glosarioLink">lote</a></b></td><td colspan="1" rowspan="1" style="width:100px;text-align:center"><b>Tama&#241;o de la muestra</b></td><td colspan="1" rowspan="1" style="width:122px;text-align:center"><b>N&#250;mero permitido de defectuosos</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">16 - 50</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">51 - 151</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">0</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">151 - 500</td><td colspan="1" rowspan="1" style="text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr></table><br /></div><h3 id="heading_12" > 4.2 PRUEBA DE CARGA DE ROTURA</h3><div style="width:333px;"><table><tr><td colspan="1" rowspan="1" style="width:111px;height:9px;text-align:center"><b>Tama&#241;o del <a href="et203_postes_concreto_instalacion_caja_medidores.html#" id="version-264" class="externalLink  glosarioLink">lote</a></b></td><td colspan="1" rowspan="1" style="width:100px;text-align:center"><b>Tama&#241;o de la muestra</b></td><td colspan="1" rowspan="1" style="width:122px;text-align:center"><b>N&#250;mero permitido de defectuosos</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">16 - 50</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">0</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">51 - 500</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td></tr></table><br /></div><h3 id="heading_13" >4.3 Pruebas y Ensayos:</h3>
+Se deben realizar los siguientes ensayos:<br /><br /><a href="et203_postes_concreto_instalacion_caja_medidores.html#" id="version-235" class="externalLink  glosarioLink">Inspecci&#243;n</a> visual y medida de las dimensiones las cuales no deben sobrepasar un +5mm de tolerancia en la secci&#243;n transversal y &#177;1% longitudinalmente.<br /><br />Se deben realizar las pruebas de flexi&#243;n y rotura a los postes.<br /><br />Se deber&#225;n hacer ensayos de la resistencia a la compresi&#243;n del concreto de acuerdo con las siguientes edades:<br /><br />7 d&#237;as, 14 d&#237;as y 28 d&#237;as. Presentar el protocolo de prueba correspondiente.<br /><br />Presentar protocolos de prueba del <a href="et203_postes_concreto_instalacion_caja_medidores.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> de tracci&#243;n, l&#237;mite de fluencia y porcentaje de alargamiento del acero.<br /><br />El valor de todos los ensayos de laboratorio y pruebas correspondientes ordenadas por Codensa S.A. ESP ser&#225;n por cuenta del contratista. Para casos de compa&#241;&#237;as extranjeras deben presentar certificados de los protocolos de prueba por laboratorio reconocido y homologado por la entidad competente del pa&#237;s de origen.<br /><br /><b>5.	CARACTER&#205;STICAS FIGURA 1</b><br /><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/451/Dibujo ET203 FIGURA4.JPG" src="http://likinormas.micodensa.com/media/cache/images/800x800/wikiimages/31353336333132333635-74241-Dibujo ET203 FIGURA4.JPG" title=""  /></div><div class="texto_imagen_articulos" style="max-width:800px"></div></div></div><br /><br /><b>NOTA :</b> Todas las medidas est&#225;n dadas en mm<br /><br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 451, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

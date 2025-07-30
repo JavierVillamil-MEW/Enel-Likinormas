@@ -1,0 +1,22 @@
+uuid: 511ed518-abae-47a6-a83c-b958e0c05d41
+langcode: es
+status: true
+dependencies:
+  config:
+    - block_content.type.rules_title_description_and_item
+id: block_content.rules_title_description_and_item.status
+field_name: status
+entity_type: block_content
+bundle: rules_title_description_and_item
+label: Publicado
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Activado
+  off_label: Desactivado
+field_type: boolean

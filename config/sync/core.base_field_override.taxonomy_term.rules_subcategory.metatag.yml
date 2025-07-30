@@ -1,0 +1,18 @@
+uuid: b14d20fe-2166-4287-a5ac-9a757828a6ce
+langcode: es
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.rules_subcategory
+id: taxonomy_term.rules_subcategory.metatag
+field_name: metatag
+entity_type: taxonomy_term
+bundle: rules_subcategory
+label: 'Metatags (Hidden field for JSON support)'
+description: 'Las metaetiquetas de la entidad.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: map

@@ -1,0 +1,19 @@
+uuid: f660f735-d481-44e9-a55c-c61c63375e45
+langcode: es
+status: true
+dependencies:
+  module:
+    - node
+id: node.description_404
+field_name: description_404
+entity_type: node
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

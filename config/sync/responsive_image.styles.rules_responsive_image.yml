@@ -1,0 +1,19 @@
+uuid: 896f1771-452d-4491-9c36-2dfaae7066c5
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.rules_replace_and_webp
+    - image.style.rules_web_image
+  theme:
+    - likinormas
+id: rules_responsive_image
+label: 'Rules: responsive image'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: rules_replace_and_webp
+    breakpoint_id: likinormas.screen.sm-max
+    multiplier: 1x
+breakpoint_group: likinormas.screen
+fallback_image_style: rules_web_image

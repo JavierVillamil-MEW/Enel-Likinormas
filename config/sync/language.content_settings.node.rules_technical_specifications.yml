@@ -1,0 +1,11 @@
+uuid: adf8febd-42cd-47b9-b3df-c4e8c6f9f0f2
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.rules_technical_specifications
+id: node.rules_technical_specifications
+target_entity_type_id: node
+target_bundle: rules_technical_specifications
+default_langcode: site_default
+language_alterable: false

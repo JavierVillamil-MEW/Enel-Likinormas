@@ -1,0 +1,125 @@
+body.path-normas,
+body.path-especificaciones,
+body.path-buscador {
+  .field-button-mobile {
+    @extend %button-mobile-filter;
+  }
+}
+
+body:not(.path-frontpage) {
+  .block-form-filter-list {
+    padding: 1.5rem var(--margin-width-container-secondary) 2.4rem;
+
+    .form-filter-list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      column-gap: 1.9rem;
+      width: 100%;
+
+      h2 {
+        color: $color-white;
+        font-family: 'RoobertENEL-Bold';
+        font-size: 2.2rem;
+        margin-right: 1.5rem;
+        margin-bottom: 0;
+        min-width: fit-content;
+
+        @include media-query(tabletL) {
+          font-size: 1.5rem;
+        }
+
+        @include media-query(desktopM) {
+          font-size: 2.2rem;
+          width: max-content;
+        }
+      }
+
+      &>fieldset {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+      }
+
+      .form-item {
+        legend {
+          display: none;
+        }
+
+        label {
+          display: block !important;
+          position: relative !important;
+          width: auto !important;
+          height: auto !important;
+          margin: 0 !important;
+          color: $color-white;
+          font-size: 1.3rem;
+          font-family: 'RoobertENEL-Bold';
+        }
+
+        input {
+          &[name="effective_date_value"] {
+            padding: 1rem 1.5rem 1rem 1rem;
+            width: 100%;
+
+            @include media-query(tabletL) {
+              max-width: 18rem;
+            }
+
+          }
+        }
+
+        select {
+          background-image: url('../assets/images/arrow-select.svg');
+          background-size: 1.1rem 0.7rem;
+
+          &.error {
+            &+.select2 .select2-selection {
+              border: 2px solid $color-red;
+              box-shadow: 0 0 0 0.1rem rgba($color: $color-red, $alpha: 25%);
+            }
+          }
+        }
+
+        .select2 {
+          .selection {
+            .select2-selection {
+              height: 4.5rem;
+              border: 0;
+              border-radius: 0;
+              color: #707070;
+              font-family: "RoobertENEL-Light";
+              font-size: 1.5rem;
+              line-height: 1.5;
+              display: block;
+              width: 100%;
+              padding: 1rem 2.25rem 1rem 0.75rem;
+              background-color: $color-white;
+              background-image: url('../assets/images/arrow-select.svg');
+              background-size: 1.1rem 0.7rem;
+              background-repeat: no-repeat;
+              background-position: right 0.75rem center;
+
+              &__rendered {
+                padding: 0;
+              }
+
+              &__arrow {
+                display: none;
+              }
+            }
+          }
+        }
+
+      }
+
+    }
+  }
+
+}
+
+body.user-logged-in.path-comment {
+  main {
+    margin-top: 15rem;
+  }
+}

@@ -1,0 +1,23 @@
+uuid: 663caf2b-9a24-43a3-a067-6b9dc58feb9f
+langcode: es
+status: true
+dependencies:
+  config:
+    - field.storage.node.validate
+    - node.type.rules_technical_specifications
+id: node.rules_technical_specifications.validate
+field_name: validate
+entity_type: node
+bundle: rules_technical_specifications
+label: 'Asociar glosario al campo de texto de la especificación'
+description: 'Este checkbox se activa para realizar una asociación de los términos del glosario con el campo html al momento de guardar el contenido.'
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Activado
+  off_label: Desactivado
+field_type: boolean

@@ -1,0 +1,30 @@
+uuid: fd72645f-5ff5-48dc-b0c4-58efbfaa8265
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:rules_title_description_and_item:e28e6901-b52e-4d58-9225-52f5f386f5dc'
+  module:
+    - block_content
+    - system
+  theme:
+    - likinormas
+id: loginblock
+theme: likinormas
+region: content
+weight: -4
+provider: null
+plugin: 'block_content:e28e6901-b52e-4d58-9225-52f5f386f5dc'
+settings:
+  id: 'block_content:e28e6901-b52e-4d58-9225-52f5f386f5dc'
+  label: 'Login Block'
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: /user/login

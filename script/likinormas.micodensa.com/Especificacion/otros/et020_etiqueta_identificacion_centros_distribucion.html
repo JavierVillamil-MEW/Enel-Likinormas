@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET020 Etiqueta de identificación para centros de distribución | Likinormas</title>
+	<meta name="description" content="etiqueta; identificacion para centros de distribucion" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/432" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F432.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/432" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/432" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '54');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET020 Etiqueta de identificaci&#243;n para centros de distribuci&#243;n</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET 020</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">24/08/2004</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/432">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F432&amp;nodoid=432', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et020_etiqueta_identificacion_centros_distribucion.html#heading_0">1. OBJETO </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et020_etiqueta_identificacion_centros_distribucion.html#heading_1">2. ALCANCE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et020_etiqueta_identificacion_centros_distribucion.html#heading_2">3. DIMENSIONES DE LA ETIQUETA  </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et020_etiqueta_identificacion_centros_distribucion.html#heading_3">5. CARACTER&#205;STICAS PARTICULARES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et020_etiqueta_identificacion_centros_distribucion.html#heading_4">6. INSTALACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et020_etiqueta_identificacion_centros_distribucion.html#heading_5">7. PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et020_etiqueta_identificacion_centros_distribucion.html#heading_6">7.1 Prueba de Adhesi&#243;n: </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et020_etiqueta_identificacion_centros_distribucion.html#heading_7">7.2 Prueba de adhesi&#243;n al liner protector: </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et020_etiqueta_identificacion_centros_distribucion.html#heading_8">7.3 Pruebas de inmersi&#243;n:</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et020_etiqueta_identificacion_centros_distribucion.html#heading_9">7.4 Resistencia a la temperatura: </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et020_etiqueta_identificacion_centros_distribucion.html#heading_10">8. REQUISITOS DE LAS OFERTAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et020_etiqueta_identificacion_centros_distribucion.html#heading_11">9. GARANT&#205;A DE F&#193;BRICA</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1. OBJETO </h2>Establecer las especificaciones  t&#233;cnicas que deber&#225; cumplir la etiqueta para la identificaci&#243;n de los centros de distribuci&#243;n de propiedad de CODENSA S.A. ESP y de PARTICULARES. <br />
+<h2 id="heading_1" >2. ALCANCE</h2>
+Con esta etiqueta se identificar&#225; en terreno la propiedad de los transformadores de CODENSA S.A. ESP y particulares. En los casos que aplique, la etiqueta podr&#225; contener informaci&#243;n acerca del transformador tal como N&#250;mero de serie, fechas de fabricaci&#243;n, entre otros. <br />
+<h2 id="heading_2" >3. DIMENSIONES DE LA ETIQUETA  </h2>
+La etiqueta deber&#225; tener las siguientes dimensiones:<br /><br /><b>FIGURA 1.</b><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/432/Dibujo 020 Figura 1.JPG" src="http://likinormas.micodensa.com/media/cache/images/500x355/wikiimages/393930363733343530-7832-Dibujo 020 Figura 1.JPG" title=""  /></div><div class="texto_imagen_articulos" style="max-width:500px"></div></div></div><br /><br />La informaci&#243;n contenida en las etiquetas, ser&#225; especificada dentro de la solicitud de ofertas respectiva.<br /> 
+<h2 id="heading_3" >5. CARACTER&#205;STICAS PARTICULARES</h2>
+La etiqueta deber&#225; cumplir con las siguientes caracter&#237;sticas:<br /><br />-	El <a href="et020_etiqueta_identificacion_centros_distribucion.html#" id="version-274" class="externalLink  glosarioLink">material</a> de la etiqueta debe ser poli&#233;ster o un <a href="et020_etiqueta_identificacion_centros_distribucion.html#" id="version-274" class="externalLink  glosarioLink">material</a> con caracter&#237;sticas similares de resistencia y durabilidad. <br />-	Debe permitir impresi&#243;n en color negro por medio de impresoras de transferencia t&#233;rmica.<br />-	El fondo de la etiqueta debe ser amarillo para su f&#225;cil lectura a grandes distancias.<br />-	Debe resistir la acci&#243;n de la intemperie, de los rayos UV y de temperaturas extremas en un rango de –4&#176;C hasta 80&#176;C.<br />-	La etiqueta debe ser de alta resistencia y adherencia a diferentes superficies met&#225;licas.<br />-	Debe ser resistente a la acci&#243;n de aceite, agua y otras sustancias similares.<br />-	El adhesivo no debe presentar sangrado durante periodos de almacenamiento cortos.<br />-	En caso que se intente retirar la etiqueta, este debe presentar rotura y no permitir su reutilizaci&#243;n.<br />-	Debe ser resistente a la abrasi&#243;n.<br /><br />Adicionalmente debe cumplir con todas las caracter&#237;sticas estipuladas en el Anexo 1. Tabla de Caracter&#237;sticas T&#233;cnicas Garantizadas.<br />
+<h2 id="heading_4" >6. INSTALACI&#211;N</h2>
+La etiqueta se instalar&#225; de acuerdo al tipo de transformador as&#237;:<br /><br />-	En centros de transformaci&#243;n capsulados o tipo pedestal,  se ubicar&#225; la etiqueta de identificaci&#243;n del transformador en la puerta de la celda, debajo del visor o ventana de <a href="et020_etiqueta_identificacion_centros_distribucion.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> ( a 2 cm aproximadamente ). <br /><br />-    En centros de transformaci&#243;n con subestaciones tipo local, s&#243;tano,  y poste, se fijar&#225; el r&#243;tulo en la carcasa del transformador y en cara  frontal superior derecha o  cara frontal superior central. <br /><br />En la instalaci&#243;n de la etiqueta o r&#243;tulo se deber&#225; seguir el siguiente procedimiento: <br /><br />a.	Limpiar perfectamente la superficie de sedimentos de humo, grasas y poluci&#243;n ambiental, utilizando para esto materiales y utensilios adecuados como solventes (alcohol industrial, estopa o bayetilla no abrasiva).  <br /><br />b.	Una vez removidos los sedimentos, se debe proceder a secar la superficie, utilizando para ello estopa o bayetilla limpia y se espera m&#237;nimo un (1) minuto para proceder a la instalaci&#243;n o fijaci&#243;n.<br /><br />c.	Se procede a fijar la etiqueta desde uno de sus extremos, previendo que haya suficiente espacio en la superficie del transformador, y evitando cualquier tipo de irregularidad en la superficie de fijaci&#243;n.  Una vez adherida la etiqueta, se debe asegurar que extienda uniformemente y no se presenten bolsas de aire.<br /><br />Posteriormente, se debe asegurar la adherencia de la etiqueta ejerciendo presi&#243;n sobre su superficie con un rodillo de caucho liso (del ancho de la etiqueta), en direcci&#243;n longitudinal de la etiqueta.  El rodillo se deber&#225; pasar 2 &#243; 3 veces sobre la etiqueta.<br /><br />El rodillo debe ser de las dimensiones acordes para el <a href="et020_etiqueta_identificacion_centros_distribucion.html#" id="version-392" class="externalLink  glosarioLink">trabajo</a> de pegado de la etiqueta, y su finalidad es la de ejercer una presi&#243;n uniforme al momento del pegado.<br /><br />Una vez presionada la etiqueta para su adherencia, termina el proceso de    instalaci&#243;n. <br />
+<h2 id="heading_5" >7. PRUEBAS</h2>
+El fabricante debe presentar protocolos de las siguientes pruebas:<br />
+<h3 id="heading_6" >7.1 Prueba de Adhesi&#243;n: </h3>Seg&#250;n ASTM D 3330 en superficies met&#225;licas y policarbonato.<br />
+<h3 id="heading_7" >7.2 Prueba de adhesi&#243;n al liner protector: </h3>Realizada a 180&#176; donde se especifique la velocidad de remoci&#243;n.<br />
+<h3 id="heading_8" >7.3 Pruebas de inmersi&#243;n:</h3>-	En aceite de motor a alta temperatura durante m&#237;nimo 4 horas<br />-	En adhesi&#243;n durante m&#237;nimo 4 horas<br />-	En detergente durante m&#237;nimo 4 horas<br />-	En agua durante m&#237;nimo 36 horas<br /><br />Despu&#233;s de las inmersiones no deben existir cambios aparentes en la etiqueta.<br />
+<h3 id="heading_9" >7.4 Resistencia a la temperatura: </h3>
+Debe someterse a una temperatura constante de 80&#176;C durante 24 horas y no debe presentar problemas de adhesi&#243;n. De igual forma debe someterse a una temperatura de –4&#176;C durante 24 horas sin que se presente cambio aparente.<br />
+<h2 id="heading_10" >8. REQUISITOS DE LAS OFERTAS</h2>
+El Oferente deber&#225; incluir con su propuesta, la siguiente informaci&#243;n:<br />
+<ul><li>Planilla de caracter&#237;sticas t&#233;cnicas garantizadas, la cual deber&#225; ser diligenciada completamente, firmada y sellada por el oferente.</li></ul>
+ 
+<ul><li>Cat&#225;logos originales completos y actualizados del fabricante, que correspondan a los bienes cotizados, en la planilla de caracter&#237;sticas t&#233;cnicas garantizadas. </li></ul>
+
+<ul><li>Protocolos de pruebas de acuerdo con las normas indicadas en el numeral 6 de la presente especificaci&#243;n..</li></ul>
+
+<ul><li><a href="et020_etiqueta_identificacion_centros_distribucion.html#" id="version-288" class="externalLink  glosarioLink">Muestra</a> de la referencia ofertada sin cargo a devoluci&#243;n, con cada una de las caracter&#237;sticas t&#233;cnicas, solicitadas y mencionadas en la presente especificaci&#243;n. </li></ul>
+
+<ul><li>Informaci&#243;n adicional que considere aporta explicaci&#243;n a su dise&#241;o (dibujos,  detalles,  caracter&#237;sticas de operaci&#243;n,  dimensiones y pesos de los materiales ofertados). </li></ul>
+<br />CODENSA S.A. podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones, sin expresi&#243;n de causa ni obligaci&#243;n de compensaci&#243;n.<br />
+<h2 id="heading_11" >9. GARANT&#205;A DE F&#193;BRICA</h2>
+CODENSA S.A. E.S.P requiere como m&#237;nimo, un per&#237;odo de garant&#237;a de f&#225;brica de doce (12) meses, a partir de la entrega de las etiquetas.<br /><br /><b>ANEXO 1. TABLA DE CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS</b><br /><div style="width:552px;"><table><tr><td colspan="1" rowspan="1" style="width:57px;height:13px;text-align:center"><b>&#205;tem</b></td><td colspan="1" rowspan="1" style="width:290px;text-align:center"><b>Descripci&#243;n</b></td><td colspan="1" rowspan="1" style="width:127px;text-align:center"><b>Solicitado por CODENSA</b></td><td colspan="1" rowspan="1" style="width:78px;text-align:center"><b>Ofertado</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">1</td><td colspan="1" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">2</td><td colspan="1" rowspan="1" style="">Referencia</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">3</td><td colspan="1" rowspan="1" style=""><a href="et020_etiqueta_identificacion_centros_distribucion.html#" id="version-274" class="externalLink  glosarioLink">Material</a> de la etiqueta</td><td colspan="1" rowspan="1" style="text-align:center">Poli&#233;ster o similar</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">4</td><td colspan="1" rowspan="1" style="">Compatible para impresi&#243;n por transferencia t&#233;rmica </td><td colspan="1" rowspan="1" style="text-align:center">S&#237;</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">5</td><td colspan="1" rowspan="1" style="">Tipo de adhesivo</td><td colspan="1" rowspan="1" style="text-align:center">#300 m&#237;nimo</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">6</td><td colspan="1" rowspan="1" style="">Espesor de la etiqueta</td><td colspan="1" rowspan="1" style="text-align:center">70 micrones m&#237;n.</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">7</td><td colspan="1" rowspan="1" style="">Liner (<a href="et020_etiqueta_identificacion_centros_distribucion.html#" id="version-274" class="externalLink  glosarioLink">Material</a> y espesor)</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">8</td><td colspan="1" rowspan="1" style="">Adhesi&#243;n a superficies met&#225;licas (N/m)</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">9</td><td colspan="1" rowspan="1" style="">Pruebas:</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center"> </td><td colspan="1" rowspan="1" style="">Adhesi&#243;n medida a 180&#176; seg&#250;n ASTM D3330</td><td colspan="1" rowspan="1" style="text-align:center">S&#237;</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center"> </td><td colspan="1" rowspan="1" style="">Adhesi&#243;n al liner protector a 180&#176;</td><td colspan="1" rowspan="1" style="text-align:center">S&#237;</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center"> </td><td colspan="1" rowspan="1" style="">Pruebas de inmersiones</td><td colspan="1" rowspan="1" style="text-align:center">S&#237;</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center"> </td><td colspan="1" rowspan="1" style="">Prueba de resistencia a la temperatura</td><td colspan="1" rowspan="1" style="text-align:center">S&#237;</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">10</td><td colspan="1" rowspan="1" style=""><a href="et020_etiqueta_identificacion_centros_distribucion.html#" id="version-406" class="externalLink  glosarioLink">Vida &#250;til</a></td><td colspan="1" rowspan="1" style="text-align:center">5 a&#241;os m&#237;nimo</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">11</td><td colspan="1" rowspan="1" style="">Empaque</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">12</td><td colspan="1" rowspan="1" style="">Incluye preparador de superficies?</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">13</td><td colspan="1" rowspan="1" style="">Dimensiones</td><td colspan="1" rowspan="1" style="text-align:center">150 x 200 mm</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:9px;text-align:center">14</td><td colspan="1" rowspan="1" style="">Garant&#237;a</td><td colspan="1" rowspan="1" style="text-align:center">12 meses</td><td colspan="1" rowspan="1" style=""> </td></tr></table><br /></div>
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 432, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

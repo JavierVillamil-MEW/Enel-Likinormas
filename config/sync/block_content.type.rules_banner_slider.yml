@@ -1,0 +1,8 @@
+uuid: ceb3da82-6587-4490-af73-fc39ae7d2443
+langcode: en
+status: true
+dependencies: {  }
+id: rules_banner_slider
+label: 'Banner Slider'
+revision: 0
+description: 'Le permite crear banners para diferentes secciones del sitio web'

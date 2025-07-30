@@ -1,0 +1,8 @@
+uuid: 27624ee4-73c8-4100-a6dd-deab4f501368
+langcode: es
+status: true
+dependencies: {  }
+id: rules-links-of-interest
+label: 'Enlaces de interés'
+description: 'Enlaces de interés del footer'
+locked: false

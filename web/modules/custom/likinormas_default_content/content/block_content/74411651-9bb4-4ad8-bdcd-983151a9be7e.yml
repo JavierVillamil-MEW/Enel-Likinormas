@@ -1,0 +1,43 @@
+_meta:
+  version: '1.0'
+  entity_type: block_content
+  uuid: 74411651-9bb4-4ad8-bdcd-983151a9be7e
+  bundle: rules_title_description_and_item
+  default_langcode: es
+  depends:
+    6050ddab-77e6-4b73-a19b-b2b046c7bf16: file
+    b3a7840f-c728-49e3-9c21-efbc4392b7b7: file
+default:
+  status:
+    -
+      value: true
+  info:
+    -
+      value: 'Registro con Facebook'
+  reusable:
+    -
+      value: true
+  revision_translation_affected:
+    -
+      value: true
+  background_image:
+    -
+      entity: 6050ddab-77e6-4b73-a19b-b2b046c7bf16
+      alt: city_backgound
+      title: city_backgound
+      width: 1920
+      height: 1080
+  background_image_mobile:
+    -
+      entity: b3a7840f-c728-49e3-9c21-efbc4392b7b7
+      alt: Mobile_backgroung
+      title: ''
+      width: 1810
+      height: 3200
+  description_section:
+    -
+      value: 'Lorem Ipsum'
+  title_section:
+    -
+      value: '<h1>Completa tu Informacion</h1>'
+      format: full_html

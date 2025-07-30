@@ -1,0 +1,21 @@
+uuid: 76f9cf23-668f-46b6-98c2-4988a72e6d58
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.specification_content
+    - node.type.rules_technical_specifications
+  module:
+    - text
+id: node.rules_technical_specifications.specification_content
+field_name: specification_content
+entity_type: node
+bundle: rules_technical_specifications
+label: 'Cuerpo de la especificación'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

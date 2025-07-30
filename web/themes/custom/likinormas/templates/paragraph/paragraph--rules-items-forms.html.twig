@@ -1,0 +1,9 @@
+<div class="d-flex info-item">
+  <div class="field__item-img">
+    {{ content.image_item }}
+  </div>
+  <div class="field__item-info">
+    <h2 class="field__item-info-title">{{ content.title_item|render|striptags }}</h2>
+    <p class="field__item-info-description">{{ content.description_item|render|striptags }}</p>
+  </div>
+</div>

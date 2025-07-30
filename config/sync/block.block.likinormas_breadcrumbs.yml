@@ -1,0 +1,22 @@
+uuid: 5dad1189-fc00-49b8-af49-0fd64787743b
+langcode: es
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - likinormas
+_core:
+  default_config_hash: SNibDf62J7VInxiG1ofl6r5qrk-n80bBUNb-vMihOxQ
+id: likinormas_breadcrumbs
+theme: likinormas
+region: breadcrumb
+weight: 0
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: 'Enlaces de ayuda a la navegación'
+  label_display: '0'
+  provider: system
+visibility: {  }

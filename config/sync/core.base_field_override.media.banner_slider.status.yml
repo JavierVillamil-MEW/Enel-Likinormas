@@ -1,0 +1,22 @@
+uuid: 285075b6-8bef-4909-ac2a-f6d31e2db0bb
+langcode: es
+status: true
+dependencies:
+  config:
+    - media.type.banner_slider
+id: media.banner_slider.status
+field_name: status
+entity_type: media
+bundle: banner_slider
+label: Publicado
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Activado
+  off_label: Desactivado
+field_type: boolean

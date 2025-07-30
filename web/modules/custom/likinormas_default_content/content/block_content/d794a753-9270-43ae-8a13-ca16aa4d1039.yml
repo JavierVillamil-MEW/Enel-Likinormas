@@ -1,0 +1,43 @@
+_meta:
+  version: '1.0'
+  entity_type: block_content
+  uuid: d794a753-9270-43ae-8a13-ca16aa4d1039
+  bundle: rules_title_description_and_item
+  default_langcode: es
+  depends:
+    f6334e33-e9c8-433d-9544-4e41e320afa6: file
+    f680eb9c-0a7b-4038-8ae0-6c5834cb6d0a: file
+default:
+  status:
+    -
+      value: true
+  info:
+    -
+      value: 'Registro en LikiNormas'
+  reusable:
+    -
+      value: true
+  revision_translation_affected:
+    -
+      value: true
+  background_image:
+    -
+      entity: f6334e33-e9c8-433d-9544-4e41e320afa6
+      alt: city_backgound
+      title: city_backgound
+      width: 1920
+      height: 1080
+  background_image_mobile:
+    -
+      entity: f680eb9c-0a7b-4038-8ae0-6c5834cb6d0a
+      alt: city_backgound
+      title: ''
+      width: 1810
+      height: 3200
+  description_section:
+    -
+      value: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.'
+  title_section:
+    -
+      value: '<h1>Registro en LikiNormas</h1>'
+      format: full_html

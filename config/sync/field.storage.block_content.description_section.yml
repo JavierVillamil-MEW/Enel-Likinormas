@@ -1,0 +1,19 @@
+uuid: 6daebe2f-5bfe-4f86-bb48-5166c314caa6
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+id: block_content.description_section
+field_name: description_section
+entity_type: block_content
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

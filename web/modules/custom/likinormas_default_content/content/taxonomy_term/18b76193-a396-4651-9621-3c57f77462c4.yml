@@ -1,0 +1,32 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 18b76193-a396-4651-9621-3c57f77462c4
+  bundle: rules_subcategory
+  default_langcode: en
+  depends:
+    f72fc070-c3e5-4e57-853a-d5bebf61f589: taxonomy_term
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: Canalizaciones
+  weight:
+    -
+      value: 0
+  parent:
+    -
+      target_id: 0
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: ''
+      langcode: en
+      pathauto: 1
+  related_category:
+    -
+      entity: f72fc070-c3e5-4e57-853a-d5bebf61f589

@@ -1,0 +1,14 @@
+<div class="container-card {{ paragraph.section_alignment.entity.alignment_class.value }}">
+  <div class="row g-0">
+    <div class="block-card-images col-12 col-lg-6">
+      {{ content.section_image }}
+    </div>
+    <div class="block-card-info col-12 col-lg-6" style="background-color: {{ paragraph.section_color.entity.hex_color.value }}">
+      <div class="block-card-body">
+        <h2 class="title-secondary">{{ content.section_title|render|striptags }}</h2>
+        <p class="block-card-body-text">{{ paragraph.section_description.value }}</p>
+        {{ content.section_button }}
+      </div>
+    </div>
+  </div>
+</div>

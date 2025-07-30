@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET-AT252 Aisladores de suspensión tipo FOG para líneas de transmisión | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/2006" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F2006.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/2006" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/2006" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '54');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET-AT252 Aisladores de suspensi&#243;n tipo FOG para l&#237;neas de transmisi&#243;n</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET-AT252</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">28/01/2005</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/2006">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F2006&amp;nodoid=2006', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#heading_0">1. OBJETO DE LA ESPECIFICACI&#211;N</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#heading_1">2. ALCANCE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#heading_2">3. CONDICIONES DE SERVICIO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#heading_3">4. SISTEMA DE UNIDADES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#heading_4">5. NORMAS DE FABRICACI&#211;N Y PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#heading_5">6. REQUISITOS T&#201;CNICOS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#heading_6">7. PRUEBAS</a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#heading_7">7.1  ENSAYOS TIPO </a></li>
+                    <li class="indexitem"><a class="head_h3" href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#heading_8">7.2 ENSAYO DE RUTINA</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#heading_9">8. EMBALAJE PARA EL TRANSPORTE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#heading_10">9. INFORMACI&#211;N PARA LA OFERTA</a></li>
+                    <li class="indexitem"><a class="head_h2" href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#heading_11">10. GARANT&#205;AS </a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1. OBJETO DE LA ESPECIFICACI&#211;N</h2>	<br />Establecer los requisitos generales que debe cumplir el suministro, fabricaci&#243;n, <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> y ensayos de AISLADORES DE SUSPENSI&#211;N TIPO FOG  de uso exterior a ser utilizados en las L&#237;neas de Transmisi&#243;n de 115 kV de CODENSA S.A.<br /><br />El suministro debe incluir los accesorios necesarios para su instalaci&#243;n, puesta en <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-359" class="externalLink  glosarioLink">servicio</a> y operaci&#243;n,  los planos de construcci&#243;n y los informes de prueba.<br />
+<h2 id="heading_1" >2. ALCANCE</h2>
+La presente especificaci&#243;n se aplicar&#225; a aisladores de suspensi&#243;n tipo fog que adquiera CODENSA S.A. ESP.    <br />
+<h2 id="heading_2" >3. CONDICIONES DE SERVICIO</h2>
+Las condiciones ambientales y el&#233;ctricas del <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> que se deben tener en cuenta para el dise&#241;o de los aisladores, a instalar en el  &#225;rea de concesi&#243;n de CODENSA S.A. E.S.P son los siguientes:   <br /><br /><div style="width:700px;"><table><tr><td colspan="2" rowspan="1" style="width:700px;height:30px;text-align:center"><b>CARACTER&#205;STICAS AMBIENTALES</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">a. Altura sobre el nivel del mar</td><td colspan="1" rowspan="1" style="">2 650 m</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">b. Ambiente</td><td colspan="1" rowspan="1" style="">Tropical</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">c. Temperatura m&#225;xima y m&#237;nima</td><td colspan="1" rowspan="1" style="">40 &#186;C y - 10 &#186;C respectivamente.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">d. Nivel de humedad</td><td colspan="1" rowspan="1" style="">Mayor al  90 %</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">e. Velocidad viento (m/s)</td><td colspan="1" rowspan="1" style="">&lt; 34</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">f. Nivel <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-145" class="externalLink  glosarioLink">contaminaci&#243;n</a> (IEC 60815)</td><td colspan="1" rowspan="1" style="">    Muy pesado (IV)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">g. Radiaci&#243;n Solar m&#225;xima (W/m&#178;) </td><td colspan="1" rowspan="1" style="">    &lt; 1000</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">i.  Instalaci&#243;n</td><td colspan="1" rowspan="1" style="">Intemperie</td></tr></table><br /></div><br /><div style="width:700px;"><table><tr><td colspan="2" rowspan="1" style="width:700px;height:30px;text-align:center"><b>CARACTER&#205;STICAS EL&#201;CTRICAS DEL SISTEMA </b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">a.&#160;<a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-384" class="externalLink  glosarioLink">tensi&#243;n nominal</a> del <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-363" class="externalLink  glosarioLink">sistema</a>   (kV)</td><td colspan="1" rowspan="1" style="text-align:center">115</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">b. <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-377" class="externalLink  glosarioLink">Tensi&#243;n</a> m&#225;xima del <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-363" class="externalLink  glosarioLink">sistema</a>  (kV)</td><td colspan="1" rowspan="1" style="text-align:center">126,5</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">c. <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-101" class="externalLink  glosarioLink">BIL</a> (kV) a 0 msnm (aislamiento externo)</td><td colspan="1" rowspan="1" style="text-align:center">650</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">d. <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-210" class="externalLink  glosarioLink">Frecuencia</a> del <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-363" class="externalLink  glosarioLink">sistema</a></td><td colspan="1" rowspan="1" style="text-align:center">60</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">e. N&#250;mero de fases</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr></table><br /></div>
+<h2 id="heading_3" >4. SISTEMA DE UNIDADES</h2>
+En todos los documentos t&#233;cnicos se deben expresar las cantidades num&#233;ricas en unidades del <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-363" class="externalLink  glosarioLink">Sistema</a> Internacional (S.I.).  <br />
+<h2 id="heading_4" >5. NORMAS DE FABRICACI&#211;N Y PRUEBAS</h2>
+<div style="width:630px;"><table><tr><td colspan="1" rowspan="1" style="width:130px;height:30px;text-align:center"><b>NORMA</b></td><td colspan="1" rowspan="1" style="width:500px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">ANSI C29.2</td><td colspan="1" rowspan="1" style="">American National Standard for insulators – Wet process porcelain and toughened glass - Suspension type.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">ANSI C29.1</td><td colspan="1" rowspan="1" style="">Test methods for electrical power insulators</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;">ASTM A-153  </td><td colspan="1" rowspan="1" style="">Galvanizado por inmersi&#243;n en caliente para herrajes y perfiles estructurales en hierro y acero.</td></tr></table><br /></div><br /><b>Pueden emplearse otras normas internacionalmente reconocidas equivalentes o superiores a las aqu&#237; se&#241;aladas, siempre y cuando se ajusten a lo solicitado en la presente <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a>.</b><br /><br /><b>Las normas citadas en la presente especificaci&#243;n o cualquier otra que llegare a ser aceptada por CODENSA S.A.,  se refieren a su &#250;ltima revisi&#243;n.</b><br />
+<h2 id="heading_5" >6. REQUISITOS T&#201;CNICOS</h2>	<br />Los aisladores ser&#225;n de porcelana del tipo proceso en h&#250;medo “wet process”, de altas propiedades aislantes, alta resistencia mec&#225;nica, alta inercia qu&#237;mica, elevado punto de fusi&#243;n, esmalte color caf&#233;, porosidad nula, libre de defectos tales como grietas, calcinaciones, burbujas y estar completamente vitrificado. Los aisladores y sus aditamentos deben ser inmunes a la acci&#243;n de la humedad, el humo, el polvo, el ozono, etc. y a los cambios r&#225;pidos de temperatura, en condiciones de <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-392" class="externalLink  glosarioLink">trabajo</a>.<br /><br />Toda la superficie expuesta del <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-78" class="externalLink  glosarioLink">aislador</a> debe cubrirse con un vidriado de tipo compresi&#243;n duro, liso, brillante, impermeable a la humedad que le permita mantenerse f&#225;cilmente libre de polvo o suciedades residuales ocasionadas por la <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-145" class="externalLink  glosarioLink">contaminaci&#243;n</a> ambiental por medio de lavado natural de las aguas lluvias.<br /><br />Los aisladores deben ser del tipo cuenca-bola.<br />
+<h2 id="heading_6" >7. PRUEBAS</h2>
+Los ensayos se realizar&#225;n conforme lo determina la norma ANSI C29.1, ANSI C29.2.<br />
+<h3 id="heading_7" >7.1  ENSAYOS TIPO </h3>Si el oferente hubiera realizado los Ensayos de Tipo de acuerdo a una norma o recomendaci&#243;n diferente a las solicitadas, deber&#225; presentar los protocolos de ensayos correspondientes  acompa&#241;ados de una copia de la Norma respectiva en idioma de origen y su traducci&#243;n al castellano o ingl&#233;s, reserv&#225;ndose CODENSA S.A. ESP el derecho de aceptarlos o de solicitar la repetici&#243;n de los Ensayos de Tipo de acuerdo a lo indicado en la presente <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-196" class="externalLink  glosarioLink">especificaci&#243;n t&#233;cnica</a>, a cargo del oferente.<br /><br />Los Ensayos Tipo deber&#225;n ser repetidos toda vez que sobre un <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-281" class="externalLink  glosarioLink">modelo</a> aprobado se introduzcan cambios de dise&#241;o, de materiales o tecnol&#243;gicos de fabricaci&#243;n.<br />
+<ul><li><a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-377" class="externalLink  glosarioLink">Tensi&#243;n</a> de flameo, a 60 Hz en Seco.</li>
+<li><a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-377" class="externalLink  glosarioLink">Tensi&#243;n</a> de flameo, a 60 Hz. en h&#250;medo.</li>
+<li><a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-377" class="externalLink  glosarioLink">Tensi&#243;n</a> de impulso a flameo cr&#237;tico con onda positiva y negativa.</li>
+<li><a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-377" class="externalLink  glosarioLink">Tensi&#243;n</a> de radio-interferencia.</li>
+<li><a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de ciclo termomec&#225;nico.</li>
+<li>Prueba de choque t&#233;rmico.</li>
+<li>Resistencia mec&#225;nica residual.</li>
+<li>Resistencia al impacto.</li>
+<li>Prueba de la chaveta de sujeci&#243;n para los aisladores tipo cuenca y bola.</li></ul>
+
+<h3 id="heading_8" >7.2 ENSAYO DE RUTINA</h3><ul><li><a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-235" class="externalLink  glosarioLink">Inspecci&#243;n</a> visual y dimensional.</li>
+<li><a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de tracci&#243;n.</li>
+<li><a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de flameo en seco.</li>
+<li><a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-188" class="externalLink  glosarioLink">Ensayo</a> de porosidad.</li></ul>
+
+<h2 id="heading_9" >8. EMBALAJE PARA EL TRANSPORTE</h2>
+Los aisladores y sus accesorios deber&#225;n ser embalados para transporte mar&#237;timo y terrestre de  exportaci&#243;n, preparando el embalaje para evitar da&#241;os (golpes, <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-151" class="externalLink  glosarioLink">corrosi&#243;n</a>, absorci&#243;n de humedad,  etc.)<br /><br />Los embalajes deben ser adecuados para soportar las operaciones normales de <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-113" class="externalLink  glosarioLink">carga</a>, descarga, y el  eventual apilamiento de un empaque sobre otro.<br /><br />El embalaje de los accesorios deber&#225; prepararse especialmente para transporte y manipulaci&#243;n poco cuidadosa, y deber&#225; tener indicaciones muy claras respecto a la fragilidad de su contenido. <br /><br />Cada uno de los empaques deber&#225; incluir facilidades para levantarlo mediante estrobos.  <br /><br />Todos los empaques deber&#225;n llevar los detalles necesarios de identificaci&#243;n y manipulaci&#243;n, en forma clara e indeleble, tanto de su contenido como de los detalles de la Orden de Compra, en especial de la <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-185" class="externalLink  glosarioLink">Empresa</a> destinataria. <br />
+<h2 id="heading_10" >9. INFORMACI&#211;N PARA LA OFERTA</h2>
+Todos los documentos relacionados con la propuesta, tales como planos, descripciones t&#233;cnicas, especificaciones, deber&#225;n usar las unidades de medida del <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-363" class="externalLink  glosarioLink">sistema</a> m&#233;trico decimal.<br /><br />El idioma a utilizar en todos esos documentos ser&#225; el espa&#241;ol. En forma excepcional se aceptar&#225;n cat&#225;logos o planos de referencia en ingl&#233;s.<br /><br />Cada proponente deber&#225; entregar junto con su oferta, la informaci&#243;n solicitada en esta especificaci&#243;n y cualquier otra informaci&#243;n necesaria que permita a CODENSA poder seleccionar los equipos a adquirir. Deber&#225; incluirse la siguiente informaci&#243;n:<br />
+<ul><li>Una lista de los equipos incluidos en el suministro destacando sus caracter&#237;sticas y componentes principales, Tabla No.1 y  Manual de Garant&#237;a de <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-112" class="externalLink  glosarioLink">Calidad</a>.</li>
+<li>Protocolos de las pruebas tipo de los aisladores ofrecidos. </li>
+<li>Una lista de referencia de las instalaciones de los mismos tipos de aisladores ofertados, con el a&#241;o de puesta en <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-359" class="externalLink  glosarioLink">servicio</a>.  CODENSA se reserva el derecho de rechazar cualquier oferta si las referencias mostradas no son consideradas suficientes para garantizar una adecuada experiencia del licitante en el tipo de <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-189" class="externalLink  glosarioLink">equipo</a> solicitado.</li></ul>
+<br />CODENSA podr&#225; solicitar informaciones adicionales en caso que considere insuficientes los antecedentes presentados, para lograr una adecuada evaluaci&#243;n <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-376" class="externalLink  glosarioLink">t&#233;cnica</a> de la oferta. <br /><br />CODENSA podr&#225; rechazar una propuesta si la informaci&#243;n entregada no tiene el suficiente grado de detalle y claridad. El proponente debe indicar claramente en su propuesta todos los puntos que presenten diferencias con respecto a esta Especificaci&#243;n.<br />
+<h2 id="heading_11" >10. GARANT&#205;AS </h2>
+El <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-189" class="externalLink  glosarioLink">equipo</a>, as&#237; como sus componentes y accesorios, deben ser cubiertos por una garant&#237;a respecto a cualquier defecto de fabricaci&#243;n,  por un plazo de 5 a&#241;os a partir de la fecha de entrega. <br /><br />Si durante el per&#237;odo de garant&#237;a determinadas piezas presentaran desgaste excesivo o defectos frecuentes,  CODENSA podr&#225; exigir el reemplazo de esas piezas en todas las unidades del suministro, sin costo para &#233;l. A las piezas de reemplazo se les aplicar&#225; nuevamente el plazo de garant&#237;a.<br /><br /><b>ANEXO 1. TABLA DE CARACTER&#205;STICAS T&#201;CNICAS GARANTIZADAS</b><br /><br /><b>AISLADOR ANSI 52-3 (TIPO FOG)</b><br /><br /><div style="width:770px;"><table><tr><td colspan="1" rowspan="1" style="width:30px;height:30px;text-align:center"> </td><td colspan="1" rowspan="1" style="width:410px;text-align:center"><b>DESCRIPCI&#211;N</b></td><td colspan="1" rowspan="1" style="width:70px;text-align:center"><b>UNIDAD</b></td><td colspan="1" rowspan="1" style="width:110px;text-align:center"><b>ESPECIFICADO</b></td><td colspan="1" rowspan="1" style="width:150px;text-align:center"><b>GARANTIZADO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">1</td><td colspan="1" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="2" style="height:20px;text-align:center">2</td><td colspan="1" rowspan="2" style="">Normas de fabricaci&#243;n</td><td colspan="1" rowspan="2" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">NTC  1170</td><td colspan="1" rowspan="2" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">ANSI C29.2</td></tr>
+<tr><td colspan="1" rowspan="2" style="height:20px;text-align:center">3</td><td colspan="1" rowspan="2" style="">Normas para pruebas</td><td colspan="1" rowspan="2" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">NTC 1285</td><td colspan="1" rowspan="2" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">ANSI C.29.1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">4</td><td colspan="1" rowspan="1" style="">Referencia de fabricaci&#243;n – cat&#225;logo</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">5</td><td colspan="1" rowspan="1" style=""><a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-274" class="externalLink  glosarioLink">Material</a></td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">Porcelana</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">6</td><td colspan="1" rowspan="1" style="">Clase</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">ANSI 52-3</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">7</td><td colspan="1" rowspan="1" style="">Color del esmalte</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center">Caf&#233;</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">8</td><td colspan="1" rowspan="1" style="">Peso del <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-78" class="externalLink  glosarioLink">aislador</a></td><td colspan="1" rowspan="1" style="text-align:center">Kg</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">9</td><td colspan="1" rowspan="1" style="">Distancia de fuga</td><td colspan="1" rowspan="1" style="text-align:center">mm</td><td colspan="1" rowspan="1" style="text-align:center">432</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">10</td><td colspan="1" rowspan="1" style="">Resistencia electromec&#225;nica</td><td colspan="1" rowspan="1" style="text-align:center">KN (lbf)</td><td colspan="1" rowspan="1" style="text-align:center">111 (25000)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">11</td><td colspan="1" rowspan="1" style="">E y M despu&#233;s del ciclo t&#233;rmomec&#225;nico</td><td colspan="1" rowspan="1" style="text-align:center">KN</td><td colspan="1" rowspan="1" style="text-align:center">111</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">12</td><td colspan="1" rowspan="1" style="">Resistencia al impacto</td><td colspan="1" rowspan="1" style="text-align:center">N-m</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">13</td><td colspan="1" rowspan="1" style="">Resistencia a la tracci&#243;n</td><td colspan="1" rowspan="1" style="text-align:center">KN</td><td colspan="1" rowspan="1" style="text-align:center">40</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">14</td><td colspan="1" rowspan="1" style="">Resistencia de <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-113" class="externalLink  glosarioLink">carga</a> sostenida</td><td colspan="1" rowspan="1" style="text-align:center">KN</td><td colspan="1" rowspan="1" style="text-align:center">52</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">15</td><td colspan="1" rowspan="1" style=""><a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-377" class="externalLink  glosarioLink">Tensi&#243;n</a> de flameo:</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center"> </td><td colspan="1" rowspan="1" style="">a. Baja <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-210" class="externalLink  glosarioLink">frecuencia</a> en seco</td><td colspan="1" rowspan="1" style="text-align:center">KV</td><td colspan="1" rowspan="1" style="text-align:center">100</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center"> </td><td colspan="1" rowspan="1" style="">b. Baja <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-210" class="externalLink  glosarioLink">frecuencia</a> en h&#250;medo</td><td colspan="1" rowspan="1" style="text-align:center">KV</td><td colspan="1" rowspan="1" style="text-align:center">55</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center"> </td><td colspan="1" rowspan="1" style="">c.Cr&#237;tica de impulso positivo 1,2x50 &#181;seg.</td><td colspan="1" rowspan="1" style="text-align:center">KV</td><td colspan="1" rowspan="1" style="text-align:center">150</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center"> </td><td colspan="1" rowspan="1" style="">d.Cr&#237;tica de impulso negativo 1,2/50 &#181;seg</td><td colspan="1" rowspan="1" style="text-align:center">KV</td><td colspan="1" rowspan="1" style="text-align:center">160</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">16</td><td colspan="1" rowspan="1" style=""><a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-377" class="externalLink  glosarioLink">Tensi&#243;n</a> de perforaci&#243;n a 60 Hz.</td><td colspan="1" rowspan="1" style="text-align:center">KV</td><td colspan="1" rowspan="1" style="text-align:center">110</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center">17</td><td colspan="1" rowspan="1" style=""><a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-377" class="externalLink  glosarioLink">Tensi&#243;n</a> de radio influencia:</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center"> </td><td colspan="1" rowspan="1" style="">a. <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-377" class="externalLink  glosarioLink">Tensi&#243;n</a> de pruebas RMS a <a href="etat252_aisladores_suspension_tipo_fog_lineas_transmision.html#" id="version-387" class="externalLink  glosarioLink">tierra</a></td><td colspan="1" rowspan="1" style="text-align:center">KV</td><td colspan="1" rowspan="1" style="text-align:center">10</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:20px;text-align:center"> </td><td colspan="1" rowspan="1" style="">b. RIV maximo a 1000 kHz</td><td colspan="1" rowspan="1" style="text-align:center">&#181;V</td><td colspan="1" rowspan="1" style="text-align:center">50</td><td colspan="1" rowspan="1" style=""> </td></tr></table><br /></div><br /><b>FIGURA 1. AISLADOR DE SUSPENSI&#211;N ANSI 52-3</b><br /><br /><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/2006/sddc.JPG" src="../../media/cache/images/500x355/wikiimages/31393739313734323737-40477-sddc.JPG" title=""  /></div><div class="texto_imagen_articulos" style="max-width:500px"></div></div></div><br /><br /><br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 2006, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+uuid: be239f22-6645-4323-a6a1-1f903e05c616
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.rules_banner_with_background
+id: block_content.rules_banner_with_background
+target_entity_type_id: block_content
+target_bundle: rules_banner_with_background
+default_langcode: site_default
+language_alterable: false

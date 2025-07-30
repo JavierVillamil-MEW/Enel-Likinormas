@@ -1,0 +1,8 @@
+likinormas.screen.sm-max:
+  label: sm-max
+  mediaQuery: '(max-width: 575.98px)'
+  weight: 3
+  group: likinormas.screen
+  multipliers:
+    - 1x
+    - 2x

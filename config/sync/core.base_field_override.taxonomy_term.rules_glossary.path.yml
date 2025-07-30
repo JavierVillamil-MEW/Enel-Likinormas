@@ -1,0 +1,20 @@
+uuid: 47875d57-abc3-46d6-93e7-21f471fd61d4
+langcode: es
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.rules_glossary
+  module:
+    - path
+id: taxonomy_term.rules_glossary.path
+field_name: path
+entity_type: taxonomy_term
+bundle: rules_glossary
+label: 'Alias de URL'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: path

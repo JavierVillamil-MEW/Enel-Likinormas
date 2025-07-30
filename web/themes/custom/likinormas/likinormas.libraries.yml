@@ -1,0 +1,19 @@
+global-styling:
+  css:
+    theme:
+      css/style.css: {}
+      https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css: {type: external}
+      https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.4/simplePagination.min.css: { type: external }
+      dist/css/main.min.css: { minified: true  }
+  js:
+    https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js: {type: external}
+    https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js: {type: external}
+    https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.4/jquery.simplePagination.min.js: { type: external }
+    dist/js/main.min.js: { minified: true  }
+  dependencies:
+    - core/matchmedia
+    - core/jquery
+    - core/drupal
+    - core/once
+    - core/drupal.debounce
+    - core/collapse

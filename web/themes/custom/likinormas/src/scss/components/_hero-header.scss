@@ -1,0 +1,52 @@
+body.path-normas,
+body.path-especificaciones {
+  .hero {
+    min-height: 38rem;
+    padding: 0 var(--margin-width-container-secondary);
+
+    &__info {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      height: inherit;
+      padding: 15rem 0 10rem;
+      width: 100%;
+      margin: 0 auto;
+
+      @include media-query(tablet) {
+        align-items: center;
+        width: 90%;
+      }
+
+      @include media-query(tabletL) {
+        align-items: center;
+        padding: 20rem 0 6rem;
+        width: 55%;
+      }
+
+      @include media-query(desktopLS) {
+        padding: 22rem 0 7rem;
+      }
+
+      &-title {
+        margin: 0 0 1.7rem;
+        text-align: center;
+
+        @include media-query(tabletL) {
+          margin: 0 0 2rem;
+        }
+      }
+
+      &-description {
+        @include max-column-text(8);
+
+        @include media-query(tabletL) {
+          text-align: center;
+          @include max-column-text(5);
+        }
+      }
+
+    }
+  }
+
+}

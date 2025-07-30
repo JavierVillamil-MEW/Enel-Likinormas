@@ -1,0 +1,10 @@
+uuid: 48660a8d-f0fa-49f6-9b50-ef77cfc37007
+langcode: es
+status: true
+dependencies:
+  module:
+    - node
+id: node.rules_pdf
+label: 'Normas: PDF'
+targetEntityType: node
+cache: true

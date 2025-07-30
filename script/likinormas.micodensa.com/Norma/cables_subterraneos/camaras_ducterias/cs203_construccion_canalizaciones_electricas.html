@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CS203 Construcción de canalizaciones eléctricas                 | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../../index.html"><img src="../../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1067" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../../Usuario/Registro%3FReturnUrl=%252FNorma%252FDetalles%252F1067.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/1067" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/1067" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			showSubmenu('4', '69');
+		});
+	</script>
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Norma t&#233;cnica
+	</div>
+	<h1>CS203 Construcci&#243;n de canalizaciones el&#233;ctricas                </h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de la norma</div>
+					<div class="caracteristicas">CS 203</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">06/05/2019</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../../Home/DownloadPDF/1067">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FNorma%2FDetalles%2F1067&amp;nodoid=1067', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+    <div class="modulo">
+        <div class="titu_modulo">
+            Relacionados
+        </div>
+            <div class="modulo_contenido" style="">
+                <div class="subtitulos_internos">
+                    <a href="cs207_detalles_ductos_zanjas_rellenos_2_ductos.html">CS207 Detalles ductos, zanjas y rellenos. 2 ductos di&#225;metro &#216; 3” PVC-TDP</a>
+                </div>
+                    <div class="relacionadotipo">Norma t&#233;cnica</div>
+            </div>
+            <div class="modulo_contenido" style="">
+                <div class="subtitulos_internos">
+                    <a href="cs221_cruce_vias_v0_v1y_v2_detalles.html">CS221 Cruce de v&#237;as. Detalles ductos, zanjas y rellenos, 9 ductos di&#225;metro &#216;4”</a>
+                </div>
+                    <div class="relacionadotipo">Norma t&#233;cnica</div>
+            </div>
+            <div class="modulo_contenido" style="">
+                <div class="subtitulos_internos">
+                    <a href="cs205_llegada_ductos_cajas.html">CS205 Llegada de ductos a cajas</a>
+                </div>
+                    <div class="relacionadotipo">Norma t&#233;cnica</div>
+            </div>
+            <div class="modulo_contenido" style="display:none">
+                <div class="subtitulos_internos">
+                    <a href="cs273_banda_plastica_indicacion_ductos_electricos_instalados.html">CS273 Banda pl&#225;stica de indicaci&#243;n de ductos el&#233;ctricos instalados          </a>
+                </div>
+                    <div class="relacionadotipo">Norma t&#233;cnica</div>
+            </div>
+            <div class="modulo_contenido" style="display:none">
+                <div class="subtitulos_internos">
+                    <a href="cs282_instalacion_ducteria_cajas_inspeccion_tramos.html">CS282 Instalaci&#243;n de ducteria y cajas de inspecci&#243;n en tramos pendientes</a>
+                </div>
+                    <div class="relacionadotipo">Norma t&#233;cnica</div>
+            </div>
+            <div class="modulo_contenido" style="display:none">
+                <div class="subtitulos_internos">
+                    <a href="cs204_seleccion_diametro_ductos.html">CS204 Selecci&#243;n del di&#225;metro de ductos</a>
+                </div>
+                    <div class="relacionadotipo">Norma t&#233;cnica</div>
+            </div>
+            <div class="modulo_contenido" style="display:none">
+                <div class="subtitulos_internos">
+                    <a href="../cables/cs311capacidad_corriente_cables_triplex_media_tension.html">CS311 Capacidad de corriente para cables triplex de media tensi&#243;n de 15 kV y 35 kV</a>
+                </div>
+                    <div class="relacionadotipo">Norma t&#233;cnica</div>
+            </div>
+            <div class="modulo_contenido" style="display:none">
+                <div class="subtitulos_internos">
+                    <a href="../transiciones/cs400_ducto_cambio_circuito_aereo_subterraneo.html">CS400 Ducto para cambio de circuito a&#233;reo  a subterr&#225;neo </a>
+                </div>
+                    <div class="relacionadotipo">Norma t&#233;cnica</div>
+            </div>
+            <a class="modulo_vermas" id="modulo_vermas" href="javascript:void(0)">Ver más</a>
+    </div>
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="cs203_construccion_canalizaciones_electricas.html#heading_0">1.	 ALCANCE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="cs203_construccion_canalizaciones_electricas.html#heading_1">2.	 V&#205;AS VEHICULARES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="cs203_construccion_canalizaciones_electricas.html#heading_2">3.	V&#205;AS PEATONALES Y ANDENES:</a></li>
+                    <li class="indexitem"><a class="head_h2" href="cs203_construccion_canalizaciones_electricas.html#heading_3">4.	RECUPERACI&#211;N DE ZONAS VERDES:</a></li>
+                    <li class="indexitem"><a class="head_h2" href="cs203_construccion_canalizaciones_electricas.html#heading_4">5.	CARACTER&#205;STICAS F&#205;SICAS:</a></li>
+                    <li class="indexitem"><a class="head_h2" href="cs203_construccion_canalizaciones_electricas.html#heading_5">6.	COMPACTACI&#211;N:</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1.	 ALCANCE</h2>
+La presente norma sobre rellenos de canalizaciones aplica para obras ejecutadas por CODENSA o terceros en el espacio p&#250;blico. <br /><br />Las consideraciones t&#233;cnicas, propiedades y caracter&#237;sticas de los materiales definidos en las diferentes intervenciones en el espacio p&#250;blico, deber&#225;n cumplir los requerimientos que aparecen en las diferentes tablas de las Especificaciones IDU-ET-2011.<br /><br />En el caso de obras ejecutadas por entidades distritales los rellenos corresponder&#225;n con lo estipulado para cada obra en particular.<br /><br />De acuerdo con la resoluci&#243;n 1115/2012 por medio de la cual se adoptan los lineamientos t&#233;cnico-ambientales para las actividades de aprovechamiento y tratamiento de los RCD (Residuos de la Construcci&#243;n y Demolici&#243;n), se podr&#225;n utilizar en el &#225;rea de cobertura de CODENSA, rellenos y sub bases de este tipo en la excavaciones siempre y cuando el <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-338" class="externalLink  glosarioLink">producto</a> RCD cumpla con las propiedades  f&#237;sicas y t&#233;cnicas  indicadas en esta norma.<br /><br />Se deber&#225; realizar la  disposici&#243;n de  c&#225;rcamo <a href="cs2211_cruce_vias_v0_v1_v2.html" class="externalLink">CS221-1<span class="externalLinkIcon"></span></a> cuando la profundidad desde la superficie de tr&#225;nsito (peatonal o vehicular) hasta la cota superior o clave de la &#250;ltima hilera de ductos instalados, sea menor de un (1.00) metro, increment&#225;ndose para zonas de intersecci&#243;n de v&#237;as hasta 1.2 metros como m&#237;nimo. Adicionalmente se debe  tener en cuenta los criterios de dise&#241;o de c&#225;rcamos indicados en el numeral 4.1 de La GU-CI-01 del IDU,  ET-IDU-2011 secci&#243;n 360-11 cruce de redes de servicios p&#250;blicos en calzadas mediante c&#225;rcamos. <br />
+<h2 id="heading_1" >2.	 V&#205;AS VEHICULARES</h2>
+<ul><li><b>CALZADA EN ASFALTO:</b></li></ul>
+Por encima del nivel superior de la ducter&#237;a y hasta el nivel inferior de la base granular tipo BG-B, se debe colocar una sub-base granular tipo SBG-B.<br /><br />El relleno superior de las canalizaciones efectuadas en v&#237;as vehiculares, se debe hacer con base granular tipo BG-B de 0.40 m de espesor.<br /><br />Para intervenciones sobre v&#237;as arteriales e intermedias, el pavimento asf&#225;ltico ser&#225; de espesor igual al encontrado en el sitio de la obra, pero nunca podr&#237;a ser inferior a 22 cm de espesor, compuesto de Base Asf&#225;ltica tipo MD-20 con espesor de 15 cm y la Rodadura Asf&#225;ltica tipo MD-12 con espesor de 7 cm. En intervenciones sobre v&#237;as locales el pavimento asfaltico debe ser m&#237;nimo de 15 cm en Base Asf&#225;ltica MD20.<br /><br />La mezcla debe llegar a la obra para ser extendida a una temperatura no inferior de 125&#176;C y ser compactada a una temperatura adecuada.<br />
+<ul><li><b>CALZADA EN CONCRETO:</b></li></ul>
+Por encima del nivel superior de la ducter&#237;a y hasta el nivel inferior de la base granular tipo BG-A, se debe colocar una sub-base granular tipo SBG-B.<br /><br />El relleno superior de las canalizaciones efectuadas en v&#237;as vehiculares, se debe hacer con base granular tipo BG-A de 0.40 m de espesor.<br /><br />Para intervenciones sobre v&#237;as locales, el pavimento r&#237;gido en concreto debe hacerse con losas de concreto que a los 28 d&#237;as de fraguado se obtenga un m&#243;dulo de rotura no menor de 43 kg/cm2 y ser&#225; de espesor igual al encontrado en el sitio de la obra, pero nunca podr&#237;a ser inferior a 20 cm. En intervenciones sobre v&#237;as arterias e intermedias el espesor del pavimento r&#237;gido debe ser igual al encontrado en el sitio de la obra.<br /><br />
+<h2 id="heading_2" >3.	V&#205;AS PEATONALES Y ANDENES:</h2>
+El relleno de las excavaciones efectuadas en v&#237;as peatonales se debe hacer de la siguiente manera: 
+<ul><li>Por encima del nivel superior de la cimentaci&#243;n de la ducter&#237;a o tuber&#237;a, hasta el nivel de la placa o acabado del and&#233;n, se debe colocar sub-base granular SBG-PEA.</li>
+<li>El recebo debe cumplir con las propiedades indicadas en el numeral 5 de esta norma. Se debe fundir la losa de concreto con una resistencia m&#237;nima de 28 d&#237;as de fraguado de 210 kg/cm2 (3000 psi), con un espesor igual o mayor a 0.10 m.</li></ul>
+
+<h2 id="heading_3" >4.	RECUPERACI&#211;N DE ZONAS VERDES:</h2>
+Las zonas verdes que se afecten con la obra se podr&#225;n rellenar con el mismo <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-274" class="externalLink  glosarioLink">material</a> procedente de la excavaci&#243;n, seleccion&#225;ndolo.  Sobre este se colocar&#225; una capa de 10 cm de <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-387" class="externalLink  glosarioLink">tierra</a> negra y sobre este se colocara el c&#233;sped debidamente podado y cortado.<br /><br />
+<h2 id="heading_4" >5.	CARACTER&#205;STICAS F&#205;SICAS:</h2>
+Las propiedades que deben cumplir los materiales de relleno utilizados en las recuperaciones de las zonas excavadas son:<br /><br />-	<b>SUB BASE GRANULAR SBG- B:</b><br />
+<ul><li>Relleno clasificado SBG- B, deber&#225; estar libre de terrones de arcilla, <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-274" class="externalLink  glosarioLink">material</a> org&#225;nico, basuras, escombros u otros elementos objetables.</li>
+<li>El desgaste del <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-274" class="externalLink  glosarioLink">material</a> determinado mediante la <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-272" class="externalLink  glosarioLink">M&#225;quina</a> de los &#193;ngeles, no podr&#225; ser superior al 50%</li>
+<li>El contenido de la materia org&#225;nica debe ser inferior al dos por ciento 2%</li>
+<li>La fracci&#243;n del <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-274" class="externalLink  glosarioLink">material</a> de relleno clasificado tipo SBG-B  deber&#225; presentar un l&#237;mite liquido menor del 25% y un &#237;ndice de plasticidad menor de 6%</li></ul>
+<br />-	<b>RELLENO BASE GRANULAR BG- B</b><br />
+<ul><li>Relleno clasificado BG- B, deber&#225; estar libre de terrones de arcilla, <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-274" class="externalLink  glosarioLink">material</a> org&#225;nico, basuras, escombros u otros elementos objetables.</li>
+<li>El desgaste del <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-274" class="externalLink  glosarioLink">material</a> determinado mediante la <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-272" class="externalLink  glosarioLink">M&#225;quina</a> de los &#193;ngeles, no podr&#225; ser superior al 45%</li>
+<li>La fracci&#243;n del <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-274" class="externalLink  glosarioLink">material</a> de relleno clasificado tipo BG- B deber&#225; presentar un l&#237;mite  liquido menor del 25% y un &#237;ndice de plasticidad menor de 3%</li></ul>
+<br />-	<b>RELLENO SUB BASE B-PEA:</b><br />
+<ul><li>Relleno clasificado B-PEA, deber&#225; estar libre de terrones de arcilla,<a href="cs203_construccion_canalizaciones_electricas.html#" id="version-274" class="externalLink  glosarioLink">material</a> org&#225;nico, basuras, escombros u otros elementos objetables.</li>
+<li>El desgaste del <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-274" class="externalLink  glosarioLink">material</a> determinado mediante la <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-272" class="externalLink  glosarioLink">M&#225;quina</a> de los &#193;ngeles, no podr&#225; ser superior al 50%</li>
+<li>El contenido de la materia org&#225;nica debe ser inferior al dos por ciento 2%</li>
+<li>La fracci&#243;n del <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-274" class="externalLink  glosarioLink">material</a> de relleno clasificado tipo B-PEA deber&#225; presentar un l&#237;mite  liquido menor del 40% y un &#237;ndice de plasticidad menor de 12%</li></ul>
+<br />-	<b>RELLENO BASE GRANULAR TIPO BG-A:</b><br />
+<ul><li>La base granular BG-A deber&#225; estar libre de terrones de arcilla, materia org&#225;nica, basuras, escombros u otros elementos objetables.</li>
+<li>El desgaste del <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-274" class="externalLink  glosarioLink">material</a> determinado mediante la <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-272" class="externalLink  glosarioLink">M&#225;quina</a> de los &#193;ngeles, no podr&#225; ser superior al 45%</li>
+<li>El agregado triturado no deber&#225; mostrar se&#241;ales de desintegraci&#243;n ni p&#233;rdida mayor de 12% o de 18%, al someterlo a 5 ciclos en la prueba de solidez en el sulfato de Sodio o Magnesio, respectivamente.</li></ul>
+
+<h2 id="heading_5" >6.	COMPACTACI&#211;N:</h2>
+-	<b>SUB BASE GRANULAR SBG- B:</b><br /><br />El <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-274" class="externalLink  glosarioLink">material</a> se colocar&#225; y extender&#225; en capas no mayores de 0.20 m de espesor, medido antes de la compactaci&#243;n. El <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-274" class="externalLink  glosarioLink">material</a> se humedecer&#225; si esto fuere  necesario, hasta obtener un contenido de humedad cercano al  &#243;ptimo y se compactar&#225; a un m&#237;nimo de 95% de la densidad m&#225;xima obtenida en el <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> de Proctor modificado.<br /><br />-	<b>RELLENO BASE GRANULAR BG- B:</b><br /><br />El <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-274" class="externalLink  glosarioLink">material</a> se colocar&#225; y extender&#225; en capas no mayores de 0.15 m de espesor, medido antes de la compactaci&#243;n. El <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-274" class="externalLink  glosarioLink">material</a> se humedecer&#225; si esto fuere necesario, hasta obtener un contenido de  humedad cercano al &#243;ptimo y se compactar&#225;  a un m&#237;nimo del 100% de la densidad m&#225;xima obtenida en el <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> Proctor modificado.<br /><br />-	<b>RELLENO SUB BASE B-PEA:</b><br /><br />El <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-274" class="externalLink  glosarioLink">material</a> se colocar&#225; y extender&#225; en capas no mayores de 0.20 m de espesor, medido antes de la compactaci&#243;n. El <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-274" class="externalLink  glosarioLink">material</a> se humedecer&#225; si esto fuere  necesario, hasta obtener un contenido de humedad cercano al  &#243;ptimo y se compactar&#225; a un m&#237;nimo de 95% de la densidad m&#225;xima obtenida en el <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> de Proctor modificado.<br /><br />-	<b>RELLENO BASE GRANULAR TIPO BG-A:</b><br /><br />El <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-274" class="externalLink  glosarioLink">material</a> se colocar&#225; y extender&#225; en capas no mayores de 0.15 m de espesor, medido antes de la compactaci&#243;n. El <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-274" class="externalLink  glosarioLink">material</a> se humedecer&#225; si esto fuere necesario, hasta obtener un contenido de  humedad cercano al &#243;ptimo y se compactar&#225;  a un m&#237;nimo del 98% de la densidad m&#225;xima obtenida en el <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-188" class="externalLink  glosarioLink">ensayo</a> Proctor modificado.<br /><br /><br />El ancho de las zanjas donde se instalan ductos deben estar de acuerdo  con la disposici&#243;n,  di&#225;metros y n&#250;mero de ductos seg&#250;n se indican en las Normas <a href="cs207_detalles_ductos_zanjas_rellenos_2_ductos.html" class="externalLink">CS207<span class="externalLinkIcon"></span></a> a <a href="cs2211_cruce_vias_v0_v1_v2.html" class="externalLink">CS221-1<span class="externalLinkIcon"></span></a>.<br /><br />La profundidad de las zanjas  tiene en cuenta los requerimientos de esfuerzos a que puedan estar sometidos los ductos  seg&#250;n el sitio donde est&#233;n  instalados.  Ver Normas   <a href="cs207_detalles_ductos_zanjas_rellenos_2_ductos.html" class="externalLink">CS207<span class="externalLinkIcon"></span></a> a <a href="cs2211_cruce_vias_v0_v1_v2.html" class="externalLink">CS221-1<span class="externalLinkIcon"></span></a>.<br /><br />Si al hacer la excavaci&#243;n de la zanja se encuentra en el fondo, <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-274" class="externalLink  glosarioLink">material</a>  de mala <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-112" class="externalLink  glosarioLink">calidad</a> como arcillas expansivas por ejemplo, se debe extraer y rellenar con recebo compactado  en una profundidad de sobre excavaci&#243;n de 30 cm.<br /><br />El fondo de la zanja debe ser uniforme y debe compactarse para evitar posibles pandeos de la canalizaci&#243;n.<br /><br />Los ductos m&#225;s profundos deben descansar  uniformemente  sobre  lechos  nivelados y compactados. Se debe  colocar una capa de arena de pe&#241;a con un espesor  m&#237;nimo de     4 cm en el fondo de la zanja.<br /><br />Las uniones de ductos dentro del tendido de la ducter&#237;a deben quedar traslapadas, nunca deben quedar una sobre otra.<br /><br />Los espacios entre ductos deben ser llenados exclusivamente con arena de pe&#241;a compactada,  libre de piedras.<br /><br />Para mantener la separaci&#243;n entre ductos, se deben colocar estacas o gu&#237;as de madera de m&#237;nimo 4 cm de espesor, a lado y lado de cada <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-394" class="externalLink  glosarioLink">tramo</a> de ducto y rellenar con arena de pe&#241;a cada una de las filas de ductos instalados horizontalmente, para luego retirar las estacas.<br /><br />Despu&#233;s de haber colocado una capa de 20 cm de <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-274" class="externalLink  glosarioLink">material</a> de relleno sobre la primera fila de ductos (la  m&#225;s superficial), se debe compactar el <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-274" class="externalLink  glosarioLink">material</a> con “vibro compactador manual“  o  “pis&#243;n“ y  as&#237; sucesivamente en capas de 15 cm hasta la superficie, donde aplique.<br /><br />El relleno de las zanjas por encima de la arena que cubre los ductos, se har&#225; seg&#250;n el caso en capas de materiales de la misma excavaci&#243;n o de materiales seleccionados y compactados, ver Normas  <a href="cs207_detalles_ductos_zanjas_rellenos_2_ductos.html" class="externalLink">CS207<span class="externalLinkIcon"></span></a> a <a href="cs2211_cruce_vias_v0_v1_v2.html" class="externalLink">CS221-1<span class="externalLinkIcon"></span></a>.<br /><br />La excavaci&#243;n se debe entibar cuando exista la posibilidad de derrumbes. Los entibados ser&#225;n retirados cuando la excavaci&#243;n haya sido rellenada y compactada.<br />El tendido de los ductos se ha de efectuar lo m&#225;s recto posible. En caso de cambio de direcci&#243;n se debe construir una caja para tal efecto.<br /><br />Al llegar a una de las cajas, los ductos deber&#225;n estar provistos de campanas para Ductos de PVC-TDP, o de boquillas terminales para ductos de acero galvanizado, ver Norma <a href="cs205_llegada_ductos_cajas.html" class="externalLink">CS205<span class="externalLinkIcon"></span></a>.<br /><br />Los ductos de reserva deben taponarse a fin de mantenerlos libres de basura, <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-387" class="externalLink  glosarioLink">tierra</a>, etc. Ver tapones en <a href="../../../Especificacion/cajas_inspeccion_ductos_accesorios/et610_ductos_lisos_pvc_redes_subterreas_baja.html" class="externalLink">ET610<span class="externalLinkIcon"></span></a> y <a href="../../../Especificacion/cajas_inspeccion_ductos_accesorios/et625_tapones_ductos.html" class="externalLink">ET625<span class="externalLinkIcon"></span></a>.<br /><br />Como se&#241;al preventiva de presencia de ductos el&#233;ctricos instalados, se debe colocar a lo largo de la zanja  a una profundidad de 50 cm de la superficie del relleno,  la banda pl&#225;stica especificada en la Norma <a href="cs273_banda_plastica_indicacion_ductos_electricos_instalados.html" class="externalLink">CS273<span class="externalLinkIcon"></span></a>.<br /><br />En terrenos planos los ductos se deben instalar con una pendiente del 3% entre cajas.     En terrenos escarpados la ducter&#237;a no debe tener una pendiente superior al 30%, ver Norma <a href="cs282_instalacion_ducteria_cajas_inspeccion_tramos.html" class="externalLink">CS282<span class="externalLinkIcon"></span></a>.<br /><br />Se deben construir desag&#252;es en las cajas de <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> para acometidas de MT y BT, en la parte m&#225;s baja de cada proyecto y donde se requiera.  Los desag&#252;es deben construirse en tuber&#237;a de 1&#189;”  a  2&#189;”  de di&#225;metro y conectarse a la red de aguas lluvias de la v&#237;a.<br /><br />Cuando la red de aguas lluvias se encuentre a nivel superior al piso de la c&#225;mara de <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a>, se debe construir una c&#225;mara sencilla intermedia, en la cual la ducter&#237;a y el drenaje tengan un nivel superior a la red de aguas lluvias.<br /><br />La selecci&#243;n del di&#225;metro de los ductos debe estar de acuerdo con la   norma <a href="cs204_seleccion_diametro_ductos.html" class="externalLink">CS204<span class="externalLinkIcon"></span></a> y respecto al n&#250;mero de ductos, generalmente se instalan bancos de 6 ductos de 4 pulgadas &#243; 6 ductos de 6  pulgadas  y  donde se requiera capacidad de reserva, como es a la salida de las subestaciones de potencia, se instalan bancos de 9 ductos de 4 o 6 pulgadas.<br /><br />En casos excepcionales  cuando se necesitan m&#225;s de 9  ductos,  &#233;stos se deben  construir en bancos separados con c&#225;maras de <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-235" class="externalLink  glosarioLink">inspecci&#243;n</a> independientes. Estos casos son de uso general para salidas de subestaciones.<br /><br />Para redes de alumbrado p&#250;blico se instalan 1 &#243; 2 ductos de 3 pulgadas, de acuerdo con el proyecto previamente aprobado por CODENSA S.A ESP.<br /><br />En los  circuitos de 34,5 kV y 11,4 kV el n&#250;mero de ductos de un banco debe ser superior al n&#250;mero de circuitos, en raz&#243;n que deben dejarse ductos de reserva para trabajos de <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-271" class="externalLink  glosarioLink">mantenimiento</a> de los cables y para  refrigeraci&#243;n.<br /><br />En cumplimiento de la Policy No. 214  Global Infrastructure and Networks design and construction for MV underground lines criteria, se deber&#225;n tener en cuenta: <br />
+<ul><li>Como regla general y de acuerdo con la <a href="../generalidades_cs/cs150_distribuccion_tipica_ductos_camara.html" class="externalLink">CS150<span class="externalLinkIcon"></span></a> se recomienda usar m&#225;ximo 4 circuitos es decir ducterias de 6 de 6” para v&#237;as locales. </li></ul>
+
+<ul><li>Acorde con las normas <a href="cs207_detalles_ductos_zanjas_rellenos_2_ductos.html" class="externalLink">CS207<span class="externalLinkIcon"></span></a> a la <a href="cs2211_cruce_vias_v0_v1_v2.html" class="externalLink">CS221-1<span class="externalLinkIcon"></span></a> el recubrimiento de la excavaci&#243;n para canalizaciones en anden o zona verde ser&#225;n como m&#237;nimo 0.6 m y para cruce de v&#237;as como m&#237;nimo 0.8 m &#243; mayor si la regulaci&#243;n local vigente as&#237; lo exige. De acuerdo a la regulaci&#243;n IDU vigente es mayor.</li></ul>
+
+<ul><li>Cumpliendo los requisitos dados por RETIE, los cables de mayor <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-292" class="externalLink  glosarioLink">nivel de tensi&#243;n</a> deber&#225;n ir debajo de los cables de menor <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-377" class="externalLink  glosarioLink">tensi&#243;n</a> incluyendo los cables telem&#225;ticos. </li></ul>
+<br />En el caso de los circuitos de <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-98" class="externalLink  glosarioLink">baja tensi&#243;n</a>, debe dejarse como m&#237;nimo un ducto de reserva por banco. El n&#250;mero m&#225;ximo de ductos est&#225; dado en la Norma <a href="cs204_seleccion_diametro_ductos.html" class="externalLink">CS204<span class="externalLinkIcon"></span></a>.<br /><br />Para el recibo final de ducter&#237;a de PVC, &#233;sta deber&#225; permitir el paso de un mandril de      60 cm de longitud, con un di&#225;metro del 5% menos que el di&#225;metro del ducto.<br /><br />En las transiciones de red a&#233;rea a subterr&#225;nea y viceversa se instalar&#225;n ductos met&#225;licos galvanizados con sus respectivos accesorios para los circuitos de 34,5 kV, Media y <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-98" class="externalLink  glosarioLink">Baja tensi&#243;n</a>,  como se muestra en la norma <a href="../transiciones/cs400_ducto_cambio_circuito_aereo_subterraneo.html" class="externalLink">CS400<span class="externalLinkIcon"></span></a>.<br /><br />Para evitar riesgos el&#233;ctricos por concurrencia de uno o m&#225;s circuitos de <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-98" class="externalLink  glosarioLink">Baja tensi&#243;n</a> o <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-277" class="externalLink  glosarioLink">Media Tensi&#243;n</a> en diferentes fuentes  y eliminar retornos  o energizaciones por plantas de <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-183" class="externalLink  glosarioLink">emergencia</a>. En casos estrictamente necesarios se instalar&#225; m&#225;ximo dos ductos destinados a bajantes de <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-277" class="externalLink  glosarioLink">Media Tensi&#243;n</a> y tres ductos en total por poste, no se permitir&#225;  compartir m&#225;s de dos circuitos diferentes en <a href="cs203_construccion_canalizaciones_electricas.html#" id="version-98" class="externalLink  glosarioLink">Baja tensi&#243;n</a> en un poste.
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 1067, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

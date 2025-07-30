@@ -1,0 +1,30 @@
+uuid: df92ebff-ae9b-4f64-834c-d33b75bf48e2
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.rules_specification_category
+id: taxonomy_term.rules_specification_category.default
+targetEntityType: taxonomy_term
+bundle: rules_specification_category
+mode: default
+content:
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  description: true
+  langcode: true
+  path: true
+  simple_sitemap: true
+  status: true

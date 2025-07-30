@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ET223 Postes en fibra de 4.5 para instalación de medidores | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../index.html"><img src="../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/1775" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../Usuario/Registro%3FReturnUrl=%252FEspecificacion%252FDetalles%252F1775.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/1775" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Especificacion/Detalles/1775" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showSubmenu('5', '24');
+        });
+    </script>
+
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Especificaci&#243;n t&#233;cnica
+	</div>
+	<h1>ET223 Postes en fibra de 4.5 para instalaci&#243;n de medidores</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de especificación</div>
+					<div class="caracteristicas">ET 223</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">06/08/2013</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../Home/DownloadPDF/1775">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FEspecificacion%2FDetalles%2F1775&amp;nodoid=1775', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et223_postes_fibra_4_5_instalacion.html#heading_0">1.	OBJETO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et223_postes_fibra_4_5_instalacion.html#heading_1">2.	ALCANCE</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et223_postes_fibra_4_5_instalacion.html#heading_2">3.	CONDICIONES AMBIENTALES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et223_postes_fibra_4_5_instalacion.html#heading_3">4.	CONDICIONES DE SERVICIO</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et223_postes_fibra_4_5_instalacion.html#heading_4">5.	SISTEMAS DE UNIDADES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et223_postes_fibra_4_5_instalacion.html#heading_5">6.	NORMAS RELACIONADAS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et223_postes_fibra_4_5_instalacion.html#heading_6">7.	DEFINICIONES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et223_postes_fibra_4_5_instalacion.html#heading_7">8.	REQUERIMIENTOS T&#201;CNICOS Y PARTICULARES</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et223_postes_fibra_4_5_instalacion.html#heading_8">8.1	Caracter&#237;sticas Generales</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et223_postes_fibra_4_5_instalacion.html#heading_9">8.2	Calculo y Dise&#241;o</a></li>
+                    <li class="indexitem"><a class="head_h5" href="et223_postes_fibra_4_5_instalacion.html#heading_10">8.2.1	Cargas M&#237;nimas de Rotura </a></li>
+                    <li class="indexitem"><a class="head_h5" href="et223_postes_fibra_4_5_instalacion.html#heading_11">8.2.2	Par&#225;metros Geom&#233;tricos</a></li>
+                    <li class="indexitem"><a class="head_h5" href="et223_postes_fibra_4_5_instalacion.html#heading_12">8.2.3	Carga de Trabajo</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et223_postes_fibra_4_5_instalacion.html#heading_13">8.3 CARGA DE ROTURA</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et223_postes_fibra_4_5_instalacion.html#heading_14">8.4	 Longitud de Enterramiento</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et223_postes_fibra_4_5_instalacion.html#heading_15">8.5	 Caracter&#237;sticas constructivas </a></li>
+                    <li class="indexitem"><a class="head_h2" href="et223_postes_fibra_4_5_instalacion.html#heading_16">9.	ENSAYO DE LABORATORIO Y PRUEBAS DE CARGA</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et223_postes_fibra_4_5_instalacion.html#heading_17">9.1	Verificaciones de proceso</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et223_postes_fibra_4_5_instalacion.html#heading_18">9.2	Resistencia qu&#237;mica </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et223_postes_fibra_4_5_instalacion.html#heading_19">9.3	Resistencia a los Rayos UV</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et223_postes_fibra_4_5_instalacion.html#heading_20">9.4	Prueba de Carga a Rotura </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et223_postes_fibra_4_5_instalacion.html#heading_21">9.5	Prueba de Combusti&#243;n </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et223_postes_fibra_4_5_instalacion.html#heading_22">9.6	Prueba de Rigidez Diel&#233;ctrica </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et223_postes_fibra_4_5_instalacion.html#heading_23">9.7	Contenidos de Vac&#237;o y Relaci&#243;n Fibra- Resina</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et223_postes_fibra_4_5_instalacion.html#heading_24">10	SUMINISTRO Y RECEPCI&#211;N DE POSTER&#205;A</a></li>
+                    <li class="indexitem"><a class="head_h3" href="et223_postes_fibra_4_5_instalacion.html#heading_25">10.1	Tolerancias Aceptadas</a></li>
+                    <li class="indexitem"><a class="head_h5" href="et223_postes_fibra_4_5_instalacion.html#heading_26">10.1.1 Longitud del Poste. </a></li>
+                    <li class="indexitem"><a class="head_h5" href="et223_postes_fibra_4_5_instalacion.html#heading_27">10.1.2 Desviaci&#243;n del Eje Longitudinal. </a></li>
+                    <li class="indexitem"><a class="head_h5" href="et223_postes_fibra_4_5_instalacion.html#heading_28">10.1.3	Separaci&#243;n de las Perforaciones. </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et223_postes_fibra_4_5_instalacion.html#heading_29">10.2	Marcas y Se&#241;alizaciones</a></li>
+                    <li class="indexitem"><a class="head_h5" href="et223_postes_fibra_4_5_instalacion.html#heading_30">10.2.1	Marcas. </a></li>
+                    <li class="indexitem"><a class="head_h5" href="et223_postes_fibra_4_5_instalacion.html#heading_31">10.2.2	Se&#241;alizaciones. </a></li>
+                    <li class="indexitem"><a class="head_h3" href="et223_postes_fibra_4_5_instalacion.html#heading_32">10.3	Recepci&#243;n de poster&#237;a</a></li>
+                    <li class="indexitem"><a class="head_h5" href="et223_postes_fibra_4_5_instalacion.html#heading_33">10.3.1	Inspecci&#243;n del Sitio de Prueba y sus Instalaciones. </a></li>
+                    <li class="indexitem"><a class="head_h5" href="et223_postes_fibra_4_5_instalacion.html#heading_34">10.3.2	Revisi&#243;n de los Equipos de Aplicaci&#243;n y de Medida de Cargas. </a></li>
+                    <li class="indexitem"><a class="head_h5" href="et223_postes_fibra_4_5_instalacion.html#heading_35">10.3.3	Plan de Muestreo. </a></li>
+                    <li class="indexitem"><a class="head_h5" href="et223_postes_fibra_4_5_instalacion.html#heading_36">10.3.4	Motivos de Rechazo. </a></li>
+                    <li class="indexitem"><a class="head_h5" href="et223_postes_fibra_4_5_instalacion.html#heading_37">10.3.5	Plan de Muestreo para las Pruebas de Carga de Flexi&#243;n y Rotura. </a></li>
+                    <li class="indexitem"><a class="head_h5" href="et223_postes_fibra_4_5_instalacion.html#heading_38">10.3.6	L&#237;mites para Aceptaci&#243;n o Rechazo.</a></li>
+                    <li class="indexitem"><a class="head_h2" href="et223_postes_fibra_4_5_instalacion.html#heading_39">11	REQUISITOS DE LAS OFERTAS</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1.	OBJETO</h2>
+La presente especificaci&#243;n t&#233;cnica tiene por objeto establecer las caracter&#237;sticas y dimensiones que deben cumplir los postes  de fibra  &#243; fibras combinadas  que se emplear&#225;n como soportes estructurales para la instalaci&#243;n de cajas de medidores<br />
+<h2 id="heading_1" >2.	ALCANCE</h2>
+Los postes ser&#225;n instalados, en cualquier zona del &#225;rea de cobertura de CODENSA S.A., estos postes son usados para la fijaci&#243;n de las cajas de medidores  donde no sea posible su instalaci&#243;n en la fachada de las viviendas.<br /><br />Los  postes ser&#225;n en secciones o embonados para facilitar su transporte e instalaci&#243;n.<br /><br />
+<h2 id="heading_2" >3.	CONDICIONES AMBIENTALES</h2>
+El ambiente donde ser&#225;n instalados los postes de fibra podr&#225; tener las siguientes caracter&#237;sticas dentro del &#225;rea de concesi&#243;n de CODENSA S.A. E.S.P,  bajo las siguientes condiciones:<br /><br /><div style="width:524px;"><table><tr><td colspan="2" rowspan="1" style="width:524px;height:21px;text-align:center"><b>CARACTER&#205;STICAS AMBIENTALES</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">a. Altura sobre el nivel del mar</td><td colspan="1" rowspan="1" style="">2 640 m</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">b. Ambiente</td><td colspan="1" rowspan="1" style="">Tropical</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">c. Humedad</td><td colspan="1" rowspan="1" style="">90%</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">d. Temperatura m&#225;xima y m&#237;nima</td><td colspan="1" rowspan="1" style="">27 &#186;C y - 5 &#186;C respectivamente.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">e. Temperatura promedio</td><td colspan="1" rowspan="1" style="">14 &#186;C.</td></tr></table><br /></div><b>TABLA 1.  PAR&#193;METROS AMBIENTALES</b><br />
+<h2 id="heading_3" >4.	CONDICIONES DE SERVICIO</h2>
+Los postes podr&#225;n ser instalados, en cualquier zona del &#225;rea de cobertura de CODENSA S.A. <br />
+<h2 id="heading_4" >5.	SISTEMAS DE UNIDADES</h2>
+En todos los documentos t&#233;cnicos se deben expresar las cantidades num&#233;ricas en unidades del sistema Internacional.  Si se usan cat&#225;logos, folletos o planos, en sistemas diferentes de unidades, deben hacerse  las conversiones respectivas.<br />
+<h2 id="heading_5" >6.	NORMAS RELACIONADAS</h2>
+Los postes deber&#225;n cumplir con las siguientes normas de fabricaci&#243;n y ensayos:<br /><div style="width:668px;"><table><tr><td colspan="2" rowspan="1" style="width:300px;height:22px;text-align:center"><b>FABRICACION</b></td><td colspan="1" rowspan="1" style="width:368px;text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:61px;text-align:center">ASTM</td><td colspan="1" rowspan="1" style="text-align:center">D 4923-01</td><td colspan="1" rowspan="1" style="">Standard Specification for Reinforced Thermosetting Plastic Poles, American Society for Testing and Materials.</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">ASTM</td><td colspan="1" rowspan="1" style="text-align:center">D 5778-00</td><td colspan="1" rowspan="1" style="">Standar d specification for Glass Fiber strands</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">IEEE</td><td colspan="1" rowspan="1" style="text-align:center">C2 2007</td><td colspan="1" rowspan="1" style="">National Electrical Safety Code</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:40px;text-align:center">ANSI</td><td colspan="1" rowspan="1" style="text-align:center">C136.20 -2008</td><td colspan="1" rowspan="1" style="">ANSI C136.20-2008 American National Standard for Roadway and Area Lighting Equipment— Fiber-Reinforced Composite (FRC) Lighting Poles</td></tr>
+<tr><td colspan="2" rowspan="1" style="height:22px;text-align:center"><b>PRUEBAS</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:61px;text-align:center">ASTM</td><td colspan="1" rowspan="1" style="text-align:center">G 154</td><td colspan="1" rowspan="1" style="">Standard Practice for Operating Fluorescent Light Apparatus for UV Exposure of Nonmetallic Materials</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:41px;text-align:center">AAMA</td><td colspan="1" rowspan="1" style="text-align:center">615</td><td colspan="1" rowspan="1" style="">American Architectural Manufacturers Association</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:61px;text-align:center">ASTM</td><td colspan="1" rowspan="1" style="text-align:center">D 149</td><td colspan="1" rowspan="1" style="">Test Method for Dielectric Breakdow Voltage and Dielectric -Strength -Solid Electrical Insulating Materials at Cornmercial Power Frecuencies</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:41px;text-align:center">ASTM</td><td colspan="1" rowspan="1" style="text-align:center">D 257</td><td colspan="1" rowspan="1" style="">Test Methods for D e Resistance or Conductance of  Insulating Materials</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:61px;text-align:center">ASTM</td><td colspan="1" rowspan="1" style="text-align:center">D 635-03</td><td colspan="1" rowspan="1" style="">Test Method for Rate of Buming and/or Extent and Time of Burning of Self-Supporting Plastics in a Horizontal Position</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:41px;text-align:center">ASTM</td><td colspan="1" rowspan="1" style="text-align:center">E 313</td><td colspan="1" rowspan="1" style="">Calculating Yellowness and Whiteness Indices from Instrumentally Measured Color Coordinate</td></tr>
+<tr><td colspan="2" rowspan="1" style="height:22px;text-align:center"><b>PRACTICAS</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>DESCRIPCI&#211;N</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">RETIE</td><td colspan="1" rowspan="1" style="text-align:center"> </td><td colspan="1" rowspan="1" style="">Reglamento T&#233;cnico de Instalaciones El&#233;ctricas </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:61px;text-align:center">ASCE</td><td colspan="1" rowspan="1" style="text-align:center">104</td><td colspan="1" rowspan="1" style="">Recommended practice for Fiber reforcerd Polymer products for overhead Utility Line Structures </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:41px;text-align:center">NTC</td><td colspan="1" rowspan="1" style="text-align:center">1329</td><td colspan="1" rowspan="1" style="">Postes de Concreto Armado para l&#237;neas a&#233;reas de energ&#237;a  y telecomunicaciones</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">ASTM</td><td colspan="1" rowspan="1" style="text-align:center">D 883</td><td colspan="1" rowspan="1" style="">Terminology Relating to plastics</td></tr></table><br /></div><b>TABLA 2.  NORMAS RELACIONADAS</b><br /><br />Pueden emplearse otras normas internacionalmente reconocidas equivalentes o superiores a las aqu&#237; se&#241;aladas, siempre y cuando se ajusten a lo solicitado en la presente especificaci&#243;n t&#233;cnica.<br /><br />Las normas citadas en la presente especificaci&#243;n (o cualquier otra que llegare a ser aceptada por CODENSA S.A.) se refieren a su &#250;ltima revisi&#243;n.<br />
+<h2 id="heading_6" >7.	DEFINICIONES</h2>
+Se establecen las siguientes definiciones para efectos de esta especificaci&#243;n t&#233;cnica:<br /><br />•	<b>ENTERRAMIENTO DIRECTO</b><br />Termino usado para referirse al poste que ser&#225; soportado en enterramiento directo en el piso o tierra.<br /><br />•	<b>PRUEBA DE DEFLEXION BAJO CARGA</b> <br />Prueba de verificaci&#243;n de la flexi&#243;n del poste bajo la carga de trabajo, la cual no debe superar el porcentaje m&#225;ximo seg&#250;n la Norma ASTM D 4923-1 para postes  clase 2<br /><br />•	<b>SUELO</b> <br />Un suelo que pueda ser efectivo empotramiento para un enterramiento directo del poste en la tierra y que resista las condiciones ambientales.<br /><br />•	<b>ENTRADA DE CABLE.</b><br />Una abertura en la parte inferior del nivel de enterramiento del poste (subterr&#225;neo) con su eje perpendicular al eje del poste, sirve de pasaje para la entrada del cable a la cavidad interna del poste.<br />
+<h2 id="heading_7" >8.	REQUERIMIENTOS T&#201;CNICOS Y PARTICULARES</h2>
+<h3 id="heading_8" >8.1	Caracter&#237;sticas Generales</h3>
+Entre otras caracter&#237;sticas los postes debe tener las que se indican a continuaci&#243;n:<br /><br />-	Resistir los rayos solares<br />-	Evitar propagar la llama <br />-	Rigidez diel&#233;ctrica elevada <br />-	Alta dureza<br />-	Alta resistencia a la tracci&#243;n y a la flexi&#243;n.<br />-	Resistente a los qu&#237;micos y &#225;cidos.<br />-	Debe ser libre de mantenimiento.<br />-	No debe contener elementos que sirvan de alimento o permitan ser atacadas por microorganismos.<br />-	Los postes deben tener en la cima una tapa que puede ser fija o removible.<br />-	Debe incluir marcaci&#243;n clara para su correcto acople, tambi&#233;n debe anexar las instrucciones de instalaci&#243;n.<br />-	Vida &#250;til de 25 a&#241;os o mayor<br />-	El acabado exterior del poste debe ser de color gris RAL serie 70, similar al RAL 7004.<br />
+<h3 id="heading_9" >8.2	Calculo y Dise&#241;o</h3>
+<h5 id="heading_10" >8.2.1	Cargas M&#237;nimas de Rotura </h5>
+Se establecen la siguiente carga m&#237;nima de rotura:<br />-	250 kg<br />
+<h5 id="heading_11" >8.2.2	Par&#225;metros Geom&#233;tricos</h5>
+Los postes de fibra , tendr&#225;n las caracter&#237;sticas geom&#233;tricas establecidas en la tabla 3.<br /><div style="width:695px;"><table><tr><td colspan="1" rowspan="2" style="width:150px;height:31px;text-align:center"><b>Carga de Rotura m&#237;n. (kgf)</b></td><td colspan="1" rowspan="2" style="width:105px;text-align:center"><b>Longitud Total (m)</b></td><td colspan="2" rowspan="1" style="width:304px;text-align:center"><b>Di&#225;metros (cm)</b></td><td colspan="1" rowspan="2" style="width:136px;text-align:center"><b>N&#250;mero de secciones embonadas</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:33px;text-align:center"><b>Ancho frontal </b></td><td colspan="1" rowspan="1" style="text-align:center"><b>Lateral </b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">250</td><td colspan="1" rowspan="1" style="text-align:center">4,5</td><td colspan="1" rowspan="1" style="text-align:center">15</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr></table><br /></div><b>TABLA 3.  PAR&#193;METROS GEOM&#201;TRICOS</b><br /><br />
+<h5 id="heading_12" >8.2.3	Carga de Trabajo</h5>
+La carga de trabajo es la resultante de dividir la carga m&#237;nima de rotura, por el coeficiente de seguridad de 2.5.<br /><br />Seg&#250;n lo anterior, las cargas de trabajo para cada una de las cargas m&#237;nimas de rotura se establecen en la tabla 4.<br /><div style="width:300px;"><table><tr><td colspan="1" rowspan="1" style="width:150px;height:22px;text-align:center"><b>Carga  m&#237;nima de rotura</b></td><td colspan="1" rowspan="1" style="width:150px;text-align:center"><b>Carga de Trabajo</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">250 kg</td><td colspan="1" rowspan="1" style="text-align:center">100 kg</td></tr></table><br /></div><b>TABLA 4.  CARGAS DE TRABAJO</b><br /><br />
+<h3 id="heading_13" >8.3 CARGA DE ROTURA</h3>
+Fuerza (kgf) aplicada horizontalmente a 30 cm de la cima del poste, bajo la cual se presenta la falla mec&#225;nica del mismo.<br /><div style="width:418px;"><table><tr><td colspan="1" rowspan="1" style="width:137px;height:41px;text-align:center"><b>Tipo de poste m x kgf</b></td><td colspan="1" rowspan="1" style="width:115px;text-align:center"><b>Carga de trabajo kgf</b></td><td colspan="1" rowspan="1" style="width:166px;text-align:center"><b>Deflexi&#243;n bajo carga (cm)</b>    (*)</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">4.5x250</td><td colspan="1" rowspan="1" style="text-align:center">100</td><td colspan="1" rowspan="1" style="text-align:center">38</td></tr></table><br /></div><b>TABLA 5.  DEFORMACIONES BAJO CARGA</b><br /><br /><i>(*) Deflexi&#243;n m&#225;xima  para postes clase 2 de acuerdo con. ASTM D4923.-  ANSI C136.20-2008.</i><br />
+<h3 id="heading_14" >8.4	 Longitud de Enterramiento</h3>
+La longitud de empotramiento ser&#225; de  70 cm <br />
+<h3 id="heading_15" >8.5	 Caracter&#237;sticas constructivas </h3>
+El poste deber&#225; tener como m&#237;nimo las siguientes capas constructivas iniciando en el exterior  del poste de la siguiente manera:<br /><br />a.	Top Coat: Capa exterior con protecci&#243;n contra intemperie y U.V, de acuerdo con la ASTM- G154.<br /><br />b.	Veil o velo: Capa rica en resina  que permite uniformidad en la textura y elimina la exposici&#243;n de fibras expuestas acorde con la ASCE-104 (Resin rich nonstructural suface veil).<br /><br />c.	Composici&#243;n o fibra que determina las caracter&#237;sticas mec&#225;nicas del poste de acuerdo con la carga, acorde con la ANSI C136 y RETIE.<br /><br />d.	Composici&#243;n rica en resina  que elimina la exposici&#243;n de fibras y defectos del poste que puedan afectar el servicio del mismo y  protege la parte interior del poste contra la intemperie. <br /><br />En su cima tendr&#225; perforaciones de 20mm para instalar pernos de retenci&#243;n de acometidas y en su parte inferior de 25 mm  para la conexi&#243;n de la puesta a tierra<br /><br />La caja del medidor, se instalar&#225; de tal forma que cubra la abertura de llegada y salida de la acometida y se fijar&#225; al poste mediante una platina de 180 x 40 x 2 mm. Con cinta met&#225;lica inoxidable<br />
+<h2 id="heading_16" >9.	ENSAYO DE LABORATORIO Y PRUEBAS DE CARGA</h2>
+El fabricante deber&#225; realizar los siguientes ensayos a los postes en laboratorios certificados y/o reconocidos, de acuerdo con lo planteado por la norma ASTM D4923 y por los documentos de referencia presentados en esta especificaci&#243;n, seg&#250;n aplique: <br /><br />•	Prueba de flexi&#243;n bajo carga: RETIE, NTC1329, ASTM D4923, ANSI C136.20-2008.<br /><br />•	Prueba de carga de rotura: RETIE, NTC1329<br /><br />•	Rata de combusti&#243;n - ensayo de auto extinci&#243;n: ASTM D635<br /><br />•	Resistencia a la degradaci&#243;n por abrasi&#243;n: AAMA-615<br /><br />•	Rigidez Diel&#233;ctrica:  ASTM D149<br /><br />•	Absorci&#243;n de humedad: AAMA-615<br /><br />•	Amarillamiento: ASTM E313<br /><br />•	Resistencia a rayos solares  U.V:  ASTM G154<br /><br />•	Adhesi&#243;n exterior en seco y en h&#250;medo: AAMA-615<br />
+<h3 id="heading_17" >9.1	Verificaciones de proceso</h3>
+Se refiere a las verificaciones que deben realizarse a los postes durante el proceso de fabricaci&#243;n. Constituyen una validaci&#243;n en el cumplimiento de par&#225;metros dimensionales y f&#237;sicos propios del dise&#241;o. Esta evaluaci&#243;n debe hacerse a todo el lote de producci&#243;n que se est&#225; fabricando.<br />
+<h3 id="heading_18" >9.2	Resistencia qu&#237;mica </h3>
+Se debe verificar la resistencia a la abrasi&#243;n y la composici&#243;n qu&#237;mica de la fibra, realizando pruebas de &#225;lcalis, &#225;cidos, aceites, detergentes, combustibles y agua salubre.        <br />
+<h3 id="heading_19" >9.3	Resistencia a los Rayos UV</h3>
+La resistencia ante los efectos de los rayos ultravioletas de los postes fabricados en pl&#225;sticos o pol&#237;meros <br />
+<h3 id="heading_20" >9.4	Prueba de Carga a Rotura </h3>
+Prueba de verificaci&#243;n de resistencia del poste hasta la carga de rotura. Si el poste no revent&#243; a la carga especificada se puede tomar la determinaci&#243;n de detener la prueba, pero este poste se debe descartar para uso en redes de distribuci&#243;n. <br />
+<h3 id="heading_21" >9.5	Prueba de Combusti&#243;n </h3>
+Prueba para determinar la rata de combusti&#243;n del material del poste. <br />
+<h3 id="heading_22" >9.6	Prueba de Rigidez Diel&#233;ctrica </h3>
+Prueba para verificar la rigidez diel&#233;ctrica del material del poste.<br />
+<h3 id="heading_23" >9.7	Contenidos de Vac&#237;o y Relaci&#243;n Fibra- Resina</h3>
+El contenido de vac&#237;os y la relaci&#243;n fibra-resina de los postes se eval&#250;an seg&#250;n las normas ASTM D2734 y ASTM D2584<br />
+<h2 id="heading_24" >10	SUMINISTRO Y RECEPCI&#211;N DE POSTER&#205;A</h2>
+<h3 id="heading_25" >10.1	Tolerancias Aceptadas</h3>
+<h5 id="heading_26" >10.1.1 Longitud del Poste. </h5>Se acepta una tolerancia en la longitud del poste de &#177; 20mm.<br />
+<h5 id="heading_27" >10.1.2 Desviaci&#243;n del Eje Longitudinal. </h5>Se acepta una desviaci&#243;n del eje longitudinal del poste de 20mm.<br />
+<h5 id="heading_28" >10.1.3	Separaci&#243;n de las Perforaciones. </h5>Se acepta una tolerancia de &#177;3mm en la posici&#243;n de las perforaciones, con respecto a la ubicaci&#243;n te&#243;rica que se indica en los planos.<br />
+<h3 id="heading_29" >10.2	Marcas y Se&#241;alizaciones</h3>
+<h5 id="heading_30" >10.2.1	Marcas. </h5>Todos los postes deber&#225;n llevar, en forma clara y a una altura de 2m sobre la secci&#243;n de empotramiento, una leyenda en bajo relieve o placa embebida en el pl&#225;stico, que indique:<br />-	Palabra BOG-CUN (en bajo relieve)<br />-	Nombre o raz&#243;n social del fabricante.<br />-	Longitud del poste en metros por carga m&#237;nima de rotura en kgf &#243; N (debe aparecer la unidad).<br />-	Fecha de fabricaci&#243;n, d&#237;a   mes   a&#241;o.<br />-	Peso del poste.<br />
+<h5 id="heading_31" >10.2.2	Se&#241;alizaciones. </h5>
+Los  postes deben llevar las siguientes se&#241;alizaciones:<br /><br />-	Profundidad de empotramiento. Todos los postes deben llevar pintada, una franja de color verde, de 30mm de ancho en la parte frontal del poste que indique hasta donde se debe enterrar el poste.<br /><br />-	Zona de ensamble de postes embonados. Para se&#241;alizar esta zona debe incluirse una franja pintadas de color negro, de 30mm de ancho en la parte frontal del poste.  Tambi&#233;n se permite identificar con flechas del mismo color  el punto hasta donde deben llegar las uniones como se indica en al figura 1.  Con esta marcaci&#243;n se busca que se garantice el correcto acople de las secciones cuando los postes sean embonados.<br />
+<h3 id="heading_32" >10.3	Recepci&#243;n de poster&#237;a</h3>
+La recepci&#243;n de los postes, deber&#225; hacerla el interventor o un representante de CODENSA S.A. E.S.P, quienes inspeccionar&#225;n los lotes en forma detallada, para determinar si cumplen las especificaciones establecidas.<br /><br />Durante el proceso de recepci&#243;n, se debe cumplir lo establecido en los numerales del 10.3.1 al 10.3.5.<br />
+<h5 id="heading_33" >10.3.1	Inspecci&#243;n del Sitio de Prueba y sus Instalaciones. </h5>
+El interventor inspeccionar&#225; el sitio de prueba y las instalaciones para la fijaci&#243;n y anclaje del poste y los patines de apoyo. <br />
+<h5 id="heading_34" >10.3.2	Revisi&#243;n de los Equipos de Aplicaci&#243;n y de Medida de Cargas. </h5>
+Se deber&#225; verificar que los equipos de aplicaci&#243;n de cargas sean los adecuados; que su anclaje no represente peligro y que la carga pueda aplicarse en forma suave y progresiva.<br /><br />Se deber&#225; verificar que el dinam&#243;metro est&#233; calibrado y que las lecturas de carga se puedan hacer con una aproximaci&#243;n de &#177; 10kg.<br />
+<h5 id="heading_35" >10.3.3	Plan de Muestreo. </h5>Para llevar a cabo las labores de inspecci&#243;n y recepci&#243;n de poster&#237;a, se establece el siguiente plan de muestreo, en el que se determina, de acuerdo con el tama&#241;o del lote, el n&#250;mero de postes a los cuales se les debe practicar la inspecci&#243;n visual para la aceptaci&#243;n o rechazo del mismo:<br /><div style="width:581px;"><table><tr><td colspan="1" rowspan="1" style="width:150px;height:30px;text-align:center"><b>Tama&#241;o del lote</b></td><td colspan="1" rowspan="1" style="width:180px;text-align:center"><b>Tama&#241;o de muestra</b></td><td colspan="1" rowspan="1" style="width:131px;text-align:center"><b>Aceptaci&#243;n</b></td><td colspan="1" rowspan="1" style="width:120px;text-align:center"><b>Rechazos</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2 -    25</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">26 -    90</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">91 –150</td><td colspan="1" rowspan="1" style="text-align:center">20</td><td colspan="1" rowspan="1" style="text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">3</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">151-280</td><td colspan="1" rowspan="1" style="text-align:center">32</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">4</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">281-500</td><td colspan="1" rowspan="1" style="text-align:center">50</td><td colspan="1" rowspan="1" style="text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">6</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">501-1200</td><td colspan="1" rowspan="1" style="text-align:center">80</td><td colspan="1" rowspan="1" style="text-align:center">7</td><td colspan="1" rowspan="1" style="text-align:center">8</td></tr></table><br /></div><b>TABLA 6. INSPECCION VISUAL Y DIMENSIONAL</b><br /><br /><i><b>Nivel de Inspecci&#243;n general II, NCA = 4%</b></i><br /><i>Nota.  Si el tama&#241;o de la muestra es mayor o igual al lote, se har&#225; inspecci&#243;n 100%</i><br />
+<h5 id="heading_36" >10.3.4	Motivos de Rechazo. </h5>Se rechazar&#225;n los postes por las siguientes causas:<br /><br /><b>10.3.4.1 Defectos cr&#237;ticos.</b><br />-	Grietas transversales o longitudinales.<br />-	Ranuras longitudinales muy amplias y profundas<br />-	El incumplimiento de las tolerancias especificadas, se consideran como defectos cr&#237;ticos.<br /><br /><b>10.3.4.2 Defectos mayores.</b><br />-	Perforaciones con el eje desviado respecto a su posici&#243;n, taponadas o de di&#225;metro inferior al especifica&#172;do.<br />-	Superficie del poste con rugosidades pronunciadas, burbujas en cantidad exagerada o manchas por utilizaci&#243;n inadecuada de compuestos.<br />	<br /><b>10.3.4.3 Defectos menores.</b><br />- 	No colocaci&#243;n de la leyenda mencionada el numeral 10.2.1.<br />-	Falta de marcado de la profundidad de empotramiento y zona de ensamble de postes embonados.<br />
+<h5 id="heading_37" >10.3.5	Plan de Muestreo para las Pruebas de Carga de Flexi&#243;n y Rotura. </h5>	Para las pruebas de flexi&#243;n, se regir&#225;n por el siguiente plan de muestreo:<br /><div style="width:596px;"><table><tr><td colspan="1" rowspan="1" style="width:150px;height:22px;text-align:center"><b>Tama&#241;o del lote</b></td><td colspan="1" rowspan="1" style="width:195px;text-align:center"><b>Tama&#241;o de muestra</b></td><td colspan="1" rowspan="1" style="width:127px;text-align:center"><b>Aceptaci&#243;n</b></td><td colspan="1" rowspan="1" style="width:124px;text-align:center"><b>Rechazos</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">2 – 150</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">151-500</td><td colspan="1" rowspan="1" style="text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">2</td></tr></table><br /></div><b>TABLA 7. PRUEBA DE CARGA DE FLEXI&#211;N</b><br /><br /><i><b>Nivel de Inspecci&#243;n especial S 3, NCA = 4%</b></i><br /><i>Nota.  Si el tama&#241;o de la muestra es mayor o igual al lote, se har&#225; inspecci&#243;n 100%</i><br /><br />Para las pruebas de rotura, se regir&#225;n por el siguiente plan de muestreo:<br /><div style="width:608px;"><table><tr><td colspan="1" rowspan="1" style="width:150px;height:22px;text-align:center"><b>Tama&#241;o del lote</b></td><td colspan="1" rowspan="1" style="width:193px;text-align:center"><b>Tama&#241;o de muestra</b></td><td colspan="1" rowspan="1" style="width:137px;text-align:center"><b>Aceptaci&#243;n</b></td><td colspan="1" rowspan="1" style="width:128px;text-align:center"><b>Rechazos</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">50-150</td><td colspan="1" rowspan="1" style="text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">0</td><td colspan="1" rowspan="1" style="text-align:center">1</td></tr></table><br /></div><b>TABLA 8. PRUEBA DE ROTURA</b><br /><i><b>Nivel de Inspecci&#243;n especial S 1, NCA = 4%</b></i><br /><br />
+<h5 id="heading_38" >10.3.6	L&#237;mites para Aceptaci&#243;n o Rechazo.</h5>	Si el n&#250;mero de unidades defectuosas en la muestra es igual o mayor que el n&#250;mero de rechazos, no se aceptar&#225; el lote.<br />
+<h2 id="heading_39" >11	REQUISITOS DE LAS OFERTAS</h2>
+La oferta t&#233;cnica deber&#225; entregarse en medio magn&#233;tico. El oferente deber&#225; incluir con su propuesta la siguiente informaci&#243;n:<br /><br />•	Planilla de caracter&#237;sticas t&#233;cnicas garantizadas indicada en el anexo1, la cual deber&#225; ser diligenciada completamente, firmada y sellada por el oferente. Esta planilla debe entregarse en formato Excel.<br /><br />•	Cat&#225;logos originales, completos y actualizados, que contengan caracter&#237;sticas t&#233;cnicas principales correspondientes a los bienes cotizados en la planilla de caracter&#237;sticas t&#233;cnicas garantizadas. <br /><br />•	Protocolos de pruebas de acuerdo con las normas indicadas en el numeral 6 y cada uno de los ensayos indicados en el numeral 9 de la presente especificaci&#243;n, en laboratorios certificados y/o reconocidos. En tales protocolos se deber&#225;n anotar las fechas de fabricaci&#243;n y de realizaci&#243;n de las pruebas, para permitir la verificaci&#243;n de las caracter&#237;sticas t&#233;cnicas garantizadas. As&#237; mismo las fotocopias de los certificados de laboratorios internacionales cuando las pruebas deban ser hechas fuera del pa&#237;s.<br /><br />•	El oferente adjuntar&#225; con su propuesta el certificado de conformidad de producto con noma t&#233;cnica y con RETIE, expedido por una entidad autorizada por la ONAC.  Adem&#225;s deber&#225; presentar el certificado del sistema de calidad (ISO 9001).<br /><br />•	Los oferentes deber&#225;n ofrecer una garant&#237;a absoluta de sus productos de por lo menos dos (2) a&#241;os.<br /><br />•	Una ampliaci&#243;n microsc&#243;pica a 1000X para determinar cada una de las capas de fabricaci&#243;n del poste indicada en la norma <br /><br />•	Una muestra f&#237;sica de m&#237;nimo 5 cm x 5 cm del poste<br /><br />•	Informaci&#243;n adicional que considere aporta explicaci&#243;n a su dise&#241;o (dibujos, detalles,  caracter&#237;sticas de operaci&#243;n,  dimensiones y pesos de los materiales ofertados). <br /><br />CODENSA S.A. podr&#225; descartar ofertas que no cumplan con las anteriores disposiciones, sin expresi&#243;n de causa ni obligaci&#243;n de compensaci&#243;n.<br /><br /><b>ANEXO 1. CARACTER&#205;STICAS T&#201;CNICAS</b><br /><div style="width:750px;"><table><tr><td colspan="5" rowspan="1" style="width:750px;height:22px;text-align:center"><b>CARACTER&#205;STICAS T&#201;CNICAS</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center"><b>ITEM</b></td><td colspan="3" rowspan="1" style="text-align:center"><b>DESCRIPCION</b></td><td colspan="1" rowspan="1" style="text-align:center"><b>OFERTADO</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">1</td><td colspan="3" rowspan="1" style="">Proveedor</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">2</td><td colspan="3" rowspan="1" style="">Fabricante</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">3</td><td colspan="3" rowspan="1" style="">Pa&#237;s del fabricante</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">4</td><td colspan="3" rowspan="1" style="">Normas t&#233;cnicas de dise&#241;o y pruebas</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">5</td><td colspan="3" rowspan="1" style="">Longitud total (m)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">6</td><td colspan="3" rowspan="1" style="">Longitud Frontal  (cm)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">7</td><td colspan="3" rowspan="1" style="">Longitud Lateral  (cm)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">8</td><td colspan="3" rowspan="1" style="">Peso total (kg)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">9</td><td colspan="3" rowspan="1" style="">N&#250;mero de secciones</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">10</td><td colspan="3" rowspan="1" style="">Longitud de cada secci&#243;n(m)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">11</td><td colspan="3" rowspan="1" style="">Peso de cada secci&#243;n (kg)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">12</td><td colspan="3" rowspan="1" style="">Describir sistema de acoplamiento </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">13</td><td colspan="3" rowspan="1" style="">Carga m&#237;nima de rotura (kgf)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">14</td><td colspan="3" rowspan="1" style="">Carga de trabajo (kgf)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">15</td><td colspan="3" rowspan="1" style="">Deflexi&#243;n bajo carga m&#225;xima (mm)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">16</td><td colspan="3" rowspan="1" style="">Color (referencia RAL)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">17</td><td colspan="3" rowspan="1" style="">Cumple con la dimensi&#243;n y la distribuci&#243;n de las perforaciones indicadas en la figura 1 (Si/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="4" style="height:22px;text-align:center">18</td><td colspan="2" rowspan="4" style="">Espesor de las capas (numeral 8.5 )</td><td colspan="1" rowspan="1" style="">Capa a.  Top coat exterior</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">Capa b.  Veil &#243; Velo</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;">Capa c.  Fibra </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:42px;">Capa d.  Composici&#243;n Resina</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">19</td><td colspan="3" rowspan="1" style="">Incluye tapa en la cima? (Si/No y describir)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">20</td><td colspan="3" rowspan="1" style="">Incluye marcaci&#243;n seg&#250;n numeral 10.2.1? (Si/No y describir)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">21</td><td colspan="3" rowspan="1" style="">Incluye se&#241;alizaci&#243;n seg&#250;n numeral 10.2.2? (Si/No y describir)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="10" style="height:22px;text-align:center">22</td><td colspan="4" rowspan="1" style="">Presentan protocolo de pruebas de los siguientes ensayos: (Indicar  Si/No y el laboratorio)</td></tr>
+<tr><td colspan="3" rowspan="1" style="height:22px;">Prueba de flexi&#243;n bajo carga (RETIE, NTC1329) </td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:22px;">Prueba de carga de rotura (RETIE, NTC1329)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:22px;">Rata de combusti&#243;n - ensayo de auto extinci&#243;n (ASTM D635)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:22px;">Resistencia a la degradaci&#243;n por abrasi&#243;n    (AAMA-615)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:22px;">Rigidez Diel&#233;ctrica  (ASTM D149)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:22px;">Absorci&#243;n de humedad  (AAMA-615)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:22px;">Amarillamiento (ASTM E313)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:22px;">Resistencia a rayos solares U.V. (ASTM G154)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="3" rowspan="1" style="height:22px;">Adhesi&#243;n exterior en seco y en h&#250;medo (AAMA-615)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">23</td><td colspan="3" rowspan="1" style="">Vida &#250;til (a&#241;os)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">24</td><td colspan="3" rowspan="1" style="">Garant&#237;a (a&#241;os)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:22px;text-align:center"><b>RESULTADO DE EVALUACI&#211;N T&#201;CNICA</b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:22px;text-align:center">25</td><td colspan="1" rowspan="5" style="">Certificaci&#243;n de sistema de calidad</td><td colspan="2" rowspan="1" style="">Entidad acreditadora</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:22px;">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:22px;">Fecha de aprobaci&#243;n (d&#237;a/mes/a&#241;o)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:22px;">Vigencia</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:22px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="6" style="height:22px;text-align:center">26</td><td colspan="1" rowspan="6" style="">Certificaci&#243;n con normas t&#233;cnicas</td><td colspan="2" rowspan="1" style="">Entidad acreditadora</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:22px;">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:22px;">Fecha de aprobaci&#243;n (D&#237;a/Mes/A&#241;o)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:22px;">Vigencia</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:22px;">Norma t&#233;cnica con la cual se certifica</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:22px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="5" style="height:22px;text-align:center">27</td><td colspan="1" rowspan="5" style="">Certificaci&#243;n con RETIE</td><td colspan="2" rowspan="1" style="">Entidad acreditadora</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:22px;">N&#250;mero de acreditaci&#243;n</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:22px;">Fecha de aprobaci&#243;n (d&#237;a/mes/a&#241;o)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:22px;">Vigencia</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="2" rowspan="1" style="height:22px;">Adjunta el certificado (Si/No)</td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="4" rowspan="1" style="height:22px;text-align:center"><b>RESULTADO DE EVALUACI&#211;N REGULATORIA</b></td><td colspan="1" rowspan="1" style=""> </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:22px;text-align:center">28</td><td colspan="3" rowspan="1" style="">Observaciones</td><td colspan="1" rowspan="1" style=""> </td></tr></table><br /></div><div class="contenedor_imagen_articulos"><div class="box_imagen_articulos"><div class="imagen_articulos"><img class="lightbox" rel="http://likinormas.micodensa.com/media/content/especificacion/1775/ET223 (1).jpg" src="http://likinormas.micodensa.com/media/cache/images/1000x1000/wikiimages/2d31363132313031353833-232905-ET223 (1).jpg" title="FIGURA 1. ESQUEMA POSTE EN FIBRA"  /></div><div class="texto_imagen_articulos" style="max-width:1000px">FIGURA 1. ESQUEMA POSTE EN FIBRA</div></div></div><br /><b>NOTAS:</b><br />1. Altura acorde al fabricante.<br />2. Espesor de la fibra acorde al fabricante.<br />3. Ver norma AE 223<br />4. Dimensiones en mm.<br /><br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 1775, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

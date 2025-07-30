@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>LA010-3-1 UTILIZACIÓN POSTES Y TEMPLETES PARA RED AÉREA RURAL DESNUDA DE MEDIA TENSIÓN | Likinormas</title>
+	<meta name="description" content="" />
+	<script src="../../../webfront-js.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<script src="../../../websitelikijs.include%3Fv=1.0.0.0" type="text/javascript"></script>
+	<link href="../../../themes/websitelikinormas/includes/style/websitelikicss.include%3Fv=1.0.0.0.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript">
+	    var active_color = '#000';
+	    var inactive_color = '#c3c3c3';
+	    var texto_default = "Buscar en LikiNormas...";
+	    $(document).ready(function () {
+	        $('#searchBox').css('color', inactive_color);
+	        $('#searchBox').val(texto_default);
+	        $('#searchBox').focus(function () {
+	            if ($('#searchBox').val() == texto_default) {
+	                $('#searchBox').css('color', active_color);
+	                $('#searchBox').val('');
+	            }
+	        });
+	        $('#searchBox').blur(function () {
+	            if ($('#searchBox').val() == '') {
+	                $('#searchBox').css('color', inactive_color);
+	                $('#searchBox').val(texto_default);
+	            }
+	        });
+	        $('#searchform').submit(function () {
+	            if (trim($('#searchBox').val()) == '' || $('#searchBox').val() == texto_default) {
+	                return false;
+	            }
+	        });
+	    });
+
+		$(document).ready(function () {
+			var currentPosition = 0;
+			var slideWidth = 960;
+			var slides = $('.slide');
+			var numberOfSlides = slides.length;
+
+			// Remove scrollbar in JS
+			$('#slidesContainer').css('overflow', 'hidden');
+
+			// Wrap all .slides with #slideInner div
+			slides.wrapAll('<div id="slideInner"></div>')
+			// Float left to display horizontally, readjust .slides width
+	            .css({
+	            	'float': 'left',
+	            	'width': slideWidth
+	            });
+
+			// Set #slideInner width equal to total width of all slides
+			$('#slideInner').css('width', slideWidth * numberOfSlides);
+
+			// Insert controls in the DOM
+			$('#slideshow').prepend('<span class="control" id="leftControl">Clicking moves left</span>').append('<span class="control" id="rightControl">Clicking moves right</span>');
+
+			// Hide left arrow control on first load
+			manageControls(currentPosition);
+
+			// Create event listeners for .controls clicks
+			$('.control').bind('click', function () {
+				// Determine new position
+				currentPosition = ($(this).attr('id') == 'rightControl') ? currentPosition + 1 : currentPosition - 1;
+				// Hide / show controls
+				manageControls(currentPosition);
+				// Move slideInner using margin-left
+				$('#slideInner').animate({
+					'marginLeft': slideWidth * (-currentPosition)
+				});
+			});
+
+			$('.glosarioLink').tooltip({
+				track: true,
+				delay: 0,
+				showURL: false,
+				showBody: " - ",
+				extraClass: "glosarioLink",
+				bodyHandler: function () {
+				    var link = $(this);
+				    var versionid = link.attr('id').split('-')[1];
+				    //alert('version:' + versionid);
+
+				    if (versionid == '0') {
+				        return false;
+				    }
+
+				    if (link.attr('rel') == '') {
+						$.ajax({ url: '/norma/obtenerdefinicion/' + versionid,
+							async: false,
+							success: function (result) {
+								link.attr('rel', result);
+							}
+
+						});
+					}
+					return $(this).attr('rel');
+				}
+			});
+			$('.lightbox').live('click', function () {
+				$.fn.colorbox({
+					href: $(this).attr('rel')
+				});
+			});
+			// manageControls: Hides and Shows controls depending on currentPosition
+			function manageControls(position) {
+				// Hide left arrow if position is first slide
+				if (position == 0) { $('#leftControl').hide() } else { $('#leftControl').show() }
+				// Hide right arrow if position is last slide
+				if (position == numberOfSlides - 1) { $('#rightControl').hide() } else { $('#rightControl').show() }
+			}
+
+		});
+	</script>
+</head>
+<body>
+
+    <div id="fb-root"></div>
+    <script type="text/javascript">
+        var fbApiInit = false;
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '130579883704247', // App ID
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                oauth: true, // enable OAuth 2.0
+                xfbml: true  // parse XFBML
+            });
+
+            fbApiInit = true;
+
+            /*FB.Event.subscribe('auth.authResponseChange', function (response) {
+            fbAuthChange();
+            });*/
+
+        };
+        // Load the SDK Asynchronously
+        (function (d) {
+            var js, id = 'facebook-jssdk';
+            if (d.getElementById(id)) { return; }
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = "//connect.facebook.net/en_US/all.js";
+            d.getElementsByTagName('head')[0].appendChild(js);
+        } (document));
+
+        function initLogin() {
+            FB.login(
+                function (response) {
+                    if (response.authResponse) {    //facebook login ok
+                        $('#at').val(response.authResponse.accessToken);
+                        $('#logonform').submit();
+
+                    }
+                }
+            );
+        }
+
+    </script>
+
+	<div class="contenedor">
+		<div class="contenedor-header">
+			<div class="topheader">
+				<div class="logo_codensa">
+                    <img src="../../../themes/websitelikinormas/includes/style/images/codensatop.jpg" alt="" usemap="#map1" />
+                    <map id="map1" name="map1">
+                        <area coords="0,0,149,35" href="http://www.codensa.com.co/" target="_blank" alt="" />
+                    </map>
+                </div>
+				<a class="logo_emgesa" href="http://www.endesa.com/" target="_blank"><img src="../../../themes/websitelikinormas/includes/style/images/endesatop.jpg" alt="" /></a>
+			</div>
+			<div class="header">
+				<a class="logo_likinormas" href="../../../index.html"><img src="../../../themes/websitelikinormas/includes/style/images/logo_likinormas.jpg" alt="" />
+				</a>
+				<div class="div_line">
+				</div>
+				<div class="slogan">
+					Siempre es más fácil conocer las normas ENEL-CODENSA</div>
+			</div>
+<div style="position: absolute; top: -999px;left: -999px;">Rolex Rolex gold watch, compared with ordinary materials, gold watches are often expensive, but the <a href="http://www.juliatoms.co.uk">replica rolex</a> gold watch has the role of <a href="http://www.replicawatchlondon.co.uk">swiss replica watches</a> hedging, so that it often becomes the first choice for collectors. The gold watch has value in the world, largely because the <a href="http://www.drhaushka.co.uk">omega replica</a> watch brand launched a commemorative limited edition watch or a <a href="http://hublotreplicawatches.webmium.com">replica hublot</a> complex movement process or artistic attainments deep watches, mostly preferred gold precious metals such material. These watches tend to have a strong hedging function, therefore, Rolex Rolex gold watch reputation.</div>
+			<div class="banner">
+				<div id="slideshow">
+					<!-- Slideshow HTML -->
+					<div id="slidesContainer">
+						<!-- <div class="slide">
+                            <a href="http://www.codensa.com.co/empresas/nuevas-conexiones/solicitud-de-recibo-de-obra" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_0.png" alt="" />
+                            </a>
+						</div> -->
+						<div class="slide">
+							    <img src="../../../themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_2.png" alt="" />
+						</div>
+						<!-- <div class="slide">
+                            <a href="http://gestionomienergia.micodensa.com/?CodMenu=4" target="_blank">
+							    <img src="/themes/websitelikinormas/includes/style/images/BANNER_LIKINORMAS_1.jpg" alt="" />
+                            </a>
+						</div> -->
+					</div>
+					<!-- Slideshow HTML -->
+				</div>
+			</div>
+		</div>
+		<div class="cuerpo">
+			<div class="lateral">
+<script type="text/javascript">
+	function logon(email, password) {
+		
+        if (email == '' || password == '') {
+            $('#logon-form').submit();
+        } else {
+            $.ajax({
+                url: '/Usuario/LogOnPost',
+                data: { email: email, password: password, returnurl: document.location.href },
+                cache: false,
+                success: function (result) {
+                    if (result == 'ok') {
+                        $('#logon-form').submit();
+                    } else {
+                        $('#logonerror').html('Email o contraseña incorrectos');
+                    }
+                }
+            });
+        }
+    }
+    function keyPressEvent(event) {
+        if (event.keyCode == '13') {
+            logon($('#logon_email').val(), $('#logon_password').val()); //, $('#rememberMe').is(':checked')
+        }
+    };
+
+    function getCurrentUrl() {
+        var pre = '/Usuario/Registro';
+        var returnUrl = window.parent.location.href;
+        return pre + '?returnUrl=' + returnUrl;
+    }
+</script>
+<form action="https://likinormas.micodensa.com/usuario/LogOnAuthenticate" id="logon-form" method="post"><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/2110" />    <div class="login_box">
+        <div class="loginsub">
+            <div class="texto_login">
+                Correo electrónico</div>
+            <input class="campo" data-val="true" data-val-length="The field Email must be a string with a maximum length of 255." data-val-length-max="255" data-val-regex="Email no v&amp;#225;lido" data-val-regex-pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" data-val-required="El Email es requerido" id="logon_email" maxlength="255" name="Email" size="25" type="text" value="" />
+            <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+        </div>
+        <div class="loginsub">
+            <div class="texto_login">
+                Clave</div>
+            <input class="campo" id="logon_password" name="password" onkeypress="javascript:keyPressEvent(event)" size="25" type="password" value="" />
+            <span class="field-validation-valid" data-valmsg-for="password" data-valmsg-replace="true"></span>
+        </div>
+        <span id="logonerror" class="logonerror"></span>
+        <div class="clear">
+        </div>
+        <div class="loginsub">
+            <div class="boton" onclick="javascript:logon($('#logon_email').val(),$('#logon_password').val())">
+                Ingresar</div>
+            <div class="espaciado_hor">
+            </div>
+            <div class="divfb_bot">
+                <div class="fb_bot">
+                    <fb:login-button size="small" show-faces="false" width="200" max-rows="1" onlogin="initLogin()">
+                        <fb:intl>Ingresa con Facebook</fb:intl>
+                    </fb:login-button>
+                </div>
+            </div>
+        </div>
+        <div class="loginsub">
+            <div class="clear">
+            </div>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" href="../../../Usuario/Registro%3FReturnUrl=%252FNorma%252FDetalles%252F2110.html">
+                Registrarme</a>
+            <div class="ico_op">
+            </div>
+            <a class="log_op1" onclick="javascript:openContent('/usuario/Recordar', {innerWidth:400,innerHeight:210}, function () { }, true)" href="javascript:void(0)">
+                Recordar contraseña</a>
+        </div>
+    </div>
+</form>    <div style="display: none">
+<form action="https://likinormas.micodensa.com/usuario/logon/2110" id="logonform" method="post"><input id="at" name="at" type="hidden" value="" /><input id="returnUrl" name="returnUrl" type="hidden" value="/Norma/Detalles/2110" /></form>    </div>
+				<div id="menu-principal">
+					<ul class="navegador">
+<li><a alt="Home de LikiNormas" class="" href="../../../Home.html" id="m2" innerHtml="Inicio" onclick="" target="_self" title="Home de LikiNormas">Inicio</a></li><li><a alt="Contiene las categorías de normas técnicas" class="" href="javascript:void(0)" id="menu_4" innerHtml="Normas técnicas" onclick="javascript:showSubmenu(4)" target="_self" title="Contiene las categorías de normas técnicas">Normas técnicas</a></li><li><a alt="Contiene categorías de especificaciones técnicas" class="" href="javascript:void(0)" id="menu_5" innerHtml="Especificaciones técnicas locales" onclick="javascript:showSubmenu(5)" target="_self" title="Contiene categorías de especificaciones técnicas">Especificaciones técnicas locales</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/normas-electricas-corporativas.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=normas_electricas_corporativas" id="m8" innerHtml="Especificaciones técnicas corporativas" onclick="" target="_self" title="">Especificaciones técnicas corporativas</a></li><li><a alt="Portal Constructores" class="" href="https://www.enel.com.co/es/conoce-enel/acceso-portal-de-compras-grupo-enel.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=portal_constructores" id="m5" innerHtml="Portal Constructores" onclick="" target="_self" title="Portal Constructores">Portal Constructores</a></li><li><a alt="" class="" href="https://www.enel.com.co/es/empresas/enel-codensa/conexiones-electrica/radicacion-proyectos-conexion.html?utm_source=pagina_likinormas&amp;utm_medium=link&amp;utm_campaign=radicacion_proyectos_conexion" id="m9" innerHtml="Radicación de diseños eléctricos" onclick="" target="_self" title="">Radicación de diseños eléctricos</a></li><li><a alt="Formulario de contacto" class="" href="https://likinormas.micodensa.com/likinormasContacto" id="m6" innerHtml="Contáctenos" onclick="" target="_self" title="Formulario de contacto">Contáctenos</a></li>
+
+
+
+					</ul>
+				</div>
+			</div>
+			<div class="contenido">
+				<div class="search_box">
+					<div class="formbus">
+<form action="https://likinormas.micodensa.com/Home/SearchList" id="searchform" method="get">							<input name="searchBox" type="text" class="search_in" id="searchBox" maxlength="100"/>
+							<a href="javascript:void(0)" onclick="javascript:$('#searchform').submit()">
+                                <img class="ico_search" src="../../../themes/websitelikinormas/includes/style/images/buscar.jpg" width="41" height="33" alt="" />
+                            </a>
+</form>						<a class="search_link" href="../../../Home/SearchList%3Fadvanced=True.html">Busqueda avanzada</a>
+					</div>
+				</div>
+				
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			showSubmenu('4', '57');
+		});
+	</script>
+<div class="internas">
+	<div class="categoria">
+		<div class="ico_cat">
+		</div>
+		Norma t&#233;cnica
+	</div>
+	<h1>LA010-3-1 UTILIZACI&#211;N POSTES Y TEMPLETES PARA RED A&#201;REA RURAL DESNUDA DE MEDIA TENSI&#211;N</h1>
+	<div class="caja_texto wikiformat">
+		<div class="lateral_der_articulo">
+			<div class="modulo">
+				<div class="titu_modulo">
+					Datos adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Número de la norma</div>
+					<div class="caracteristicas">LA010-3-1</div>
+				</div>
+				<div class="modulo_contenido">
+					<div class="subtitulos_internos">
+						Fecha de vigencia</div>
+					<div class="caracteristicas">01/03/2024</div>
+				</div>
+			</div>
+			<div class="modulo">
+				<div class="titu_modulo">
+					Herramientas adicionales
+				</div>
+				<div class="modulo_contenido">
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion1">
+						</div>
+		    				<a target="_blank" href="../../../Home/DownloadPDF/2110">Descargar archivo</a>
+					</div>
+					<!--<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion3">
+						</div>
+						<a class="printcontentpage" onclick="pintContent('.caja_texto')">Imprimir</a>
+					</div>-->
+					<div class="herramienta-opcion">
+						<div class="ico-herramienta-opcion4">
+						</div>
+						<a class="sendpagebyemail" href="javascript:void(0)" onclick="javascript:openContent('/Home/EnviarEmail?contenturl=%2FNorma%2FDetalles%2F2110&amp;nodoid=2110', {innerWidth:450,innerHeight:500}, function () { }, true)">Compartir</a>
+					</div>
+				</div>
+			</div>
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+			
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#modulo_vermas').click(function (event) {
+            $(this).hide();
+            $('.modulo_contenido').show('fast');
+            return false;
+        });
+    });
+</script>
+
+
+		</div>
+            <ul class="headings">
+                <li style="float:none;font-weight:bold;color:#000; text-align:center;"><span>Contenido</span> <a id="indexitemocultar" class="ocultar" href="javascript:void(0)" onclick="javascript:changeIndexView('indexitemocultar')">Ocultar</a></li>
+                    <li class="indexitem"><a class="head_h2" href="la01031_utilizacion_postes_templetes_red_aerea_rural_desnuda_2110.html#heading_0">1.	GENERALIDADES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="la01031_utilizacion_postes_templetes_red_aerea_rural_desnuda_2110.html#heading_1">2.	CONDICIONES AMBIENTALES</a></li>
+                    <li class="indexitem"><a class="head_h2" href="la01031_utilizacion_postes_templetes_red_aerea_rural_desnuda_2110.html#heading_2"> 3.	CONDICIONES VANOS</a></li>
+                    <li class="indexitem"><a class="head_h2" href="la01031_utilizacion_postes_templetes_red_aerea_rural_desnuda_2110.html#heading_3">4.	RESULTADOS</a></li>
+            </ul>
+        <div style="clear:left;"></div>
+		<h2 id="heading_0" >1.	GENERALIDADES</h2> <br /> <br />La presente norma contiene las tablas de selecci&#243;n de postes y templetes para ser usadas en redes desnudas a&#233;reas de media tensi&#243;n teniendo en cuenta los conductores utilizados en la especificaci&#243;n GSC003	CONCENTRIC-LAY-STRANDED BARE CONDUCTOR y las normas de construcci&#243;n para red desnuda indicadas en la siguiente tabla:<br /><br /><div style="width:748px;"><table><tr><td colspan="1" rowspan="1" style="width:82px;height:21px;text-align:center"><b>No.</b></td><td colspan="1" rowspan="1" style="width:77px;text-align:center"><b>Norma</b></td><td colspan="1" rowspan="1" style="width:589px;text-align:center"><b>T&#237;tulo</b></td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">1</td><td colspan="1" rowspan="1" style="text-align:center">LAR102</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 34,5 kV estructura triangular </td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">2</td><td colspan="1" rowspan="1" style="text-align:center">LAR105</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 34,5 kV estructura triangular en &#225;ngulo</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">3</td><td colspan="1" rowspan="1" style="text-align:center">LAR111</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 34,5 kV estructura triangular terminal</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">4</td><td colspan="1" rowspan="1" style="text-align:center">LAR113</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 34,5 kV estructura triangular retenci&#243;n doble</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">5</td><td colspan="1" rowspan="1" style="text-align:center">LAR120</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 34,5 kV estructura en H con suspensi&#243;n horizontal</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">6</td><td colspan="1" rowspan="1" style="text-align:center">LAR121</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 34,5 kV estructura en H terminal con disposici&#243;n horizontal</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">7</td><td colspan="1" rowspan="1" style="text-align:center">LAR122</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 34,5 kV estructura horizontal en H</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">8</td><td colspan="1" rowspan="1" style="text-align:center">LAR123</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 34,5 kV estructura en H de retenci&#243;n horizontal</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">9</td><td colspan="1" rowspan="1" style="text-align:center">LAR125</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 34,5 kV estructura en H disposici&#243;n horizontal para &#225;ngulos</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">10</td><td colspan="1" rowspan="1" style="text-align:center">LAR127</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 34,5 kV estructura en H suspensi&#243;n triangular</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">11</td><td colspan="1" rowspan="1" style="text-align:center">LAR132</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 34,5 kV estructura en H disposici&#243;n triangular</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">12</td><td colspan="1" rowspan="1" style="text-align:center">LAR133</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 34,5 kV estructura de retenci&#243;n triangular en H</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">13</td><td colspan="1" rowspan="1" style="text-align:center">LAR135</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 34,5 kV estructura triangular en H para &#225;ngulos</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">14</td><td colspan="1" rowspan="1" style="text-align:center">LAR137</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 34,5 kV estructura de suspensi&#243;n horizontal con cruceta de seis metros</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">15</td><td colspan="1" rowspan="1" style="text-align:center">LAR143</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 34,5 kV estructura de retenci&#243;n horizontal en tres postes</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">16</td><td colspan="1" rowspan="1" style="text-align:center">LAR173</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 34,5 kV estructura en H de retenci&#243;n horizontal con cruceta de seis metros</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">17</td><td colspan="1" rowspan="1" style="text-align:center">LAR183</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 34,5 kV estructura de retenci&#243;n horizontal en tres postes con cruceta de seis metros</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">18</td><td colspan="1" rowspan="1" style="text-align:center">LAR202</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 13,2 – 11,4 kV estructura triangular</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">19</td><td colspan="1" rowspan="1" style="text-align:center">LAR205</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 13,2 -11,4 kV estructura triangular en &#225;ngulo</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">20</td><td colspan="1" rowspan="1" style="text-align:center">LAR211</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 13,2 – 11,4 kV estructura triangular terminal</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">21</td><td colspan="1" rowspan="1" style="text-align:center">LAR213</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 13,2 – 11,4 kV estructura triangular de retenci&#243;n</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">22</td><td colspan="1" rowspan="1" style="text-align:center">LAR220</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 13,2 – 11,4 kV estructura de suspensi&#243;n horizontal en H</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">23</td><td colspan="1" rowspan="1" style="text-align:center">LAR221</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 13,2 – 11,4 kV estructura terminal horizontal en H</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">24</td><td colspan="1" rowspan="1" style="text-align:center">LAR222</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 13,2 – 11,4 kV estructura en H disposici&#243;n horizontal</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">25</td><td colspan="1" rowspan="1" style="text-align:center">LAR223</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 13,2 - 11,4 kV estructura de retenci&#243;n horizontal en H</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">26</td><td colspan="1" rowspan="1" style="text-align:center">LAR225</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 13,2 –11,4 kV estructura en H para &#225;ngulos</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">27</td><td colspan="1" rowspan="1" style="text-align:center">LAR227</td><td colspan="1" rowspan="1" style="">L&#237;nea 13.2 – 11.4 kV estructura en H suspensi&#243;n triangular</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">28</td><td colspan="1" rowspan="1" style="text-align:center">LAR232</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 13,2 – 11,4 kV estructura en H disposici&#243;n triangular</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">29</td><td colspan="1" rowspan="1" style="text-align:center">LAR233</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 13,2 – 11,4 kV estructura de retenci&#243;n triangular en H</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">30</td><td colspan="1" rowspan="1" style="text-align:center">LAR235</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 13,2 – 11,4 kV estructura triangular en H para &#225;ngulos</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">31</td><td colspan="1" rowspan="1" style="text-align:center">LAR237</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 13,2 – 11,4 kV estructura de suspensi&#243;n horizontal con cruceta de seis metros</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">32</td><td colspan="1" rowspan="1" style="text-align:center">LAR243</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 13,2 – 11,4 kV estructura de retenci&#243;n horizontal en tres postes</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">33</td><td colspan="1" rowspan="1" style="text-align:center">LAR273</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 13,2 – 11,4 kV estructura en H de retenci&#243;n horizontal con crucetas de seis metros</td></tr>
+<tr><td colspan="1" rowspan="1" style="height:21px;text-align:center">34</td><td colspan="1" rowspan="1" style="text-align:center">LAR274</td><td colspan="1" rowspan="1" style="">L&#237;nea rural 13,2 – 11,4 kV estructura de retenci&#243;n horizontal en tres postes con cruceta de seis metros</td></tr></table><br /></div><b>Tabla 1. Normas de construcci&#243;n para red rural desnuda 11.4 kV, 13.2 kV y 34.5 kV.</b><br /><br />Las estructuras de soporte objeto de esta norma corresponden a los postes de 12m, 14m y 16m en sus diferentes capacidades de carga de dise&#241;o normalizadas. Los templetes considerados en la norma corresponden a templetes directo a tierra (poste a varilla de anclaje) indicados en la (LA 410) templetes y retenidas terminales; se deben tener en cuenta las consideraciones indicadas en la (LA 410) y en la presente norma. Adicionalmente para la cimentaci&#243;n de los postes se debe considerar la norma LA 009.<br />Otras normas aplicables son:<br /><br />• RETIE. Reglamento T&#233;cnico de Instalaciones El&#233;ctricas, Resoluci&#243;n No. 90708 de agosto 30 de 2013 del Ministerio de Minas y Energ&#237;a.<br />• IEC. International Electro-technical Commission.<br />• IEEE. Institute of Electrical and Electronic Engineers.<br />• ASTM. American Society for Testing and Materials.<br />• EPRI. Electric Power Research Institute.<br />• ASCE - American Society of Civil Engineers. - Guidelines for Electrical Transmission Line Structural Loading.<br />• Manuals and Reports on Engineering Practice No 74.<br /><br />Esta norma presenta los criterios, consideraciones y disposiciones tenidas en cuenta para la utilizaci&#243;n de postes y templetes en l&#237;neas de distribuci&#243;n urbanas desnudas 11.4kV, 13.2kV kV y 34,5 kV<br />Se considera que, para las normas de estructuras de la Tabla 1 y los cables mencionados en la tabla 2, los vanos m&#225;ximos establecidos dependen de cada estructura.<br /><br /><img src="https://i.ibb.co/KVqwLW9/1.png" /><br /><b>Tabla 2. Conductores de la norma</b><br /><img src="https://i.ibb.co/F69sksx/2.png" /><br />  <br />
+<h2 id="heading_1" >2.	CONDICIONES AMBIENTALES</h2>
+Las condiciones de altura sobre el nivel del mar, velocidad del viento y temperatura ambiente evaluadas para la presente norma contemplan las diferentes zonas y/o municipios en los cuales ENEL Colombia tiene sus redes, sin embargo, para determinar las tracciones mec&#225;nicas y las fechas a la hora de instalar una nueva l&#237;nea de energ&#237;a el&#233;ctrica de media tensi&#243;n se debe tener en cuenta lo estipulado en la norma LAR017. “Flechas y cargas para tendido de red a&#233;rea semiaislada de media tensi&#243;n”.<br />Las cargas de viento se evaluaron considerando lo expuesto en el documento ASCE 74 - 2010, teniendo en cuenta una velocidad de viento b&#225;sica de r&#225;faga de 3s y la categor&#237;a del terreno donde se encuentra la l&#237;nea.<br />Los templetes manejan un factor de seguridad de 2 y los postes un factor de seguridad de 2.5.<br />Los par&#225;metros ambientales son definidos a continuaci&#243;n:<br />•	Velocidad de viento m&#225;ximo: velocidad de r&#225;faga de viento de 3 s en m/s a 10 m sobre el terreno con periodo de retorno de 50 a&#241;os.<br />•	Temperatura m&#225;xima: valor de temperatura que con probabilidad del 2 % (periodo de retorno de 50 a&#241;os) puede ser excedida en un a&#241;o, obtenida a partir de la serie de registros anuales de temperatura m&#225;xima absoluta.<br />•	Temperatura coincidente: valor de la temperatura considerada como coincidente con las velocidades de viento del proyecto. Es el valor promedio de la serie de registros de temperatura m&#237;nima.<br />•	Temperatura m&#237;nima: valor m&#237;nimo de temperatura para la que con probabilidad del 2 % (periodo de retorno de 50 a&#241;os) no se presentan temperaturas inferiores en un periodo de un a&#241;o, obtenida a partir de la serie de registros anuales de temperaturas m&#237;nimas absoluta.<br />•	Temperatura media: valor promedio de la serie de registros de temperaturas promedio anuales.<br /><br /><br /> 
+<h2 id="heading_2" > 3.	CONDICIONES VANOS</h2>En el siguiente esquema se puede observar la definici&#243;n de las variables, vano peso (Vp), vano viento (VV), y la relaci&#243;n directa de estas con el terreno de influencia para el dise&#241;o.<br /><br />Las tablas mencionadas en esta norma corresponden a los cables indicados en las especificaciones <br /><br /><img src="https://i.ibb.co/JqDfJ9G/3.jpg" /><br />En donde:<br /><img src="https://i.ibb.co/zrGX2Vn/4.png" /><br /><br />VP: Vano peso. <br />VV: Vano viento <br />VR: Vano regulador<br />R: Estructura de &#225;ngulo (Retenci&#243;n)<br />S: Estructura de alineamiento (Suspensi&#243;n)<br /><br /><img src="https://i.ibb.co/TkQBcm5/5.png" /><br /><b>Figura 1. Cargas seg&#250;n el tipo de estructura</b><br />
+<h2 id="heading_3" >4.	RESULTADOS</h2><img src="https://i.ibb.co/cy7sctv/6.png" /><br /><b>Tabla 3. LAR 102 – LAR 202 circuito sencillo sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/kBScdXn/7.png" /><br />Tabla 4. LAR 105 – LAR 205 circuito sencillo sin BT sin telem&#225;ticos<br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/drTg6S5/8.png" /><br /><b>Tabla 5. LAR 113 – LAR 213 circuito sencillo sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /> <br /><img src="https://i.ibb.co/25KRzPp/9.png" /><br /><b>Tabla 6. LAR 111 – LAR 211 circuito sencillo sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/q16LWQX/10.png" /><br /><b>Tabla 7. LAR 122 – LAR 222 circuito sencillo sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/TrYTPP5/11.png" /><br /><b>Tabla 8. LAR 125 – LAR 225 circuito sencillo sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/D8JSG7J/12.png" /><br /><b>Tabla 9. LAR 123 – LAR 223 circuito sencillo sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/Pm5mvXn/13.png" /><br /><b>Tabla 10. LAR 121 – LAR 221 circuito sencillo sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/j3Z1Bsh/14.png" /><br /><b>Tabla 11. LAR 120 – LAR 220 circuito sencillo sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/v4PJjLS/15.png" /><br /><b>Tabla 12. LAR 132 – LAR 232 circuito sencillo sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/44JMYLy/16.png" /><br /><b>Tabla 13. LAR 135 – LAR 235 circuito sencillo sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/pR9MjY9/17.png" /><br /><b>Tabla 14. LAR 133 – LAR 233 circuito sencillo sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/9p2YRTL/18.png" /><br /><b>Tabla 15. LAR RFL – LAR RFL circuito sencillo sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/SN3MzDc/19.png" /><br /><b>Tabla 16. LAR 127 – LAR 227 circuito sencillo sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/JkXyZnb/20.png" /><br /><b>Tabla 17. LAR 137 – LAR 237 circuito sencillo sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/F7hzdh0/21.png" /><br /><b>Tabla 18. LAR 173 – LAR 273 (5&#176; - 30&#176;) circuito sencillo sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/gw46BSx/22.png" /><br /><b>Tabla 19. LAR 173 – LAR 273 (30&#176; - 60&#176;) circuito sencillo sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/3mwJqDr/23.png" /><br /><b>Tabla 20. LAR 143 – LAR 243 (5&#176; - 30&#176;) circuito sencillo sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/rsdbC5m/24.png" /><br /><b>Tabla 21. LAR 143 – LAR 243 (30&#176; - 60&#176;) circuito sencillo sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/gZB0wQH/25.png" /><br /><b>Tabla 22. LAR 183 – LAR 274 (5&#176; - 30&#176;) circuito sencillo sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/T4GnB6X/26.png" /><br /><b>Tabla 23. LAR 183 – LAR 274 (30&#176; - 60&#176;) circuito sencillo sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/KWN8b3X/27.png" /><br /><b>Tabla 24. LAR 122 – LAR 222 circuito doble sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/h8sTnCK/28.png" /><br /><b>Tabla 25. LAR 125 – LAR 225 circuito doble sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/PgrCqrc/29.png" /><br /><b>Tabla 26. LAR 123 – LAR 223 circuito doble sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/GPXF38Z/30.png" /><br /><b>Tabla 27. LAR 121 – LAR 221 circuito doble sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/FnckMqc/31.png" /><br /><b>Tabla 28. LAR 120 – LAR 220 circuito doble sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/tJzYYbC/32.png" /><br /><b>Tabla 29. LAR 132 – LAR 232 circuito doble sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/R4xKySX/33.png" /><br /><b>Tabla 30. LAR 135 – LAR 235 circuito doble sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/myyr3z8/34.png" /><br /><b>Tabla 31. LAR 133 – LAR 233 circuito doble sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/SPB52sn/35.png" /><br /><b>Tabla 32. LAR RFL – LAR RFL circuito doble sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/C0G86BP/36.png" /><br /><b>Tabla 33. LAR 127 – LAR 227 circuito doble sin BT sin telem&#225;ticos</b><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/1QSSV8v/37.png" /><br /><b>Tabla 34. LAR 137 – LAR 237 circuito doble sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/VYPYYqN/38.png" /><br /><b>Tabla 35. LAR 173 – LAR 273 (5&#176; - 30&#176;) circuito doble sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/2gh60yz/39.png" /><br /><b>Tabla 36. LAR 143 – LAR 243 (5&#176; - 30&#176;) circuito doble sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/df1q9CV/40.png" /><br /><b>Tabla 37. LAR 143 – LAR 243 (30&#176; - 60&#176;) circuito doble sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/q50RvPM/41.png" /><br /><b>Tabla 38. LAR 183 – LAR 274 (5&#176; - 30&#176;) circuito doble sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><img src="https://i.ibb.co/vXdqFKW/42.png" /><br /><b>Tabla 39. LAR 183 – LAR 274 (30&#176; - 60&#176;) circuito doble sin BT sin telem&#225;ticos</b><br /><br />
+<ul><li>Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones de diferentes niveles de tensi&#243;n o calibres de conductores, se debe elegir la estructura por el nivel de tensi&#243;n mayor y el calibre del conductor mayor, asumiendo que los dos circuitos llevan el conductor de mayor peso.</li></ul>
+<br />N/A No aplica, se debe utilizar el poste de menor capacidad.<br /><br /><b>NOTAS</b><br />•	Siempre que haya circuito doble se recomienda el uso de postes de 14 metros en adelante con el fin de respetar las distancias de seguridad. Lo anterior conlleva a que la intervenci&#243;n de un circuito no afecte la confiabilidad del circuito que no se va a intervenir.<br />•	Los porcentajes de EDS del cable mensajero y los conductores de fases est&#225;n definidos por las siguientes consideraciones:<br />	     La coordinaci&#243;n de flechas es importante a la hora de analizar la separaci&#243;n entre conductores a mitad de vano. Esta apreciaci&#243;n se debe tener en cuenta en redes de distribuci&#243;n de energ&#237;a el&#233;ctrica de doble circuito. En concordancia con lo anterior, es 	 v&#225;lido estipular los porcentajes de tensionado y sus valores equivalentes en Newtons de los diferentes conductores y cables mensajeros, los cuales son plasmados en las siguientes tablas:<br /><br /><br /><img src="https://i.ibb.co/WyPYfft/43.png" /><br /><b>Tabla 40. Tensi&#243;n de rotura en vanos de 30 a 40 metros en CS  y CD</b> <br /><br />•	Los templetes para los &#225;ngulos de 0&#176;-5&#176; y 5&#176;-30&#176; son templetes normalizados que van en la direcci&#243;n opuesta a la bisectriz del complemento del &#225;ngulo de deflexi&#243;n de la l&#237;nea, por ende, es importante tener en cuenta que al haber desbalance en las longitudes de los vanos adelante y atr&#225;s del poste a seleccionar, se determine correctamente el &#225;ngulo de la fuerza resultante ya que como se menciona anteriormente de &#233;sta depende la orientaci&#243;n del templete en la estructura.<br /><br /><img src="https://i.ibb.co/dtt6g9w/53.png" /><br /><br /><img src="https://i.ibb.co/7r7Fp04/44.png" /><br /><img src="https://i.ibb.co/yqzzszD/45.png" /><br /><img src="https://i.ibb.co/T081SRM/46.png" /><br /><img src="https://i.ibb.co/XXk6c9r/47.png" /><br /><img src="https://i.ibb.co/bbnHLkj/48.png" /><br /><img src="https://i.ibb.co/jZ88P7C/49.png" /><br /><img src="https://i.ibb.co/KXsNfc9/50.png" /><br /><img src="https://i.ibb.co/Vpgxy7g/51.png" /><br /><img src="https://i.ibb.co/Lp9h0PL/54.png" /><br /><b>Figura 2. &#193;ngulos de deflexi&#243;n de la l&#237;nea con templetes</b><br /><br />Por otra parte, en la figura 3 se puede evidenciar la disposici&#243;n para la instalaci&#243;n de 1, 2 o 4 templetes seg&#250;n lo requiera el caso. El n&#250;mero de templetes requeridos para los distintos escenarios en cuesti&#243;n se evidencian en las tablas de resultados de la presente norma.<br /><br /><img src="https://i.ibb.co/m5V0C6p/52.png" /><br /><b>Figura 3. Disposici&#243;n para la instalaci&#243;n de templetes</b><br /><br /><br />En donde “h” hace referencia la altura libre del poste, lo anterior seg&#250;n la norma LA411 Retenida terminal o en &#225;ngulo poste a varilla de anclaje.<br />•	Las cimentaciones est&#225;n dadas por la norma LA009-1.<br /><br />•	Las estructuras en doble nivel no contemplan la combinaci&#243;n entre diferentes conductores, es decir se asume que el conductor es el mismo para ambos niveles, por lo tanto, en el caso de tener combinaciones se debe elegir la estructura por el peor caso, asumiendo que los dos circuitos llevan el conductor de mayor peso.<br /><br />•	Las nuevas estructuras de red compacta en bandera en su disposici&#243;n como final de l&#237;nea en todos los casos deben llevar el templete relacionado en la LA415 “Retenida terminal bandera poste a poste con varilla de anclaje”, ya que despu&#233;s de realizadas todas las simulaciones ning&#250;n poste soport&#243; los esfuerzos.<br />
+	</div>
+	<div id="streamgrouped" class="streamgrouped">
+		<script type="text/javascript">
+        renderAction('streamgrouped', '/Stream/GroupedStream', { ct: 'Content', nodeid: 2110, userid: 0, page: 0, title: 'Actividad de Usuarios' }, false, function () { })
+		</script>
+	</div>
+</div>
+
+				<div class="footer">
+					<div class="line-deco-footer">
+					</div>
+					<div class="box-text-footer">
+						<div class="line-footer">
+						</div>
+						<div class="textofooter">
+							<strong>CODENSA S.A. ESP</strong><br />
+							Cra 13 A No. 93 - 66<br />
+							Teléfono: 6016060</div>
+						<div class="terminos">
+							<strong>Términos y condiciones</strong><br />
+							2011 CODENSA S.A. ESP - Todos los derechos reservados, all rights reserved.</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18088061-16']);
+      _gaq.push(['_trackPageview']);
+
+      (function () {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+ 
+</script>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+uuid: f62c7d07-7b97-4e71-aeb5-c90323c6b242
+langcode: es
+status: true
+dependencies:
+  config:
+    - block_content.type.rules_title_description_and_item
+    - field.storage.block_content.background_image
+  module:
+    - image
+    - image_replace
+third_party_settings:
+  image_replace:
+    image_style_map:
+      rules_replace_and_webp:
+        source_field: background_image_mobile
+id: block_content.rules_title_description_and_item.background_image
+field_name: background_image
+entity_type: block_content
+bundle: rules_title_description_and_item
+label: 'Imagen de fondo'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:file'
+  handler_settings: {  }
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'png gif jpg jpeg'
+  max_filesize: ''
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: true
+  title_field: true
+  title_field_required: true
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+field_type: image

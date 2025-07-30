@@ -1,0 +1,52 @@
+_meta:
+  version: '1.0'
+  entity_type: paragraph
+  uuid: d1e0ac93-2abf-457a-a35e-fb36b2afc007
+  bundle: rules_section
+  default_langcode: en
+  depends:
+    7a4a3703-dd88-4bed-b773-abe532b6bc21: taxonomy_term
+    1b0ca6b2-5a14-4414-8959-47738183cb12: file
+    e1322bcb-24c1-44d8-adac-205c0c0017d3: file
+default:
+  status:
+    -
+      value: true
+  created:
+    -
+      value: 1682436070
+  behavior_settings:
+    -
+      value: {  }
+  revision_translation_affected:
+    -
+      value: true
+  section_alignment:
+    -
+      entity: 7a4a3703-dd88-4bed-b773-abe532b6bc21
+  section_button:
+    -
+      uri: 'internal:/'
+      title: 'Registrarme ahora'
+      options: {  }
+  section_description:
+    -
+      value: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, \r\nsed diam nonumy eirmod tempor invidunt ut labore et \r\ndolore magna aliquyam erat, sed diam voluptua. At vero eos \r\net accusam et justo duo"
+  section_image:
+    -
+      entity: 1b0ca6b2-5a14-4414-8959-47738183cb12
+      alt: users
+      title: users
+      width: 374
+      height: 296
+  section_image_mobile:
+    -
+      entity: e1322bcb-24c1-44d8-adac-205c0c0017d3
+      alt: users
+      title: ''
+      width: 374
+      height: 296
+  section_title:
+    -
+      value: '<h2>Red del usuario</h2>'
+      format: full_html

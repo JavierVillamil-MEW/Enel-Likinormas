@@ -1,0 +1,25 @@
+uuid: 7a831f92-3b58-4a12-aee7-b2e54e0fe7a8
+langcode: es
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - likinormas
+_core:
+  default_config_hash: NjvLk-ncoIqsCpmKT6I4pNVg63W_4djuP_Fx59hW3M4
+id: likinormas_branding
+theme: likinormas
+region: nav_branding
+weight: -6
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Marca del sitio'
+  label_display: '0'
+  provider: system
+  use_site_logo: true
+  use_site_name: false
+  use_site_slogan: false
+visibility: {  }

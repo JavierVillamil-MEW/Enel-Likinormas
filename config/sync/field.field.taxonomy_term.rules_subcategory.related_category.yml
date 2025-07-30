@@ -1,0 +1,29 @@
+uuid: caf42479-73b4-4287-8b4c-cef426496019
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.related_category
+    - taxonomy.vocabulary.rules_category
+    - taxonomy.vocabulary.rules_subcategory
+id: taxonomy_term.rules_subcategory.related_category
+field_name: related_category
+entity_type: taxonomy_term
+bundle: rules_subcategory
+label: 'Categoría relacionada'
+description: 'Se refiere a la categoría que es padre de la subcategoría que está añadiendo'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      rules_category: rules_category
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

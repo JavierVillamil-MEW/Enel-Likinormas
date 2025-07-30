@@ -1,0 +1,27 @@
+_meta:
+  version: '1.0'
+  entity_type: taxonomy_term
+  uuid: 27e24322-79fa-4ee6-8b8d-90d460ea11ba
+  bundle: rules_category
+  default_langcode: en
+default:
+  status:
+    -
+      value: true
+  name:
+    -
+      value: 'CENTROS DE TRANSFORMACIÓN PARA REDES AEREAS URBANOS Y RURALES'
+  weight:
+    -
+      value: 3
+  parent:
+    -
+      target_id: 0
+  revision_translation_affected:
+    -
+      value: true
+  path:
+    -
+      alias: /normas/centros-de-transformacion-para-redes-aereas-urbanos-y-rurales
+      langcode: en
+      pathauto: 1
