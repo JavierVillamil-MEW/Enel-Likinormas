@@ -84,6 +84,8 @@
         "drupal/redirect": "^1.11",
         "drupal/save_edit": "^2.1",
         "drupal/simple_sitemap": "^4.1",
+        "drupal/social_api": "^4.0",
+        "drupal/social_auth": "^4.1",
         "drupal/social_auth_facebook": "^4.0",
         "drupal/svg_image": "^3.0",
         "drupal/swiftmailer": "^2.0",
@@ -183,9 +185,6 @@
             ]
         },
         "patches": {
-            "drupal/default_content": {
-                "Do not reimport existing entities": "https://git.drupalcode.org/project/default_content/-/merge_requests/14.patch"
-            }
         }
     }
 }
