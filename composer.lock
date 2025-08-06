@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5dc2a7dd351bae2158298420ac377de2",
+    "content-hash": "307df412f9906c3f2513581744d9de25",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2987,29 +2987,29 @@
         },
         {
             "name": "drupal/entity_reference_revisions",
-            "version": "1.10.0",
+            "version": "1.12.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/entity_reference_revisions.git",
-                "reference": "8.x-1.10"
+                "reference": "8.x-1.12"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/entity_reference_revisions-8.x-1.10.zip",
-                "reference": "8.x-1.10",
-                "shasum": "edd23b91c4a34db65ea22c4db54b7458edc7513b"
+                "url": "https://ftp.drupal.org/files/projects/entity_reference_revisions-8.x-1.12.zip",
+                "reference": "8.x-1.12",
+                "shasum": "2a2ff8617c7ce01b56df1caaf0a563da04948e26"
             },
             "require": {
-                "drupal/core": "^9 || ^10"
+                "drupal/core": "^9 || ^10 || ^11"
             },
             "require-dev": {
-                "drupal/diff": "1.x-dev"
+                "drupal/diff": "^1 || ^2"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.10",
-                    "datestamp": "1660664712",
+                    "version": "8.x-1.12",
+                    "datestamp": "1722804497",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3027,7 +3027,7 @@
             ],
             "authors": [
                 {
-                    "name": "Berdir",
+                    "name": "berdir",
                     "homepage": "https://www.drupal.org/user/214652"
                 },
                 {
@@ -3209,30 +3209,30 @@
         },
         {
             "name": "drupal/gin",
-            "version": "3.0.0-rc6",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/gin.git",
-                "reference": "8.x-3.0-rc6"
+                "reference": "8.x-3.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/gin-8.x-3.0-rc6.zip",
-                "reference": "8.x-3.0-rc6",
-                "shasum": "45d1939be11592cff64e0e3fe4e17553e754175a"
+                "url": "https://ftp.drupal.org/files/projects/gin-8.x-3.1.zip",
+                "reference": "8.x-3.1",
+                "shasum": "e652cf8a55888fc2d72118291ec22f62e0807f7c"
             },
             "require": {
-                "drupal/core": "^9 || ^10",
-                "drupal/gin_toolbar": "^1.0@beta"
+                "drupal/core": "^9 || ^10 || ^11 <11.2",
+                "drupal/gin_toolbar": "^1.0"
             },
             "type": "drupal-theme",
             "extra": {
                 "drupal": {
-                    "version": "8.x-3.0-rc6",
-                    "datestamp": "1693299666",
+                    "version": "8.x-3.1",
+                    "datestamp": "1750246434",
                     "security-coverage": {
-                        "status": "not-covered",
-                        "message": "RC releases are not covered by Drupal security advisories."
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
                     }
                 }
             },
@@ -3250,6 +3250,10 @@
                     "name": "Sascha Eggenberger (saschaeggi)",
                     "homepage": "https://www.drupal.org/u/saschaeggi",
                     "role": "Maintainer"
+                },
+                {
+                    "name": "saschaeggi",
+                    "homepage": "https://www.drupal.org/user/1999056"
                 }
             ],
             "description": "For a better Admin and Content Editor Experience.",
@@ -3330,29 +3334,29 @@
         },
         {
             "name": "drupal/gin_toolbar",
-            "version": "1.0.0-rc3",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/gin_toolbar.git",
-                "reference": "8.x-1.0-rc3"
+                "reference": "8.x-1.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/gin_toolbar-8.x-1.0-rc3.zip",
-                "reference": "8.x-1.0-rc3",
-                "shasum": "f9ae6c1c086f008a2911eb2ced4740ac5c307faf"
+                "url": "https://ftp.drupal.org/files/projects/gin_toolbar-8.x-1.1.zip",
+                "reference": "8.x-1.1",
+                "shasum": "c6079e28460a9d36e2d83a710143eb56985092c6"
             },
             "require": {
-                "drupal/core": "^9 || ^10"
+                "drupal/core": "^9 || ^10 || ^11 <11.2"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.0-rc3",
-                    "datestamp": "1688477564",
+                    "version": "8.x-1.1",
+                    "datestamp": "1750245793",
                     "security-coverage": {
-                        "status": "not-covered",
-                        "message": "RC releases are not covered by Drupal security advisories."
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
                     }
                 }
             },
@@ -3365,6 +3369,10 @@
                     "name": "Sascha Eggenberger (saschaeggi)",
                     "homepage": "https://www.drupal.org/u/saschaeggi",
                     "role": "Maintainer"
+                },
+                {
+                    "name": "saschaeggi",
+                    "homepage": "https://www.drupal.org/user/1999056"
                 }
             ],
             "description": "Gin Toolbar for Frontend use",
@@ -3389,17 +3397,17 @@
         },
         {
             "name": "drupal/google_tag",
-            "version": "1.6.0",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/google_tag.git",
-                "reference": "8.x-1.6"
+                "reference": "8.x-1.8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/google_tag-8.x-1.6.zip",
-                "reference": "8.x-1.6",
-                "shasum": "d084315e54c2e561b8b64eef86081c2634d054cd"
+                "url": "https://ftp.drupal.org/files/projects/google_tag-8.x-1.8.zip",
+                "reference": "8.x-1.8",
+                "shasum": "13c95050a0d1b19ae1178636b2cc56217073b23e"
             },
             "require": {
                 "drupal/core": "^8.8 || ^9 || ^10"
@@ -3407,8 +3415,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.6",
-                    "datestamp": "1671145853",
+                    "version": "8.x-1.8",
+                    "datestamp": "1738172701",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -11617,8 +11625,6 @@
         "drupal/ckeditor5_embedded_content": 15,
         "drupal/default_content": 15,
         "drupal/feeds": 10,
-        "drupal/gin": 15,
-        "drupal/gin_toolbar": 10,
         "drupal/inline_entity_form": 5,
         "drupal/layout_library": 10,
         "drupal/webform": 10
