@@ -839,27 +839,17 @@ $settings['trusted_host_patterns'] = [
   '^www\.likinormas\.enelcol\.com\.co$',
   '^likinormas\.enelcol\.com\.co$',
 ];
- 
-$databases['default']['default'] = array (
-  'database' => 'liki_likinormas',
-  'username' => 'liki_a_linkinormas',
-  'password' => 'PbBlluNG*e*HcExp',
-  'prefix' => '',
-  'host' => 'localhost',
-  'port' => '3306',
-  'namespace' => 'Drupal\\mysql\\Driver\\Database\\mysql',
-  'driver' => 'mysql',
-  'autoload' => 'core/modules/mysql/src/Driver/Database/mysql/',
-  'init_commands' => [
-  'isolation_level' => 'SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED',
-   ],
-);
+
 $settings['config_sync_directory'] = '../config/sync';
-$config_directories["sync"] = "../config/sync";
+
 $config['system.logging']['error_level']='verbose';
 if (isset($GLOBALS['request']) and
 '/subdirectory/index.php' === $GLOBALS['request']->server->get('SCRIPT_NAME')) {
 $GLOBALS['request']->server->set('SCRIPT_NAME', '/index.php');
+}
+
+if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
+  include $app_root . '/' . $site_path . '/settings.local.php';
 }
 
 // Automatically generated include for settings managed by ddev.
