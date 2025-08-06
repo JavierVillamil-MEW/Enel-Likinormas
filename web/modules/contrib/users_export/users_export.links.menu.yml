@@ -1,4 +1,0 @@
-users_export.export:
-  title: Export
-  parent: entity.user.collection
-  route_name: users_export.form

@@ -1,6 +1,0 @@
-{
-  "extends": [
-    "drupal"
-  ],
-  "root": true
-}
