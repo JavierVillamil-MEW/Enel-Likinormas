@@ -916,7 +916,7 @@ display:
       display_extenders:
         simple_sitemap_display_extender:
           variants: {  }
-      path: taxonomy/term/%
+      path: taxonomy/term/%/definition
     cache_metadata:
       max-age: -1
       contexts:

@@ -6,6 +6,7 @@ dependencies:
     - 'block_content:rules_header_fixed_logo:73b0096d-0cb3-4fd4-8b9a-f3e75e9ca63c'
   module:
     - block_content
+    - system
   theme:
     - likinormas
 id: logofijomenuprincipal
@@ -22,4 +23,8 @@ settings:
   status: true
   info: ''
   view_mode: full
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: /search-url

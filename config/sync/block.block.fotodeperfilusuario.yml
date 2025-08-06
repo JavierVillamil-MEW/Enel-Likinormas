@@ -4,6 +4,7 @@ status: true
 dependencies:
   module:
     - likinormas_base
+    - system
   theme:
     - likinormas
 id: fotodeperfilusuario
@@ -17,4 +18,8 @@ settings:
   label: 'Foto de perfil usuario'
   label_display: '0'
   provider: likinormas_base
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    negate: true
+    pages: /search-url
