@@ -2208,7 +2208,7 @@ $(function () {
   moveFormSearchHome();
   addClassForSwiperSliderHome();
   heightCardMobileHome();
-  addAosHome();
+  // addAosHome();
   eventsFormFilterList();
   eventFormSearchNorma();
   addBackgroundColorHeroAndFilter();
@@ -2451,7 +2451,7 @@ $(window).on("load", function (e) {
   openShowcaseImgModal();
   targeLinkContent();
 
-  console.log("Init AOS")
+  addAosHome()
   AOS.init({
     delay: 100,
   });
