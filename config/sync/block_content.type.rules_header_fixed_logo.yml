@@ -4,5 +4,5 @@ status: true
 dependencies: {  }
 id: rules_header_fixed_logo
 label: 'Logo menu principal fixed'
-revision: 0
+revision: false
 description: 'Logo que se muestra cuando el menú se torna de color blanco'

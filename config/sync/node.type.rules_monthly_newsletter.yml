@@ -11,7 +11,7 @@ third_party_settings:
 name: 'Boletín mensual'
 type: rules_monthly_newsletter
 description: 'Contenido que permite actualizar el boletín mensual por medio de un campo HTML'
-help: ''
+help: null
 new_revision: false
 preview_mode: 1
 display_submitted: false

@@ -406,6 +406,7 @@ display:
             offset: false
             offset_label: Offset
           quantity: 9
+          pagination_heading_level: h4
       exposed_form:
         type: bef
         options:
@@ -780,7 +781,6 @@ display:
         - url
         - url.query_args
         - 'url.query_args:sort_by'
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags:
@@ -812,7 +812,6 @@ display:
         - url
         - url.query_args
         - 'url.query_args:sort_by'
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags:

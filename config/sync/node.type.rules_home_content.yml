@@ -11,7 +11,7 @@ third_party_settings:
 name: 'Página principal (Home)'
 type: rules_home_content
 description: 'Gestiona el contenido de las secciones de inicio: reglas, usuarios... etc.'
-help: ''
+help: null
 new_revision: false
 preview_mode: 1
 display_submitted: false

@@ -2451,6 +2451,7 @@ $(window).on("load", function (e) {
   openShowcaseImgModal();
   targeLinkContent();
 
+  console.log("Init AOS")
   AOS.init({
     delay: 100,
   });

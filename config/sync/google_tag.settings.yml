@@ -1,6 +1,5 @@
 _core:
   default_config_hash: 65d5DfK5p2hQDpBskbvCIj2hSEqw_Odm2e_d46BH1Lk
-langcode: es
 uri: 'public:/'
 compact_snippet: true
 include_file: true

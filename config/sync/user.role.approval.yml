@@ -4,6 +4,7 @@ status: true
 dependencies:
   module:
     - comment
+    - file
     - node
     - save_edit
     - system
@@ -35,6 +36,7 @@ permissions:
   - 'create webform'
   - 'delete any webform'
   - 'delete any webform submission'
+  - 'delete own files'
   - 'delete own webform'
   - 'delete own webform submission'
   - 'edit any webform'

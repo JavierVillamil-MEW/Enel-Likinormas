@@ -4,11 +4,13 @@ global-styling:
       css/style.css: {}
       https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css: {type: external}
       https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.4/simplePagination.min.css: { type: external }
+      node_modules/aos/dist/aos.css: { minified: true  }
       dist/css/main.min.css: { minified: true  }
   js:
     https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js: {type: external}
     https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js: {type: external}
     https://cdnjs.cloudflare.com/ajax/libs/simplePagination.js/1.4/jquery.simplePagination.min.js: { type: external }
+    node_modules/aos/dist/aos.js: { minified: true  }
     dist/js/main.min.js: { minified: true  }
   dependencies:
     - core/matchmedia

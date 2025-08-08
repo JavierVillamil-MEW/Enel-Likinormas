@@ -6,6 +6,7 @@ dependencies:
     - filter.format.webform_default
   module:
     - comment
+    - file
     - filter
     - likinormas_pdf_using_mpdf
     - media
@@ -21,6 +22,7 @@ permissions:
   - 'access content'
   - 'access user profiles'
   - 'change own username'
+  - 'delete own files'
   - 'generate rules_technical_rules pdf'
   - 'generate rules_technical_specifications pdf'
   - 'post comments'

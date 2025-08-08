@@ -6,3 +6,4 @@ name: 'Subcategorías de especificaciones'
 vid: rules_specification_subcategory
 description: 'Listado de subcategorías a las que puede pertenecer una especificación'
 weight: -7
+new_revision: false

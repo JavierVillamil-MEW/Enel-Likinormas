@@ -4,5 +4,5 @@ status: true
 dependencies: {  }
 id: rules_banner_with_background
 label: 'Banner con fondo'
-revision: 0
+revision: false
 description: 'Banner que se muestra en los filtros de cada tipo de norma'

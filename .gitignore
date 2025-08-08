@@ -165,3 +165,6 @@ npm-debug.log
 
 # Node dependencies
 node_modules
+
+# Dist folders
+dist
