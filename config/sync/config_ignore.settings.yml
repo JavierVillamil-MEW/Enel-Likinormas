@@ -1,0 +1,8 @@
+_core:
+  default_config_hash: IgOVnECx6lbVt6JVFnadoEEugneDf3UblPZnOzov43Q
+mode: simple
+ignored_config_entities:
+  - ga4_google_analytics.config
+  - 'google_tag.*'
+  - recaptcha.settings
+  - social_auth_facebook.settings

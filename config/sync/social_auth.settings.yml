@@ -8,3 +8,4 @@ disable_admin_login: true
 disabled_roles:
   administrator: '0'
   editor: '0'
+  approval: '0'
