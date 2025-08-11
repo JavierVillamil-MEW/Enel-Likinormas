@@ -1,6 +1,5 @@
 _core:
   default_config_hash: FHNbqwJesB9Q7Y92XdHOxRODYD8eatKrqdwNA4O78lw
-langcode: es
 likinormas_pdf_using_mpdf:
   pdf_filename: '[node:title]'
   pdf_save_option: '0'

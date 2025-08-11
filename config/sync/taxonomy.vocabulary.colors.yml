@@ -6,3 +6,4 @@ name: Colores
 vid: colors
 description: 'Colores utilizados para el fondo de las secciones'
 weight: -6
+new_revision: false

@@ -6,3 +6,4 @@ name: Orientación
 vid: rules_alignment
 description: 'Orientación de las secciones'
 weight: -5
+new_revision: false

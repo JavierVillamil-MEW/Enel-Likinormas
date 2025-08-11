@@ -29,11 +29,7 @@
  * It is strongly recommended that you set zend.assertions=1 in the PHP.ini file
  * (It cannot be changed from .htaccess or runtime) on development machines and
  * to 0 or -1 in production.
- *
- * @see https://wiki.php.net/rfc/expectations
  */
-assert_options(ASSERT_ACTIVE, TRUE);
-assert_options(ASSERT_EXCEPTION, TRUE);
 
 /**
  * Enable local development services.
@@ -153,3 +149,27 @@ $settings['skip_permissions_hardening'] = TRUE;
  * the language or field module.
  */
 # $settings['config_exclude_modules'] = ['devel', 'stage_file_proxy'];
+
+$settings['hash_salt'] = 'Iw78t5ggRjed6VsFBDmuGW35gxil-xA2ft_eha1AojOQGYimZVmdzUFX12gQoKWDiL54yzBZ1Q';
+
+/**
+ * Database configuration.
+ *
+ * Replace the DB configuration credentials.
+ */
+# $databases['default']['default'] = array (
+#   'database' => 'db',
+#   'username' => 'db',
+#   'password' => 'db',
+#   'host' => 'localhost',
+#   'port' => '3306',
+#   'namespace' => 'Drupal\\mysql\\Driver\\Database\\mysql',
+#   'driver' => 'mysql',
+#   'autoload' => 'core/modules/mysql/src/Driver/Database/mysql/',
+#   'init_commands' => [
+#     'isolation_level' => 'SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED',
+#    ],
+# );
+
+# Uncomment this line only to enable dev config, NOT FOR PRODUCTION.
+// $config['config_split.config_split.dev']['status'] = TRUE;

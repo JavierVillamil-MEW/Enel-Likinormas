@@ -4,5 +4,5 @@ status: true
 dependencies: {  }
 id: rules_banner_slider
 label: 'Banner Slider'
-revision: 0
+revision: false
 description: 'Le permite crear banners para diferentes secciones del sitio web'

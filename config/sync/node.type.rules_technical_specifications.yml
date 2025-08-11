@@ -11,7 +11,7 @@ third_party_settings:
 name: 'Especificación técnica'
 type: rules_technical_specifications
 description: 'Contenido por el cual se administran las especificaciones técnicas locales'
-help: ''
+help: null
 new_revision: false
 preview_mode: 1
 display_submitted: false

@@ -4,5 +4,5 @@ status: true
 dependencies: {  }
 id: rules_title_description_and_item
 label: 'Título, descripción y elementos'
-revision: 0
+revision: false
 description: 'Secciones que se muestran en el registro, inicio de sesión y recuperación de contraseña'

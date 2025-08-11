@@ -6,3 +6,4 @@ name: 'Categorías de normas'
 vid: rules_category
 description: 'Listado de categorías a los que puede pertenecer una norma'
 weight: -10
+new_revision: false

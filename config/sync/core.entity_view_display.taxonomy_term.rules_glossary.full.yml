@@ -1,0 +1,30 @@
+uuid: 5e62d2a9-896e-4310-8898-a23ed2e1b941
+langcode: es
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.taxonomy_term.full
+    - field.field.taxonomy_term.rules_glossary.feeds_item
+    - taxonomy.vocabulary.rules_glossary
+  module:
+    - layout_builder
+    - text
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+id: taxonomy_term.rules_glossary.full
+targetEntityType: taxonomy_term
+bundle: rules_glossary
+mode: full
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  feeds_item: true
+  langcode: true

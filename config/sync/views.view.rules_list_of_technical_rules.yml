@@ -406,6 +406,7 @@ display:
             offset: false
             offset_label: Offset
           quantity: 9
+          pagination_heading_level: h4
       exposed_form:
         type: bef
         options:
@@ -429,6 +430,7 @@ display:
               secondary_label: 'Advanced options'
               secondary_open: false
               reset_button_always_show: false
+              autosubmit_textfield_minimum_length: 3
             sort:
               plugin_id: default
               advanced:
@@ -446,28 +448,38 @@ display:
                   sort_options: false
                   rewrite:
                     filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
                   collapsible: false
                   is_secondary: false
+                  collapsible_disable_automatic_open: false
+                  hide_label: false
               rule_subcategory_target_id:
                 plugin_id: default
                 advanced:
                   sort_options: false
                   rewrite:
                     filter_rewrite_values: ''
+                    filter_rewrite_values_key: false
                   collapsible: false
                   is_secondary: false
+                  collapsible_disable_automatic_open: false
+                  hide_label: false
               combine:
                 plugin_id: default
                 advanced:
                   placeholder_text: Buscar
                   collapsible: false
                   is_secondary: false
+                  collapsible_disable_automatic_open: false
+                  hide_label: false
               effective_date_value:
                 plugin_id: bef_datepicker
                 advanced:
                   placeholder_text: Fecha
                   collapsible: false
                   is_secondary: false
+                  collapsible_disable_automatic_open: false
+                  hide_label: false
       access:
         type: perm
         options:
@@ -769,7 +781,6 @@ display:
         - url
         - url.query_args
         - 'url.query_args:sort_by'
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags:
@@ -801,7 +812,6 @@ display:
         - url
         - url.query_args
         - 'url.query_args:sort_by'
-        - user
         - 'user.node_grants:view'
         - user.permissions
       tags:

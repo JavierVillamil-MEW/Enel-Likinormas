@@ -551,6 +551,7 @@ display:
             offset: false
             offset_label: Desplazamiento
           quantity: 9
+          pagination_heading_level: h4
       exposed_form:
         type: bef
         options:
@@ -574,6 +575,7 @@ display:
               secondary_label: 'Opciones avanzadas'
               secondary_open: false
               reset_button_always_show: false
+              autosubmit_textfield_minimum_length: 3
             sort:
               plugin_id: default
               advanced:
@@ -591,6 +593,8 @@ display:
                   placeholder_text: Buscar
                   collapsible: false
                   is_secondary: false
+                  collapsible_disable_automatic_open: false
+                  hide_label: false
       access:
         type: perm
         options:
@@ -647,7 +651,6 @@ display:
           default_argument_type: fixed
           default_argument_options:
             argument: ''
-          default_argument_skip_url: false
           summary_options:
             base_path: ''
             count: true
@@ -916,7 +919,7 @@ display:
       display_extenders:
         simple_sitemap_display_extender:
           variants: {  }
-      path: taxonomy/term/%
+      path: taxonomy/term/%/definition
     cache_metadata:
       max-age: -1
       contexts:

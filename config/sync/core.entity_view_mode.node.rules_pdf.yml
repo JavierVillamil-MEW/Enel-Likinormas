@@ -6,5 +6,6 @@ dependencies:
     - node
 id: node.rules_pdf
 label: 'Normas: PDF'
+description: ''
 targetEntityType: node
 cache: true

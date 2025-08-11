@@ -6,3 +6,4 @@ name: 'Subcategorías de normas'
 vid: rules_subcategory
 description: 'Listado de subcategorías a las que puede pertenecer una norma'
 weight: -9
+new_revision: false

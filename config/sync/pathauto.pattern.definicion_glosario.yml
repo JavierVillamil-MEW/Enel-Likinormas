@@ -1,0 +1,22 @@
+uuid: afb206c3-8ad2-4f0f-98e4-1bc63b2367fd
+langcode: es
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: definicion_glosario
+label: 'Definición Glosario'
+type: 'canonical_entities:taxonomy_term'
+pattern: 'taxonomy/term/[term:name]/definition'
+selection_criteria:
+  3a866358-4433-4f9b-82f5-bfae9bd710e4:
+    id: 'entity_bundle:taxonomy_term'
+    negate: false
+    uuid: 3a866358-4433-4f9b-82f5-bfae9bd710e4
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    bundles:
+      rules_glossary: rules_glossary
+selection_logic: and
+weight: -5
+relationships: {  }

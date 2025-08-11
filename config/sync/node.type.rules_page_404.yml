@@ -11,7 +11,7 @@ third_party_settings:
 name: 'Página 404'
 type: rules_page_404
 description: 'Administra los elementos de la página de 404'
-help: ''
+help: null
 new_revision: false
 preview_mode: 1
 display_submitted: false

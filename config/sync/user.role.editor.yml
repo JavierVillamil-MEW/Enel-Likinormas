@@ -77,6 +77,7 @@ permissions:
   - 'delete any video media'
   - 'delete own audio media'
   - 'delete own document media'
+  - 'delete own files'
   - 'delete own image media'
   - 'delete own remote_video media'
   - 'delete own rules_monthly_newsletter content'

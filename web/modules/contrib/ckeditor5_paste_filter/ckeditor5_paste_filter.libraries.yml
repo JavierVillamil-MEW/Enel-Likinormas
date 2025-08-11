@@ -1,5 +1,0 @@
-paste_filter:
-  js:
-    js/build/pasteFilter.js: { preprocess: false, minified: true }
-  dependencies:
-    - core/ckeditor5

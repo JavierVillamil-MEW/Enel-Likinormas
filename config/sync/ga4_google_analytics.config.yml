@@ -1,0 +1,12 @@
+measurement_id: ''
+scripts_custom_attributes: ''
+ga4_access_roles:
+  administrator: administrator
+  anonymous: 0
+  authenticated: 0
+  editor: 0
+  approval: 0
+ga4_access_pages:
+  id: request_path
+  pages: ''
+  negate: '0'

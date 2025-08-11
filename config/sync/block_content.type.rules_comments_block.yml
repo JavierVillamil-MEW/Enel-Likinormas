@@ -4,5 +4,5 @@ status: true
 dependencies: {  }
 id: rules_comments_block
 label: 'Bloque de comentarios listado'
-revision: 0
+revision: false
 description: 'Bloque que permite añadir comentarios en los listados de normas y especificaciones'
