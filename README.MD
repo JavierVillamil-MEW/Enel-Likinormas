@@ -78,10 +78,18 @@ A change on the VHost configuration is required, you need to change the entry po
 
 The current configuration of the project has changed, now there is a configuration for the DEV environment against PROD environment. To enable this mode, you have to go to  `/sites/default/settings.local.php` open the file and add or enable this line at the end of the file:
 ```php
-$config['config_split.config_split.dev']['status'] = FALSE;
+$config['config_split.config_split.dev']['status'] = TRUE;
 ```
 This will enable the DEV mode and will enable some modules not enabled on production. You need to import the changes of this mode with the command:
 ```bash
 ./vendor/bin/drush cim
 ```
-Accept the import and let the command work.
+Accept the import and let the command work, now the site is on Dev mode.
+## Deployments
+When there is new changes on the repo and you need a deployment, follow these steps:
+- Make a DB backup
+- Pull from repo `git pull`
+- if there is composer changes execute the install command `composer install`
+- Execute Drupal deploy command `./vendor/bin/drush deploy` on project root.
+- New changes has been deployed
+
