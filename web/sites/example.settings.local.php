@@ -170,3 +170,6 @@ $settings['hash_salt'] = 'Iw78t5ggRjed6VsFBDmuGW35gxil-xA2ft_eha1AojOQGYimZVmdzU
 #     'isolation_level' => 'SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED',
 #    ],
 # );
+
+# Uncomment this line only to enable dev config, NOT FOR PRODUCTION.
+// $config['config_split.config_split.dev']['status'] = TRUE;

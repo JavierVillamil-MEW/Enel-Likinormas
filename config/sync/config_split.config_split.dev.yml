@@ -1,0 +1,19 @@
+uuid: 6e05edfc-b633-4b01-883f-6e571973d625
+langcode: es
+status: true
+dependencies: {  }
+id: dev
+label: Dev
+description: 'Esta es la configuración para la configuración de desarrollo.'
+weight: 0
+stackable: false
+no_patching: false
+storage: folder
+folder: ../config/dev
+module:
+  dblog: 0
+  devel: 0
+theme: {  }
+complete_list:
+  - system.performance
+partial_list: {  }
