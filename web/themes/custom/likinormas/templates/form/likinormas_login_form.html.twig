@@ -1,6 +1,6 @@
 <div class="login-form childre-form">
   <h2 class="form-title">Iniciar sesión</h2>
-  {% if form.boolean_setting == "1" %}
+  {% if form.facebook_login is not empty %}
     <button type="button" class="btn btn-facebook"><span class="icon-facebook"></span><a href="/user/login/facebook">Inicia
         sesión con Facebook</a></button>
     <span class="other"> O </span>
