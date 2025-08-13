@@ -43,7 +43,12 @@ function likinormas_form_alter(&$form, FormStateInterface $form_state, $form_id)
 {
   switch ($form_id) {
     case 'user_register_form':
-      $form['boolean_setting'] = theme_get_setting('boolean_setting');
+      if (theme_get_setting('boolean_setting')) {
+        $form['facebook_login'] = [
+          '#type' => 'hidden',
+          '#value' => theme_get_setting('boolean_setting'),
+        ];
+      }
       $form["#theme"][0] = 'likinormas-register-form';
       unset($form['account']['name']['#description']);
       unset($form['account']['mail']['#description']);
@@ -54,7 +59,12 @@ function likinormas_form_alter(&$form, FormStateInterface $form_state, $form_id)
       $form['actions']['submit']['#value'] = t('Registrarme ahora');
       break;
     case 'user_login_form':
-      $form['boolean_setting'] = theme_get_setting('boolean_setting');
+      if (theme_get_setting('boolean_setting')) {
+        $form['facebook_login'] = [
+          '#type' => 'hidden',
+          '#value' => theme_get_setting('boolean_setting'),
+        ];
+      }
       $form["#theme"][0] = 'likinormas-login-form';
       unset($form['name']['#description']);
       unset($form['pass']['#description']);
