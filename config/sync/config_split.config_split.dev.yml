@@ -13,6 +13,7 @@ folder: ../config/dev
 module:
   dblog: 0
   devel: 0
+  devel_entity_updates: 0
 theme: {  }
 complete_list:
   - system.performance
