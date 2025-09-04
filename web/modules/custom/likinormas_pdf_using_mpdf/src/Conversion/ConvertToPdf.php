@@ -108,6 +108,11 @@ class ConvertToPdf implements ConvertToPdfInterface {
       $this->applyProperties();
       $this->setFooter();
 
+      // Debug step, just for testint, remove after the testing
+      $this->mpdf->curlAllowUnsafeSslRequests = true;
+      $this->mpdf->showImageErrors = true;
+      $this->mpdf->debug = true;
+
       // Apply custom cascading styles.
       if (!empty($styles)) {
         $this->mpdf->WriteHTML($styles, \Mpdf\HTMLParserMode::HEADER_CSS);
