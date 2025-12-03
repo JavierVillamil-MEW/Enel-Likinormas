@@ -1,14 +1,14 @@
 _core:
   default_config_hash: QDFjOXYIYVwCPQYHY4wAx4DUqOEkNaZokIx6DGApR9I
 langcode: es
-enable_globally: null
+enable_globally: 0
 enable_globally_on_admin_routes: false
 default_challenge: captcha/Math
 description: ''
 title: ''
 administration_mode: false
 administration_mode_on_admin_routes: false
-whitelist_ips: ''
+whitelist_ips: 52.207.188.83
 wrong_captcha_response_message: 'La respuesta que ingresó para el código de verificación no fue correcta.'
 default_validation: 1
 persistence: 1
