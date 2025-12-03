@@ -15,6 +15,6 @@ module:
   devel: 0
   devel_entity_updates: 0
 theme: {  }
-complete_list:
+complete_list: {  }
+partial_list:
   - system.performance
-partial_list: {  }
