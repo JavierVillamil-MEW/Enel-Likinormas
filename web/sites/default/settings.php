@@ -838,6 +838,8 @@ $_SERVER['HTTPS'] = 'on';
 $settings['trusted_host_patterns'] = [
   '^www\.likinormas\.enelcol\.com\.co$',
   '^likinormas\.enelcol\.com\.co$',
+  '^www\.liki\.appsmccann\.com$',
+  '^liki\.appsmccann\.com$',
 ];
 
 $settings['config_sync_directory'] = '../config/sync';
