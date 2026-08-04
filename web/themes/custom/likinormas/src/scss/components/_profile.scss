@@ -254,7 +254,8 @@ body.user-profile {
             }
 
             &.form-item-your-email,
-            &.form-item-user-message {
+            &.form-item-user-message,
+            .form-item-message-value {
               padding: 0 4rem 0rem;
               margin: 2rem 0 0;
             }
@@ -311,6 +312,10 @@ body.user-profile {
               resize: none;
             }
 
+          .text-format-wrapper {
+            .form-wrapper {
+              display: none;
+            }
           }
 
           .form-actions {
