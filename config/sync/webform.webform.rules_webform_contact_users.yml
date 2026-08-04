@@ -27,11 +27,12 @@ elements: |-
     '#title': 'Su correo electrónico'
     '#placeholder': 'Correo electrónico'
     '#required': true
-  user_message:
-    '#type': textarea
+  message:
+    '#type': text_format
     '#title': Mensaje
-    '#placeholder': 'Escriba su mensaje'
     '#required': true
+    '#allowed_formats':
+      plain_text: plain_text
 css: ''
 javascript: ''
 settings:
