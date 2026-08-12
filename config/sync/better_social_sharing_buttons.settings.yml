@@ -2,12 +2,57 @@ _core:
   default_config_hash: 5UHMfSmFu9rzzODqDc4xPCxSBK0u_u9xq0ftLz8uy4Q
 iconset: social-icons--no-color
 services:
-  facebook: facebook
-  x: x
-  whatsapp: whatsapp
-  email: email
+  -
+    id: facebook
+    enabled: true
+  -
+    id: x
+    enabled: true
+  -
+    id: whatsapp
+    enabled: true
+  -
+    id: facebook_messenger
+    enabled: false
+  -
+    id: email
+    enabled: true
+  -
+    id: pinterest
+    enabled: false
+  -
+    id: linkedin
+    enabled: false
+  -
+    id: xing
+    enabled: false
+  -
+    id: tumblr
+    enabled: false
+  -
+    id: reddit
+    enabled: false
+  -
+    id: truth
+    enabled: false
+  -
+    id: bluesky
+    enabled: false
+  -
+    id: evernote
+    enabled: false
+  -
+    id: print
+    enabled: false
+  -
+    id: copy
+    enabled: false
+  -
+    id: telegram
+    enabled: false
 width: 32px
 radius: 3px
 print_css: ''
 facebook_app_id: ''
 node_field: false
+paragraph_field: false

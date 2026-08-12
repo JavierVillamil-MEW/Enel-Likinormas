@@ -32,6 +32,7 @@ permissions:
   - 'administer users'
   - 'administer webform'
   - 'administer webform element access'
+  - 'administer webform overview'
   - 'administer webform submission'
   - 'create webform'
   - 'delete any webform'
