@@ -176,3 +176,6 @@ node_modules
 
 # Dist folders
 dist
+
+# JWM local context and update reports (never commit)
+/_jwm/
